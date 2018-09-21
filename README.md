@@ -1,2 +1,2 @@
-# thesis
+# Thesis
 My PhD thesis
