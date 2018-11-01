@@ -11,4 +11,4 @@ Inside the cloned repository run:
     mkdir build
     cd build
     cmake ..
-    make pdf
+    make thesis
