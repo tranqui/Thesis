@@ -2,19 +2,85 @@
 The mathematical formalism which provides elegant and unified description of sizes, underlying the morphological approach taken in the thesis.
 Ideas from this branch of mathematics were crucial to the development of fundamental measure theory, so it makes sense to place this before the section
 on liquid state theory.
-Integral geometry is generally unfamiliar to people from a physics background, so I will attempt to describe this area with additional care.
+Integral geometry is generally unfamiliar to people with a background in physics, so I will attempt to describe this area with additional care.
+
+Make connections with statistical physics frequently.
 
 \subsection{Motivation}
 
 \subsection{Generalised functions acting on sets}
 \subsubsection{Set arithmetic}
-Minkowski addition and its inverse
+Minkowski addition and its inverse.
+
+Minkowski sum:
+\begin{equation}
+  A + \epsilon B = {a + \epsilon b : a \in A \textrm{ and } b \in B}
+\end{equation}
+The analagous Minkowski subtraction is defined by reversing the sign
+\begin{equation}
+  A - \epsilon B := A + (-\epsilon) B \ne (A + \epsilon B)^{-1}
+\end{equation}
+
+Figures:
+\begin{itemize}
+\item Geometry of Minkowski addition: growth and erosion, and the inverse operations.
+\end{itemize}
+
 \subsubsection{Distances between sets}
 The Hausdorff metric.
 \subsubsection{Valuations on sets}
 Additivity criterion and its significance
 
+Examples:
+\begin{itemize}
+\item Additivity of the entropy.
+\item Connection between sets and events: probabilistic interpretation of measures.
+\end{itemize}
+
 \subsection{Important theorems for continuous invariant valuations}
+
+\subsubsection{Invariant measures}
+
+\begin{itemize}
+\item Introduce intrinsic volumes $\{\mu_i\}_{i=0}^d$
+\item Examples: intrinsic volumes of unit ball $\mathcal{B}_d$ and cube ($\mathcal{C}_d$). Cube:
+  \begin{equation}
+    \mu_i (\mathcal{C}_d) = {d \choose i}
+  \end{equation}
+\end{itemize}
+
+\begin{theorem}[Hadwiger's characterisation theorem]
+  Together the functionals $\{\mu_i\}_{i=0}^d$ form a basis for the vector space of all continuous rigid-motion invariant valuations of polyconvex sets in $\mathbb{R}^d$.
+\end{theorem}
+
+I.e. a continuous rigid-motion invariant valuation can be written
+
+\begin{equation}
+  \mu(A) = \sum_{i=0}^d c_i \mu_i(A)
+\end{equation}
+where $c_i$ are some coefficients independent of $A$.
+
+\begin{theorem}[Steiner's formula for parallel volumes]
+  \begin{equation}
+    \mu_d(\mathcal{K} + \epsilon \mathcal{B}_d) =
+    \sum_{i=0}^d \mu_i(\mathcal{K}) \omega_{d-i} \epsilon^{d-i}
+  \end{equation}
+\end{theorem}
+
 \subsubsection{Principal kinematic formula}
-\subsubsection{Steiner formula for parallel surfaces}
-\subsubsection{Hadwiger’s characterisation theorem}
+
+Flag coefficients from binomial coefficients
+\begin{equation}
+  \begin{bmatrix} d \\ k \end{bmatrix}
+  = {d \choose k}
+  \frac{\omega_d}{\omega_i \omega_{d-i}}
+\end{equation}
+Provides the generalisation of combinatorial results to continuous spaces\footnote{For this reason Klain and Rota argue that integral geometry/geometric probability should be called \emph{continuous combinatorics} \cite{Klain1997}}.
+
+\begin{theorem}[General kinematic formula]
+  For $0 \le k \le d$:
+  \begin{equation}
+    \int_{\mathbb{E}_d} \mu_i (A \cap g B) \, dg =
+    \sum_{i=0}^{d-k} {i + k \choose k} {d \choose i}^{-1} \frac{\omega_{i+k}}{\omega_k \omega_i} \left(\frac{\omega_d}{\omega_i \omega_{d-i}} \right)^{-1} \mu_{k+i}(A) \mu_{d-i}(B)
+  \end{equation}
+\end{theorem}

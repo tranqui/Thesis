@@ -1,3 +1,6 @@
+\usepackage{mathtools}
+\usepackage{amssymb}
+
 \usepackage{hyperref}
 \usepackage{graphicx}
 \usepackage{epstopdf}
@@ -42,14 +45,14 @@ frametitleaboveskip=\dimexpr-\ht\strutbox\relax}
 %\definecolor{color2}{RGB}{10,100,100} % Color of the boxes behind the abstract and headings
 \colorlet{color2}{blue!10}
 
-\newcounter{method} \setcounter{method}{0}
-\renewcommand{\themethod}{\Roman{method}}
-\newenvironment{method}[1][]
+\newcounter{theorem} \setcounter{theorem}{0}
+\renewcommand{\thetheorem}{\arabic{theorem}}
+\newenvironment{theorem}[1][]
 {%
-\refstepcounter{method}%
+\refstepcounter{theorem}%
 \ifstrempty{#1}
-{\begin{framedbox}[SI~\themethod]{color1}{color2}}%
-{\begin{framedbox}[SI~\themethod: #1]{color1}{color2}}%
+{\begin{framedbox}[Theorem~\thetheorem]{color1}{color2}}%
+{\begin{framedbox}[Theorem~\thetheorem: #1]{color1}{color2}}%
 }%
 {\end{framedbox}}
 

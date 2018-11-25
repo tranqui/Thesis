@@ -15,11 +15,70 @@ Particle densities $\rho^{(n)}$ and distribution functions $g^{(n)}$.
 \subsection{Homogeneous liquid state theory}
 
 \subsubsection{Virial expansion of the equation of state}
+
 \paragraph{Distribution function form}
 Pressure in terms of pair distribution function $g(r)$.
+
+For pair potentials:
+\begin{equation}
+  \frac{\beta P}{\rho} =
+  1 - \frac{2 \pi \beta \rho}{3}
+  \int_0^\infty v'(r) g(r) r^3 \, dr
+\end{equation}
+Generalisation to many-body potentials requires higher order distribution functions.
+Difficulty of discontinuities overcome by introducing cavity function
+\begin{equation}
+  y(r) = e^{\beta v(r)} g(r)
+\end{equation}
+which is continuous leading to
+\begin{equation}
+  \frac{\beta P}{\rho} =
+  1 + \frac{2 \pi \beta \rho}{3}
+  \int_0^\infty e'(r) g(r) r^3 \, dr,
+\end{equation}
+where Boltzmann factor of pair potential is
+\begin{equation}
+  e(r) = e^{\beta v(r)}.
+\end{equation}
+
 \paragraph{Diagrammatic form}
 Low density expansion of pressure in series with virial coefficients.
+
+\begin{equation}
+  \frac{\beta P}{\rho} =
+  1 + \sum_{i=2}^\infty B_i(T) \rho^{i-1}
+\end{equation}
+where $B_i$ are the virial coefficients.
+
+Generalisation to a binary mixture: \cite{Hansen-Goos2014}
+\begin{equation}
+  \Phi = \sum_{n=2}^\infty \sum_{j=0}^{n}
+  \frac{1}{n-1} {n \choose j} B_n^{[j]} \rho_1^{n-j} \rho_2^j
+\end{equation}
+
 \paragraph{Empirical Carnahan-Starling equation of state for hard spheres}
+
+The excess free energy is determined from the equation of state by
+\begin{equation}
+  \frac{\beta F^{ex}}{N}
+  = \int_0^\eta \left( \frac{\beta p}{\rho} - 1 \right) \, \frac{d\eta'}{\eta'},
+\end{equation}
+giving the excess chemical potential from the thermodynamic relation
+\begin{equation}\label{eq:chemical-potential}
+  \beta \mu^{ex}[p]
+  = \beta \left( \frac{\partial F^{ex}}{\partial N} \right)_{V,T}
+  = \left( \frac{\beta p}{\rho} - 1 \right)
+  + \int_0^\eta \left( \frac{\beta p}{\rho} - 1 \right) \, \frac{d\eta'}{\eta'}.
+\end{equation}
+
+The Carnahan-Starling equation of state approximates the pressure for hard spheres as \cite{Carnahan1969}
+\begin{equation}\label{eq:cs-pressure}
+  \frac{\beta p_{cs}}{\rho} = \frac{1 + \eta + \eta^2 - \eta^3}{(1-\eta)^3},
+\end{equation}
+which gives the excess chemical potential using \eqref{eq:chemical-potential} as
+\begin{equation}\label{eq:cs-mu}
+  \beta \mu_{cs}^{ex} = \frac{8\eta - 9\eta^2 + 3\eta^3}{(1-\eta)^3}.
+\end{equation}
 
 \subsubsection{Free energy from distribution functions}
 \paragraph{Distribution function theories}
@@ -32,7 +91,18 @@ Low density expansion of pressure in series with virial coefficients.
 
 \subsubsection{Solvation physics}
 \subsubsection{Density functional theory (DFT)}
+
+\begin{itemize}
+\item Contrast mechanical problem (e.g.\ simulations) with inverse problem
+\item Summarise successes
+\end{itemize}
+
 \paragraph{Fundamental measure theory (FMT)}
+\begin{itemize}
+\item $d+1$ weight functions
+\item Exact decomposition of Mayer-f bond
+\end{itemize}
+
 \subsubsection{Heterogeneous approaches to the homogeneous liquid}
 \paragraph{Potential distribution theorem}
 \paragraph{Scaled particle theory}

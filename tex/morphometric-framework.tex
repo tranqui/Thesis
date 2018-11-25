@@ -8,7 +8,59 @@ Mostly theoretical but with some numerical experiments which motivate/justify de
 The main body of numerical work is left to the following chapter.
 
 \section{Formalism for many-body correlations}
-A generalised potential distribution theorem and the potential of mean force.
+
+We write the $n$-particle distribution function $g^{(n)}$ as
+\begin{equation}\label{eq:n-density-pdf}
+  \textrm{Probability}\left( \textit{any } n \textrm{ particles in volume } d\vec{r}^n \right)
+  \equiv
+  \rho^n g^{(n)}(\vec{r}^n) \, d\vec{r}^n.
+\end{equation}
+In the main text, we expressed $g^{(n)}$ in terms of a generalised potential of mean force $\phi^{(n)}$: the reversible work required to insert $n$ particles into the liquid.
+We decomposed $\phi^{(n)}$ into a local (potential energy) and solvent (free energy) component.
+Although this quantity is quite intuitive and could be determined heuristically, here we give a short proof that this decomposition is formally exact and arises quite naturally from the definition of the distribution function.
+
+In the grand-canonical ensemble the $n$-particle density $\rho^{(n)}(\vec{r}^n) \equiv \rho^n g^{(n)}$ is determined by integrating over the remaining degrees of freedom~\cite{Hansen2013}
+\begin{equation}
+  \rho^{(n)}(\vec{r}^n)
+  = \frac{1}{\Xi} \sum_{N=n}^\infty \frac{z^N}{(N-n)!} \int e^{-\beta U_N} \, d\vec{r}^{(N-n)},
+\end{equation}
+where the activity is written in terms of the thermal de Broglie wavelength $\Lambda$ as $z = \exp{\beta\mu} / \Lambda^d$.
+Changing the summation limits $N \rightarrow N+n$ we obtain
+\begin{equation}\label{eq:n-density}
+\begin{aligned}
+  \rho^{(n)}(\vec{r}^n)
+  &= \frac{z^n}{\Xi} \sum_{N=0}^\infty \frac{z^N}{N!} \int e^{-\beta U_{N+n}} \, d\vec{r}^{N} \\
+ & = z^n e^{-\beta U_n} \left< e^{-\beta U_{n \leftrightarrow N}} \right>
+\end{aligned}
+\end{equation}
+where in the latter step we decomposed the total potential $U_{N+n}$ into purely local and solvent terms, i.e.\ $U_{N+n} = U_n + U_N + U_{n \leftrightarrow N}$, where $U_\alpha$ for $\alpha \in \{n,N\}$ indicates the internal interactions between particles in component $\alpha$.
+The ``interspecies'' interactions are contained within $U_{n \leftrightarrow N}$ which acts as an external field for the solvent.
+The angled brackets indicate ensemble averaging over all arrangements of the solvent, i.e.\
+\begin{equation}
+  \left< \cdots \right> =
+  \frac{1}{\Xi} \sum_{N=0}^\infty \frac{z^N}{N!} \int \left(\cdots\right) e^{-\beta U_N} \, d\vec{r}^N,
+\end{equation}
+with partition function of the unperturbed system $\Xi \equiv e^{-\beta \Omega_{hom}}$, where $\Omega_{hom} = -p V$ is the usual homogeneous grand potential.
+Thus, \eqref{eq:n-density} becomes
+\begin{equation}
+  \rho^{(n)}(\vec{r}^n)
+  = z^n e^{-\beta (U_n + \Omega - \Omega_{hom})}.
+\end{equation}
+where $\Omega$ is the grand potential of the solvent in the presence of the $n$-particle inhomogeneity.
+Splitting the chemical potential into its ideal and excess parts so that $\beta\mu = \ln{\Lambda^d \rho} + \beta\mu^{ex}$ gives
+\begin{equation}
+  \rho^{(n)}(\vec{r}^n)
+  = \rho^n e^{-\beta (U_n + \Omega - \Omega_{hom} - n\mu^{ex})}.
+\end{equation}
+The $n$-particle distribution functions are then determined from~\cite{Hansen2013}
+\begin{equation}\label{eq:distribution-functions}
+  g^{(n)}(\vec{r}^n)
+  \equiv \frac{\rho^{(n)}(\vec{r}^n)}{\rho^n}
+  = e^{-\beta(U_n + \Delta\Omega - n\mu^{ex})}
+\end{equation}
+where $\Delta\Omega = \Omega - \Omega_{hom}$ giving the generalised potential of mean force stated in the main text.
+
+The above is essentially the generalisation of the \emph{potential distribution theorem} \cite{Widom1963,Widom1982} to many-particles. See Ref.\ \cite{Rowlinson2002} and references therein for a detailed review of this approach.
 
 \section{Morphological form of the potential of mean force}
 Justification of assumptions: additivity, continuity and motion invariance
@@ -27,6 +79,222 @@ Explore where additivity, continuity and motion invariance apply.
 \subsubsection{Implications for higher dimensions}
 
 \section{Derivation of thermodynamic coefficients for hard spheres in $d = 3$}
+
+\subsubsection{Scaled particle route}
+
+We describe here in more detail the derivation of the first set of morphometric coefficients, equivalent to those given in \cite{Hansen-Goos2006} through fundamental measure theory (FMT).
+The derivation sketched below avoids use of FMT, instead favouring a geometric formulation equivalent to the scaled particle approach of Reiss \emph{et al}.\ \cite{Reiss1959,Reiss1960}.
+The standard scaled particle approach considers an expansion of the grand potential surrounding a spherical solute in powers of radii; here, we modify the \emph{ansatz} to use morphological measures instead, so that the resulting theory is more naturally extended to geometries of arbitrary shapes.
+Additionally, we impose the Carnahan-Starling equation of state as an \emph{input} whereas the Percus-Yevick equation of state is an \textit{output} of standard scaled particle approaches.
+
+Following the protocol of scaled particle theories, we consider the insertion of a hard ball of radius $R-\frac{\sigma}{2}$ into the liquid at the origin.
+This choice of radius ensures that contact with the \emph{center} of solvent particles occurs at distance $R$ from the point of insertion i.e.\ $\rho(r) = 0$ for $r < R$.
+Writing the change in the grand potential due to the insertion of the ball in its morphometric form (from \eqref{eq:surface-tension} and \eqref{eq:morphometric-surface-tension} of the main text), we have the \emph{ansatz}
+\begin{equation}\label{eq:morph-ball-solvation}
+  \Delta \Omega(R) =
+  \frac{4\pi R^3}{3} p +
+  4\pi R^2 \, \gamma_\infty +
+  4\pi R \, \kappa +
+  4 \pi \, \overline{\kappa}.
+\end{equation}
+If an equation of state for the pressure is taken as input, only three equations are needed to set the remaining coefficients of surface tension $\gamma_\infty, \kappa$ and $\overline{\kappa}$.
+
+Restating the expressions for the insertion of a hard point and a new particle from the main text as
+\begin{align}
+  \label{eq:spt-point} \Delta\Omega(R=0) &= -k_B T \ln{(1- \eta)}, \\
+  \label{eq:spt-mu} \Delta\Omega\left(R=\frac{\sigma}{2}\right) &= \mu^{ex},
+\end{align}
+we need one more equation to set the thermodynamic coefficients for the theory.
+Following Ref.\ \cite{Bryk2003} we take the normal derivative of $\Omega$ with respect to $R$, and noting that $\Delta\Omega(R) = \Omega(R) - \Omega_{hom}$ gives
+\begin{equation}\label{eq:spt-derivative}
+  \left( \frac{\partial \Delta \Omega}{\partial R} \right)_{\mu,V,T} =
+  \left( \frac{\partial \Omega}{\partial R} \right)_{\mu,V,T} =
+  \int
+  \frac{\delta \Omega[\rho_0(\vec{r})]}{\delta \rho}
+  \left( \frac{\partial \rho_0(\vec{r})}{\partial R} \right)_{\mu,V,T}
+  \, d\vec{r} +
+  \int
+  \rho_0(\vec{r})
+  \left( \frac{\partial \phi_{ext}(\vec{r})}{\partial R} \right)_{\mu,V,T}
+  \, d\vec{r},
+\end{equation}
+where $\rho_0$ is the equilibrium density profile and $\phi_{ext}$ is the external potential (i.e.\ the potential of the ball).
+In equilibrium $\Omega$ is minimised so
+\begin{equation}
+  \left.
+  \frac{\delta \Omega[\rho(\vec{r}); \phi_{ext}]}{\delta \rho}
+  \right|_{\rho(\vec{r})=\rho_0(\vec{r})} = 0,
+\end{equation}
+so the first integral in \eqref{eq:spt-derivative} vanishes.
+As the ball is hard, the external potential and its derivative are zero everywhere except at the surface $R$ where both $\rho_0$ and $\phi_{ext}$ are discontinuous.
+We consider its Boltzmann weight, i.e.\
+\begin{equation}
+  e^{-\beta\phi_{ext}(\vec{r})} = \Theta(|\vec{r}| - R).
+\end{equation}
+Taking the derivative of both sides gives
+\begin{equation}
+  \beta\left( \frac{\partial\phi_{ext}(\vec{r})}{\partial R} \right)_{\mu,V,T} =
+  \delta(|\vec{r}| - R) e^{\beta\phi_{ext}(\vec{r})}
+\end{equation}
+Inserting this expression into \eqref{eq:spt-derivative} and using the fact that $\rho(\vec{r}) e^{\beta\phi_{ext}(\vec{r})}$ is continuous (c.f.\ Ref.\ \cite{Hansen2013}) gives the contact theorem
+\begin{equation}
+  \beta \left( \frac{\partial \Omega}{\partial R} \right)_{\mu,V,T} =
+  4\pi R^2 \rho(R).
+\end{equation}
+When $R = \sigma$ the inserted ball is equivalent to the hard sphere particles themselves, so $\Omega = \mu^{ex}$ and the contact density is $\rho(\sigma) = \rho \, g^{(2)}(\sigma)$ giving
+\begin{equation}\label{eq:spt-contact-density}
+  \left. \beta \left( \frac{\partial \Delta \Omega}{\partial R} \right)_{\mu,V,T}
+  \right|_{R = \sigma}
+  =
+  \left. \beta \left( \frac{\partial \Omega}{\partial R} \right)_{\mu,V,T}
+  \right|_{R = \sigma}
+  =
+  %\beta \frac{\partial \mu^{ex}}{\partial \sigma} =
+  4\pi \sigma^2 \rho \, g^{(2)}(\sigma),
+\end{equation}
+or written in morphometric form using \eqref{eq:morph-ball-solvation} we have
+\begin{equation}
+  4\pi \sigma^2 \, p +
+  8\pi \sigma \, \gamma_\infty +
+  4\pi \, \kappa =
+  \frac{4\pi \sigma^2 \rho}{\beta} \, g^{(2)}(\sigma).
+\end{equation}
+Applying the virial theorem (equation \eqref{eq:contact-g} in the main text) to the right hand side gives the final expression:
+\begin{equation}\label{eq:spt-virial}
+  4\pi \sigma^2 \, p +
+  8\pi \sigma \, \gamma_\infty +
+  4\pi \, \kappa =
+  \frac{6}{\beta\sigma} \left( \frac{\beta p}{\rho} - 1 \right).
+\end{equation}
+Together \eqref{eq:spt-point}, \eqref{eq:spt-mu} and \eqref{eq:spt-virial} form a complete system of equations which we solve to obtain the coefficients
+\begin{subequations}
+  \begin{align}
+    \frac{\beta \gamma_\infty^{WBII}}{R \rho} &=
+    \left(\frac{\pi}{6\eta^2} - \frac{5\pi}{18\eta}\right) p -
+    \frac{\mu^{ex}[p]}{3\eta} -
+    \frac{\ln{(1-\eta)}}{3\eta} -
+    \frac{1}{\eta}
+    \label{eq:spt-gamma}
+    \\
+    \frac{\beta \kappa^{WBII}}{R^2\rho} &=
+    \left( \frac{4\pi}{9\eta} - \frac{\pi}{2\eta^2} \right) p +
+    \frac{4\mu^{ex}[p]}{3\eta} + \frac{4\ln{(1-\eta)}}{3\eta} + \frac{3}{\eta}
+    \\
+    \frac{\beta \overline{\kappa}^{WBII}}{R^3\rho} &=
+    \left( \frac{\pi}{3\eta^2} - \frac{2\pi}{9\eta} \right) p -
+    \frac{\mu^{ex}[p]}{\eta} - \frac{4\ln{(1-\eta)}}{3\eta} - \frac{2}{\eta}.
+  \end{align}
+\end{subequations}
+Inserting the Carnahan-Starling parameters \eqref{eq:cs-pressure} and \eqref{eq:cs-mu} gives the coefficients explicitly as
+\begin{subequations}
+  \begin{align}
+    \frac{\beta p^{WBII}}{\rho} &=
+    \frac{1 + \eta + \eta^2 - \eta^3}{(1-\eta)^3}
+    \\
+    \frac{\beta \gamma_\infty^{WBII}}{R\rho} &=
+    -\frac{1 + 2\eta + 8\eta^2 - 5\eta^3}{3(1-\eta)^3}
+    - \frac{\ln{(1-\eta)}}{3\eta}
+    \\
+    \frac{\beta \kappa^{WBII}}{R^2\rho} &=
+    \frac{4 - 10\eta + 20\eta^2 - 8\eta^3}{3(1-\eta)^3} + \frac{4 \ln{(1-\eta)}}{3\eta}
+    \\
+    \frac{\beta \overline{\kappa}^{WBII}}{R^3\rho} &=
+    - \frac{4 - 11\eta + 13\eta^2 - 4\eta^3}{3(1-\eta)^3} - \frac{4 \ln{(1-\eta)}}{3\eta},
+  \end{align}
+\end{subequations}
+which are \emph{identical} to the coefficients derived from the WBII free energy functional in Ref.\ \cite{Hansen-Goos2006}.
+Remarkably, we have obtained these coefficients through a route completely different from their original derivation.
+In Ref.\ \cite{Hansen-Goos2006} the coefficients were determined within FMT by taking the limit of a binary mixture where one component is infinitely dilute.
+Here we completely avoided FMT, in favour of geometrical arguments similar to standard scaled particle approaches.
+This suggests that the above scaled particle argument is somehow built into the structure of the WBII functional; we note that this is a nonobvious fact which cannot be determined from the form of the functional alone, nor is it obvious how it emerges from its original derivation.
+
+Finally, note that (as described in the main text) the resulting $g^{(2)}$ performs poorly in the supercooled regime as compared with the ``exact'' result from virial theorem i.e.\ Eq.\ \eqref{eq:contact-g} in the main text.
+In Fig.\ \ref{fig:contact-g} we plot the contact value with this set of coefficients, finding that it is reasonably accurate until around the freezing density where contact correlations spuriously decay.
+The next section will detail how to modify the derivation to produce coefficients which describe more accurate correlation functions at high densities.
+
+\subsubsection{Virial route}
+
+In this section we give the detailed steps used in the derivation of the new set of morphometric coefficients, following the direction laid out in the main text.
+In section \ref{SI:two-particles} above the morphological form of $g^{(2)}$ was computed explicitly; this derivation imposes the contact density using $\rho(\sigma) = \rho \, g^{(2)}(\sigma)$ with this explicit form.
+
+From \eqref{eq:g2-explicit} the potential of mean force for neighbouring particles reduces to $\phi^{(2)}(r) = \Delta\Omega(r) - 2\mu^{ex}$ if they do not overlap, giving
+\begin{equation}
+  \begin{split}
+  \phi^{(2)}(r) &\equiv - k_B T \ln g^{(2)}(r) \\
+  &= pV(r) + \gamma_\infty A(r) + \kappa C(r) + \overline{\kappa} X(r) - 2\mu^{ex}
+  \quad \forall \; \sigma \le r \le 2\sigma.
+  \end{split}
+\end{equation}
+Inserting the morphological quantities at contact from \eqref{eq:g2-explicit-morph} gives
+\begin{equation}
+  \phi^{(2)}(\sigma) =
+  \frac{9\pi \sigma^3}{4} p +
+  6\pi\sigma^2 \, \gamma_\infty +
+  \left( 6\pi\sigma - \frac{\pi^2\sigma}{2\sqrt{3}} \right) \, \kappa +
+  4\pi \, \overline{\kappa}
+  - 2\mu^{ex}[p].
+\end{equation}
+Equating this with $-k_B T \ln g^{(2)}(\sigma)$ and using the virial theorem (Eq.\ \eqref{eq:contact-g} in the main text) gives the final expression
+\begin{equation}\label{eq:v-virial}
+  \frac{9\pi \sigma^3}{4} p +
+  6\pi\sigma^2 \, \gamma_\infty +
+  \left( 6\pi\sigma - \frac{\pi^2\sigma}{2\sqrt{3}} \right) \, \kappa +
+  4\pi \, \overline{\kappa} = 
+  2\mu^{ex}[p] - \beta^{-1} \ln{\frac{3}{2\pi \rho \sigma^3} \left( \frac{\beta p}{\rho} - 1 \right)}.
+\end{equation}
+We will use this last expression instead of the contact theorem \eqref{eq:spt-virial} in order to obtain new coefficients.
+Together \eqref{eq:spt-point}, \eqref{eq:spt-mu} and \eqref{eq:v-virial} solve to give coefficients:
+\begin{subequations}
+  \begin{align}
+    \frac{\beta \gamma_\infty^{V}}{R\rho} &=
+    \frac{ (18\pi - 7\sqrt{3} \pi^2) p + 6\sqrt{3}\pi \mu^{ex}[p]
+      - 6(12 - \sqrt{3}\pi) \ln{(1-\eta)}
+      - 72\ln{\left( \frac{\pi p - 6\eta}{24\eta^2} \right)} }
+    {54(\sqrt{3}\pi - 4) \eta}
+    \label{eq:virial-gamma}
+    \\
+    \frac{\beta \kappa^{V}}{R^2\rho} &=
+    \frac{ 5\pi p - 12 \mu^{ex}[p] + 24 \ln{(1-\eta)}
+      + 36\ln{\left( \frac{\pi p - 6\eta}{24\eta^2} \right)} }
+    {9(\sqrt{3}\pi - 4) \eta}
+    \\
+    \frac{\beta \overline{\kappa}^{V}}{R^3\rho} &=
+    - \frac{
+      (18\pi - 2\sqrt{3} \pi^2) p - (36 - 3\sqrt{3}\pi) \mu^{ex}[p] + 12\sqrt{3}\pi \ln{(1-\eta)}
+      + 72\ln{\left( \frac{\pi p - 6\eta}{24\eta^2} \right)} }
+    {27(\sqrt{3}\pi - 4) \eta},
+  \end{align}
+\end{subequations}
+which upon insertion of the Carnahan-Starling parameters \eqref{eq:cs-pressure} and \eqref{eq:cs-mu} gives the coefficients explicitly as
+\begin{subequations}
+  \begin{align}
+    \frac{\beta p^{V}}{\rho} &=
+    \frac{1 + \eta + \eta^2 - \eta^3}{(1-\eta)^3} \\
+    \frac{\beta \gamma_\infty^{V}}{R\rho} &=
+    \frac{ 18\eta \frac{1 + \eta + \eta^2 - \eta^3}{(1-\eta)^3}
+      + \sqrt{3}\pi\eta \frac{1 - 16\eta - 4\eta^2 + 7\eta^3}{(1-\eta)^3}
+      - (12 - \sqrt{3}\pi) \ln{(1-\eta)}
+      - 12\ln{\left( \frac{2 - \eta}{2(1-\eta)^3} \right)} }
+    {9(\sqrt{3}\pi - 4) \eta} \\
+    \frac{\beta \kappa^{V}}{R^2\rho} &= -
+    \frac{ 2\eta \frac{11 - 23\eta + \eta^2 + 5\eta^3}{(1-\eta)^3}
+      - 8 \ln{(1-\eta)}
+      - 12\ln{\left( \frac{2 - \eta}{2(1-\eta)^3} \right)} }
+    {3(\sqrt{3}\pi - 4) \eta} \\
+    \frac{\beta \overline{\kappa}^{V}}{R^3\rho} &=
+    \frac{ 12\eta \frac{5 - 12\eta + 3\eta^3}{(1-\eta)^3}
+      - \sqrt{3}\pi\eta \frac{4 - 13\eta - \eta^2 + 4\eta^3}{(1-\eta)^3}
+      - 4\sqrt{3}\pi \ln{(1-\eta)}
+      - 24\ln{\left( \frac{2 - \eta}{2(1-\eta)^3} \right)} }
+    {9(\sqrt{3}\pi - 4) \eta}.
+  \end{align}
+\end{subequations}
+Unlike the WBII coefficients above these are entirely new, and produce significantly more accurate correlation functions at high densities as described in the main text.
+The pair correlation produced by these coefficients (black line in Fig.\ \ref{fig:contact-g}) is self-consistent with CS at contact by construction, but as an additional bonus we find that the new coefficients provide a theory that outperforms the older WBII approach across the whole range of distances typical of neighbouring particles (inset of Fig.\ \ref{fig:contact-g}).
+The latter observation enables us to accurately model complex many-particle local structures.
+
+However, it should be noted that the planar surface tension $\gamma_\infty^{V}$ is considerably less accurate than $\gamma_\infty^{WBII}$ as compared with molecular dynamics studies in \cite{Davidchack2016}.
+For this reason, WBII coefficients may give more accurate grand potentials (and thus correlations) for large solutes where the surface becomes approximately planar.
 
 \section{Accuracy of predicted distribution functions in $d = 3$}
 \subsection{Comparison with molecular dynamics simulations}
