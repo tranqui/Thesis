@@ -6,6 +6,20 @@
 \usepackage{epstopdf}
 \usepackage[caption=false]{subfig}
 
+% Make margin notes behave like footnotes
+\usepackage{marginnote}
+\renewcommand\raggedrightmarginnote{\sloppy}
+\renewcommand*{\marginfont}{\footnotesize}
+\newcounter{marginnotecounter}
+\newcommand{\marginfootnote}[1]{%
+\refstepcounter{marginnotecounter}%
+\mbox{\textsuperscript{\themarginnotecounter}}%
+\marginnote{\mbox{\textsuperscript{\themarginnotecounter}} #1}%
+}
+%\newcommand{\marginfootnote}[1]{\footnotemark\marginnote{#1}}
+% Create enough space in the margin for the notes.
+\usepackage[top=2cm, bottom=2cm, outer=7cm, inner=2cm, heightrounded, marginparwidth=5cm, marginparsep=1cm]{geometry}
+
 \usepackage{titlesec}
 \setcounter{secnumdepth}{2}
 \setcounter{tocdepth}{4}

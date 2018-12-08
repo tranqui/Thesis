@@ -212,6 +212,58 @@ Finally, note that (as described in the main text) the resulting $g^{(2)}$ perfo
 In Fig.\ \ref{fig:contact-g} we plot the contact value with this set of coefficients, finding that it is reasonably accurate until around the freezing density where contact correlations spuriously decay.
 The next section will detail how to modify the derivation to produce coefficients which describe more accurate correlation functions at high densities.
 
+\subsection{Aside: scaled particle theory extension for dimers}
+
+I was unaware of work by Stillinger et al \cite{Stillinger2006} before publishing on the morphometric approach, but upon discovering this work I realised their ideas are very similar in nature.
+Here I present similar results but using the morphometric notation.%
+\marginfootnote{The purpose of this section needs to be fleshed out and made \emph{very} clear, otherwise the reader will get lost quickly.
+  This section \emph{is} important as we explore the boundaries of where the morphometric approach can fail: this is a great testbed for continuity, and allows us to argue the accuracy of the approach applied to local structures.}
+
+We have the probability of any number of particles existing inside the cavity
+\begin{equation}
+  \sum_{n=0}^\infty p_n (\lambda) = 1
+\end{equation}
+Giving the probability the cavity is empty due to a spontaneous thermal fluctuation
+as
+\begin{equation}
+  p_0 (\lambda) = e^{-\beta W(\lambda)}
+  = 1 - \sum_{n=1}^\infty p_n (\lambda).
+\end{equation}
+The singular nature of the hard sphere interaction ensures there is a maximum number of particles that can fit inside any finite sized cavity (the optimal packing), so we define
+\begin{equation}
+  n^*(\lambda) = \max{n(\lambda)},
+\end{equation}
+and thus
+\begin{equation}
+  p_0 (\lambda) = e^{-\beta W(\lambda)}
+  = 1 - \sum_{n=1}^{n^*(\lambda)} p_n (\lambda).
+\end{equation}
+
+Following Stillinger we generalise to two cavities.
+Define work to insert both cavities as $W^{(2)}(r,\lambda)$.
+We then have the generalisaton
+\begin{equation}
+  p_0^{(2)} (\lambda) = e^{-\beta W^{(2)}(\lambda)}
+  = 1 - \sum_{n=1}^{\max{n^{(2)}(\lambda)}} p_n^{(2)} (\lambda).
+\end{equation}
+We have the conditions:%
+\marginfootnote{To do: Make this notation more consistent and able to handle different numbers of cavities. We don't want to just recycle Stillinger's notation: we want to be consistent with the rest of the thesis.}
+\marginfootnote{Also, need to define $\lambda$ as the cavity diameter}[4cm]
+\begin{align}
+  \lim_{r \to 0} W^{(2)}(r; \lambda) &= W^{(1)}(\lambda) \\
+  \max{n^{(2)}(r; \lambda)} &= 1
+  \quad \forall \; r + 2\lambda < 1 \\
+  \lim_{r \to \infty} W^{(2)}(r; \lambda) &= 2 W^{(1)}(\lambda) \\
+  \max{n^{(2)}(r; \lambda)} &\le 2 \max{n^{(1)}(\lambda)}
+  \quad \forall \; r > 2\lambda
+\end{align}
+Which gives us the `point' insertion condition (where $\max{n^{(2)}(r; \lambda)} = 1$)
+\begin{equation}
+  \beta W^{(2)}(r; \lambda) = -\ln (1 - \rho V(r; \lambda))
+\end{equation}
+
+Hausdorff distance is simply $r$, so how the hell is the Euler characteristic of their union continuous with respect to $r$? It is discontinuous at $r = 2\lambda$.
+
 \subsubsection{Virial route}
 
 In this section we give the detailed steps used in the derivation of the new set of morphometric coefficients, following the direction laid out in the main text.
