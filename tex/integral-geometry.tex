@@ -1,4 +1,5 @@
-\section{Integral geometry}
+\section{Integral geometry (or ``How big is that thing?'')}
+
 The mathematical formalism which provides elegant and unified description of sizes, underlying the morphological approach taken in the thesis.
 Ideas from this branch of mathematics were crucial to the development of fundamental measure theory, so it makes sense to place this before the section
 on liquid state theory.
@@ -6,7 +7,25 @@ Integral geometry is generally unfamiliar to people with a background in physics
 
 Make connections with statistical physics frequently.
 
+Possible additions:
+\begin{itemize}
+\item Measure theory?
+\item Partially ordered sets?
+\end{itemize}
+
 \subsection{Motivation}
+
+Want to describe how `big' an object is.
+First we define our objects: sets in Euclidean space.
+We will see that the only reasonable notion of size is a \emph{continuous} rigid-motion invariant valuation.
+
+Free volume theories: (free) energy based on size of an object.
+We could argue that fundamentally these theories are based on measuring physical sizes.
+Integral geometry offers a mathematically rigorous formalism for describing sizes, so presents a possible starting point for free volume theories.
+\marginfootnote{Can I find a coherent definition of free volume theories? Can I cook one up?
+  Need at least two examples to draw a trend.
+  Free volume theories in polymers are probably the best well known.
+  Free volume theory in glasses?}
 
 \subsection{Generalised functions acting on sets}
 \subsubsection{Set arithmetic}
@@ -14,9 +33,9 @@ Minkowski addition and its inverse.
 
 Minkowski sum:
 \begin{equation}
-  A + \epsilon B = {a + \epsilon b : a \in A \textrm{ and } b \in B}
+  A + \epsilon B = \{a + \epsilon b : a \in A \textrm{ and } b \in B\}
 \end{equation}
-The analagous Minkowski subtraction is defined by reversing the sign
+The analogous Minkowski subtraction is defined by reversing the sign
 \begin{equation}
   A - \epsilon B := A + (-\epsilon) B \ne (A + \epsilon B)^{-1}
 \end{equation}
@@ -36,6 +55,13 @@ Examples:
 \item Additivity of the entropy.
 \item Connection between sets and events: probabilistic interpretation of measures.
 \end{itemize}
+
+\subsubsection{Which sets do we consider}
+
+We consider Polyconvex sets.
+
+Avoid pathological sets: Banach-Tarski paradox allows one to break a sphere apart and recompose it as two identical spheres.
+We want a well-defined volume, so need to avoid sets which allow this.
 
 \subsection{Important theorems for continuous invariant valuations}
 
@@ -75,7 +101,7 @@ Flag coefficients from binomial coefficients
   = {d \choose k}
   \frac{\omega_d}{\omega_i \omega_{d-i}}
 \end{equation}
-Provides the generalisation of combinatorial results to continuous spaces\footnote{For this reason Klain and Rota argue that integral geometry/geometric probability should be called \emph{continuous combinatorics} \cite{Klain1997}}.
+Provides the generalisation of combinatorial results to continuous spaces\marginfootnote{For this reason Klain and Rota argue that integral geometry/geometric probability should be called \emph{continuous combinatorics} \cite{Klain1997}}.
 
 \begin{theorem}[General kinematic formula]
   For $0 \le k \le d$:
