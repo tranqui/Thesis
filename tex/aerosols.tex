@@ -13,8 +13,284 @@ A connection with the morphometric work could be made if the applications to nuc
 As optimistic as this scenario is, it is worth making \emph{some} connection.
 
 \section{Diffusion model for a drying droplet}
+A moving boundary problem with diffusion.
+
 \subsection{Evolution equation}
-A moving boundary problem with diffusion
+
+We consider a droplet of radius $R(t)$ and consider concentration profiles at radius $r$ from its centre.
+The droplet consists of a binary fluid, with solute and solvent (mass) concentration profiles labelled $c_s(r)$ and $c_w(r)$ respectively.
+The mass fraction of each component is written
+\begin{equation}\label{eq:mass-fraction}
+  \phi_i(r) = \frac{c_i(r)}{\sum_j c_j(r)} = \frac{c_i(r)}{c_w(r) + c_s(r)} \qquad i=\{w,s\}
+\end{equation}
+Clearly $\phi_w = 1 - \phi_s$ as they must sum to unity, so we can choose either to describe the fluid;
+we will henceforth use solute mass fraction $\phi_s$.
+The density of the droplet is
+\begin{equation}
+  \rho(r) = \sum_i c_i(r) = c_w(r) + c_s(r) = \frac{c_s(r)}{\phi_s(r)},
+\end{equation}
+but $c_s$ and $\phi_s$ are related by an equation of state so we could equivalently write:
+\begin{equation}
+  \rho(r) = \frac{c_s(r)}{\phi_s(c_s(r))} = \frac{c_s(\phi_s(r))}{\phi_s(r)}.
+\end{equation}
+We use an empirical form for this density by fitting it to a polynomial i.e. the leading order terms in its Taylor series expansion
+\begin{equation}
+  \rho(c_s) = \sum_{n=0}^{\infty} \frac{\rho^{(n)}(c_s^{(0)})}{n!} (c_s - c_s^{(0)})^n,
+\end{equation}
+where $c_s^{(0)}$ is the reference state point with known density and concentrations.
+While a high order polynomial would normally be used in the full numerical calculations, we will
+truncate this series to its linear term in order to estimate leading order terms in evolution
+equations giving
+\begin{equation}\label{eq:density-expansion}
+  \rho(c_s) = \rho(c_s^{(0)}) + \rho'(c_s^{(0)}) \Delta c_s + \mathcal{O}(\Delta c_s^2)
+\end{equation}
+where $\Delta c_s = c_s - c_s^{(0)}$.
+With any order of polynomial it follows that
+\begin{equation}\label{eq:linear-density-regime}
+  \frac{\partial \rho}{\partial t}
+  = \frac{\partial \rho}{\partial \phi_s} \frac{\partial \phi_s}{\partial t}
+  = \frac{\partial \rho}{\partial c_s} \frac{\partial c_s}{\partial t}
+\end{equation}
+
+The concentration of solute evolves according to the diffusion equation
+\begin{equation}\label{eq:diffusion-equation}
+  \frac{\partial c_s}{\partial t}
+  = D_s \nabla^2 c_s
+  = D_s \frac{1}{r^2} \frac{\partial}{\partial r} \left( r^2 \frac{\partial c_s}{\partial r} \right)
+\end{equation}
+The total solute mass is obtained from this concentration profile as
+\begin{equation}\label{eq:solute-mass-equation}
+  m_s(t) = 4\pi \int_0^{R(t)} c_s(r,t) r^2 \, dr.
+\end{equation}
+Differentiating this expression using Leibniz's rule gives
+\begin{equation}
+  \begin{aligned}
+    \frac{dm_s}{dt} &=
+    4\pi \left(
+    c_s(R) R^2 \frac{dR}{dt} + \int_0^R \frac{\partial c_s}{\partial t} r^2 dr
+    \right) \\
+    &=
+    4\pi R^2 \left(
+    c_s(R) \frac{dR}{dt} + D_s \left.\frac{\partial c_s}{\partial r}\right|_{r=R}
+    \right),
+  \end{aligned}
+\end{equation}
+where we used \eqref{eq:diffusion-equation} in the final step.
+Assuming there is no solute flux outside the droplet $m_s = const$ we obtain the outer boundary condition
+\begin{equation}
+  \left.\frac{\partial c_s}{\partial r}\right|_{r=R} = -\frac{c_s(R)}{D_s} \frac{dR}{dt}
+\end{equation}
+
+The total droplet mass is obtained from the internal density profile as
+\begin{equation}\label{eq:mass-equation}
+  m(t) = 4\pi \int_0^{R(t)} \rho(r,t) r^2 \, dr.
+\end{equation}
+Differentiating this expression using Leibniz's rule gives
+\begin{equation}
+  \frac{dm}{dt} = 4\pi \left(
+  \rho(R) R^2 \frac{dR}{dt} + \int_0^R \frac{\partial \rho}{\partial t} r^2 dr
+  \right),
+\end{equation}
+and rearranging for the evolution of the boundary gives
+\begin{equation}
+  \frac{dR}{dt} =
+  \frac{1}{\rho(R) R^2} \left(
+  \frac{1}{4\pi} \frac{dm}{dt} - \int_0^R \frac{\partial \rho}{\partial t} r^2 dr
+  \right).
+\end{equation}
+Writing the density in terms of the concentration profile and using \eqref{eq:diffusion-equation} gives
+\begin{equation}\label{eq:radial-evolution}
+  \frac{dR}{dt} =
+  \frac{\phi_s(c_s(R))}{c_s(R)} \frac{1}{R^2} \left(
+  \frac{1}{4\pi} \frac{dm}{dt} -
+  D_s \int_0^R
+  \frac{\partial \rho}{\partial c_s}
+  \frac{\partial}{\partial r} \left( r^2 \frac{\partial c_s}{\partial r} \right) dr
+  \right).
+\end{equation}
+%% In the linear density regime given by equation \eqref{eq:linear-density-regime} this expression reduces to
+%% \begin{equation}
+%%   \frac{dR}{dt} =
+%%   \frac{\phi_s(c_s(R))}{c_s(R)} \left(
+%%   \frac{1}{4\pi R^2} \frac{dm}{dt} -
+%%   \rho'(c_s^{(0)}) \left.\frac{\partial c_s}{\partial r}\right| _{r=R}
+%%   + \mathcal{O}(\Delta c_s)
+%%   \right).
+%% \end{equation}
+
+\subsection{Evaporation condition}
+
+Kulmala equation for mass flow:
+\begin{equation}
+  I(R, \phi_s)%; \; T_\infty, S_\infty, P)
+  \equiv \frac{dm}{dt}
+  \simeq -2\pi \, S_h \, R \frac{S_{\infty} - a_w(\phi_s(R))}{\kappa_1(\phi_s) + \kappa_2(R, \phi_s)}
+\end{equation}
+with
+\begin{align}
+  \kappa_1(\phi_s) &= \frac{R_{mol} \, T_\infty}{M_w \, \beta_M \, D_w^{(air)} \, p_{eq} \, A(\phi_s)} \\
+  \kappa_2(R, \phi_s) &= \frac{L^2 \, M_w}{K \, R_{mol} \, \beta_T \, T_\infty^2} a_w(\phi_s(R))
+\end{align}
+The water activity $a_w$ is a fitted function of $\phi_s$ using experimental data.
+The constants I used are given as
+\begin{itemize}
+\item Sherwood number: $S_h \simeq 2.15479$
+\item Relative humidity of gas phase: $S_\infty = 0$ (dry experiments)
+\item Gas temperature: $T_\infty$ (\SI{}{\kelvin})
+\item Gas pressure: $p(T_\infty) \simeq \frac{T_\infty}{\SI{293}{\kelvin}} \SI{101325}{\newton}$
+\item Gas thermal conductivity (nitrogen): $K(T_\infty) = \left(\sum_{n=0}^2 \alpha_n T_\infty^n \right) \SI{}{\watt\per\meter\per\kelvin}$
+  \begin{itemize}
+  \item $\alpha_0 = \SI{3.95e-4}{}$
+  \item $\alpha_1 = \SI{9.805e-5}{\per\kelvin}$
+  \item $\alpha_2 = \SI{-4.3032e-8}{\per\square\kelvin}$
+  \end{itemize}
+\item Molar gas constant: $R_{mol} = \SI{8.314}{\joule\kelvin\per\mol}$
+\item $M_w = \SI{0.018016}{\kilogram\per\mol}$
+\item Diffusion constant of solvent through gas:
+  $D_w^{(air)} \simeq \left(\frac{T_\infty}{\SI{273.15}{\kelvin}}\right)^{1.81} \frac{T_\infty}{\SI{293}{\kelvin}} \, \SI{2.19e-5}{\square\meter\per\second}$
+\item Equilibrium water vapour pressure: $p_{eq} = \SI{2338.77}{\newton\per\meter}$
+\item Stefan flow correction: $A(\phi_s) = 1 + \frac{S_\infty + a_w(\phi_s)}{2} \frac{p_{eq}}{p(T_\infty)}$
+\item Latent heat of evaporation (water): $L = \SI{2455595}{\joule\per\kilogram}$
+\item Mass flux correction: $\beta_M \simeq 0.996175$
+\item Heat flux correction: $\beta_T \simeq 0.995228$
+\end{itemize}
+
+\subsubsection{Vapour phase analysis}
+
+Starting from the continuity equation\marginfootnote{A key reference for this section is: Sirignano, W. A. \emph{Fluid dynamics and transport of droplets and sprays - Second edition} (2010).}:
+\begin{equation}\label{eq:continuity-eqn}
+  \frac{\partial \rho}{\partial t}
+  + \vec{\nabla} \cdot \vec{j} = 0,
+\end{equation}
+where the current is
+\begin{equation}
+  \vec{\nabla} \cdot \vec{j} =
+  \frac{1}{r^2} \frac{\partial (r^2 \rho u)}{\partial r}
+\end{equation}
+If we assume a steady state the time derivative in \eqref{eq:continuity-eqn} disappears leaving
+\begin{equation}
+  r ^2 \rho u = \textrm{constant} = \frac{\dot{m}}{4\pi}.
+\end{equation}
+For motion of the evaporating solvent we have
+\begin{align}
+  \frac{\partial (\rho\phi_s)}{\partial t}
+  + \vec{\nabla} \cdot \vec{j_s} &= 0, \\
+  \vec{\nabla} \cdot \vec{j}_s &=
+  \rho (u \phi_s - D \phi'_s) \\
+  \frac{\partial (\rho\phi_s)}{\partial t}
+  + \frac{1}{r^2} \frac{\partial (r^2 \rho u \phi_s)}{\partial r}
+  - \frac{1}{r^2} \frac{\partial (r^2 \rho D \phi'_s)}{\partial r} &= 0
+\end{align}
+
+We wind up with the ordinary differential equation\marginfootnote{We are using $\phi$ to mean mass fraction, but this could get confused with terms elsewhere in the thesis.
+  Perhaps a glossary of terms at the start also?}[-1cm]:
+\begin{equation}
+  (\phi(r) - \phi_\infty) \frac{\dot{m}}{4\pi r^2 \rho D}
+    = \frac{\partial \phi}{\partial r}
+\end{equation}
+Integrating this expression gives\marginfootnote{The easiest way to do this is to change to intermediate variable $\Delta\phi(r) = \phi(r) - \phi_\infty$, then multiply through by the integrating factor $\exp{\left(-\int_r^\infty \frac{\dot{m}}{4\pi (r')^2 \rho D} \, dr'\right)}$.}:
+\begin{equation}
+  \phi(r) - \phi_\infty =
+  e^{-\frac{\dot{m}}{4\pi} \int_r^\infty \frac{dr'}{\rho D (r')^2}}
+\end{equation}
+Taking $\rho$ and $D$ as constants we obtain\marginfootnote{I think we need to subtract 1 from the right hand side to make this properly normalised: we don't want any evaporation when there is a homogeneous vapour profile.}[1cm]
+\begin{equation}
+  \phi(r) - \phi_\infty =
+  e^{-\frac{\dot{m}}{4\pi \rho D r}}
+\end{equation}
+This gives us our final expression for quasistatic evaporation:
+\begin{equation}
+  \dot{m} = - 4\pi \rho D R \ln{(\phi(R) - \phi_\infty)}
+\end{equation}
+
+\subsection{Quasistatic expressions}
+
+In the quasistatic limit the density profile relaxes instantaneously leaving only
+\begin{equation}
+  \rho_{hom}(t) = \lim_{D\to\infty}{\rho(r,t)}
+\end{equation}
+which inserted back into \eqref{eq:mass-equation} gives the droplet mass in this limit as
+\begin{equation}
+  m_{hom}(t) = 4\pi \rho_{hom}(t) \int_0^{R(t)} r^2 \, dr = \frac{4\pi R(t)^3}{3} \rho_{hom}(t)
+\end{equation}
+We can rearrange this relation for $R(t)$
+\begin{equation}\label{eq:homogeneous-droplet-radius}
+  R(t) = \left( \frac{3 \, m_{hom}(t)}{4\pi \rho_{hom}(t)} \right)^\frac{1}{3}
+\end{equation}
+where the corrections arise due to deviations from the homogeneous density profile $\Delta \rho = \rho(r) - \rho_{hom}$.
+The solute mass fraction \eqref{eq:mass-fraction} reduces to
+\begin{equation}\label{eq:homogeneous-solute-mass-fraction}
+  \phi_{s,hom}(t) = \frac{m_s}{m_{hom}(t)}.
+\end{equation}
+In what follows we will drop the subscript $hom$ in all expressions
+
+The trick to this method is realising that at short times the Kulmala coefficients remain approximately constant, leading to the following ODE and solution:
+\begin{equation*}
+  \frac{dR}{dt} = \frac{c}{R(t)} \quad \implies R(t) = \sqrt{R(0)^2 + 2ct}.
+\end{equation*}
+
+Differentiating \eqref{eq:homogeneous-droplet-radius} gives
+\begin{equation}
+  \frac{1}{3} \frac{d}{dt} \left( R^3 \right)
+  = R^2 \frac{dR}{dt}
+  = \frac{1}{4\pi} \frac{d}{dt} \left( \frac{m}{\rho} \right)
+  = \frac{1}{4\pi} \left(
+  \frac{1}{\rho} \frac{d m}{dt}
+  - \frac{m}{\rho^2} \frac{d \rho}{dt}
+  \right).
+\end{equation}
+
+We use \eqref{eq:homogeneous-solute-mass-fraction} to differentiate the density as
+\begin{equation*}
+  \frac{d\rho}{dt}
+  = \rho'(\phi_s) \frac{d\phi_s}{dt}
+  = -\rho'(\phi_s) \frac{m_s}{m^2} \frac{dm}{dt}
+  = -\rho'(\phi_s) \frac{\phi_s}{m} \frac{dm}{dt}.
+\end{equation*}
+\begin{equation}
+  \implies \quad \frac{dR}{dt}
+  = \frac{1}{4\pi \rho} \left(
+  1 + \phi_s \frac{\rho'(\phi_s)}{\rho}
+  \right)
+  \underbrace{\frac{1}{R^2} \frac{dm}{dt}}_{\propto 1/R}
+\end{equation}
+
+Giving the time integral from the ODE solution:
+\begin{equation}
+  \begin{aligned}
+    R(t + \Delta t)
+    &= \sqrt{R(t)^2 + \frac{1}{2\pi \rho R(t)}
+      \left(
+      1 + \phi_s \frac{\rho'(\phi_s)}{\rho}
+      \right)
+      \frac{dm}{dt} \Delta t} \\
+    &= R(t) \left(
+    1 + \frac{1}{4\pi \rho R(t)^3}
+    \left(
+    1 + \phi_s \frac{\rho'(\phi_s)}{\rho}
+    \right)
+    \frac{dm}{dt} \Delta t
+    \right)
+    + \mathcal{O}(\Delta t^2) \\
+    &= R(t) \left(
+    1 +
+    \left(
+    1 + \phi_s \frac{\rho'(\phi_s)}{\rho}
+    \right)
+    \frac{\dot{m}}{3m} \Delta t
+    \right)
+    + \mathcal{O}(\Delta t^2).
+  \end{aligned}
+\end{equation}
+
+We model the diffusion constant by calibrating dynamic viscosity measurements
+\marginfootnote{Need a Reid group citation} against molecular dynamics measures of the diffusion constant \marginfootnote{Lyubartsev and Laaksonen citation here}[2cm].
+We assume the Stokes-Einstein form
+\begin{equation}
+  D(c;T) = D_0 \frac{\eta_0}{\eta(c)} \frac{T}{T_0}
+\end{equation}
+where $\eta_0$ is the dynamic viscosity of water in ambient conditions, $T_0 = \SI{293}{\kelvin}$ and $D_0 = \SI{1266}{\micro\metre^2\per\second}$ is a constant determined by fitting the two datasets.
+
 \subsection{Treating evaporation}
 \subsection{Evolution of the concentration profile}
 
