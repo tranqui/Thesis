@@ -8,6 +8,14 @@
 \usepackage{epstopdf}
 \usepackage[caption=false]{subfig}
 
+\usepackage[margincaption,outercaption,wide]{sidecap}
+\sidecaptionvpos{figure}{c}
+\sidecaptionvpos{table}{c}
+\renewcommand\sidecaptionsep{1cm}
+
+\usepackage{caption}
+\captionsetup[SCfigure]{width=5cm,font=footnotesize,labelfont=bf,justification=centerlast}
+
 % Make margin notes behave like footnotes
 \usepackage{marginnote}
 \renewcommand\raggedrightmarginnote{\sloppy}
