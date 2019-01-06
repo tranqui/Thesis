@@ -29,16 +29,27 @@ Integral geometry offers a mathematically rigorous formalism for describing size
 
 \subsection{Generalised functions acting on sets}
 \subsubsection{Set arithmetic}
-Minkowski addition and its inverse.
 
-Minkowski sum:
+Scalar multiplication or \emph{dilate}:
 \begin{equation}
-  A + \epsilon B = \{a + \epsilon b : a \in A \textrm{ and } b \in B\}
+  \epsilon A = \{\epsilon a : a \in A\}
 \end{equation}
-The analogous Minkowski subtraction is defined by reversing the sign
+\emph{Minkowski addition}:
 \begin{equation}
-  A - \epsilon B := A + (-\epsilon) B \ne (A + \epsilon B)^{-1}
+  A + B := \{ a + b : a \in A \textrm{ and } b \in B \}
 \end{equation}
+\emph{Minkowski difference}:
+\begin{equation}
+  A - B := \{ c : c + B \subseteq A \}
+\end{equation}
+Note that these operations are not the inverses of each other as in the the case of arithmetic, i.e.\ in general
+\begin{equation*}
+  A - B \ne A + (-B).
+\end{equation*}
+Instead, set addition and subtraction operations are related through
+\begin{equation*}
+  A - B = (A^C + (-B))^C.
+\end{equation*}
 
 Figures:
 \begin{itemize}
@@ -68,45 +79,213 @@ We want a well-defined volume, so need to avoid sets which allow this.
 \subsubsection{Invariant measures}
 
 \begin{itemize}
-\item Introduce intrinsic volumes $\{\mu_i\}_{i=0}^d$
-\item Examples: intrinsic volumes of unit ball $\mathcal{B}_d$ and cube ($\mathcal{C}_d$). Cube:
-  \begin{equation}
-    \mu_i (\mathcal{C}_d) = {d \choose i}
-  \end{equation}
+\item Introduce intrinsic volumes $\{\mu_k\}_{k=0}^d$
+\item Minkowski functionals as alternative $\{W_k\}_{k=0}^d$
+\item Examples: intrinsic volumes of unit ball $B_d$ and cube ($C_d$).
+\item Compact convex set $K \in \mathcal{K}$ notation.
+\item Notation for convex ring/polyconvex sets
+\item Difference between $\mu_0(K)$ and $\mu_0(\partial K)$.
+\item Figure for curvatures and cusps: how you can define the intrinsic volumes but not the local curvature. Worked example.
 \end{itemize}
 
+The volume of the unit ball in $d$-dimensions is
+\begin{equation}
+  \omega_d := \mu_d(B_d) = \frac{\pi^{d/2}}{\Gamma(\frac{d}{2} + 1)}.
+\end{equation}
+Intrinsic volumes of the unit ball:
+\begin{equation}\label{eq:intrinsic-volume-ball}
+  \mu_k (B_d) = {d \choose k} \frac{\omega_d}{\omega_{d-k}}
+\end{equation}
+Unit cube:
+\begin{equation}
+  \mu_k (C_d) = {d \choose k}
+\end{equation}
+Alternative normalisation sometimes used: $\{W_k\}_{k=0}^d$ are the Minkowski functionals, or \emph{quermassintegrals}.
+\begin{equation}
+  W_k(K) = {d \choose k}^{-1} \omega_k \, \mu_{d-k}(K)
+\end{equation}
+This choice of normalisation sets $W_k(B_d) = \omega_k$ for all $k$.
+
+\begin{center}
+\begin{tabular}{cccccc}
+  \toprule
+  $k$ & $\omega_k$ & $\mu_k(B_2)$ & $W_k(B_2)$ & $\mu_k(B_3)$ & $W_k(B_3)$ \\
+  \midrule
+  0 & 1 & 1 & $\pi$ & 1 & $\frac{4\pi}{3}$ \\
+  1 & 2 & $\pi$ & $\pi$ & 4 & $\frac{4\pi}{3}$ \\
+  2 & $\pi$ & $\pi$ & $\pi$ & $2\pi$ & $\frac{4\pi}{3}$ \\
+  3 & $\frac{4\pi}{3}$ &&& $\frac{4\pi}{3}$ & $\frac{4\pi}{3}$ \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
 \begin{theorem}[Hadwiger's characterisation theorem]
-  Together the functionals $\{\mu_i\}_{i=0}^d$ form a basis for the vector space of all continuous rigid-motion invariant valuations of polyconvex sets in $\mathbb{R}^d$.
+  Together the functionals $\{\mu_k\}_{k=0}^d$ form a basis for the vector space of all continuous rigid-motion invariant valuations on polyconvex sets in $\mathbb{R}^d$.
 \end{theorem}
 
 I.e. a continuous rigid-motion invariant valuation can be written
-
 \begin{equation}
   \mu(A) = \sum_{i=0}^d c_i \mu_i(A)
 \end{equation}
 where $c_i$ are some coefficients independent of $A$.
 
 \begin{theorem}[Steiner's formula for parallel volumes]
+  For a compact, convex body $K \in \mathcal{K}$ the parallel volume is expressable as:
   \begin{equation}
-    \mu_d(\mathcal{K} + \epsilon \mathcal{B}_d) =
-    \sum_{i=0}^d \mu_i(\mathcal{K}) \omega_{d-i} \epsilon^{d-i}
+    \mu_d(K + \epsilon B_d) =
+    \sum_{i=0}^d \mu_i(K) \omega_{d-i} \epsilon^{d-i}
   \end{equation}
 \end{theorem}
 
+%% Other normalisation:
+%% \begin{equation}
+%%   \mu_d(K + \epsilon B_d) =
+%%   \sum_{i=0}^d W_i^{(d)}(K) {d \choose i} \epsilon^i
+%% \end{equation}
+%% where $K \in \mathcal{K}$.
+
+\begin{SCtable}
+  \begin{minipage}[b]{\linewidth}
+  \centering
+  \begin{tabular}{ccc}
+    \toprule
+    \multicolumn{2}{c}{Geometric property} \\
+    \cmidrule(r){1-2}
+    Name & Symbol & Functional \\
+    \midrule
+    \multicolumn{3}{c}{$d = 1$} \\
+    \midrule
+    Euler characteristic & $\chi$ & $\mu_0$ \\
+    Length & $L$ & $\mu_1$ \\
+    \midrule
+    \multicolumn{3}{c}{$d = 2$} \\
+    \midrule
+    Euler characteristic & $\chi$ & $\mu_0$ \\
+    Perimeter & $L$ & $2 \mu_1$ \\
+    Area & $A$ & $\mu_2$ \\
+    \midrule
+    \multicolumn{3}{c}{$d = 3$} \\
+    \midrule
+    Euler characteristic & $\chi$ & $\mu_0$ \\
+    Integrated Gaussian curvature & $X$ & $4 \pi \mu_0$ \\
+    Integrated mean curvature & $C$ & $\pi \mu_1$ \\
+    Mean width & $b$ & $\frac{1}{2} \mu_1$ \\
+    Surface area & $A$ & $2 \mu_2$ \\
+    Volume & $V$ & $\mu_3$ \\
+    \bottomrule
+  \end{tabular}
+  \end{minipage}
+  \caption{The intrinsic volumes $\{\mu_k\}$ are evaluated on some $K \in \mathcal{K}$.
+    The corresponding geometric interpretation of $\mu_k$ for $k < d$ typically involves integrations of the boundary $\partial K$, e.g. $C,X,A$ for $d=3$.
+    However, the intrinsic volumes are more general (they can be calulated for shapes where curvatures not locally definable, e.g. at vertices).}
+\end{SCtable}
+
 \subsubsection{Principal kinematic formula}
 
+We have the invariant measure on 1-dimensional linear subspaces of $\mathbb{R}^d$ (\emph{Grassmanians}) as
+\begin{equation}
+  [d] = \tau_d(\textrm{Gr}(d,1))
+  = \frac{d \omega_d}{2 \omega_{d-1}}.
+\end{equation}
+Factorial defined as
+\begin{equation}
+  [k]! = \prod_{i=0}^k \, [i]
+\end{equation}
 Flag coefficients from binomial coefficients
 \begin{equation}
-  \begin{bmatrix} d \\ k \end{bmatrix}
+  {d \brack k}
+  := \frac{[n]!}{[k]! [n-k]!}
   = {d \choose k}
-  \frac{\omega_d}{\omega_i \omega_{d-i}}
+  \frac{\omega_d}{\omega_k \omega_{d-k}}
 \end{equation}
 Provides the generalisation of combinatorial results to continuous spaces\marginfootnote{For this reason Klain and Rota argue that integral geometry/geometric probability should be called \emph{continuous combinatorics} \cite{Klain1997}}.
+Analagously to binomial coefficients, the flag coefficients obey
+\begin{equation}\label{eq:flag-coefficients-symmetry}
+  {d \brack k} = {d \brack d - k}.
+\end{equation}
+Note that we can rewrite \eqref{eq:intrinsic-volume-ball} using the flag coefficients as
+\begin{equation}\label{eq:intrinsic-volume-ball-flag}
+  \mu_k (B_d) = {d \choose k} \frac{\omega_d}{\omega_{d-k}}
+  = {d \brack k} \omega_k
+\end{equation}
+
+\begin{center}
+\begin{tabular}{cccccc}
+  \toprule
+  $k$ & $\omega_k$ & $[k]$ & $[k]!$ & ${2 \brack k}$ & ${3 \brack k}$ \\
+  \midrule
+  0 & 1 & 1 & 1 & 1 & 1 \\
+  1 & 2 & 1 & 1 & $\frac{\pi}{2}$ & 2 \\
+  2 & $\pi$ & $\frac{\pi}{2}$ & $\frac{\pi}{2}$ & 1 & 2 \\
+  3 & $\frac{4\pi}{3}$ & 2 & $\pi$ & & 1 \\
+  \bottomrule
+\end{tabular}
+\end{center}
 
 \begin{theorem}[General kinematic formula]
   For $0 \le k \le d$:
   \begin{equation}
-    \int_{\mathbb{E}_d} \mu_i (A \cap g B) \, dg =
-    \sum_{i=0}^{d-k} {i + k \choose k} {d \choose i}^{-1} \frac{\omega_{i+k}}{\omega_k \omega_i} \left(\frac{\omega_d}{\omega_i \omega_{d-i}} \right)^{-1} \mu_{k+i}(A) \mu_{d-i}(B)
+    \int_{\mathbb{E}_d} \mu_k (A \cap g B) \, dg =
+    \sum_{i=0}^{d-k}
+    {i + k \brack k} {d \brack i}^{-1}
+    \mu_{k+i}(A) \mu_{d-i}(B)
   \end{equation}
+  In regular binomial:
+  \begin{equation*}
+    \int_{\mathbb{E}_d} \mu_k (A \cap g B) \, dg =
+    \sum_{i=0}^{d-k}
+    {i + k \choose k} {d \choose i}^{-1}
+    \frac{\omega_{i+k} \omega_{d-i}}{\omega_k \omega_d}
+    \mu_{k+i}(A) \mu_{d-i}(B)
+  \end{equation*}
 \end{theorem}
+
+Simple example: Mayer-f two balls:
+\begin{equation}
+  \frac{\beta p}{\rho} - 1 =
+  - \sum_{i=1}^\infty \frac{i}{i+1} \beta_i \rho^i =
+  \frac{rho}{2} \int_{\mathbb{E}_d} \mu_0 (B_d \cap g B_d) \, dg
+  + \mathcal{O}(\rho^2)
+\end{equation}
+Volume fraction $\eta = \rho \omega_d$
+\begin{equation}
+  \frac{\beta p}{\rho} - 1 =
+  \frac{\eta}{2 \omega_d}
+  \int_{\mathbb{E}_d} \mu_0 (B_d \cap g B_d) \, dg
+  + \mathcal{O}(\eta^2)
+\end{equation}
+For $d = 3$ this gives $4\eta + \mathcal{O}(\eta^2)$.
+\begin{align*}
+  \frac{\eta}{2 \omega_d}
+  \int_{\mathbb{E}_d} \mu_0 (B_d \cap g B_d) \, dg &=
+  \sum_{i=0}^{d}
+  {d \brack i}^{-1}
+  \mu_i(B_d) \mu_{d-i}(B_d) \\
+  &=
+  \frac{\eta}{2 \omega_d}
+  \sum_{i=0}^{d}
+  {d \brack i}^{-1}
+  {d \brack i} \omega_i
+  {d \brack d-i} \omega_{d-i} \\
+  &=
+  \frac{\eta}{2 \omega_d}
+  \sum_{i=0}^{d}
+  {d \brack i} \omega_i \omega_{d-i} \\
+  &=
+  \begin{cases}
+    \frac{\eta}{2 \omega_2}
+    (2 \omega_0 \omega_2 + \frac{\pi}{2} \omega_1^2)
+    & \qquad d=2 \\
+    \frac{\eta}{\omega_3}
+    (\omega_0 \omega_3 + 2 \omega_1 \omega_2)
+    & \qquad d=3
+  \end{cases} \\
+  &=
+  \begin{cases}
+    2 \eta & \qquad d=2 \\
+    4 \eta & \qquad d=3
+  \end{cases}
+\end{align*}
+using \eqref{eq:flag-coefficients-symmetry} and \eqref{eq:intrinsic-volume-ball-flag}.
+\begin{equation*}
+\end{equation*}
