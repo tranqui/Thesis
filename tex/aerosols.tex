@@ -119,6 +119,28 @@ Writing the density in terms of the concentration profile and using \eqref{eq:di
 %%   \right).
 %% \end{equation}
 
+\subsection{Updated notation}
+
+Book describes 6 vaporisation models that differ primarily by their treatment of heat/temp of fluid phase.
+In order of increasing complexity these are:
+\begin{enumerate}
+\item const $T$ (enough to get $\Delta R^2 \propto t$ law)
+\item Uniform but varying $T$
+\item Conduction limit
+\item Effective-conduction: treats internal circulation/convection of heat in an ad hoc manner
+\item Vortex models
+\item Navier-Stokes: in principle exact
+\end{enumerate}
+
+Some general notes:
+\begin{itemize}
+\item Generally, the thermal diffusivity of gas phase is much larger than that in the liquid phase (except near a critical point where physical properties become identical).
+  Therefore transient liquid heating takes longer, and can often treat gas-phase as quasi-steady.
+\item Internal heat circulation ignored in first three models above.
+\item Gas has mass diffusion $\sim$ heat diffusion whereas in the liquid mass diffusion is much slower than heat diffusion
+\end{itemize}
+
+
 \subsection{Evaporation condition}
 
 Kulmala equation for mass flow:
@@ -297,8 +319,84 @@ where $\eta_0$ is the dynamic viscosity of water in ambient conditions, $T_0 = \
 
 \section{Nucleation model}
 \subsection{Classical nucleation theory}
+
+Numerical values taken from capilliary paper.
+
+Nucleation rate per unit volume:
+\begin{equation}
+  \Gamma = \kappa \exp{\left(-\frac{\Delta G^{*}}{k_B T}\right)}
+\end{equation}
+where $\kappa$ is a kinetic prefactor.
+CNT equation:
+\begin{equation}
+  \Delta G(R) = \frac{4}{3} \pi R^3 \rho_s \Delta \mu + 4\pi R^2 \gamma
+\end{equation}
+Defining $\Delta G^{*} = \max{(\Delta G)}$ and $R^{*} = \argmax{(\Delta G)}$ we have
+\begin{align}
+  \Delta G^{*} &= \frac{4}{3} \pi (R^{*})^2 \gamma \\
+  (R^{*}) &= -\frac{2\gamma}{\rho_s \Delta\mu}
+\end{align}
+NB: $\Delta \mu < 0$.
+
+Chemical potential expressed in terms of mean ionic activity:
+\begin{equation}
+  \begin{aligned}
+  \exp{-\frac{\Delta \mu}{k_B T}} &=
+  \nu \ln{\left( \frac{a_\pm}{a_{0\pm}} \right)} \\
+  &=
+  \nu \ln{\left( \frac{\gamma_\pm}{\gamma_{0\pm}} \frac{m}{m_0} \right)}
+  \end{aligned}
+\end{equation}
+$nu$ is sum of ions (2 for NaCl), $a_\pm$ is mean ionic activity, $\gamma_\pm$ is mean ionic activity coefficient, $m$ and $m_0$ are molarities at equilibrium and crystal stabilisation respectively, no idea what $a_{0\pm}$ and $\gamma_{0\pm}$ are.
+
+Kinetic prefactor:
+\begin{align}
+  \kappa &= \rho_l j Z \\
+  j &\sim \rho_l D_l R^* \\
+  Z &\sim (n^*)^{-\tfrac{2}{3}}
+\end{align}
+$\rho_l$ is liquid phase density, $j$ is rate of aggregation, $Z$ is Zeldovich factor, $n^*$ is excess number of molecules in critical nucleus (check references!).
+
 \subsection{Density dependence of nucleation rate}
 \subsection{Decay rates with droplet evolution}
+
+Nucleation rate/unit volume is $\Gamma(Y_S)$.
+Total nucleation rate (nucleation events per second across whole droplet):
+\begin{equation}
+  W = \int \Gamma dV
+  = 4\pi \int_0^{R(t)} \Gamma(Y_S(r); t) \, dr
+\end{equation}
+
+In the volume element $r \to r + \Delta r$ Between $t \to t+\Delta t$ we have a Poisson process.
+Mean events:
+\begin{equation}
+  \begin{aligned}
+    \mu(r) &= \frac{4\pi}{3} ( (r+\Delta r)^3 - r^3)
+    \int_t^{t+\Delta t} \Gamma(r,t') \, dt' \\
+    &\simeq
+    4\pi r^2 \Delta r \Gamma(r, t) \Delta t
+  \end{aligned}
+\end{equation}
+Poisson process so we have probability of exactly $n$ events as
+\begin{equation}
+  P(n) = \frac{e^{-\mu} \mu^n}{n!}
+\end{equation}
+Giving probability of no event (`survival') as $P(0) = e^{-\mu}$.
+Survival across all $r$ in this time period:
+\begin{equation}
+  \begin{aligned}
+  \textrm{Probability}\left( \textrm{no event in } t \to t + \Delta t \right)
+  &= \prod_i P(0;i) \\
+  &= \prod_i \exp{\left(-4\pi (i\Delta r)^2 \Gamma(i\Delta r) \Delta t \Delta r\right)} \\
+  &= \exp{\left(
+    -4\pi \int_t^{t+\Delta t} dt' \int_0^{R(t')} dr r^2 \Gamma(r, t')
+    \right)}
+  \end{aligned}
+\end{equation}
+
+We have $\Gamma(r,t') = \Gamma(Y_S(r,t'), T(r,t'))$ so need a phenomenological model (CNT) for this.
+Initially ignore temperature so we have $\Gamma(Y_S(r,t'))$.
+We know: nucleation impossible below saturation limit.
 
 \section{Appendix: finite difference methods for numerical integration}
 Second-order scheme (Crank-Nicolson)
