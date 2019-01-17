@@ -1,3 +1,11 @@
+Advantage of geometric approach is in the intuition gained.
+\marginfootnote{I used to hate geometry, largely because I have aphantasia (mind's eye is blind).
+  Cruel twist of fate that I became a geometer.
+  Even I find the concepts and framework useful for building intuitions.}
+With that in mind the aim of this section is to provide a primer on useful geometric concepts and relations.
+Particularly regarding integral geometry, which is generally unfamiliar to people from physics background.
+Emphasis hear is on concepts and intuition rather than rigour.
+
 \section{Integral geometry (or ``How big is that thing?'')}
 
 The mathematical formalism which provides elegant and unified description of sizes, underlying the morphological approach taken in the thesis.
@@ -38,6 +46,16 @@ Scalar multiplication or \emph{dilate}:
 \begin{equation}
   A + B := \{ a + b : a \in A \textrm{ and } b \in B \}
 \end{equation}
+\begin{SCfigure}[H]
+  \missingfigure[figwidth=0.333\linewidth]{}%
+  \missingfigure[figwidth=0.333\linewidth]{}%
+  \missingfigure[figwidth=0.333\linewidth]{}
+  \caption{Examples of Minkowski addition with ball:
+    ball $\to$ ball,
+    line $\to$ capsule/spherocylinder (common in nature: bacterium?),
+    circle $\to$ torus.
+  }
+\end{SCfigure}
 \emph{Minkowski difference}:
 \begin{equation}
   A - B := \{ c : c + B \subseteq A \}
@@ -51,10 +69,11 @@ Instead, set addition and subtraction operations are related through
   A - B = (A^C + (-B))^C.
 \end{equation*}
 
-Figures:
-\begin{itemize}
-\item Geometry of Minkowski addition: growth and erosion, and the inverse operations.
-\end{itemize}
+\begin{SCfigure}[H]
+  \missingfigure[figwidth=0.5\linewidth]{$A + B$ growth}%
+  \missingfigure[figwidth=0.5\linewidth]{$A + B - B$ erosion}
+  \caption{Minkowski addition and difference not the inverse of each other.}
+\end{SCfigure}
 
 \subsubsection{Distances between sets}
 The Hausdorff metric.
@@ -69,10 +88,60 @@ Examples:
 
 \subsubsection{Which sets do we consider}
 
-We consider Polyconvex sets.
+We consider Polyconvex sets (convex ring).
 
 Avoid pathological sets: Banach-Tarski paradox allows one to break a sphere apart and recompose it as two identical spheres.
 We want a well-defined volume, so need to avoid sets which allow this.
+\marginfootnote{Have to be formed by countable union of convex objects.
+Covers most physically realistic geometries.}
+
+\subsubsection{Euler characteristic}
+
+Aim of this section is to provide intuition over Euler characteristic.
+
+\begin{tcolorbox}
+  Nomenclature note: difference between sphere and ball.
+  \begin{equation*}
+    S^{d-1} = \partial B^d
+  \end{equation*}
+\end{tcolorbox}
+
+Should explain intrinsic volumes earlier perhaps.
+Euler characteristic of a boundary depends on dimension:
+\begin{align}
+  \mu_0(K^d) &= 1 \\
+  \mu_0(\partial K^d) &= 1 + (-1)^d
+\end{align}
+Disjoint union: sum them (by inclusion-exclusion principle).
+
+Repeat arguments in figures and you obtain the general rule that dividing an $n$-sphere gives two $n-1$-dimensional convex objects and a $n-1$ sphere dividor.
+This gives us the rule for the Euler characteristic.
+Euler characteristic describes the topology.
+
+\begin{itemize}
+\item Multiple disjoint convex objects: increase
+\item Holes lower Euler characteristic
+\item Cavities increase
+\end{itemize}
+
+For $d=3$ we have the important Gauss-Bonnet theorem.
+
+\begin{SCfigure}[H]
+  \missingfigure[figwidth=\linewidth]{boundary points in 1d (rod)}
+  \caption{Only convex object in 1d is a rod.}
+\end{SCfigure}
+
+\begin{SCfigure}[H]
+  \missingfigure[figwidth=0.5\linewidth]{$\partial B$}%
+  \missingfigure[figwidth=0.5\linewidth]{$\partial B$}
+  \caption{Effect of holes: divide 2d circle in two (2 rods + 2 points).}
+\end{SCfigure}
+
+\begin{SCfigure}[H]
+  \missingfigure[figwidth=0.5\linewidth]{$\partial B$}%
+  \missingfigure[figwidth=0.5\linewidth]{$\partial B$}
+  \caption{Effect of cavities: divide 3d sphere in two (2 disks + circle).}
+\end{SCfigure}
 
 \subsection{Important theorems for continuous invariant valuations}
 
