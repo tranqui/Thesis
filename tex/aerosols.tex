@@ -140,7 +140,6 @@ Some general notes:
 \item Gas has mass diffusion $\sim$ heat diffusion whereas in the liquid mass diffusion is much slower than heat diffusion
 \end{itemize}
 
-
 \subsection{Evaporation condition}
 
 Kulmala equation for mass flow:
@@ -176,6 +175,77 @@ The constants I used are given as
 \item Latent heat of evaporation (water): $L = \SI{2455595}{\joule\per\kilogram}$
 \item Mass flux correction: $\beta_M \simeq 0.996175$
 \item Heat flux correction: $\beta_T \simeq 0.995228$
+\end{itemize}
+
+\subsubsection{Vapour phase analysis (new)}
+
+Gas-field continuity equation
+\begin{equation}
+  \frac{\partial}{\partial t} ( \rho r^2 ) +
+  \frac{\partial}{\partial r} ( \rho r^2 u ) = 0
+\end{equation}
+Momentum equation (from Navier-Stokes, so assumes Newtonian fluid, Stokes hypothesis and no body forces):
+\begin{equation}
+  \frac{\partial}{\partial t} ( \rho r^2 u ) +
+  \frac{\partial}{\partial r} ( \rho r^2 u^2 ) +
+  r^2 \frac{\partial p}{\partial r}
+  = \frac{4 r^2}{3} \frac{\partial}{\partial r}
+  \left( \mu \frac{\partial u}{\partial r} - \mu \frac{u}{r} \right)
+  + 4 r^2 \mu \frac{\partial}{\partial r} \left( \frac{u}{r} \right)
+\end{equation}
+where $\mu$ is dynamic viscosity\marginfootnote{Also symbol used for chemical potential in previous chapters, need to make this clearer or choose a new symbol.}.
+Fourier's law of heat conduction
+\begin{equation}
+  \vec{q} = -k \vec{\nabla} T
+\end{equation}
+$\vec{q}$ is heat flux, $k$ conductivity and $T$ is local temperature.
+Energy equation:
+\begin{equation}
+  \frac{\partial}{\partial t} ( \rho r^2 h ) +
+  \frac{\partial}{\partial r} ( \rho r^2 u h ) -
+  \frac{\partial}{\partial r} ( \lambda r^2 \frac{\partial T}{\partial r} ) +
+  \frac{\partial}{\partial r} ( \sum_m \rho r^2 V_m h_m Y_m ) =
+  r^2 \frac{\partial p}{\partial t} +
+  r^2 u \frac{\partial p}{\partial r} + r^2 \phi
+\end{equation}
+$h = \sum_m h_m$ is enthalpy, $\phi = \tau_{ij} \frac{\partial u_i}{\partial x_j}$, $V_m = - \frac{D}{Y_m} \frac{\partial Y_m}{\partial r}$.
+Assumed $D_m = D \forall m$\marginfootnote{Book suggests citation by Megandis and Sirignanco (1991).}, and equal molecular weights.
+Species equation (continuity equation for individual components):
+\begin{equation}
+  \frac{\partial}{\partial t} ( \rho r^2 Y_m ) +
+  \frac{\partial}{\partial r} ( \rho r^2 u Y_m ) +
+  \frac{\partial}{\partial r} ( \rho r^2 V_m Y_m ) = 0
+\end{equation}
+
+Assuming constant density and ideal gas ($\beta p = \rho$), quasi-steady so time derivatives disappear
+\begin{align}
+  \frac{\partial}{\partial r} ( \rho r^2 u ) &= 0 \\
+  \frac{4 r^2}{3} \frac{\partial}{\partial r}
+  \left( \mu \frac{\partial u}{\partial r} - \mu \frac{u}{r} \right)
+  + 4 r^2 \mu \frac{\partial}{\partial r} \left( \frac{u}{r} \right)
+  &= \frac{\partial}{\partial r} ( \rho r^2 u^2 ) \\
+  \frac{\partial}{\partial r} ( \rho r^2 u h ) -
+  \frac{\partial}{\partial r} ( \lambda r^2 \frac{\partial T}{\partial r} ) -
+  \frac{\partial}{\partial r} ( \sum_m \rho r^2 D h_m \frac{\partial Y_m}{\partial r} ) &=
+  r^2 u \frac{\partial p}{\partial r} + r^2 \phi \\
+  \frac{\partial}{\partial r} ( \rho r^2 u Y_m ) -
+  \frac{\partial}{\partial r} ( \rho r^2 D \frac{\partial Y_m}{\partial r} ) &= 0
+\end{align}
+
+Our boundary conditions:
+\begin{itemize}
+\item Ambient conditions at $r \to \infty$ ($T$, $p$, $\rho$, $\{ Y_m \}$)
+\item Phase equilibrium at $r = R$, i.e.\ Clausius-Clapeyron relation:
+  \begin{align}
+    X_m(R) &= \frac{A}{p} e^{-\frac{L}{RT}} \\
+    A &= p_0 e^{\frac{L}{RT_b(p_0)}}
+  \end{align}
+  $p_0$ is reference pressure, $T_b$ is the (pressure dependent) boiling point.
+\item mass balance at $r = R$, if $\rho$ const:
+  \begin{align}
+    \frac{\dot{m}}{4\pi} Y_F(R) + \rho D R^2 \left. \frac{\partial Y_F}{\partial r} \right|_{r=R} &= \frac{\dot{m}}{4\pi} \\
+    \frac{\dot{m}}{4\pi} Y_m(R) + \rho D R^2 \left. \frac{\partial Y_m}{\partial r} \right|_{r=R} &= 0 \qquad m \ne F
+  \end{align}
 \end{itemize}
 
 \subsubsection{Vapour phase analysis}
