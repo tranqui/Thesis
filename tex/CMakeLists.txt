@@ -14,7 +14,7 @@ add_custom_target(chapters)
 add_dependencies(chapters introduction theory morph1 morph2 cuzr aerosols conclusion)
 
 add_latex_document(thesis.tex
-                   INPUTS abstract.tex dedication.tex declaration.tex acknowledgements.tex introduction.tex theory.tex integral-geometry.tex liquid-state-theory.tex supercooled-liquids.tex morphometric-framework.tex morphometric-applications.tex cuzr.tex aerosols.tex conclusion.tex
+                   INPUTS abstract.tex dedication.tex declaration.tex acknowledgements.tex word-count.tex introduction.tex theory.tex integral-geometry.tex liquid-state-theory.tex supercooled-liquids.tex morphometric-framework.tex morphometric-applications.tex cuzr.tex aerosols.tex conclusion.tex
                    TARGET_NAME thesis
                    IMAGE_DIRS ../img)
 
