@@ -1,16 +1,15 @@
-Advantage of geometric approach is in the intuition gained.
+Advantage of geometric approach is in the intuition gained%
 \marginfootnote{I used to hate geometry, largely because I have aphantasia (mind's eye is blind).
   Cruel twist of fate that I became a geometer.
-  Even I find the concepts and framework useful for building intuitions.}
+  Even I find the concepts and framework useful for building intuitions.}.
 With that in mind the aim of this section is to provide a primer on useful geometric concepts and relations.
 Particularly regarding integral geometry, which is generally unfamiliar to people from physics background.
 Emphasis hear is on concepts and intuition rather than rigour.
 
-\section{Integral geometry (or ``How big is that thing?'')}
+\section[Integral geometry. Or ``How big is that thing?'']{Integral geometry\\ {\large Or ``How big is that thing?''}}
 
 The mathematical formalism which provides elegant and unified description of sizes, underlying the morphological approach taken in the thesis.
-Ideas from this branch of mathematics were crucial to the development of fundamental measure theory, so it makes sense to place this before the section
-on liquid state theory.
+Ideas from this branch of mathematics were crucial to the development of fundamental measure theory, so it makes sense to place this before the section on liquid state theory.
 Integral geometry is generally unfamiliar to people with a background in physics, so I will attempt to describe this area with additional care.
 
 Make connections with statistical physics frequently.
@@ -30,10 +29,54 @@ We will see that the only reasonable notion of size is a \emph{continuous} rigid
 Free volume theories: (free) energy based on size of an object.
 We could argue that fundamentally these theories are based on measuring physical sizes.
 Integral geometry offers a mathematically rigorous formalism for describing sizes, so presents a possible starting point for free volume theories.
-\marginfootnote{Can I find a coherent definition of free volume theories? Can I cook one up?
-  Need at least two examples to draw a trend.
-  Free volume theories in polymers are probably the best well known.
-  Free volume theory in glasses?}
+\marginfootnote{Can I find a coherent definition of free volume theories?
+Can I cook one up?
+Need at least two examples to draw a trend.
+Free volume theories in polymers are probably the best well known.
+Free volume theory in glasses?}
+
+\subsection{Selected facts from differential geometry}
+
+I will assume some familiarity with differential geometry.
+I will review some results concerning curvature measures.
+
+\subsubsection{Curvature measures}
+
+Curvature tensors
+\begin{equation}
+  \kappa_{\alpha\beta} = \frac{\partial \vec{g}_\alpha}{\partial x_\beta}
+\end{equation}
+Note this is a symmetric tensor i.e.\ $\kappa_{\alpha\beta} = \kappa_{\beta\alpha}$.
+
+\subsubsection{Worked example: 2d hinges}
+
+This example is to illustrate how the curvature measures can be integrated over general bodies making them quite generic.
+Even though the curvature measure is not locally defined at the cusp, the resulting integrated measure is still well defined.
+
+Consider some path $L$ that parameterises on $\xi \in [0, \Xi]$.
+Some covariant vector (not necessarily normalised)
+\begin{equation*}
+  \vec{g} = \frac{\partial \vec{r}}{\partial \xi}.
+\end{equation*}
+We have the normal vector $\vec{n} = \vec{g} \times \vec{e}_z = \vec{r}' \times \vec{e}_z$ giving curvature $\kappa = \vec{r}' \cdot \vec{n}' = \vec{r}' \cdot (\vec{r}'' \times \vec{e}_z)$.
+Here we use $\vec{e}_z$ to mean the unit vector in the $z$ direction.
+The integrated curvature along the path is thus
+\begin{equation*}
+  C_L = \int_L \vec{r}' \cdot ( \vec{r}'' \times \vec{e}_z ) \, d|\vec{r}|.
+\end{equation*}
+The nonzero part of the integrand occurs where $\vec{r}' \perp \vec{r}''$ i.e.\ the circular part of motion.
+We can thus consider cases where the path is locally circular without loss of generality, thus $\xi \equiv \theta \in [\theta_0, \theta_1]$ and the curvature $\kappa = \tfrac{1}{r}$.
+Motion orthogonal the angular changes does not contribute to the integrated curvature, so the integral reduces to
+\begin{equation*}
+  C_L = \int_L \frac{1}{r} \, r d\theta
+  = \int_L \, d\theta
+  = \theta_1 - \theta_0 \equiv \Delta\theta
+\end{equation*}
+where $\Delta\theta = \theta_1 - \theta_0$%
+\marginfootnote{NB: We have not constrained the the allowable values of $\theta$, so if $L$ is a closed path we have $\Delta\theta = 2 n \pi$ where $n \in \mathbb{Z}$ is the winding number for the path, i.e. the number of complete anticlockwise turns.
+  A value $n \ne 1$ indicates that the path self-intersects.}.
+Note that as the dependence on $r$ dropped out in the second line, this even works on hinges.
+Graphical example.
 
 \subsection{Generalised functions acting on sets}
 \subsubsection{Set arithmetic}
