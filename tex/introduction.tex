@@ -1,3 +1,6 @@
+%TC: macro \marginfootnote [other]
+%TC: envir SCfigure [] other
+%TC: macrocount beginSCfigure [figure]
 \documentclass[12pt]{report}
 \usepackage{preamble}
 \graphicspath{{../img/}}
@@ -12,6 +15,10 @@ Begin with a short (1–2 pages) broader introduction for a general audience: on
 A more detailed motivation.
 
 \subsection{Toy model: Hard spheres}
+
+Physics is filled with toy models.
+Ising model.
+The physicists favourite toy model is the hard sphere li
 
 As a soft matter system:
 \begin{itemize}
@@ -31,9 +38,22 @@ As a soft matter system:
   \label{fig:shade-balls}
 \end{SCfigure}
 
-Hard spheres will spontaneously crystallise due to entropic interactions\marginfootnote{Expand on this. Why is this surprising?}[-9cm].
+Hard spheres will spontaneously crystallise due to entropic interactions%
+\marginfootnote{Expand on this. Why is this surprising?}[-9cm].
 A similar effect is seen in balls floating on water as in e.g.\ peas in a saucepan or shade balls covering a reservoir.
-The hard interactions between the balls causes\marginfootnote{In my desperate desire to use everyday examples I am cheating somewhat: while the balls certainly interact as hard spheres close to contact, I suspect there are in fact effective attractions at mid-range due to \emph{hydrodynamic} interactions at the water surface. When cooking peas in a saucepan one sees that peas will group together hexagonally even when very few of them float on the surface, i.e.\ at low densities. In contrast, hard disks should only do this at high densities.}[-8cm] 
-them to `crystallise'\marginfootnote{I am cheating again, though in a smaller way this time. Strictly speaking, floating balls are two dimensionsal as they are confined to the water surface. In two dimensions it is not possible to form a crystal in the sense of long-range \emph{translational} order\cite{Mermin}, however it is possible to form a `crystal' in a less formal way of long-range \emph{orientational} order.}[-1cm] at high densities as seen in Figure \ref{fig:shade-balls}.
+The hard interactions between the balls causes%
+\marginfootnote{In my desperate desire to use everyday examples I am cheating somewhat: while the balls certainly interact as hard spheres close to contact, I suspect there are in fact effective attractions at mid-range due to \emph{hydrodynamic} interactions at the water surface.
+  When cooking peas in a saucepan one sees that peas will group together hexagonally even when very few of them float on the surface, i.e.\ at low densities.
+  By contrast, hard disks should only do this at high densities.}[-8cm]
+them to `crystallise'%
+\marginfootnote{I am cheating again, though in a smaller way this time.
+  Strictly speaking, floating balls are two dimensionsal as they are confined to the water surface.
+  In two dimensions it is not possible to form a crystal in the sense of long-range \emph{translational} order\cite{Mermin}, however it is possible to form a `crystal' in a less formal way of long-range \emph{orientational} order.}[-1cm]
+at high densities as seen in Figure \ref{fig:shade-balls}.
+
+%Notes on missing stuff:
+%Hard sphere phase diagram
+%Hard spheres importance as a model system
+%Other hard systems, self assembly.
 
 \end{document}
