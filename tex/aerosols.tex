@@ -1,3 +1,6 @@
+%TC: macro \marginfootnote [other]
+%TC: envir SCfigure [] other
+%TC: macrocount beginSCfigure [figure]
 \documentclass[12pt]{report}
 \usepackage{preamble}
 \setcounter{chapter}{5}
@@ -219,7 +222,6 @@ Species equation (continuity equation for individual components):
 
 Assuming constant density and ideal gas ($\beta p = \rho$), quasi-steady so time derivatives disappear
 \begin{align}
-  \frac{\partial}{\partial r} ( \rho r^2 u ) &= 0 \\
   \frac{4 r^2}{3} \frac{\partial}{\partial r}
   \left( \mu \frac{\partial u}{\partial r} - \mu \frac{u}{r} \right)
   + 4 r^2 \mu \frac{\partial}{\partial r} \left( \frac{u}{r} \right)
@@ -227,9 +229,7 @@ Assuming constant density and ideal gas ($\beta p = \rho$), quasi-steady so time
   \frac{\partial}{\partial r} ( \rho r^2 u h ) -
   \frac{\partial}{\partial r} ( \lambda r^2 \frac{\partial T}{\partial r} ) -
   \frac{\partial}{\partial r} ( \sum_m \rho r^2 D h_m \frac{\partial Y_m}{\partial r} ) &=
-  r^2 u \frac{\partial p}{\partial r} + r^2 \phi \\
-  \frac{\partial}{\partial r} ( \rho r^2 u Y_m ) -
-  \frac{\partial}{\partial r} ( \rho r^2 D \frac{\partial Y_m}{\partial r} ) &= 0
+  r^2 u \frac{\partial p}{\partial r} + r^2 \phi
 \end{align}
 
 Our boundary conditions:
@@ -246,54 +246,116 @@ Our boundary conditions:
     \frac{\dot{m}}{4\pi} Y_F(R) + \rho D R^2 \left. \frac{\partial Y_F}{\partial r} \right|_{r=R} &= \frac{\dot{m}}{4\pi} \\
     \frac{\dot{m}}{4\pi} Y_m(R) + \rho D R^2 \left. \frac{\partial Y_m}{\partial r} \right|_{r=R} &= 0 \qquad m \ne F
   \end{align}
+\item Ambient gas dot not enter the droplet
+  \begin{equation}
+    \rho u Y_A(R) - \rho D \left.\frac{d Y_A}{dr}\right|_{r=R} = 0
+  \end{equation}
+  combining with \eqref{eq:quasistatic-vapour-species-conservation} gives
+  \begin{equation}
+    \rho u Y_A - \rho D \frac{d Y_A}{dr} = 0 \quad \forall \; r \ge R.
+  \end{equation}
 \end{itemize}
 
 \subsubsection{Vapour phase analysis}
+
+Key assumptions
+\begin{enumerate}
+\item Spherical symmetry
+\item Quasi-steady
+%\item Lack of convection currents: $\vec{j} = D \vec{\nabla} \rho$ omits $-\vec{u} \rho$ term.
+\end{enumerate}
 
 Starting from the continuity equation\marginfootnote{A key reference for this section is: Sirignano, W. A. \emph{Fluid dynamics and transport of droplets and sprays - Second edition} (2010).}:
 \begin{equation}\label{eq:continuity-eqn}
   \frac{\partial \rho}{\partial t}
   + \vec{\nabla} \cdot \vec{j} = 0,
 \end{equation}
-where the current is
+where the divergence term in spherical coordinates is
 \begin{equation}
   \vec{\nabla} \cdot \vec{j} =
   \frac{1}{r^2} \frac{\partial (r^2 \rho u)}{\partial r}
 \end{equation}
-If we assume a steady state the time derivative in \eqref{eq:continuity-eqn} disappears leaving
-\begin{equation}
-  r ^2 \rho u = \textrm{constant} = \frac{\dot{m}}{4\pi}.
-\end{equation}
-For motion of the evaporating solvent we have
-\begin{align}
-  \frac{\partial (\rho\phi_s)}{\partial t}
-  + \vec{\nabla} \cdot \vec{j_s} &= 0, \\
-  \vec{\nabla} \cdot \vec{j}_s &=
-  \rho (u \phi_s - D \phi'_s) \\
-  \frac{\partial (\rho\phi_s)}{\partial t}
-  + \frac{1}{r^2} \frac{\partial (r^2 \rho u \phi_s)}{\partial r}
-  - \frac{1}{r^2} \frac{\partial (r^2 \rho D \phi'_s)}{\partial r} &= 0
-\end{align}
 
-We wind up with the ordinary differential equation\marginfootnote{We are using $\phi$ to mean mass fraction, but this could get confused with terms elsewhere in the thesis.
-  Perhaps a glossary of terms at the start also?}[-1cm]:
+We treat the vapour phase as a binary system of the water vapour and an ambient gas phase, $Y_W + Y_A = 1$%
+\marginfootnote{We have a solute (\ce{NaCl} or \ce{NaNO3}) and an evaporating solvent (water), which unfortunately both have the initial $S$ so we need an alternative subscript to distinguish them.
+  \textbf{What to use for the solute?}
+  We use $W$ for the water component and $A$ for the ambient gas phase.
+I find it helpful to think of the subscript $A$ as also standing for `atmosphere'.}[-2cm].
+Absent any chemical reactions the total number of each species is conserved, so the continuity equation must be satisfied for each constituent:
 \begin{equation}
-  (\phi(r) - \phi_\infty) \frac{\dot{m}}{4\pi r^2 \rho D}
-    = \frac{\partial \phi}{\partial r}
+  \frac{\partial (\rho Y_i)}{\partial t}
+  + \vec{\nabla} \cdot \vec{j}_i = 0
 \end{equation}
-Integrating this expression gives\marginfootnote{The easiest way to do this is to change to intermediate variable $\Delta\phi(r) = \phi(r) - \phi_\infty$, then multiply through by the integrating factor $\exp{\left(-\int_r^\infty \frac{\dot{m}}{4\pi (r')^2 \rho D} \, dr'\right)}$.}:
 \begin{equation}
-  \phi(r) - \phi_\infty =
-  e^{-\frac{\dot{m}}{4\pi} \int_r^\infty \frac{dr'}{\rho D (r')^2}}
+  \vec{\nabla} \cdot \vec{j}_i =
+  \frac{1}{r^2} \frac{d}{dr} \left(
+  r^2 \rho u Y_i - r^2 D_V \frac{d(\rho Y_i)}{dr}
+  \right)
 \end{equation}
-Taking $\rho$ and $D$ as constants we obtain\marginfootnote{I think we need to subtract 1 from the right hand side to make this properly normalised: we don't want any evaporation when there is a homogeneous vapour profile.}[1cm]
+here $D_V$ is understood as a binary diffusion constant%
+\marginfootnote{The subscript $V$ stands for vapour.},
+the same for both species, as there is no net flow of mass: the species merely mix.
+
+If we assume relaxation in the vapour phase a quasi-steady vapour relaxation the time derivative in \eqref{eq:continuity-eqn} disappears leaving
 \begin{equation}
-  \phi(r) - \phi_\infty =
-  e^{-\frac{\dot{m}}{4\pi \rho D r}}
+  \frac{d}{dr} ( r^2 \rho u ) = 0
 \end{equation}
-This gives us our final expression for quasistatic evaporation:
+which allows us to write
+\begin{equation}\label{eq:mass-conservation}
+  r ^2 \rho u = \textrm{constant} = -\frac{\dot{m}}{4\pi}.
+\end{equation}
+Similarly, for the species equation we have
 \begin{equation}
-  \dot{m} = - 4\pi \rho D R \ln{(\phi(R) - \phi_\infty)}
+  \frac{d}{dr} \left(
+  r^2 \rho u Y_i - r^2 \rho D_V \frac{d Y_i}{dr}
+  \right) = 0
+  \label{eq:quasistatic-vapour-species-conservation}
+\end{equation}
+Using \eqref{eq:mass-conservation} we have
+\begin{equation}\label{eq:ambient-gas-ode}
+  -\frac{\dot{m}}{4\pi r^2 \rho D_V} Y_A - \frac{d Y_A}{dr} = 0.
+\end{equation}
+Defining
+\begin{equation*}
+  \phi_A(r) = -\frac{\dot{m}}{4\pi}
+  \int_r^\infty  \frac{1}{\rho D_V (r')^2} \, dr'
+\end{equation*}
+\eqref{eq:ambient-gas-ode} becomes
+\begin{equation}
+  \frac{d\phi_A}{dr} Y_A - \frac{d Y_A}{dr} = 0.
+\end{equation}
+which can be integrated%
+\marginfootnote{One way to do this integral involves multiplying through by the integrating factor $e^{-\phi_A(r)}$.}
+giving
+\begin{equation}
+  Y_A(r) e^{-\phi_A(r)} = \textrm{constant}.
+\end{equation}
+Thus, we have
+\begin{equation}
+  \frac{Y_A(R)}{\displaystyle{\lim_{r \to \infty}} Y_A(r)} = e^{\phi_A(R)}.
+\end{equation}
+using the fact that $\displaystyle{\lim_{r \to \infty} \phi_A(r) = 0}$.
+Transforming this in terms of the mass fraction of the water component $Y_F = 1 - Y_A$ we have
+\begin{equation}
+  \frac{1 - Y_F(R)}{1 - \displaystyle{\lim_{r \to \infty}} Y_F(r)} =
+  1 + B = e^{\phi_A(R)},
+\end{equation}
+where we have defined the \emph{Spalding number} as
+\begin{equation}
+  %B(Y_F(R); \displaystyle{\lim_{r \to \infty}} Y_F(r)) =
+  B =
+  \frac{\displaystyle{\lim_{r \to \infty}} Y_F(r) - Y_F(R)}
+       {1 - \displaystyle{\lim_{r \to \infty}} Y_F(r)}.
+\end{equation}
+Upon reinserting the definition of $\phi_A$ and rearranging we obtain the equation for the evaporation rate as
+\begin{equation}
+  \dot{m} = -
+  \frac{4\pi \ln{(1 + B)}}
+       {\int_r^\infty  \frac{1}{\rho D_V (r')^2} \, dr'}
+\end{equation}
+If we take the product $\rho D_V$ as a constant in the vapour phase, then we obtain the classic result for quasistatic evaporation:
+\begin{equation}
+  \dot{m} = - 4\pi \rho D_V R \ln{(1 + B)}.
 \end{equation}
 
 \subsection{Quasistatic expressions}
