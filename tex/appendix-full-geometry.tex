@@ -1,0 +1,15 @@
+%TC: macro \marginfootnote [other]
+%TC: envir SCfigure [] other
+%TC: macrocount beginSCfigure [figure]
+\documentclass[12pt]{report}
+\usepackage{preamble}
+\setcounter{chapter}{1}
+\renewcommand{\chaptername}{Appendix}
+\renewcommand{\thechapter}{\Alph{chapter}}
+\graphicspath{{../img/}}
+
+\begin{document}
+\chapter{Computational geometry for the union of many spheres}
+\section{Line curvature}
+\input{appendix-line-curvature}
+\end{document}
