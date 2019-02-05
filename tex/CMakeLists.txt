@@ -13,12 +13,13 @@ add_latex_document(appendix-two-spheres.tex TARGET_NAME appendix-two-spheres IMA
 add_latex_document(appendix-full-geometry.tex
                    INPUTS appendix-line-curvature.tex
                    TARGET_NAME appendix-full-geometry IMAGE_DIRS ../img EXCLUDE_FROM_ALL)
+add_latex_document(appendix-finite-differences.tex TARGET_NAME appendix-finite-differences IMAGE_DIRS ../img EXCLUDE_FROM_ALL)
 
 add_custom_target(chapters)
-add_dependencies(chapters introduction theory morph1 morph2 cuzr aerosols conclusion appendix-two-spheres appendix-full-geometry)
+add_dependencies(chapters introduction theory morph1 morph2 cuzr aerosols conclusion appendix-two-spheres appendix-full-geometry appendix-finite-differences)
 
 add_latex_document(thesis.tex
-                   INPUTS abstract.tex dedication.tex declaration.tex acknowledgements.tex word-count.tex introduction.tex theory.tex integral-geometry.tex liquid-state-theory.tex supercooled-liquids.tex morphometric-framework.tex morphometric-applications.tex cuzr.tex aerosols.tex conclusion.tex appendix-two-spheres.tex appendix-full-geometry.tex appendix-line-curvature.tex
+                   INPUTS abstract.tex dedication.tex declaration.tex acknowledgements.tex word-count.tex introduction.tex theory.tex integral-geometry.tex liquid-state-theory.tex supercooled-liquids.tex morphometric-framework.tex morphometric-applications.tex cuzr.tex aerosols.tex conclusion.tex appendix-two-spheres.tex appendix-full-geometry.tex appendix-line-curvature.tex appendix-finite-differences.tex
                    TARGET_NAME thesis
                    IMAGE_DIRS ../img)
 

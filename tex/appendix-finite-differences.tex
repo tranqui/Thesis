@@ -1,0 +1,14 @@
+%TC: macro \marginfootnote [other]
+%TC: envir SCfigure [] other
+%TC: macrocount beginSCfigure [figure]
+\documentclass[12pt]{report}
+\usepackage{preamble}
+\setcounter{chapter}{2}
+\renewcommand{\chaptername}{Appendix}
+\renewcommand{\thechapter}{\Alph{chapter}}
+\graphicspath{{../img/}}
+
+\begin{document}
+\chapter{Finite-difference schemes for numerical integration}
+Second-order scheme (Crank-Nicolson).
+\end{document}
