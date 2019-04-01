@@ -3,12 +3,12 @@
 %TC: macrocount beginSCfigure [figure]
 \documentclass[12pt]{report}
 \usepackage{preamble}
-\setcounter{chapter}{5}
+\setcounter{chapter}{6}
 \graphicspath{{../img/}}
 
 \begin{document}
 \chapter{Drying kinetics and nucleation of aerosol droplets}
-A shorter chapter.
+A self-contained chapter.
 
 \section{Motivation}
 Connection with rest of thesis: here we attempt ot model nucleation of salt crystals inside of aerosol droplets, whereas in previous chapters we will have attempted to model nucleation of hard spheres.
@@ -19,13 +19,686 @@ As optimistic as this scenario is, it is worth making \emph{some} connection.
 \section{Diffusion model for a drying droplet}
 A moving boundary problem with diffusion.
 
+\subsection{New}
+
+Continuity equations (total and species)
+\begin{align}
+  \label{eq:total-continuity}
+  \frac{\partial \rho}{\partial t} +
+  \vec{\nabla} \cdot (\rho \vec{v}) &= 0 \\
+  \label{eq:species-continuity}
+  \frac{\partial \rho^{(i)}}{\partial t} +
+  \vec{\nabla} \cdot (\rho^{(i)} \vec{v}^{(i)}) &= 0
+  \qquad i \in \{f,s\}
+\end{align}
+where $\vec{v}^{(i)}$ is the velocity of species $i$ and the mass-averaged fluid velocity is
+\begin{equation}
+  \vec{v} = \sum_i Y^{(i)} \vec{v}^{(i)}
+\end{equation}
+We have
+\begin{equation*}
+  \frac{\partial \rho^{(i)}}{\partial t} +
+  \vec{\nabla} \cdot (\rho^{(i)} \vec{v}) +
+  \vec{\nabla} \cdot (\rho^{(i)} (\vec{v}^{(i)} - \vec{v})) = 0
+  \qquad i \in \{f,s\}
+\end{equation*}
+and defining the relative mass flux as
+\begin{equation}\label{eq:relative-mass-flux}
+  \vec{j}^{(i)} = \rho^{(i)} (\vec{v}^{(i)} - \vec{v})
+  \qquad i \in \{f,s\}
+\end{equation}
+gives
+\begin{equation}\label{eq:species-continuity-relative}
+  \frac{\partial \rho^{(i)}}{\partial t} +
+  \vec{\nabla} \cdot (\rho^{(i)} \vec{v}) +
+  \vec{\nabla} \cdot \vec{j}^{(i)} = 0
+  \qquad i \in \{f,s\}
+\end{equation}
+
+Note that the divergence term in spherical coordinates is
+\begin{equation*}
+  \vec{\nabla} \cdot \vec{j} =
+  \frac{1}{r^2} \frac{\partial (r^2 \rho u)}{\partial r}
+\end{equation*}
+
+\subsection{Liquid phase analysis}
+
+Assume Fick's law for diffusion:
+\begin{equation}\label{eq:ficks-law}
+  \vec{j}^{(i)} = -D_{\textrm{eff}} \rho \vec{\nabla} Y^{(i)}
+\end{equation}
+where $D_{\textrm{eff}}$ is an effective \emph{binary} diffusion constant for the relative motion.
+Note that as $Y^{(f)} + Y^{(s)} = 1$ we have
+\begin{equation*}
+  \vec{j}^{(i)} = -\vec{j}^{(i)}
+\end{equation*}
+
+Expressing the concentration terms in the species equation in terms of the density and mass fraction gives
+\begin{align*}
+  \frac{\partial \rho^{(i)}}{\partial t} &=
+  \frac{\partial (\rho Y^{(i)})}{\partial t} \\
+  &=
+  \rho \frac{\partial Y^{(i)}}{\partial t} +
+  Y^{(i)} \frac{\partial \rho}{\partial t} \\
+  &=
+  \rho \frac{\partial Y^{(i)}}{\partial t} -
+  Y^{(i)} \vec{\nabla} \cdot (\rho \vec{v})
+\end{align*}
+and
+\begin{equation*}
+  \begin{aligned}
+    \vec{\nabla} \cdot (\rho^{(i)} \vec{v}) &=
+    \vec{\nabla} \cdot (\rho Y^{(i)} \vec{v}) \\
+    &=
+    \rho \vec{v} \cdot \vec{\nabla} Y^{(i)} +
+    Y^{(i)} \vec{\nabla} \cdot (\rho \vec{v})
+  \end{aligned}
+\end{equation*}
+Inserting these expressions into the species equation gives
+\begin{equation}\label{eq:advection-continuity-1}
+  \begin{aligned}
+    \frac{\partial \rho^{(i)}}{\partial t} -
+    \vec{\nabla} \cdot (\rho^{(i)} \vec{v}) +
+    \vec{\nabla} \cdot \vec{j}^{(i)} &= \\
+    \rho \frac{\partial Y^{(i)}}{\partial t} -
+    Y^{(i)} \vec{\nabla} \cdot (\rho \vec{v}) +
+    \rho \vec{v} \cdot \vec{\nabla} Y^{(i)} +
+    Y^{(i)} \vec{\nabla} \cdot (\rho \vec{v}) +
+    \vec{\nabla} \cdot \vec{j}^{(i)} &= \\
+    \rho \left(
+    \frac{\partial Y^{(i)}}{\partial t} +
+    \vec{v} \cdot \vec{\nabla} Y^{(i)}
+    \right) +
+    \vec{\nabla} \cdot \vec{j}^{(i)}
+    &= 0 \qquad i \in \{f,s\}
+  \end{aligned}
+\end{equation}
+Thus inserting \eqref{eq:ficks-law} into \eqref{eq:advection-continuity-1} gives the mass fraction form of \eqref{eq:species-continuity-relative} as
+\begin{equation}\label{eq:mass-fraction-continuity}
+  \rho \left(
+  \frac{\partial Y^{(i)}}{\partial t} +
+  \underbrace{\vec{v} \cdot \vec{\nabla} Y^{(i)}}_\textrm{advection}
+  \right)
+  -
+  \underbrace{\vec{\nabla} \cdot (D_{\textrm{eff}} \rho \vec{\nabla} Y^{(i)})}_\textrm{diffusion}
+  = 0
+  \qquad i \in \{f,s\}.
+\end{equation}
+Note: we only need solve this for a single component, e.g.\ for $i=s$, and then we have the other one through $Y^{(f)} + Y^{(s)} = 1$.
+We must deduce the form of the fluid velocity $\vec{v}$ to close this equation.
+
+Using the fact that $\rho = \rho(Y^{(i)})$, i.e.\
+\begin{equation*}
+  \frac{\partial \rho}{\partial t} =
+  \frac{\partial \rho}{\partial Y^{(i)}} \frac{\partial Y^{(i)}}{\partial t}
+\end{equation*}
+transforms the continuity equation \eqref{eq:total-continuity} as
+\begin{equation}\label{eq:advection-continuity-2}
+  \begin{aligned}
+    \frac{\partial \rho}{\partial t} +
+    \vec{\nabla} \cdot (\rho \vec{v})
+    &=
+    \frac{\partial \rho}{\partial Y^{(i)}} \frac{\partial Y^{(i)}}{\partial t} +
+    \vec{v} \cdot \vec{\nabla} \rho +
+    \rho \vec{\nabla} \cdot \vec{v} \\
+    &=
+    \frac{\partial \rho}{\partial Y^{(i)}}
+    \left(
+    \frac{\partial Y^{(i)}}{\partial t} +
+    \vec{v} \cdot \vec{\nabla} Y^{(i)}
+    \right) +
+    \rho \vec{\nabla} \cdot \vec{v} \\
+    &= 0
+  \end{aligned}
+\end{equation}
+Equating the bracketed terms in \eqref{eq:advection-continuity-1} and \eqref{eq:advection-continuity-2} gives
+\begin{equation}
+  \vec{\nabla} \cdot \vec{v}
+  =
+  \frac{1}{\rho^2}
+  \frac{\partial \rho}{\partial Y^{(i)}}
+  \vec{\nabla} \cdot \vec{j}^{(i)}
+\end{equation}
+which must be inverted to find $\vec{v}$ to model the advection.
+Integrating both sides we find
+\begin{equation*}
+  \int_{\mathbb{V}}
+  \vec{\nabla} \cdot \vec{v}
+  \, d^3|\vec{r}|
+  =
+  \int_{\mathbb{V}}
+  \frac{1}{\rho^2}
+  \frac{\partial \rho}{\partial Y^{(i)}}
+  \vec{\nabla} \cdot \vec{j}^{(i)}
+  \, d^3|\vec{r}|
+\end{equation*}
+and applying Stokes' theorem to the LHS gives
+\begin{equation*}
+  \int_{\partial \mathbb{V}}
+  \vec{v} \cdot
+  \, d^2\vec{S}
+  =
+  \int_{\mathbb{V}}
+  \frac{1}{\rho^2}
+  \frac{\partial \rho}{\partial Y^{(i)}}
+  \vec{\nabla} \cdot \vec{j}^{(i)}
+  \, d^3|\vec{r}|
+\end{equation*}
+
+Volume additivity
+\begin{equation}\label{eq:volume-additivity}
+  \begin{aligned}
+    \frac{1}{\rho} &=
+    \sum_{k \in \{f,s\}} \frac{Y^{(k)}}{\rho^{(j)}_0} \\
+    &=
+    \frac{Y^{(i)}}{\rho^{(i)}_0} +
+    \frac{1 - Y^{(i)}}{\rho^{(j)}_0}
+    \qquad i,j \in \{f,s\}, \; j \ne i.
+  \end{aligned}
+\end{equation}
+means
+(define)
+\begin{equation}\label{eq:density-lambda}
+  \begin{aligned}
+    \Lambda^{(i)} &=
+    \frac{1}{\rho^2} \frac{\partial \rho}{\partial Y^{(i)}} \\
+    &=
+    \frac{1}{\rho^{(i)}_0} -
+    \frac{1}{\rho^{(j)}_0}
+    \\
+    &=
+    \frac{\rho^{(j)}_0 - \rho^{(i)}_0}{\rho^{(i)}_0\rho^{(j)}_0}
+    \qquad i,j \in \{f,s\}, \; j \ne i.
+  \end{aligned}
+\end{equation}
+From \eqref{eq:volume-additivity} and \eqref{eq:density-lambda} we have
+\begin{equation*}
+  \begin{aligned}
+    \frac{1}{\rho} &=
+    \Lambda^{(i)} Y^{(i)} + \frac{1}{\rho^{(j)}_0} \\
+    &=
+    \Lambda^{(i)} \frac{\rho^{(i)}}{\rho} + \frac{1}{\rho^{(j)}_0}
+    \qquad i,j \in \{f,s\}, \; j \ne i,
+  \end{aligned}
+\end{equation*}
+which rearranges to give
+\begin{equation*}
+  (1 - \rho^{(i)} \Lambda^{(i)})
+  \frac{1}{\rho} =
+  \frac{1}{\rho^{(j)}_0}
+  \qquad i,j \in \{f,s\}, \; j \ne i,
+\end{equation*}
+and finally we have
+\begin{equation}
+  \rho =
+  \rho^{(j)}_0 (1 - \rho^{(i)} \Lambda^{(i)})
+  \qquad i,j \in \{f,s\}, \; j \ne i.
+\end{equation}
+This means
+\begin{equation}
+  \begin{aligned}
+    \rho - \rho^{(i)} &=
+    \rho^{(j)}_0 (1 - \rho^{(i)} \Lambda^{(i)}) - \rho^{(i)} \\
+    &=
+    \rho^{(j)}_0 - \rho^{(i)}(1 + \rho^{(j)}_0 \Lambda^{(i)})
+    \qquad i,j \in \{f,s\}, \; j \ne i.
+  \end{aligned}
+\end{equation}
+or more importantly
+\begin{equation}
+  \frac{\rho^{(i)}}{\rho} =
+  \frac{\rho^{(i)}}{\rho^{(j)}_0 (1 - \rho^{(i)} \Lambda^{(i)})}
+  \qquad i,j \in \{f,s\}, \; j \ne i.
+\end{equation}
+Note:
+\begin{equation*}
+  \Lambda^{(f)} = -\Lambda^{(s)}.
+\end{equation*}
+So we have
+\begin{equation*}
+  \begin{aligned}
+  \int_{\partial \mathbb{V}}
+  \vec{v} \cdot
+  \, d^2\vec{S}
+  &=
+  \Lambda^{(i)}
+  \int_{\mathbb{V}}
+  \vec{\nabla} \cdot \vec{j}^{(i)}
+  \, d^3|\vec{r}| \\
+  &=
+  \Lambda^{(i)}
+  \int_{\partial \mathbb{V}}
+  \vec{j}^{(i)} \cdot
+  \, d^2\vec{S}
+  \end{aligned}
+\end{equation*}
+i.e.\ we obtain
+\begin{equation*}
+  \int_{\partial \mathbb{V}}
+  (\vec{v} - \Lambda^{(i)} \vec{j}^{(i)})
+  \cdot \, d^2\vec{S}
+  = 0
+\end{equation*}
+or in differential form
+\begin{equation}
+  \left.
+  (\vec{v} - \Lambda^{(i)} \vec{j}^{(i)})
+  \right|_{\partial \mathbb{V}}
+  = 0
+\end{equation}
+As we could have drawn arbitrary boundaries inside the droplet, we have
+\begin{equation}
+  \vec{v} =
+  \Lambda^{(i)} \vec{j}^{(i)} =
+  -D_{\textrm{eff}} \Lambda^{(i)} \rho \vec{\nabla} Y^{(i)}
+\end{equation}
+The concentration species equation \eqref{eq:species-continuity-relative} becomes
+\begin{equation}\label{eq:species-continuity-advection-corrected}
+  \begin{aligned}
+    0 &=
+    \frac{\partial \rho^{(i)}}{\partial t} +
+    \vec{\nabla} \cdot
+    \left(
+    \rho^{(i)} \vec{v} +
+    \vec{j}^{(i)}
+    \right)
+    \\
+    &=
+    \frac{\partial \rho^{(i)}}{\partial t} +
+    \vec{\nabla} \cdot
+    \Big(
+    (1 + \rho^{(i)} \Lambda^{(i)})
+    \vec{j}^{(i)} \Big)
+    \qquad i \in \{f,s\}
+  \end{aligned}
+\end{equation}
+whereas the mass fraction form \eqref{eq:mass-fraction-continuity} becomes
+\begin{equation}
+  \begin{aligned}
+    0 &=
+    \rho \left(
+    \frac{\partial Y^{(i)}}{\partial t} +
+    \vec{v} \cdot \vec{\nabla} Y^{(i)}
+    \right)
+    -
+    \vec{\nabla} \cdot (D_{\textrm{eff}} \rho \vec{\nabla} Y^{(i)}) \\
+    &=
+    \rho
+    \frac{\partial Y^{(i)}}{\partial t} +
+    \rho \Lambda^{(i)} \; \vec{j}^{(i)} \cdot \vec{\nabla} Y^{(i)}
+    +
+    \vec{\nabla} \cdot \vec{j}^{(i)} \\
+    &=
+    \rho
+    \frac{\partial Y^{(i)}}{\partial t} +
+    \vec{\nabla} \cdot
+    (\rho \Lambda^{(i)} \; \vec{j}^{(i)} Y^{(i)}) -
+    Y^{(i)} \vec{\nabla} \cdot
+    (\rho \Lambda^{(i)} \; \vec{j}^{(i)}) +
+    \vec{\nabla} \cdot \vec{j}^{(i)}
+    %\vec{\nabla} \cdot (D_{\textrm{eff}} \rho \vec{\nabla} Y^{(i)})
+    \\
+    &=
+    \rho
+    \frac{\partial Y^{(i)}}{\partial t} +
+    \vec{\nabla} \cdot
+    \Big(
+    (1 + \rho^{(i)} \Lambda^{(i)}) \;
+    \vec{j}^{(i)} \Big) -
+    Y^{(i)} \vec{\nabla} \cdot
+    (\rho \Lambda^{(i)} \; \vec{j}^{(i)})
+    \qquad i \in \{f,s\}.
+  \end{aligned}
+\end{equation}
+
+Note:
+\begin{equation}
+  \begin{aligned}
+    \rho \Lambda^{(i)} &=
+    \left(
+    \frac{Y^{(i)}}{\rho^{(i)}_0} +
+    \frac{1 - Y^{(i)}}{\rho^{(j)}_0}
+    \right)^{-1}
+    \frac{\rho^{(j)}_0 - \rho^{(i)}_0}{\rho^{(i)}_0\rho^{(j)}_0} \\
+    &=
+    \left(
+    \frac{Y^{(i)} (\rho^{(j)}_0 - \rho^{(i)}_0) + \rho^{(i)}_0}{\rho^{(i)}_0 \rho^{(j)}_0}
+    \right)^{-1}
+    \frac{\rho^{(j)}_0 - \rho^{(i)}_0}{\rho^{(i)}_0\rho^{(j)}_0}
+    \\
+    &=
+    \frac{\rho^{(i)}_0 \rho^{(j)}_0}{Y^{(i)} (\rho^{(j)}_0 - \rho^{(i)}_0) + \rho^{(i)}_0}
+    \frac{\rho^{(j)}_0 - \rho^{(i)}_0}{\rho^{(i)}_0\rho^{(j)}_0}
+    \\
+    &=
+    \frac{\rho^{(j)}_0 - \rho^{(i)}_0}{Y^{(i)} (\rho^{(j)}_0 - \rho^{(i)}_0) + \rho^{(i)}_0}
+    \\
+    &=
+    \frac{1}{Y^{(i)} + \frac{\rho^{(i)}_0}{\rho^{(j)}_0 - \rho^{(i)}_0}}
+    \qquad i,j \in \{f,s\}, \; j \ne i.
+  \end{aligned}
+\end{equation}
+
+\subsection{Boundary conditions}
+
+The mass of each species inside the droplet is obtained from its concentration profile as
+\begin{equation}
+  m^{(i)}(t) = \int_{\mathbb{V}(t)} \rho^{(i)}(\vec{r},t) \, d^3|\vec{r}|
+  \qquad i \in \{f,s\}
+\end{equation}
+where $\mathbb{V}$ is the volume of the droplet.
+Differentiating this expression gives the mass flow into the droplet (of this species) as
+\begin{equation}\label{eq:integral-continuity}
+  \frac{d m^{(i)}}{dt} =
+  \int_{\mathbb{V}(t)} \frac{\partial \rho^{(i)}}{\partial t} \, d^3|\vec{r}| +
+  \int_{\partial \mathbb{V}(t)} \rho^{(i)} \, \vec{v}_{\partial \mathbb{V}(t)} \cdot d^2\vec{S}
+  \qquad i \in \{f,s\}
+\end{equation}
+where $\vec{v}_{\partial \mathbb{V}(t)}$ is the velocity of the boundary and the vectorial surface element $d^2\vec{S}$ points in the direction of the outer normal vector.
+\eqref{eq:integral-continuity} is the integral form of \eqref{eq:species-continuity}.
+Note that solute does not leave the droplet, so all mass entering/leaving the droplet must be due to the solvent.
+We write these conditions as
+\begin{subequations}
+  \begin{align}
+    \frac{d m^{(s)}}{dt} &= 0 \\
+    \frac{d m^{(f)}}{dt} &= \frac{d m}{dt}
+  \end{align}
+\end{subequations}
+where $m = m^{(s)} + m^{(f)}$ is the total solute mass.
+\eqref{eq:species-continuity-advection-corrected} gives
+\begin{equation}\label{eq:species-evolution-current}
+  \begin{aligned}
+    \frac{\partial \rho^{(i)}}{\partial t} &=
+    - \vec{\nabla} \cdot \Big(
+    \rho^{(i)} \vec{v} + \vec{j}^{(i)}
+    \Big)
+    \\
+    &=
+    - \vec{\nabla} \cdot \Big(
+    (1 + \rho^{(i)} \Lambda^{(i)}) \vec{j}^{(i)}
+    \Big)
+    \qquad i \in \{f,s\}
+  \end{aligned}
+\end{equation}
+Using \eqref{eq:density-lambda} we have
+\begin{equation*}
+  \begin{aligned}
+    \vec{\nabla} \rho^{(i)} &=
+    \rho \vec{\nabla} Y^{(i)} +
+    Y^{(i)} \vec{\nabla} \rho \\
+    &=
+    \left(
+    \rho + Y^{(i)} \frac{\partial \rho}{\partial Y^{(i)}}
+    \right)
+    \vec{\nabla} Y^{(i)}
+    \\
+    &=
+    \left(
+    \rho +
+    Y^{(i)} \rho^2 \Lambda^{(i)}
+    \right)
+    \vec{\nabla} Y^{(i)} \\
+    &=
+    \left(
+    1 +
+    \rho^{(i)} \Lambda^{(i)}
+    \right)
+    \rho
+    \vec{\nabla} Y^{(i)}
+  \end{aligned}
+\end{equation*}
+so inserting this and \eqref{eq:ficks-law} into \eqref{eq:species-evolution-current} gives
+\begin{equation}\label{eq:species-evolution-final}
+  \begin{aligned}
+    \frac{\partial \rho^{(i)}}{\partial t} &=
+    \vec{\nabla} \cdot \Big(
+    (1 + \rho^{(i)} \Lambda^{(i)})
+    D_{\textrm{eff}} \rho \vec{\nabla} Y^{(i)}
+    \Big) \\
+    &=
+    \vec{\nabla} \cdot \Big(
+    D_{\textrm{eff}} \vec{\nabla} \rho^{(i)}
+    \Big)
+    \qquad i \in \{f,s\}
+  \end{aligned}
+\end{equation}
+Inserting this into \eqref{eq:integral-continuity} and applying Stokes' theorem to the volume integral gives
+\begin{equation}
+  \begin{aligned}
+    \frac{d m^{(i)}}{dt} &=
+    \int_{\partial \mathbb{V}(t)}
+    (\rho^{(i)} (\vec{v}_{\partial \mathbb{V}(t)} - \vec{v}) - \vec{j}^{(i)})
+    \cdot d^2\vec{S} \\
+    &=
+    \int_{\partial \mathbb{V}(t)}
+    \rho^{(i)} (\vec{v}_{\partial \mathbb{V}(t)} - \vec{v}^{(i)})
+    \cdot d^2\vec{S} \\
+    &=
+    \int_{\partial \mathbb{V}(t)}
+    \Big(
+    \rho^{(i)} \vec{v}_{\partial \mathbb{V}(t)} -
+    (1 + \rho^{(i)} \Lambda^{(i)}) \vec{j}^{(i)}
+    \Big)
+    \cdot d^2\vec{S} \\
+    &=
+    \int_{\partial \mathbb{V}(t)}
+    \Big(
+    \rho^{(i)} \vec{v}_{\partial \mathbb{V}(t)} +
+    (1 + \rho^{(i)} \Lambda^{(i)})
+    D_{\textrm{eff}} \rho \vec{\nabla} Y^{(i)}
+    \Big)
+    \cdot d^2\vec{S} \\
+    &=
+    \int_{\partial \mathbb{V}(t)}
+    \Big(
+    \rho^{(i)} \vec{v}_{\partial \mathbb{V}(t)} +
+    D_{\textrm{eff}} \vec{\nabla} \rho^{(i)}
+    \Big)
+    \cdot d^2\vec{S}
+    \qquad i \in \{f,s\}
+  \end{aligned}
+\end{equation}
+after making use of \eqref{eq:relative-mass-flux} in the latter step.
+For our spherical droplets this becomes
+\begin{equation}
+  \begin{aligned}
+    \frac{d m^{(i)}}{dt} &=
+    4 \pi R^2
+    \rho^{(i)}(R) \left( \frac{dR}{dt} - v^{(i)}(R) \right) \\
+    &=
+    4 \pi R^2
+    \rho^{(i)}(R) \left(
+    \frac{dR}{dt} +
+    \left.\left(
+    (1 + \rho^{(i)} \Lambda^{(i)})
+    \frac{D_{\textrm{eff}}}{Y^{(i)}}
+    \frac{\partial Y^{(i)}}{\partial r}
+    \right)\right|_{r=R(t)}
+    \right)
+    \qquad i \in \{f,s\}
+  \end{aligned}
+\end{equation}
+\begin{equation}
+  \left. \frac{\partial Y^{(s)}}{\partial r} \right|_{r=R(t)} =
+  -
+  \frac{Y^{(s)}}{(1 + \rho^{(s)} \Lambda^{(s)}) D_{\textrm{eff}}}
+  \frac{dR}{dt}
+\end{equation}
+so
+\begin{equation}
+  \left. \frac{\partial \rho^{(s)}}{\partial r} \right|_{r=R(t)} =
+  -
+  \frac{\rho^{(s)}}{D_{\textrm{eff}}}
+  \frac{dR}{dt}
+\end{equation}
+
+Some new stuff
+\begin{equation*}
+  \rho^{(f)} = Y^{(f)} \rho = (1 - Y^{(s)}) \rho = \rho - \rho^{(s)}
+\end{equation*}
+Reminder:
+\begin{equation*}
+  \rho =
+  \rho^{(j)}_0 (1 - \rho^{(i)} \Lambda^{(i)})
+  \qquad i,j \in \{f,s\}, \; j \ne i.
+\end{equation*}
+so we have
+\begin{equation*}
+  \frac{\partial \rho}{\partial \rho^{(i)}} =
+  - \rho^{(j)}_0 \Lambda^{(i)}
+  \qquad i,j \in \{f,s\}, \; j \ne i.
+\end{equation*}
+\begin{equation}
+  \begin{aligned}
+    \frac{d m}{dt} &=
+    \frac{d m^{(f)}}{dt} \\
+    &=
+    4 \pi R^2
+    \left(
+    \rho^{(f)}(R)  \frac{dR}{dt} +
+    \left[
+    D_{\textrm{eff}}
+    \frac{\partial \rho^{(f)}}{\partial r}
+    \right]_{r=R(t)}
+    \right) \\
+    &=
+    4 \pi R^2
+    \left(
+    \rho^{(f)}(R)
+    \frac{dR}{dt} +
+    \left[
+    D_{\textrm{eff}}
+    \left(
+    \frac{\partial \rho}{\partial r} -
+    \frac{\partial \rho^{(s)}}{\partial r}
+    \right)
+    \right]_{r=R(t)}
+    \right) \\
+    &=
+    4 \pi R^2
+    \left(
+    \rho^{(f)}(R)
+    \frac{dR}{dt} +
+    \left[
+    D_{\textrm{eff}}
+    \left(
+    1 - \frac{\partial \rho}{\partial \rho^{(s)}}
+    \right)
+    \frac{\partial \rho^{(s)}}{\partial r}
+    \right]_{r=R(t)}
+    \right) \\
+    &=
+    4 \pi R^2
+    \left(
+    \rho^{(f)}(R)
+    \frac{dR}{dt} +
+    \left[
+    D_{\textrm{eff}}
+    \left(
+    1 - \rho^{(f)}_0 \Lambda^{(s)}
+    \right)
+    \frac{\partial \rho^{(s)}}{\partial r}
+    \right]_{r=R(t)}
+    \right) \\
+    &=
+    4 \pi R^2
+    \left(
+    \rho^{(f)}(R)
+    \frac{dR}{dt} +
+    \left( 1 - \rho^{(f)}_0 \Lambda^{(s)} \right)
+    \rho^{(s)}(R)
+    \frac{d R}{d t}
+    \right) \\
+    &=
+    4 \pi R^2
+    \left(
+    \rho(R) - \rho^{(s)}(R) \rho^{(f)}_0 \Lambda^{(s)}
+    \right)
+    \frac{dR}{dt} \\
+    &=
+    4 \pi R^2
+    \left(
+    \rho_0^{(f)}(1 - \rho^{(s)}(R) \Lambda^{(s)}) - \rho^{(s)}(R) \rho^{(f)}_0 \Lambda^{(s)}
+    \right)
+    \frac{dR}{dt} \\
+    &=
+    4 \pi R^2 \rho_0^{(f)} \frac{dR}{dt}
+  \end{aligned}
+\end{equation}
+or
+\begin{equation}
+  \frac{dR}{dt} =
+  \frac{1}{4\pi R^2 \rho^{(f)}_0} \frac{dm}{dt}.
+\end{equation}
+
+\begin{equation}
+  \begin{aligned}
+  \frac{dR}{dt} &=
+  -\frac{1}{4\pi R^2 \rho^{(f)}_0}
+  2\pi Sh \rho_V D_V R \ln{(1 + B)} \\
+  &=
+  -\frac{Sh}{2 R \rho^{(f)}_0}
+  \rho_V D_V \ln{(1 + B)} =
+  \frac{A}{2 R} \\
+  Sh &= \frac{A \rho^{(f)}_0}{\rho_V D_V \ln{(1+B)}}
+  \end{aligned}
+\end{equation}
+
+Taking into account the latent heat across the phase boundary, we expect
+\begin{equation}
+  \frac{\rho^{(f)}(R^+)}{\rho^{(f)}(R^-)} =
+  e^{-\beta L}
+\end{equation}
+where $T$ is the temperature at the droplet surface, $L$ is the latent heat of vaporisation (per unit mole) and $R$ is the molar gas constant.
+So the mass fraction ratios become
+\begin{equation}
+  \begin{aligned}
+    \frac{Y^{(f)}(R^+)}{Y^{(f)}(R^-)} &=
+    \frac{\rho^{(f)}(R^+)}{\rho(R^+)}
+    \frac{\rho(R^-)}{\rho^{(f)}(R^-)} \\
+    &=
+    \frac{\rho(R^-)}{\rho_V}
+    e^{-\beta L}
+  \end{aligned}
+\end{equation}
+assuming $\rho(R+) = \rho_V$.
+
+\begin{equation*}
+  \ln{(1 + B)} = B + \mathcal{O}(B^2)
+\end{equation*}
+recall:
+\begin{equation*}
+  \begin{aligned}
+    1 + B &=
+    \frac{1 - Y_F(R^+)}{1 - \displaystyle{\lim_{r \to \infty}} Y_F(r)} \\
+    &=
+    \frac{1 - \frac{\rho_V}{\rho(R^-)}
+      e^{-\beta L} Y_F(R^-)}{1 - \displaystyle{\lim_{r \to \infty}} Y_F(r)} \\
+    &=
+    1 - \frac{\rho_V}{\rho(R^-)} e^{-\beta L} Y_F(R^-)
+  \end{aligned}
+\end{equation*}
+for $\lim_{r \to \infty} Y_F(r) = 0$ in the final step
+
+So we have
+\begin{equation*}
+  \begin{aligned}
+    \frac{dR}{dt} &=
+    -\frac{Sh}{2 R \rho^{(f)}_0}
+    \rho_V D_V B + \mathcal{O}(B^2) \\
+    &=
+    -\frac{Sh}{2 R \rho^{(f)}_0}
+    \rho_V D_V B + \mathcal{O}(B^2)
+  \end{aligned}
+\end{equation*}
+
 \subsection{Evolution equation}
 
 We consider a droplet of radius $R(t)$ and consider concentration profiles at radius $r$ from its centre.
 The droplet consists of a binary fluid, with solute and solvent (mass) concentration profiles labelled $c_s(r)$ and $c_w(r)$ respectively.
 The mass fraction of each component is written
 \begin{equation}\label{eq:mass-fraction}
-  \phi_i(r) = \frac{c_i(r)}{\sum_j c_j(r)} = \frac{c_i(r)}{c_w(r) + c_s(r)} \qquad i=\{w,s\}
+  Y^{(i)}(r) = \frac{\rho^{(i)}(r)}{\sum_j \rho^{(j)}(r)} = \frac{\rho^{(i)}(r)}{c_w(r) + c_s(r)} \qquad i \in \{w,s\}
 \end{equation}
 Clearly $\phi_w = 1 - \phi_s$ as they must sum to unity, so we can choose either to describe the fluid;
 we will henceforth use solute mass fraction $\phi_s$.
@@ -42,9 +715,7 @@ We use an empirical form for this density by fitting it to a polynomial i.e. the
   \rho(c_s) = \sum_{n=0}^{\infty} \frac{\rho^{(n)}(c_s^{(0)})}{n!} (c_s - c_s^{(0)})^n,
 \end{equation}
 where $c_s^{(0)}$ is the reference state point with known density and concentrations.
-While a high order polynomial would normally be used in the full numerical calculations, we will
-truncate this series to its linear term in order to estimate leading order terms in evolution
-equations giving
+While a high order polynomial would normally be used in the full numerical calculations, we will truncate this series to its linear term in order to estimate leading order terms in evolution equations giving
 \begin{equation}\label{eq:density-expansion}
   \rho(c_s) = \rho(c_s^{(0)}) + \rho'(c_s^{(0)}) \Delta c_s + \mathcal{O}(\Delta c_s^2)
 \end{equation}
@@ -196,7 +867,7 @@ Momentum equation (from Navier-Stokes, so assumes Newtonian fluid, Stokes hypoth
   \left( \mu \frac{\partial u}{\partial r} - \mu \frac{u}{r} \right)
   + 4 r^2 \mu \frac{\partial}{\partial r} \left( \frac{u}{r} \right)
 \end{equation}
-where $\mu$ is dynamic viscosity\marginfootnote{Also symbol used for chemical potential in previous chapters, need to make this clearer or choose a new symbol.}.
+where $\mu$ is dynamic viscosity\todo{Also symbol used for chemical potential in previous chapters, need to make this clearer or choose a new symbol.}.
 Fourier's law of heat conduction
 \begin{equation}
   \vec{q} = -k \vec{\nabla} T
@@ -212,7 +883,7 @@ Energy equation:
   r^2 u \frac{\partial p}{\partial r} + r^2 \phi
 \end{equation}
 $h = \sum_m h_m$ is enthalpy, $\phi = \tau_{ij} \frac{\partial u_i}{\partial x_j}$, $V_m = - \frac{D}{Y_m} \frac{\partial Y_m}{\partial r}$.
-Assumed $D_m = D \forall m$\marginfootnote{Book suggests citation by Megandis and Sirignanco (1991).}, and equal molecular weights.
+Assumed $D_m = D \forall m$\todo{Book suggests citation by Megandis and Sirignanco (1991).}, and equal molecular weights.
 Species equation (continuity equation for individual components):
 \begin{equation}
   \frac{\partial}{\partial t} ( \rho r^2 Y_m ) +
@@ -256,16 +927,134 @@ Our boundary conditions:
   \end{equation}
 \end{itemize}
 
+\subsubsection{Numerical implementation}
+
+$\rho(r)$ will later be discretised into the density at equally spaced points of separation $\Delta r$, so it is natural to think of it as a vector of points $\vec{\rho} = \{\rho(0), \rho(\Delta r), \rho(2 \Delta r), \cdots, \rho(1)\} = \{\rho_1, \cdots, \rho_N\}$ so we will use the notation $\vec{\rho}$ from
+now on to mean $\rho(r)$.
+
+To integrate a timestep $\Delta t$ we use the Crank-Nicolson \cite{Crank1947} method where the time derivative for integration is taken as the average of the instantaneous derivatives at the start and end of integration.
+This is essentially a midpoint method, but requires a bit of linear algebra to solve as we do not know the value of $\partial \vec{\rho} / \partial t$ until we also know $\vec{\rho}$.
+Starting from
+\begin{equation}
+  \frac{\partial \vec{\rho}}{\partial t} =
+  \lim_{\Delta t \to 0} \frac{\vec{\rho}(t + \Delta t) - \vec{\rho}(t)}{\Delta t}
+\end{equation}
+after discretising we obtain
+\begin{equation}
+  \frac{\vec{\rho}(t + \Delta t) - \vec{\rho}(t)}{\Delta t}
+  =
+  \frac{1}{2}
+  \left(
+  \left. \frac{\partial \vec{\rho}}{\partial t} \right|_{t + \Delta t}
+  +
+  \left. \frac{\partial \vec{\rho}}{\partial t} \right|_t
+  \right)
+  + \mathcal{O}(\Delta t^2).
+\end{equation}
+The main advantage of this scheme over more simple schemes (e.g. forward Euler method where we just take the initial $\partial \vec{\rho} / \partial t$) is that the error is of order $\Delta t^2$; this ensures rapid convergence to the correct solution with small integration steps.
+
+Labelling $\vec{\rho}(t) = \vec{\rho}_n$ and $\vec{\rho}(t + \Delta t) = \vec{\rho}_{n+1}$, the goal is to make progressively better guesses for $\vec{\rho}_{n+1}$.
+We label the $k^\textrm{th}$ approximation for $\vec{\rho}_{n+1}$ as $\vec{\rho}_{n+1}^{(k)}$ where the initial guess is $\vec{\rho}_{n+1}^{(1)} = \vec{\rho}_n$, and derive an iterative formula to find $\vec{\rho}_{n+1}^{(k+1)}$ which converges to $\vec{\rho}_{n+1}$ in the limit $k \to \infty$, although in practice only a few iterations should be enough to achieve an approximate solution.
+Using the Crank-Nicolson scheme we write
+\begin{equation}
+  \frac{\vec{\rho}_{n+1}^{(k+1)} - \vec{\rho}_n}{\Delta t}
+  =
+  \frac{\vec{\rho}_{n+1}^{(k)} + \delta \vec{\rho}_{n+1}^{(k)} - \vec{\rho}_n}{\Delta t}
+  =
+  \frac{1}{2}
+  \left(
+  \frac{\partial (\vec{\rho}_{n+1}^{(k)} + \delta \vec{\rho}_{n+1}^{(k)})}{\partial t}
+  +
+  \frac{\partial \vec{\rho}_n}{\partial t}
+  \right)
+\end{equation}
+This is complicated by the fact that $\rho(r)$ depends on $R(t)$ making this equation nonlinear as it couples with the evolution of $R(t)$.
+As such, the above equation implicitly involves terms $R_{n+1}^{(k)} + \delta R_{n+1}^{(k)}$.
+To find the form of the right-hand side we expand in powers of $\delta \vec{\rho}_{n+1}^{(k)}$ and $\delta R_{n+1}^{(k)}$ retaining only those linear.
+Doing this we find...
+\begin{equation}
+  \frac{\vec{\rho}_{n+1}^{(k)} + \delta \vec{\rho}_{n+1}^{(k)} - \vec{\rho}_n}{\Delta t}
+  =
+  F_\rho^{(k)} (\vec{\rho}_n, \vec{\rho}_{n+1}^{(k)}, R_n, R_{n+1}^{(k)}) +
+  G_\rho^{(k)} (\vec{\rho}_{n+1}^{(k)}, R_{n+1}^{(k)}) \delta \vec{\rho}_{n+1}^{(k)} +
+  H_\rho^{(k)} (\vec{\rho}_{n+1}^{(k)}, R_{n+1}^{(k)}) \delta R_{n+1}^{(k)}
+\end{equation}
+where the functions $F_\rho^{(k)},G_\rho^{(k)},H_\rho^{(k)}$ are long and not particularly illuminating so we omit their explicit form for the sake of brevity.
+Importantly $F_\rho^{(k)},G_\rho^{(k)},H_\rho^{(k)}$ are functions of known variables and $\delta \vec{\rho}_{n+1}^{(k)}, \delta R_{n+1}^{(k)}$.
+We can do a similar expansion for the evolution of the boundary, i.e.\
+\begin{equation}\label{eq:discrete-evolution-rho}
+  \frac{R_{n+1}^{(k)} + \delta R_{n+1}^{(k)} - R_n}{\Delta t}
+  =
+  \frac{1}{2}
+  \left(
+  \frac{\partial (R_{n+1}^{(k)} + \delta R_{n+1}^{(k)})}{\partial t}
+  +
+  \frac{\partial R_n}{\partial t}
+  \right)
+\end{equation}
+and we perform the same expansion as before to obtain something of in the form of
+\begin{equation}\label{eq:discrete-evolution-R}
+  \frac{R_{n+1}^{(k)} + \delta R_{n+1}^{(k)} - R_n}{\Delta t}
+  =
+  F_R^{(k)} (\vec{\rho}_n, \vec{\rho}_{n+1}^{(k)}, R_n, R_{n+1}^{(k)}) +
+  G_R^{(k)} (\vec{\rho}_{n+1}^{(k)}, R_{n+1}^{(k)}) \delta \vec{\rho}_{n+1}^{(k)} +
+  H_R^{(k)} (\vec{\rho}_{n+1}^{(k)}, R_{n+1}^{(k)}) \delta R_{n+1}^{(k)}
+\end{equation}
+with new functions $F_R^{(k)},\vec{G}_R^{(k)},H_R^{(k)}$ which are also of known variables.
+In all likelyhood, these only depend on the density of the solute at the boundary.
+We can combine equations \eqref{eq:discrete-evolution-rho} and \eqref{eq:discrete-evolution-R} into a single matrix equation, i.e.
+\begin{equation}
+  \begin{pmatrix}
+    \vec{G}_\rho^{(k)} \Delta t - 1 & H_\rho^{(k)} \Delta t \\
+    G_R^{(k)} \Delta t & H_R^{(k)} \Delta t - 1
+  \end{pmatrix}
+  \begin{pmatrix}
+    \delta \vec{\rho}_{n+1}^{(k)} \\
+    \delta R_{n+1}^{(k)}
+  \end{pmatrix}
+  =
+  \begin{pmatrix}
+    \vec{\rho}_{n+1}^{(k)} - \vec{\rho}_n^{(k)} -
+    F_\rho^{(k)} (\vec{\rho}_n, \vec{\rho}_{n+1}^{(k)}, R_n, R_{n+1}^{(k)})
+    \Delta t
+    \\
+    R_{n+1}^{(k)} - R_n^{(k)} -
+    F_R^{(k)} (\vec{\rho}_n, \vec{\rho}_{n+1}^{(k)}, R_n, R_{n+1}^{(k)})
+    \Delta t
+  \end{pmatrix}.
+\end{equation}
+The terms on the right-hand side of this matrix equation are called th eresiduals, and the left-hand side consists of the (Jacobian) matrix and the vector of unknowns.
+The solution is found by inverting the matrix.
+If we write $\vec{x}_n = (\vec{\rho}_n, R_n)^T$ we have
+\begin{equation}
+  \delta \vec{F} \cdot \delta \vec{x}_{n+1}^{(k)} =
+  \vec{F}(\vec{x}_n, \vec{x}_{n+1}^{(k)}
+\end{equation}
+where $\vec{F}(\vec{x}_n, \vec{x}_{n+1}^{(k)}) = \vec{x}_{n+1}^{(k)} - \vec{x}_n - \Delta t (F_\rho^{(k)} (\vec{x}_n, \vec{x}_{n+1}^{(k)}), F_R^{(k)} (\vec{x}_n, \vec{x}_{n+1}^{(k)}))^T$ giving solution
+\begin{equation}
+  \delta \vec{x}_{n+1}^{(k)} =
+  (\delta \vec{F}^{(k)})^{-1} \cdot \vec{F}(\vec{x}_n, \vec{x}_{n+1}^{(k)}).
+\end{equation}
+We iterate this inversion procedure until some stop criterion is met (i.e.\ we find $\vec{x}_{n+1}$ to some desired accuracy), giving the final solution after $k_{stop}$ iterations:
+\begin{equation}
+  \vec{x}_{n+1} =
+  \vec{x}_n + \sum_{k=1}^{k_{stop}}
+  (\delta \vec{F}^{(k)})^{-1} \cdot \vec{F}(\vec{x}_n, \vec{x}_{n+1}^{(k)})
+  + \mathcal{O}(\Delta t^2).
+\end{equation}
+A sensible stop criterion is that the residuals $F(\vec{x}_n, \vec{x}_{n+1}^{(k)}$ fall to some small value close to zero, meaning $\delta\vec{x}^{(k+1)}$ is small and we are sufficiently close to the true $\vec{x}_{n+1}$.
+Note that the true $\vec{x}_{n+1}$ is not `true' in the sense that it is the exact result, i.e. $(\rho(t + \Delta t), R(t + \Delta t))^T$, but rather true in the sense that it is the correct result predicted by this method (i.e. to $\mathcal{O}(\Delta t^2)$ accuracy).
+
 \subsubsection{Vapour phase analysis}
 
-Key assumptions
+Key assumptions\todo{Also reference Slattery, \emph{Advanced transport phenomena}, (1999)}
 \begin{enumerate}
 \item Spherical symmetry
 \item Quasi-steady
 %\item Lack of convection currents: $\vec{j} = D \vec{\nabla} \rho$ omits $-\vec{u} \rho$ term.
 \end{enumerate}
 
-Starting from the continuity equation\marginfootnote{A key reference for this section is: Sirignano, W. A. \emph{Fluid dynamics and transport of droplets and sprays - Second edition} (2010).}:
+Starting from the continuity equation\todo{Insert key reference for this section is: Sirignano, W. A. \emph{Fluid dynamics and transport of droplets and sprays - Second edition} (2010).}:
 \begin{equation}\label{eq:continuity-eqn}
   \frac{\partial \rho}{\partial t}
   + \vec{\nabla} \cdot \vec{j} = 0,
@@ -280,7 +1069,7 @@ We treat the vapour phase as a binary system of the water vapour and an ambient 
 \marginfootnote{We have a solute (\ce{NaCl} or \ce{NaNO3}) and an evaporating solvent (water), which unfortunately both have the initial $S$ so we need an alternative subscript to distinguish them.
   \textbf{What to use for the solute?}
   We use $W$ for the water component and $A$ for the ambient gas phase.
-I find it helpful to think of the subscript $A$ as also standing for `atmosphere'.}[-2cm].
+I find it more memorable to think of the subscript $A$ as standing for `atmosphere'.}[-2cm].
 Absent any chemical reactions the total number of each species is conserved, so the continuity equation must be satisfied for each constituent:
 \begin{equation}
   \frac{\partial (\rho Y_i)}{\partial t}
@@ -356,6 +1145,21 @@ Upon reinserting the definition of $\phi_A$ and rearranging we obtain the equati
 If we take the product $\rho D_V$ as a constant in the vapour phase, then we obtain the classic result for quasistatic evaporation:
 \begin{equation}
   \dot{m} = - 4\pi \rho D_V R \ln{(1 + B)}.
+\end{equation}
+
+Empirical modification \cite{Abramzon1988}
+\begin{align}
+  \dot{m} &= - 2\pi \rho D_V R \; Sh^* \ln{(1 + B)}, \\
+  \dot{m} &= - 2\pi \frac{k_F}{C_{pF}} R \; Nu^* \ln{(1 + B_T)} \\
+  Sh^* &= 2 + \frac{(Sh_0 - 2)}{F_M} \\
+  Nu^* &= 2 + \frac{(Nu_0 - 2)}{F_T} \\
+  B_T &= \frac{C_{pF} (T_\infty - T(R))}{L(T_s) + Q_L / \dot{m}}.
+\end{align}
+I guess $Sh_0$ is a widely used fudge factor (to account for convection?), and this constitutes further corrections to it.
+
+The heat penetrating into the liquid droplet is \cite{Abramzon1988}
+\begin{equation}
+  Q_L = \dot{m} \left( \frac{C_{pF} (T_\infty - T(R))}{B_T} - L(T(R)) \right)
 \end{equation}
 
 \subsection{Quasistatic expressions}
@@ -439,7 +1243,7 @@ Giving the time integral from the ODE solution:
 \end{equation}
 
 We model the diffusion constant by calibrating dynamic viscosity measurements
-\marginfootnote{Need a Reid group citation} against molecular dynamics measures of the diffusion constant \marginfootnote{Lyubartsev and Laaksonen citation here}[2cm].
+\todo{Need a Reid group citation} against molecular dynamics measures of the diffusion constant \todo{Lyubartsev and Laaksonen citation here}[2cm].
 We assume the Stokes-Einstein form
 \begin{equation}
   D(c;T) = D_0 \frac{\eta_0}{\eta(c)} \frac{T}{T_0}
