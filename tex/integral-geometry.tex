@@ -1,12 +1,20 @@
-Advantage of geometric approach is in the intuition gained%
-\marginfootnote{I used to hate geometry, largely because I have aphantasia (mind's eye is blind).
-  Cruel twist of fate that I became a geometer.
-  Even I find the concepts and framework useful for building intuitions.}.
+%TC: macro \marginfootnote [other]
+%TC: envir SCfigure [] other
+%TC: macrocount beginSCfigure [figure]
+\documentclass[12pt]{report}
+\usepackage{preamble}
+\setcounter{chapter}{1}
+\graphicspath{{../img/}}
+
+\begin{document}
+\chapter[A primer on integral geometry. Or ``How big is that thing?'']{A primer on integral geometry\\ {\large Or ``How big is that thing?''}}
+
+Advantage of geometric approach is in the intuition gained.
 With that in mind the aim of this section is to provide a primer on useful geometric concepts and relations.
 Particularly regarding integral geometry, which is generally unfamiliar to people from physics background.
 Emphasis hear is on concepts and intuition rather than rigour.
 
-\section[Integral geometry. Or ``How big is that thing?'']{Integral geometry\\ {\large Or ``How big is that thing?''}}
+\section{Introduction}
 
 The mathematical formalism which provides elegant and unified description of sizes, underlying the morphological approach taken in the thesis.
 Ideas from this branch of mathematics were crucial to the development of fundamental measure theory, so it makes sense to place this before the section on liquid state theory.
@@ -25,15 +33,6 @@ Possible additions:
 Want to describe how `big' an object is.
 First we define our objects: sets in Euclidean space.
 We will see that the only reasonable notion of size is a \emph{continuous} rigid-motion invariant valuation.
-
-Free volume theories: (free) energy based on size of an object.
-We could argue that fundamentally these theories are based on measuring physical sizes.
-Integral geometry offers a mathematically rigorous formalism for describing sizes, so presents a possible starting point for free volume theories.
-\marginfootnote{Can I find a coherent definition of free volume theories?
-Can I cook one up?
-Need at least two examples to draw a trend.
-Free volume theories in polymers are probably the best well known.
-Free volume theory in glasses?}
 
 \subsection{Selected facts from differential geometry}
 
@@ -142,8 +141,8 @@ Covers most physically realistic geometries.}
 
 Aim of this section is to provide intuition over Euler characteristic.
 
-\begin{tcolorbox}
-  Nomenclature note: difference between sphere and ball.
+\begin{tcolorbox}[title=A note on nomenclature]
+  Difference between sphere and ball.
   \begin{equation*}
     S^{d-1} = \partial B^d
   \end{equation*}
@@ -231,7 +230,7 @@ This choice of normalisation sets $W_k(B_d) = \omega_k$ for all $k$.
 \end{tabular}
 \end{center}
 
-\begin{theorem}[Hadwiger's characterisation theorem]
+\begin{theorem}{Hadwiger's characterisation theorem}
   Together the functionals $\{\mu_k\}_{k=0}^d$ form a basis for the vector space of all continuous rigid-motion invariant valuations on polyconvex sets in $\mathbb{R}^d$.
 \end{theorem}
 
@@ -241,7 +240,7 @@ I.e. a continuous rigid-motion invariant valuation can be written
 \end{equation}
 where $c_i$ are some coefficients independent of $A$.
 
-\begin{theorem}[Steiner's formula for parallel volumes]
+\begin{theorem}{Steiner's formula for parallel volumes}
   For a compact, convex body $K \in \mathcal{K}$ the parallel volume is expressable as:
   \begin{equation}
     \mu_d(K + \epsilon B_d) =
@@ -334,70 +333,70 @@ Note that we can rewrite \eqref{eq:intrinsic-volume-ball} using the flag coeffic
 \end{tabular}
 \end{center}
 
-\begin{theorem}[General kinematic formula]
+\begin{theorem}{General kinematic formula}
   For $0 \le k \le d$:
   \begin{equation}
     \int_{\mathbb{E}_d} \mu_k (A \cap g B) \, dg =
     \sum_{i=0}^{d-k}
     {i + k \brack k} {d \brack i}^{-1}
-    \mu_{k+i}(A) \mu_{d-i}(B)
+    \mu_{i+k}(A) \mu_{d-i}(B)
   \end{equation}
+  \begin{equation*}
+    \int_{\mathbb{E}_d} \mu_k (A \cap g B) \, dg =
+    \sum_{i=0}^{d-k}
+    {i + k \brack k}
+    {d \brack i + k}
+    \kappa_{i+k}(A) \kappa_{d-i}(B)
+  \end{equation*}
   In regular binomial:
   \begin{equation*}
     \int_{\mathbb{E}_d} \mu_k (A \cap g B) \, dg =
     \sum_{i=0}^{d-k}
     {i + k \choose k} {d \choose i}^{-1}
     \frac{\omega_{i+k} \omega_{d-i}}{\omega_k \omega_d}
-    \mu_{k+i}(A) \mu_{d-i}(B)
+    \mu_{i+k}(A) \mu_{d-i}(B)
   \end{equation*}
 \end{theorem}
 
-Simple example: Mayer-f two balls:
-\begin{equation}
-  \frac{\beta p}{\rho} - 1 =
-  - \sum_{i=1}^\infty \frac{i}{i+1} \beta_i \rho^i =
-  \frac{\rho}{2} \int_{\mathbb{E}_d} \mu_0 (B_d \cap g B_d) \, dg
-  + \mathcal{O}(\rho^2)
-\end{equation}
-Volume fraction $\eta = \rho \omega_d$
-\begin{equation}
-  \frac{\beta p}{\rho} - 1 =
-  \frac{\eta}{2 \omega_d}
-  \int_{\mathbb{E}_d} \mu_0 (B_d \cap g B_d) \, dg
-  + \mathcal{O}(\eta^2)
-\end{equation}
-For $d = 3$ this gives $4\eta + \mathcal{O}(\eta^2)$.
-\begin{align*}
-  \frac{\eta}{2 \omega_d}
-  \int_{\mathbb{E}_d} \mu_0 (B_d \cap g B_d) \, dg &=
-  \sum_{i=0}^{d}
-  {d \brack i}^{-1}
-  \mu_i(B_d) \mu_{d-i}(B_d) \\
-  &=
-  \frac{\eta}{2 \omega_d}
-  \sum_{i=0}^{d}
-  {d \brack i}^{-1}
-  {d \brack i} \omega_i
-  {d \brack d-i} \omega_{d-i} \\
-  &=
-  \frac{\eta}{2 \omega_d}
-  \sum_{i=0}^{d}
-  {d \brack i} \omega_i \omega_{d-i} \\
-  &=
-  \begin{cases}
-    \frac{\eta}{2 \omega_2}
-    (2 \omega_0 \omega_2 + \frac{\pi}{2} \omega_1^2)
-    & \qquad d=2 \\
-    \frac{\eta}{\omega_3}
-    (\omega_0 \omega_3 + 2 \omega_1 \omega_2)
-    & \qquad d=3
-  \end{cases} \\
-  &=
-  \begin{cases}
-    2 \eta & \qquad d=2 \\
-    4 \eta & \qquad d=3
-  \end{cases}
-\end{align*}
-using \eqref{eq:flag-coefficients-symmetry} and \eqref{eq:intrinsic-volume-ball-flag}.
 \begin{equation*}
+  {n \choose k} {k \choose p}
+  =
+  \frac{n!}{k!(n-k)!}
+  \frac{k!}{p!(k-p)!}
+  =
+  \frac{n!}{p!(k-p)!(n-k)!}
+  =
+  {n \choose p, k-p, n-k}
 \end{equation*}
+I.e. this is a trinomial coefficient.
+So we have
+\begin{equation*}
+  {n \brack k} {k \brack p}
+  =
+  {n \choose k}
+  {k \choose p}
+  \frac{\omega_n}{\omega_k \omega_{n-k}}
+  \frac{\omega_k}{\omega_p \omega_{k-p}}
+  =
+  {n \choose p, k-p, n-k}
+  \frac{\omega_n}{\omega_p \omega_{k-p} \omega_{n-k}}
+\end{equation*}
+
+\section{Physical examples}
+
+\subsection{Additivity and extensivity}
+
+\subsection{Free volume calculations}
+
+The free volume from Steiner's theorem.
+
+Free volume theories: (free) energy based on size of an object.
+\todo{Can I find a coherent definition of free volume theories?
+Can I cook one up?
+Need at least two examples to draw a trend.
+Free volume theories in polymers are probably the best well known.
+Free volume theory in glasses?}
+We could argue that fundamentally these theories are based on measuring physical sizes.
+Integral geometry offers a mathematically rigorous formalism for describing sizes, so presents a possible starting point for free volume theories.
+
+\end{document}

@@ -9,7 +9,6 @@
 \usepackage{graphicx}
 \usepackage{epstopdf}
 \usepackage{todonotes}
-\usepackage{tcolorbox}
 
 \usepackage[toc,page]{appendix}
 
@@ -18,6 +17,12 @@
 \sidecaptionvpos{figure}{c}
 \sidecaptionvpos{table}{c}
 \renewcommand\sidecaptionsep{1cm}
+
+\usepackage{tcolorbox}
+\tcbset{fonttitle=\bfseries}
+\newtcolorbox[auto counter]{theorem}[2][]{%
+  colback=green!10,colframe=green!65!black,fonttitle=\bfseries,%
+  title=Theorem~\thetcbcounter: #2,#1}
 
 \usepackage{caption}
 \captionsetup[SCfigure]{width=5cm,font=footnotesize,labelfont=bf,justification=centerlast}
@@ -40,53 +45,9 @@
 \setcounter{secnumdepth}{2}
 \setcounter{tocdepth}{4}
 
-
 \renewcommand{\vec}[1]{\boldsymbol{\mathbf{#1}}}
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
-
-\usepackage[framemethod=TikZ]{mdframed}
-\usepackage{amsthm}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newenvironment{framedbox}[3][]
-{%
-%\refstepcounter{technique}%
-\ifstrempty{#1}%
-{\mdfsetup{%
-frametitle={%
-\tikz[baseline=(current bounding box.east),outer sep=0pt]%
-\node[anchor=east,rectangle]%
-{\strut};}}%
-}%
-{\mdfsetup{%
-frametitle={%
-\tikz[baseline=(current bounding box.east),outer sep=0pt]%
-\node[anchor=east,rectangle,fill=#3]%
-{\strut {\normalsize\sffamily\color{#2}#1}};}}%
-}%
-\mdfsetup{innertopmargin=5pt,innerbottommargin=10pt,linecolor=#3,%
-linewidth=2pt,topline=true,%
-frametitleaboveskip=\dimexpr-\ht\strutbox\relax}
-\begin{mdframed}[]\relax%
-%\label{#2}
-}{\end{mdframed}}
-
-% Technique
-
-\definecolor{color1}{RGB}{40,80,100} % Color of the article title and sections
-%\definecolor{color2}{RGB}{10,100,100} % Color of the boxes behind the abstract and headings
-\colorlet{color2}{blue!10}
-
-\newcounter{theorem} \setcounter{theorem}{0}
-\renewcommand{\thetheorem}{\arabic{theorem}}
-\newenvironment{theorem}[1][]
-{%
-\refstepcounter{theorem}%
-\ifstrempty{#1}
-{\begin{framedbox}[Theorem~\thetheorem]{color1}{color2}}%
-{\begin{framedbox}[Theorem~\thetheorem: #1]{color1}{color2}}%
-}%
-{\end{framedbox}}
 
 \usepackage{verbatim}
 \newcommand\wordcount{\verbatiminput{\jobname.wordcount}}
