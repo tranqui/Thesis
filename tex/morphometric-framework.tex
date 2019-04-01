@@ -3,7 +3,7 @@
 %TC: macrocount beginSCfigure [figure]
 \documentclass[12pt]{report}
 \usepackage{preamble}
-\setcounter{chapter}{2}
+\setcounter{chapter}{3}
 \graphicspath{{../img/}}
 
 \begin{document}
@@ -11,7 +11,327 @@
 Mostly theoretical but with some numerical experiments which motivate/justify developments to the theory.
 The main body of numerical work is left to the following chapter.
 
-\section{Formalism for many-body correlations}
+\section{Generalised Ornstein-Zernike relations}
+
+Density-density correlation functions
+\begin{equation}
+  H^{(n)}(\vec{r}^n) =
+  \left\langle
+  \prod_{i=1}^n
+  \Big[ \rho(\vec{r}_i) - \big\langle\rho(\vec{r}_i)\big\rangle \Big]
+  \right\rangle
+\end{equation}
+They are obtained from the total grand potential by repeat functional differentiation, as in
+\begin{equation}
+  H^{(n)}(\vec{r}^n) =
+  - \frac{\delta^n \beta \Omega}{\delta \beta\psi(\vec{r}_1) \delta \beta\psi(\vec{r}_2) \cdots \delta \beta\psi(\vec{r}_n)}.
+\end{equation}
+I.e.\ the grand potential is the generating functional for the density-density correlation functions.
+
+Derivatives of the ideal gas free energy.
+The ideal gas free energy is given as
+\begin{equation*}
+  \beta F_{id}[\rho(\vec{r})] =
+  \int \rho(\vec{r}) (\ln{\Lambda^d \rho(\vec{r})} - 1) \, d\vec{r},
+\end{equation*}
+so the first functional derivative is
+\begin{equation*}
+  \frac{\delta \beta F_{id}}{\delta \rho(\vec{r})} =
+  \ln{\Lambda^d \rho(\vec{r})}.
+\end{equation*}
+To obtain the higher order functional derivatives it is helpful to write this as an integral with a delta function
+\begin{equation*}
+  \frac{\delta \beta F_{id}}{\delta \rho(\vec{r})} =
+  \int \delta{(\vec{r}' - \vec{r})}
+  \ln{\Lambda^d \rho(\vec{r}')} \, d\vec{r}',
+\end{equation*}
+so we obtain the second derivative as
+\begin{equation*}
+  \frac{\delta^2 \beta F_{id}}{\delta \rho(\vec{r}) \delta \rho(\vec{r}')} =
+  \frac{\delta(\vec{r}'-\vec{r})}{\rho(\vec{r})}.
+\end{equation*}
+Iterating this procedure gives us the $n$th functional derivative as
+\begin{equation}
+  \begin{aligned}
+    \frac{\delta^n \beta F_{id}}{\delta \rho(\vec{r}_1) \delta \rho(\vec{r}_2) \cdots \delta \rho(\vec{r}_n)} &=
+    \frac{\partial^n (\ln{\Lambda^d \rho(\vec{r})})}{\partial \rho(\vec{r})^n}
+    \prod_{i=2}^n \delta(\vec{r}_i - \vec{r}_1) \\
+    &=
+    (-1)^n
+    \frac{(n-2)!}{\rho(\vec{r})^n}
+    \prod_{i=2}^n \delta(\vec{r}_i - \vec{r}_1),
+  \end{aligned}
+\end{equation}
+where the last line is valid for all $n \ge 2$.
+
+Summarise all 3 functional derivatives:
+\begin{align*}
+  H^{(n)}(\vec{r}^n) &=
+  - \frac{\delta^n \beta \Omega}{\delta \beta\psi(\vec{r}_1) \delta \beta\psi(\vec{r}_2) \cdots \delta \beta\psi(\vec{r}_n)} \\
+  c^{(n)}(\vec{r}^n) &=
+  - \frac{\delta^n \beta F_{ex}}{\delta \rho(\vec{r}_1)\delta \rho(\vec{r}_2) \cdots \delta \rho(\vec{r}_n)} \\
+  \frac{\delta^n \beta F_{id}}{\delta \rho(\vec{r}_1) \delta \rho(\vec{r}_2) \cdots \delta \rho(\vec{r}_n)} &=
+    \frac{\partial^n (\ln{\Lambda^d \rho(\vec{r})})}{\partial \rho(\vec{r})^n}
+    \prod_{i=2}^n \delta(\vec{r}_i - \vec{r}_1)
+\end{align*}
+From the Legendre transform of $\beta \Omega$
+\begin{equation}
+  \begin{aligned}
+    \Omega[\rho(\vec{r})] &=
+    F[\rho(\vec{r})] +
+    \int \rho(\vec{r}) \psi(\vec{r}) \, d\vec{r} \\
+    &=
+    F_{id}[\rho(\vec{r})] +
+    F_{ex}[\rho(\vec{r})] +
+    \int \rho(\vec{r}) \psi(\vec{r}) \, d\vec{r}
+  \end{aligned}
+\end{equation}
+therefore we have
+\begin{equation}
+  \frac{\delta^n \beta \Omega}{\delta\rho(\vec{r}_1) \delta\rho(\vec{r}_2) \cdots \delta\rho(\vec{r}_n)} =
+  \frac{\delta^n \beta F_{id}}{\delta \rho(\vec{r}_1) \delta \rho(\vec{r}_2) \cdots \delta \rho(\vec{r}_n)} +
+  \frac{\delta^n \beta F_{ex}}{\delta \rho(\vec{r}_1)\delta \rho(\vec{r}_2) \cdots \delta \rho(\vec{r}_n)} +
+  \beta \psi(\vec{r})
+\end{equation}
+\begin{equation}
+  \frac{\delta^n \beta \Omega}{\delta\rho(\vec{r}_1) \delta\rho(\vec{r}_2) \cdots \delta\rho(\vec{r}_n)} =
+  \frac{\delta^n \beta F_{id}}{\delta \rho(\vec{r}_1) \delta \rho(\vec{r}_2) \cdots \delta \rho(\vec{r}_n)} -
+  c^{(n)}(\vec{r}^n) +
+  \beta \psi(\vec{r})
+\end{equation}
+\begin{equation}
+  \frac{\delta^n \beta \Omega}{\delta\rho(\vec{r}_1) \delta\rho(\vec{r}_2) \cdots \delta\rho(\vec{r}_n)} =
+  (-1)^n
+  \frac{(n-2)!}{\rho(\vec{r})^n}
+  \prod_{i=2}^n \delta(\vec{r}_i - \vec{r}_1) -
+  c^{(n)}(\vec{r}^n) +
+  \beta \psi(\vec{r})
+\end{equation}
+No, not working. Try:
+\begin{equation}
+  \frac{\delta\beta \Omega}{\delta\beta\psi(\vec{r})} =
+  \frac{\delta\beta F_{id}}{\delta\beta\psi(\vec{r})} +
+  \frac{\delta\beta F_{ex}}{\delta\beta\psi(\vec{r})} +
+  \frac{\delta}{\delta\beta\psi(\vec{r})}
+  \left(
+  \int \beta\psi(\vec{r}') \rho(\vec{r}') \, d\vec{r}'
+  \right)
+\end{equation}
+Note that
+\begin{equation*}
+  \frac{\delta\beta\Omega}{\delta\beta\psi(\vec{r})} =
+  - \rho(\vec{r})
+\end{equation*}
+so
+\begin{equation*}
+  \begin{aligned}
+    \frac{\delta}{\delta\beta\psi(\vec{r})}
+    \left(
+    \int \beta\psi(\vec{r}') \rho(\vec{r}') \, d\vec{r}'
+    \right)
+    &=
+    \rho(\vec{r}) +
+    \beta\psi(\vec{r}') \frac{\delta \rho(\vec{r}')}{\delta\beta\psi(\vec{r})} \\
+    &=
+    \rho(\vec{r}) -
+    \beta\psi(\vec{r}')
+    \frac{\delta^2 \beta\Omega}{\delta\beta\psi(\vec{r})\delta\beta\psi(\vec{r}')} \\
+    &=
+    \rho(\vec{r}) +
+    \beta\psi(\vec{r}') H^{(2)}(\vec{r}, \vec{r}')
+  \end{aligned}
+\end{equation*}
+leading to
+\begin{equation}
+  \frac{\delta\beta \Omega}{\delta\beta\psi(\vec{r})} =
+  \frac{\delta\beta F_{id}}{\delta\beta\psi(\vec{r})} +
+  \frac{\delta\beta F_{ex}}{\delta\beta\psi(\vec{r})} +
+  \rho(\vec{r}) +
+  \beta\psi(\vec{r}') H^{(2)}(\vec{r}, \vec{r}')
+\end{equation}
+or
+\begin{equation}
+  \frac{\delta\beta \Omega}{\delta\beta\psi(\vec{r})} =
+  \frac{\delta\beta F_{id}}{\delta\beta\psi(\vec{r})} +
+  \frac{\delta\beta F_{ex}}{\delta\beta\psi(\vec{r})} +
+  \rho(\vec{r}) +
+  \beta\psi(\vec{r}') H^{(2)}(\vec{r}, \vec{r}')
+\end{equation}
+
+The chain rule of functional calculus is
+\todo{Insert citation to some calculus of variations reference, and Hansen2013/Bob's reviews for application to liquids.}
+\begin{equation*}
+  \frac{\delta f}{\delta u(\vec{r})} =
+  \int
+  \frac{\delta f}{\delta v(\vec{r}')}
+  \frac{\delta v(\vec{r}')}{\delta u(\vec{r})}
+  \, d\vec{r}'
+\end{equation*}
+and inverse derivatives are found via
+\begin{equation*}
+  \int
+  \frac{\delta u(\vec{r})}{\delta v(\vec{r}')}
+  \frac{\delta v(\vec{r}')}{\delta u(\vec{r})}
+  \, d\vec{r} =
+  \delta(\vec{r} - \vec{r}')
+\end{equation*}
+So
+\begin{equation*}
+  \frac{\delta\beta\Omega}{\delta\rho(\vec{r})} =
+  \int
+  \frac{\delta\beta\Omega}{\delta\beta\psi(\vec{r}')}
+  \frac{\delta\beta\psi(\vec{r}')}{\delta\rho(\vec{r})}
+  \, d\vec{r}'
+\end{equation*}
+
+Obtain OZ equations by inverse of $H$.
+Consider a function $Q^{(n)}$ such that
+\begin{equation}
+  \int H^{(n)}(\vec{r}^n) Q^{(n)} \, d\vec{r}^n =
+  \delta(\vec{r})
+\end{equation}
+
+\section{Many-body correlations from fundamental measure theory}
+
+Following \cite{Rosenfeld1990} we have
+\begin{equation}\label{eq:fmt-direct-correlations}
+  \begin{aligned}
+    c^{(n)}(\vec{r}^n) &=
+    - \frac{\delta^n \beta F_{ex}}{\delta \rho(\vec{r}_1)\delta \rho(\vec{r}_2) \cdots \delta \rho(\vec{r}_n)} \\
+    &=
+    - \sum_{\alpha_1, \alpha_2, \cdots, \alpha_n}
+    \int d\vec{r}'
+    \prod_{i=1}^n \Big( \omega_{\alpha_i}(\vec{r}' - \vec{r}_i) \Big)
+    \partial^n_{\alpha_1, \alpha_2, \cdots, \alpha_n} \beta\Phi_{ex}(\vec{r}')
+  \end{aligned}
+\end{equation}
+where
+\begin{equation*}
+  \partial^n_{\alpha_1, \alpha_2, \cdots, \alpha_n} \beta\Phi_{ex}(\vec{r}') =
+  \left.
+  \frac{\partial^n \beta\Phi_{ex}}{\partial n_{\alpha_1} \partial n_{\alpha_2} \cdots \partial n_{\alpha_n}}
+  \right|_{\{n_\alpha\} = \{n_\alpha(\vec{r}')\}}.
+\end{equation*}
+At uniform density $\partial^n_{\alpha_1, \alpha_2, \cdots, \alpha_n} \beta\Phi_{ex}$ is position independent, so \eqref{eq:fmt-direct-correlations} becomes
+\begin{equation}\label{eq:fmt-direct-correlations-uniform-density}
+  \begin{aligned}
+    c^{(n)}(\vec{r}^n) &=
+    - \sum_{\alpha_1, \alpha_2, \cdots, \alpha_n}
+    \partial^n_{\alpha_1, \alpha_2, \cdots, \alpha_n} \beta\Phi_{ex}
+    \int d\vec{r}'
+    \prod_{i=1}^n \Big( \omega_{\alpha_i}(\vec{r}' - \vec{r}_i) \Big) \\
+    &=
+    - \sum_{\alpha_1, \alpha_2, \cdots, \alpha_n}
+    \partial^n_{\alpha_1, \alpha_2, \cdots, \alpha_n} \beta\Phi_{ex} \;
+    \Big(
+    \omega_{\alpha_1} \otimes \omega_{\alpha_2} \otimes \cdots \otimes \omega_{\alpha_n}
+    (\vec{r}^n)
+    \Big)
+  \end{aligned}
+\end{equation}
+where the $\otimes$-notation in the latter step denotes the $n$-body convolution.
+For example, the two body convolution would be written%
+\marginfootnote{The `standard' convolution, i.e.\ $f \otimes g(\vec{r} \equiv \vec{r}_1 - \vec{r}_2)$, is recovered after transforming to the new integration variable $\vec{r}'' = \vec{r}' - \vec{r}_1$.}
+\begin{equation*}
+  f \otimes g(\vec{r}_1, \vec{r}_2) =
+  \int d\vec{r}' f(\vec{r}' - \vec{r}_1) g(\vec{r}' - \vec{r}_2).
+\end{equation*}
+Applying the convolution theorem allows the Fourier transform of \eqref{eq:fmt-direct-correlations-uniform-density} to be written rather succinctly as
+\begin{equation}
+  \tilde{c}^{(n)}(\vec{k}^n) =
+  - \sum_{\alpha_1, \alpha_2, \cdots, \alpha_n}
+  \partial^n_{\alpha_1, \alpha_2, \cdots, \alpha_n} \beta\Phi_{ex} \;
+  \left( \prod_{i=1}^n \widetilde{\omega}_{\alpha_i}(\vec{k}_i) \right)
+  \delta(\vec{k}_1 + \vec{k}_2 + \cdots + \vec{k}_n).
+\end{equation}
+The delta function enforces the `ring' condition $\sum_{i=1}^n \vec{k}_i = 0$ which emerges from translational symmetry of the weight functions%
+\marginfootnote{In the previous note this occurred by change of integration variables to a relative displacement, which was only possible because of this translational symmetry.}[-3cm],
+reducing the dimensionality of the domain by $d$.
+A further $d(d-1)/2$ degrees of freedom%
+\marginfootnote{This many degrees of freedom can be removed for general $n \ge d$, but there are fewer for $n < d$.
+  For example, $n=2$ arrangements (a dimer) are isomorphic to a line so they possess $d-1$ rotational degrees of freedom.}
+can be removed by exploiting rotational symmetry.
+
+From \cite{Rosenfeld1990}:
+\begin{align}
+  \widetilde{\omega}_0 &= \cos{(kR)} \\
+  \widetilde{\omega}_1 &= 2\frac{\sin{(kR)}}{k} \\
+  \widetilde{\omega}_0 &= \cos{(kR)}
+\end{align}
+
+White bear I:
+\begin{equation}
+  c^{(2)}(r)
+\end{equation}
+
+The Ornstein-Zernike equation
+\begin{equation}
+  h^{(2)}(\vec{r}) =
+  c^{(2)}(\vec{r}) +
+  \rho \int d\vec{r}' h^{(2)}(\vec{r}') c^{(2)}(\vec{r} - \vec{r}')
+\end{equation}
+in Fourier space
+\begin{equation*}
+  \tilde{h}^{(2)}(\vec{k}) =
+  \tilde{c}^{(2)}(\vec{k}) +
+  \rho \tilde{h}^{(2)}(\vec{k}) \tilde{c}^{(2)}(\vec{k})
+\end{equation*}
+after rearranging
+\begin{equation}
+  \tilde{h}^{(2)}(\vec{k}) =
+  \frac{\tilde{c}^{(2)}(\vec{k})}{1 - \rho \tilde{c}^{(2)}(\vec{k})}
+\end{equation}
+
+The two-point static structure factor
+\begin{equation}
+  \begin{aligned}
+    S^{(2)}(\vec{k}) &\equiv 1 + \rho \tilde{g}^{(2)}(\vec{k}) \\
+    &= 1 + \rho \delta(\vec{k}) + \rho \tilde{h}^{(2)}(\vec{k})
+  \end{aligned}
+\end{equation}
+
+\section{Some notes on things to add}
+
+In the Kirkwood superposition approximation \cite{Kirkwood1935} many-body correlations are expressed as pairwise products of the two-body correlation function, i.e.
+\begin{equation}
+  g^{(n)}(\vec{r}^n) =
+  \prod_{i < j} g^{(2)}(\vec{r}_i, \vec{r}_j),
+\end{equation}
+which correctly satisfies the hard-core condition, but violates the sum rule
+\begin{equation}
+  \begin{aligned}
+    \rho^{(n)}(\vec{r}^n) &=
+    \frac{1}{\Xi} \sum_{N=n}^\infty \frac{z^N}{(N-n)!} \int e^{-\beta U_N} \, d\vec{r}^{(N-n)} \\
+    &=
+    \frac{1}{N-n}
+    \int d\vec{r}_n \left(
+    \frac{1}{\Xi} \sum_{N=n}^\infty \frac{z^N}{(N-(n+1))!} \int e^{-\beta U_N} \, d\vec{r}^{(N-(n+1))}
+    \right) \\
+    &=
+    \frac{1}{N-n}
+    \int \rho^{(n+1)}(\{\vec{r}^n, \vec{r}_{n+1}\}) d\vec{r}_{n+1},
+  \end{aligned}
+\end{equation}
+and the related convolution approximation \cite{Barrat1988}%
+\todo{Check this expression is correct - it almost certainly is not.}
+\begin{equation}
+  S^{(n)}(\vec{k}^n) =
+  \prod_{i < j} S^{(2)}(\vec{k}_i, \vec{k}_j)
+\end{equation}
+satisfies the sum rule but fails to satisfy the hard-core condition.
+
+%% In equilibrium
+%% \begin{equation}
+%%   c^{(n)}(\vec{r}^n) =
+%%   \left.
+%%   \frac{\delta^n \beta F_{ex}}{\delta \rho(\vec{r}_1)\delta \rho(\vec{r}_2) \cdots \delta \rho(\vec{r}_n)}
+%%   \right|_{\rho(\vec{r})=\rho}
+%% \end{equation}
+
+\section{Solvation expression for many-body correlations}
+
+Here we derive an expression for the distribution functions in terms of the potential of mean force.
+This provides a form suitable for approximation/calculation.
 
 We write the $n$-particle distribution function $g^{(n)}$ as
 \begin{equation}\label{eq:n-density-pdf}
@@ -227,11 +547,23 @@ Finally, note that (as described in the main text) the resulting $g^{(2)}$ perfo
 In Fig.\ \ref{fig:contact-g} we plot the contact value with this set of coefficients, finding that it is reasonably accurate until around the freezing density where contact correlations spuriously decay.
 The next section will detail how to modify the derivation to produce coefficients which describe more accurate correlation functions at high densities.
 
+\begin{SCfigure}[h]
+ \includegraphics[width=\linewidth]{g2_contact}
+ \caption{
+   Contact values of the radial distribution function against volume fraction $\eta$ and reduced pressure $Z = \beta p / \rho$ for the hard sphere liquid using Eq.\ \eqref{eq:contact-g} from the main text with Eq. \eqref{eq:g2-explicit} for the explicit form of $g^{(2)}$, assuming the Carnahan-Starling equation of state.
+   Contact values are determined with two sets of morphometric coefficients: WBII (section \ref{sec:spt-route} and Ref.\ \cite{Hansen-Goos2006}) which performs poorly in the supercooled regime, and coefficients derived in this work (section \ref{sec:virial-route}) using the virial theorem which is exact by construction.
+   The hard sphere freezing and melting volume fractions are indicated by vertical dashed lines.
+   Inset: the errors $\Delta g = g^{(2)} - g^{(2)}_{MD}$ where $g^{(2)}_{MD}$ is determined from molecular dynamics simulations (c.f.\ section \ref{SI:molecular-dynamics}), showing the new theory also improves the accuracy away from contact.
+   %\todo{Remove the inset and make that its own figure.}
+ }
+\label{fig:contact-g}
+\end{SCfigure}
+
 \subsection{Aside: scaled particle theory extension for dimers}
 
 I was unaware of work by Stillinger et al \cite{Stillinger2006} before publishing on the morphometric approach, but upon discovering this work I realised their ideas are very similar in nature.
 Here I present similar results but using the morphometric notation.%
-\marginfootnote{The purpose of this section needs to be fleshed out and made \emph{very} clear, otherwise the reader will get lost quickly.
+\todo{The purpose of this section needs to be fleshed out and made \emph{very} clear, otherwise the reader will get lost quickly.
   This section \emph{is} important as we explore the boundaries of where the morphometric approach can fail: this is a great testbed for continuity, and allows us to argue the accuracy of the approach applied to local structures.}
 
 We have the probability of any number of particles existing inside the cavity
@@ -262,8 +594,7 @@ We then have the generalisaton
   = 1 - \sum_{n=1}^{\max{n^{(2)}(\lambda)}} p_n^{(2)} (\lambda).
 \end{equation}
 We have the conditions:%
-\marginfootnote{To do: Make this notation more consistent and able to handle different numbers of cavities. We don't want to just recycle Stillinger's notation: we want to be consistent with the rest of the thesis.}
-\marginfootnote{Also, need to define $\lambda$ as the cavity diameter}[4cm]
+\todo{Make this notation more consistent and able to handle different numbers of cavities. We don't want to just recycle Stillinger's notation: we want to be consistent with the rest of the thesis.}
 \begin{align}
   \lim_{r \to 0} W^{(2)}(r; \lambda) &= W^{(1)}(\lambda) \\
   \max{n^{(2)}(r; \lambda)} &= 1
@@ -272,6 +603,7 @@ We have the conditions:%
   \max{n^{(2)}(r; \lambda)} &\le 2 \max{n^{(1)}(\lambda)}
   \quad \forall \; r > 2\lambda
 \end{align}
+\todo{Need to define $\lambda$ as the cavity diameter}[4cm]
 Which gives us the `point' insertion condition (where $\max{n^{(2)}(r; \lambda)} = 1$)
 \begin{equation}
   \beta W^{(2)}(r; \lambda) = -\ln (1 - \rho V(r; \lambda))
@@ -306,7 +638,7 @@ Equating this with $-k_B T \ln g^{(2)}(\sigma)$ and using the virial theorem (Eq
   \frac{9\pi \sigma^3}{4} p +
   6\pi\sigma^2 \, \gamma_\infty +
   \left( 6\pi\sigma - \frac{\pi^2\sigma}{2\sqrt{3}} \right) \, \kappa +
-  4\pi \, \overline{\kappa} = 
+  4\pi \, \overline{\kappa} =
   2\mu^{ex}[p] - \beta^{-1} \ln{\frac{3}{2\pi \rho \sigma^3} \left( \frac{\beta p}{\rho} - 1 \right)}.
 \end{equation}
 We will use this last expression instead of the contact theorem \eqref{eq:spt-virial} in order to obtain new coefficients.
@@ -364,6 +696,12 @@ However, it should be noted that the planar surface tension $\gamma_\infty^{V}$ 
 For this reason, WBII coefficients may give more accurate grand potentials (and thus correlations) for large solutes where the surface becomes approximately planar.
 
 \section{Accuracy of predicted distribution functions in $d = 3$}
+
+\begin{SCfigure}[h]
+ \includegraphics[width=\linewidth]{g2_phi045}
+ \caption{$g^{(2)}(r)$ for $\eta = 0.45$.}
+\end{SCfigure}
+
 \subsection{Comparison with molecular dynamics simulations}
 \subsection{Comparison with Kirkwood superposition approximation}
 
