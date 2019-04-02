@@ -11,152 +11,7 @@
 Mostly theoretical but with some numerical experiments which motivate/justify developments to the theory.
 The main body of numerical work is left to the following chapter.
 
-\section{Generalised Ornstein-Zernike relations}
-
-Density-density correlation functions
-\begin{equation}
-  H^{(n)}(\vec{r}^n) =
-  \left\langle
-  \prod_{i=1}^n
-  \Big[ \rho(\vec{r}_i) - \big\langle\rho(\vec{r}_i)\big\rangle \Big]
-  \right\rangle
-\end{equation}
-They are obtained from the total grand potential by repeat functional differentiation, as in
-\begin{equation}
-  H^{(n)}(\vec{r}^n) =
-  - \frac{\delta^n \beta \Omega}{\delta \beta\psi(\vec{r}_1) \delta \beta\psi(\vec{r}_2) \cdots \delta \beta\psi(\vec{r}_n)}.
-\end{equation}
-I.e.\ the grand potential is the generating functional for the density-density correlation functions.
-
-Derivatives of the ideal gas free energy.
-The ideal gas free energy is given as
-\begin{equation*}
-  \beta F_{id}[\rho(\vec{r})] =
-  \int \rho(\vec{r}) (\ln{\Lambda^d \rho(\vec{r})} - 1) \, d\vec{r},
-\end{equation*}
-so the first functional derivative is
-\begin{equation*}
-  \frac{\delta \beta F_{id}}{\delta \rho(\vec{r})} =
-  \ln{\Lambda^d \rho(\vec{r})}.
-\end{equation*}
-To obtain the higher order functional derivatives it is helpful to write this as an integral with a delta function
-\begin{equation*}
-  \frac{\delta \beta F_{id}}{\delta \rho(\vec{r})} =
-  \int \delta{(\vec{r}' - \vec{r})}
-  \ln{\Lambda^d \rho(\vec{r}')} \, d\vec{r}',
-\end{equation*}
-so we obtain the second derivative as
-\begin{equation*}
-  \frac{\delta^2 \beta F_{id}}{\delta \rho(\vec{r}) \delta \rho(\vec{r}')} =
-  \frac{\delta(\vec{r}'-\vec{r})}{\rho(\vec{r})}.
-\end{equation*}
-Iterating this procedure gives us the $n$th functional derivative as
-\begin{equation}
-  \begin{aligned}
-    \frac{\delta^n \beta F_{id}}{\delta \rho(\vec{r}_1) \delta \rho(\vec{r}_2) \cdots \delta \rho(\vec{r}_n)} &=
-    \frac{\partial^n (\ln{\Lambda^d \rho(\vec{r})})}{\partial \rho(\vec{r})^n}
-    \prod_{i=2}^n \delta(\vec{r}_i - \vec{r}_1) \\
-    &=
-    (-1)^n
-    \frac{(n-2)!}{\rho(\vec{r})^n}
-    \prod_{i=2}^n \delta(\vec{r}_i - \vec{r}_1),
-  \end{aligned}
-\end{equation}
-where the last line is valid for all $n \ge 2$.
-
-Summarise all 3 functional derivatives:
-\begin{align*}
-  H^{(n)}(\vec{r}^n) &=
-  - \frac{\delta^n \beta \Omega}{\delta \beta\psi(\vec{r}_1) \delta \beta\psi(\vec{r}_2) \cdots \delta \beta\psi(\vec{r}_n)} \\
-  c^{(n)}(\vec{r}^n) &=
-  - \frac{\delta^n \beta F_{ex}}{\delta \rho(\vec{r}_1)\delta \rho(\vec{r}_2) \cdots \delta \rho(\vec{r}_n)} \\
-  \frac{\delta^n \beta F_{id}}{\delta \rho(\vec{r}_1) \delta \rho(\vec{r}_2) \cdots \delta \rho(\vec{r}_n)} &=
-    \frac{\partial^n (\ln{\Lambda^d \rho(\vec{r})})}{\partial \rho(\vec{r})^n}
-    \prod_{i=2}^n \delta(\vec{r}_i - \vec{r}_1)
-\end{align*}
-From the Legendre transform of $\beta \Omega$
-\begin{equation}
-  \begin{aligned}
-    \Omega[\rho(\vec{r})] &=
-    F[\rho(\vec{r})] +
-    \int \rho(\vec{r}) \psi(\vec{r}) \, d\vec{r} \\
-    &=
-    F_{id}[\rho(\vec{r})] +
-    F_{ex}[\rho(\vec{r})] +
-    \int \rho(\vec{r}) \psi(\vec{r}) \, d\vec{r}
-  \end{aligned}
-\end{equation}
-therefore we have
-\begin{equation}
-  \frac{\delta^n \beta \Omega}{\delta\rho(\vec{r}_1) \delta\rho(\vec{r}_2) \cdots \delta\rho(\vec{r}_n)} =
-  \frac{\delta^n \beta F_{id}}{\delta \rho(\vec{r}_1) \delta \rho(\vec{r}_2) \cdots \delta \rho(\vec{r}_n)} +
-  \frac{\delta^n \beta F_{ex}}{\delta \rho(\vec{r}_1)\delta \rho(\vec{r}_2) \cdots \delta \rho(\vec{r}_n)} +
-  \beta \psi(\vec{r})
-\end{equation}
-\begin{equation}
-  \frac{\delta^n \beta \Omega}{\delta\rho(\vec{r}_1) \delta\rho(\vec{r}_2) \cdots \delta\rho(\vec{r}_n)} =
-  \frac{\delta^n \beta F_{id}}{\delta \rho(\vec{r}_1) \delta \rho(\vec{r}_2) \cdots \delta \rho(\vec{r}_n)} -
-  c^{(n)}(\vec{r}^n) +
-  \beta \psi(\vec{r})
-\end{equation}
-\begin{equation}
-  \frac{\delta^n \beta \Omega}{\delta\rho(\vec{r}_1) \delta\rho(\vec{r}_2) \cdots \delta\rho(\vec{r}_n)} =
-  (-1)^n
-  \frac{(n-2)!}{\rho(\vec{r})^n}
-  \prod_{i=2}^n \delta(\vec{r}_i - \vec{r}_1) -
-  c^{(n)}(\vec{r}^n) +
-  \beta \psi(\vec{r})
-\end{equation}
-No, not working. Try:
-\begin{equation}
-  \frac{\delta\beta \Omega}{\delta\beta\psi(\vec{r})} =
-  \frac{\delta\beta F_{id}}{\delta\beta\psi(\vec{r})} +
-  \frac{\delta\beta F_{ex}}{\delta\beta\psi(\vec{r})} +
-  \frac{\delta}{\delta\beta\psi(\vec{r})}
-  \left(
-  \int \beta\psi(\vec{r}') \rho(\vec{r}') \, d\vec{r}'
-  \right)
-\end{equation}
-Note that
-\begin{equation*}
-  \frac{\delta\beta\Omega}{\delta\beta\psi(\vec{r})} =
-  - \rho(\vec{r})
-\end{equation*}
-so
-\begin{equation*}
-  \begin{aligned}
-    \frac{\delta}{\delta\beta\psi(\vec{r})}
-    \left(
-    \int \beta\psi(\vec{r}') \rho(\vec{r}') \, d\vec{r}'
-    \right)
-    &=
-    \rho(\vec{r}) +
-    \beta\psi(\vec{r}') \frac{\delta \rho(\vec{r}')}{\delta\beta\psi(\vec{r})} \\
-    &=
-    \rho(\vec{r}) -
-    \beta\psi(\vec{r}')
-    \frac{\delta^2 \beta\Omega}{\delta\beta\psi(\vec{r})\delta\beta\psi(\vec{r}')} \\
-    &=
-    \rho(\vec{r}) +
-    \beta\psi(\vec{r}') H^{(2)}(\vec{r}, \vec{r}')
-  \end{aligned}
-\end{equation*}
-leading to
-\begin{equation}
-  \frac{\delta\beta \Omega}{\delta\beta\psi(\vec{r})} =
-  \frac{\delta\beta F_{id}}{\delta\beta\psi(\vec{r})} +
-  \frac{\delta\beta F_{ex}}{\delta\beta\psi(\vec{r})} +
-  \rho(\vec{r}) +
-  \beta\psi(\vec{r}') H^{(2)}(\vec{r}, \vec{r}')
-\end{equation}
-or
-\begin{equation}
-  \frac{\delta\beta \Omega}{\delta\beta\psi(\vec{r})} =
-  \frac{\delta\beta F_{id}}{\delta\beta\psi(\vec{r})} +
-  \frac{\delta\beta F_{ex}}{\delta\beta\psi(\vec{r})} +
-  \rho(\vec{r}) +
-  \beta\psi(\vec{r}') H^{(2)}(\vec{r}, \vec{r}')
-\end{equation}
+\section{Functional calculus}
 
 The chain rule of functional calculus is
 \todo{Insert citation to some calculus of variations reference, and Hansen2013/Bob's reviews for application to liquids.}
@@ -175,20 +30,303 @@ and inverse derivatives are found via
   \, d\vec{r} =
   \delta(\vec{r} - \vec{r}')
 \end{equation*}
-So
-\begin{equation*}
-  \frac{\delta\beta\Omega}{\delta\rho(\vec{r})} =
-  \int
-  \frac{\delta\beta\Omega}{\delta\beta\psi(\vec{r}')}
-  \frac{\delta\beta\psi(\vec{r}')}{\delta\rho(\vec{r})}
-  \, d\vec{r}'
-\end{equation*}
 
-Obtain OZ equations by inverse of $H$.
-Consider a function $Q^{(n)}$ such that
+\section{Fourier transforming weight functions}
+
 \begin{equation}
-  \int H^{(n)}(\vec{r}^n) Q^{(n)} \, d\vec{r}^n =
-  \delta(\vec{r})
+  \widetilde{\omega}_\alpha(\vec{k}) =
+  \int \omega_\alpha (\vec{r}) e^{-i \vec{k}\cdot\vec{r}} \, d\vec{r}
+\end{equation}
+
+\section{Generalised Ornstein-Zernike relations}
+
+\begin{equation}
+  \begin{split}
+    \tilde{c}^{(2)}_{RF}(k_1,k_2) =
+    \frac{1}{\pi (1-\eta)^4}
+    \Bigg(
+    &
+    \widetilde{\omega }_2 (k_1)
+    \widetilde{\omega }_2 (k_2)
+    \,
+    \frac{2 - 3\eta + \eta^3}{2}
+    \; + \\
+    &
+    \widetilde{\omega }_2 (k_1)
+    \widetilde{\omega}_3 (k_2)
+    \,
+    \big(2 + 6\eta -8 \eta ^3\big)
+    \; + \\
+    &
+    \widetilde{\omega }_3 (k_1)
+    \widetilde{\omega }_3 (k_2)
+    \,
+    \big(6 \eta  (1 + 2 \eta)^2\big)
+    \Bigg)
+  \end{split}
+\end{equation}
+
+Density-density correlation functions
+\begin{equation}
+  H^{(n)}(\vec{r}^n) =
+  \left\langle
+  \prod_{i=1}^n
+  \Big[ \rho(\vec{r}_i) - \big\langle\rho(\vec{r}_i)\big\rangle \Big]
+  \right\rangle
+  \qquad \forall \; n \ge 2
+\end{equation}
+They are obtained from the total grand potential by repeat functional differentiation, as in
+\begin{equation}
+  \begin{aligned}
+  H^{(n)}(\vec{r}^n) &=
+  - \frac{\delta^n \beta \Omega}{\delta \beta\psi(\vec{r}_1) \delta \beta\psi(\vec{r}_2) \cdots \delta \beta\psi(\vec{r}_n)} \\
+  &=
+  \frac{\delta^{n-1} \rho(\vec{r}_1)}{\delta \beta\psi(\vec{r}_2) \delta \beta\psi(\vec{r}_3) \cdots \delta \beta\psi(\vec{r}_n)}.
+  \end{aligned}
+\end{equation}
+I.e.\ the grand potential is the generating functional for the density-density correlation functions.
+
+Derivatives of the ideal gas free energy.
+The ideal gas free energy is given as
+\begin{equation*}
+  \beta F_{id}[\rho(\vec{r})] =
+  \int \rho(\vec{r}) (\ln{\lambda^d \rho(\vec{r})} - 1) \, d\vec{r},
+\end{equation*}
+so the first functional derivative is
+\begin{equation*}
+  \frac{\delta \beta F_{id}}{\delta \rho(\vec{r})} =
+  \ln{\lambda^d \rho(\vec{r})}.
+\end{equation*}
+To obtain the higher order functional derivatives it is helpful to write this as an integral with a delta function
+\begin{equation*}
+  \frac{\delta \beta F_{id}}{\delta \rho(\vec{r})} =
+  \int \delta{(\vec{r}' - \vec{r})}
+  \ln{\lambda^d \rho(\vec{r}')} \, d\vec{r}',
+\end{equation*}
+so we can obtain the second derivative as
+\begin{equation*}
+  \frac{\delta^2 \beta F_{id}}{\delta \rho(\vec{r}) \delta \rho(\vec{r}')} =
+  \frac{\delta(\vec{r}'-\vec{r})}{\rho(\vec{r})}.
+\end{equation*}
+Iterating this procedure gives us the $n$th functional derivative as
+\begin{equation}
+  \begin{aligned}
+    \frac{\delta^n \beta F_{id}}{\delta \rho(\vec{r}_1) \delta \rho(\vec{r}_2) \cdots \delta \rho(\vec{r}_n)} &=
+    \frac{\partial^{n-1} (\ln{\lambda^d \rho(\vec{r})})}{\partial \rho(\vec{r})^{n-1}}
+    \prod_{i=2}^n \delta(\vec{r}_i - \vec{r}_1) \\
+    &=
+    (-1)^{n-1}
+    \frac{(n-2)!}{\rho(\vec{r})^{n-1}}
+    \prod_{i=2}^n \delta(\vec{r}_i - \vec{r}_1),
+  \end{aligned}
+\end{equation}
+where the last line is valid for all $n \ge 2$.
+
+Excess free energy is the generating functional for direct correlations
+\begin{equation}\label{eq:direct-correlations}
+  c^{(n)}(\vec{r}^n) =
+  - \frac{\delta^n \beta F_{ex}}{\delta \rho(\vec{r}_1)\delta \rho(\vec{r}_2) \cdots \delta \rho(\vec{r}_n)}
+\end{equation}
+
+Defining intrinsic chemical potential
+\begin{equation}\label{eq:intrinsic-chemical-potential}
+  \psi(\vec{r}) = \mu - V_{ext}(\vec{r})
+\end{equation}
+From the Legendre transform of $\beta \Omega$
+\begin{equation}
+  \begin{aligned}
+    \Omega[\rho(\vec{r})] &=
+    F[\rho(\vec{r})] -
+    \int \rho(\vec{r}) \psi(\vec{r}) \, d\vec{r} \\
+    &=
+    F_{id}[\rho(\vec{r})] +
+    F_{ex}[\rho(\vec{r})] -
+    \int \rho(\vec{r}) \psi(\vec{r}) \, d\vec{r}
+  \end{aligned}
+\end{equation}
+
+We have to compute a derivative like
+\begin{equation}\label{eq:intrinsic-chemical-potential-derivative-1}
+  \frac{\delta}{\delta\rho(\vec{r})}
+  \left(
+  \int \psi(\vec{r}') \rho(\vec{r}') \, d\vec{r}'
+  \right)
+  =
+  \psi(\vec{r}) +
+  \int
+  \rho(\vec{r}') \frac{\delta\psi(\vec{r}')}{\delta\rho(\vec{r})}
+  \, d\vec{r}'.
+\end{equation}
+The functional derivative on the right-hand side of \eqref{eq:intrinsic-chemical-potential-derivative-1} is a little odd.
+In general the external potential $V_{ext}(\vec{r})$%
+\marginfootnote{And thus $\psi(\vec{r})$ through \eqref{eq:intrinsic-chemical-potential}}
+is fixed so we consider the density profile as relaxing in response to perturbations from the potential i.e.\ terms like \[ \frac{\delta \rho(\vec{r})}{\delta \psi(\vec{r}')}. \]
+However, here the \emph{inverse} derivative appears.
+This must satisfy the inversion formula
+\begin{equation}\label{eq:intrinsic-chemical-potential-inverse-derivative}
+  \int
+  \frac{\delta \rho(\vec{r}_1)}{\delta \psi(\vec{r}')}
+  \frac{\delta \psi(\vec{r}')}{\delta \rho(\vec{r}_2)}
+  \, d\vec{r}' =
+  \delta(\vec{r}_1 - \vec{r}_2),
+\end{equation}
+which will be very important for obtaining Ornstein-Zernike relations later.
+Considering the external field as the control parameter, and noting the definition of $\psi(\vec{r})$ in \eqref{eq:intrinsic-chemical-potential} we take
+\begin{equation*}
+  \frac{\delta\psi(\vec{r}')}{\delta\rho(\vec{r})} = 0
+\end{equation*}
+so \eqref{eq:intrinsic-chemical-potential-derivative-2} becomes
+\begin{equation}\label{eq:intrinsic-chemical-potential-derivative-2}
+  \frac{\delta}{\delta\rho(\vec{r})}
+  \left(
+  \int \psi(\vec{r}') \rho(\vec{r}') \, d\vec{r}'
+  \right)
+  =
+  \psi(\vec{r}).
+\end{equation}
+
+In equilibrium
+\begin{equation}
+  \frac{\delta \Omega[\rho]}{\delta\rho(\vec{r})} = 0
+\end{equation}
+and consequently all higher-order derivatives must be zero, i.e.\
+\begin{equation}
+  \frac{\delta^n \Omega[\rho]}{\delta\rho(\vec{r}_1) \delta\rho(\vec{r}_2) \cdots \delta\rho(\vec{r}_n)} = 0 \qquad \forall \; n \ge 1
+\end{equation}
+therefore we have
+\begin{equation}
+  \frac{\delta^n F[\rho]}{\delta \rho(\vec{r}_1) \delta \rho(\vec{r}_2) \cdots \delta \rho(\vec{r}_n)} -
+  \frac{\delta}{\delta\rho(\vec{r})}
+  \left(
+  \int \psi(\vec{r}') \rho(\vec{r}') \, d\vec{r}'
+  \right)
+  = 0
+\end{equation}
+or using \eqref{eq:direct-correlations} this becomes
+\begin{equation}
+  c^{(n)}(\vec{r}^n) =
+  \frac{\delta^n \beta F_{id}[\rho]}{\delta \rho(\vec{r}_1) \delta \rho(\vec{r}_2) \cdots \delta \rho(\vec{r}_n)} -
+  \frac{\delta^n}{\delta \rho(\vec{r}_1) \delta \rho(\vec{r}_2) \cdots \delta \rho(\vec{r}_n)}
+  \left(
+  \int \beta\psi(\vec{r}') \rho(\vec{r}') \, d\vec{r}'
+  \right)
+\end{equation}
+For $n=1$ we have:
+\begin{equation}
+  \begin{aligned}
+    c^{(1)}(\vec{r}) &=
+    \frac{\delta \beta F_{id}}{\delta \rho(\vec{r})} -
+    \frac{\delta}{\delta \rho(\vec{r})}
+    \left(
+    \int \beta\psi(\vec{r}') \rho(\vec{r}') \, d\vec{r}'
+    \right) \\
+    &=
+    \ln{\lambda^d \rho(\vec{r})} -
+    \beta\psi(\vec{r})
+  \end{aligned}
+\end{equation}
+Which gives the equilibrium density as
+\begin{equation}
+  \rho(\vec{r}) = \lambda^{-d} \exp{\left(\beta\psi(\vec{r}) + c^{(1)}(\vec{r})\right)}
+\end{equation}
+Thus for $n > 1$ we have
+\begin{equation}
+  \begin{aligned}
+    c^{(n)}(\vec{r}^n) &=
+    \frac{\delta^{n-1} c^{(1)}(\vec{r}_1)}{\delta \rho(\vec{r}_2) \delta \rho(\vec{r}_3) \cdots \delta \rho(\vec{r}_n)} \\
+    &=
+    (-1)^{n-1}
+    \frac{(n-2)!}{\rho(\vec{r})^{n-1}}
+    \prod_{i=2}^n \delta(\vec{r}_i - \vec{r}_1) -
+    \frac{\delta^{n-1} \beta\psi(\vec{r}_1)}{\delta \rho(\vec{r}_2) \delta \rho(\vec{r}_3) \cdots \delta \rho(\vec{r}_n)}
+  \end{aligned}
+\end{equation}
+Specifically, for $n=2$:
+\begin{equation}
+  c^{(2)}(\vec{r}_1, \vec{r}_2) =
+  \frac{\delta(\vec{r}_2 - \vec{r}_1)}{\rho(\vec{r}_1)} -
+  \frac{\delta\beta\psi(\vec{r}_1)}{\delta \rho(\vec{r}_2)}
+\end{equation}
+From \eqref{eq:intrinsic-chemical-potential-inverse-derivative} we get
+\begin{equation}
+  \begin{aligned}
+    \delta(\vec{r}_1 - \vec{r}_2) &=
+    \int
+    \frac{\delta \rho(\vec{r}_1)}{\delta \psi(\vec{r}')}
+    \frac{\delta \psi(\vec{r}')}{\delta \rho(\vec{r}_2)}
+    \, d\vec{r}' \\
+    &=
+    \int
+    H^{(2)}(\vec{r}_1, \vec{r}')
+    \left(
+    \frac{\delta(\vec{r}' - \vec{r}_2)}{\rho(\vec{r}')} -
+    c^{(2)}(\vec{r}', \vec{r}_2)
+    \right)
+    \, d\vec{r}' \\
+    &=
+    \int
+    \bigg(
+    \rho^{(2)}(\vec{r}_1, \vec{r}') +
+    \rho^{(1)}(\vec{r}_1) \delta(\vec{r}_1 - \vec{r}') -
+    \rho^{(1)}(\vec{r}_1) \rho^{(1)}(\vec{r}')
+    \bigg)
+    \left(
+    \frac{\delta(\vec{r}' - \vec{r}_2)}{\rho^{(1)}(\vec{r}')} -
+    c^{(2)}(\vec{r}', \vec{r}_2)
+    \right)
+    \, d\vec{r}' \\
+    &=
+    \frac{\rho^{(2)}(\vec{r}_1, \vec{r}_2)}{\rho^{(1)}(\vec{r}_2)} +
+    \delta(\vec{r}_1 - \vec{r}_2) -
+    \rho^{(1)}(\vec{r}_1) -
+    \rho^{(1)}(\vec{r}_1) c^{(2)}(\vec{r}_1, \vec{r}_2) -\\
+    &\quad
+    \int
+    \Big(
+    \rho^{(2)}(\vec{r}_1, \vec{r}') -
+    \rho^{(1)}(\vec{r}_1) \rho^{(1)}(\vec{r}')
+    \Big)
+    c^{(2)}(\vec{r}', \vec{r}_2)
+    \, d\vec{r}'
+  \end{aligned}
+\end{equation}
+\begin{equation}
+  \frac{\rho^{(2)}(\vec{r}_1, \vec{r}_2) - \rho^{(1)}(\vec{r}_1) \rho^{(1)}(\vec{r}_2)}{\rho^{(1)}(\vec{r}_2)}
+  =
+  \rho^{(1)}(\vec{r}_1) c^{(2)}(\vec{r}_1, \vec{r}_2) +
+  \int
+  \Big(
+  \rho^{(2)}(\vec{r}_1, \vec{r}') -
+  \rho^{(1)}(\vec{r}_1) \rho^{(1)}(\vec{r}')
+  \Big)
+  c^{(2)}(\vec{r}', \vec{r}_2)
+  \, d\vec{r}'
+\end{equation}
+is the Ornstein-Zernike equation.
+
+\begin{equation}
+  H^{(n)}(\vec{r}^n) =
+  \left\langle
+  \prod_{i=1}^n
+  \Big[ \rho(\vec{r}_i) - \big\langle\rho(\vec{r}_i)\big\rangle \Big]
+  \right\rangle
+  \qquad \forall \; n \ge 2
+\end{equation}
+\begin{equation}
+  \begin{aligned}
+    H^{(2)}(\vec{r}_1, \vec{r}_2) &=
+    \left\langle
+    \left[ \rho(\vec{r}_1) - \big\langle\rho(\vec{r}_1)\big\rangle \right]
+    \left[ \rho(\vec{r}_2) - \big\langle\rho(\vec{r}_2)\big\rangle \right]
+    \right\rangle \\
+    &=
+    \big\langle \rho(\vec{r}_1) \rho(\vec{r}_2) \big\rangle -
+    \big\langle \rho(\vec{r}_1) \big\rangle \big\langle \rho(\vec{r}_2) \big\rangle \\
+    &=
+    \rho^{(2)}(\vec{r}_1, \vec{r}_2) +
+    \rho(\vec{r}_1) \delta(\vec{r}_1 - \vec{r}_2) -
+    \big\langle \rho(\vec{r}_1) \big\rangle \big\langle \rho(\vec{r}_2) \big\rangle
+  \end{aligned}
 \end{equation}
 
 \section{Many-body correlations from fundamental measure theory}
