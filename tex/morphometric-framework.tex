@@ -7,9 +7,23 @@
 \graphicspath{{../img/}}
 
 \begin{document}
-\chapter{Morphological framework for many-body correlations}
-Mostly theoretical but with some numerical experiments which motivate/justify developments to the theory.
-The main body of numerical work is left to the following chapter.
+\chapter{Many-body correlations using integral geometry}
+
+This chapter will focus on the morphological framework for the treatment of many-body correlations.
+This will cover two related topics:
+\begin{enumerate}
+\item \emph{Fundamental measure theory} which is ideally suited for correlations in Fourier space i.e.\ structure factors, and
+\item The \emph{morphometric approach}, which presents a highly accurate alternative for real space calculations, albeit with many caveats.
+\end{enumerate}
+These two approaches are related in that they both depend on integral geometry, which we introduced in \ref{sec:integral-geometry}.
+In fact, we will see that the latter approach can be seen as a limiting case of the former.
+We will focus on the theoretical developments in this chapter, and leave the main body of numerical work to the following chapter where we will apply this to local structure in the hard sphere liquid.
+
+I have tried to make this chapter a relatively self-contained account of the treatment of many-body correlations in hard spheres.
+As such there will be a mixture of original results, pure literature review and some original \emph{presentation} of established results.
+I will indicate where each of these is the case, though loosely speaking it will start off unoriginal and get progressively more original.
+The final sections are entirely original: we use integral geometry to calculate distribution functions in hard spheres, which is work now published as Ref.\ \cite{Robinson2019}.
+The results of this chapter only entered the supplementary material of Ref.\ \cite{Robinson2019}, whereas the results of the next chapter were described in the main text.
 
 \section{Functional calculus}
 
@@ -38,32 +52,92 @@ and inverse derivatives are found via
   \int \omega_\alpha (\vec{r}) e^{-i \vec{k}\cdot\vec{r}} \, d\vec{r}
 \end{equation}
 
-\section{Generalised Ornstein-Zernike relations}
+\begin{align}
+  \widetilde{\omega}_3(\vec{k}) &=
+  4\pi \frac{\sin{kR} - kR\cos{kR}}{k^3} \\
+  \widetilde{\omega}_2(\vec{k}) &=
+  4\pi R^2 \frac{\sin{kR}}{kR} \\
+  \widetilde{\vec{\omega}}_2(\vec{k}) &=
+  - i \vec{k} \widetilde{\omega}_3(\vec{k})
+\end{align}
 
 \begin{equation}
-  \begin{split}
-    \tilde{c}^{(2)}_{RF}(k_1,k_2) =
-    \frac{1}{\pi (1-\eta)^4}
-    \Bigg(
-    &
-    \widetilde{\omega }_2 (k_1)
-    \widetilde{\omega }_2 (k_2)
-    \,
-    \frac{2 - 3\eta + \eta^3}{2}
-    \; + \\
-    &
-    \widetilde{\omega }_2 (k_1)
-    \widetilde{\omega}_3 (k_2)
-    \,
-    \big(2 + 6\eta -8 \eta ^3\big)
-    \; + \\
-    &
-    \widetilde{\omega }_3 (k_1)
-    \widetilde{\omega }_3 (k_2)
-    \,
-    \big(6 \eta  (1 + 2 \eta)^2\big)
-    \Bigg)
-  \end{split}
+  \begin{aligned}
+    c_{22}(\vec{r} = \vec{r}_2 - \vec{r}_1) &=
+    \frac{1}{(2\pi)^3}
+    \iint
+    e^{-i (\vec{k}_1\cdot\vec{r}_1 + \vec{k}_2\cdot\vec{r}_2)}
+    \widetilde{\omega}_2(\vec{k}_1)
+    \widetilde{\omega}_2(\vec{k}_2)
+    \delta{(\vec{k}_1 + \vec{k}_2)}
+    \, d\vec{k}_1 d\vec{k}_2 \\
+    &=
+    \frac{1}{(2\pi)^3}
+    \int
+    e^{i \vec{k}_1 \cdot (\vec{r}_2 - \vec{r}_1)}
+    \widetilde{\omega}_2(\vec{k}_1)
+    \widetilde{\omega}_2(-\vec{k}_1)
+    \, d\vec{k}_1 \\
+    &=
+    \frac{1}{(2\pi)^3}
+    \int
+    e^{i \vec{k} \cdot \vec{r}}
+    \widetilde{\omega}_2(\vec{k})^2
+    \, d\vec{k}
+    =
+    \frac{8\pi^2 R^2}{(2\pi)^3}
+    \int
+    e^{i \vec{k} \cdot \vec{r}}
+    \left( \frac{\sin{kR}}{k} \right)^2
+    \, d\vec{k} \\
+    &=
+    \frac{R^2}{\pi}
+    \int
+    e^{i k r \cos\theta}
+    \left( \frac{\sin{kR}}{k} \right)^2
+    \, 2\pi k^2 \sin\theta \, dr d\theta \\
+    &=
+    2 R^2
+    \int
+    e^{i k r \cos\theta}
+    \sin^2{(kR)}
+    \, \sin\theta \, dr d\theta
+  \end{aligned}
+\end{equation}
+
+\section{Correlation functions}
+
+\begin{equation}
+  H^{(n)}(\vec{r}^n) =
+  \left\langle
+  \prod_{i=1}^n
+  \Big[ \rho(\vec{r}_i) - \rho^{(1)}(\vec{r}_i) \Big]
+  \right\rangle
+  \qquad \forall \; n \ge 2
+\end{equation}
+\begin{equation}
+  \begin{aligned}
+    H^{(2)}(\vec{r}_1, \vec{r}_2) &=
+    \left\langle
+    \left[ \rho(\vec{r}_1) - \rho^{(1)}(\vec{r}_1) \right]
+    \left[ \rho(\vec{r}_2) - \rho^{(1)}(\vec{r}_2) \right]
+    \right\rangle \\
+    &=
+    \big\langle \rho(\vec{r}_1) \rho(\vec{r}_2) \big\rangle -
+    \rho^{(1)}(\vec{r}_1) \rho^{(1)}(\vec{r}_2) \\
+    &=
+    \rho^{(2)}(\vec{r}_1, \vec{r}_2) +
+    \rho^{(1)}(\vec{r}_1) \delta(\vec{r}_1 - \vec{r}_2) -
+    \rho^{(1)}(\vec{r}_1) \rho^{(1)}(\vec{r}_2) \\
+    &=
+    \rho^{(1)}(\vec{r}_1) \rho^{(1)}(\vec{r}_2) h^{(2)}(\vec{r}_1, \vec{r}_2)
+    +
+    \rho^{(1)}(\vec{r}_1) \delta(\vec{r}_1 - \vec{r}_2)
+  \end{aligned}
+\end{equation}
+where
+\begin{equation}
+  h^{(n)}(\vec{r}^n) \equiv g^{(n)}(\vec{r}^n) - 1
 \end{equation}
 
 Density-density correlation functions
@@ -85,6 +159,27 @@ They are obtained from the total grand potential by repeat functional differenti
   \end{aligned}
 \end{equation}
 I.e.\ the grand potential is the generating functional for the density-density correlation functions.
+
+\section{Density functional theory}
+
+\subsection{Functional form of thermodynamic potentials}
+
+From the Legendre transform of $\beta \Omega$
+\begin{equation}
+  \begin{aligned}
+    \Omega[\rho(\vec{r})] &=
+    F[\rho(\vec{r})] -
+    \int \rho(\vec{r}) \psi(\vec{r}) \, d\vec{r} \\
+    &=
+    F_{id}[\rho(\vec{r})] +
+    F_{ex}[\rho(\vec{r})] -
+    \int \rho(\vec{r}) \psi(\vec{r}) \, d\vec{r}
+  \end{aligned}
+\end{equation}
+after defining intrinsic chemical potential
+\begin{equation}\label{eq:intrinsic-chemical-potential}
+  \psi(\vec{r}) = \mu - V_{ext}(\vec{r})
+\end{equation}
 
 Derivatives of the ideal gas free energy.
 The ideal gas free energy is given as
@@ -122,27 +217,12 @@ Iterating this procedure gives us the $n$th functional derivative as
 \end{equation}
 where the last line is valid for all $n \ge 2$.
 
+\subsection{Correlation functions}
+
 Excess free energy is the generating functional for direct correlations
 \begin{equation}\label{eq:direct-correlations}
   c^{(n)}(\vec{r}^n) =
   - \frac{\delta^n \beta F_{ex}}{\delta \rho(\vec{r}_1)\delta \rho(\vec{r}_2) \cdots \delta \rho(\vec{r}_n)}
-\end{equation}
-
-Defining intrinsic chemical potential
-\begin{equation}\label{eq:intrinsic-chemical-potential}
-  \psi(\vec{r}) = \mu - V_{ext}(\vec{r})
-\end{equation}
-From the Legendre transform of $\beta \Omega$
-\begin{equation}
-  \begin{aligned}
-    \Omega[\rho(\vec{r})] &=
-    F[\rho(\vec{r})] -
-    \int \rho(\vec{r}) \psi(\vec{r}) \, d\vec{r} \\
-    &=
-    F_{id}[\rho(\vec{r})] +
-    F_{ex}[\rho(\vec{r})] -
-    \int \rho(\vec{r}) \psi(\vec{r}) \, d\vec{r}
-  \end{aligned}
 \end{equation}
 
 We have to compute a derivative like
@@ -173,9 +253,10 @@ This must satisfy the inversion formula
 which will be very important for obtaining Ornstein-Zernike relations later.
 Considering the external field as the control parameter, and noting the definition of $\psi(\vec{r})$ in \eqref{eq:intrinsic-chemical-potential} we take
 \begin{equation*}
-  \frac{\delta\psi(\vec{r}')}{\delta\rho(\vec{r})} = 0
+  \frac{\delta\psi(\vec{r}')}{\delta\rho(\vec{r})} = 0.
 \end{equation*}
-so \eqref{eq:intrinsic-chemical-potential-derivative-2} becomes
+This expression satisfies \eqref{eq:intrinsic-chemical-potential-inverse-derivative}, being zero in general except where $\psi(\vec{r}')$ is used as an intermediate function in the (functional) chain rule expression.
+With this expression \eqref{eq:intrinsic-chemical-potential-derivative-2} becomes
 \begin{equation}\label{eq:intrinsic-chemical-potential-derivative-2}
   \frac{\delta}{\delta\rho(\vec{r})}
   \left(
@@ -187,7 +268,10 @@ so \eqref{eq:intrinsic-chemical-potential-derivative-2} becomes
 
 In equilibrium
 \begin{equation}
-  \frac{\delta \Omega[\rho]}{\delta\rho(\vec{r})} = 0
+  \left.
+  \frac{\delta \Omega[\rho]}{\delta\rho(\vec{r})}
+  \right|_{\rho(\vec{r}) = \rho^{(1)}(\vec{r})}
+  = 0
 \end{equation}
 and consequently all higher-order derivatives must be zero, i.e.\
 \begin{equation}
@@ -203,20 +287,20 @@ therefore we have
   = 0
 \end{equation}
 or using \eqref{eq:direct-correlations} this becomes
-\begin{equation}
+\begin{equation*}
   c^{(n)}(\vec{r}^n) =
   \frac{\delta^n \beta F_{id}[\rho]}{\delta \rho(\vec{r}_1) \delta \rho(\vec{r}_2) \cdots \delta \rho(\vec{r}_n)} -
   \frac{\delta^n}{\delta \rho(\vec{r}_1) \delta \rho(\vec{r}_2) \cdots \delta \rho(\vec{r}_n)}
   \left(
   \int \beta\psi(\vec{r}') \rho(\vec{r}') \, d\vec{r}'
   \right)
-\end{equation}
-For $n=1$ we have:
-\begin{equation}
+\end{equation*}
+At the one-body level we have:
+\begin{equation}\label{eq:c1}
   \begin{aligned}
     c^{(1)}(\vec{r}) &=
     \frac{\delta \beta F_{id}}{\delta \rho(\vec{r})} -
-    \frac{\delta}{\delta \rho(\vec{r})}
+    \frac{\delta}{\delta \rho(\vec{r})^{(1)}}
     \left(
     \int \beta\psi(\vec{r}') \rho(\vec{r}') \, d\vec{r}'
     \right) \\
@@ -227,28 +311,20 @@ For $n=1$ we have:
 \end{equation}
 Which gives the equilibrium density as
 \begin{equation}
-  \rho(\vec{r}) = \lambda^{-d} \exp{\left(\beta\psi(\vec{r}) + c^{(1)}(\vec{r})\right)}
+  \rho^{(1)}(\vec{r}) = \lambda^{-d} \exp{\left(\beta\psi(\vec{r}) + c^{(1)}(\vec{r})\right)}
 \end{equation}
-Thus for $n > 1$ we have
-\begin{equation}
+We obtain the two-body correlations by functionally differentiating \eqref{eq:c1}, as in
+\begin{equation}\label{eq:c2}
   \begin{aligned}
-    c^{(n)}(\vec{r}^n) &=
-    \frac{\delta^{n-1} c^{(1)}(\vec{r}_1)}{\delta \rho(\vec{r}_2) \delta \rho(\vec{r}_3) \cdots \delta \rho(\vec{r}_n)} \\
+    c^{(2)}(\vec{r}_1, \vec{r}_2) &=
+    \frac{\delta c^{(1)}(\vec{r}_1)}{\delta \rho^{(1)}(\vec{r}_2)} \\
     &=
-    (-1)^{n-1}
-    \frac{(n-2)!}{\rho(\vec{r})^{n-1}}
-    \prod_{i=2}^n \delta(\vec{r}_i - \vec{r}_1) -
-    \frac{\delta^{n-1} \beta\psi(\vec{r}_1)}{\delta \rho(\vec{r}_2) \delta \rho(\vec{r}_3) \cdots \delta \rho(\vec{r}_n)}
+    \frac{\delta(\vec{r}_2 - \vec{r}_1)}{\rho^{(1)}(\vec{r}_1)} -
+    \frac{\delta\beta\psi(\vec{r}_1)}{\delta \rho(\vec{r}_2)}
   \end{aligned}
 \end{equation}
-Specifically, for $n=2$:
-\begin{equation}
-  c^{(2)}(\vec{r}_1, \vec{r}_2) =
-  \frac{\delta(\vec{r}_2 - \vec{r}_1)}{\rho(\vec{r}_1)} -
-  \frac{\delta\beta\psi(\vec{r}_1)}{\delta \rho(\vec{r}_2)}
-\end{equation}
 From \eqref{eq:intrinsic-chemical-potential-inverse-derivative} we get
-\begin{equation}
+\begin{equation*}
   \begin{aligned}
     \delta(\vec{r}_1 - \vec{r}_2) &=
     \int
@@ -259,75 +335,186 @@ From \eqref{eq:intrinsic-chemical-potential-inverse-derivative} we get
     \int
     H^{(2)}(\vec{r}_1, \vec{r}')
     \left(
-    \frac{\delta(\vec{r}' - \vec{r}_2)}{\rho(\vec{r}')} -
-    c^{(2)}(\vec{r}', \vec{r}_2)
-    \right)
-    \, d\vec{r}' \\
-    &=
-    \int
-    \bigg(
-    \rho^{(2)}(\vec{r}_1, \vec{r}') +
-    \rho^{(1)}(\vec{r}_1) \delta(\vec{r}_1 - \vec{r}') -
-    \rho^{(1)}(\vec{r}_1) \rho^{(1)}(\vec{r}')
-    \bigg)
-    \left(
     \frac{\delta(\vec{r}' - \vec{r}_2)}{\rho^{(1)}(\vec{r}')} -
     c^{(2)}(\vec{r}', \vec{r}_2)
     \right)
     \, d\vec{r}' \\
     &=
-    \frac{\rho^{(2)}(\vec{r}_1, \vec{r}_2)}{\rho^{(1)}(\vec{r}_2)} +
-    \delta(\vec{r}_1 - \vec{r}_2) -
-    \rho^{(1)}(\vec{r}_1) -
-    \rho^{(1)}(\vec{r}_1) c^{(2)}(\vec{r}_1, \vec{r}_2) -\\
-    &\quad
+    \rho^{(1)}(\vec{r}_1)
+    \left(
+    h^{(2)}(\vec{r}_1, \vec{r}_2) -
+    c^{(2)}(\vec{r}_1, \vec{r}_2)
+    \right) +
+    \delta(\vec{r}_1 - \vec{r}_2) - \\
+    &\qquad
+    \rho^{(1)}(\vec{r}_1)
     \int
-    \Big(
-    \rho^{(2)}(\vec{r}_1, \vec{r}') -
-    \rho^{(1)}(\vec{r}_1) \rho^{(1)}(\vec{r}')
-    \Big)
+    \rho^{(1)}(\vec{r}')
+    h^{(2)}(\vec{r}_1, \vec{r}')
     c^{(2)}(\vec{r}', \vec{r}_2)
     \, d\vec{r}'
   \end{aligned}
-\end{equation}
+\end{equation*}
+which rearranges to give the Ornstein-Zernike equation
 \begin{equation}
-  \frac{\rho^{(2)}(\vec{r}_1, \vec{r}_2) - \rho^{(1)}(\vec{r}_1) \rho^{(1)}(\vec{r}_2)}{\rho^{(1)}(\vec{r}_2)}
-  =
-  \rho^{(1)}(\vec{r}_1) c^{(2)}(\vec{r}_1, \vec{r}_2) +
+  h^{(2)}(\vec{r}_1, \vec{r}_2) =
+  c^{(2)}(\vec{r}_1, \vec{r}_2) +
   \int
-  \Big(
-  \rho^{(2)}(\vec{r}_1, \vec{r}') -
-  \rho^{(1)}(\vec{r}_1) \rho^{(1)}(\vec{r}')
-  \Big)
+  \rho^{(1)}(\vec{r}')
+  h^{(2)}(\vec{r}_1, \vec{r}')
   c^{(2)}(\vec{r}', \vec{r}_2)
-  \, d\vec{r}'
+  \, d\vec{r}'.
 \end{equation}
-is the Ornstein-Zernike equation.
-
+This is a classic result in liquid state theory (cf.\ Refs.\ \cite{Ornstein1914,Hansen2010,Evans1979}) though normally it is expressed for the uniform liquid $\rho^{(1)}(\vec{r}) = \rho$ for spherically symmetric pair potentials thus
 \begin{equation}
-  H^{(n)}(\vec{r}^n) =
-  \left\langle
-  \prod_{i=1}^n
-  \Big[ \rho(\vec{r}_i) - \big\langle\rho(\vec{r}_i)\big\rangle \Big]
-  \right\rangle
-  \qquad \forall \; n \ge 2
+  h^{(2)}(r) =
+  c^{(2)}(r) +
+  \rho
+  \int
+  h^{(2)}(r)
+  c^{(2)}(|\vec{r}' - \vec{r}|)
+  \, d\vec{r}',
 \end{equation}
+where $r = |\vec{r}_2 - \vec{r}_1|$.
+The integral is a convolution, so it simplifies under Fourier transform to
+\begin{equation}
+  \tilde{h}(\vec{k}) =
+  \tilde{c}(\vec{k}) +
+  \rho \tilde{h}(\vec{k}) \tilde{c}(\vec{k})
+\end{equation}
+or rearranging for
+\begin{equation}
+  \tilde{h}(\vec{k}) =
+  \frac{\tilde{c}(\vec{k})}{1 - \rho \tilde{c}(\vec{k})}.
+\end{equation}
+Note that the static structure factor is defined as the Fourier transform of the two-body distribution function, i.e.\
 \begin{equation}
   \begin{aligned}
-    H^{(2)}(\vec{r}_1, \vec{r}_2) &=
-    \left\langle
-    \left[ \rho(\vec{r}_1) - \big\langle\rho(\vec{r}_1)\big\rangle \right]
-    \left[ \rho(\vec{r}_2) - \big\langle\rho(\vec{r}_2)\big\rangle \right]
-    \right\rangle \\
+    S(\vec{k}) \equiv \tilde{g}^{(2)}(\vec{k}) &=
+    \delta(\vec{k}) + \tilde{h}(\vec{k}) \\
     &=
-    \big\langle \rho(\vec{r}_1) \rho(\vec{r}_2) \big\rangle -
-    \big\langle \rho(\vec{r}_1) \big\rangle \big\langle \rho(\vec{r}_2) \big\rangle \\
-    &=
-    \rho^{(2)}(\vec{r}_1, \vec{r}_2) +
-    \rho(\vec{r}_1) \delta(\vec{r}_1 - \vec{r}_2) -
-    \big\langle \rho(\vec{r}_1) \big\rangle \big\langle \rho(\vec{r}_2) \big\rangle
+    \delta(\vec{k}) +
+    \frac{\tilde{c}(\vec{k})}{1 - \rho \tilde{c}(\vec{k})}.
   \end{aligned}
 \end{equation}
+
+\subsection{Generalised Ornstein-Zernike equations}
+
+This section follows \cite{Barrat1988}.
+
+Thus for higher $n$ we have
+\begin{equation}
+  \begin{aligned}
+    c^{(n)}(\vec{r}^n) &=
+    \frac{\delta^{n-1} c^{(1)}(\vec{r}_1)}{\delta \rho(\vec{r}_2) \delta \rho(\vec{r}_3) \cdots \delta \rho(\vec{r}_n)} \\
+    &=
+    (-1)^n
+    \frac{(n-2)!}{\rho(\vec{r}_1)^{n-1}}
+    \prod_{i=2}^n \delta(\vec{r}_i - \vec{r}_1) -
+    \frac{\delta^{n-1} \beta\psi(\vec{r}_1)}{\delta \rho(\vec{r}_2) \delta \rho(\vec{r}_3) \cdots \delta \rho(\vec{r}_n)}
+  \end{aligned}
+\end{equation}
+or
+\begin{equation}
+  \frac{\delta^{n-1} \beta\psi(\vec{r}_1)}{\delta \rho(\vec{r}_2) \delta \rho(\vec{r}_3) \cdots \delta \rho(\vec{r}_n)} =
+  (-1)^n
+  \frac{(n-2)!}{\rho(\vec{r}_1)^{n-1}}
+  \prod_{i=2}^n \delta(\vec{r}_i - \vec{r}_1) -
+  c^{(n)}(\vec{r}^n)
+\end{equation}
+
+\begin{equation*}
+  H^{(n)}(\vec{r}^n) =
+  \frac{\delta^{n-1} \rho(\vec{r}_1)}{\delta \beta\psi(\vec{r}_2) \delta \beta\psi(\vec{r}_3) \cdots \delta \beta\psi(\vec{r}_n)}.
+\end{equation*}
+
+Defining
+\begin{equation*}
+  K^{(n)}(\vec{r}^n) =
+  \frac{\delta^{n-1} \beta\psi(\vec{r}_1)}{\delta \rho(\vec{r}_2) \delta \rho(\vec{r}_3) \cdots \delta \rho(\vec{r}_n)}
+\end{equation*}
+we have
+\begin{equation*}
+  \frac{\delta K^{(n)}(\vec{r}^n)}{\delta \rho(\vec{r}_{n+1})} =
+  K^{(n+1)}(\vec{r}^{n+1}).
+\end{equation*}
+and
+\begin{equation*}
+  \begin{aligned}
+    \frac{\delta H^{(n)}(\vec{r}^n)}{\delta \rho(\vec{r}_{n+1})}
+    &=
+    \int
+    \frac{\delta H^{(n)}(\vec{r}^n)}{\delta \psi(\vec{r}')}
+    \frac{\delta \psi(\vec{r}')}{\delta \psi(\vec{r}_{n+1})}
+    \, d\vec{r}' \\
+    &=
+    \int
+    H^{(n+1)}(\vec{r}^n, \vec{r}')
+    K^{(2)}(\vec{r}', \vec{r}_{n+1})
+    \, d\vec{r}' \\
+    &=
+    H^{(n+1)} \otimes K^{(2)}(\vec{r}^{n+1}).
+  \end{aligned}
+\end{equation*}
+In this form the Ornstein-Zernike equation can be written.
+\begin{equation*}
+  \begin{aligned}
+    \delta(\vec{r}_1 - \vec{r}_2) &=
+    \int
+    \frac{\delta \rho(\vec{r}_1)}{\delta \psi(\vec{r}')}
+    \frac{\delta \psi(\vec{r}')}{\delta \rho(\vec{r}_2)}
+    \, d\vec{r}' \\
+    &=
+    \int
+    H^{(2)}(\vec{r}_1, \vec{r}') K^{(2)}(\vec{r}', \vec{r}_2)
+    \, d\vec{r}' \\
+    &=
+    H^{(2)} \otimes K^{(2)} (\vec{r}^2)
+  \end{aligned}
+\end{equation*}
+Taking functional derivatives of this expression gives us a hierarchy of generalised Ornstein-Zernike equations.
+For example, the next equation in the hierarchy is
+\begin{equation*}
+  H^{(2)} \otimes K^{(3)} (\vec{r}^3) +
+  H^{(3)} \otimes K^{(2)} \otimes K^{(2)} (\vec{r}^3) = 0
+\end{equation*}
+The next functional derivative
+\begin{equation}
+  \begin{aligned}
+  H^{(2)} \otimes K^{(4)} (\vec{r}^4) & \\
+  + \; 2 H^{(3)} \otimes K^{(3)} \otimes K^{(2)} (\vec{r}^4) & \\
+  + \; H^{(4)} \otimes K^{(2)} \otimes K^{(2)} \otimes K^{(2)} (\vec{r}^4)
+  &= 0
+  \end{aligned}
+\end{equation}
+And the next one%
+\todo{Can we find a general formula? I notice some constraints on the indices: the sum of the indices $\{m\}$ in the $K^{(m)}$ terms must add up to $n-1$ so that the right number of independent variables are returned (the extra one is provided by the $H^{(l)}$ function giving the $\vec{r}^n$ total.}
+\begin{equation}
+  \begin{aligned}
+    H^{(2)} \otimes K^{(5)} (\vec{r}^5) & \\
+    + \; 3 H^{(3)} \otimes K^{(3)} \otimes K^{(3)} (\vec{r}^5) & \\
+    + \; 2 H^{(3)} \otimes K^{(4)} \otimes K^{(2)} (\vec{r}^5) & \\
+    + \; 5 H^{(4)} \otimes K^{(3)} \otimes K^{(2)} \otimes K^{(2)} (\vec{r}^5) & \\
+    + \; H^{(5)} \otimes K^{(2)} \otimes K^{(2)} \otimes K^{(2)} \otimes K^{(2)} (\vec{r}^5)
+    &= 0
+  \end{aligned}
+\end{equation}
+
+\section{Integral geometric approaches}
+
+\subsection{Scaled particle approach}
+
+\begin{SCfigure}[H]
+  \missingfigure[figwidth=\linewidth]{}
+  \caption{Scaled particle.}
+\end{SCfigure}
+
+\subsection{Bulk virial approach}
+
+\begin{SCfigure}[H]
+  \missingfigure[figwidth=\linewidth]{}
+  \caption{Lost cases of FMT.}
+\end{SCfigure}
 
 \section{Many-body correlations from fundamental measure theory}
 
@@ -369,7 +556,8 @@ At uniform density $\partial^n_{\alpha_1, \alpha_2, \cdots, \alpha_n} \beta\Phi_
 \end{equation}
 where the $\otimes$-notation in the latter step denotes the $n$-body convolution.
 For example, the two body convolution would be written%
-\marginfootnote{The `standard' convolution, i.e.\ $f \otimes g(\vec{r} \equiv \vec{r}_1 - \vec{r}_2)$, is recovered after transforming to the new integration variable $\vec{r}'' = \vec{r}' - \vec{r}_1$.}
+\todo{This is not the standard convolution! See \cite{Rosenfeld1997}.}
+%\marginfootnote{The `standard' convolution, i.e.\ $f \otimes g(\vec{r} \equiv \vec{r}_1 - \vec{r}_2)$, is recovered after transforming to the new integration variable $\vec{r}'' = \vec{r}' - \vec{r}_1$.}
 \begin{equation*}
   f \otimes g(\vec{r}_1, \vec{r}_2) =
   \int d\vec{r}' f(\vec{r}' - \vec{r}_1) g(\vec{r}' - \vec{r}_2).
@@ -428,7 +616,17 @@ The two-point static structure factor
   \end{aligned}
 \end{equation}
 
-\section{Some notes on things to add}
+\begin{SCfigure}[H]
+  \missingfigure[figwidth=\linewidth]{}
+  \caption{Static structure factor for convolution, Rosenfeld and White Bear closures.}
+\end{SCfigure}
+
+\begin{SCfigure}[H]
+  \missingfigure[figwidth=\linewidth]{}
+  \caption{Triplet static structure factors for convolution, Rosenfeld and White Bear closures.}
+\end{SCfigure}
+
+\section{Superposition and convolution approximations}
 
 In the Kirkwood superposition approximation \cite{Kirkwood1935} many-body correlations are expressed as pairwise products of the two-body correlation function, i.e.
 \begin{equation}
@@ -450,10 +648,11 @@ which correctly satisfies the hard-core condition, but violates the sum rule
     \int \rho^{(n+1)}(\{\vec{r}^n, \vec{r}_{n+1}\}) d\vec{r}_{n+1},
   \end{aligned}
 \end{equation}
-and the related convolution approximation \cite{Barrat1988}%
+and the related convolution approximation \cite{Jackson1962,Ichimaru1970,Barrat1988}%
 \todo{Check this expression is correct - it almost certainly is not.}
 \begin{equation}
   S^{(n)}(\vec{k}^n) =
+  (1 + \tilde{c}^{(n)}(\vec{k}^n))
   \prod_{i < j} S^{(2)}(\vec{k}_i, \vec{k}_j)
 \end{equation}
 satisfies the sum rule but fails to satisfy the hard-core condition.
