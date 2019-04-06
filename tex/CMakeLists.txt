@@ -20,7 +20,7 @@ add_custom_target(chapters)
 add_dependencies(chapters introduction geometry theory morph1 morph2 cuzr aerosols conclusion appendix-two-spheres appendix-full-geometry appendix-finite-differences)
 
 add_latex_document(thesis.tex
-                   INPUTS abstract.tex dedication.tex declaration.tex acknowledgements.tex word-count.tex introduction.tex integral-geometry.tex theory.tex liquid-state-theory.tex supercooled-liquids.tex morphometric-framework.tex morphometric-applications.tex cuzr.tex aerosols.tex conclusion.tex appendix-two-spheres.tex appendix-full-geometry.tex appendix-line-curvature.tex appendix-finite-differences.tex
+                   INPUTS abstract.tex dedication.tex declaration.tex acknowledgements.tex word-count.tex opening-quote.tex introduction.tex integral-geometry.tex theory.tex liquid-state-theory.tex supercooled-liquids.tex morphometric-framework.tex morphometric-applications.tex cuzr.tex aerosols.tex conclusion.tex appendix-two-spheres.tex appendix-full-geometry.tex appendix-line-curvature.tex appendix-finite-differences.tex
                    TARGET_NAME thesis
                    IMAGE_DIRS ../img)
 
