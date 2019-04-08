@@ -1,3 +1,4 @@
+\section{Liquid state theory}
 
 Here we talk in general terms about descriptions of the liquid state.
 Broadly speaking, in its historical development approaches can be placed inside one of two categories.
@@ -35,84 +36,7 @@ Motion invariance: translation and rotation invariance.
 Additivity: the energy is extensive (even for small system sizes)
 Continuity: the function is well behaved
 
-\section{Liquid state theory}
 A summary of results in the modern formalism as given by standard texts (notably references \cite{Hansen2013} and \cite{Santos2016}) that will be used throughout the thesis.
-
-\section{Statistical mechanical preliminaries}
-
-I will assume the reader has a background in physics, and is familiar enough with statistical ensembles that I do not need to explain the origin of the following equations in detail.
-Briefly, these emerge by considering typical fluctuations of thermodynamic quantities for a subsystem within a macroscopic system called the \emph{ensemble}; the properties of this larger system define average quanties of the subsystem \cite{standard-text}.
-Alternatively, from a Bayesian perspective the probability distributions given below emerge from maximising the entropy%
-\marginfootnote{The entropy represents a thermodynamic quantity in the former picture, whereas it represents our own \emph{uncertainty} about the system in the latter.
-  While these two approaches are formally equivalent, the first interpretation is more common in the physics literature.
-  That being said, the derivations of the ensembles within an information theoretic framework are remarkably simple and will probably be more accessible to the non-physicist with a background in probability theory.}[-3cm]
-subject to the constraint of average energy and (optionally) the average particle number \cite{Jaynes1957a,Jaynes1957b}.
-
-A $d$-dimensional system of $N$ particles consists of $\vec{r}^N = \{\vec{r}_1, \cdots, \vec{r}_N\} \in \mathbb{R}^{dN}$ coordinates and $\vec{p}^N = \{\vec{p}_1, \cdots, \vec{p}_N\} \in \mathbb{R}^{dN}$ momenta.
-The classical Hamiltonian can be decomposed into kinetic and potential terms as in
-\begin{equation}
-  \mathcal{H}(\vec{r}^N, \vec{p}^N) = K_N(\vec{p}^N) + U_N(\vec{r}^N)
-\end{equation}
-in the absence of an external field.
-Further, we constrain the coordinates inside the region $\mathbb{V}^d$ of volume%
-\marginfootnote{Physicists would typically use the same symbol $V$ for these two concepts.
-  In keeping with the formal language of the previous chapter we would write $\vec{r}_i \in \mathbb{V}^d$ with $V = \mu_d(\mathbb{V}^d)$.}
-$V$.
-The \emph{canonical} ensemble describes an equilibrium system at constant temperature $T$ with probability measure
-\begin{equation}
-  f^{(N)}(\vec{r}^N, \vec{p}^N) \propto e^{-\beta{\mathcal{H}(\vec{r}^N, \vec{p}^N)}}
-\end{equation}
-where $\beta = (k_B T)^{-1}$ with Boltzmann constant $k_B$.
-The proportionality constant ensures the probability distribution is properly normalised, leading to the canonical partition function
-\begin{equation}
-  Q_N =
-  \int_{\mathbb{R}^{dN}} \int_{\mathbb{V}^{dN}}
-  e^{-\beta{\mathcal{H}(\vec{r}^N, \vec{p}^N)}}
-  \, d\vec{r}^N d\vec{p}^N.
-\end{equation}
-Or the classical kinetic energy can be written
-\[ K_N(\vec{p}^N) = \sum_{i=1}^N \frac{|\vec{p}|^2}{2m_i} \]
-then the momenta can be integrated out leaving only the configurational integral
-\begin{equation}
-  Q_N = \frac{\Lambda^{dN} Z_N}{N!}
-\end{equation}
-with
-\begin{equation*}
-  Z_N =
-  \int_{\mathbb{V}^{dN}}
-  \exp{-\beta U_N}
-  \, d\vec{r}^N.
-\end{equation*}
-%% and confiprobability measure
-%% \begin{equation}
-%%   g^{(N)}(\vec{r}^N) = \frac{e^{-\beta U_N(\vec{r}^N)}}{Z_N}
-%% \end{equation}
-
-The grand canonical ensemble is taken.
-
-The phase space measure is now
-The partition function is given as
-\begin{equation}
-  \Xi
-  = \sum_{N=0}^\infty \frac{z^N Z_N}{N!} \, d\vec{r}^N
-  = \sum_{N=0}^\infty \frac{z^N}{N!} \int e^{-\beta U_N} \, d\vec{r}^N,
-\end{equation}
-where the activity is written in terms of the thermal de Broglie wavelength $\Lambda$ as $z = \exp{\beta\mu} / \Lambda^d$.
-Accordingly, average quantities are found via
-\begin{equation}
-  \left< \cdots \right> =
-  \frac{1}{\Xi} \sum_{N=0}^\infty \frac{z^N}{N!} \int \left(\cdots\right) e^{-\beta U_N} \, d\vec{r}^N,
-\end{equation}
-
-We will work almost exlusively in the \emph{grand canonical ensemble} as it is the most convenient for liquid state descriptions%
-\marginfootnote{Notably the free energy is extensive without the need to invoke Stirling's approximation for $N!$, making the thermodynamics properly self-consistent even at finite system volumes.}.
-
-\begin{equation}
-  \mu_{id} = k_B T \ln{\Lambda^d \rho}
-\end{equation}
-\begin{equation}
-  \frac{F_{id}}{N} = k_B T (\ln{\Lambda^d \rho} - 1)
-\end{equation}
 
 \subsection{Interaction potentials}
 \subsection{Simple liquids}
@@ -163,7 +87,7 @@ Low density expansion of pressure in series with virial coefficients.
 where $B_i$ are the virial coefficients.
 
 Generalisation to a binary mixture \todo{Where does this come from? What do the diagrams look like? Are they simpler than the distribution function diagrams?}: \cite{Hansen-Goos2014}
-\begin{equation}
+\begin{equation}\label{eq:virial-series-binary}
   \Phi = \sum_{n=2}^\infty \sum_{j=0}^{n}
   \frac{1}{n-1} {n \choose j} B_n^{[j]} \rho_1^{n-j} \rho_2^j
 \end{equation}
@@ -199,343 +123,533 @@ which gives the excess chemical potential using \eqref{eq:chemical-potential} as
 
 \subsubsection{Beyond hard spheres: perturbation theory and the mean field approximation}
 
-\subsection{Does integral geometry help us?}
-
-Simple example: Mayer-f two balls:
-\begin{equation}
-  \frac{\beta p}{\rho} - 1 =
-  - \sum_{i=1}^\infty \frac{i}{i+1} \beta_i \rho^i =
-  \frac{\rho}{2} \int_{\mathbb{E}_d} \mu_0 (B_d \cap g B_d) \, dg
-  + \mathcal{O}(\rho^2)
-\end{equation}
-Volume fraction $\eta = \rho \omega_d$
-\begin{equation}
-  \frac{\beta p}{\rho} - 1 =
-  \frac{\eta}{2 \omega_d}
-  \int_{\mathbb{E}_d} \mu_0 (B_d \cap g B_d) \, dg
-  + \mathcal{O}(\eta^2)
-\end{equation}
-For $d = 3$ this gives $4\eta + \mathcal{O}(\eta^2)$.
-\begin{align*}
-  \frac{\eta}{2 \omega_d}
-  \int_{\mathbb{E}_d} \mu_0 (B_d \cap g B_d) \, dg &=
-  \sum_{i=0}^{d}
-  {d \brack i}^{-1}
-  \mu_i(B_d) \mu_{d-i}(B_d) \\
-  &=
-  \frac{\eta}{2 \omega_d}
-  \sum_{i=0}^{d}
-  {d \brack i}^{-1}
-  {d \brack i} \omega_i
-  {d \brack d-i} \omega_{d-i} \\
-  &=
-  \frac{\eta}{2 \omega_d}
-  \sum_{i=0}^{d}
-  {d \brack i} \omega_i \omega_{d-i} \\
-  &=
-  \begin{cases}
-    \frac{\eta}{2 \omega_2}
-    (2 \omega_0 \omega_2 + \frac{\pi}{2} \omega_1^2)
-    & \qquad d=2 \\
-    \frac{\eta}{\omega_3}
-    (\omega_0 \omega_3 + 2 \omega_1 \omega_2)
-    & \qquad d=3
-  \end{cases} \\
-  &=
-  \begin{cases}
-    2 \eta & \qquad d=2 \\
-    4 \eta & \qquad d=3
-  \end{cases}
-\end{align*}
-using \eqref{eq:flag-coefficients-symmetry} and \eqref{eq:intrinsic-volume-ball-flag}.
-\begin{equation*}
-\end{equation*}
-
-We can do much better in $d=1$, for hard rods.
-We have the pressure defined by
-\begin{equation}
-  \frac{\beta p}{\rho} =
-  1 + \sum_{n=2}^\infty c_n (n-1) \rho^{n-1} \Gamma_n
-\end{equation}
-with $c_n = 1/n(n-1)$ \todo{I think you can get $c_n$ from the $d=0$ case: check this} giving
-\begin{equation}
-  \Gamma_n = \int_{\mathbb{E}_d^n} \mu_0 (B^d \cap_{i=2}^n g_i B^d) \, d^n g
-\end{equation}
-For $d=1$ we have
-\begin{equation}
-  \int_{\mathbb{E}} \mu_k (A \cap g B^1) \, dg =
-  \begin{cases}
-    \mu_0(A) \mu_1(B^1) + \mu_1(A) & \qquad k=0 \\
-    \mu_1(A) \mu_1(B^1) & \qquad k=1
-  \end{cases}
-\end{equation}
-which gives
-\begin{equation}
-  \begin{split}
-    \Gamma_n &= \int_{\mathbb{E}_d^{n-1}} \left(
-    \mu_0 (B^1 \cap_{i=2}^{n-1} g_i B^1) \mu_1(B^1) +
-    \mu_1 (B^1 \cap_{i=2}^{n-1} g_i B^1)
-    \right) \, d^{n-1} g \\
-    &= \Gamma_{n-1} \mu_1(B^1) + \mu_1(B^1)^{n-1}.
-  \end{split}
-\end{equation}
-Applying this formula iteratively gives
-\begin{equation}
-  \Gamma_n = n \mu_1(B^1)^{n-1}.
-\end{equation}
-\begin{equation}
-  \frac{\beta p}{\rho} =
-  1 + \sum_{n=2}^\infty \rho^{n-1} \mu_1(B^1)^{n-1}
-\end{equation}
-But $\rho = \eta / \mu_1(B^1)$ so we have
-\begin{equation}
-  \frac{\beta p}{\rho} =
-  1 + \sum_{n=2}^\infty \eta^{n-1} = 
-  \sum_{n=0}^\infty \eta^{n} = \frac{1}{1 - \eta}
-\end{equation}
-which is convergent for all $|\eta| < 1$ although only positive volume fractions i.e.\ in the range $\eta \in [0,1]$ have any physical meaning.
-
-Defining the more general integral
-\begin{equation}
-  \Gamma_n^{(k)} = \int_{\mathbb{E}_d^n} \mu_k (B^d \cap_{i=2}^n g_i B^d) \, d^n g
-\end{equation}
-For $d=3$ we have
-\begin{equation}
-  \int_{\mathbb{E}} \mu_k (A \cap g B^3) \, dg =
-  \begin{cases}
-    \omega_3 \mu_0(A) + \omega_2 \mu_1(A) +
-    \omega_1 \mu_2(A) + \omega_0 \mu_3(A)
-    & \qquad k=0 \\
-    \omega_3 \mu_1(A) + \frac{\pi}{2} \omega_2 \mu_2(A)
-    + 2 \omega_1 \mu_3(A)
-    & \qquad k=1 \\
-    \omega_3 \mu_2(A) + 2 \omega_2 \mu_3(A) & \qquad k=2 \\
-    \omega_3 \mu_3(A) & \qquad k=3
-  \end{cases}
-\end{equation}
-so the lowest-order integrals for $n=2$ evaluate to
-\begin{align}
-  \Gamma_2^{(0)} &= 2 \omega_0 \omega_3 + 4 \omega_1 \omega_2 \\
-  \Gamma_2^{(1)} &= 4 \omega_1 \omega_3 + \pi \omega_2^2 \\
-  \Gamma_2^{(2)} &= 4 \omega_2 \omega_3 \\
-  \Gamma_2^{(3)} &= \omega_3^2.
-\end{align}
-Iterating the integrals gives (evaluated in order of simplicity)
-\begin{align}
-  \Gamma_n^{(3)} &=
-  \omega_3 \Gamma_{n-1}^{(3)}
-  = \omega_3^n \\
-  \Gamma_n^{(2)} &=
-  \omega_3 \Gamma_{n-1}^{(2)} + 2 \omega_2 \Gamma_{n-1}^{(3)}
-  \nonumber \\ &=
-  \omega_3 \Gamma_{n-1}^{(2)} + 2 \omega_2 \omega_3^{n-1}
-  = 2 n \omega_2 \omega_3^{n-1} \\
-  \Gamma_n^{(1)} &=
-  \omega_3 \Gamma_{n-1}^{(1)} +
-  \frac{\pi}{2} \omega_2 \Gamma_{n-1}^{(2)} +
-  2 \omega_1 \Gamma_{n-1}^{(3)}
-  \nonumber \\ &=
-  \omega_3 \Gamma_{n-1}^{(1)} +
-  (n-1) \pi \omega_2^2 \omega_3^{n-2} +
-  2 \omega_1 \omega_3^{n-1}
-  \nonumber \\ &=
-  \frac{n(n-1)}{2} \pi \omega_2^2 \omega_3^{n-2} +
-  2n \omega_1 \omega_3^{n-1}
-  \\
-  \Gamma_n^{(0)} &=
-  \omega_3 \Gamma_{n-1}^{(0)} +
-  \omega_2 \Gamma_{n-1}^{(1)} +
-  \omega_1 \Gamma_{n-1}^{(2)} +
-  \omega_0 \Gamma_{n-1}^{(3)}
-  \nonumber \\ &=
-  \omega_3 \Gamma_{n-1}^{(0)} +
-  \frac{(n-1)(n-2)}{2} \pi \omega_2^3 \omega_3^{n-3} +
-  2(n-1) \omega_1 \omega_2 \omega_3^{n-2} +
-  \nonumber \\ & \quad
-  2(n-1) \omega_1 \omega_2 \omega_3^{n-2} +
-  \omega_0 \omega_3^{n-1}
-  \nonumber \\ &=
-  \frac{n(n-1)(n-2))}{6} \pi \omega_2^3 \omega_3^{n-3} +
-  2 n(n-1) \omega_1 \omega_2 \omega_3^{n-2} +
-  n \omega_0 \omega_3^{n-1}
-\end{align}
-This gives
-\begin{equation}
-  \begin{split}
-    \frac{\beta p}{\rho} &=
-    1 + \sum_{n=2}^\infty \frac{1}{n} \frac{\eta^{n-1}}{\omega_3^{n-1}} \Gamma_n
-    =
-    1 + \sum_{n=1}^\infty \frac{1}{n+1} \frac{\eta^n}{\omega_3^n} \Gamma_{n+1}
-    \\ &=
-    1 + \sum_{n=1}^\infty \frac{1}{n+1} \frac{\eta^n}{\omega_3^n}
-    \left(
-    \frac{n(n-1)(n+1))}{6} \pi \omega_2^3 \omega_3^{n-2} +
-    2 n(n+1) \omega_1 \omega_2 \omega_3^{n-1} +
-    (n+1) \omega_0 \omega_3^{n}
-    \right)
-    \\ &=
-    1 + \sum_{n=1}^\infty \eta^n
-    \left(
-    \frac{n(n-1)}{6} \pi \frac{\omega_2^3}{\omega_3^2} +
-    2 n \frac{\omega_1 \omega_2}{\omega_3} +
-    \omega_0
-    \right)
-    \\ &=
-    \pi \frac{\omega_2^3}{6\omega_3^2}
-    \sum_{n=0}^\infty
-    n(n-1) \eta^n
-    +
-    2 \frac{\omega_1 \omega_2}{\omega_3}
-    \sum_{n=0}^\infty n \eta^n
-    +
-    \left( 1 + \omega_0 \sum_{n=1}^\infty \eta^n \right)
-    \\ &=
-    \pi \frac{\omega_2^3}{6\omega_3^2}
-    \eta^2
-    \sum_{n=0}^\infty
-    n(n-1) \eta^{n-2}
-    +
-    2 \frac{\omega_1 \omega_2}{\omega_3}
-    \eta
-    \sum_{n=0}^\infty n \eta^{n-1}
-    +
-    \sum_{n=0}^\infty \eta^n
-    \\ &=
-    \pi \frac{\omega_2^3}{6\omega_3^2}
-    \eta^2
-    \frac{2}{(1-\eta)^3}
-    +
-    2 \frac{\omega_1 \omega_2}{\omega_3}
-    \eta
-    \frac{1}{(1-\eta)^2}
-    +
-    \frac{1}{1-\eta}
-    \\ &=
-    \pi \frac{\pi^3}{6 (16 \pi^2 / 9)}
-    \eta^2
-    \frac{2}{(1-\eta)^3}
-    +
-    2 \frac{2 \pi}{4 \pi / 3}
-    \eta
-    \frac{1}{(1-\eta)^2}
-    +
-    \frac{1}{1-\eta}
-    \\ &=
-    \frac{3 \pi^2}{16}
-    \eta^2
-    \frac{1}{(1-\eta)^3}
-    +
-    3
-    \eta
-    \frac{1}{(1-\eta)^2}
-    +
-    \frac{1}{1-\eta}
-    \\ &=
-    \frac{A\eta^2}{(1-\eta)^3}
-    +
-    \frac{3\eta (1-\eta)}{(1-\eta)^3}
-    +
-    \frac{(1-\eta)^2}{(1-\eta)^3}
-    \\ &=
-    \frac{A \eta^2
-    +
-    3\eta - 3\eta^2
-    +
-    1-2\eta + \eta^2}{(1-\eta)^3}
-    \\ &=
-    \frac{1 + \eta + (A - 2) \eta^2}{(1-\eta)^3}
-  \end{split}
-\end{equation}
-\begin{align*}
-  A = 3 &= \frac{3\pi^2}{16} + B \\
-  B &= 3\left( 1 - \frac{\pi^2}{16} \right) \\
-  B &= \frac{48 - 3\pi^2}{16} \\
-  B &= 3 - \frac{\pi \omega_2^2}{\omega_3^2} \\
-\end{align*}
-For $d=2$ we have
-\begin{equation}
-  \int_{\mathbb{E}} \mu_k (A \cap g B^2) \, dg =
-  \begin{cases}
-    \omega_2 \mu_0(A) + \omega_1 \mu_1(A) + \omega_0 \mu_2(A) & \qquad k=0 \\
-    \omega_2 \mu_1(A) + \frac{\pi}{2} \omega_1 \mu_2(A) & \qquad k=1 \\
-    \omega_2 \mu_2(A) & \qquad k=2
-  \end{cases}
-\end{equation}
-so the lowest-order integrals for $n=2$ evaluate to
-\begin{align}
-  \Gamma_2^{(0)} &= 2 \omega_0 \omega_2 + \omega_1^2 \\
-  \Gamma_2^{(1)} &= \pi \omega_1 \omega_2 \\
-  \Gamma_2^{(2)} &= \omega_2^2.
-\end{align}
-Iterating the integrals gives (evaluated in order of simplicity)
-\begin{align}
-  \Gamma_n^{(2)} &=
-  \omega_2 \Gamma_{n-1}^{(2)}
-  = \omega_2^n \\
-  \Gamma_n^{(1)} &=
-  \omega_2 \Gamma_{n-1}^{(1)}
-  + \frac{\pi}{2} \omega_1 \Gamma_{n-1}^{(2)}
-  \nonumber \\ &=
-  \omega_2 \Gamma_{n-1}^{(1)}
-  + \frac{\pi}{2} \omega_1 \omega_2^{n-1}
-  = \frac{n \pi}{2} \omega_1 \omega_2^{n-1} \\
-  \Gamma_n^{(0)} &=
-  \omega_2 \Gamma_{n-1}^{(0)}
-  + \omega_1 \Gamma_{n-1}^{(1)}
-  + \omega_0 \Gamma_{n-1}^{(2)}
-  \nonumber \\ &=
-  \omega_2 \Gamma_{n-1}^{(0)}
-  + \frac{(n-1) \pi}{2} \omega_1^2 \omega_2^{n-2}
-  + \omega_0 \omega_2^{n-1}
-  \nonumber \\ &=
-  \sum_{m=1}^n \omega_2^{n-m} \left(
-  \frac{(m-1)\pi}{2} \omega_1^2 \omega_2^{m-2}
-  + \omega_0 \omega_2^{m-1}
-  \right)
-  \nonumber \\ &=
-  \omega_2^{n-2}
-  \sum_{m=1}^n \left(
-  \frac{(m-1)\pi}{2} \omega_1^2
-  + \omega_0 \omega_2
-  \right)
-  \nonumber \\ &=
-  \omega_2^{n-2}
-  \left(
-  \frac{n(n-1)\pi}{4} \omega_1^2
-  + n \omega_0 \omega_2
-  \right)
-\end{align}
-This gives
-\begin{equation}
-  \begin{split}
-    \frac{\beta p}{\rho} &=
-    1 + \sum_{n=2}^\infty \frac{1}{n} \frac{\eta^{n-1}}{\omega_2^{n-1}} \Gamma_n
-    \\ &=
-    1 + \sum_{n=1}^\infty \frac{1}{n+1} \frac{\eta^n}{\omega_2^n} \Gamma_{n+1}
-    \\ &=
-    1 + \sum_{n=1}^\infty \frac{1}{n+1} \frac{\eta^n}{\omega_2^n}
-    \omega_2^{n-1}
-    \left(
-    \frac{n(n+1)\pi}{4} \omega_1^2
-    + (n+1) \omega_0 \omega_2
-    \right)
-    \\ &=
-    1 + \sum_{n=1}^\infty \eta^n
-    \left(
-    \frac{n\pi}{4} \frac{\omega_1^2}{\omega_2}
-    + \omega_0
-    \right)
-    \\ &=
-    1 + \sum_{n=1}^\infty (n+1) \eta^n =
-    \sum_{n=0}^\infty n \eta^{n-1}
-    = \frac{1}{(1-\eta)^2}
-  \end{split}
-\end{equation}
-which is absolutely convergent for all $|\eta| < 1$, although only values in the range $\eta \in [0,1]$ have any physical meaning.
-
 \subsection{Inhomogeneous liquid state theory}
 
 \subsubsection{Solvation physics}
+
+\section{Functional calculus}
+
+The chain rule of functional calculus is
+\todo{Insert citation to some calculus of variations reference, and Hansen2013/Bob's reviews for application to liquids.}
+\begin{equation*}
+  \frac{\delta f}{\delta u(\vec{r})} =
+  \int
+  \frac{\delta f}{\delta v(\vec{r}')}
+  \frac{\delta v(\vec{r}')}{\delta u(\vec{r})}
+  \, d\vec{r}'
+\end{equation*}
+and inverse derivatives are found via
+\begin{equation*}
+  \int
+  \frac{\delta u(\vec{r})}{\delta v(\vec{r}')}
+  \frac{\delta v(\vec{r}')}{\delta u(\vec{r})}
+  \, d\vec{r} =
+  \delta(\vec{r} - \vec{r}')
+\end{equation*}
+
+\section{Correlation functions}
+
+\begin{equation}
+  H^{(n)}(\vec{r}^n) =
+  \left\langle
+  \prod_{i=1}^n
+  \Big[ \rho(\vec{r}_i) - \rho^{(1)}(\vec{r}_i) \Big]
+  \right\rangle
+  \qquad \forall \; n \ge 2
+\end{equation}
+\begin{equation}
+  \begin{aligned}
+    H^{(2)}(\vec{r}_1, \vec{r}_2) &=
+    \left\langle
+    \left[ \rho(\vec{r}_1) - \rho^{(1)}(\vec{r}_1) \right]
+    \left[ \rho(\vec{r}_2) - \rho^{(1)}(\vec{r}_2) \right]
+    \right\rangle \\
+    &=
+    \big\langle \rho(\vec{r}_1) \rho(\vec{r}_2) \big\rangle -
+    \rho^{(1)}(\vec{r}_1) \rho^{(1)}(\vec{r}_2) \\
+    &=
+    \rho^{(2)}(\vec{r}_1, \vec{r}_2) +
+    \rho^{(1)}(\vec{r}_1) \delta(\vec{r}_1 - \vec{r}_2) -
+    \rho^{(1)}(\vec{r}_1) \rho^{(1)}(\vec{r}_2) \\
+    &=
+    \rho^{(1)}(\vec{r}_1) \rho^{(1)}(\vec{r}_2) h^{(2)}(\vec{r}_1, \vec{r}_2)
+    +
+    \rho^{(1)}(\vec{r}_1) \delta(\vec{r}_1 - \vec{r}_2)
+  \end{aligned}
+\end{equation}
+where
+\begin{equation}
+  h^{(n)}(\vec{r}^n) \equiv g^{(n)}(\vec{r}^n) - 1
+\end{equation}
+
+Density-density correlation functions
+\begin{equation}
+  H^{(n)}(\vec{r}^n) =
+  \left\langle
+  \prod_{i=1}^n
+  \Big[ \rho(\vec{r}_i) - \big\langle\rho(\vec{r}_i)\big\rangle \Big]
+  \right\rangle
+  \qquad \forall \; n \ge 2
+\end{equation}
+They are obtained from the total grand potential by repeat functional differentiation, as in
+\begin{equation}
+  \begin{aligned}
+  H^{(n)}(\vec{r}^n) &=
+  - \frac{\delta^n \beta \Omega}{\delta \beta\psi(\vec{r}_1) \delta \beta\psi(\vec{r}_2) \cdots \delta \beta\psi(\vec{r}_n)} \\
+  &=
+  \frac{\delta^{n-1} \rho(\vec{r}_1)}{\delta \beta\psi(\vec{r}_2) \delta \beta\psi(\vec{r}_3) \cdots \delta \beta\psi(\vec{r}_n)}.
+  \end{aligned}
+\end{equation}
+I.e.\ the grand potential is the generating functional for the density-density correlation functions.
+
+\section{Density functional theory}
+
+\subsection{Functional form of thermodynamic potentials}
+
+From the Legendre transform of $\beta \Omega$
+\begin{equation}
+  \begin{aligned}
+    \Omega[\rho(\vec{r})] &=
+    F[\rho(\vec{r})] -
+    \int \rho(\vec{r}) \psi(\vec{r}) \, d\vec{r} \\
+    &=
+    F_{id}[\rho(\vec{r})] +
+    F_{ex}[\rho(\vec{r})] -
+    \int \rho(\vec{r}) \psi(\vec{r}) \, d\vec{r}
+  \end{aligned}
+\end{equation}
+after defining intrinsic chemical potential
+\begin{equation}\label{eq:intrinsic-chemical-potential}
+  \psi(\vec{r}) = \mu - V_{ext}(\vec{r})
+\end{equation}
+
+For the ideal gas
+\begin{align*}
+  \Xi_{id} &=
+  \sum_{N=0}^\infty
+  \frac{(e^{\beta\mu} Z_1)^N}{N!}
+  = \exp{\left( Z_1 e^{\beta \mu} \right)} \\
+  Z_1 &= \int e^{-\beta V_{ext}(\vec{r})} \, d\vec{r} \\
+  \beta\Omega_{id}[V_{ext}] &=
+  - \ln{\Xi_{id}}
+  =
+  - e^{\beta\mu} \int e^{-\beta V_{ext}(\vec{r})} \, d\vec{r} \\
+  \rho^{(1)}(\vec{r}) &=
+  \frac{\langle N \rangle e^{-\beta V_{ext}(\vec{r})}}
+       {\int e^{-\beta V_{ext}(\vec{r}')} \, d\vec{r}'} =
+  \frac{\langle N \rangle}{Z_1} e^{-\beta V_{ext}(\vec{r})}
+  \\
+  \beta V_{ext}(\vec{r})
+  &=
+  -\ln
+  \left(
+  \frac{\rho^{(1)}(\vec{r})}{\langle N \rangle}
+  \int e^{-\beta V_{ext}(\vec{r}')} \, d\vec{r}'
+  \right)
+  \\
+  e^{\beta \mu} &= \lambda^d \rho
+  \\
+  F[\rho]
+  &=
+  - \lambda^d \rho
+  \int e^{-\beta V_{ext}(\vec{r})} \, d\vec{r} -
+  \int
+  \rho(\vec{r})
+  (V_{ext}(\vec{r}) - \mu)
+  \, d\vec{r}
+  \\
+  &=
+  - \lambda^d \rho
+  \int e^{-\beta V_{ext}(\vec{r})} \, d\vec{r} -
+  \int
+  \rho(\vec{r})
+  V_{ext}(\vec{r})
+  \, d\vec{r} -
+  \int
+  \rho(\vec{r}) \mu
+  \, d\vec{r}
+  \\
+  &=
+  - \lambda^d \rho
+  \int e^{-\beta V_{ext}(\vec{r})} \, d\vec{r} -
+  \int
+  \rho(\vec{r})
+  \ln {\frac{Z_1}{\langle N \rangle} \rho(\vec{r})}
+  \, d\vec{r} +
+  \int
+  \rho(\vec{r}) \mu
+  \, d\vec{r}
+  \\
+  &=
+  - \lambda^d \rho
+  \int
+  \frac{\rho^{(1)}(\vec{r})}{\langle N \rangle}
+  \left( \int e^{-\beta V_{ext}(\vec{r}')} \, d\vec{r}' \right)
+  \, d\vec{r} -
+  \int
+  \rho(\vec{r})
+  \ln{\left(
+  \frac{\rho^{(1)}(\vec{r})}{\langle N \rangle}
+  \int e^{-\beta V_{ext}(\vec{r}')} \, d\vec{r}'
+  \right)}
+  (V_{ext}(\vec{r}) - \mu)
+  \, d\vec{r}
+  \\
+  \beta\Omega_{id}[\rho] &=
+  F[\rho] + \int \rho(\vec{r}) (V_{ext}(\vec{r}) - \mu) \\
+  &=
+  F[\rho] + \int \rho(\vec{r}) (V_{ext}(\vec{r}) - \mu) \\
+\end{align*}
+Following \cite{Ashcroft1996}, we write the single-particle density as
+\begin{equation*}
+  \rho^{(1)}(\vec{r}) =
+  \frac{1}{\Xi}
+  \Tr{ \left(
+    e^{-\beta U_N(\vec{r}^N)} \sum_{i=1}^N \delta(\vec{r} - \vec{r}')
+    \right)
+  }
+\end{equation*}
+which in the absence of particle interactions reduces to
+\begin{equation*}
+  \rho^{(1)}(\vec{r}) =
+  \frac{\langle N \rangle e^{-\beta V_{ext}(\vec{r})}}
+       {\int e^{-\beta V_{ext}(\vec{r}')} \, d\vec{r}'}
+\end{equation*}
+We note that the energetic contribution to the free energy arising solely from the external potential is
+\begin{equation*}
+  \int \rho(\vec{r}') V_{ext}(\vec{r}') \, d\vec{r}'
+\end{equation*}
+The intrinsic free energy of the ideal gas is then obtained by subtracting the contributions from the external potential, as in
+\begin{equation*}
+  \begin{aligned}
+  F_{id}[\rho] &=
+  F[\rho] -
+  \int \rho(\vec{r}') V_{ext}(\vec{r}') \, d\vec{r}' \\
+  &=
+  F[\rho] -
+  \int \rho(\vec{r}') V_{ext}(\vec{r}') \, d\vec{r}' \\
+  \end{aligned}
+\end{equation*}
+
+Derivatives of the ideal gas free energy.
+The ideal gas free energy is given as
+\begin{equation*}
+  \beta F_{id}[\rho(\vec{r})] =
+  \int \rho(\vec{r}) (\ln{\lambda^d \rho(\vec{r})} - 1) \, d\vec{r},
+\end{equation*}
+so the first functional derivative is
+\begin{equation*}
+  \frac{\delta \beta F_{id}}{\delta \rho(\vec{r})} =
+  \ln{\lambda^d \rho(\vec{r})}.
+\end{equation*}
+To obtain the higher order functional derivatives it is helpful to write this as an integral with a delta function
+\begin{equation*}
+  \frac{\delta \beta F_{id}}{\delta \rho(\vec{r})} =
+  \int \delta{(\vec{r}' - \vec{r})}
+  \ln{\lambda^d \rho(\vec{r}')} \, d\vec{r}',
+\end{equation*}
+so we can obtain the second derivative as
+\begin{equation*}
+  \frac{\delta^2 \beta F_{id}}{\delta \rho(\vec{r}) \delta \rho(\vec{r}')} =
+  \frac{\delta(\vec{r}'-\vec{r})}{\rho(\vec{r})}.
+\end{equation*}
+Iterating this procedure gives us the $n$th functional derivative as
+\begin{equation}
+  \begin{aligned}
+    \frac{\delta^n \beta F_{id}}{\delta \rho(\vec{r}_1) \delta \rho(\vec{r}_2) \cdots \delta \rho(\vec{r}_n)} &=
+    \frac{\partial^{n-1} (\ln{\lambda^d \rho(\vec{r})})}{\partial \rho(\vec{r})^{n-1}}
+    \prod_{i=2}^n \delta(\vec{r}_i - \vec{r}_1) \\
+    &=
+    (-1)^{n-1}
+    \frac{(n-2)!}{\rho(\vec{r})^{n-1}}
+    \prod_{i=2}^n \delta(\vec{r}_i - \vec{r}_1),
+  \end{aligned}
+\end{equation}
+where the last line is valid for all $n \ge 2$.
+
+\subsection{Correlation functions}
+
+Excess free energy is the generating functional for direct correlations
+\begin{equation}\label{eq:direct-correlations}
+  c^{(n)}(\vec{r}^n) =
+  - \frac{\delta^n \beta F_{ex}}{\delta \rho(\vec{r}_1)\delta \rho(\vec{r}_2) \cdots \delta \rho(\vec{r}_n)}
+\end{equation}
+
+We have to compute a derivative like
+\begin{equation}\label{eq:intrinsic-chemical-potential-derivative-1}
+  \frac{\delta}{\delta\rho(\vec{r})}
+  \left(
+  \int \psi(\vec{r}') \rho(\vec{r}') \, d\vec{r}'
+  \right)
+  =
+  \psi(\vec{r}) +
+  \int
+  \rho(\vec{r}') \frac{\delta\psi(\vec{r}')}{\delta\rho(\vec{r})}
+  \, d\vec{r}'.
+\end{equation}
+The functional derivative on the right-hand side of \eqref{eq:intrinsic-chemical-potential-derivative-1} is a little odd.
+In general the external potential $V_{ext}(\vec{r})$%
+\marginfootnote{And thus $\psi(\vec{r})$ through \eqref{eq:intrinsic-chemical-potential}}
+is fixed so we consider the density profile as relaxing in response to perturbations from the potential i.e.\ terms like \[ \frac{\delta \rho(\vec{r})}{\delta \psi(\vec{r}')}. \]
+However, here the \emph{inverse} derivative appears.
+This must satisfy the inversion formula
+\begin{equation}\label{eq:intrinsic-chemical-potential-inverse-derivative}
+  \int
+  \frac{\delta \rho(\vec{r}_1)}{\delta \psi(\vec{r}')}
+  \frac{\delta \psi(\vec{r}')}{\delta \rho(\vec{r}_2)}
+  \, d\vec{r}' =
+  \delta(\vec{r}_1 - \vec{r}_2),
+\end{equation}
+which will be very important for obtaining Ornstein-Zernike relations later.
+Considering the external field as the control parameter, and noting the definition of $\psi(\vec{r})$ in \eqref{eq:intrinsic-chemical-potential} we take
+\begin{equation*}
+  \frac{\delta\psi(\vec{r}')}{\delta\rho(\vec{r})} = 0.
+\end{equation*}
+This expression satisfies \eqref{eq:intrinsic-chemical-potential-inverse-derivative}, being zero in general except where $\psi(\vec{r}')$ is used as an intermediate function in the (functional) chain rule expression.
+With this expression \eqref{eq:intrinsic-chemical-potential-derivative-2} becomes
+\begin{equation}\label{eq:intrinsic-chemical-potential-derivative-2}
+  \frac{\delta}{\delta\rho(\vec{r})}
+  \left(
+  \int \psi(\vec{r}') \rho(\vec{r}') \, d\vec{r}'
+  \right)
+  =
+  \psi(\vec{r}).
+\end{equation}
+
+In equilibrium
+\begin{equation}
+  \left.
+  \frac{\delta \Omega[\rho]}{\delta\rho(\vec{r})}
+  \right|_{\rho(\vec{r}) = \rho^{(1)}(\vec{r})}
+  = 0
+\end{equation}
+and consequently all higher-order derivatives must be zero, i.e.\
+\begin{equation}
+  \frac{\delta^n \Omega[\rho]}{\delta\rho(\vec{r}_1) \delta\rho(\vec{r}_2) \cdots \delta\rho(\vec{r}_n)} = 0 \qquad \forall \; n \ge 1
+\end{equation}
+therefore we have
+\begin{equation}
+  \frac{\delta^n F[\rho]}{\delta \rho(\vec{r}_1) \delta \rho(\vec{r}_2) \cdots \delta \rho(\vec{r}_n)} -
+  \frac{\delta}{\delta\rho(\vec{r})}
+  \left(
+  \int \psi(\vec{r}') \rho(\vec{r}') \, d\vec{r}'
+  \right)
+  = 0
+\end{equation}
+or using \eqref{eq:direct-correlations} this becomes
+\begin{equation*}
+  c^{(n)}(\vec{r}^n) =
+  \frac{\delta^n \beta F_{id}[\rho]}{\delta \rho(\vec{r}_1) \delta \rho(\vec{r}_2) \cdots \delta \rho(\vec{r}_n)} -
+  \frac{\delta^n}{\delta \rho(\vec{r}_1) \delta \rho(\vec{r}_2) \cdots \delta \rho(\vec{r}_n)}
+  \left(
+  \int \beta\psi(\vec{r}') \rho(\vec{r}') \, d\vec{r}'
+  \right)
+\end{equation*}
+At the one-body level we have:
+\begin{equation}\label{eq:c1}
+  \begin{aligned}
+    c^{(1)}(\vec{r}) &=
+    \frac{\delta \beta F_{id}}{\delta \rho(\vec{r})} -
+    \frac{\delta}{\delta \rho(\vec{r})^{(1)}}
+    \left(
+    \int \beta\psi(\vec{r}') \rho(\vec{r}') \, d\vec{r}'
+    \right) \\
+    &=
+    \ln{\lambda^d \rho(\vec{r})} -
+    \beta\psi(\vec{r})
+  \end{aligned}
+\end{equation}
+Which gives the equilibrium density as
+\begin{equation}
+  \rho^{(1)}(\vec{r}) = \lambda^{-d} \exp{\left(\beta\psi(\vec{r}) + c^{(1)}(\vec{r})\right)}
+\end{equation}
+We obtain the two-body correlations by functionally differentiating \eqref{eq:c1}, as in
+\begin{equation}\label{eq:c2}
+  \begin{aligned}
+    c^{(2)}(\vec{r}_1, \vec{r}_2) &=
+    \frac{\delta c^{(1)}(\vec{r}_1)}{\delta \rho^{(1)}(\vec{r}_2)} \\
+    &=
+    \frac{\delta(\vec{r}_2 - \vec{r}_1)}{\rho^{(1)}(\vec{r}_1)} -
+    \frac{\delta\beta\psi(\vec{r}_1)}{\delta \rho(\vec{r}_2)}
+  \end{aligned}
+\end{equation}
+From \eqref{eq:intrinsic-chemical-potential-inverse-derivative} we get
+\begin{equation*}
+  \begin{aligned}
+    \delta(\vec{r}_1 - \vec{r}_2) &=
+    \int
+    \frac{\delta \rho(\vec{r}_1)}{\delta \psi(\vec{r}')}
+    \frac{\delta \psi(\vec{r}')}{\delta \rho(\vec{r}_2)}
+    \, d\vec{r}' \\
+    &=
+    \int
+    H^{(2)}(\vec{r}_1, \vec{r}')
+    \left(
+    \frac{\delta(\vec{r}' - \vec{r}_2)}{\rho^{(1)}(\vec{r}')} -
+    c^{(2)}(\vec{r}', \vec{r}_2)
+    \right)
+    \, d\vec{r}' \\
+    &=
+    \rho^{(1)}(\vec{r}_1)
+    \left(
+    h^{(2)}(\vec{r}_1, \vec{r}_2) -
+    c^{(2)}(\vec{r}_1, \vec{r}_2)
+    \right) +
+    \delta(\vec{r}_1 - \vec{r}_2) - \\
+    &\qquad
+    \rho^{(1)}(\vec{r}_1)
+    \int
+    \rho^{(1)}(\vec{r}')
+    h^{(2)}(\vec{r}_1, \vec{r}')
+    c^{(2)}(\vec{r}', \vec{r}_2)
+    \, d\vec{r}'
+  \end{aligned}
+\end{equation*}
+which rearranges to give the Ornstein-Zernike equation
+\begin{equation}
+  h^{(2)}(\vec{r}_1, \vec{r}_2) =
+  c^{(2)}(\vec{r}_1, \vec{r}_2) +
+  \int
+  \rho^{(1)}(\vec{r}')
+  h^{(2)}(\vec{r}_1, \vec{r}')
+  c^{(2)}(\vec{r}', \vec{r}_2)
+  \, d\vec{r}'.
+\end{equation}
+This is a classic result in liquid state theory (cf.\ Refs.\ \cite{Ornstein1914,Hansen2010,Evans1979}) though normally it is expressed for the uniform liquid $\rho^{(1)}(\vec{r}) = \rho$ for spherically symmetric pair potentials thus
+\begin{equation}
+  h^{(2)}(r) =
+  c^{(2)}(r) +
+  \rho
+  \int
+  h^{(2)}(r)
+  c^{(2)}(|\vec{r}' - \vec{r}|)
+  \, d\vec{r}',
+\end{equation}
+where $r = |\vec{r}_2 - \vec{r}_1|$.
+The integral is a convolution, so it simplifies under Fourier transform to
+\begin{equation}
+  \tilde{h}(\vec{k}) =
+  \tilde{c}(\vec{k}) +
+  \rho \tilde{h}(\vec{k}) \tilde{c}(\vec{k})
+\end{equation}
+or rearranging for
+\begin{equation}
+  \tilde{h}(\vec{k}) =
+  \frac{\tilde{c}(\vec{k})}{1 - \rho \tilde{c}(\vec{k})}.
+\end{equation}
+Note that the static structure factor is defined as the Fourier transform of the two-body distribution function, i.e.\
+\begin{equation}
+  \begin{aligned}
+    S(\vec{k}) \equiv \tilde{g}^{(2)}(\vec{k}) &=
+    \delta(\vec{k}) + \tilde{h}(\vec{k}) \\
+    &=
+    \delta(\vec{k}) +
+    \frac{\tilde{c}(\vec{k})}{1 - \rho \tilde{c}(\vec{k})}.
+  \end{aligned}
+\end{equation}
+
+\subsection{Generalised Ornstein-Zernike equations}
+
+This section follows \cite{Barrat1988}.
+
+Thus for higher $n$ we have
+\begin{equation}
+  \begin{aligned}
+    c^{(n)}(\vec{r}^n) &=
+    \frac{\delta^{n-1} c^{(1)}(\vec{r}_1)}{\delta \rho(\vec{r}_2) \delta \rho(\vec{r}_3) \cdots \delta \rho(\vec{r}_n)} \\
+    &=
+    (-1)^n
+    \frac{(n-2)!}{\rho(\vec{r}_1)^{n-1}}
+    \prod_{i=2}^n \delta(\vec{r}_i - \vec{r}_1) -
+    \frac{\delta^{n-1} \beta\psi(\vec{r}_1)}{\delta \rho(\vec{r}_2) \delta \rho(\vec{r}_3) \cdots \delta \rho(\vec{r}_n)}
+  \end{aligned}
+\end{equation}
+or
+\begin{equation}
+  \frac{\delta^{n-1} \beta\psi(\vec{r}_1)}{\delta \rho(\vec{r}_2) \delta \rho(\vec{r}_3) \cdots \delta \rho(\vec{r}_n)} =
+  (-1)^n
+  \frac{(n-2)!}{\rho(\vec{r}_1)^{n-1}}
+  \prod_{i=2}^n \delta(\vec{r}_i - \vec{r}_1) -
+  c^{(n)}(\vec{r}^n)
+\end{equation}
+
+\begin{equation*}
+  H^{(n)}(\vec{r}^n) =
+  \frac{\delta^{n-1} \rho(\vec{r}_1)}{\delta \beta\psi(\vec{r}_2) \delta \beta\psi(\vec{r}_3) \cdots \delta \beta\psi(\vec{r}_n)}.
+\end{equation*}
+
+Defining
+\begin{equation*}
+  K^{(n)}(\vec{r}^n) =
+  \frac{\delta^{n-1} \beta\psi(\vec{r}_1)}{\delta \rho(\vec{r}_2) \delta \rho(\vec{r}_3) \cdots \delta \rho(\vec{r}_n)}
+\end{equation*}
+we have
+\begin{equation*}
+  \frac{\delta K^{(n)}(\vec{r}^n)}{\delta \rho(\vec{r}_{n+1})} =
+  K^{(n+1)}(\vec{r}^{n+1}).
+\end{equation*}
+and
+\begin{equation*}
+  \begin{aligned}
+    \frac{\delta H^{(n)}(\vec{r}^n)}{\delta \rho(\vec{r}_{n+1})}
+    &=
+    \int
+    \frac{\delta H^{(n)}(\vec{r}^n)}{\delta \psi(\vec{r}')}
+    \frac{\delta \psi(\vec{r}')}{\delta \psi(\vec{r}_{n+1})}
+    \, d\vec{r}' \\
+    &=
+    \int
+    H^{(n+1)}(\vec{r}^n, \vec{r}')
+    K^{(2)}(\vec{r}', \vec{r}_{n+1})
+    \, d\vec{r}' \\
+    &=
+    H^{(n+1)} \otimes K^{(2)}(\vec{r}^{n+1}).
+  \end{aligned}
+\end{equation*}
+In this form the Ornstein-Zernike equation can be written.
+\begin{equation*}
+  \begin{aligned}
+    \delta(\vec{r}_1 - \vec{r}_2) &=
+    \int
+    \frac{\delta \rho(\vec{r}_1)}{\delta \psi(\vec{r}')}
+    \frac{\delta \psi(\vec{r}')}{\delta \rho(\vec{r}_2)}
+    \, d\vec{r}' \\
+    &=
+    \int
+    H^{(2)}(\vec{r}_1, \vec{r}') K^{(2)}(\vec{r}', \vec{r}_2)
+    \, d\vec{r}' \\
+    &=
+    H^{(2)} \otimes K^{(2)} (\vec{r}^2)
+  \end{aligned}
+\end{equation*}
+Taking functional derivatives of this expression gives us a hierarchy of generalised Ornstein-Zernike equations.
+For example, the next equation in the hierarchy is
+\begin{equation*}
+  H^{(2)} \otimes K^{(3)} (\vec{r}^3) +
+  H^{(3)} \otimes K^{(2)} \otimes K^{(2)} (\vec{r}^3) = 0
+\end{equation*}
+The next functional derivative
+\begin{equation}
+  \begin{aligned}
+  H^{(2)} \otimes K^{(4)} (\vec{r}^4) & \\
+  + \; 2 H^{(3)} \otimes K^{(3)} \otimes K^{(2)} (\vec{r}^4) & \\
+  + \; H^{(4)} \otimes K^{(2)} \otimes K^{(2)} \otimes K^{(2)} (\vec{r}^4)
+  &= 0
+  \end{aligned}
+\end{equation}
+And the next one%
+\todo{Can we find a general formula? I notice some constraints on the indices: the sum of the indices $\{m\}$ in the $K^{(m)}$ terms must add up to $n-1$ so that the right number of independent variables are returned (the extra one is provided by the $H^{(l)}$ function giving the $\vec{r}^n$ total.}
+\begin{equation}
+  \begin{aligned}
+    H^{(2)} \otimes K^{(5)} (\vec{r}^5) & \\
+    + \; 3 H^{(3)} \otimes K^{(3)} \otimes K^{(3)} (\vec{r}^5) & \\
+    + \; 2 H^{(3)} \otimes K^{(4)} \otimes K^{(2)} (\vec{r}^5) & \\
+    + \; 5 H^{(4)} \otimes K^{(3)} \otimes K^{(2)} \otimes K^{(2)} (\vec{r}^5) & \\
+    + \; H^{(5)} \otimes K^{(2)} \otimes K^{(2)} \otimes K^{(2)} \otimes K^{(2)} (\vec{r}^5)
+    &= 0
+  \end{aligned}
+\end{equation}
+
 \subsubsection{Density functional theory (DFT)}
 
 Classic texts are \cite{Evans1979,Evans1992}, and a more recent review \cite{Roth2010}.
@@ -574,31 +688,6 @@ where the ideal part is
 \item Contrast mechanical problem (e.g.\ simulations) with inverse problem
 \item Summarise successes
 \end{itemize}
-
-\paragraph{Fundamental measure theory (FMT)}
-\begin{itemize}
-\item $d+1$ weight functions
-\item Exact decomposition of Mayer-f bond
-\end{itemize}
-
-We have 4 scalar weight functions
-\begin{subequations}
-  \begin{align}
-    \omega_3^i(\vec{r}) &= \Theta(R_i - r), \\
-    \omega_2^i(\vec{r}) &= \delta(R_i - r), \\
-    \omega_1^i(\vec{r}) &= \frac{\omega_2^i(\vec{r})}{4\pi R_i}, \\
-    \omega_0^i(\vec{r}) &= \frac{\omega_2^i(\vec{r})}{4\pi R_i^2},
-  \end{align}
-\end{subequations}
-and 2 vector weight functions
-\begin{subequations}
-  \begin{align}
-    \vec{\omega}_2^i(\vec{r}) &=
-    \frac{\vec{r}}{r} \delta(R_i - r), \\
-    \vec{\omega}_1^i(\vec{r}) &=
-    \frac{\vec{\omega}_1^i(\vec{r})}{4\pi R_i}.
-  \end{align}
-\end{subequations}
 
 \subsubsection{Heterogeneous approaches to the homogeneous liquid}
 \paragraph{Potential distribution theorem}

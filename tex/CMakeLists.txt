@@ -3,7 +3,7 @@ include(UseLATEX)
 add_latex_document(introduction.tex TARGET_NAME introduction IMAGE_DIRS ../img EXCLUDE_FROM_ALL)
 add_latex_document(integral-geometry.tex TARGET_NAME geometry IMAGE_DIRS ../img EXCLUDE_FROM_ALL)
 add_latex_document(theory.tex
-                   INPUTS liquid-state-theory.tex supercooled-liquids.tex
+                   INPUTS statistical-mechanics.tex liquid-state-theory.tex supercooled-liquids.tex
                    TARGET_NAME theory IMAGE_DIRS ../img EXCLUDE_FROM_ALL)
 add_latex_document(morphometric-framework.tex TARGET_NAME morph1 IMAGE_DIRS ../img EXCLUDE_FROM_ALL)
 add_latex_document(morphometric-applications.tex TARGET_NAME morph2 IMAGE_DIRS ../img EXCLUDE_FROM_ALL)
@@ -20,7 +20,7 @@ add_custom_target(chapters)
 add_dependencies(chapters introduction geometry theory morph1 morph2 cuzr aerosols conclusion appendix-two-spheres appendix-full-geometry appendix-finite-differences)
 
 add_latex_document(thesis.tex
-                   INPUTS abstract.tex dedication.tex declaration.tex acknowledgements.tex word-count.tex opening-quote.tex introduction.tex integral-geometry.tex theory.tex liquid-state-theory.tex supercooled-liquids.tex morphometric-framework.tex morphometric-applications.tex cuzr.tex aerosols.tex conclusion.tex appendix-two-spheres.tex appendix-full-geometry.tex appendix-line-curvature.tex appendix-finite-differences.tex
+                   INPUTS abstract.tex dedication.tex declaration.tex acknowledgements.tex word-count.tex opening-quote.tex introduction.tex integral-geometry.tex theory.tex statistical-mechanics.tex liquid-state-theory.tex supercooled-liquids.tex morphometric-framework.tex morphometric-applications.tex cuzr.tex aerosols.tex conclusion.tex appendix-two-spheres.tex appendix-full-geometry.tex appendix-line-curvature.tex appendix-finite-differences.tex
                    TARGET_NAME thesis
                    IMAGE_DIRS ../img)
 

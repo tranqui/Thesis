@@ -1,0 +1,75 @@
+\section{Statistical mechanics}
+
+I will assume the reader has a background in physics, and is familiar enough with statistical ensembles that I do not need to explain the origin of the following equations in detail.
+Briefly, these emerge by considering typical fluctuations of thermodynamic quantities for a subsystem within a macroscopic system called the \emph{ensemble}; the properties of this larger system define average quanties of the subsystem \cite{standard-text}.
+Alternatively, from a Bayesian perspective the probability distributions given below emerge from maximising the entropy%
+\marginfootnote{The entropy represents a thermodynamic quantity in the former picture, whereas it represents our own \emph{uncertainty} about the system in the latter.
+  While these two approaches are formally equivalent, the first interpretation is more common in the physics literature.
+  That being said, the derivations of the ensembles within an information theoretic framework are remarkably simple and will probably be more accessible to the non-physicist with a background in probability theory.}[-3cm]
+subject to the constraint of average energy and (optionally) the average particle number \cite{Jaynes1957a,Jaynes1957b}.
+
+A $d$-dimensional system of $N$ particles consists of $\vec{r}^N = \{\vec{r}_1, \cdots, \vec{r}_N\} \in \mathbb{R}^{dN}$ coordinates and $\vec{p}^N = \{\vec{p}_1, \cdots, \vec{p}_N\} \in \mathbb{R}^{dN}$ momenta.
+The classical Hamiltonian can be decomposed into kinetic and potential terms as in
+\begin{equation}
+  \mathcal{H}(\vec{r}^N, \vec{p}^N) = K_N(\vec{p}^N) + U_N(\vec{r}^N)
+\end{equation}
+in the absence of an external field.
+Further, we constrain the coordinates inside the region $\mathbb{V}^d$ of volume%
+\marginfootnote{Physicists would typically use the same symbol $V$ for these two concepts.
+  In keeping with the formal language of the previous chapter we would write $\vec{r}_i \in \mathbb{V}^d$ with $V = \mu_d(\mathbb{V}^d)$.}
+$V$.
+The \emph{canonical} ensemble describes an equilibrium system at constant temperature $T$ with probability measure
+\begin{equation}
+  f^{(N)}(\vec{r}^N, \vec{p}^N) \propto e^{-\beta{\mathcal{H}(\vec{r}^N, \vec{p}^N)}}
+\end{equation}
+where $\beta = (k_B T)^{-1}$ with Boltzmann constant $k_B$.
+The proportionality constant ensures the probability distribution is properly normalised, leading to the canonical partition function
+\begin{equation}
+  Q_N =
+  \int_{\mathbb{R}^{dN}} \int_{\mathbb{V}^{dN}}
+  e^{-\beta{\mathcal{H}(\vec{r}^N, \vec{p}^N)}}
+  \, d\vec{r}^N d\vec{p}^N.
+\end{equation}
+Or the classical kinetic energy can be written
+\[ K_N(\vec{p}^N) = \sum_{i=1}^N \frac{|\vec{p}|^2}{2m_i} \]
+then the momenta can be integrated out leaving only the configurational integral
+\begin{equation}
+  Q_N = \frac{\Lambda^{dN} Z_N}{N!}
+\end{equation}
+with
+\begin{equation*}
+  Z_N =
+  \int_{\mathbb{V}^{dN}}
+  \exp{-\beta U_N}
+  \, d\vec{r}^N.
+\end{equation*}
+%% and confiprobability measure
+%% \begin{equation}
+%%   g^{(N)}(\vec{r}^N) = \frac{e^{-\beta U_N(\vec{r}^N)}}{Z_N}
+%% \end{equation}
+
+The grand canonical ensemble is taken.
+
+The phase space measure is now
+The partition function is given as
+\begin{equation}
+  \Xi
+  = \sum_{N=0}^\infty \frac{z^N Z_N}{N!} \, d\vec{r}^N
+  = \sum_{N=0}^\infty \frac{z^N}{N!} \int e^{-\beta U_N} \, d\vec{r}^N,
+\end{equation}
+where the activity is written in terms of the thermal de Broglie wavelength $\Lambda$ as $z = \exp{\beta\mu} / \Lambda^d$.
+Accordingly, average quantities are found via
+\begin{equation}
+  \left< \cdots \right> =
+  \frac{1}{\Xi} \sum_{N=0}^\infty \frac{z^N}{N!} \int \left(\cdots\right) e^{-\beta U_N} \, d\vec{r}^N,
+\end{equation}
+
+We will work almost exlusively in the \emph{grand canonical ensemble} as it is the most convenient for liquid state descriptions%
+\marginfootnote{Notably the free energy is extensive without the need to invoke Stirling's approximation for $N!$, making the thermodynamics properly self-consistent even at finite system volumes.}.
+
+\begin{equation}
+  \mu_{id} = k_B T \ln{\Lambda^d \rho}
+\end{equation}
+\begin{equation}
+  \frac{F_{id}}{N} = k_B T (\ln{\Lambda^d \rho} - 1)
+\end{equation}

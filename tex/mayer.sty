@@ -1,0 +1,166 @@
+\usepackage{forloop}
+\usepackage{xcolor}
+\usepackage{tkz-euclide}
+\usepackage{xparse}
+\usetkzobj{all}
+
+\def\mayerlineloop#1{%
+  \ifx\relax#1%
+  \else%
+  \ifthenelse{\equal{#1}{|}} {%
+    \tkzDrawLine[add=0 and 0, style=solid](\i,\j)%
+  } {%
+    \ifthenelse{\equal{#1}{:}} {%
+      \tkzDrawLine[add=0 and 0, style=dashed](\i,\j)%
+    } { }%
+  }%
+  \FPeval{\nextj}{clip(1+\j)}%
+  \ifthenelse{\equal{\j}{\natoms}} {%
+    \FPeval{\nexti}{clip(1+\i)}%
+    \xdef\i{\nexti}%
+    \FPeval{\nexti}{clip(1+\i)}%
+    \xdef\j{\nexti}%
+  } {%
+    \FPeval{\nextj}{clip(1+\j)}%
+    \xdef\j{\nextj}%
+  }%
+  \expandafter\mayerlineloop%
+  \fi}
+
+\def\mayerlines#1{%
+  \def\i{1}%
+  \def\j{2}%
+  \mayerlineloop#1\relax%
+}
+
+\def\mayernodeloop#1{%
+  \ifx\relax#1%
+  \else%
+  \ifthenelse{\equal{#1}{o}} {%
+    \tkzDrawPoints[color=black,fill=white,size=12](\i)
+  } {%
+    \ifthenelse{\equal{#1}{.}} {%
+      \tkzDrawPoints[color=black,fill=black,size=12](\i)
+    } { }%
+  }%
+  \FPeval{\nexti}{clip(1+\i)}%
+  \xdef\i{\nexti}%
+  \expandafter\mayernodeloop%
+  \fi}
+
+\def\mayernodes#1{%
+  \def\i{1}%
+  \mayernodeloop#1\relax%
+}
+
+\NewDocumentCommand{\mayerdiagram}{oom}{%
+  \def \natoms {#3}%
+  \FPeval{\nlines}{clip(\natoms*(\natoms-1)/2)}%
+  \def \mayerrescale {0.8}%
+  \begin{tikzpicture}[baseline={([yshift=-.5ex]current  bounding  box.center)},
+      scale=\mayerrescale, every node/.style={scale=\mayerrescale}]
+    % Figure out side lengths to achieve unit height.
+    \ifthenelse{\natoms = 2}{\def \sidelength {1}} {
+      \FPeval{\iseven}{clip((cos(\natoms*pi)+1)/2)}
+      \ifthenelse{\iseven = 1} {
+        \FPeval{\heightbyradius}{clip(2*cos(pi/\natoms))}
+      } {
+        \FPeval{\heightbyradius}{clip(1 + cos(pi/\natoms))}
+      }
+      \FPeval{\circleradius}{clip(1/\heightbyradius)}
+      \FPeval{\sidelength}{clip(2*\circleradius * sin(pi/\natoms))}
+    }
+
+    % Place the points in a regular polygon.
+    \tkzDefPoint(0,0){1}
+    \foreach \i in {1,...,\natoms} {
+      \FPeval{\nexti}{clip(1+\i)}
+      \FPeval{\anglei}{clip(360*(\i-1)/\natoms)}
+      \tkzDefShiftPoint[\i](\anglei:\sidelength){\nexti}
+    }
+
+    % Draw lines between all the points.
+    \IfValueTF{#1}{%
+      \mayerlines{#1}
+    } {
+      \def \thislinestyle {solid}
+      \FPeval{\natomsminusone}{clip(\natoms - 1)}
+      \foreach \i in {1,...,\natomsminusone} {
+        \FPeval{\nexti}{clip(1+\i)}
+        \foreach \j in {\nexti,...,\natoms} {
+          \tkzDrawLine[add=0 and 0, style=\thislinestyle](\i,\j)
+        }
+      }
+    }
+
+    % Draw the points.
+    \IfValueTF{#2} {
+      \mayernodes{#2}
+    } {
+      \foreach \i in {1,...,\natoms} {
+        \tkzDrawPoints[color=black,fill=black,size=12](\i)
+      }
+    }
+  \end{tikzpicture}%
+}
+
+\newcommand{\fmtdiagram}[1] {%
+  \def \natoms {#1}%
+  \def \mayerrescale {0.8}%
+  \begin{tikzpicture}[baseline={([yshift=-.5ex]current  bounding  box.center)},
+      scale=\mayerrescale, every node/.style={scale=\mayerrescale}]
+    % Figure out side lengths to achieve unit height.
+    \ifthenelse{\natoms = 2}{\def \sidelength {1}} {
+      \FPeval{\iseven}{clip((cos(\natoms*pi)+1)/2)}
+      \ifthenelse{\iseven = 1} {
+        \FPeval{\heightbyradius}{clip(2*cos(pi/\natoms))}
+      } {
+        \FPeval{\heightbyradius}{clip(1 + cos(pi/\natoms))}
+      }
+      \FPeval{\circleradius}{clip(1/\heightbyradius)}
+      \FPeval{\sidelength}{clip(2*\circleradius * sin(pi/\natoms))}
+    }
+
+    % Place the points in a regular polygon.
+    \tkzDefPoint(0,0){1}
+    \foreach \i in {1,...,\natoms} {
+      \FPeval{\nexti}{clip(1+\i)}
+      \FPeval{\anglei}{clip(360*(\i-1)/\natoms)}
+      \tkzDefShiftPoint[\i](\anglei:\sidelength){\nexti}
+    }
+
+    %% % Draw lines between all the points.
+    %% \def \thislinestyle {solid}
+    %% \FPeval{\natomsminusone}{clip(\natoms - 1)}
+    %% \foreach \i in {1,...,\natomsminusone} {
+    %%   \FPeval{\nexti}{clip(1+\i)}
+    %%   \foreach \j in {\nexti,...,\natoms} {
+    %%     \tkzDrawLine[add=0 and 0, style=\thislinestyle](\i,\j)
+    %%   }
+    %% }
+
+    % Place the central point.
+    \FPeval{\x}{clip(0.5*\sidelength)}
+    \ifthenelse{\natoms = 2} {
+      \tkzDefPoint(\x,0.){0}
+    } {
+      \FPeval{\interiorangle}{clip((\natoms-2) * pi / \natoms)}
+      \FPeval{\y}{clip(\circleradius * sin(\interiorangle / 2))}
+      \tkzDefPoint(\x,\y){0}
+    }
+
+    % Draw lines between all the points and the central one.
+    \def \thislinestyle {solid}
+    \foreach \i in {1,...,\natoms} {
+        \tkzDrawLine[add=0 and 0, style=\thislinestyle](\i,0)
+    } 
+
+    %% % Draw the points.
+    %% \foreach \i in {1,...,\natoms} {
+    %%   \tkzDrawPoints[color=black,fill=black,size=12](\i)
+    %% }
+
+    % Draw the central point.
+    \tkzDrawPoints[color=black,fill=black,size=12](0)%
+  \end{tikzpicture}%
+}
