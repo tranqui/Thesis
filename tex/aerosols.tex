@@ -1,7 +1,7 @@
 %TC: macro \marginfootnote [other]
 %TC: envir SCfigure [] other
 %TC: macrocount beginSCfigure [figure]
-\documentclass[12pt]{report}
+\documentclass[12pt,twoside]{report}
 \usepackage{preamble}
 \setcounter{chapter}{6}
 \graphicspath{{../img/}}
@@ -19,7 +19,102 @@ As optimistic as this scenario is, it is worth making \emph{some} connection.
 \section{Diffusion model for a drying droplet}
 A moving boundary problem with diffusion.
 
-\subsection{New}
+We consider a droplet of radius $R(t)$ and consider concentration profiles at position $\vec{r}$ inside the droplet.
+We will later assume spherical symmetry and reduce the dependance on $\vec{r}$ to a dependance on the distance from the centre $r = |\vec{r}|$.
+The droplet consists of a binary fluid, with solute and solvent (mass) concentration profiles labelled $\rho^{(s)}(\vec{r})$ and $\rho^{(f)}(\vec{r})$ respectively.
+The mass fraction of each component is written
+\begin{equation}\label{eq:mass-fraction}
+  Y^{(i)}(\vec{r}) = \frac{\rho^{(i)}(\vec{r})}{\sum_j \rho^{(j)}(\vec{r})} = \frac{\rho^{(i)}(\vec{r})}{\rho^{(f)}(\vec{r}) + \rho^{(s)}(\vec{r})} \qquad i \in \{f, s\}
+\end{equation}
+Clearly $Y^{(f)} = 1 - Y^{(s)}$ as they must sum to unity, so we can choose either to describe the fluid;
+we will henceforth use solute mass fraction $Y^{(s)}$.
+The density of the droplet is
+\begin{equation}
+  \rho(\vec{r}) = \sum_i \rho^{(i)}(\vec{r}) = \rho^{(f)}(\vec{r}) + \rho^{(s)}(\vec{r}) = \frac{\rho^{(s)}(\vec{r})}{\rho^{(s)}(\vec{r})},
+\end{equation}
+but $\rho^{(s)}$ and $Y^{(s)}$ are related by an equation of state so we could equivalently write:
+\begin{equation}
+  \rho(\vec{r}) =
+  \frac{\rho^{(s)}(\vec{r})}{Y^{(s)}(\rho^{(s)}(\vec{r}))} =
+  \frac{\rho^{(s)}(Y^{(s)}(\vec{r}))}{Y^{(s)}(\vec{r})}.
+\end{equation}
+Volume additivity holds to a good approximation \cite{Handscomb???}, i.e.\ the density and concentrations are related by
+\begin{equation}\label{eq:volume-additivity}
+  \begin{aligned}
+    \frac{1}{\rho} &=
+    \sum_{k \in \{f,s\}} \frac{Y^{(k)}}{\rho^{(j)}_0} \\
+    &=
+    \frac{Y^{(i)}}{\rho^{(i)}_0} +
+    \frac{1 - Y^{(i)}}{\rho^{(j)}_0}
+    \qquad i,j \in \{f,s\}, \; j \ne i.
+  \end{aligned}
+\end{equation}
+means
+(define)
+\begin{equation}\label{eq:density-lambda}
+  \begin{aligned}
+    \Lambda^{(i)} &=
+    \frac{1}{\rho^2} \frac{\partial \rho}{\partial Y^{(i)}} \\
+    &=
+    \frac{1}{\rho^{(i)}_0} -
+    \frac{1}{\rho^{(j)}_0}
+    \\
+    &=
+    \frac{\rho^{(j)}_0 - \rho^{(i)}_0}{\rho^{(i)}_0\rho^{(j)}_0}
+    \qquad i,j \in \{f,s\}, \; j \ne i.
+  \end{aligned}
+\end{equation}
+From \eqref{eq:volume-additivity} and \eqref{eq:density-lambda} we have
+\begin{equation*}
+  \begin{aligned}
+    \frac{1}{\rho} &=
+    \Lambda^{(i)} Y^{(i)} + \frac{1}{\rho^{(j)}_0} \\
+    &=
+    \Lambda^{(i)} \frac{\rho^{(i)}}{\rho} + \frac{1}{\rho^{(j)}_0}
+    \qquad i,j \in \{f,s\}, \; j \ne i,
+  \end{aligned}
+\end{equation*}
+which rearranges to give
+\begin{equation*}
+  (1 - \rho^{(i)} \Lambda^{(i)})
+  \frac{1}{\rho} =
+  \frac{1}{\rho^{(j)}_0}
+  \qquad i,j \in \{f,s\}, \; j \ne i,
+\end{equation*}
+and finally we have
+\begin{equation}
+  \rho =
+  \rho^{(j)}_0 (1 - \rho^{(i)} \Lambda^{(i)})
+  \qquad i,j \in \{f,s\}, \; j \ne i.
+\end{equation}
+This means
+\begin{equation}
+  \begin{aligned}
+    \rho - \rho^{(i)} &=
+    \rho^{(j)}_0 (1 - \rho^{(i)} \Lambda^{(i)}) - \rho^{(i)} \\
+    &=
+    \rho^{(j)}_0 - \rho^{(i)}(1 + \rho^{(j)}_0 \Lambda^{(i)})
+    \qquad i,j \in \{f,s\}, \; j \ne i.
+  \end{aligned}
+\end{equation}
+or more importantly
+\begin{equation}
+  \frac{\rho^{(i)}}{\rho} =
+  \frac{\rho^{(i)}}{\rho^{(j)}_0 (1 - \rho^{(i)} \Lambda^{(i)})}
+  \qquad i,j \in \{f,s\}, \; j \ne i.
+\end{equation}
+Note:
+\begin{equation*}
+  \Lambda^{(f)} = -\Lambda^{(s)}.
+\end{equation*}
+
+\begin{SCfigure}[H]
+  \missingfigure[figwidth=\linewidth]{}
+  \caption{The model droplet: we have a liquid phase and a vapour phase separated by a moving boundary at radius $r=R(t)$.
+  We have a shrinking boundary $\dot{R} < 0$ for drying.}
+\end{SCfigure}
+
+\subsection{Evolution equations}
 
 Continuity equations (total and species)
 \begin{align}
@@ -61,7 +156,7 @@ Note that the divergence term in spherical coordinates is
   \frac{1}{r^2} \frac{\partial (r^2 \rho u)}{\partial r}
 \end{equation*}
 
-\subsection{Liquid phase analysis}
+\subsection{Liquid phase analysis I: mass fraction}
 
 Assume Fick's law for diffusion:
 \begin{equation}\label{eq:ficks-law}
@@ -184,77 +279,7 @@ and applying Stokes' theorem to the LHS gives
   \vec{\nabla} \cdot \vec{j}^{(i)}
   \, d^3|\vec{r}|
 \end{equation*}
-
-Volume additivity
-\begin{equation}\label{eq:volume-additivity}
-  \begin{aligned}
-    \frac{1}{\rho} &=
-    \sum_{k \in \{f,s\}} \frac{Y^{(k)}}{\rho^{(j)}_0} \\
-    &=
-    \frac{Y^{(i)}}{\rho^{(i)}_0} +
-    \frac{1 - Y^{(i)}}{\rho^{(j)}_0}
-    \qquad i,j \in \{f,s\}, \; j \ne i.
-  \end{aligned}
-\end{equation}
-means
-(define)
-\begin{equation}\label{eq:density-lambda}
-  \begin{aligned}
-    \Lambda^{(i)} &=
-    \frac{1}{\rho^2} \frac{\partial \rho}{\partial Y^{(i)}} \\
-    &=
-    \frac{1}{\rho^{(i)}_0} -
-    \frac{1}{\rho^{(j)}_0}
-    \\
-    &=
-    \frac{\rho^{(j)}_0 - \rho^{(i)}_0}{\rho^{(i)}_0\rho^{(j)}_0}
-    \qquad i,j \in \{f,s\}, \; j \ne i.
-  \end{aligned}
-\end{equation}
-From \eqref{eq:volume-additivity} and \eqref{eq:density-lambda} we have
-\begin{equation*}
-  \begin{aligned}
-    \frac{1}{\rho} &=
-    \Lambda^{(i)} Y^{(i)} + \frac{1}{\rho^{(j)}_0} \\
-    &=
-    \Lambda^{(i)} \frac{\rho^{(i)}}{\rho} + \frac{1}{\rho^{(j)}_0}
-    \qquad i,j \in \{f,s\}, \; j \ne i,
-  \end{aligned}
-\end{equation*}
-which rearranges to give
-\begin{equation*}
-  (1 - \rho^{(i)} \Lambda^{(i)})
-  \frac{1}{\rho} =
-  \frac{1}{\rho^{(j)}_0}
-  \qquad i,j \in \{f,s\}, \; j \ne i,
-\end{equation*}
-and finally we have
-\begin{equation}
-  \rho =
-  \rho^{(j)}_0 (1 - \rho^{(i)} \Lambda^{(i)})
-  \qquad i,j \in \{f,s\}, \; j \ne i.
-\end{equation}
-This means
-\begin{equation}
-  \begin{aligned}
-    \rho - \rho^{(i)} &=
-    \rho^{(j)}_0 (1 - \rho^{(i)} \Lambda^{(i)}) - \rho^{(i)} \\
-    &=
-    \rho^{(j)}_0 - \rho^{(i)}(1 + \rho^{(j)}_0 \Lambda^{(i)})
-    \qquad i,j \in \{f,s\}, \; j \ne i.
-  \end{aligned}
-\end{equation}
-or more importantly
-\begin{equation}
-  \frac{\rho^{(i)}}{\rho} =
-  \frac{\rho^{(i)}}{\rho^{(j)}_0 (1 - \rho^{(i)} \Lambda^{(i)})}
-  \qquad i,j \in \{f,s\}, \; j \ne i.
-\end{equation}
-Note:
-\begin{equation*}
-  \Lambda^{(f)} = -\Lambda^{(s)}.
-\end{equation*}
-So we have
+Using \eqref{eq:density-lambda} we have
 \begin{equation*}
   \begin{aligned}
   \int_{\partial \mathbb{V}}
@@ -379,32 +404,30 @@ Note:
   \end{aligned}
 \end{equation}
 
-\subsection{Boundary conditions}
-
-The mass of each species inside the droplet is obtained from its concentration profile as
+We model the diffusion constant by calibrating dynamic viscosity measurements
+\todo{Need a Reid group citation} against molecular dynamics measures of the diffusion constant \todo{Lyubartsev and Laaksonen citation here}[2cm].
+We assume the Stokes-Einstein form
 \begin{equation}
-  m^{(i)}(t) = \int_{\mathbb{V}(t)} \rho^{(i)}(\vec{r},t) \, d^3|\vec{r}|
-  \qquad i \in \{f,s\}
+  D_{\textrm{eff}}(\rho^{(s)};T) = D_{\textrm{eff}}(\rho_0^{(s)}, T_0) \frac{\eta_0}{\eta(\rho^{(s)})} \frac{T}{T_0}
 \end{equation}
-where $\mathbb{V}$ is the volume of the droplet.
-Differentiating this expression gives the mass flow into the droplet (of this species) as
-\begin{equation}\label{eq:integral-continuity}
-  \frac{d m^{(i)}}{dt} =
-  \int_{\mathbb{V}(t)} \frac{\partial \rho^{(i)}}{\partial t} \, d^3|\vec{r}| +
-  \int_{\partial \mathbb{V}(t)} \rho^{(i)} \, \vec{v}_{\partial \mathbb{V}(t)} \cdot d^2\vec{S}
-  \qquad i \in \{f,s\}
+where $\eta_0$ is the dynamic viscosity of water in ambient conditions, $T_0 = \SI{293}{\kelvin}$ and $D_0 = \SI{1266}{\micro\metre^2\per\second}$ is a constant determined by fitting the two datasets.
+Further we fit it to low densities using an Arrhenius-like extrapolation
+\begin{equation}
+  \eta(\rho^{(s)}) = \eta(\rho^{(s)} = 0) \exp{\left( \alpha \rho^{(s)} \right)}
 \end{equation}
-where $\vec{v}_{\partial \mathbb{V}(t)}$ is the velocity of the boundary and the vectorial surface element $d^2\vec{S}$ points in the direction of the outer normal vector.
-\eqref{eq:integral-continuity} is the integral form of \eqref{eq:species-continuity}.
-Note that solute does not leave the droplet, so all mass entering/leaving the droplet must be due to the solvent.
-We write these conditions as
-\begin{subequations}
-  \begin{align}
-    \frac{d m^{(s)}}{dt} &= 0 \\
-    \frac{d m^{(f)}}{dt} &= \frac{d m}{dt}
-  \end{align}
-\end{subequations}
-where $m = m^{(s)} + m^{(f)}$ is the total solute mass.
+where $\alpha$ is a fitting parameter.
+See Figure \ref{fig:diffusion-fit-nano3} for an example of this fitting for \ce{NaNO3} solutions.
+
+\begin{SCfigure}[H]
+  \includegraphics[width=\linewidth]{diffusion-fit-nano3}
+  \caption{Binary diffusion constant for \ce{NaNO3}--\ce{H2O} solution.
+  Solid points are experimental data from \cite{???} and the line is the numerical vft fit.}
+\end{SCfigure}
+
+\subsection{Liquid phase analysis II: concentration}
+
+This is much simpler: before we had separate advection and diffusion terms, but with this choice of variables they merge into one.
+
 \eqref{eq:species-continuity-advection-corrected} gives
 \begin{equation}\label{eq:species-evolution-current}
   \begin{aligned}
@@ -462,7 +485,34 @@ so inserting this and \eqref{eq:ficks-law} into \eqref{eq:species-evolution-curr
     \qquad i \in \{f,s\}
   \end{aligned}
 \end{equation}
-Inserting this into \eqref{eq:integral-continuity} and applying Stokes' theorem to the volume integral gives
+
+\subsection{Boundary conditions}
+
+The mass of each species inside the droplet is obtained from its concentration profile as
+\begin{equation}
+  m^{(i)}(t) = \int_{\mathbb{V}(t)} \rho^{(i)}(\vec{r},t) \, d^3|\vec{r}|
+  \qquad i \in \{f,s\}
+\end{equation}
+where $\mathbb{V}$ is the volume of the droplet.
+Differentiating this expression gives the mass flow into the droplet (of this species) as
+\begin{equation}\label{eq:integral-continuity}
+  \frac{d m^{(i)}}{dt} =
+  \int_{\mathbb{V}(t)} \frac{\partial \rho^{(i)}}{\partial t} \, d^3|\vec{r}| +
+  \int_{\partial \mathbb{V}(t)} \rho^{(i)} \, \vec{v}_{\partial \mathbb{V}(t)} \cdot d^2\vec{S}
+  \qquad i \in \{f,s\}
+\end{equation}
+where $\vec{v}_{\partial \mathbb{V}(t)}$ is the velocity of the boundary and the vectorial surface element $d^2\vec{S}$ points in the direction of the outer normal vector.
+\eqref{eq:integral-continuity} is the integral form of \eqref{eq:species-continuity}.
+Note that solute does not leave the droplet, so all mass entering/leaving the droplet must be due to the solvent.
+We write these conditions as
+\begin{subequations}
+  \begin{align}
+    \frac{d m^{(s)}}{dt} &= 0 \\
+    \frac{d m^{(f)}}{dt} &= \frac{d m}{dt}
+  \end{align}
+\end{subequations}
+where $m = m^{(s)} + m^{(f)}$ is the total solute mass.
+Inserting \eqref{eq:species-evolution-final} into \eqref{eq:integral-continuity} and applying Stokes' theorem to the volume integral gives
 \begin{equation}
   \begin{aligned}
     \frac{d m^{(i)}}{dt} &=
@@ -521,18 +571,18 @@ For our spherical droplets this becomes
 \begin{equation}
   \left. \frac{\partial Y^{(s)}}{\partial r} \right|_{r=R(t)} =
   -
-  \frac{Y^{(s)}}{(1 + \rho^{(s)} \Lambda^{(s)}) D_{\textrm{eff}}}
+  \frac{Y^{(s)}}{(1 + \rho^{(s)} \Lambda^{(s)}) D_{\textrm{eff}}(R)}
   \frac{dR}{dt}
 \end{equation}
 so
 \begin{equation}
   \left. \frac{\partial \rho^{(s)}}{\partial r} \right|_{r=R(t)} =
   -
-  \frac{\rho^{(s)}}{D_{\textrm{eff}}}
+  \frac{\rho^{(s)}}{D_{\textrm{eff}}(R)}
   \frac{dR}{dt}
 \end{equation}
 
-Some new stuff
+We can simplify the above expression by using volume additivity.
 \begin{equation*}
   \rho^{(f)} = Y^{(f)} \rho = (1 - Y^{(s)}) \rho = \rho - \rho^{(s)}
 \end{equation*}
@@ -694,22 +744,6 @@ So we have
 
 \subsection{Evolution equation}
 
-We consider a droplet of radius $R(t)$ and consider concentration profiles at radius $r$ from its centre.
-The droplet consists of a binary fluid, with solute and solvent (mass) concentration profiles labelled $c_s(r)$ and $c_w(r)$ respectively.
-The mass fraction of each component is written
-\begin{equation}\label{eq:mass-fraction}
-  Y^{(i)}(r) = \frac{\rho^{(i)}(r)}{\sum_j \rho^{(j)}(r)} = \frac{\rho^{(i)}(r)}{c_w(r) + c_s(r)} \qquad i \in \{w,s\}
-\end{equation}
-Clearly $\phi_w = 1 - \phi_s$ as they must sum to unity, so we can choose either to describe the fluid;
-we will henceforth use solute mass fraction $\phi_s$.
-The density of the droplet is
-\begin{equation}
-  \rho(r) = \sum_i c_i(r) = c_w(r) + c_s(r) = \frac{c_s(r)}{\phi_s(r)},
-\end{equation}
-but $c_s$ and $\phi_s$ are related by an equation of state so we could equivalently write:
-\begin{equation}
-  \rho(r) = \frac{c_s(r)}{\phi_s(c_s(r))} = \frac{c_s(\phi_s(r))}{\phi_s(r)}.
-\end{equation}
 We use an empirical form for this density by fitting it to a polynomial i.e. the leading order terms in its Taylor series expansion
 \begin{equation}
   \rho(c_s) = \sum_{n=0}^{\infty} \frac{\rho^{(n)}(c_s^{(0)})}{n!} (c_s - c_s^{(0)})^n,
@@ -793,9 +827,46 @@ Writing the density in terms of the concentration profile and using \eqref{eq:di
 %%   \right).
 %% \end{equation}
 
-\subsection{Updated notation}
+%% \subsection{Evaporation condition}
 
-Book describes 6 vaporisation models that differ primarily by their treatment of heat/temp of fluid phase.
+%% Kulmala equation for mass flow:
+%% \begin{equation}
+%%   I(R, \phi_s)%; \; T_\infty, S_\infty, P)
+%%   \equiv \frac{dm}{dt}
+%%   \simeq -2\pi \, S_h \, R \frac{S_{\infty} - a_w(\phi_s(R))}{\kappa_1(\phi_s) + \kappa_2(R, \phi_s)}
+%% \end{equation}
+%% with
+%% \begin{align}
+%%   \kappa_1(\phi_s) &= \frac{R_{mol} \, T_\infty}{M_w \, \beta_M \, D_w^{(air)} \, p_{eq} \, A(\phi_s)} \\
+%%   \kappa_2(R, \phi_s) &= \frac{L^2 \, M_w}{K \, R_{mol} \, \beta_T \, T_\infty^2} a_w(\phi_s(R))
+%% \end{align}
+%% The water activity $a_w$ is a fitted function of $\phi_s$ using experimental data.
+%% The constants I used are given as
+%% \begin{itemize}
+%% \item Sherwood number: $S_h \simeq 2.15479$
+%% \item Relative humidity of gas phase: $S_\infty = 0$ (dry experiments)
+%% \item Gas temperature: $T_\infty$ (\SI{}{\kelvin})
+%% \item Gas pressure: $p(T_\infty) \simeq \frac{T_\infty}{\SI{293}{\kelvin}} \SI{101325}{\newton}$
+%% \item Gas thermal conductivity (nitrogen): $K(T_\infty) = \left(\sum_{n=0}^2 \alpha_n T_\infty^n \right) \SI{}{\watt\per\meter\per\kelvin}$
+%%   \begin{itemize}
+%%   \item $\alpha_0 = \SI{3.95e-4}{}$
+%%   \item $\alpha_1 = \SI{9.805e-5}{\per\kelvin}$
+%%   \item $\alpha_2 = \SI{-4.3032e-8}{\per\square\kelvin}$
+%%   \end{itemize}
+%% \item Molar gas constant: $R_{mol} = \SI{8.314}{\joule\kelvin\per\mol}$
+%% \item $M_w = \SI{0.018016}{\kilogram\per\mol}$
+%% \item Diffusion constant of solvent through gas:
+%%   $D_w^{(air)} \simeq \left(\frac{T_\infty}{\SI{273.15}{\kelvin}}\right)^{1.81} \frac{T_\infty}{\SI{293}{\kelvin}} \, \SI{2.19e-5}{\square\meter\per\second}$
+%% \item Equilibrium water vapour pressure: $p_{eq} = \SI{2338.77}{\newton\per\meter}$
+%% \item Stefan flow correction: $A(\phi_s) = 1 + \frac{S_\infty + a_w(\phi_s)}{2} \frac{p_{eq}}{p(T_\infty)}$
+%% \item Latent heat of evaporation (water): $L = \SI{2455595}{\joule\per\kilogram}$
+%% \item Mass flux correction: $\beta_M \simeq 0.996175$
+%% \item Heat flux correction: $\beta_T \simeq 0.995228$
+%% \end{itemize}
+
+\subsection{Vapour phase analysis}
+
+Ref.\ \cite{Sirignano2010} describes 6 vaporisation models that differ primarily by their treatment of heat/temp of fluid phase.
 In order of increasing complexity these are:
 \begin{enumerate}
 \item const $T$ (enough to get $\Delta R^2 \propto t$ law)
@@ -813,239 +884,6 @@ Some general notes:
 \item Internal heat circulation ignored in first three models above.
 \item Gas has mass diffusion $\sim$ heat diffusion whereas in the liquid mass diffusion is much slower than heat diffusion
 \end{itemize}
-
-\subsection{Evaporation condition}
-
-Kulmala equation for mass flow:
-\begin{equation}
-  I(R, \phi_s)%; \; T_\infty, S_\infty, P)
-  \equiv \frac{dm}{dt}
-  \simeq -2\pi \, S_h \, R \frac{S_{\infty} - a_w(\phi_s(R))}{\kappa_1(\phi_s) + \kappa_2(R, \phi_s)}
-\end{equation}
-with
-\begin{align}
-  \kappa_1(\phi_s) &= \frac{R_{mol} \, T_\infty}{M_w \, \beta_M \, D_w^{(air)} \, p_{eq} \, A(\phi_s)} \\
-  \kappa_2(R, \phi_s) &= \frac{L^2 \, M_w}{K \, R_{mol} \, \beta_T \, T_\infty^2} a_w(\phi_s(R))
-\end{align}
-The water activity $a_w$ is a fitted function of $\phi_s$ using experimental data.
-The constants I used are given as
-\begin{itemize}
-\item Sherwood number: $S_h \simeq 2.15479$
-\item Relative humidity of gas phase: $S_\infty = 0$ (dry experiments)
-\item Gas temperature: $T_\infty$ (\SI{}{\kelvin})
-\item Gas pressure: $p(T_\infty) \simeq \frac{T_\infty}{\SI{293}{\kelvin}} \SI{101325}{\newton}$
-\item Gas thermal conductivity (nitrogen): $K(T_\infty) = \left(\sum_{n=0}^2 \alpha_n T_\infty^n \right) \SI{}{\watt\per\meter\per\kelvin}$
-  \begin{itemize}
-  \item $\alpha_0 = \SI{3.95e-4}{}$
-  \item $\alpha_1 = \SI{9.805e-5}{\per\kelvin}$
-  \item $\alpha_2 = \SI{-4.3032e-8}{\per\square\kelvin}$
-  \end{itemize}
-\item Molar gas constant: $R_{mol} = \SI{8.314}{\joule\kelvin\per\mol}$
-\item $M_w = \SI{0.018016}{\kilogram\per\mol}$
-\item Diffusion constant of solvent through gas:
-  $D_w^{(air)} \simeq \left(\frac{T_\infty}{\SI{273.15}{\kelvin}}\right)^{1.81} \frac{T_\infty}{\SI{293}{\kelvin}} \, \SI{2.19e-5}{\square\meter\per\second}$
-\item Equilibrium water vapour pressure: $p_{eq} = \SI{2338.77}{\newton\per\meter}$
-\item Stefan flow correction: $A(\phi_s) = 1 + \frac{S_\infty + a_w(\phi_s)}{2} \frac{p_{eq}}{p(T_\infty)}$
-\item Latent heat of evaporation (water): $L = \SI{2455595}{\joule\per\kilogram}$
-\item Mass flux correction: $\beta_M \simeq 0.996175$
-\item Heat flux correction: $\beta_T \simeq 0.995228$
-\end{itemize}
-
-\subsubsection{Vapour phase analysis (new)}
-
-Gas-field continuity equation
-\begin{equation}
-  \frac{\partial}{\partial t} ( \rho r^2 ) +
-  \frac{\partial}{\partial r} ( \rho r^2 u ) = 0
-\end{equation}
-Momentum equation (from Navier-Stokes, so assumes Newtonian fluid, Stokes hypothesis and no body forces):
-\begin{equation}
-  \frac{\partial}{\partial t} ( \rho r^2 u ) +
-  \frac{\partial}{\partial r} ( \rho r^2 u^2 ) +
-  r^2 \frac{\partial p}{\partial r}
-  = \frac{4 r^2}{3} \frac{\partial}{\partial r}
-  \left( \mu \frac{\partial u}{\partial r} - \mu \frac{u}{r} \right)
-  + 4 r^2 \mu \frac{\partial}{\partial r} \left( \frac{u}{r} \right)
-\end{equation}
-where $\mu$ is dynamic viscosity\todo{Also symbol used for chemical potential in previous chapters, need to make this clearer or choose a new symbol.}.
-Fourier's law of heat conduction
-\begin{equation}
-  \vec{q} = -k \vec{\nabla} T
-\end{equation}
-$\vec{q}$ is heat flux, $k$ conductivity and $T$ is local temperature.
-Energy equation:
-\begin{equation}
-  \frac{\partial}{\partial t} ( \rho r^2 h ) +
-  \frac{\partial}{\partial r} ( \rho r^2 u h ) -
-  \frac{\partial}{\partial r} ( \lambda r^2 \frac{\partial T}{\partial r} ) +
-  \frac{\partial}{\partial r} ( \sum_m \rho r^2 V_m h_m Y_m ) =
-  r^2 \frac{\partial p}{\partial t} +
-  r^2 u \frac{\partial p}{\partial r} + r^2 \phi
-\end{equation}
-$h = \sum_m h_m$ is enthalpy, $\phi = \tau_{ij} \frac{\partial u_i}{\partial x_j}$, $V_m = - \frac{D}{Y_m} \frac{\partial Y_m}{\partial r}$.
-Assumed $D_m = D \forall m$\todo{Book suggests citation by Megandis and Sirignanco (1991).}, and equal molecular weights.
-Species equation (continuity equation for individual components):
-\begin{equation}
-  \frac{\partial}{\partial t} ( \rho r^2 Y_m ) +
-  \frac{\partial}{\partial r} ( \rho r^2 u Y_m ) +
-  \frac{\partial}{\partial r} ( \rho r^2 V_m Y_m ) = 0
-\end{equation}
-
-Assuming constant density and ideal gas ($\beta p = \rho$), quasi-steady so time derivatives disappear
-\begin{align}
-  \frac{4 r^2}{3} \frac{\partial}{\partial r}
-  \left( \mu \frac{\partial u}{\partial r} - \mu \frac{u}{r} \right)
-  + 4 r^2 \mu \frac{\partial}{\partial r} \left( \frac{u}{r} \right)
-  &= \frac{\partial}{\partial r} ( \rho r^2 u^2 ) \\
-  \frac{\partial}{\partial r} ( \rho r^2 u h ) -
-  \frac{\partial}{\partial r} ( \lambda r^2 \frac{\partial T}{\partial r} ) -
-  \frac{\partial}{\partial r} ( \sum_m \rho r^2 D h_m \frac{\partial Y_m}{\partial r} ) &=
-  r^2 u \frac{\partial p}{\partial r} + r^2 \phi
-\end{align}
-
-Our boundary conditions:
-\begin{itemize}
-\item Ambient conditions at $r \to \infty$ ($T$, $p$, $\rho$, $\{ Y_m \}$)
-\item Phase equilibrium at $r = R$, i.e.\ Clausius-Clapeyron relation:
-  \begin{align}
-    X_m(R) &= \frac{A}{p} e^{-\frac{L}{RT}} \\
-    A &= p_0 e^{\frac{L}{RT_b(p_0)}}
-  \end{align}
-  $p_0$ is reference pressure, $T_b$ is the (pressure dependent) boiling point.
-\item mass balance at $r = R$, if $\rho$ const:
-  \begin{align}
-    \frac{\dot{m}}{4\pi} Y_F(R) + \rho D R^2 \left. \frac{\partial Y_F}{\partial r} \right|_{r=R} &= \frac{\dot{m}}{4\pi} \\
-    \frac{\dot{m}}{4\pi} Y_m(R) + \rho D R^2 \left. \frac{\partial Y_m}{\partial r} \right|_{r=R} &= 0 \qquad m \ne F
-  \end{align}
-\item Ambient gas dot not enter the droplet
-  \begin{equation}
-    \rho u Y_A(R) - \rho D \left.\frac{d Y_A}{dr}\right|_{r=R} = 0
-  \end{equation}
-  combining with \eqref{eq:quasistatic-vapour-species-conservation} gives
-  \begin{equation}
-    \rho u Y_A - \rho D \frac{d Y_A}{dr} = 0 \quad \forall \; r \ge R.
-  \end{equation}
-\end{itemize}
-
-\subsubsection{Numerical implementation}
-
-$\rho(r)$ will later be discretised into the density at equally spaced points of separation $\Delta r$, so it is natural to think of it as a vector of points $\vec{\rho} = \{\rho(0), \rho(\Delta r), \rho(2 \Delta r), \cdots, \rho(1)\} = \{\rho_1, \cdots, \rho_N\}$ so we will use the notation $\vec{\rho}$ from
-now on to mean $\rho(r)$.
-
-To integrate a timestep $\Delta t$ we use the Crank-Nicolson \cite{Crank1947} method where the time derivative for integration is taken as the average of the instantaneous derivatives at the start and end of integration.
-This is essentially a midpoint method, but requires a bit of linear algebra to solve as we do not know the value of $\partial \vec{\rho} / \partial t$ until we also know $\vec{\rho}$.
-Starting from
-\begin{equation}
-  \frac{\partial \vec{\rho}}{\partial t} =
-  \lim_{\Delta t \to 0} \frac{\vec{\rho}(t + \Delta t) - \vec{\rho}(t)}{\Delta t}
-\end{equation}
-after discretising we obtain
-\begin{equation}
-  \frac{\vec{\rho}(t + \Delta t) - \vec{\rho}(t)}{\Delta t}
-  =
-  \frac{1}{2}
-  \left(
-  \left. \frac{\partial \vec{\rho}}{\partial t} \right|_{t + \Delta t}
-  +
-  \left. \frac{\partial \vec{\rho}}{\partial t} \right|_t
-  \right)
-  + \mathcal{O}(\Delta t^2).
-\end{equation}
-The main advantage of this scheme over more simple schemes (e.g. forward Euler method where we just take the initial $\partial \vec{\rho} / \partial t$) is that the error is of order $\Delta t^2$; this ensures rapid convergence to the correct solution with small integration steps.
-
-Labelling $\vec{\rho}(t) = \vec{\rho}_n$ and $\vec{\rho}(t + \Delta t) = \vec{\rho}_{n+1}$, the goal is to make progressively better guesses for $\vec{\rho}_{n+1}$.
-We label the $k^\textrm{th}$ approximation for $\vec{\rho}_{n+1}$ as $\vec{\rho}_{n+1}^{(k)}$ where the initial guess is $\vec{\rho}_{n+1}^{(1)} = \vec{\rho}_n$, and derive an iterative formula to find $\vec{\rho}_{n+1}^{(k+1)}$ which converges to $\vec{\rho}_{n+1}$ in the limit $k \to \infty$, although in practice only a few iterations should be enough to achieve an approximate solution.
-Using the Crank-Nicolson scheme we write
-\begin{equation}
-  \frac{\vec{\rho}_{n+1}^{(k+1)} - \vec{\rho}_n}{\Delta t}
-  =
-  \frac{\vec{\rho}_{n+1}^{(k)} + \delta \vec{\rho}_{n+1}^{(k)} - \vec{\rho}_n}{\Delta t}
-  =
-  \frac{1}{2}
-  \left(
-  \frac{\partial (\vec{\rho}_{n+1}^{(k)} + \delta \vec{\rho}_{n+1}^{(k)})}{\partial t}
-  +
-  \frac{\partial \vec{\rho}_n}{\partial t}
-  \right)
-\end{equation}
-This is complicated by the fact that $\rho(r)$ depends on $R(t)$ making this equation nonlinear as it couples with the evolution of $R(t)$.
-As such, the above equation implicitly involves terms $R_{n+1}^{(k)} + \delta R_{n+1}^{(k)}$.
-To find the form of the right-hand side we expand in powers of $\delta \vec{\rho}_{n+1}^{(k)}$ and $\delta R_{n+1}^{(k)}$ retaining only those linear.
-Doing this we find...
-\begin{equation}
-  \frac{\vec{\rho}_{n+1}^{(k)} + \delta \vec{\rho}_{n+1}^{(k)} - \vec{\rho}_n}{\Delta t}
-  =
-  F_\rho^{(k)} (\vec{\rho}_n, \vec{\rho}_{n+1}^{(k)}, R_n, R_{n+1}^{(k)}) +
-  G_\rho^{(k)} (\vec{\rho}_{n+1}^{(k)}, R_{n+1}^{(k)}) \delta \vec{\rho}_{n+1}^{(k)} +
-  H_\rho^{(k)} (\vec{\rho}_{n+1}^{(k)}, R_{n+1}^{(k)}) \delta R_{n+1}^{(k)}
-\end{equation}
-where the functions $F_\rho^{(k)},G_\rho^{(k)},H_\rho^{(k)}$ are long and not particularly illuminating so we omit their explicit form for the sake of brevity.
-Importantly $F_\rho^{(k)},G_\rho^{(k)},H_\rho^{(k)}$ are functions of known variables and $\delta \vec{\rho}_{n+1}^{(k)}, \delta R_{n+1}^{(k)}$.
-We can do a similar expansion for the evolution of the boundary, i.e.\
-\begin{equation}\label{eq:discrete-evolution-rho}
-  \frac{R_{n+1}^{(k)} + \delta R_{n+1}^{(k)} - R_n}{\Delta t}
-  =
-  \frac{1}{2}
-  \left(
-  \frac{\partial (R_{n+1}^{(k)} + \delta R_{n+1}^{(k)})}{\partial t}
-  +
-  \frac{\partial R_n}{\partial t}
-  \right)
-\end{equation}
-and we perform the same expansion as before to obtain something of in the form of
-\begin{equation}\label{eq:discrete-evolution-R}
-  \frac{R_{n+1}^{(k)} + \delta R_{n+1}^{(k)} - R_n}{\Delta t}
-  =
-  F_R^{(k)} (\vec{\rho}_n, \vec{\rho}_{n+1}^{(k)}, R_n, R_{n+1}^{(k)}) +
-  G_R^{(k)} (\vec{\rho}_{n+1}^{(k)}, R_{n+1}^{(k)}) \delta \vec{\rho}_{n+1}^{(k)} +
-  H_R^{(k)} (\vec{\rho}_{n+1}^{(k)}, R_{n+1}^{(k)}) \delta R_{n+1}^{(k)}
-\end{equation}
-with new functions $F_R^{(k)},\vec{G}_R^{(k)},H_R^{(k)}$ which are also of known variables.
-In all likelyhood, these only depend on the density of the solute at the boundary.
-We can combine equations \eqref{eq:discrete-evolution-rho} and \eqref{eq:discrete-evolution-R} into a single matrix equation, i.e.
-\begin{equation}
-  \begin{pmatrix}
-    \vec{G}_\rho^{(k)} \Delta t - 1 & H_\rho^{(k)} \Delta t \\
-    G_R^{(k)} \Delta t & H_R^{(k)} \Delta t - 1
-  \end{pmatrix}
-  \begin{pmatrix}
-    \delta \vec{\rho}_{n+1}^{(k)} \\
-    \delta R_{n+1}^{(k)}
-  \end{pmatrix}
-  =
-  \begin{pmatrix}
-    \vec{\rho}_{n+1}^{(k)} - \vec{\rho}_n^{(k)} -
-    F_\rho^{(k)} (\vec{\rho}_n, \vec{\rho}_{n+1}^{(k)}, R_n, R_{n+1}^{(k)})
-    \Delta t
-    \\
-    R_{n+1}^{(k)} - R_n^{(k)} -
-    F_R^{(k)} (\vec{\rho}_n, \vec{\rho}_{n+1}^{(k)}, R_n, R_{n+1}^{(k)})
-    \Delta t
-  \end{pmatrix}.
-\end{equation}
-The terms on the right-hand side of this matrix equation are called th eresiduals, and the left-hand side consists of the (Jacobian) matrix and the vector of unknowns.
-The solution is found by inverting the matrix.
-If we write $\vec{x}_n = (\vec{\rho}_n, R_n)^T$ we have
-\begin{equation}
-  \delta \vec{F} \cdot \delta \vec{x}_{n+1}^{(k)} =
-  \vec{F}(\vec{x}_n, \vec{x}_{n+1}^{(k)}
-\end{equation}
-where $\vec{F}(\vec{x}_n, \vec{x}_{n+1}^{(k)}) = \vec{x}_{n+1}^{(k)} - \vec{x}_n - \Delta t (F_\rho^{(k)} (\vec{x}_n, \vec{x}_{n+1}^{(k)}), F_R^{(k)} (\vec{x}_n, \vec{x}_{n+1}^{(k)}))^T$ giving solution
-\begin{equation}
-  \delta \vec{x}_{n+1}^{(k)} =
-  (\delta \vec{F}^{(k)})^{-1} \cdot \vec{F}(\vec{x}_n, \vec{x}_{n+1}^{(k)}).
-\end{equation}
-We iterate this inversion procedure until some stop criterion is met (i.e.\ we find $\vec{x}_{n+1}$ to some desired accuracy), giving the final solution after $k_{stop}$ iterations:
-\begin{equation}
-  \vec{x}_{n+1} =
-  \vec{x}_n + \sum_{k=1}^{k_{stop}}
-  (\delta \vec{F}^{(k)})^{-1} \cdot \vec{F}(\vec{x}_n, \vec{x}_{n+1}^{(k)})
-  + \mathcal{O}(\Delta t^2).
-\end{equation}
-A sensible stop criterion is that the residuals $F(\vec{x}_n, \vec{x}_{n+1}^{(k)}$ fall to some small value close to zero, meaning $\delta\vec{x}^{(k+1)}$ is small and we are sufficiently close to the true $\vec{x}_{n+1}$.
-Note that the true $\vec{x}_{n+1}$ is not `true' in the sense that it is the exact result, i.e. $(\rho(t + \Delta t), R(t + \Delta t))^T$, but rather true in the sense that it is the correct result predicted by this method (i.e. to $\mathcal{O}(\Delta t^2)$ accuracy).
-
-\subsubsection{Vapour phase analysis}
 
 Key assumptions\todo{Also reference Slattery, \emph{Advanced transport phenomena}, (1999)}
 \begin{enumerate}
@@ -1162,96 +1000,88 @@ The heat penetrating into the liquid droplet is \cite{Abramzon1988}
   Q_L = \dot{m} \left( \frac{C_{pF} (T_\infty - T(R))}{B_T} - L(T(R)) \right)
 \end{equation}
 
-\subsection{Quasistatic expressions}
+%% \subsection{Quasistatic expressions}
 
-In the quasistatic limit the density profile relaxes instantaneously leaving only
-\begin{equation}
-  \rho_{hom}(t) = \lim_{D\to\infty}{\rho(r,t)}
-\end{equation}
-which inserted back into \eqref{eq:mass-equation} gives the droplet mass in this limit as
-\begin{equation}
-  m_{hom}(t) = 4\pi \rho_{hom}(t) \int_0^{R(t)} r^2 \, dr = \frac{4\pi R(t)^3}{3} \rho_{hom}(t)
-\end{equation}
-We can rearrange this relation for $R(t)$
-\begin{equation}\label{eq:homogeneous-droplet-radius}
-  R(t) = \left( \frac{3 \, m_{hom}(t)}{4\pi \rho_{hom}(t)} \right)^\frac{1}{3}
-\end{equation}
-where the corrections arise due to deviations from the homogeneous density profile $\Delta \rho = \rho(r) - \rho_{hom}$.
-The solute mass fraction \eqref{eq:mass-fraction} reduces to
-\begin{equation}\label{eq:homogeneous-solute-mass-fraction}
-  \phi_{s,hom}(t) = \frac{m_s}{m_{hom}(t)}.
-\end{equation}
-In what follows we will drop the subscript $hom$ in all expressions
+%% In the quasistatic limit the density profile relaxes instantaneously leaving only
+%% \begin{equation}
+%%   \rho_{hom}(t) = \lim_{D\to\infty}{\rho(r,t)}
+%% \end{equation}
+%% which inserted back into \eqref{eq:mass-equation} gives the droplet mass in this limit as
+%% \begin{equation}
+%%   m_{hom}(t) = 4\pi \rho_{hom}(t) \int_0^{R(t)} r^2 \, dr = \frac{4\pi R(t)^3}{3} \rho_{hom}(t)
+%% \end{equation}
+%% We can rearrange this relation for $R(t)$
+%% \begin{equation}\label{eq:homogeneous-droplet-radius}
+%%   R(t) = \left( \frac{3 \, m_{hom}(t)}{4\pi \rho_{hom}(t)} \right)^\frac{1}{3}
+%% \end{equation}
+%% where the corrections arise due to deviations from the homogeneous density profile $\Delta \rho = \rho(r) - \rho_{hom}$.
+%% The solute mass fraction \eqref{eq:mass-fraction} reduces to
+%% \begin{equation}\label{eq:homogeneous-solute-mass-fraction}
+%%   \phi_{s,hom}(t) = \frac{m_s}{m_{hom}(t)}.
+%% \end{equation}
+%% In what follows we will drop the subscript $hom$ in all expressions
 
-The trick to this method is realising that at short times the Kulmala coefficients remain approximately constant, leading to the following ODE and solution:
-\begin{equation*}
-  \frac{dR}{dt} = \frac{c}{R(t)} \quad \implies R(t) = \sqrt{R(0)^2 + 2ct}.
-\end{equation*}
+%% The trick to this method is realising that at short times the Kulmala coefficients remain approximately constant, leading to the following ODE and solution:
+%% \begin{equation*}
+%%   \frac{dR}{dt} = \frac{c}{R(t)} \quad \implies R(t) = \sqrt{R(0)^2 + 2ct}.
+%% \end{equation*}
 
-Differentiating \eqref{eq:homogeneous-droplet-radius} gives
-\begin{equation}
-  \frac{1}{3} \frac{d}{dt} \left( R^3 \right)
-  = R^2 \frac{dR}{dt}
-  = \frac{1}{4\pi} \frac{d}{dt} \left( \frac{m}{\rho} \right)
-  = \frac{1}{4\pi} \left(
-  \frac{1}{\rho} \frac{d m}{dt}
-  - \frac{m}{\rho^2} \frac{d \rho}{dt}
-  \right).
-\end{equation}
+%% Differentiating \eqref{eq:homogeneous-droplet-radius} gives
+%% \begin{equation}
+%%   \frac{1}{3} \frac{d}{dt} \left( R^3 \right)
+%%   = R^2 \frac{dR}{dt}
+%%   = \frac{1}{4\pi} \frac{d}{dt} \left( \frac{m}{\rho} \right)
+%%   = \frac{1}{4\pi} \left(
+%%   \frac{1}{\rho} \frac{d m}{dt}
+%%   - \frac{m}{\rho^2} \frac{d \rho}{dt}
+%%   \right).
+%% \end{equation}
 
-We use \eqref{eq:homogeneous-solute-mass-fraction} to differentiate the density as
-\begin{equation*}
-  \frac{d\rho}{dt}
-  = \rho'(\phi_s) \frac{d\phi_s}{dt}
-  = -\rho'(\phi_s) \frac{m_s}{m^2} \frac{dm}{dt}
-  = -\rho'(\phi_s) \frac{\phi_s}{m} \frac{dm}{dt}.
-\end{equation*}
-\begin{equation}
-  \implies \quad \frac{dR}{dt}
-  = \frac{1}{4\pi \rho} \left(
-  1 + \phi_s \frac{\rho'(\phi_s)}{\rho}
-  \right)
-  \underbrace{\frac{1}{R^2} \frac{dm}{dt}}_{\propto 1/R}
-\end{equation}
+%% We use \eqref{eq:homogeneous-solute-mass-fraction} to differentiate the density as
+%% \begin{equation*}
+%%   \frac{d\rho}{dt}
+%%   = \rho'(\phi_s) \frac{d\phi_s}{dt}
+%%   = -\rho'(\phi_s) \frac{m_s}{m^2} \frac{dm}{dt}
+%%   = -\rho'(\phi_s) \frac{\phi_s}{m} \frac{dm}{dt}.
+%% \end{equation*}
+%% \begin{equation}
+%%   \implies \quad \frac{dR}{dt}
+%%   = \frac{1}{4\pi \rho} \left(
+%%   1 + \phi_s \frac{\rho'(\phi_s)}{\rho}
+%%   \right)
+%%   \underbrace{\frac{1}{R^2} \frac{dm}{dt}}_{\propto 1/R}
+%% \end{equation}
 
-Giving the time integral from the ODE solution:
-\begin{equation}
-  \begin{aligned}
-    R(t + \Delta t)
-    &= \sqrt{R(t)^2 + \frac{1}{2\pi \rho R(t)}
-      \left(
-      1 + \phi_s \frac{\rho'(\phi_s)}{\rho}
-      \right)
-      \frac{dm}{dt} \Delta t} \\
-    &= R(t) \left(
-    1 + \frac{1}{4\pi \rho R(t)^3}
-    \left(
-    1 + \phi_s \frac{\rho'(\phi_s)}{\rho}
-    \right)
-    \frac{dm}{dt} \Delta t
-    \right)
-    + \mathcal{O}(\Delta t^2) \\
-    &= R(t) \left(
-    1 +
-    \left(
-    1 + \phi_s \frac{\rho'(\phi_s)}{\rho}
-    \right)
-    \frac{\dot{m}}{3m} \Delta t
-    \right)
-    + \mathcal{O}(\Delta t^2).
-  \end{aligned}
-\end{equation}
+%% Giving the time integral from the ODE solution:
+%% \begin{equation}
+%%   \begin{aligned}
+%%     R(t + \Delta t)
+%%     &= \sqrt{R(t)^2 + \frac{1}{2\pi \rho R(t)}
+%%       \left(
+%%       1 + \phi_s \frac{\rho'(\phi_s)}{\rho}
+%%       \right)
+%%       \frac{dm}{dt} \Delta t} \\
+%%     &= R(t) \left(
+%%     1 + \frac{1}{4\pi \rho R(t)^3}
+%%     \left(
+%%     1 + \phi_s \frac{\rho'(\phi_s)}{\rho}
+%%     \right)
+%%     \frac{dm}{dt} \Delta t
+%%     \right)
+%%     + \mathcal{O}(\Delta t^2) \\
+%%     &= R(t) \left(
+%%     1 +
+%%     \left(
+%%     1 + \phi_s \frac{\rho'(\phi_s)}{\rho}
+%%     \right)
+%%     \frac{\dot{m}}{3m} \Delta t
+%%     \right)
+%%     + \mathcal{O}(\Delta t^2).
+%%   \end{aligned}
+%% \end{equation}
 
-We model the diffusion constant by calibrating dynamic viscosity measurements
-\todo{Need a Reid group citation} against molecular dynamics measures of the diffusion constant \todo{Lyubartsev and Laaksonen citation here}[2cm].
-We assume the Stokes-Einstein form
-\begin{equation}
-  D(c;T) = D_0 \frac{\eta_0}{\eta(c)} \frac{T}{T_0}
-\end{equation}
-where $\eta_0$ is the dynamic viscosity of water in ambient conditions, $T_0 = \SI{293}{\kelvin}$ and $D_0 = \SI{1266}{\micro\metre^2\per\second}$ is a constant determined by fitting the two datasets.
-
-\subsection{Treating evaporation}
-\subsection{Evolution of the concentration profile}
+%% \subsection{Treating evaporation}
+%% \subsection{Evolution of the concentration profile}
 
 \section{Nucleation model}
 \subsection{Classical nucleation theory}
@@ -1333,5 +1163,123 @@ Survival across all $r$ in this time period:
 We have $\Gamma(r,t') = \Gamma(Y_S(r,t'), T(r,t'))$ so need a phenomenological model (CNT) for this.
 Initially ignore temperature so we have $\Gamma(Y_S(r,t'))$.
 We know: nucleation impossible below saturation limit.
+
+\section*{Appendix: Numerical implementation}
+
+$\rho(r)$ will later be discretised into the density at equally spaced points of separation $\Delta r$, so it is natural to think of it as a vector of points $\vec{\rho} = \{\rho(0), \rho(\Delta r), \rho(2 \Delta r), \cdots, \rho(1)\} = \{\rho_1, \cdots, \rho_N\}$ so we will use the notation $\vec{\rho}$ from
+now on to mean $\rho(r)$.
+
+To integrate a timestep $\Delta t$ we use the Crank-Nicolson \cite{Crank1947} method where the time derivative for integration is taken as the average of the instantaneous derivatives at the start and end of integration.
+This is essentially a midpoint method, but requires a bit of linear algebra to solve as we do not know the value of $\partial \vec{\rho} / \partial t$ until we also know $\vec{\rho}$.
+Starting from
+\begin{equation}
+  \frac{\partial \vec{\rho}}{\partial t} =
+  \lim_{\Delta t \to 0} \frac{\vec{\rho}(t + \Delta t) - \vec{\rho}(t)}{\Delta t}
+\end{equation}
+after discretising we obtain
+\begin{equation}
+  \frac{\vec{\rho}(t + \Delta t) - \vec{\rho}(t)}{\Delta t}
+  =
+  \frac{1}{2}
+  \left(
+  \left. \frac{\partial \vec{\rho}}{\partial t} \right|_{t + \Delta t}
+  +
+  \left. \frac{\partial \vec{\rho}}{\partial t} \right|_t
+  \right)
+  + \mathcal{O}(\Delta t^2).
+\end{equation}
+The main advantage of this scheme over more simple schemes (e.g. forward Euler method where we just take the initial $\partial \vec{\rho} / \partial t$) is that the error is of order $\Delta t^2$; this ensures rapid convergence to the correct solution with small integration steps.
+
+Labelling $\vec{\rho}(t) = \vec{\rho}_n$ and $\vec{\rho}(t + \Delta t) = \vec{\rho}_{n+1}$, the goal is to make progressively better guesses for $\vec{\rho}_{n+1}$.
+We label the $k^\textrm{th}$ approximation for $\vec{\rho}_{n+1}$ as $\vec{\rho}_{n+1}^{(k)}$ where the initial guess is $\vec{\rho}_{n+1}^{(1)} = \vec{\rho}_n$, and derive an iterative formula to find $\vec{\rho}_{n+1}^{(k+1)}$ which converges to $\vec{\rho}_{n+1}$ in the limit $k \to \infty$, although in practice only a few iterations should be enough to achieve an approximate solution.
+Using the Crank-Nicolson scheme we write
+\begin{equation}
+  \frac{\vec{\rho}_{n+1}^{(k+1)} - \vec{\rho}_n}{\Delta t}
+  =
+  \frac{\vec{\rho}_{n+1}^{(k)} + \delta \vec{\rho}_{n+1}^{(k)} - \vec{\rho}_n}{\Delta t}
+  =
+  \frac{1}{2}
+  \left(
+  \frac{\partial (\vec{\rho}_{n+1}^{(k)} + \delta \vec{\rho}_{n+1}^{(k)})}{\partial t}
+  +
+  \frac{\partial \vec{\rho}_n}{\partial t}
+  \right)
+\end{equation}
+This is complicated by the fact that $\rho(r)$ depends on $R(t)$ making this equation nonlinear as it couples with the evolution of $R(t)$.
+As such, the above equation implicitly involves terms $R_{n+1}^{(k)} + \delta R_{n+1}^{(k)}$.
+To find the form of the right-hand side we expand in powers of $\delta \vec{\rho}_{n+1}^{(k)}$ and $\delta R_{n+1}^{(k)}$ retaining only those linear.
+Doing this we find...
+\begin{equation}
+  \frac{\vec{\rho}_{n+1}^{(k)} + \delta \vec{\rho}_{n+1}^{(k)} - \vec{\rho}_n}{\Delta t}
+  =
+  F_\rho^{(k)} (\vec{\rho}_n, \vec{\rho}_{n+1}^{(k)}, R_n, R_{n+1}^{(k)}) +
+  G_\rho^{(k)} (\vec{\rho}_{n+1}^{(k)}, R_{n+1}^{(k)}) \delta \vec{\rho}_{n+1}^{(k)} +
+  H_\rho^{(k)} (\vec{\rho}_{n+1}^{(k)}, R_{n+1}^{(k)}) \delta R_{n+1}^{(k)}
+\end{equation}
+where the functions $F_\rho^{(k)},G_\rho^{(k)},H_\rho^{(k)}$ are long and not particularly illuminating so we omit their explicit form for the sake of brevity.
+Importantly $F_\rho^{(k)},G_\rho^{(k)},H_\rho^{(k)}$ are functions of known variables and $\delta \vec{\rho}_{n+1}^{(k)}, \delta R_{n+1}^{(k)}$.
+We can do a similar expansion for the evolution of the boundary, i.e.\
+\begin{equation}\label{eq:discrete-evolution-rho}
+  \frac{R_{n+1}^{(k)} + \delta R_{n+1}^{(k)} - R_n}{\Delta t}
+  =
+  \frac{1}{2}
+  \left(
+  \frac{\partial (R_{n+1}^{(k)} + \delta R_{n+1}^{(k)})}{\partial t}
+  +
+  \frac{\partial R_n}{\partial t}
+  \right)
+\end{equation}
+and we perform the same expansion as before to obtain something of in the form of
+\begin{equation}\label{eq:discrete-evolution-R}
+  \frac{R_{n+1}^{(k)} + \delta R_{n+1}^{(k)} - R_n}{\Delta t}
+  =
+  F_R^{(k)} (\vec{\rho}_n, \vec{\rho}_{n+1}^{(k)}, R_n, R_{n+1}^{(k)}) +
+  G_R^{(k)} (\vec{\rho}_{n+1}^{(k)}, R_{n+1}^{(k)}) \delta \vec{\rho}_{n+1}^{(k)} +
+  H_R^{(k)} (\vec{\rho}_{n+1}^{(k)}, R_{n+1}^{(k)}) \delta R_{n+1}^{(k)}
+\end{equation}
+with new functions $F_R^{(k)},\vec{G}_R^{(k)},H_R^{(k)}$ which are also of known variables.
+In all likelyhood, these only depend on the density of the solute at the boundary.
+We can combine equations \eqref{eq:discrete-evolution-rho} and \eqref{eq:discrete-evolution-R} into a single matrix equation, i.e.
+\begin{equation}
+  \begin{pmatrix}
+    \vec{G}_\rho^{(k)} \Delta t - 1 & H_\rho^{(k)} \Delta t \\
+    G_R^{(k)} \Delta t & H_R^{(k)} \Delta t - 1
+  \end{pmatrix}
+  \begin{pmatrix}
+    \delta \vec{\rho}_{n+1}^{(k)} \\
+    \delta R_{n+1}^{(k)}
+  \end{pmatrix}
+  =
+  \begin{pmatrix}
+    \vec{\rho}_{n+1}^{(k)} - \vec{\rho}_n^{(k)} -
+    F_\rho^{(k)} (\vec{\rho}_n, \vec{\rho}_{n+1}^{(k)}, R_n, R_{n+1}^{(k)})
+    \Delta t
+    \\
+    R_{n+1}^{(k)} - R_n^{(k)} -
+    F_R^{(k)} (\vec{\rho}_n, \vec{\rho}_{n+1}^{(k)}, R_n, R_{n+1}^{(k)})
+    \Delta t
+  \end{pmatrix}.
+\end{equation}
+The terms on the right-hand side of this matrix equation are called th eresiduals, and the left-hand side consists of the (Jacobian) matrix and the vector of unknowns.
+The solution is found by inverting the matrix.
+If we write $\vec{x}_n = (\vec{\rho}_n, R_n)^T$ we have
+\begin{equation}
+  \delta \vec{F} \cdot \delta \vec{x}_{n+1}^{(k)} =
+  \vec{F}(\vec{x}_n, \vec{x}_{n+1}^{(k)}
+\end{equation}
+where $\vec{F}(\vec{x}_n, \vec{x}_{n+1}^{(k)}) = \vec{x}_{n+1}^{(k)} - \vec{x}_n - \Delta t (F_\rho^{(k)} (\vec{x}_n, \vec{x}_{n+1}^{(k)}), F_R^{(k)} (\vec{x}_n, \vec{x}_{n+1}^{(k)}))^T$ giving solution
+\begin{equation}
+  \delta \vec{x}_{n+1}^{(k)} =
+  (\delta \vec{F}^{(k)})^{-1} \cdot \vec{F}(\vec{x}_n, \vec{x}_{n+1}^{(k)}).
+\end{equation}
+We iterate this inversion procedure until some stop criterion is met (i.e.\ we find $\vec{x}_{n+1}$ to some desired accuracy), giving the final solution after $k_{stop}$ iterations:
+\begin{equation}
+  \vec{x}_{n+1} =
+  \vec{x}_n + \sum_{k=1}^{k_{stop}}
+  (\delta \vec{F}^{(k)})^{-1} \cdot \vec{F}(\vec{x}_n, \vec{x}_{n+1}^{(k)})
+  + \mathcal{O}(\Delta t^2).
+\end{equation}
+A sensible stop criterion is that the residuals $F(\vec{x}_n, \vec{x}_{n+1}^{(k)}$ fall to some small value close to zero, meaning $\delta\vec{x}^{(k+1)}$ is small and we are sufficiently close to the true $\vec{x}_{n+1}$.
+Note that the true $\vec{x}_{n+1}$ is not `true' in the sense that it is the exact result, i.e. $(\rho(t + \Delta t), R(t + \Delta t))^T$, but rather true in the sense that it is the correct result predicted by this method (i.e. to $\mathcal{O}(\Delta t^2)$ accuracy).
 
 \end{document}
