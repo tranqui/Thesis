@@ -486,7 +486,7 @@ so inserting this and \eqref{eq:ficks-law} into \eqref{eq:species-evolution-curr
   \end{aligned}
 \end{equation}
 
-\subsection{Boundary conditions}
+\subsection{Liquid phase boundary conditions}
 
 The mass of each species inside the droplet is obtained from its concentration profile as
 \begin{equation}
@@ -676,193 +676,10 @@ so we have
   \end{aligned}
 \end{equation}
 or
-\begin{equation}
+\begin{equation}\label{eq:radial-evolution}
   \frac{dR}{dt} =
   \frac{1}{4\pi R^2 \rho^{(f)}_0} \frac{dm}{dt}.
 \end{equation}
-
-\begin{equation}
-  \begin{aligned}
-  \frac{dR}{dt} &=
-  -\frac{1}{4\pi R^2 \rho^{(f)}_0}
-  2\pi Sh \rho_V D_V R \ln{(1 + B)} \\
-  &=
-  -\frac{Sh}{2 R \rho^{(f)}_0}
-  \rho_V D_V \ln{(1 + B)} =
-  \frac{A}{2 R} \\
-  Sh &= \frac{A \rho^{(f)}_0}{\rho_V D_V \ln{(1+B)}}
-  \end{aligned}
-\end{equation}
-
-Taking into account the latent heat across the phase boundary, we expect
-\begin{equation}
-  \frac{\rho^{(f)}(R^+)}{\rho^{(f)}(R^-)} =
-  e^{-\beta L}
-\end{equation}
-where $T$ is the temperature at the droplet surface, $L$ is the latent heat of vaporisation (per unit mole) and $R$ is the molar gas constant.
-So the mass fraction ratios become
-\begin{equation}
-  \begin{aligned}
-    \frac{Y^{(f)}(R^+)}{Y^{(f)}(R^-)} &=
-    \frac{\rho^{(f)}(R^+)}{\rho(R^+)}
-    \frac{\rho(R^-)}{\rho^{(f)}(R^-)} \\
-    &=
-    \frac{\rho(R^-)}{\rho_V}
-    e^{-\beta L}
-  \end{aligned}
-\end{equation}
-assuming $\rho(R+) = \rho_V$.
-
-\begin{equation*}
-  \ln{(1 + B)} = B + \mathcal{O}(B^2)
-\end{equation*}
-recall:
-\begin{equation*}
-  \begin{aligned}
-    1 + B &=
-    \frac{1 - Y_F(R^+)}{1 - \displaystyle{\lim_{r \to \infty}} Y_F(r)} \\
-    &=
-    \frac{1 - \frac{\rho_V}{\rho(R^-)}
-      e^{-\beta L} Y_F(R^-)}{1 - \displaystyle{\lim_{r \to \infty}} Y_F(r)} \\
-    &=
-    1 - \frac{\rho_V}{\rho(R^-)} e^{-\beta L} Y_F(R^-)
-  \end{aligned}
-\end{equation*}
-for $\lim_{r \to \infty} Y_F(r) = 0$ in the final step
-
-So we have
-\begin{equation*}
-  \begin{aligned}
-    \frac{dR}{dt} &=
-    -\frac{Sh}{2 R \rho^{(f)}_0}
-    \rho_V D_V B + \mathcal{O}(B^2) \\
-    &=
-    -\frac{Sh}{2 R \rho^{(f)}_0}
-    \rho_V D_V B + \mathcal{O}(B^2)
-  \end{aligned}
-\end{equation*}
-
-\subsection{Evolution equation}
-
-We use an empirical form for this density by fitting it to a polynomial i.e. the leading order terms in its Taylor series expansion
-\begin{equation}
-  \rho(c_s) = \sum_{n=0}^{\infty} \frac{\rho^{(n)}(c_s^{(0)})}{n!} (c_s - c_s^{(0)})^n,
-\end{equation}
-where $c_s^{(0)}$ is the reference state point with known density and concentrations.
-While a high order polynomial would normally be used in the full numerical calculations, we will truncate this series to its linear term in order to estimate leading order terms in evolution equations giving
-\begin{equation}\label{eq:density-expansion}
-  \rho(c_s) = \rho(c_s^{(0)}) + \rho'(c_s^{(0)}) \Delta c_s + \mathcal{O}(\Delta c_s^2)
-\end{equation}
-where $\Delta c_s = c_s - c_s^{(0)}$.
-With any order of polynomial it follows that
-\begin{equation}\label{eq:linear-density-regime}
-  \frac{\partial \rho}{\partial t}
-  = \frac{\partial \rho}{\partial \phi_s} \frac{\partial \phi_s}{\partial t}
-  = \frac{\partial \rho}{\partial c_s} \frac{\partial c_s}{\partial t}
-\end{equation}
-
-The concentration of solute evolves according to the diffusion equation
-\begin{equation}\label{eq:diffusion-equation}
-  \frac{\partial c_s}{\partial t}
-  = D_s \nabla^2 c_s
-  = D_s \frac{1}{r^2} \frac{\partial}{\partial r} \left( r^2 \frac{\partial c_s}{\partial r} \right)
-\end{equation}
-The total solute mass is obtained from this concentration profile as
-\begin{equation}\label{eq:solute-mass-equation}
-  m_s(t) = 4\pi \int_0^{R(t)} c_s(r,t) r^2 \, dr.
-\end{equation}
-Differentiating this expression using Leibniz's rule gives
-\begin{equation}
-  \begin{aligned}
-    \frac{dm_s}{dt} &=
-    4\pi \left(
-    c_s(R) R^2 \frac{dR}{dt} + \int_0^R \frac{\partial c_s}{\partial t} r^2 dr
-    \right) \\
-    &=
-    4\pi R^2 \left(
-    c_s(R) \frac{dR}{dt} + D_s \left.\frac{\partial c_s}{\partial r}\right|_{r=R}
-    \right),
-  \end{aligned}
-\end{equation}
-where we used \eqref{eq:diffusion-equation} in the final step.
-Assuming there is no solute flux outside the droplet $m_s = const$ we obtain the outer boundary condition
-\begin{equation}
-  \left.\frac{\partial c_s}{\partial r}\right|_{r=R} = -\frac{c_s(R)}{D_s} \frac{dR}{dt}
-\end{equation}
-
-The total droplet mass is obtained from the internal density profile as
-\begin{equation}\label{eq:mass-equation}
-  m(t) = 4\pi \int_0^{R(t)} \rho(r,t) r^2 \, dr.
-\end{equation}
-Differentiating this expression using Leibniz's rule gives
-\begin{equation}
-  \frac{dm}{dt} = 4\pi \left(
-  \rho(R) R^2 \frac{dR}{dt} + \int_0^R \frac{\partial \rho}{\partial t} r^2 dr
-  \right),
-\end{equation}
-and rearranging for the evolution of the boundary gives
-\begin{equation}
-  \frac{dR}{dt} =
-  \frac{1}{\rho(R) R^2} \left(
-  \frac{1}{4\pi} \frac{dm}{dt} - \int_0^R \frac{\partial \rho}{\partial t} r^2 dr
-  \right).
-\end{equation}
-Writing the density in terms of the concentration profile and using \eqref{eq:diffusion-equation} gives
-\begin{equation}\label{eq:radial-evolution}
-  \frac{dR}{dt} =
-  \frac{\phi_s(c_s(R))}{c_s(R)} \frac{1}{R^2} \left(
-  \frac{1}{4\pi} \frac{dm}{dt} -
-  D_s \int_0^R
-  \frac{\partial \rho}{\partial c_s}
-  \frac{\partial}{\partial r} \left( r^2 \frac{\partial c_s}{\partial r} \right) dr
-  \right).
-\end{equation}
-%% In the linear density regime given by equation \eqref{eq:linear-density-regime} this expression reduces to
-%% \begin{equation}
-%%   \frac{dR}{dt} =
-%%   \frac{\phi_s(c_s(R))}{c_s(R)} \left(
-%%   \frac{1}{4\pi R^2} \frac{dm}{dt} -
-%%   \rho'(c_s^{(0)}) \left.\frac{\partial c_s}{\partial r}\right| _{r=R}
-%%   + \mathcal{O}(\Delta c_s)
-%%   \right).
-%% \end{equation}
-
-%% \subsection{Evaporation condition}
-
-%% Kulmala equation for mass flow:
-%% \begin{equation}
-%%   I(R, \phi_s)%; \; T_\infty, S_\infty, P)
-%%   \equiv \frac{dm}{dt}
-%%   \simeq -2\pi \, S_h \, R \frac{S_{\infty} - a_w(\phi_s(R))}{\kappa_1(\phi_s) + \kappa_2(R, \phi_s)}
-%% \end{equation}
-%% with
-%% \begin{align}
-%%   \kappa_1(\phi_s) &= \frac{R_{mol} \, T_\infty}{M_w \, \beta_M \, D_w^{(air)} \, p_{eq} \, A(\phi_s)} \\
-%%   \kappa_2(R, \phi_s) &= \frac{L^2 \, M_w}{K \, R_{mol} \, \beta_T \, T_\infty^2} a_w(\phi_s(R))
-%% \end{align}
-%% The water activity $a_w$ is a fitted function of $\phi_s$ using experimental data.
-%% The constants I used are given as
-%% \begin{itemize}
-%% \item Sherwood number: $S_h \simeq 2.15479$
-%% \item Relative humidity of gas phase: $S_\infty = 0$ (dry experiments)
-%% \item Gas temperature: $T_\infty$ (\SI{}{\kelvin})
-%% \item Gas pressure: $p(T_\infty) \simeq \frac{T_\infty}{\SI{293}{\kelvin}} \SI{101325}{\newton}$
-%% \item Gas thermal conductivity (nitrogen): $K(T_\infty) = \left(\sum_{n=0}^2 \alpha_n T_\infty^n \right) \SI{}{\watt\per\meter\per\kelvin}$
-%%   \begin{itemize}
-%%   \item $\alpha_0 = \SI{3.95e-4}{}$
-%%   \item $\alpha_1 = \SI{9.805e-5}{\per\kelvin}$
-%%   \item $\alpha_2 = \SI{-4.3032e-8}{\per\square\kelvin}$
-%%   \end{itemize}
-%% \item Molar gas constant: $R_{mol} = \SI{8.314}{\joule\kelvin\per\mol}$
-%% \item $M_w = \SI{0.018016}{\kilogram\per\mol}$
-%% \item Diffusion constant of solvent through gas:
-%%   $D_w^{(air)} \simeq \left(\frac{T_\infty}{\SI{273.15}{\kelvin}}\right)^{1.81} \frac{T_\infty}{\SI{293}{\kelvin}} \, \SI{2.19e-5}{\square\meter\per\second}$
-%% \item Equilibrium water vapour pressure: $p_{eq} = \SI{2338.77}{\newton\per\meter}$
-%% \item Stefan flow correction: $A(\phi_s) = 1 + \frac{S_\infty + a_w(\phi_s)}{2} \frac{p_{eq}}{p(T_\infty)}$
-%% \item Latent heat of evaporation (water): $L = \SI{2455595}{\joule\per\kilogram}$
-%% \item Mass flux correction: $\beta_M \simeq 0.996175$
-%% \item Heat flux correction: $\beta_T \simeq 0.995228$
-%% \end{itemize}
 
 \subsection{Vapour phase analysis}
 
@@ -995,11 +812,6 @@ Empirical modification \cite{Abramzon1988}
 \end{align}
 I guess $Sh_0$ is a widely used fudge factor (to account for convection?), and this constitutes further corrections to it.
 
-The heat penetrating into the liquid droplet is \cite{Abramzon1988}
-\begin{equation}
-  Q_L = \dot{m} \left( \frac{C_{pF} (T_\infty - T(R))}{B_T} - L(T(R)) \right)
-\end{equation}
-
 %% \subsection{Quasistatic expressions}
 
 %% In the quasistatic limit the density profile relaxes instantaneously leaving only
@@ -1082,6 +894,147 @@ The heat penetrating into the liquid droplet is \cite{Abramzon1988}
 
 %% \subsection{Treating evaporation}
 %% \subsection{Evolution of the concentration profile}
+\subsection{Phase boundary}
+
+At short times
+\begin{subequations}
+  \begin{align}
+    R(t) &\simeq \sqrt{R(t=0)^2 + A t} \qquad \\
+    \implies \; \frac{dR}{dt} &\simeq \frac{A}{2R}.
+  \end{align}
+\end{subequations}
+From \eqref{eq:radial-evolution}
+\begin{equation}
+  \begin{aligned}
+  \frac{dR}{dt} &=
+  -\frac{1}{4\pi R^2 \rho^{(f)}_0}
+  2\pi Sh \rho_V D_V R \ln{(1 + B)} \\
+  &=
+  -\frac{Sh}{2 R \rho^{(f)}_0}
+  \rho_V D_V \ln{(1 + B)} =
+  \frac{A}{2 R} \\
+  Sh &= \frac{A \rho^{(f)}_0}{\rho_V D_V \ln{(1+B)}}
+  \end{aligned}
+\end{equation}
+so we can work out the empirical correction if we know the initial $\dot{R}$ from fitting the parameter $A$.
+
+The steady state heat flux through the droplet boundary in the steady state is \cite{Kulmala1993,Rovelli2016}
+\begin{equation}
+  Q = Q_R - h \frac{dm^{(f)}}{dt} + 4\pi R K (T(R) - T_\infty)
+\end{equation}
+where $Q_R$ is the excess heat flux of radiation over absorption, $h$ is the vapour enthalpy of the evaporating solvent, and $K$ is the thermal conductivity of the gas phase.
+Neglecting the droplet heat capacity and the effect of radiation gives the temperature difference between
+the droplet surface and the ambient temperature as \cite{Kulmala1993,Rovelli2016}
+\begin{equation}
+  T(R) - T_\infty = \frac{L}{4\pi R K} \frac{dm^{(f)}}{dt}
+\end{equation}
+
+The mass fraction at the surface, and thus $B$, is determined through the Clausius-Clapeyron relation.
+We have
+\begin{equation}\label{eq:Clausius-Clapeyron}
+  \frac{d P}{dT} = \frac{L}{T \Delta v}
+\end{equation}
+where $L$ is the specific latent heat of evaporation, and $\Delta v$ is the specific volume change between the liquid and vapour
+\begin{equation}
+  \Delta v
+  \equiv v_g - v_l
+  \sim v_g
+  = \frac{RT}{P}
+\end{equation}
+where the approximation holds for the gas-liquid transition because $v_l \ll 1$ and we used the ideal gas law in the last step.
+Taking $L$ as constant with respect to $T$ \eqref{eq:Clausius-Clapeyron} becomes
+\todo{We use $R$ for both the droplet radius and the molar gas constant, so we need to change the symbol for the radius to e.g.\ $a$.}
+\begin{equation}
+  \int_{P_1}^{P_2} \frac{d P}{P} =
+  \frac{L}{R} \int_{T_1}^{T_2} \frac{dT}{T^2}
+\end{equation}
+giving
+\begin{equation}\label{eq:Clausius-Clapeyron-pressure-difference-mono}
+  \begin{aligned}
+    P_2 &=
+    P_1 \exp{\left( \frac{L}{R} \left(\frac{1}{T_1} - \frac{1}{T_2} \right) \right)} \\
+    &=
+    P_1 \exp{\left( \frac{L}{R} \frac{T_2 - T_1}{T_1 T_2} \right)}
+  \end{aligned}
+\end{equation}
+though for a binary mixture $P_i$ represents the partial pressures of the evaporating components,
+where the partial pressure is determined from the solvent activity by
+\begin{subequations}
+  \begin{align}
+    P_1 &= a_w(Y^{(f)}) P_{eq} \\
+    P_2 &= P(R^-) \\
+    T_1 &= T_\infty
+  \end{align}
+\end{subequations}
+so \eqref{eq:Clausius-Clapeyron-pressure-difference-mono} becomes
+\todo{We use lower case $p$ to mean pressure in the rest of the thesis, so we should change $P \to p$ here too.}
+\begin{equation}\label{eq:Clausius-Clapeyron-pressure-difference-binary}
+  P(R^-) =
+  a_w(Y^{(f)}) P_{eq}
+  \exp{\left( \frac{L}{R} \frac{T(R) - T_\infty}{T(R) T_\infty} \right)}
+\end{equation}
+Finally, the molar fraction of the fluid component at the surface is obtained from
+\begin{equation}
+  P(R^-) = X^{(f)}(R^+) P
+\end{equation}
+giving the mass fraction as
+\begin{equation}
+  \begin{aligned}
+    Y^{(f)}(R^+) &=
+    \frac{X^{(f)}(R^+) W^{(f)}}{X^{(f)}(R^+) W^{(f)} + X^{(g)} W^{(g)}} \\
+    &=
+    \frac{X^{(f)}(R^+) W^{(f)}}{X^{(f)}(R^+) W^{(f)} + (1 - X^{(f)}(R^+)) W^{(g)}}.
+  \end{aligned}
+\end{equation}
+where $W^{(f)}$ and $W^{(g)}$ are the molar masses of the solvent and air components respectively.
+
+%% Taking into account the latent heat across the phase boundary, we expect
+%% \begin{equation}
+%%   \frac{\rho^{(f)}(R^+)}{\rho^{(f)}(R^-)} =
+%%   e^{-\beta L}
+%% \end{equation}
+%% where $T$ is the temperature at the droplet surface, $L$ is the latent heat of vaporisation (per unit mole) and $R$ is the molar gas constant.
+%% So the mass fraction ratios become
+%% \begin{equation}
+%%   \begin{aligned}
+%%     \frac{Y^{(f)}(R^+)}{Y^{(f)}(R^-)} &=
+%%     \frac{\rho^{(f)}(R^+)}{\rho(R^+)}
+%%     \frac{\rho(R^-)}{\rho^{(f)}(R^-)} \\
+%%     &=
+%%     \frac{\rho(R^-)}{\rho_V}
+%%     e^{-\beta L}
+%%   \end{aligned}
+%% \end{equation}
+%% assuming $\rho(R+) = \rho_V$.
+
+%% \begin{equation*}
+%%   \ln{(1 + B)} = B + \mathcal{O}(B^2)
+%% \end{equation*}
+%% recall:
+%% \begin{equation*}
+%%   \begin{aligned}
+%%     1 + B &=
+%%     \frac{1 - Y_F(R^+)}{1 - \displaystyle{\lim_{r \to \infty}} Y_F(r)} \\
+%%     &=
+%%     \frac{1 - \frac{\rho_V}{\rho(R^-)}
+%%       e^{-\beta L} Y_F(R^-)}{1 - \displaystyle{\lim_{r \to \infty}} Y_F(r)} \\
+%%     &=
+%%     1 - \frac{\rho_V}{\rho(R^-)} e^{-\beta L} Y_F(R^-)
+%%   \end{aligned}
+%% \end{equation*}
+%% for $\lim_{r \to \infty} Y_F(r) = 0$ in the final step
+
+%% So we have
+%% \begin{equation*}
+%%   \begin{aligned}
+%%     \frac{dR}{dt} &=
+%%     -\frac{Sh}{2 R \rho^{(f)}_0}
+%%     \rho_V D_V B + \mathcal{O}(B^2) \\
+%%     &=
+%%     -\frac{Sh}{2 R \rho^{(f)}_0}
+%%     \rho_V D_V B + \mathcal{O}(B^2)
+%%   \end{aligned}
+%% \end{equation*}
 
 \section{Nucleation model}
 \subsection{Classical nucleation theory}
