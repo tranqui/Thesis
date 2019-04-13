@@ -672,14 +672,14 @@ Fourier transforming weight functions:
   \widetilde{\omega}_\alpha(\vec{k}) =
   \int \omega_\alpha (\vec{r}) e^{-i \vec{k}\cdot\vec{r}} \, d\vec{r}
 \end{equation}
-\begin{align}
-  \widetilde{\omega}_3(\vec{k}) &=
-  4\pi \frac{\sin{kR} - kR\cos{kR}}{k^3} \\
-  \widetilde{\omega}_2(\vec{k}) &=
-  4\pi R^2 \frac{\sin{kR}}{kR} \\
-  \widetilde{\vec{\omega}}_2(\vec{k}) &=
-  - i \vec{k} \widetilde{\omega}_3(\vec{k})
-\end{align}
+%% \begin{align}
+%%   \widetilde{\omega}_3(\vec{k}) &=
+%%   4\pi \frac{\sin{kR} - kR\cos{kR}}{k^3} \\
+%%   \widetilde{\omega}_2(\vec{k}) &=
+%%   4\pi R^2 \frac{\sin{kR}}{kR} \\
+%%   \widetilde{\vec{\omega}}_2(\vec{k}) &=
+%%   - i \vec{k} \widetilde{\omega}_3(\vec{k})
+%% \end{align}
 \begin{equation}
   \begin{aligned}
     c_{22}(\vec{r} = \vec{r}_2 - \vec{r}_1) &=
@@ -902,6 +902,54 @@ Explore where additivity, continuity and motion invariance apply.
 \section{Derivation of thermodynamic coefficients for hard spheres in $d = 3$}
 
 \subsubsection{Scaled particle route}
+
+Discontinuity argument: probabilty that \emph{exactly} zero hard spheres contained in a spherical region of radius $R$ is \cite{Mandell1976}
+\todo{I have lifted this wording almost exactly from Mandell \& Reiss, so rewrite this to avoid plagerism}
+\begin{equation}
+  p_0(R) = 1 + \sum_{n=1}^{\infty} (-1)^n F^{(n)}(R)
+\end{equation}
+where $F_n(R)$ is the average number of $n$-tuples of hard spheres contained in the region defined via
+\begin{equation}
+  F_n = \frac{\rho^n}{n!} \int_{\mathbb{V}_R} g^{(n)}(\vec{r}^n) \, d\vec{r}^n
+\end{equation}
+clearly $F_n(R) = 0$ for $R < R_n$, the minimum radius capable of containing the $n$ hard spheres.
+Around one of these we have \todo{check this}
+\begin{subequations}
+  \begin{align}
+    \Omega(R) &= - \ln{p_0(R)} \\
+    G(R) &=
+    \frac{1}{4\pi \rho R^2}
+    \frac{\partial \Omega}{\partial R} \\
+    F_n(R + \epsilon) - F_n(R) &=
+    \mathcal{O}(\epsilon^{dn})
+    \qquad R \ge R_n \\
+    \left. \frac{\partial F_n}{\partial \epsilon} \right|_R &=
+    \mathcal{O}(\epsilon^{dn-1})
+    \qquad R \ge R_n \\
+    \left. \frac{\partial^{dn+1} F_n}{\partial \epsilon^{dn+1}} \right|_R &=
+    0
+    \qquad R \ge R_n \\
+    p_0(R) &= \mathcal{O}(R^{dn}) \qquad R_n \le R < R_n \\
+    p_0(R) &= \mathcal{O}(R^{dn}) \qquad R_n \le R < R_n \\
+    p_0(R_n - \epsilon) &= \mathcal{O}(R^{d(n-1)}) \\
+    p_0(R_n + \epsilon) &= \mathcal{O}(R^{d(n+1)}) \\
+    \left. \frac{\partial \Omega}{\partial R} \right|_{R_n} &=
+    -\frac{1}{p_0(R_n)}
+    \left. \frac{\partial F_{n+1}(R_n + \epsilon)}{\partial \epsilon} \right|_{R_n}
+    \\
+    &=
+    \frac{\mathcal{O}(\epsilon^{d(n+1)})}{\mathcal{O}(\epsilon^{d(n-1)})} \\
+    G(R_n + \epsilon) &=
+    \frac{1}{4\pi \rho R^2}
+  \end{align}
+\end{subequations}
+Concerning the exact result, for soft potentials it should be noted that the equivalent of volume would be an integral over the external potential
+\begin{equation}
+  V \to \int e^{-\beta \phi(\vec{r})} \, d\vec{r}
+\end{equation}
+which reduces to an accessible volume in the limit that $\phi$ describes a hard interaction.\todo{Can logarithmic surface tension corrections (capillary waves) destroy the formal result?}
+
+Other exact rules that could be used.
 
 We describe here in more detail the derivation of the first set of morphometric coefficients, equivalent to those given in \cite{Hansen-Goos2006} through fundamental measure theory (FMT).
 The derivation sketched below avoids use of FMT, instead favouring a geometric formulation equivalent to the scaled particle approach of Reiss \emph{et al}.\ \cite{Reiss1959,Reiss1960}.
