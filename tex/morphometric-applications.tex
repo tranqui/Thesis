@@ -89,7 +89,9 @@ We separate rigid body from internal motion by applying the following transforma
 where $\vec{t}$ is the translation vector, $\vec{\theta}$ the Euler angles, $\vec{R}$ the rotation matrix, and $\vec{x} \in \mathbb{R}^{3n-6}$ represents the internal coordinates.
 We need to compute the metric of this transformation $G_{ij} = \vec{G}_i \vec{G}_i^T$ where the (generally curvilinear) basis vectors are $\vec{G}_i = \partial_i \vec{r}$.
 To simplify calculation we choose $\vec{q}(\vec{x})$ to always be in the center-of-mass frame and orthogonal to rotations such that $G_{ij}$ reduces to block-diagonal form.
-If the rotation matrix is expressed in Euler-angle representation as $\vec{R}(\vec{\theta}) = \vec{R}_3(\theta_3) \vec{R}_2(\theta_2) \vec{R}_1(\theta_1)$ then we have
+If the rotation matrix is expressed in Euler-angle representation as $\vec{R}(\vec{\theta}) = \vec{R}_3(\theta_3) \vec{R}_2(\theta_2) \vec{R}_1(\theta_1)$ then we have%
+\marginfootnote{While the final form of $\vec{G}$ is elegant, I do not have a straightforward way of getting it; it involved a lot of guesswork and within Mathematica to find a form of $\vec{U}$ which gives the middle block.
+  There is probably a more direct route.}
 \begin{equation}
   G_{ij}(\{\theta_i\}, \vec{x}) =
   \begin{pmatrix}
