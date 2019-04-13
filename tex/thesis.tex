@@ -1,7 +1,7 @@
 %TC: macro \marginfootnote [other]
 %TC: envir SCfigure [] other
 %TC: macrocount beginSCfigure [figure]
-\documentclass[11pt,twoside]{report}
+\documentclass[12pt,twoside]{report}
 \usepackage{preamble}
 \usepackage{standalone}
 \graphicspath{{../img/}}
@@ -38,9 +38,12 @@
 \include{aerosols}
 \include{conclusion}
 
+\printbibliography
+
 \begin{appendices}
   \include{appendix-two-spheres}
   \include{appendix-full-geometry}
   \include{appendix-finite-differences}
 \end{appendices}
+
 \end{document}
