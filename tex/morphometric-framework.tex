@@ -125,14 +125,38 @@ Splitting the chemical potential into its ideal and excess parts so that $\beta\
   = \rho^n e^{-\beta (U_n + \Omega - \Omega_{hom} - n\mu^{ex})}.
 \end{equation}
 The $n$-particle distribution functions are then determined from~\cite{Hansen2013}
-\begin{equation}\label{eq:distribution-functions}
-  g^{(n)}(\vec{r}^n)
-  \equiv \frac{\rho^{(n)}(\vec{r}^n)}{\rho^n}
-  = e^{-\beta(U_n + \Delta\Omega - n\mu^{ex})}
+\begin{subequations}\label{eq:distribution-functions}
+  \begin{equation}
+    g^{(n)}(\vec{r}^n)
+    \equiv \frac{\rho^{(n)}(\vec{r}^n)}{\rho^n}
+    = e^{-\beta(U_n + \Delta\Omega - n\mu^{ex})}
+  \end{equation}
+\end{subequations}
+where
+\begin{subequations*}
+  \begin{equation}
+    \Delta\Omega = \Omega - \Omega_{hom}.
+  \end{equation}
+\end{subequations*}
+We can express the distribution functions in terms of a potential function i.e.\ $g^{(n)} = \exp{\left(-\beta \phi^{(n)}\right)}$ where
+\begin{equation}
+  \begin{split}
+    \phi^{(n)}(\vec{r}^n) &\equiv
+    - k_B T \ln{g^{(n)}(\vec{r}^n)} \\
+    &=
+    U_n + \Delta\Omega - n\mu^{ex},
+  \end{split}
 \end{equation}
-where $\Delta\Omega = \Omega - \Omega_{hom}$ giving the generalised potential of mean force stated in the main text.
+which we call the \emph{generalised potential of mean force}%
+\marginfootnote{For the case $n=2$ this reduces to the potential commonly referred to as the potential of mean force in the liquid state literature \cite{Hansen2013}.}.
+The $n$-particle cavity distribution \[y^{(n)}(\vec{r}^n) \equiv e^{\beta U_n} g^{(n)}(\vec{r}^n)\] will be useful in certain contexts, and from \eqref{eq:distribution-functions} we find
+\begin{equation}\label{eq:cavity-functions}
+  y^{(n)}(\vec{r}^n) =
+  e^{-\beta(\Delta\Omega - n\mu^{ex})}.
+\end{equation}
 
 The above is essentially the generalisation of the \emph{potential distribution theorem} \cite{Widom1963,Widom1982} to many-particles. See Ref.\ \cite{Rowlinson2002} and references therein for a detailed review of this approach.
+\todo{Comment on applicability of these relations to non-pair potentials and mixtures. Also include the separation of volume and surface tension terms.}
 
 \section{Bulk virial approach}
 
@@ -285,7 +309,7 @@ Applying this formula iteratively gives
 But $\rho = \eta / \mu_1(B^1)$ so we have
 \begin{equation}
   \frac{\beta p}{\rho} =
-  1 + \sum_{n=2}^\infty \eta^{n-1} = 
+  1 + \sum_{n=2}^\infty \eta^{n-1} =
   \sum_{n=0}^\infty \eta^{n} = \frac{1}{1 - \eta}
 \end{equation}
 which is convergent for all $|\eta| < 1$ although only positive volume fractions i.e.\ in the range $\eta \in [0,1]$ have any physical meaning.
@@ -904,27 +928,27 @@ Explore where additivity, continuity and motion invariance apply.
 
 \subsection{Grand potential is not an analytic function}
 
-Here we demonstrate that the grand canonical cost of insertion contains singularities, so \emph{any} analytic representation is necessarily an approximation.
-This argument is a reformulation of those arguments made in the original scaled particle theories, as it was originally made for three-dimensional hard spheres by Reiss and coworkers in \cite{Reiss1959,Reiss1960,Mandell1976} discussed in detail in references 
+Here we demonstrate that the grand canonical cost of insertion contains singularities, so \emph{any} representation as an analytic function must necessarily be approximate.
+This argument is a reformulation of those arguments made in the original scaled particle theories, as it was originally made for three-dimensional hard spheres by Reiss and coworkers in \cite{Reiss1959,Reiss1960,Mandell1976} discussed in detail in references
 generalised to the noble gases \cite{Helfand1960}, hard disks \cite{Helfand1961}, mixtures \cite{Lebowitz1965} and more recently to hard sphere pairs in \cite{Stillinger2006,Chatterjee2006}.
 Not sure: \cite{Reiss1961,Frisch1964,Reiss1965,Reiss1974,Tully-Smith1970,Harris1971}.
 
 Discontinuity argument: probabilty that \emph{exactly} zero hard spheres contained in a spherical region of radius $R$ is \cite{Mandell1976}
 \todo{I have lifted this wording almost exactly from Mandell \& Reiss, so rewrite this to avoid plagiarism}
-\begin{equation}
+\begin{equation}\label{eq:spt-zero-cavity-p}
   p_0(R) = 1 + \sum_{n=1}^{\infty} (-1)^n F^{(n)}(R)
 \end{equation}
-where $F_n(R)$ is the average number of $n$-tuples of hard spheres contained in the region defined via
+where $F^{(n)}(R)$ is the average number of $n$-tuples of hard spheres contained in the region defined via
 \begin{equation}\label{eq:spt-tuple-function}
-  F_n = \frac{\rho^n}{n!} \int_{\mathbb{V}_R} g^{(n)}(\vec{r}^n) \, d\vec{r}^n
+  F^{(n)} = \frac{\rho^n}{n!} \int_{\mathbb{V}_R} g^{(n)}(\vec{r}^n) \, d\vec{r}^n
 \end{equation}
-clearly $F_n(R) = 0$ for $R < R_n$, the minimum radius capable of containing the $n$ hard spheres.
+clearly $F^{(n)}(R) = 0$ for $R < R_n$, the minimum radius capable of containing the $n$ hard spheres.
 At any given state point $g^{(n)}$ will be bounded from above by some finite number%
 \marginfootnote{Typically we would expect this to occur where the maximum number of particles are in contact, however that is not a necessary assumption for this argument.},
 so we can write the inequality
-\begin{equation}\label{eq:spt-tuple-function-bound}
+\begin{equation}\label{eq:spt-tuple-function-upper-bound}
   \begin{split}
-    F_n(R) &\le
+    F^{(n)}(R) &\le
     \frac{\rho^n}{n!}
     \max_{\mathbb{R}^{dn}}{\left(g^{(n)}\right)}
     \int_{\mathbb{V}_R} \, d\vec{r}^n \\
@@ -936,52 +960,94 @@ so we can write the inequality
 \end{equation}
 but because of the hard core interaction there will be heavy restrictions on allowable values of $n$ for any $R$.
 Defining $R_n$ as the smallest $R$ such that $n$ particles can be accommodated, we expect
-\begin{equation}
-  F_n(R) =
-  \begin{cases}
-    0 & \quad R < R_n \\
-    \mathcal{O}\left( V_R^n \right) & \quad R > R_n
-  \end{cases}
-\end{equation}
-where the latter polynomial is motivated by the same argument as used in \eqref{eq:spt-tuple-function-bound}.
-Noting that polynomials of degree $n$ have vanishing $(n+1)$th derivatives, and $V_R \propto R^d$, we thus expect a singularity in the $(d \times n)$th derivative of $p_0$ about $R=R_n$.
-Around one of these we have \todo{check this}
-\begin{subequations}
-  \begin{align}
-    \Omega(R) &= - \ln{p_0(R)} \\
-    G(R) &=
-    \frac{1}{4\pi \rho R^2}
-    \frac{\partial \Omega}{\partial R} \\
-    F_n(R + \epsilon) - F_n(R) &=
-    \mathcal{O}(\epsilon^{dn})
-    \qquad R \ge R_n \\
-    \left. \frac{\partial F_n}{\partial \epsilon} \right|_R &=
-    \mathcal{O}(\epsilon^{dn-1})
-    \qquad R \ge R_n \\
-    \left. \frac{\partial^{dn+1} F_n}{\partial \epsilon^{dn+1}} \right|_R &=
-    0
-    \qquad R \ge R_n \\
-    p_0(R) &= \mathcal{O}(R^{dn}) \qquad R_n \le R < R_{n+1} \\
-    \frac{\partial p_0(R_n^-)}{\partial R} &=
-    \mathcal{O}(R^{dn-1}) \\
-    \frac{\partial p_0(R_n^+)}{\partial R} &=
-    \mathcal{O}(R^{d(n+1)-1}) \\
-    \frac{\partial p_0(R_n^+)}{\partial R} &=
-    \mathcal{O}(R^{d(n+1)-1}) \\
-    p_0(R) &= \mathcal{O}(R^{dn}) \qquad R_n \le R < R_n \\
-    p_0(R_n - \epsilon) &= \mathcal{O}(R^{d(n-1)}) \\
-    p_0(R_n + \epsilon) &= \mathcal{O}(R^{d(n+1)}) \\
-    \left. \frac{\partial \Omega}{\partial R} \right|_{R_n} &=
-    -\frac{1}{p_0(R_n)}
-    \left. \frac{\partial F_{n+1}(R_n + \epsilon)}{\partial \epsilon} \right|_{R_n}
-    \\
-    &=
-    \frac{\mathcal{O}(\epsilon^{d(n+1)})}{\mathcal{O}(\epsilon^{d(n-1)})}
-  \end{align}
+\begin{subequations}\label{eq:F-scaling}
+  \begin{equation}
+    F^{(n)}(R) =
+    \begin{cases}
+      0 & \quad R < R_n \\
+      \mathcal{O}\left( \left(V_R\right)^n \right) & \quad R > R_n
+    \end{cases}
+  \end{equation}
 \end{subequations}
+where the latter polynomial is motivated by the same argument as used in \eqref{eq:spt-tuple-function-upper-bound}.
+Noting that $V_R \propto R^d$ this can be expressed alternatively as a polynomial in $R$
+\begin{subequations*}
+  \begin{equation}
+    F^{(n)}(R) =
+    \begin{cases}
+      0 & \quad R < R_n \\
+      \mathcal{O}\left( R^{dn} \right) & \quad R > R_n
+    \end{cases}
+  \end{equation}
+\end{subequations*}
+Applying this bound to \eqref{eq:spt-zero-cavity-p} gives bounds on the scaling of $p_0$ as
+\begin{equation}\label{eq:spt-p-scaling}
+  p_0(R) =
+  \mathcal{O}\left( R^{dn} \right)
+  \quad R_n < R < R_{n+1}.
+\end{equation}
+From \eqref{eq:spt-p-scaling} we expect to see singular behaviour at the points $\{R_n\}$.
+To look at this in detail we define
+\begin{equation}
+  p_0^{(n)}(R) = 1 + \sum_{m=1}^n (-1)^m F^{(m)}(R)
+\end{equation}
+such that $p_0 = p_0^{(n)}$ for $R \le R_{n+1}$.
+Approaching the singular point $R_n$ we find the deviation from the solution for $R < R_n$ is thus
+\begin{equation}
+  \Delta p_0(R) \equiv
+  p_0(R) - p_0^{(n-1)}(R) = (-1)^n F^{(n)}(R)
+  \qquad R < R_{n+1}
+\end{equation}
+i.e.\ the singular behaviour is entirely contained in $F^{(n)}$.
+Noting that polynomials of degree $n$ have vanishing $(n+1)$th derivatives, and $V_R \propto R^d$, we thus expect a discontinuity in the $(dn)$th derivative of $p_0$ about $R=R_n$.
+Note that a discontinuity in the $dn$th derivative of $f(p_0(R))$ will be inherited from $p_0$ so long as $f$ is a suitably smooth function.
+Thus $\Omega$ will feature a discontinuity in its $dn$th derivative about $R_n$, and $G$ in its $(dn+1)$th derivative.
 
-A spherical cavity of radius $R=$ can accommodate the centres of 3 hard spheres
-Finding the arrangement of $n$ spheres which minimises its bounding sphere is a hard problem, but we can .
+Note that we have not quite proven that the singular behaviour actually occurs at any of the points $\{R_n\}$, because it is possible for the form of $g^{(n)}$ to eliminate singular behaviour.
+We will eliminate this physically implausible scenario by showing that $F^{(n)}$ is bounded from below by $\mathcal{O}(R^{dn})$ so that it must take the form of this polynomial in the region $R > R_n$.
+Then the argument above shows that singularities must occur in the indicated derivatives for hard spheres.
+
+First, we note that for hard interactions the pair potential restricts the domain of integration in \eqref{eq:spt-tuple-function} to those configurations where particles do not overlap $\mathbb{V}_R'$, that is
+\begin{equation}\label{eq:spt-tuple-integrand-lower-bound}
+  \int_{\mathbb{V}_R} g^{(n)}(\vec{r}^n) d\vec{r}^n =
+  \int_{\mathbb{V}_R'} y^{(n)}(\vec{r}^n) d\vec{r}^n \ge
+  \min_{\mathbb{R}^{dn}}{\left(y^{(n)}(\vec{r}^n)\right)} V(\mathbb{V}_R')
+\end{equation}
+using the definition of the cavity function $y^{(n)}$ in \eqref{eq:cavity-functions}.
+Note that in general $y^{(n)}(\vec{r}^n) > 0$, so as long as we just need to find some minimal set of configurations where $V(\mathbb{V}_R')$ is nonzero and scales as $\mathcal{O}(R^{nd})$ in order to complete the lower bound.
+We consider a cavity of size $R=R_n$ where an arrangement%
+\marginfootnote{It is possible that multiple arrangements become viable at the same radius, though this does not effect the substance of the argument.
+  In this case the lower bound \eqref{eq:spt-tuple-function-lower-bound} will be multiplied by the degeneracy of $n$-particle packings at $R=R_n$, not affecting the scaling with $R$.}
+of $n$ spheres becomes possible.
+As this is the minimum radius required, the particles will be in contact.
+If the cavity size $R$ is increased infinitesimally by an amount $\epsilon$, it is possible to affinely transform the particle positions
+\begin{equation*}
+  \vec{r}^{(n)} \to \left(1 + \frac{\epsilon}{2}\right) \vec{r}^{(n)}
+\end{equation*}
+so every particle can move up to $\epsilon/2$ in any direction without leaving the cavity or overlapping another sphere.
+This gives us
+\begin{equation*}
+  V\left(\mathbb{V}_{R+\epsilon}'\right) \ge
+  \left[ \omega_d \left(\frac{\epsilon}{2}\right)^d \right]^n
+\end{equation*}
+so from \eqref{eq:spt-tuple-function} and \eqref{eq:spt-tuple-integrand-lower-bound} we have
+\begin{equation}\label{eq:spt-tuple-function-lower-bound}
+  F^{(n)}(R_n+\epsilon) \ge
+  \min_{\mathbb{R}^{dn}}{\left(y^{(n)}(\vec{r}^n)\right)}
+  \, \left[ \omega_d \left(\frac{\epsilon}{2}\right)^d \right]^n \ge
+  \mathcal{O}(\epsilon^{dn})
+\end{equation}
+where the right hand side is also a polynomial in $R$ so $F^{(n)}(R)$ is bounded from below by $\mathcal{O}(R^{(dn)})$.
+Thus comparing the bounds \eqref{eq:spt-tuple-function-lower-bound} and \eqref{eq:spt-tuple-function-upper-bound} we see that
+\begin{equation}
+  \mathcal{O}(R^{dn}) \le F^{(n)}(R) \le \mathcal{O}(R^{dn})
+  \quad R > R_n
+\end{equation}
+and so $F^{(n)}$ must scale as $R^{dn}$, thus completing the proof.
+
+%A spherical cavity of radius $R=$ can accommodate the centres of 3 hard spheres
+%Finding the arrangement of $n$ spheres which minimises its bounding sphere is a hard problem, but we can .
+
 \begin{SCtable}
   \begin{minipage}[b]{\linewidth}
   \centering
@@ -989,18 +1055,21 @@ Finding the arrangement of $n$ spheres which minimises its bounding sphere is a 
     \toprule
     $n$ & $R_n$ & Discontinuity \\
     \midrule
+    \multicolumn{3}{c}{$d = 3$} \\
+    \midrule
     1 & 0 & -- \\
-    2 & $\frac{\sigma}{2}$ & $\Omega', g'$ \\
-    3 & $\frac{1}{\sqrt{3}}$ & $\Omega, \partial^4 g$ \\
+    2 & $\frac{\sigma}{2}$ & $\Omega'', g'$ \\
+    3 & $\frac{\sigma}{\sqrt{3}}$ &
+    $\frac{\partial^6 \Omega}{\partial R^6}, \frac{\partial^5 g}{\partial R^5}$ \\
+    4 & ${\sqrt{\frac{3}{8}}} \sigma$ &
+    $\frac{\partial^9 \Omega}{\partial R^9}, \frac{\partial^8 g}{\partial R^8}$ \\
     \multicolumn{3}{c}{$d = 1$} \\
     \midrule
     1 & 0 & -- \\
-    2 & $\frac{\sigma}{2}$ & $g', \Omega'$ \\
     \midrule
     \multicolumn{3}{c}{$d = 2$} \\
     \midrule
     1 & 0 & -- \\
-    2 & $\frac{\sigma}{4}$ & -- \\
     \bottomrule
   \end{tabular}
   \end{minipage}
