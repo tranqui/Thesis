@@ -29,6 +29,105 @@ The results of this chapter only entered the supplementary material of Ref.\ \ci
 
 \section{Overview of approaches}
 
+Scaled particle theory and the Percus-Yevick correlation function theories were unified by Rosenfeld in a series of papers, in scaled field particle theory (homogeneous) and fundamental measure theory (inhomogeneous).
+Consider integrals of the form
+\begin{equation*}
+  \mayerdiagram[.||]{3}
+\end{equation*}
+or
+\begin{equation*}
+  \mayerdiagram[.||]{2}
+\end{equation*}
+Following \cite{Hansen-Goos2014} for this part.
+\begin{equation}
+  \frac{\beta p}{\rho} - 1 =
+  \sum_{i=2}^\infty
+  B_i \rho^{i-1}
+\end{equation}
+The excess free energy is determined from the equation of state by
+\begin{equation}
+  \frac{\beta F^{ex}}{N} =
+  \int_0^\eta \left( \frac{\beta p}{\rho} - 1 \right) \, \frac{d\eta'}{\eta'} =
+  \sum_{i=2}^\infty
+  \frac{B_i \rho^{i-1}}{i-1},
+\end{equation}
+giving the excess chemical potential from the thermodynamic relation
+\begin{equation}
+  \beta \mu^{ex}[p] =
+  \beta \left( \frac{\partial F^{ex}}{\partial N} \right)_{V,T} =
+  \left( \frac{\beta p}{\rho} - 1 \right) +
+  \int_0^\eta \left( \frac{\beta p}{\rho} - 1 \right) \, \frac{d\eta'}{\eta'}.
+\end{equation}
+Generalisation to $m$-component mixtures, the $k$th virial coefficient is a polynomial in the compositional mole fractions
+\begin{equation}
+  B_k(\{x_i\}) =
+  \sum_{\nu_1=1}^m \cdots \sum_{\nu_k=1}^m
+  B_{\nu_1, \cdots, \nu_k} \prod_{i=1}^k x_{\nu_i}
+\end{equation}
+where $x_i$ is the molar fraction of species $i$, giving free energy
+\begin{equation*}
+  \frac{\beta F^{ex}}{N} =
+  \sum_{k=2}^\infty
+  \frac{\rho^{k-1}}{k-1} \left(
+  \sum_{\nu_1=1}^m \cdots \sum_{\nu_k=1}^m
+  B_{\nu_1, \cdots, \nu_k} \prod_{i=1}^k x_{\nu_i}
+  \right)
+\end{equation*}
+or multiplying through by $\rho$ gives the excess free energy per unit volume as
+\begin{equation}
+  \frac{\beta F^{ex}}{V} =
+  \sum_{k=2}^\infty
+  \frac{1}{k-1} \left(
+  \sum_{\nu_1=1}^m \cdots \sum_{\nu_k=1}^m
+  B_{\nu_1, \cdots, \nu_k} \prod_{i=1}^k \rho_{\nu_i}
+  \right)
+\end{equation}
+where $B_{\nu_1, \cdots, \nu_k}$ are the composition independent virial coefficients.
+For binary mixtures this becomes
+\begin{equation}
+  \frac{\beta F^{ex}}{V} =
+  \sum_{k=2}^\infty \sum_{i=0}^k
+  \frac{1}{k-1} {k \choose i}
+  B_{i,k-i} \rho_1^{k-i} \rho_2^i.
+\end{equation}
+The chemical potential of species $i$ is
+\begin{equation}
+  \beta \mu^{ex}_i = 
+  \beta \left( \frac{\partial F^{ex}}{\partial N_i} \right)_{V,T} =
+  \frac{\partial}{\partial \rho_i}
+  \left( \frac{\beta F^{ex}}{V} \right)_{V,T}
+\end{equation}
+giving in the limit $\rho_2 \ll 1$
+\begin{equation}
+  \begin{split}
+    \beta \mu^{ex}_2 &=
+    \lim_{\rho_2 \to 0}
+    \sum_{k=2}^\infty \sum_{i=1}^k
+    \frac{i}{k-1} {k \choose i}
+    B_{i,k-i} \rho_1^{k-i} \rho_2^{i-1} \\
+    &=
+    \sum_{k=2}^\infty
+    \frac{k}{k-1}
+    B_{1,k-1} \rho_1^{k-1}
+  \end{split}
+\end{equation}
+with composition independent coefficients
+\begin{subequations}
+  \begin{align}
+    B_{1,1} &=
+    \mayerdiagram[|][t.]{2}
+    \\
+    B_{1,2} &=
+    3 \mayerdiagram[|||][t..]{3}
+    \\
+    B_{1,3} &=
+    3 \mayerdiagram[|.||.||][t...]{4} +
+    3 \mayerdiagram[||||.||][t...]{4} +
+    3 \mayerdiagram[|.|||||][t...]{4} +
+    \mayerdiagram[|||||||][t...]{4}
+  \end{align}
+\end{subequations}
+
 The first virial coefficient for a general
 \begin{equation}
   \frac{\beta F^{ex}}{N} =
