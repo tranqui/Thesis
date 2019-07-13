@@ -27,7 +27,7 @@ I will indicate where each of these is the case, though loosely speaking it will
 The final sections are entirely original: we use integral geometry to calculate distribution functions in hard spheres, which is work now published as Ref.\ \cite{Robinson2019}.
 The results of this chapter only entered the supplementary material of Ref.\ \cite{Robinson2019}, whereas the results of the next chapter were described in the main text.
 
-\section{Overview of approaches}
+\section{Preliminaries}
 
 Scaled particle theory and the Percus-Yevick correlation function theories were unified by Rosenfeld in a series of papers, in scaled field particle theory (homogeneous) and fundamental measure theory (inhomogeneous).
 Consider integrals of the form
@@ -39,24 +39,77 @@ or
   \mayerdiagram[.||]{2}
 \end{equation*}
 Following \cite{Hansen-Goos2014} for this part.
+
+\begin{tcolorbox}[title=Virial expansion of the pressure]
+The virial series for the equation of state is%
+\marginfootnote{The left-hand side of \eqref{eq:virial-series-pressure} can be thought of as the deviation from ideal gas behaviour, because $\beta p = \rho$ is the ideal gas law.}
+\begin{subequations}
+  \begin{equation}\label{eq:virial-series-pressure}
+    \frac{\beta p}{\rho} - 1 =
+    \sum_{k=2}^\infty
+    B_k \, \rho^{k-1}
+  \end{equation}
+\end{subequations}
+where $B_k$ are the virial coefficients
+\begin{subequations*}
+  \begin{equation}
+    B_k =
+    -\frac{k-1}{k!}
+    \sum \textrm{all }\textit{stars}\textrm{ with 1 root and } k-1 \textrm{ field points}.
+  \end{equation}
+\end{subequations*}
+The first few contributions are
+\begin{subequations}
+  \begin{align*}
+    B_2 &=
+    -\frac{1}{2!} \mayerdiagram[|][o.]{2} \\
+    B_3 &=
+    -\frac{2}{3!} \mayerdiagram[|||][o..]{3} \\
+    B_4 &=
+    -\frac{3}{4!} \left(
+    3 \mayerdiagram[|.||.||][o...]{4} +
+    6 \mayerdiagram[||||.||][o...]{4} +
+    \mayerdiagram[|||||||][o...]{4}
+    \right)
+  \end{align*}
+\end{subequations}
+\end{tcolorbox}
+
+The excess free energy per particle is determined from the equation of state by
+\begin{subequations}
+  \begin{equation}
+    \frac{\beta F^{ex}}{N} =
+    \int_0^\eta \left( \frac{\beta p}{\rho} - 1 \right) \, \frac{d\eta'}{\eta'} =
+    \sum_{k=2}^\infty
+    \frac{1}{k-1} B_k \, \rho^{k-1},
+  \end{equation}
+\end{subequations}
+or equivalently expressed per volume
+\begin{subequations*}
+  \begin{equation}
+    \frac{\beta F^{ex}}{V} =
+    \rho \frac{\beta F^{ex}}{N} =
+    \sum_{k=2}^\infty
+    \frac{1}{k-1} B_k \, \rho^k,
+  \end{equation}
+\end{subequations*}
+giving the a few equivalent expressions of the excess chemical potential
 \begin{equation}
-  \frac{\beta p}{\rho} - 1 =
-  \sum_{i=2}^\infty
-  B_i \rho^{i-1}
-\end{equation}
-The excess free energy is determined from the equation of state by
-\begin{equation}
-  \frac{\beta F^{ex}}{N} =
-  \int_0^\eta \left( \frac{\beta p}{\rho} - 1 \right) \, \frac{d\eta'}{\eta'} =
-  \sum_{i=2}^\infty
-  \frac{B_i \rho^{i-1}}{i-1},
-\end{equation}
-giving the excess chemical potential from the thermodynamic relation
-\begin{equation}
-  \beta \mu^{ex}[p] =
-  \beta \left( \frac{\partial F^{ex}}{\partial N} \right)_{V,T} =
-  \left( \frac{\beta p}{\rho} - 1 \right) +
-  \int_0^\eta \left( \frac{\beta p}{\rho} - 1 \right) \, \frac{d\eta'}{\eta'}.
+  \begin{split}
+    \beta \mu^{ex} &=
+    \beta \left( \frac{\partial F^{ex}}{\partial N} \right)_{V,T} =
+    \frac{\partial}{\partial \rho}
+    \left( \frac{\beta F^{ex}}{V} \right)_{V,T} \\
+    &=
+    \left( \frac{\beta p}{\rho} - 1 \right) +
+    \int_0^\eta \left( \frac{\beta p}{\rho} - 1 \right) \, \frac{d\eta'}{\eta'} \\
+    &=
+    \sum_{k=2}^\infty
+    \frac{k}{k-1} B_k \, \rho^{k-1}
+    =
+    \sum_{k=1}^\infty
+    \frac{k+1}{k} B_{k+1} \, \rho^{k}.
+  \end{split}
 \end{equation}
 Generalisation to $m$-component mixtures, the $k$th virial coefficient is a polynomial in the compositional mole fractions
 \begin{equation}
@@ -88,7 +141,7 @@ For binary mixtures this becomes
   \frac{\beta F^{ex}}{V} =
   \sum_{k=2}^\infty \sum_{i=0}^k
   \frac{1}{k-1} {k \choose i}
-  B_{i,k-i} \rho_1^{k-i} \rho_2^i.
+  B_{i,k-i} \, \rho_1^{k-i} \rho_2^i.
 \end{equation}
 The chemical potential of species $i$ is
 \begin{equation}
@@ -104,29 +157,229 @@ giving in the limit $\rho_2 \ll 1$
     \lim_{\rho_2 \to 0}
     \sum_{k=2}^\infty \sum_{i=1}^k
     \frac{i}{k-1} {k \choose i}
-    B_{i,k-i} \rho_1^{k-i} \rho_2^{i-1} \\
+    B_{i,k-i} \, \rho_1^{k-i} \rho_2^{i-1} \\
     &=
     \sum_{k=2}^\infty
     \frac{k}{k-1}
-    B_{1,k-1} \rho_1^{k-1}
+    B_{1,k-1} \, \rho_1^{k-1}
+    =
+    \sum_{k=1}^\infty
+    \frac{k+1}{k}
+    B_{1,k} \, \rho_1^k
   \end{split}
 \end{equation}
-with composition independent coefficients
+with the first few composition independent coefficients
 \begin{subequations}
   \begin{align}
     B_{1,1} &=
+    -\frac{1}{2!}
     \mayerdiagram[|][t.]{2}
     \\
     B_{1,2} &=
-    3 \mayerdiagram[|||][t..]{3}
+    -\frac{2}{3!}
+    \mayerdiagram[|||][t..]{3}
     \\
     B_{1,3} &=
+    -\frac{3}{4!}
+    \left(
     3 \mayerdiagram[|.||.||][t...]{4} +
     3 \mayerdiagram[||||.||][t...]{4} +
     3 \mayerdiagram[|.|||||][t...]{4} +
     \mayerdiagram[|||||||][t...]{4}
+    \right)
   \end{align}
 \end{subequations}
+Giving the excess cost of insertion as
+\begin{equation}
+  \begin{split}
+    \beta \Omega^{ex} &= \beta \mu^{ex}_2 - \beta p \Delta V \\
+    &=
+    \sum_{k=1}^\infty
+    \left(
+    \frac{k+1}{k}
+    B_{1,k} -
+    B_k \, \Delta V
+    \right) \rho^k \\
+    &=
+    \sum_{k=1}^\infty
+    \beta\Omega^{ex}_k \rho^k.
+  \end{split}
+\end{equation}
+where the first few terms in the density expansion are
+\begin{subequations}
+  \begin{align}
+    \beta\Omega^{ex}_1 &=
+    - \mayerdiagram[|][t.]{2}
+    - \Delta V
+    \\
+    \beta\Omega^{ex}_2 &=
+    -\frac{1}{2!}
+    \left(
+    \mayerdiagram[|||][t..]{3}
+    - \Delta V \mayerdiagram[|][o.]{2}
+    \right)
+    \\
+    \beta\Omega^{ex}_3 &=
+    -\frac{1}{3!}
+    \left(
+    3 \mayerdiagram[|.||.|][t...]{4} +
+    3 \mayerdiagram[||||.|][t...]{4} +
+    3 \mayerdiagram[|.||||][t...]{4} +
+    \mayerdiagram[||||||][t...]{4}
+    - 2 \Delta V \mayerdiagram[|||][o..]{3}
+    \right)
+  \end{align}
+\end{subequations}
+We argue that $\beta\Omega^{ex}_1 = 0$ below, and for the second argument using the Ree-Hoover replacement rules we have
+\begin{equation}
+  \begin{split}
+    \beta\Omega^{ex}_2
+    &=
+    -\frac{1}{2!}
+    \left(
+    \mayerdiagram[|:|][t..]{3}
+    - \mayerdiagram[|.|][t..]{3}
+    - \Delta V \mayerdiagram[|][o.]{2}
+    \right) \\
+    &=
+    -\frac{1}{2!}
+    \left(
+    \mayerdiagram[|:|][t..]{3}
+    + \Delta V \mayerdiagram[|][o.]{2}
+    - \Delta V \mayerdiagram[|][o.]{2}
+    \right) \\
+    &=
+    -\frac{1}{2!} \mayerdiagram[|:|][t..]{3}.
+\end{split}
+\end{equation}
+and for the third one we have
+\begin{subequations}
+  \begin{align}
+    \mayerdiagram[|.||.|][t...]{4}
+    &=
+    \mayerdiagram[|.:|.|][t...]{4} -
+    \mayerdiagram[|..|.|][t...]{4} \\
+    \mayerdiagram[||||.|][t...]{4}
+    &=
+    %% \mayerdiagram[||:|.|][t...]{4} -
+    %% \mayerdiagram[||.|.|][t...]{4}
+    %% =
+    \mayerdiagram[|::|.|][t...]{4} -
+    \mayerdiagram[|.:|.|][t...]{4} -
+    \mayerdiagram[|:.|.|][t...]{4} +
+    \mayerdiagram[|..|.|][t...]{4} \\
+    \mayerdiagram[|.||||][t...]{4}
+    &=
+    \mayerdiagram[|.:|||][t...]{4} -
+    \mayerdiagram[|..|||][t...]{4} \\
+    \mayerdiagram[||||||][t...]{4}
+    &=
+    %% \mayerdiagram[||:|||][t...]{4} -
+    %% \mayerdiagram[||.|||][t...]{4}
+    %% =
+    \mayerdiagram[|::|||][t...]{4} -
+    \mayerdiagram[|.:|||][t...]{4} -
+    \mayerdiagram[|:.|||][t...]{4} +
+    \mayerdiagram[|..|||][t...]{4}
+  \end{align}
+\end{subequations}
+giving
+\begin{equation}
+  \begin{split}
+    3 \mayerdiagram[|.||.|][t...]{4} +
+    3 \mayerdiagram[||||.|][t...]{4} +
+    3 \mayerdiagram[|.||||][t...]{4} +
+    \mayerdiagram[||||||][t...]{4} &= \\
+    3 \mayerdiagram[|.:|.|][t...]{4} -
+    3 \mayerdiagram[|..|.|][t...]{4} +
+    3 \mayerdiagram[|::|.|][t...]{4} -
+    3 \mayerdiagram[|.:|.|][t...]{4} -
+    3 \mayerdiagram[|:.|.|][t...]{4} +
+    3 \mayerdiagram[|..|.|][t...]{4} +& \\
+    3 \mayerdiagram[|.:|||][t...]{4} -
+    3 \mayerdiagram[|..|||][t...]{4} +
+    \mayerdiagram[|::|||][t...]{4} -
+    \mayerdiagram[|.:|||][t...]{4} -
+    \mayerdiagram[|:.|||][t...]{4} +
+    \mayerdiagram[|..|||][t...]{4} &= \\
+    %3 \mayerdiagram[|.:|.|][t...]{4} -
+    %3 \mayerdiagram[|..|.|][t...]{4} +
+    3 \mayerdiagram[|::|.|][t...]{4} -
+    %3 \mayerdiagram[|.:|.|][t...]{4} -
+    3 \mayerdiagram[|:.|.|][t...]{4} +
+    %3 \mayerdiagram[|..|.|][t...]{4} +
+    \mayerdiagram[|.:|||][t...]{4} +
+    \mayerdiagram[|::|||][t...]{4} -
+    2 \mayerdiagram[|..|||][t...]{4} %-
+    %\mayerdiagram[|.:|||][t...]{4} -
+    %\mayerdiagram[|:.|||][t...]{4} %+
+    %\mayerdiagram[|..|||][t...]{4}
+    & = \\
+    3 \mayerdiagram[|::|.|][t...]{4} -
+    3 \mayerdiagram[|:.|.|][t...]{4} +
+    \mayerdiagram[|.:|||][t...]{4} +
+    \mayerdiagram[|::|||][t...]{4} +
+    2 \Delta V \mayerdiagram[|||][o..]{3} &
+  \end{split}
+\end{equation}
+so finally
+\begin{equation}
+  \begin{split}
+    \beta\Omega^{ex}_3 &=
+    -\frac{1}{3!}
+    \left(
+    3 \mayerdiagram[|::|.|][t...]{4} +
+    \mayerdiagram[|.:|||][t...]{4} +
+    \mayerdiagram[|::|||][t...]{4} -
+    3 \mayerdiagram[|:.|.|][t...]{4}
+    \right) \\
+    &=
+    -\frac{1}{3!}
+    \left(
+    3 \mayerdiagram[|::|.|][t...]{4} +
+    \mayerdiagram[|.:|||][t...]{4} +
+    \mayerdiagram[|::|||][t...]{4} +
+    3 V(B+B) \mayerdiagram[|:|][t..]{3}
+    \right)
+    %% \\
+    %% &=
+    %% -\frac{1}{3!}
+    %% \left(
+    %% 3 \mayerdiagram[|::|:|][t...]{4} +
+    %% 3 V(B+B) \mayerdiagram[|:|][t..]{3} +
+    %% \mayerdiagram[|.:|||][t...]{4} -
+    %% 2 \mayerdiagram[|::|||][t...]{4}
+    %% \right)
+  \end{split}
+\end{equation}
+Note to get the coefficients in front of the brackets we used
+\begin{equation*}
+  \frac{k + 1}{k} \frac{k}{(k+1)!} = \frac{1}{k!}.
+\end{equation*}
+
+The starting point for geometrical approaches is a recognition that for two hard bodies $A, B \in \mathcal{K}^d$ the Mayer-$f$ function reduces to
+\begin{equation}
+  f(A, B) =
+  \begin{cases}
+    0 & \qquad A \cap B = \emptyset\\
+    -1 & \qquad A \cap B \ne \emptyset
+  \end{cases}
+\end{equation}
+for convex bodies this is simply
+\begin{equation}
+  f(A, B) = - \mu_0(A \cap B)
+\end{equation}
+\todo{Comment on how these approaches break down for highly elongated shapes, \cite{Wertheim1994}.}
+For hard spheres this is particularly simple reducing to
+\begin{equation}
+  f(A, B) =
+  - \Theta \left(
+  \frac{\sigma_A + \sigma_B}{2} - |\vec{r}|
+  \right)
+\end{equation}
+where $\vec{r}$ is the separation between the centers of $A$ and $B$ and $\sigma_{\{A,B\}}$ their diameters.
+
+\section{Overview of approaches}
 
 The first virial coefficient for a general
 \begin{equation}

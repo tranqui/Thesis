@@ -37,11 +37,26 @@
   \ifx\relax#1%
   \else%
   \ifthenelse{\equal{#1}{o}} {%
-    \tkzDrawPoints[color=black,fill=white,size=12](\i)
+    \tkzDrawPoints[color=black,fill=white,size=12](\i)%
   } {%
     \ifthenelse{\equal{#1}{.}} {%
-      \tkzDrawPoints[color=black,fill=black,size=12](\i)
-    } { }%
+      \tkzDrawPoints[color=black,fill=black,size=12](\i)%
+    } {%
+      \ifthenelse{\equal{#1}{T}} {%
+        \tkzDefShiftPoint[\i](90:0.1){t1}%
+        \tkzDefShiftPoint[\i](210:0.1){t2}%
+        \tkzDefShiftPoint[\i](330:0.1){t3}%
+        \tkzDrawPolygon[color=black,fill=black](t1,t2,t3)%
+      } {%
+        \ifthenelse{\equal{#1}{t}} {%
+          \tkzDefShiftPoint[\i](90:0.1){t1}%
+          \tkzDefShiftPoint[\i](210:0.1){t2}%
+          \tkzDefShiftPoint[\i](330:0.1){t3}%
+          \tkzDrawPolygon[color=black,fill=white](t1,t2,t3)%
+        } {%
+        }%
+      }%
+    }%
   }%
   \FPeval{\nexti}{clip(1+\i)}%
   \xdef\i{\nexti}%

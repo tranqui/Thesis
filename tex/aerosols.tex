@@ -8,16 +8,74 @@
 
 \begin{document}
 \chapter{Drying kinetics and nucleation of aerosol droplets}
-A self-contained chapter.
 
-\section{Motivation}
-Connection with rest of thesis: here we attempt ot model nucleation of salt crystals inside of aerosol droplets, whereas in previous chapters we will have attempted to model nucleation of hard spheres.
-Presently, the nucleation rates of the droplets are taken from phenomenological fits to available data assuming classical nucleation theory.
-A connection with the morphometric work could be made if the applications to nucleation in hard spheres is succesful: this could provide a route to a proper first-principles treatment of nucleation in aerosols avoiding fitting parameters.
-As optimistic as this scenario is, it is worth making \emph{some} connection.
+\section{Introduction}
 
-\section{Diffusion model for a drying droplet}
-A moving boundary problem with diffusion.
+We have concentrated on the problem of modelling hard spheres at high densities, with a paritcular focus on supercooled liquids and glasses.
+Another problem at high densities is crystal nucleation.
+In this chapter we will address a practical application of nucleation: nucleation of salt crystals insdide of aerosol droplets, with applications to climate modelling and industrial spray drying.
+We will describe these applications in more detail below.
+
+One of the leading known-unknowns in climate modelling is the contribution to the greenhouse effect; salt droplets have different refractive properties depending on whether they are in crystal or liquid states which has an impact on the indirect effect.
+Understanding the nucleation rates of droplets in the troposphere is thus potentially a crucial ingredient in climate science.
+In order to keep statistical physicists alive long enough to reach a consensus on the nature of the glass transition, we have a fervent interest in better descriptions of the climate to inform policy.
+\todo{Add something about industrial spray drying}
+
+We briefly review the nucleation problem below starting from the mean field description.
+Above the freezing point the crystal is the thermodynamically stable phase, so mean field (Landau) descriptions start by positing the lower free energy of the crystal phase in this regime.
+In mean field, where fluctuations are impossible, transitioning from one phase to another is impossible however.
+In physical dimensions (finite $d$) first-order phase transitions are kinetically allowable through fluctuations: classical nucleation theory describes how one thermodynamically extends the mean field (Landau) description to allow for fluctuations with a single reaction coordinate.
+We describe this framework in \ref{sec:classical-nucleation-theory}
+
+Nucleation rates of salt solutions are a much harder problem than hard spheres, a toy system, so our microscopic morphometric formalism will be unlikely to work here at present.
+In stead we will start from the other mesoscale limit, where the droplet can be treated as a continuum.
+At present real systems are too complex to be treated from first principles, so we will employ phenomenological fits to available data assuming classical nucleation theory.
+We hope one day theory will allow a connection between microscopic and mesoscopic approaches, paving the way to a properly first-principles treatment of real systems.
+
+\section{Experiments}
+
+We describe the experiments here, carried out by the Gregson in the Reid group.
+I did not contribute to this work, but it is essential to understand their setup as my work attempts to model their data.
+
+They levitate droplets in a humidity controlled environment.
+The humidity control consists of air currents which they can control the water in.
+They can turn off the water at any point to rapidly switch between different humidities.
+They place a salt crystal inside the apparatus, and set the humidity high to grow a droplet.
+The water wets the crystal, dissolving the salt and becoming a solution.
+When they want to study drying they turn off the water flow (or turn it down) so water starts to evaporate and it dries.
+After the droplet is highly saturated by the salt nucleation occurs, with the experimental observation that it occurs disproportionately at the boundary.
+
+The droplet is monitored by scattering light.
+When the scattering profile goes haywire (coalesces) this indicates that the droplet has nucleated.
+Nucleation and growth occur on such a short time scale that it is not possible to obtain information on where inside the droplet this occurs or how many initial nucleation sites there were, only that the droplet has crystallised.
+Nucleation seemed to occur where the average concentration of salt inside the droplets was not very supersaturated (and thus nucleation is not expected), suggesting that an inhomogeneous profile might be driving it.
+Fast water evaporation rates for dry conditions would lead to a build up of salt at the boundary.
+This scenario is more akin to spray drying than climate modelling.
+Follow up experiments by the Reid group placed the droplets inside scanning electron microscopes (SEM) for imaging.
+These find that in general for \ce{NaCl} the nucleation does seem to occur at the boundary in line with this hypothesis.
+\marginfootnote{I am reversing chronology here.
+  Actually we used our numerical model to predict this first, and later the SEM experiments were performed which confirmed this.}
+The experiments featuring slower evaporation tend to have more perfect crystals, suggesing a fewer number of nucleation sites and allowing for slow crystal growth.
+The SEM results for \ce{NaNO3} are inconclusive, although the resulting crystal is more spherical suggesting multiple nucleation sites/less strongly distributed at the boundary.
+
+While there is an air-water interface, this phase boundary is not believed to act as a heterogeneous nucleation sites; rather the increased concentration of salt at the boundary drives it (we conjecture this).
+They use fancy distilled water to eliminate potential heterogeneous nucleation sites due to impurities.
+We will attempt to model the nucleation as homogeneous nucleation, albeit with an inhomogeneous evolving concentration profile.
+As such we need to model:
+\begin{itemize}
+  \item The instantaneous homogeneous nucleation rates for a given concentration profile.
+  \item The rate of evaporation of water from the droplet.
+  \item The evolution of the concentration inside the droplet.
+\end{itemize}
+
+We have the following experimental datasets for \ce{NaNO3}, RH = relative humidity
+\begin{itemize}
+\item Varying temperature at constant RH=0 (dry conditions).
+\item Varying Initial solute concentration at constant $T$=20\si{K}
+\item Varying gas RH at constant $T$=20\si{K}.
+\end{itemize}
+
+\section{Notation}
 
 We consider a droplet of radius $R(t)$ and consider concentration profiles at position $\vec{r}$ inside the droplet.
 We will later assume spherical symmetry and reduce the dependance on $\vec{r}$ to a dependance on the distance from the centre $r = |\vec{r}|$.
@@ -114,9 +172,141 @@ Note:
   We have a shrinking boundary $\dot{R} < 0$ for drying.}
 \end{SCfigure}
 
+\section{Nucleation model}
+\subsection{Classical nucleation theory}
+\label{sec:classical-nucleation-theory}
+
+Numerical values taken from capilliary paper.
+
+Here we review classical nucleation theory (CNT) which describes the mechanism of first-order transitions by modelling the formation of the new phase as fluctuations inside a metastable phase.
+We imagine the metastable phase to have `equilibrated' in the sense that it has sampled all of the microstates corresponding to the metastable-phases macrostate, so that fluctuations can be treated as Boltzmann-weighted fluctuations.
+This allows a thermodynamic description of nucleation, and is widely used/confirmed by simulation/experimental studies \cite{?}.
+We loosely follow the excellent review of Sears \cite{Sears?}.
+
+Consider a small region of the new phase forms inside the metastable one, and we wish to calculate the (free) energetic cost of this formation.
+The region has a smaller chemical potential due to this new phase being the thermodynamic ground state, however it also introduces a phase-boundary at the edge of this region paying a surface energy penalty.
+This gives the energy change (Gibbs)
+\begin{equation}
+  \Delta G(R) = \gamma A - |\Delta \mu| \rho_s V
+\end{equation}
+where $\Delta \mu$ is the different in chemical potential between the two phases and we have written it with absolute bars to make the sign explicit, $A$ and $V$ are the surface areas and volumes of the new region.
+Note that this is equivalent to the reversible work to assemble such a system, so in principle this could be calculated via the formalism described in previous chapters (at least for hard spheres where we have shown this is accurate).
+Assuming the region to be spherical of radius $R$ this reduces to the single reaction coordinate
+\begin{equation}
+  \Delta G(R) = 4\pi R^2 \gamma - \frac{4}{3} \pi R^3 \rho_s |\Delta \mu|
+\end{equation}
+The maximum of this equation is thus the thermodynamic barrier to nucleation.
+Defining $\Delta G^{*} = \max{(\Delta G)}$ and $R^{*} = \argmax{(\Delta G)}$ we have
+\begin{align}\label{eq:cnt-barrier}
+  \Delta G^{*} &= \frac{4}{3} \pi (R^{*})^2 \gamma \\
+  (R^{*}) &= -\frac{2\gamma}{\rho_s \Delta\mu}
+\end{align}
+In the above we assumed the new region is spherical, but in general it could be of arbitrary (but compact) shape and it is possible for there to be multiple reaction coordinates leading to novel nucleation kinetics.
+In the latter case a simple CNT description would break down.
+
+From \eqref{eq:cnt-barrier} we write the homogeneous nucleation rate per unit volume as
+\begin{equation}
+  J = \kappa \exp{\left(-\frac{\Delta G^{*}}{k_B T}\right)}
+\end{equation}
+where $\kappa$ is a kinetic prefactor.
+We will now describe the functional forms of these quantities within CNT, giving a phenomenological description of nucleation rates within CNT.
+
+The chemical potential expressed in terms of mean ionic activity is
+\begin{equation}
+  \begin{aligned}
+  \exp{-\frac{\Delta \mu}{k_B T}} &=
+  \nu \ln{\left( \frac{a_\pm}{a_{0\pm}} \right)} \\
+  &=
+  \nu \ln{\left( \frac{\gamma_\pm}{\gamma_{0\pm}} \frac{m}{m_0} \right)}
+  \end{aligned}
+\end{equation}
+$nu$ is sum of ions (2 for \ce{NaCl}), $a_\pm$ is mean ionic activity, $\gamma_\pm$ is mean ionic activity coefficient, $m$ and $m_0$ are molarities at equilibrium and crystal stabilisation respectively, ?%
+\todo{Find out what $a_{0\pm}$ and $\gamma_{0\pm}$ are from Flo.}
+
+A commonly used approximation for the kinetic prefactor in \eqref{?} is \cite{Sears?}:
+\begin{align}
+  \kappa &= \rho_l j Z \\
+  j &\sim \rho_l D_l R^* \\
+  Z &\sim (n^*)^{-\tfrac{2}{3}}
+\end{align}
+$\rho_l$ is liquid phase density, $j$ is rate of aggregation, $Z$ is Zeldovich factor, $n^*$ is excess number of molecules in critical nucleus (check references!).
+\todo{Review the literatue on where this comes from.}
+
+Inserting values from literature we see that the homogeneous nucleation rate per unit volume is essentially a step function for both \ce{NaCl} and \ce{NaNO3}.
+We tried various values of surface tension for \ce{NaNO3}, however it did not specifically change the phenomenon.
+\todo{2d plots of nucleation rates.}
+The nucleation rates are weakly dependent on the temperature, and strongly dependent on the salt concentration.
+
+The experimental data cannot directly give the nucleation rates per unit volume, rather they determine whether the entire droplet has crystallised; to make a comparison we have to go from the local nucleation rate to the entire droplet's rate.
+In the next section we will describe this process based on Poisson statistics, and later we will present a diffusion-evaporation model for obtaining a trajectory of concentration profiles.
+
+\subsection{Droplet nucleation rates}
+
+We will assume Poisson statistics in order to determine the survival probabilty of the droplet, i.e.\ the probability that there has been no nucleation event.
+This is mathematically identical to calculating e.g.\ decay rates of radioactive isotopes.
+
+Suppose we have the instantaneous droplet concentration profile $\rho_s(r; t)$ at a certain point in time.
+Assuming CNT from the previous section, we know the nucleation rate/unit volume everywhere in the droplet $J(r; t) = J\Big(\rho_s(r; t)\Big)$.
+The total nucleation rate across the droplet, i.e.\ the number of expected events per second globally is:
+\begin{equation}
+  W = \int J dV
+  = 4\pi \int_0^{R(t)} J(r; t) \, r^2 dr
+\end{equation}
+We treat the number of events in the volume element $r \to r + \Delta r$ Between $t \to t+\Delta t$ as a Poisson process, with mean events:
+\begin{equation}
+  \begin{aligned}
+    \mu(r) &= \frac{4\pi}{3} \left( (r+\Delta r)^3 - r^3 \right)
+    \int_t^{t+\Delta t} J(r,t') \, dt' \\
+    &\simeq
+    4\pi r^2 \Delta r J(r, t) \Delta t
+  \end{aligned}
+\end{equation}
+For Poisson statistics the probability of having exactly $n$ events as
+\begin{equation}
+  P(n; r) = \frac{e^{-\mu(r)} \mu(r)^n}{n!}.
+\end{equation}
+Giving probability of no nucleation event (`survival') as $P(0; r) = e^{-\mu(r)}$.
+This gives the probability of having seen no events across the whole droplet in this time period as:
+\begin{equation}
+  \begin{aligned}
+    \textrm{Prob}\left[ \textrm{no event in } t \to t + \Delta t \right]
+    &=
+    \exp{\left(
+      -4\pi \int_t^{t+\Delta t} dt' \int_0^{R(t')} dr r^2 J(r, t')
+      \right)}
+    \\ &\simeq
+    \prod_i \exp{\left(-4\pi (i\Delta r)^2 J(i\Delta r) \Delta t \Delta r\right)}
+  \end{aligned}
+\end{equation}
+where the latter line is a useful approximation for numerical descriptions on a uniformly separated discrete grid.
+
+\subsection{Inverse problem}
+
+We can try to determine the nucleation rates directly from experiments by observing the stochastic nucleation behaviour over repeat trajectories and comparing these against the numerical model.
+In this way we can attempt to find $J$ as a function of concentration directly from the known survival probabilities; this is an inverse problem and is in general not well posed.
+We can make some progress by making some strong assumptions about the form of $J$ based on physical intuition.
+We will then test for self-consistency to justify this approach ad-hoc.
+
+We generally expect nucleation to occur at the surface $r = R$ where the concentration is most saturated.
+We therefore expect $J = J(\rho^{(s)}(R), T)$.
+We thus expect the survival probability \eqref{eq?} to be dominated by a term like
+\begin{equation}
+  \textrm{Prob}\left[ \textrm{no event in } t \to t + \Delta t \right]
+  \sim
+  \exp^{-4\pi R^2 \Delta t J(R) \xi}
+\end{equation}
+where $\xi$ is some lengthscale over which the concentration is enriched i.e.\ where nucleation occurs.
+Assuming that $\xi$ will be the same at all state points, we can determine $J \xi$ by fitting it against the nucleation rates seen in the lab.
+
+\section{Diffusion model for a drying droplet}
+
 \subsection{Evolution equations}
 
-Continuity equations (total and species)
+To determine the concentration profile trajectory for a drying droplet we have to consider the relative motion of solute-solvent species inside the droplet, the relative motion of various species in the vapour phase, as well as the evaporation of solvent across the phase boundary.
+This problem reduces to a moving boundary problem with diffusion.
+
+Starting from conservation of mass/species we have the continuity equations
+\begin{subequations}
 \begin{align}
   \label{eq:total-continuity}
   \frac{\partial \rho}{\partial t} +
@@ -126,6 +316,7 @@ Continuity equations (total and species)
   \vec{\nabla} \cdot (\rho^{(i)} \vec{v}^{(i)}) &= 0
   \qquad i \in \{f,s\}
 \end{align}
+\end{subequations}
 where $\vec{v}^{(i)}$ is the velocity of species $i$ and the mass-averaged fluid velocity is
 \begin{equation}
   \vec{v} = \sum_i Y^{(i)} \vec{v}^{(i)}
@@ -417,6 +608,13 @@ Further we fit it to low densities using an Arrhenius-like extrapolation
 \end{equation}
 where $\alpha$ is a fitting parameter.
 See Figure \ref{fig:diffusion-fit-nano3} for an example of this fitting for \ce{NaNO3} solutions.
+Note that the point for zero salt concentration is the diffusion constant of pure water for reference, i.e.\ not the binary diffusion constant in the dilute limit which is expected to fall on the line giving the numerical fit. 
+
+\begin{SCfigure}
+  \missingfigure[figwidth=\linewidth]{}
+  \caption{Binary diffusion constant for \ce{NaCl}--\ce{H2O} solution.}
+\end{SCfigure}
+
 
 \begin{SCfigure}[H]
   \includegraphics[width=\linewidth]{diffusion-fit-nano3}
@@ -1036,86 +1234,39 @@ where $W^{(f)}$ and $W^{(g)}$ are the molar masses of the solvent and air compon
 %%   \end{aligned}
 %% \end{equation*}
 
-\section{Nucleation model}
-\subsection{Classical nucleation theory}
+\section{Implementation and results}
 
-Numerical values taken from capilliary paper.
+\todo{Figure of state point evolution (boundary concentration and temperature) for \ce{NaCl} droplets.
+  Indicate point where 50\% have nucleated, with bars for the upper and lower bounds.
+  These should show a more-or-less fixed final boundary concentration.}
 
-Nucleation rate per unit volume:
-\begin{equation}
-  \Gamma = \kappa \exp{\left(-\frac{\Delta G^{*}}{k_B T}\right)}
-\end{equation}
-where $\kappa$ is a kinetic prefactor.
-CNT equation:
-\begin{equation}
-  \Delta G(R) = \frac{4}{3} \pi R^3 \rho_s \Delta \mu + 4\pi R^2 \gamma
-\end{equation}
-Defining $\Delta G^{*} = \max{(\Delta G)}$ and $R^{*} = \argmax{(\Delta G)}$ we have
-\begin{align}
-  \Delta G^{*} &= \frac{4}{3} \pi (R^{*})^2 \gamma \\
-  (R^{*}) &= -\frac{2\gamma}{\rho_s \Delta\mu}
-\end{align}
-NB: $\Delta \mu < 0$.
+For \ce{NaCl} the agreement is very good, as a step function in the nucleation rates seems to hold.
+However, the theory predicts similar behaviour for \ce{NaNO3} which is not seen in the experiments.
+The cause of this breakdown is unknown.
 
-Chemical potential expressed in terms of mean ionic activity:
-\begin{equation}
-  \begin{aligned}
-  \exp{-\frac{\Delta \mu}{k_B T}} &=
-  \nu \ln{\left( \frac{a_\pm}{a_{0\pm}} \right)} \\
-  &=
-  \nu \ln{\left( \frac{\gamma_\pm}{\gamma_{0\pm}} \frac{m}{m_0} \right)}
-  \end{aligned}
-\end{equation}
-$nu$ is sum of ions (2 for NaCl), $a_\pm$ is mean ionic activity, $\gamma_\pm$ is mean ionic activity coefficient, $m$ and $m_0$ are molarities at equilibrium and crystal stabilisation respectively, no idea what $a_{0\pm}$ and $\gamma_{0\pm}$ are.
+At long times the radial evolution shows some discrepancy with the experiments, suggesting our semi-empirical treatment of evaporation breaks down.
 
-Kinetic prefactor:
-\begin{align}
-  \kappa &= \rho_l j Z \\
-  j &\sim \rho_l D_l R^* \\
-  Z &\sim (n^*)^{-\tfrac{2}{3}}
-\end{align}
-$\rho_l$ is liquid phase density, $j$ is rate of aggregation, $Z$ is Zeldovich factor, $n^*$ is excess number of molecules in critical nucleus (check references!).
+\section{Discussion}
 
-\subsection{Density dependence of nucleation rate}
-\subsection{Decay rates with droplet evolution}
 
-Nucleation rate/unit volume is $\Gamma(Y_S)$.
-Total nucleation rate (nucleation events per second across whole droplet):
-\begin{equation}
-  W = \int \Gamma dV
-  = 4\pi \int_0^{R(t)} \Gamma(Y_S(r); t) \, dr
-\end{equation}
+Classical nucleation theory with physically plausible parameters, seems to work well for \ce{NaCl} solutions but not for \ce{NaNO3}.
+In both cases CNT predicts nucleation essentially after a threshold surface saturation is reached, whereas experiments show nucleation in \ce{NaNO3} has stochastic behaviour.
+The discrepancy is either due to the assumptions entering into our evolution equations, leading to incorrect trajectories entering the CNT calculation, or CNT itself does not predict accurate nucleation kinetics for this solution.
+We consider each of these possibilities in turn.
 
-In the volume element $r \to r + \Delta r$ Between $t \to t+\Delta t$ we have a Poisson process.
-Mean events:
-\begin{equation}
-  \begin{aligned}
-    \mu(r) &= \frac{4\pi}{3} ( (r+\Delta r)^3 - r^3)
-    \int_t^{t+\Delta t} \Gamma(r,t') \, dt' \\
-    &\simeq
-    4\pi r^2 \Delta r \Gamma(r, t) \Delta t
-  \end{aligned}
-\end{equation}
-Poisson process so we have probability of exactly $n$ events as
-\begin{equation}
-  P(n) = \frac{e^{-\mu} \mu^n}{n!}
-\end{equation}
-Giving probability of no event (`survival') as $P(0) = e^{-\mu}$.
-Survival across all $r$ in this time period:
-\begin{equation}
-  \begin{aligned}
-  \textrm{Probability}\left( \textrm{no event in } t \to t + \Delta t \right)
-  &= \prod_i P(0;i) \\
-  &= \prod_i \exp{\left(-4\pi (i\Delta r)^2 \Gamma(i\Delta r) \Delta t \Delta r\right)} \\
-  &= \exp{\left(
-    -4\pi \int_t^{t+\Delta t} dt' \int_0^{R(t')} dr r^2 \Gamma(r, t')
-    \right)}
-  \end{aligned}
-\end{equation}
+It is unlikely to be due to the trajectories being incorrect: even varying the most poorly estimated parameter for \ce{NaNO3}, the surface tension, does not change the CNT prediction.
+Because of the sensitivity of CNT on parameters, it would require a remarkable degree of fine tuning to fit CNT model with any physically plausible parameters.
+It's possible nucleation of \ce{NaNO3} occurs via a more complex kinetic pathway, e.g.\ multiple steps \cite{?,?,?}.
+Alternatively, the experimental nucleation could be occurring via heterogeneous nucleation (e.g.\ impurities in the sample).
+This is unlikely however, as the experiments can maintain the same salt sample and follow the single trajectory and it will still show the same stochastic behaviour.
+Impurities are not likely to be in the solvent, or we would likely see the same phenomenon in \ce{NaNO3} nucleation.
 
-We have $\Gamma(r,t') = \Gamma(Y_S(r,t'), T(r,t'))$ so need a phenomenological model (CNT) for this.
-Initially ignore temperature so we have $\Gamma(Y_S(r,t'))$.
-We know: nucleation impossible below saturation limit.
+Our evaporation model is rather crude, though it seems to qualitatively show the right behaviour.
+It's possible that our assumption of pure Fickian diffusion oversaturates the concentration at the boundary.
+To go beyond this one would have to introduce more sophisticated kinetics beyond Fickian diffusion.
+An option would be to relax the assumption that the temperature of the droplet is constant, as convection effects could play a key role in mixing the solution.
+Solving the Navier-Stokes equations would be essentially exact, though expensive route to include this.
+Less expensive would be to use vortex models or effective-conduction models which treat the internal circulation/convection of heat in an ad hoc manner.
 
 \section*{Appendix: Numerical implementation}
 
