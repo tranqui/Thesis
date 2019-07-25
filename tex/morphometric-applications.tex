@@ -1,11 +1,13 @@
 %TC: macro \marginfootnote [other]
 %TC: envir SCfigure [] other
 %TC: macrocount beginSCfigure [figure]
-\documentclass[11pt]{report}
+\documentclass[11pt,twoside]{report}
 \usepackage{preamble}
-\setcounter{chapter}{4}
+\setcounter{chapter}{3}
 \graphicspath{{../img/}}
+\def\includebibliography{}
 
+\externaldocument{background}
 \externaldocument{morphometric-framework}
 
 \begin{document}

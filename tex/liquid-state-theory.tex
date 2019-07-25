@@ -1,162 +1,335 @@
-\section{Liquid state theory}
+\section{Statistical physics of fluids}
 
-Here we talk in general terms about descriptions of the liquid state.
-Broadly speaking, in its historical development approaches can be placed inside one of two categories.
-Namely, theories involving
-\begin{enumerate}
-  \item Local geometric approximations capturing the short range interactions (free volume theory/cell theory, scaled particle theory), and
-  \item Integral equations (Ornstein-Zernike closures, density functional theory) which properly treat the long range correlations.
-\end{enumerate}
-These two approaches are not mutually exclusive, and hybrid theories can improve on.
-For instance, fundamental measure theory (FMT) involves the synthesis of integral geometry with the formalism of density functional theory which involves minimising a functional (i.e.\ an integral equation).
+%% \subsection{Notes}
 
-Classical theory of phase transitions (Landau).
-Van der waals theory.
-How does the transition occur?
-Metastability leads into kinetics.
+%% Here we talk in general terms about descriptions of the liquid state.
+%% Broadly speaking, in its historical development approaches can be placed inside one of two categories.
+%% Namely, theories involving
+%% \begin{enumerate}
+%%   \item Local geometric approximations capturing the short range interactions (free volume theory/cell theory, scaled particle theory), and
+%%   \item Integral equations (Ornstein-Zernike closures, density functional theory) which properly treat the long range correlations.
+%% \end{enumerate}
+%% These two approaches are not mutually exclusive, and hybrid theories can improve on.
+%% For instance, fundamental measure theory (FMT) involves the synthesis of integral geometry with the formalism of density functional theory which involves minimising a functional (i.e.\ an integral equation).
 
-Kinetics vs thermodynamics.
-Thermodynamic driving force vs activation barrier.
+%% Classical theory of phase transitions (Landau).
+%% Van der waals theory.
+%% How does the transition occur?
+%% Metastability leads into kinetics.
 
-Relaxation behaviour controlled by activation barrier.
-A thermal fluctuation which takes the system over the barrier%
-\marginfootnote{These fluctuations are conventionally called \emph{instantons} as they spontaneously appear and vanish just like virtual particles in fundamental physics.
-  The name for this relatively straightforward phenomenon is thus a reference to a much more counterintuitive and bizarre phenomenon, because physicists are good at making helpful analogies.}
-occurs with rate $\exp{-\beta \Delta U}$ \cite{Langer}.
+%% Kinetics vs thermodynamics.
+%% Thermodynamic driving force vs activation barrier.
 
-Liquids:
-Free volume theory.
-Early curvature corrections.
-Free volume theory depends on the free volume (duh).
-This is an example of an integral geometric theory.
-Morphological 
+%% Relaxation behaviour controlled by activation barrier.
+%% A thermal fluctuation which takes the system over the barrier%
+%% \marginfootnote{These fluctuations are conventionally called \emph{instantons} as they spontaneously appear and vanish just like virtual particles in fundamental physics.
+%%   The name for this relatively straightforward phenomenon is thus a reference to a much more counterintuitive and bizarre phenomenon, because physicists are good at making helpful analogies.}
+%% occurs with rate $\exp{-\beta \Delta U}$ \cite{Langer}.
 
-Technical - handwavey:
-Motion invariance: translation and rotation invariance.
-Additivity: the energy is extensive (even for small system sizes)
-Continuity: the function is well behaved
+%% Liquids:
+%% Free volume theory.
+%% Early curvature corrections.
+%% Free volume theory depends on the free volume (duh).
+%% This is an example of an integral geometric theory.
+%% Morphological
 
-A summary of results in the modern formalism as given by standard texts (notably references \cite{Hansen2013} and \cite{Santos2016}) that will be used throughout the thesis.
+\subsection{Statistical mechanics}
 
-\subsection{Interaction potentials}
-\subsection{Simple liquids}
-\subsection{Hard sphere model system}
+In this section we \emph{briefly} introduce the statistical ensembles used throughout the rest of the thesis.
+These emerge by considering typical fluctuations of thermodynamic quantities for a subsystem within a macroscopic system called the \emph{ensemble}; the properties of this larger system define average quanties of the subsystem \cite{Landau2008}.
+Alternatively, from a Bayesian perspective the probability distributions given below emerge from maximising the entropy%
+\marginfootnote{The entropy represents a thermodynamic quantity in the former picture, whereas it represents our own \emph{uncertainty} about the system in the latter.}
+subject to the constraint of average energy and (optionally) the average particle number \cite{JaynesPR1957,JaynesPR1957a}.
 
-\subsubsection{Grand canonical ensemble}
-\paragraph{Averages}
-The partition function and free energy
-\paragraph{Correlations}
-Particle densities $\rho^{(n)}$ and distribution functions $g^{(n)}$.
-
-\subsection{Homogeneous liquid state theory}
-
-\subsubsection{Virial expansion of the equation of state}
-
-\paragraph{Distribution function form}
-Pressure in terms of pair distribution function $g(r)$.
-
-For pair potentials:
+A $d$-dimensional system of $N$ particles consists of $\vec{r}^N = \{\vec{r}_1, \cdots, \vec{r}_N\} \in \mathbb{R}^{dN}$ coordinates and $\vec{p}^N = \{\vec{p}_1, \cdots, \vec{p}_N\} \in \mathbb{R}^{dN}$ momenta.
+The classical Hamiltonian can be decomposed into kinetic and potential terms as in
 \begin{equation}
-  \frac{\beta P}{\rho} =
-  1 - \frac{2 \pi \beta \rho}{3}
-  \int_0^\infty v'(r) g(r) r^3 \, dr
+  \mathcal{H}_N(\vec{r}^N, \vec{p}^N)
+  =
+  K_N(\vec{p}^N) + U_N(\vec{r}^N)
 \end{equation}
-Generalisation to many-body potentials requires higher order distribution functions.
-Difficulty of discontinuities overcome by introducing cavity function
+in the absence of an external field.
+Further, we constrain the coordinates inside the volume $V$%
+\marginfootnote{We use the usual physicist abuse of notation where $V$ refers to both a region in space $V \subset \mathbb{R}^d$, and also the volume of this space $V = V_d(V)$.}.
+The \emph{canonical} ensemble describes an equilibrium system at constant temperature $T$ with probability measure
 \begin{equation}
-  y(r) = e^{\beta v(r)} g(r)
+  f^{(N)}(\vec{r}^N, \vec{p}^N) \propto e^{-\beta \mathcal{H}_N}
 \end{equation}
-which is continuous \todo{Find out why this is continuous} leading to
+where $\beta = (k_B T)^{-1}$ with Boltzmann constant $k_B$ and temperature $T$.
+The proportionality constant ensures the probability distribution is properly normalised, leading to the canonical partition function
 \begin{equation}
-  \frac{\beta P}{\rho} =
-  1 + \frac{2 \pi \beta \rho}{3}
-  \int_0^\infty e'(r) g(r) r^3 \, dr,
+  Q_N
+  =
+  \int_{\mathbb{R}^{dN}} \int_{V^N}
+  e^{-\beta\mathcal{H}_N}
+  d\vec{r}^N d\vec{p}^N.
 \end{equation}
-where Boltzmann factor of pair potential is
-\begin{equation}
-  e(r) = e^{\beta v(r)}.
-\end{equation}
-
-\paragraph{Diagrammatic form}
-Low density expansion of pressure in series with virial coefficients.
-
-\begin{equation}
-  \frac{\beta P}{\rho} =
-  1 + \sum_{i=2}^\infty B_i(T) \rho^{i-1}
-\end{equation}
-where $B_i$ are the virial coefficients.
-
-Generalisation to a binary mixture \todo{Where does this come from? What do the diagrams look like? Are they simpler than the distribution function diagrams?}: \cite{Hansen-Goos2014}
-\begin{equation}\label{eq:virial-series-binary}
-  \Phi = \sum_{n=2}^\infty \sum_{j=0}^{n}
-  \frac{1}{n-1} {n \choose j} B_n^{[j]} \rho_1^{n-j} \rho_2^j
-\end{equation}
-
-\paragraph{Empirical Carnahan-Starling equation of state for hard spheres}
-
-The excess free energy is determined from the equation of state by
-\begin{equation}
-  \frac{\beta F^{ex}}{N}
-  = \int_0^\eta \left( \frac{\beta p}{\rho} - 1 \right) \, \frac{d\eta'}{\eta'},
-\end{equation}
-giving the excess chemical potential from the thermodynamic relation
-\begin{equation}\label{eq:chemical-potential}
-  \beta \mu^{ex}[p]
-  = \beta \left( \frac{\partial F^{ex}}{\partial N} \right)_{V,T}
-  = \left( \frac{\beta p}{\rho} - 1 \right)
-  + \int_0^\eta \left( \frac{\beta p}{\rho} - 1 \right) \, \frac{d\eta'}{\eta'}.
-\end{equation}
-
-The Carnahan-Starling equation of state approximates the pressure for hard spheres as \cite{Carnahan1969}
-\begin{equation}\label{eq:cs-pressure}
-  \frac{\beta p_{cs}}{\rho} = \frac{1 + \eta + \eta^2 - \eta^3}{(1-\eta)^3},
-\end{equation}
-which gives the excess chemical potential using \eqref{eq:chemical-potential} as
-\begin{equation}\label{eq:cs-mu}
-  \beta \mu_{cs}^{ex} = \frac{8\eta - 9\eta^2 + 3\eta^3}{(1-\eta)^3}.
-\end{equation}
-
-\subsubsection{Free energy from distribution functions}
-\paragraph{Distribution function theories}
-\paragraph{Kirkwood superposition approximation}
-\paragraph{Distribution functions from direct correlation functions: Ornstein-Zernike equation}
-
-\subsubsection{Beyond hard spheres: perturbation theory and the mean field approximation}
-
-\subsection{Inhomogeneous liquid state theory}
-
-\subsubsection{Solvation physics}
-
-\section{Functional calculus}
-
-The chain rule of functional calculus is
-\todo{Insert citation to some calculus of variations reference, and Hansen2013/Bob's reviews for application to liquids.}
+Classically, the kinetic energy is simply
 \begin{equation*}
-  \frac{\delta f}{\delta u(\vec{r})} =
-  \int
-  \frac{\delta f}{\delta v(\vec{r}')}
-  \frac{\delta v(\vec{r}')}{\delta u(\vec{r})}
-  \, d\vec{r}'
+  K_N(\vec{p}^N) = \sum_{i=1}^N \frac{|\vec{p}_i|^2}{2m_i}
 \end{equation*}
-and inverse derivatives are found via
+which can be integrated leaving
+\begin{equation}
+  Q_N = \frac{Z_N}{\Lambda^{dN} N!}
+\end{equation}
+where $\Lambda$ is the thermal de Broglie wavelength, and the configurational integral is given by
+\begin{equation}\label{eq:canonical-partition}
+  Z_N
+  =
+  \int_{V^N}
+  e^{-\beta U_N}
+  d\vec{r}^N.
+\end{equation}
+Average constants with $N$ fixed are obtained through
+\begin{equation*}\label{eq:canonical-average}
+  \left< \cdots \right>_N
+  =
+  \frac{1}{Z_N}
+  \int_{V^N} \left(\cdots\right) e^{-\beta U_N} d\vec{r}^N,
+\end{equation*}
+and the Helmholtz free energy is obtained through
 \begin{equation*}
-  \int
-  \frac{\delta u(\vec{r})}{\delta v(\vec{r}')}
-  \frac{\delta v(\vec{r}')}{\delta u(\vec{r})}
-  \, d\vec{r} =
-  \delta(\vec{r} - \vec{r}')
+  \beta F = -\ln{Z_N}.
 \end{equation*}
 
-\section{Correlation functions}
+We will work almost exclusively in the \emph{grand canonical ensemble}, where particle number varies according to a chemical potential $\mu$, which is convenient for liquid state descriptions%
+\marginfootnote{Notably the free energy is extensive without invoking Stirling's approximation for $N!$, making the thermodynamics properly self-consistent even with small system sizes.}.
+The corresponding partition function features summation over $N$, as in
+\begin{equation}\label{eq:grand-canonical-partition}
+  \Xi
+  =
+  \sum_{N=0}^\infty \frac{z^N}{N!} Z_N
+  =
+  \sum_{N=0}^\infty \frac{z^N}{N!}
+  \int_{V^N} e^{-\beta U_N} d\vec{r}^N,
+\end{equation}
+where the activity is $z = \exp{(\beta\mu)} / \Lambda^d$.
+Accordingly, average quantities are found via
+\begin{equation}\label{eq:grand-canonical-average}
+  \left< \cdots \right>
+  =
+  \frac{1}{\Xi} \sum_{N=0}^\infty \frac{z^N}{N!}
+  \int_{V^N} \left(\cdots\right) e^{-\beta U_N} d\vec{r}^N,
+\end{equation}
+and the corresponding free energy (or \emph{grand potential}) is obtained via
+\begin{equation*}
+  \beta \Omega = -\ln{\Xi}.
+\end{equation*}
+For a homogeneous system this reduces to the standard result
+\begin{equation}\label{eq:homogeneous-grand-potential}
+  \Omega_\mathrm{hom} = - p V.
+\end{equation}
+Thermodynamic quantities are easily calculated for the ideal gas, e.g.\
+\begin{equation*}
+  \beta\Omega = - \frac{e^{\beta\mu^\mathrm{id}}}{\Lambda^d} V.
+\end{equation*}
+Comparing the homogeneous result \eqref{eq:homogeneous-grand-potential} with the ideal gas law $\beta p = \rho$ gives the chemical potential of an ideal gas as
+\begin{equation}\label{eq:ideal-chemical-potential}
+  \beta \mu^\mathrm{id} = \ln{(\Lambda^d \rho)}.
+\end{equation}
+From the Legendre transform of the grand potential
+\begin{equation}\label{eq:grand-potential-legendre-transform}
+  \Omega = F - \mu N
+\end{equation}
+we obtain the free energy density of an ideal gas as
+\begin{equation}\label{eq:ideal-free-energy-density}
+  \frac{\beta F^\mathrm{id}}{V} = \rho (\ln{(\Lambda^d \rho)} - 1).
+\end{equation}
+Finally, for interacting systems the chemical potential and free energy are typically separated into \emph{ideal} and \emph{excess} parts, as in
+\begin{align*}
+  \beta \mu &= \beta \mu^\mathrm{id} + \beta \mu^\mathrm{ex} \\
+  \beta F &= \beta F^\mathrm{id} + \beta F^\mathrm{ex}
+\end{align*}
+with the ideal contributions as expressed above.
 
+\subsection{Liquid structure}
+
+Interparticle interactions induce spatial structure in the liquid which are characterised by several (equivalent) hierarchies of correlation functions.
+The most natural description of structure starts from the \emph{$n$-particle density}
+\begin{equation}\label{eq:n-particle-density-pdf}
+  \mathrm{Prob}\left[ \textit{any } n \textrm{ particles in volume } d\vec{r}^n \right]
+  :=
+  \rho^{(n)}(\vec{r}^n) \, d\vec{r}^n.
+\end{equation}
+This is formally obtained by integrating the full (configurational) probability distribution over the remaining degrees of freedom.
+For the single-component system this yields~\cite{Hansen2013}
+\begin{equation}\label{eq:n-particle-density}
+  \rho^{(n)}(\vec{r}^n)
+  =
+  \frac{1}{\Xi}
+  \sum_{N=n}^\infty \frac{z^N}{(N-n)!}
+  \int_{V^N} e^{-\beta U_N} \, d\vec{r}^{(N-n)}.
+\end{equation}
+Importantly, the single-particle density is simply the equilibrium density profile i.e.\
+\begin{equation}\label{eq:single-particle-density}
+  \rho^{(1)}(\vec{r})
+  =
+  \langle \rho(\vec{r}) \rangle
+  =
+  \left\langle \sum_{i=1}^N \delta(\vec{r} - \vec{r}_i) \right\rangle.
+\end{equation}
+The $n$-particle density is an intuitive descriptor for liquid structure because it generalises the probability density function for a closed system, i.e.\
+\begin{equation*}
+  \mathrm{Prob}\left[ N \textrm{ particles in volume } d\vec{r}^n \right]
+  :=
+  \frac{e^{-\beta U_N}}{Z_N} \, d\vec{r}^N,
+\end{equation*}
+to a subset of particles in an open system.
+$\rho^{(n)}$ thus provides the correct procedure for coarse-graining onto selected degrees of freedom within a bulk system.
+The analogy with canonical ensemble fails in that $\rho^{(n)}$ is unnormalised so it is not strictly a probability density function; integrating \eqref{eq:n-particle-density} over the remaining degrees of freedom yields%
+\marginfootnote{In keeping with the analogy to canonical ensemble we treat this integral as a partition function, and so account for indistinguishability of the $n$ particles by dividing through by $n!$.}
+\begin{equation}\label{eq:n-particle-density-normalisation}
+  \frac{1}{n!}
+  \int_{V^n} \rho^{(n)}(\vec{r}^n) \, d\vec{r}^n
+  =
+  \left\langle \frac{N!}{n! (N-n)!} \right\rangle
+\end{equation}
+i.e.\ the average binomial coefficient.
+The $n$-particle density scales proportionally to $\rho^n$ so it is usual to remove this by defining the \emph{$n$-particle distribution function} as
+\begin{equation}\label{eq:n-particle-distribution}
+  g^{(n)}(\vec{r}^n)
+  :=
+  \frac{\rho^{(n)}(\vec{r}^n)}{\rho^n},
+\end{equation}
+which provides our first (and primary) hierarchy of correlation functions.
+
+Physically, particles become decorrelated when they are separated by macroscopic distances%
+\marginfootnote{This limit behaviour is only valid for `normal' liquid behaviour far from the critical point where the correlation length diverges.}.
+This property manifests in the distribution functions via a \emph{product property} where \cite{UhlenbeckJMP1963}
+\begin{equation*}
+  g^{(n)}(\vec{r}^n)
+  \simeq
+  g^{(s)}(\vec{r}^s) \, g^{(n-s)}(\vec{r}^{n-s})
+\end{equation*}
+in the limit where the $s$ particles become macroscopically separated from the remaining $(n-s)$ particles.
+This property causes the distribution functions to decay to their ideal gas value $g^{(n)}(\vec{r}^n) \to 1$ in the limit of infinite separations between all particles.
+Moreover, the product property suggests that there is a great deal of redundancy inside the distribution functions; in certain applications it is convenient to introduce an additional hierarchy of correlation functions which only capture the excess correlations.
+If we imagine the normalisation of the distribution functions $g^{(n)}$ as \emph{moments} of an unspecified probability distribution, then we can formally imagine a dual set of correlation functions $h^{(n)}$ which generate the \emph{cumulants}.
+Formally, this relationship is expressed \cite{Santos2016}
+\begin{equation}\label{eq:correlation-moment-generating-function}
+  1
+  + \sum_{n=1}^\infty \frac{\epsilon^n}{n!}
+  \int_{V^n} g^{(n)}(\vec{r}^n) \, d\vec{r}^n
+  =
+  \exp{
+    \left(
+    \sum_{n=1}^\infty \frac{\epsilon^n}{n!}
+    \int_{V^n} h^{(n)}(\vec{r}^n) \, d\vec{r}^n
+    \right)
+  },
+\end{equation}
+with $\epsilon$ as a formal expansion parameter of the moment generating function.
+In addition, we require that these new functions share the same symmetries as $g^{(n)}$ e.g.\ permutation invariance of the arguments.
+These conditions specify a new hierarchy: the \emph{cluster correlation functions}%
+\marginfootnote{These are so-named because they possess a \emph{cluster property} where they decay to zero in the limit where any particles become macroscopically separated \cite{UhlenbeckJMP1963}.
+  This feature directly emerges from, and is dual to, the product property for $g^{(n)}$.}
+where the first few terms are given by \cite{UhlenbeckJMP1963}
+\begin{subequations}
+  \begin{align}
+    h^{(1)}(\vec{r})
+    =& \,
+    g^{(1)}(\vec{r}) = 1,
+    \\
+    h^{(2)}(\vec{r}^2)
+    =& \,
+    g^{(2)}(\vec{r}_1, \vec{r}_2)
+    - g^{(1)}(\vec{r}_1) g^{(1)}(\vec{r}_2),
+    \label{eq:pair-cluster-correlation-function}
+    \\
+    h^{(3)}(\vec{r}^3)
+    =& \,
+    g^{(3)}(\vec{r}_1, \vec{r}_2, \vec{r}_3)
+    - g^{(2)}(\vec{r}_1, \vec{r}_2) g^{(1)}(\vec{r}_3)
+    - g^{(2)}(\vec{r}_1, \vec{r}_3) g^{(1)}(\vec{r}_2)
+    \nonumber \\ & \,
+    - g^{(2)}(\vec{r}_2, \vec{r}_3) g^{(1)}(\vec{r}_1)
+    + g^{(1)}(\vec{r}_1) g^{(1)}(\vec{r}_2) g^{(1)}(\vec{r}_3),
+  \end{align}
+\end{subequations}
+The pair cluster correlation function%
+\marginfootnote{This is often called simply the \emph{total correlation function}, especially in the context of integral equation theories (cf.\ section \ref{sec:oz-equation}).}
+$h^{(2)}(\vec{r}_1, \vec{r}_2) = g^{(2)}(\vec{r}_1, \vec{r}_2) - 1$ is the main function we will use from this hierarchy.
+
+An important response function for liquid structure is the isothermal compressibility
+\begin{equation*}\label{eq:isothermal-compressibility}
+  \kappa_T
+  :=
+  %% - \frac{1}{V}
+  %% \left( \frac{\partial V}{\partial p} \right)_{N,T}.
+  \frac{1}{\rho}
+  \left( \frac{\partial \rho}{\partial p} \right)_{V,T}.
+\end{equation*}
+Using standard thermodynamic manipulations we can obtain the equivalent expression \begin{equation*}
+  \kappa_T
+  =
+  \frac{1}{\rho^2}
+  \left( \frac{\partial \rho}{\partial \mu} \right)_{V,T}
+\end{equation*}
+or defining the dimensionless \emph{isothermal susceptibility} as \begin{equation*}\label{eq:isothermal-susceptibility}
+  \chi_T
+  :=
+  \rho k_B T \kappa_T
+  =
+  \frac{1}{\rho}
+  \left( \frac{\partial \rho}{\partial (\beta \mu)} \right)_{V,T}.
+\end{equation*}
+It is straightforward to evaluate this through the grand canonical average \eqref{eq:grand-canonical-average} of density $\rho = \langle N \rangle / V$, obtaining
 \begin{equation}
-  H^{(n)}(\vec{r}^n) =
+  \chi_T
+  =
+  \frac{ \langle N^2 \rangle - \langle N \rangle^2 }{\langle N \rangle}.
+\end{equation}
+From the normalisation of $\rho^{(2)}$ \eqref{eq:n-particle-density-normalisation} we find
+\begin{equation}\label{eq:compressibility-h2}
+  \begin{split}
+    \chi_T
+    &=
+    1
+    + \frac{1}{\langle N \rangle}
+    \int_{V^2} \rho^{(2)}(\vec{r}_1, \vec{r}_2) \, d\vec{r}_1 d\vec{r}_2
+    - \langle N \rangle
+    \\ &=
+    1
+    + \rho \int_V h^{(2)}(\vec{r}) \, d\vec{r}
+  \end{split}
+\end{equation}
+where the latter step is valid for the homogeneous liquid where $g^{(2)}(\vec{r}_1, \vec{r}_2) = g^{(2)}(\vec{r}_2 - \vec{r}_1)$ and we used the pair cluster correlation function \eqref{eq:pair-cluster-correlation-function}.
+
+The above are the real space structural descriptors, but there are an equivalent set of Fourier space measures.
+The static structure factor
+Note that the static structure factor is defined from the Fourier transform of the pair distribution function, i.e.\
+\begin{equation}\label{eq:static-structure-factor}
+  \begin{split}
+    S^{(2)}(\vec{k})
+    :=&
+    1 + \rho \tilde{g}^{(2)}(\vec{k})
+    \\ =&
+    1 + \rho \tilde{h}^{(2)}(\vec{k}) + \rho \delta(\vec{k})
+  \end{split}
+\end{equation}
+where the tilde over a function denotes its Fourier transform.
+In terms of the structure factor \eqref{eq:compressibility-h2} is written succinctly as%
+\marginfootnote{The Dirac delta function at the origin in $S^{(2)}(\vec{k})$ is often left out in order to regularise the function, in which case the right-hand side can be written more simply as $S^{(2)}(0)$.}
+\begin{equation}
+  \chi_T = \lim_{\vec{k} \to 0} S^{(2)}(\vec{k}).
+\end{equation}
+
+Kirkwood superposition and convolution approximations
+
+\subsection{Correlation functions I}
+
+\todo{Finish this section.}
+Density-density correlation functions
+\begin{equation}\label{eq:density-density-correlations}
+  H^{(n)}(\vec{r}^n)
+  =
   \left\langle
   \prod_{i=1}^n
-  \Big[ \rho(\vec{r}_i) - \rho^{(1)}(\vec{r}_i) \Big]
+  \Big[ \rho(\vec{r}_i) - \big\langle\rho(\vec{r}_i)\big\rangle \Big]
   \right\rangle
   \qquad \forall \; n \ge 2
 \end{equation}
+e.g.\
 \begin{equation}
   \begin{aligned}
     H^{(2)}(\vec{r}_1, \vec{r}_2) &=
@@ -177,518 +350,276 @@ and inverse derivatives are found via
     \rho^{(1)}(\vec{r}_1) \delta(\vec{r}_1 - \vec{r}_2)
   \end{aligned}
 \end{equation}
-where
+
+Higher moments of the instantaneous density are obtained through
 \begin{equation}
-  h^{(n)}(\vec{r}^n) \equiv g^{(n)}(\vec{r}^n) - 1
+  \left\langle \prod_{i=1}^n \rho(\vec{r}_1) \right\rangle
+  =
+  \sum_{m=1}^n {n \choose m}
+  \rho^{(m)}(\vec{r}^m)
+  \prod_{j=m+1}^n \delta(\vec{r}_j - \vec{r}_1)
 \end{equation}
 
-Density-density correlation functions
+\subsection{?}
+
+\todo{Finish this section}
+
 \begin{equation}
-  H^{(n)}(\vec{r}^n) =
-  \left\langle
-  \prod_{i=1}^n
-  \Big[ \rho(\vec{r}_i) - \big\langle\rho(\vec{r}_i)\big\rangle \Big]
-  \right\rangle
-  \qquad \forall \; n \ge 2
+  \chi_T \rho
+  \left( \frac{\partial \rho^{(n)}}{\partial \rho} \right)_{V,T}
+  =
+  (n - \rho V) \rho^{(n)}(\vec{r}^n)
+  + \int \rho^{(n+1)}(\vec{r}^{n+1}) \, d\vec{r}_{n+1}
 \end{equation}
-They are obtained from the total grand potential by repeat functional differentiation, as in
 \begin{equation}
-  \begin{aligned}
-  H^{(n)}(\vec{r}^n) &=
-  - \frac{\delta^n \beta \Omega}{\delta \beta\psi(\vec{r}_1) \delta \beta\psi(\vec{r}_2) \cdots \delta \beta\psi(\vec{r}_n)} \\
-  &=
-  \frac{\delta^{n-1} \rho(\vec{r}_1)}{\delta \beta\psi(\vec{r}_2) \delta \beta\psi(\vec{r}_3) \cdots \delta \beta\psi(\vec{r}_n)}.
-  \end{aligned}
+  \left( \frac{\partial g^{(n)}(\vec{r}^n)}{\partial \rho} \right)_{V,T}
+  =
+  \frac{1}{\rho^n}
+  \left( \frac{\partial \rho^{(n)}(\vec{r}^n)}{\partial \rho} \right)_{V,T}
+  - \frac{n}{\rho} g^{(n)}(\vec{r}^n)
 \end{equation}
-I.e.\ the grand potential is the generating functional for the density-density correlation functions.
-
-\section{Density functional theory}
-
-\subsection{Functional form of thermodynamic potentials}
-
-From the Legendre transform of $\beta \Omega$
 \begin{equation}
-  \begin{aligned}
-    \Omega[\rho(\vec{r})] &=
-    F[\rho(\vec{r})] -
-    \int \rho(\vec{r}) \psi(\vec{r}) \, d\vec{r} \\
+  \begin{split}
+    \frac{\chi_T}{\rho^n}
+    \left( \frac{\partial \rho^{(n)}}{\partial \rho} \right)_{V,T}
     &=
-    F_{id}[\rho(\vec{r})] +
-    F_{ex}[\rho(\vec{r})] -
-    \int \rho(\vec{r}) \psi(\vec{r}) \, d\vec{r}
-  \end{aligned}
+    \left(\frac{n}{\rho} - V\right) g^{(n)}(\vec{r}^n)
+    + \int g^{(n+1)}(\vec{r}^{n+1}) \, d\vec{r}_{n+1}
+    \\ &=
+    \chi_T \left( \frac{\partial g^{(n)}}{\partial \rho} \right)_{V,T}
+    + \chi_T \frac{n}{\rho} g^{(n)}
+  \end{split}
 \end{equation}
-after defining intrinsic chemical potential
-\begin{equation}\label{eq:intrinsic-chemical-potential}
-  \psi(\vec{r}) = \mu - V_{ext}(\vec{r})
-\end{equation}
-
-For the ideal gas
-\begin{align*}
-  \Xi_{id} &=
-  \sum_{N=0}^\infty
-  \frac{(e^{\beta\mu} Z_1)^N}{N!}
-  = \exp{\left( Z_1 e^{\beta \mu} \right)} \\
-  Z_1 &= \int e^{-\beta V_{ext}(\vec{r})} \, d\vec{r} \\
-  \beta\Omega_{id}[V_{ext}] &=
-  - \ln{\Xi_{id}}
-  =
-  - e^{\beta\mu} \int e^{-\beta V_{ext}(\vec{r})} \, d\vec{r} \\
-  \rho^{(1)}(\vec{r}) &=
-  \frac{\langle N \rangle e^{-\beta V_{ext}(\vec{r})}}
-       {\int e^{-\beta V_{ext}(\vec{r}')} \, d\vec{r}'} =
-  \frac{\langle N \rangle}{Z_1} e^{-\beta V_{ext}(\vec{r})}
-  \\
-  \beta V_{ext}(\vec{r})
-  &=
-  -\ln
-  \left(
-  \frac{\rho^{(1)}(\vec{r})}{\langle N \rangle}
-  \int e^{-\beta V_{ext}(\vec{r}')} \, d\vec{r}'
-  \right)
-  \\
-  e^{\beta \mu} &= \lambda^d \rho
-  \\
-  F[\rho]
-  &=
-  - \lambda^d \rho
-  \int e^{-\beta V_{ext}(\vec{r})} \, d\vec{r} -
-  \int
-  \rho(\vec{r})
-  (V_{ext}(\vec{r}) - \mu)
-  \, d\vec{r}
-  \\
-  &=
-  - \lambda^d \rho
-  \int e^{-\beta V_{ext}(\vec{r})} \, d\vec{r} -
-  \int
-  \rho(\vec{r})
-  V_{ext}(\vec{r})
-  \, d\vec{r} -
-  \int
-  \rho(\vec{r}) \mu
-  \, d\vec{r}
-  \\
-  &=
-  - \lambda^d \rho
-  \int e^{-\beta V_{ext}(\vec{r})} \, d\vec{r} -
-  \int
-  \rho(\vec{r})
-  \ln {\frac{Z_1}{\langle N \rangle} \rho(\vec{r})}
-  \, d\vec{r} +
-  \int
-  \rho(\vec{r}) \mu
-  \, d\vec{r}
-  \\
-  &=
-  - \lambda^d \rho
-  \int
-  \frac{\rho^{(1)}(\vec{r})}{\langle N \rangle}
-  \left( \int e^{-\beta V_{ext}(\vec{r}')} \, d\vec{r}' \right)
-  \, d\vec{r} -
-  \int
-  \rho(\vec{r})
-  \ln{\left(
-  \frac{\rho^{(1)}(\vec{r})}{\langle N \rangle}
-  \int e^{-\beta V_{ext}(\vec{r}')} \, d\vec{r}'
-  \right)}
-  (V_{ext}(\vec{r}) - \mu)
-  \, d\vec{r}
-  \\
-  \beta\Omega_{id}[\rho] &=
-  F[\rho] + \int \rho(\vec{r}) (V_{ext}(\vec{r}) - \mu) \\
-  &=
-  F[\rho] + \int \rho(\vec{r}) (V_{ext}(\vec{r}) - \mu) \\
-\end{align*}
-Following \cite{Ashcroft1996}, we write the single-particle density as
-\begin{equation*}
-  \rho^{(1)}(\vec{r}) =
-  \frac{1}{\Xi}
-  \Tr{ \left(
-    e^{-\beta U_N(\vec{r}^N)} \sum_{i=1}^N \delta(\vec{r} - \vec{r}')
-    \right)
-  }
-\end{equation*}
-which in the absence of particle interactions reduces to
-\begin{equation*}
-  \rho^{(1)}(\vec{r}) =
-  \frac{\langle N \rangle e^{-\beta V_{ext}(\vec{r})}}
-       {\int e^{-\beta V_{ext}(\vec{r}')} \, d\vec{r}'}
-\end{equation*}
-We note that the energetic contribution to the free energy arising solely from the external potential is
-\begin{equation*}
-  \int \rho(\vec{r}') V_{ext}(\vec{r}') \, d\vec{r}'
-\end{equation*}
-The intrinsic free energy of the ideal gas is then obtained by subtracting the contributions from the external potential, as in
-\begin{equation*}
-  \begin{aligned}
-  F_{id}[\rho] &=
-  F[\rho] -
-  \int \rho(\vec{r}') V_{ext}(\vec{r}') \, d\vec{r}' \\
-  &=
-  F[\rho] -
-  \int \rho(\vec{r}') V_{ext}(\vec{r}') \, d\vec{r}' \\
-  \end{aligned}
-\end{equation*}
-
-Derivatives of the ideal gas free energy.
-The ideal gas free energy is given as
-\begin{equation*}
-  \beta F_{id}[\rho(\vec{r})] =
-  \int \rho(\vec{r}) (\ln{\lambda^d \rho(\vec{r})} - 1) \, d\vec{r},
-\end{equation*}
-so the first functional derivative is
-\begin{equation*}
-  \frac{\delta \beta F_{id}}{\delta \rho(\vec{r})} =
-  \ln{\lambda^d \rho(\vec{r})}.
-\end{equation*}
-To obtain the higher order functional derivatives it is helpful to write this as an integral with a delta function
-\begin{equation*}
-  \frac{\delta \beta F_{id}}{\delta \rho(\vec{r})} =
-  \int \delta{(\vec{r}' - \vec{r})}
-  \ln{\lambda^d \rho(\vec{r}')} \, d\vec{r}',
-\end{equation*}
-so we can obtain the second derivative as
-\begin{equation*}
-  \frac{\delta^2 \beta F_{id}}{\delta \rho(\vec{r}) \delta \rho(\vec{r}')} =
-  \frac{\delta(\vec{r}'-\vec{r})}{\rho(\vec{r})}.
-\end{equation*}
-Iterating this procedure gives us the $n$th functional derivative as
 \begin{equation}
-  \begin{aligned}
-    \frac{\delta^n \beta F_{id}}{\delta \rho(\vec{r}_1) \delta \rho(\vec{r}_2) \cdots \delta \rho(\vec{r}_n)} &=
-    \frac{\partial^{n-1} (\ln{\lambda^d \rho(\vec{r})})}{\partial \rho(\vec{r})^{n-1}}
-    \prod_{i=2}^n \delta(\vec{r}_i - \vec{r}_1) \\
+  \chi_T \left( \frac{\partial g^{(n)}}{\partial \rho} \right)_{V,T}
+  =
+  \left(
+  \frac{n (1 - \chi_T)}{\rho}
+  - V
+  \right) g^{(n)}(\vec{r}^n)
+  + \int g^{(n+1)}(\vec{r}^{n+1}) \, d\vec{r}_{n+1}
+\end{equation}
+\begin{equation}
+  \begin{split}
+    \chi_T \left( \frac{\partial g^{(2)}}{\partial \rho} \right)_{V,T}
     &=
-    (-1)^{n-1}
-    \frac{(n-2)!}{\rho(\vec{r})^{n-1}}
-    \prod_{i=2}^n \delta(\vec{r}_i - \vec{r}_1),
-  \end{aligned}
+    \left(
+    \frac{2 (1 - \chi_T)}{\rho}
+    - V
+    \right) g^{(2)}(\vec{r}^2)
+    + \int g^{(3)}(\vec{r}^3) \, d\vec{r}_3
+    \\
+    \left( \frac{\partial g^{(2)}}{\partial \rho} \right)_{V,T}
+    &=
+    \frac{2 (1 - \chi_T)}{\rho \chi_T}
+    g^{(2)}(\vec{r}^2)
+    +
+    \int g^{(3)}(\vec{r}^3) - \rho g^{(2)}(\vec{r}^2) \, d\vec{r}_3
+  \end{split}
 \end{equation}
-where the last line is valid for all $n \ge 2$.
 
-\subsection{Correlation functions}
+\subsection{Thermodynamic routes to the free energy}
 
-Excess free energy is the generating functional for direct correlations
-\begin{equation}\label{eq:direct-correlations}
-  c^{(n)}(\vec{r}^n) =
-  - \frac{\delta^n \beta F_{ex}}{\delta \rho(\vec{r}_1)\delta \rho(\vec{r}_2) \cdots \delta \rho(\vec{r}_n)}
-\end{equation}
-
-We have to compute a derivative like
-\begin{equation}\label{eq:intrinsic-chemical-potential-derivative-1}
-  \frac{\delta}{\delta\rho(\vec{r})}
-  \left(
-  \int \psi(\vec{r}') \rho(\vec{r}') \, d\vec{r}'
-  \right)
+Goal: obtain the free energy and we have everything.
+Ordinarily this is achieved by obtaining an equation of state for the pressure $p = p(\rho)$, giving the free energy implicitly through the thermodynamic relation
+\begin{equation}\label{eq:pressure-relation-1}
+  p
   =
-  \psi(\vec{r}) +
-  \int
-  \rho(\vec{r}') \frac{\delta\psi(\vec{r}')}{\delta\rho(\vec{r})}
-  \, d\vec{r}'.
+  - \left( \frac{\partial F}{\partial V} \right)_{N,T},
 \end{equation}
-The functional derivative on the right-hand side of \eqref{eq:intrinsic-chemical-potential-derivative-1} is a little odd.
-In general the external potential $V_{ext}(\vec{r})$%
-\marginfootnote{And thus $\psi(\vec{r})$ through \eqref{eq:intrinsic-chemical-potential}}
-is fixed so we consider the density profile as relaxing in response to perturbations from the potential i.e.\ terms like \[ \frac{\delta \rho(\vec{r})}{\delta \psi(\vec{r}')}. \]
-However, here the \emph{inverse} derivative appears.
-This must satisfy the inversion formula
-\begin{equation}\label{eq:intrinsic-chemical-potential-inverse-derivative}
-  \int
-  \frac{\delta \rho(\vec{r}_1)}{\delta \psi(\vec{r}')}
-  \frac{\delta \psi(\vec{r}')}{\delta \rho(\vec{r}_2)}
-  \, d\vec{r}' =
-  \delta(\vec{r}_1 - \vec{r}_2),
-\end{equation}
-which will be very important for obtaining Ornstein-Zernike relations later.
-Considering the external field as the control parameter, and noting the definition of $\psi(\vec{r})$ in \eqref{eq:intrinsic-chemical-potential} we take
-\begin{equation*}
-  \frac{\delta\psi(\vec{r}')}{\delta\rho(\vec{r})} = 0.
-\end{equation*}
-This expression satisfies \eqref{eq:intrinsic-chemical-potential-inverse-derivative}, being zero in general except where $\psi(\vec{r}')$ is used as an intermediate function in the (functional) chain rule expression.
-With this expression \eqref{eq:intrinsic-chemical-potential-derivative-2} becomes
-\begin{equation}\label{eq:intrinsic-chemical-potential-derivative-2}
-  \frac{\delta}{\delta\rho(\vec{r})}
-  \left(
-  \int \psi(\vec{r}') \rho(\vec{r}') \, d\vec{r}'
-  \right)
-  =
-  \psi(\vec{r}).
-\end{equation}
+although a state equation for any other thermodynamic observable would sufficiently determine $F$.
 
-In equilibrium
+The first option for determining the free energy is through the compressibility, from the thermodynamic relation
 \begin{equation}
+  \frac{1}{\chi_T}
+  %% =
+  %% - V \left( \frac{\partial p}{\partial V} \right)_{N,T}
+  =
+  \left( \frac{\partial \beta p}{\partial \rho} \right)_{V,T}
+  %% =
+  %% V \left( \frac{\partial^2 F}{\partial V^2} \right)_{N,T}
+  %% =
+  %% \frac{\rho^2}{V}
+  %% \left( \frac{\partial^2 F}{\partial \rho^2} \right)_{N,T}
+\end{equation}
+Integrating this relation over the density and making use of the isothermal compressibility identity for a uniform system \eqref{eq:compressibility-h2} gives
+\begin{equation}\label{eq:compressibility-route}
+  \beta p
+  %% =
+  %% \int_0^\rho \frac{1}{\rho' k_B T \kappa_T} d\rho'
+  =
+  \int_0^\rho \frac{1}{\chi_T} d\rho'
+  %% =
+  %% \int_0^\rho \frac{1}{1 + \rho \int h^{(2)}(\vec{r}) \, d\vec{r}} d\rho',
+  =
+  \int_0^\rho \lim_{\vec{k} \to 0} \frac{1}{S^{(2)}(\vec{k})} d\rho',
+\end{equation}
+i.e.\ the \emph{compressibility route} to the pressure.
+
+Another option evaluates the pressure directly \eqref{eq:pressure-relation-1} from the partition function.
+In terms of the canonical partition function this gives
+\begin{equation}\label{eq:pressure-relation-2}
+  \beta p
+  =
+  \left( \frac{\partial (\ln{Z_N})}{\partial V} \right)_{N,T}.
+\end{equation}
+We consider what happens during a volume change $V \to \alpha^d V$ emerging from the affine rescaling $\vec{r} \to \alpha \vec{r}$, so that the configurational integral \eqref{eq:canonical-partition} becomes
+\begin{equation}\label{eq:inflated-canonical-partition}
+  Z_N(\alpha^d V)
+  =
+  \int_{\alpha V^N} e^{-\beta U_N(\vec{r}^N)} d\vec{r}^N
+  =
+  \alpha^{dN}
+  \int_{V^N} e^{-\beta U_N(\alpha \vec{r}^N)} d\vec{r}^N
+\end{equation}
+Using the identity
+\begin{equation*}
+  \frac{\partial f(xy)}{\partial y}
+  =
+  \frac{x}{y} \frac{\partial f(xy)}{\partial x},
+\end{equation*}
+we can write
+\begin{equation}
+  \frac{\partial (\ln{Z_N(\alpha^d V)})}{\partial V}
+  =
+  \frac{\alpha}{d V}
+  \frac{\partial (\ln{Z_N(\alpha^d V)})}{\partial \alpha}.
+\end{equation}
+This trick allows the pressure relation \eqref{eq:pressure-relation-2} to be reexpressed as
+\begin{equation*}
+  \frac{\beta p}{\rho}
+  =
+  \frac{1}{d N}
   \left.
-  \frac{\delta \Omega[\rho]}{\delta\rho(\vec{r})}
-  \right|_{\rho(\vec{r}) = \rho^{(1)}(\vec{r})}
-  = 0
-\end{equation}
-and consequently all higher-order derivatives must be zero, i.e.\
-\begin{equation}
-  \frac{\delta^n \Omega[\rho]}{\delta\rho(\vec{r}_1) \delta\rho(\vec{r}_2) \cdots \delta\rho(\vec{r}_n)} = 0 \qquad \forall \; n \ge 1
-\end{equation}
-therefore we have
-\begin{equation}
-  \frac{\delta^n F[\rho]}{\delta \rho(\vec{r}_1) \delta \rho(\vec{r}_2) \cdots \delta \rho(\vec{r}_n)} -
-  \frac{\delta}{\delta\rho(\vec{r})}
-  \left(
-  \int \psi(\vec{r}') \rho(\vec{r}') \, d\vec{r}'
-  \right)
-  = 0
-\end{equation}
-or using \eqref{eq:direct-correlations} this becomes
-\begin{equation*}
-  c^{(n)}(\vec{r}^n) =
-  \frac{\delta^n \beta F_{id}[\rho]}{\delta \rho(\vec{r}_1) \delta \rho(\vec{r}_2) \cdots \delta \rho(\vec{r}_n)} -
-  \frac{\delta^n}{\delta \rho(\vec{r}_1) \delta \rho(\vec{r}_2) \cdots \delta \rho(\vec{r}_n)}
-  \left(
-  \int \beta\psi(\vec{r}') \rho(\vec{r}') \, d\vec{r}'
-  \right)
+  \frac{\partial (\ln{Z_N(\alpha^d V)})}{\partial \alpha}
+  \right|_{\alpha = 1}.
 \end{equation*}
-At the one-body level we have:
-\begin{equation}\label{eq:c1}
-  \begin{aligned}
-    c^{(1)}(\vec{r}) &=
-    \frac{\delta \beta F_{id}}{\delta \rho(\vec{r})} -
-    \frac{\delta}{\delta \rho(\vec{r})^{(1)}}
-    \left(
-    \int \beta\psi(\vec{r}') \rho(\vec{r}') \, d\vec{r}'
-    \right) \\
-    &=
-    \ln{\lambda^d \rho(\vec{r})} -
-    \beta\psi(\vec{r})
-  \end{aligned}
-\end{equation}
-Which gives the equilibrium density as
-\begin{equation}
-  \rho^{(1)}(\vec{r}) = \lambda^{-d} \exp{\left(\beta\psi(\vec{r}) + c^{(1)}(\vec{r})\right)}
-\end{equation}
-We obtain the two-body correlations by functionally differentiating \eqref{eq:c1}, as in
-\begin{equation}\label{eq:c2}
-  \begin{aligned}
-    c^{(2)}(\vec{r}_1, \vec{r}_2) &=
-    \frac{\delta c^{(1)}(\vec{r}_1)}{\delta \rho^{(1)}(\vec{r}_2)} \\
-    &=
-    \frac{\delta(\vec{r}_2 - \vec{r}_1)}{\rho^{(1)}(\vec{r}_1)} -
-    \frac{\delta\beta\psi(\vec{r}_1)}{\delta \rho(\vec{r}_2)}
-  \end{aligned}
-\end{equation}
-From \eqref{eq:intrinsic-chemical-potential-inverse-derivative} we get
+The derivative of \eqref{eq:inflated-canonical-partition} with respect to $\alpha$ can be calculated explicitly as
 \begin{equation*}
-  \begin{aligned}
-    \delta(\vec{r}_1 - \vec{r}_2) &=
-    \int
-    \frac{\delta \rho(\vec{r}_1)}{\delta \psi(\vec{r}')}
-    \frac{\delta \psi(\vec{r}')}{\delta \rho(\vec{r}_2)}
-    \, d\vec{r}' \\
+  \begin{split}
+    \frac{\partial Z_N(\alpha^d V)}{\partial \alpha}
     &=
-    \int
-    H^{(2)}(\vec{r}_1, \vec{r}')
-    \left(
-    \frac{\delta(\vec{r}' - \vec{r}_2)}{\rho^{(1)}(\vec{r}')} -
-    c^{(2)}(\vec{r}', \vec{r}_2)
-    \right)
-    \, d\vec{r}' \\
-    &=
-    \rho^{(1)}(\vec{r}_1)
-    \left(
-    h^{(2)}(\vec{r}_1, \vec{r}_2) -
-    c^{(2)}(\vec{r}_1, \vec{r}_2)
-    \right) +
-    \delta(\vec{r}_1 - \vec{r}_2) - \\
-    &\qquad
-    \rho^{(1)}(\vec{r}_1)
-    \int
-    \rho^{(1)}(\vec{r}')
-    h^{(2)}(\vec{r}_1, \vec{r}')
-    c^{(2)}(\vec{r}', \vec{r}_2)
-    \, d\vec{r}'
-  \end{aligned}
+    %% \frac{\partial}{\partial \alpha}
+    %% \left(
+    %% \int_{V^N} e^{-\beta U_N(\alpha^d \vec{r}^N)} d\vec{r}^N
+    %% \right)
+    %% \\ &=
+    \frac{dN}{\alpha} Z_N
+    +
+    \alpha^{dN}
+    \int_{V^N}
+    \frac{\partial}{\partial \alpha}
+    \left( e^{-\beta U_N(\alpha \vec{r}^N)} \right)
+    d\vec{r}^N
+    \\ &=
+    \frac{dN}{\alpha} Z_N
+    -
+    \alpha^{dN}
+    %\sum_{i,j}
+    \int_{V^N}
+    \frac{\partial \beta U_N(\alpha \vec{r}^N)}{\partial \alpha}
+    e^{-\beta U_N}
+    d\vec{r}^N,
+  \end{split}
 \end{equation*}
-which rearranges to give the Ornstein-Zernike equation
-\begin{equation}
-  h^{(2)}(\vec{r}_1, \vec{r}_2) =
-  c^{(2)}(\vec{r}_1, \vec{r}_2) +
-  \int
-  \rho^{(1)}(\vec{r}')
-  h^{(2)}(\vec{r}_1, \vec{r}')
-  c^{(2)}(\vec{r}', \vec{r}_2)
-  \, d\vec{r}'.
-\end{equation}
-This is a classic result in liquid state theory (cf.\ Refs.\ \cite{Ornstein1914,Hansen2010,Evans1979}) though normally it is expressed for the uniform liquid $\rho^{(1)}(\vec{r}) = \rho$ for spherically symmetric pair potentials thus
-\begin{equation}
-  h^{(2)}(r) =
-  c^{(2)}(r) +
-  \rho
-  \int
-  h^{(2)}(r)
-  c^{(2)}(|\vec{r}' - \vec{r}|)
-  \, d\vec{r}',
-\end{equation}
-where $r = |\vec{r}_2 - \vec{r}_1|$.
-The integral is a convolution, so it simplifies under Fourier transform to
-\begin{equation}
-  \tilde{h}(\vec{k}) =
-  \tilde{c}(\vec{k}) +
-  \rho \tilde{h}(\vec{k}) \tilde{c}(\vec{k})
-\end{equation}
-or rearranging for
-\begin{equation}
-  \tilde{h}(\vec{k}) =
-  \frac{\tilde{c}(\vec{k})}{1 - \rho \tilde{c}(\vec{k})}.
-\end{equation}
-Note that the static structure factor is defined as the Fourier transform of the two-body distribution function, i.e.\
-\begin{equation}
-  \begin{aligned}
-    S(\vec{k}) \equiv \tilde{g}^{(2)}(\vec{k}) &=
-    \delta(\vec{k}) + \tilde{h}(\vec{k}) \\
+giving the final result
+\begin{equation}\label{eq:virial-route-pressure}
+  \begin{split}
+    \frac{\beta p}{\rho}
     &=
-    \delta(\vec{k}) +
-    \frac{\tilde{c}(\vec{k})}{1 - \rho \tilde{c}(\vec{k})}.
-  \end{aligned}
+    1
+    -
+    \frac{1}{\rho d Z_N}
+    \int_{V^N}
+    \left.
+    \frac{\partial \beta U_N(\alpha \vec{r}^N)}{\partial \alpha}
+    \right|_{\alpha = 1}
+    e^{-\beta U_N}
+    d\vec{r}^N
+    \\ &=
+    1
+    -
+    \frac{1}{\rho d}
+    \left\langle
+    \left.
+    \frac{\partial \beta U_N(\alpha \vec{r}^N)}{\partial \alpha}
+    \right|_{\alpha = 1}
+    \right\rangle,
+  \end{split}
 \end{equation}
+which is known as the \emph{virial route}%
+\marginfootnote{This is so-named because historically it was derived through the virial theorem.
+Despite the similar name, this approach has no relation to the virial series which will be introduced in section \ref{sec:virial-series}.}
+to the pressure.
+In the latter step we replaced the canonical average with the grand-canonical average \eqref{eq:grand-canonical-average} from ensemble equivalence in the thermodynamic limit.
 
-\subsection{Generalised Ornstein-Zernike equations}
+There are other routes involving different observables (e.g.\ the potential energy or the chemical potential \cite{Santos2016}) to obtain the equation of state from the correlation functions; however, we will not discuss them as we will only use the virial route in the results chapters.
+The degree of self-consistency between different routes can act as a proxy for the accuracy of an approximate theory.
 
-This section follows \cite{Barrat1988}.
-
-Thus for higher $n$ we have
-\begin{equation}
-  \begin{aligned}
-    c^{(n)}(\vec{r}^n) &=
-    \frac{\delta^{n-1} c^{(1)}(\vec{r}_1)}{\delta \rho(\vec{r}_2) \delta \rho(\vec{r}_3) \cdots \delta \rho(\vec{r}_n)} \\
-    &=
-    (-1)^n
-    \frac{(n-2)!}{\rho(\vec{r}_1)^{n-1}}
-    \prod_{i=2}^n \delta(\vec{r}_i - \vec{r}_1) -
-    \frac{\delta^{n-1} \beta\psi(\vec{r}_1)}{\delta \rho(\vec{r}_2) \delta \rho(\vec{r}_3) \cdots \delta \rho(\vec{r}_n)}
-  \end{aligned}
+\begin{tcolorbox}[title=Contact theorem for hard spheres]
+For a single-component system interacting through a spherically symmetric pair potential $u(r)$, the virial route \eqref{eq:virial-route-pressure} yields
+\begin{equation}\label{eq:virial-route-pressure-uniform}
+  \frac{\beta p}{\rho}
+  =
+  1
+  -
+  \frac{\rho}{2 d}
+  \int_V
+  r g^{(2)}(r) \frac{d \beta u}{d r} \, d\vec{r},
 \end{equation}
-or
-\begin{equation}
-  \frac{\delta^{n-1} \beta\psi(\vec{r}_1)}{\delta \rho(\vec{r}_2) \delta \rho(\vec{r}_3) \cdots \delta \rho(\vec{r}_n)} =
-  (-1)^n
-  \frac{(n-2)!}{\rho(\vec{r}_1)^{n-1}}
-  \prod_{i=2}^n \delta(\vec{r}_i - \vec{r}_1) -
-  c^{(n)}(\vec{r}^n)
-\end{equation}
-
-\begin{equation*}
-  H^{(n)}(\vec{r}^n) =
-  \frac{\delta^{n-1} \rho(\vec{r}_1)}{\delta \beta\psi(\vec{r}_2) \delta \beta\psi(\vec{r}_3) \cdots \delta \beta\psi(\vec{r}_n)}.
+using the definition of the 2-particle distribution function \eqref{eq:n-particle-distribution} as the average over the remaining degrees of freedom.
+In the case of hard spheres $u'(r)$ is not well-defined because the pair potential is singular, however the cavity function
+\begin{equation*}\label{eq:cavity-function}
+  y^{(2)}(r) = g^{(2)}(r) e^{\beta u(r)}
 \end{equation*}
-
-Defining
-\begin{equation*}
-  K^{(n)}(\vec{r}^n) =
-  \frac{\delta^{n-1} \beta\psi(\vec{r}_1)}{\delta \rho(\vec{r}_2) \delta \rho(\vec{r}_3) \cdots \delta \rho(\vec{r}_n)}
+is continuous (see e.g.\ Refs.\ \cite{Hansen2013,Santos2016}) even in cases where the pair potential is not.
+In terms of the cavity function, the virial route \eqref{eq:virial-route-pressure-uniform} becomes
+\begin{equation*}\label{eq:virial-route-pressure-cavity}
+  \frac{\beta p}{\rho}
+  =
+  1
+  +
+  \frac{\rho}{2 d}
+  \int_V
+  r y^{(2)}(r) \frac{d f}{dr}
+  \, d\vec{r},
 \end{equation*}
-we have
-\begin{equation*}
-  \frac{\delta K^{(n)}(\vec{r}^n)}{\delta \rho(\vec{r}_{n+1})} =
-  K^{(n+1)}(\vec{r}^{n+1}).
-\end{equation*}
-and
-\begin{equation*}
-  \begin{aligned}
-    \frac{\delta H^{(n)}(\vec{r}^n)}{\delta \rho(\vec{r}_{n+1})}
-    &=
-    \int
-    \frac{\delta H^{(n)}(\vec{r}^n)}{\delta \psi(\vec{r}')}
-    \frac{\delta \psi(\vec{r}')}{\delta \psi(\vec{r}_{n+1})}
-    \, d\vec{r}' \\
-    &=
-    \int
-    H^{(n+1)}(\vec{r}^n, \vec{r}')
-    K^{(2)}(\vec{r}', \vec{r}_{n+1})
-    \, d\vec{r}' \\
-    &=
-    H^{(n+1)} \otimes K^{(2)}(\vec{r}^{n+1}).
-  \end{aligned}
-\end{equation*}
-In this form the Ornstein-Zernike equation can be written.
-\begin{equation*}
-  \begin{aligned}
-    \delta(\vec{r}_1 - \vec{r}_2) &=
-    \int
-    \frac{\delta \rho(\vec{r}_1)}{\delta \psi(\vec{r}')}
-    \frac{\delta \psi(\vec{r}')}{\delta \rho(\vec{r}_2)}
-    \, d\vec{r}' \\
-    &=
-    \int
-    H^{(2)}(\vec{r}_1, \vec{r}') K^{(2)}(\vec{r}', \vec{r}_2)
-    \, d\vec{r}' \\
-    &=
-    H^{(2)} \otimes K^{(2)} (\vec{r}^2)
-  \end{aligned}
-\end{equation*}
-Taking functional derivatives of this expression gives us a hierarchy of generalised Ornstein-Zernike equations.
-For example, the next equation in the hierarchy is
-\begin{equation*}
-  H^{(2)} \otimes K^{(3)} (\vec{r}^3) +
-  H^{(3)} \otimes K^{(2)} \otimes K^{(2)} (\vec{r}^3) = 0
-\end{equation*}
-The next functional derivative
+which for $d$-dimensional hard spheres of diameter $\sigma$ yields the \emph{contact theorem}:
 \begin{equation}
-  \begin{aligned}
-  H^{(2)} \otimes K^{(4)} (\vec{r}^4) & \\
-  + \; 2 H^{(3)} \otimes K^{(3)} \otimes K^{(2)} (\vec{r}^4) & \\
-  + \; H^{(4)} \otimes K^{(2)} \otimes K^{(2)} \otimes K^{(2)} (\vec{r}^4)
-  &= 0
-  \end{aligned}
+  \frac{\beta p}{\rho}
+  =
+  1
+  +
+  \frac{\rho \omega_d \sigma^3}{2}
+  y^{(2)}(\sigma).
+  %% \\ &=
+  %% 1
+  %% +
+  %% \frac{2 \pi \rho \sigma^3}{3}
+  %% y^{(2)}(\sigma)
 \end{equation}
-And the next one%
-\todo{Can we find a general formula? I notice some constraints on the indices: the sum of the indices $\{m\}$ in the $K^{(m)}$ terms must add up to $n-1$ so that the right number of independent variables are returned (the extra one is provided by the $H^{(l)}$ function giving the $\vec{r}^n$ total.}
-\begin{equation}
-  \begin{aligned}
-    H^{(2)} \otimes K^{(5)} (\vec{r}^5) & \\
-    + \; 3 H^{(3)} \otimes K^{(3)} \otimes K^{(3)} (\vec{r}^5) & \\
-    + \; 2 H^{(3)} \otimes K^{(4)} \otimes K^{(2)} (\vec{r}^5) & \\
-    + \; 5 H^{(4)} \otimes K^{(3)} \otimes K^{(2)} \otimes K^{(2)} (\vec{r}^5) & \\
-    + \; H^{(5)} \otimes K^{(2)} \otimes K^{(2)} \otimes K^{(2)} \otimes K^{(2)} (\vec{r}^5)
-    &= 0
-  \end{aligned}
-\end{equation}
+\end{tcolorbox}
 
-\subsubsection{Density functional theory (DFT)}
+Derivatives of free energy reduce to $g^{(2)}$, emblematic of the conventional routes.
+Absolute free energies require higher order correlation functions to appear.
+\todo{Talk about this. Also: entropy route.}
 
-Classic texts are \cite{Evans1979,Evans1992}, and a more recent review \cite{Roth2010}.
-Also mention \cite{Lutsko2010} for more of a focus on crystallisation.
-This exposition follows \cite{Roth2010} mainly.
+The pair distribution function $g^{(2)}$ appears because the specified system interacts via a pair potential; we could reasonably expect the generalisation to an $n$-body interaction potential to give the equation of state in terms of the $n$-body distribution function $g^{(n)}$.
 
-Density functional theory traces back to 
+\subsection{Virial series}
+\label{sec:virial-series}
 
-Rigorously prove that \cite{Evans1979,Evans1992}
-\begin{equation}
-  \Omega[\{\rho_i\}] =
-  \mathcal{F}[\{\rho_i\}]
-  + \sum_{i=1}^\nu \int d^d \vec{r} \rho_i(\vec{r}) (\phi(\vec{r}) - \mu_i)
-\end{equation}
+Low density expansion of pressure in series with virial coefficients.
+\todo{Finish this section}
 
 \begin{equation}
-  \left.
-  \frac{\delta \Omega[\{\rho_i\}]}{\delta \rho_i(\vec{r})}
-  \right|_{\{\rho_i(\vec{r}) = \rho_i^0(\vec{r})\}}
-  = 0.
+  \frac{\beta p}{\rho} =
+  1 + \sum_{i=2}^\infty B_i(T) \rho^{i-1}
 \end{equation}
+where $B_i$ are the virial coefficients.
 
-Split into ideal and excess parts
-\begin{equation}
-  \mathcal{F}[\{\rho_i\}] =
-  \mathcal{F}_{id}[\{\rho_i\}] + \mathcal{F}_{ex}[\{\rho_i\}]
+Generalisation to a binary mixture \todo{Where does this come from? What do the diagrams look like? Are they simpler than the distribution function diagrams?}: \cite{Hansen-Goos2014}
+\begin{equation}\label{eq:virial-series-binary}
+  \Phi = \sum_{n=2}^\infty \sum_{j=0}^{n}
+  \frac{1}{n-1} {n \choose j} B_n^{[j]} \rho_1^{n-j} \rho_2^j
 \end{equation}
-where the ideal part is
-\begin{equation}
-  \beta \mathcal{F}_{id}[\{\rho_i\}] =
-  \sum_{i=1}^\nu \int d^d \vec{r} \rho_i(\vec{r})
-  (\ln{\Lambda_i^d \rho_i(\vec{r})} - 1)
-\end{equation}
-
-\begin{itemize}
-\item Contrast mechanical problem (e.g.\ simulations) with inverse problem
-\item Summarise successes
-\end{itemize}
-
-\subsubsection{Heterogeneous approaches to the homogeneous liquid}
-\paragraph{Potential distribution theorem}
-\paragraph{Scaled particle theory}

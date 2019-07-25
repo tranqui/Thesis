@@ -1,0 +1,115 @@
+\section{Insertion cost is not generally analytic in geometric measures}
+\label{sec:singularities}
+
+Here we review the arguments made by Reiss and coworkers \cite{ReissJCP1959,ReissJCP1960} that the grand canonical cost of insertion contains singularities.
+This argument is worth revisiting as it demonstrates that \emph{any} regular expansion of $\Delta \Omega$ in terms of geometrical measures like curvature must necessarily be approximate.
+In sections \ref{sec:morphometric-theory} and \ref{sec:spt} we will contribute to the theory of such an expansion, so the purpose of this section is to emphasise its approximate nature from the outset as a disclaimer.
+
+We consider a single-component hard sphere liquid with particles of diameter $\sigma$, and we imagine inserting a hard spherical solute of radius $R$.
+A sphere of radius $R + \sigma/2$ around the solute is excluded to the centers of solvent particles.
+We write this excluded volume as $V_\mathrm{ex}$, which is clearly the minimum size of cavity required to contain the solute.
+The insertion cost is simply the probability that a randomly chosen position for insertion contains such a cavity, i.e.\
+\begin{equation}\label{eq:insertion-from-p}
+  \Delta \Omega(R)
+  =
+  -k_B T \ln p_0(R)
+\end{equation}
+where $p_0$ is the probability that the excluded region is empty.
+This can be determined as \cite{ReissJCP1959}
+\begin{equation}\label{eq:spt-zero-cavity-p}
+  p_0(R) = 1 + \sum_{n=1}^\infty (-1)^n F^{(n)}(R)
+\end{equation}
+where $F^{(n)}(R)$ is the average number of $n$-tuples of solvent particles contained in the excluded region, as in
+\begin{equation}\label{eq:spt-tuple-function}
+  F^{(n)}(R)
+  =
+  \frac{\rho^n}{n!}
+  \int_{V_\mathrm{ex}^n} g^{(n)}(\vec{r}^n) \, d\vec{r}^n.
+\end{equation}
+Clearly $F^{(n)}(R) = 0$ for $R < R_n$, the minimum radius capable of containing $n$ hard spheres.
+At any given state point $g^{(n)}$ will be bounded from above by some finite number, so we can write the inequality
+%\footnote{Typically we would expect this to occur where the maximum number of particles are in contact, however that is not a necessary assumption for this argument.},
+\begin{equation}\label{eq:spt-tuple-function-upper-bound}
+  \begin{split}
+    F^{(n)}(R) &\le
+    \frac{\rho^n}{n!}
+    \max_{\mathbb{R}^{dn}}{\left(g^{(n)}\right)}
+    \int_{V_\mathrm{ex}} \, d\vec{r}^n \\
+    &=
+    \frac{\rho^n}{n!}
+    \max_{\mathbb{R}^{dn}}{\left(g^{(n)}\right)}
+    (V_\mathrm{ex})^n,
+  \end{split}
+\end{equation}
+but because of the hard core interaction there will be heavy restrictions on allowable values of $n$ for any $R$.
+Defining $R_n$ as the smallest $R$ such that $n$ particles can be accommodated, we expect
+\begin{equation}\label{eq:F-scaling}
+  F^{(n)}(R) =
+  \begin{cases}
+    0 & \quad R < R_n \\
+    \mathcal{O}\left( \left(V_\mathrm{ex}\right)^n \right) & \quad R > R_n
+  \end{cases}
+\end{equation}
+where the latter polynomial is motivated by the same argument as used in \eqref{eq:spt-tuple-function-upper-bound}.
+Noting that $V_\mathrm{ex} \propto R^d$ this can be expressed alternatively as a polynomial in $R$.
+\begin{equation*}
+  F^{(n)}(R) =
+  \begin{cases}
+    0 & \quad R < R_n \\
+    \mathcal{O}\left( R^{dn} \right) & \quad R > R_n
+  \end{cases}
+\end{equation*}
+Applying this bound to \eqref{eq:spt-zero-cavity-p} gives bounds on the scaling of $p_0$ as
+\begin{equation}\label{eq:spt-p-scaling}
+  p_0(R) =
+  \mathcal{O}\left( R^{dn} \right)
+  \quad R_n < R < R_{n+1}.
+\end{equation}
+From \eqref{eq:spt-p-scaling} we expect to see singular behaviour at the points $\{R_n\}$.
+To look at this in more detail we define
+\begin{equation*}
+  p_0^{(n)}(R) := 1 + \sum_{m=1}^n (-1)^m F^{(m)}(R)
+\end{equation*}
+such that $p_0 = p_0^{(n)}$ for $R \le R_{n+1}$.
+Approaching the singular point $R_n$ we find the deviation from the solution for $R < R_n$ is thus
+\begin{equation*}
+  \begin{split}
+    \Delta p_0(R) &:=
+    p_0(R) - p_0^{(n-1)}(R)
+    \\ &=
+    (-1)^n F^{(n)}(R)
+    \qquad R < R_{n+1}
+  \end{split}
+\end{equation*}
+i.e.\ the singular behaviour is entirely contained in $F^{(n)}$.
+Noting that polynomials of degree $n$ have vanishing $(n+1)$th derivatives, and $V_\mathrm{ex} \propto R^d$, we thus expect a discontinuity in the $dn$th derivative of $p_0$ about $R=R_n$; from \eqref{eq:insertion-from-p} we find $\Delta \Omega$ will similarly feature a discontinuity in its $dn$th derivative at $R=R_n$.
+A summary of the first few singularities in three-dimensions is given in Table~\ref{table:singularities}.
+
+Again, these singularities have long been known since the first papers on scaled particle theory \cite{ReissJCP1959,ReissJCP1960}.
+They are worth reiterating because any geometric expansion in simple powers of $R$ will not capture these singularities; the morphometric approach is an example of such an expansion, albeit generalised beyond spherical solutes, so it must necessarily be approximate.
+
+\begin{table}
+  \begin{ruledtabular}
+    \begin{tabular}{ccc}
+      $n$ & $R_n / \sigma$ & Discontinuity \\
+      \hline
+      %% 2 & $\frac{\sigma}{2}$ & $\Delta \Omega'''(R)$
+      %% \\
+      %% 3 & $\frac{\sigma}{\sqrt{3}}$ &
+      %% $\dfrac{\partial^6 \Delta \Omega}{\partial R^6}$
+      %% \vspace{0.25em} \\
+      %% 4 & ${\sqrt{\frac{3}{8}}} \sigma$ &
+      %% $\dfrac{\partial^9 \Delta \Omega}{\partial R^9}$
+      2 & 0 & $\Delta \Omega'''(R)$
+      \\
+      3 & $\dfrac{1}{\sqrt{3}} - \dfrac{1}{2}$ &
+      $\dfrac{\partial^6 \Delta \Omega}{\partial R^6}$
+      \vspace{0.25em} \\
+      4 & $\sqrt{\dfrac{3}{8}} - \dfrac{1}{2}$ &
+      $\dfrac{\partial^9 \Delta \Omega}{\partial R^9}$
+    \end{tabular}
+  \end{ruledtabular}
+  \caption{First few singularities in the cost of inserting a sphere of radius $R$ into a one-component hard sphere liquid of diameter $\sigma$ in $d=3$.
+    $R = R_n$ is the minimum radius required for a sphere to contain $n$ spheres, and the corresponding singularity is determined from equations \eqref{eq:insertion-from-p} and \eqref{eq:spt-p-scaling}.}
+  \label{table:singularities}
+\end{table}

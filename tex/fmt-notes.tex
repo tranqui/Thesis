@@ -1,0 +1,232 @@
+\subsection{Fundamental measure theory (FMT)}
+
+\subsection{Many-body correlations from fundamental measure theory}
+
+\begin{itemize}
+\item $d+1$ weight functions
+\item Exact decomposition of Mayer-f bond
+\end{itemize}
+
+We have 4 scalar weight functions
+\begin{subequations}
+  \begin{align}
+    \omega_3^i(\vec{r}) &= \Theta(R_i - r), \\
+    \omega_2^i(\vec{r}) &= \delta(R_i - r), \\
+    \omega_1^i(\vec{r}) &= \frac{\omega_2^i(\vec{r})}{4\pi R_i}, \\
+    \omega_0^i(\vec{r}) &= \frac{\omega_2^i(\vec{r})}{4\pi R_i^2},
+  \end{align}
+\end{subequations}
+and 2 vector weight functions
+\begin{subequations}
+  \begin{align}
+    \vec{\omega}_2^i(\vec{r}) &=
+    \frac{\vec{r}}{r} \delta(R_i - r), \\
+    \vec{\omega}_1^i(\vec{r}) &=
+    \frac{\vec{\omega}_1^i(\vec{r})}{4\pi R_i}.
+  \end{align}
+\end{subequations}
+
+Fourier transforming weight functions:
+\begin{equation}
+  \widetilde{\omega}_\alpha(\vec{k}) =
+  \int \omega_\alpha (\vec{r}) e^{-i \vec{k}\cdot\vec{r}} \, d\vec{r}
+\end{equation}
+%% \begin{align}
+%%   \widetilde{\omega}_3(\vec{k}) &=
+%%   4\pi \frac{\sin{kR} - kR\cos{kR}}{k^3} \\
+%%   \widetilde{\omega}_2(\vec{k}) &=
+%%   4\pi R^2 \frac{\sin{kR}}{kR} \\
+%%   \widetilde{\vec{\omega}}_2(\vec{k}) &=
+%%   - i \vec{k} \widetilde{\omega}_3(\vec{k})
+%% \end{align}
+\begin{equation}
+  \begin{aligned}
+    c_{22}(\vec{r} = \vec{r}_2 - \vec{r}_1) &=
+    \frac{1}{(2\pi)^3}
+    \iint
+    e^{-i (\vec{k}_1\cdot\vec{r}_1 + \vec{k}_2\cdot\vec{r}_2)}
+    \widetilde{\omega}_2(\vec{k}_1)
+    \widetilde{\omega}_2(\vec{k}_2)
+    \delta{(\vec{k}_1 + \vec{k}_2)}
+    \, d\vec{k}_1 d\vec{k}_2 \\
+    &=
+    \frac{1}{(2\pi)^3}
+    \int
+    e^{i \vec{k}_1 \cdot (\vec{r}_2 - \vec{r}_1)}
+    \widetilde{\omega}_2(\vec{k}_1)
+    \widetilde{\omega}_2(-\vec{k}_1)
+    \, d\vec{k}_1 \\
+    &=
+    \frac{1}{(2\pi)^3}
+    \int
+    e^{i \vec{k} \cdot \vec{r}}
+    \widetilde{\omega}_2(\vec{k})^2
+    \, d\vec{k}
+    =
+    \frac{8\pi^2 R^2}{(2\pi)^3}
+    \int
+    e^{i \vec{k} \cdot \vec{r}}
+    \left( \frac{\sin{kR}}{k} \right)^2
+    \, d\vec{k} \\
+    &=
+    \frac{R^2}{\pi}
+    \int
+    e^{i k r \cos\theta}
+    \left( \frac{\sin{kR}}{k} \right)^2
+    \, 2\pi k^2 \sin\theta \, dr d\theta \\
+    &=
+    2 R^2
+    \int
+    e^{i k r \cos\theta}
+    \sin^2{(kR)}
+    \, \sin\theta \, dr d\theta
+  \end{aligned}
+\end{equation}
+
+Following \cite{Rosenfeld1990} we have
+\begin{equation}\label{eq:fmt-direct-correlations}
+  \begin{aligned}
+    c^{(n)}(\vec{r}^n) &=
+    - \frac{\delta^n \beta F_{ex}}{\delta \rho(\vec{r}_1)\delta \rho(\vec{r}_2) \cdots \delta \rho(\vec{r}_n)} \\
+    &=
+    - \sum_{\alpha_1, \alpha_2, \cdots, \alpha_n}
+    \int d\vec{r}'
+    \prod_{i=1}^n \Big( \omega_{\alpha_i}(\vec{r}' - \vec{r}_i) \Big)
+    \partial^n_{\alpha_1, \alpha_2, \cdots, \alpha_n} \beta\Phi_{ex}(\vec{r}')
+  \end{aligned}
+\end{equation}
+where
+\begin{equation*}
+  \partial^n_{\alpha_1, \alpha_2, \cdots, \alpha_n} \beta\Phi_{ex}(\vec{r}') =
+  \left.
+  \frac{\partial^n \beta\Phi_{ex}}{\partial n_{\alpha_1} \partial n_{\alpha_2} \cdots \partial n_{\alpha_n}}
+  \right|_{\{n_\alpha\} = \{n_\alpha(\vec{r}')\}}.
+\end{equation*}
+At uniform density $\partial^n_{\alpha_1, \alpha_2, \cdots, \alpha_n} \beta\Phi_{ex}$ is position independent, so \eqref{eq:fmt-direct-correlations} becomes
+\begin{equation}\label{eq:fmt-direct-correlations-uniform-density}
+  \begin{aligned}
+    c^{(n)}(\vec{r}^n) &=
+    - \sum_{\alpha_1, \alpha_2, \cdots, \alpha_n}
+    \partial^n_{\alpha_1, \alpha_2, \cdots, \alpha_n} \beta\Phi_{ex}
+    \int d\vec{r}'
+    \prod_{i=1}^n \Big( \omega_{\alpha_i}(\vec{r}' - \vec{r}_i) \Big) \\
+    &=
+    - \sum_{\alpha_1, \alpha_2, \cdots, \alpha_n}
+    \partial^n_{\alpha_1, \alpha_2, \cdots, \alpha_n} \beta\Phi_{ex} \;
+    \Big(
+    \omega_{\alpha_1} \otimes \omega_{\alpha_2} \otimes \cdots \otimes \omega_{\alpha_n}
+    (\vec{r}^n)
+    \Big)
+  \end{aligned}
+\end{equation}
+where the $\otimes$-notation in the latter step denotes the $n$-body convolution.
+For example, the two body convolution would be written%
+\todo{This is not the standard convolution! See \cite{Rosenfeld1997}.}
+%\marginfootnote{The `standard' convolution, i.e.\ $f \otimes g(\vec{r} \equiv \vec{r}_1 - \vec{r}_2)$, is recovered after transforming to the new integration variable $\vec{r}'' = \vec{r}' - \vec{r}_1$.}
+\begin{equation*}
+  f \otimes g(\vec{r}_1, \vec{r}_2) =
+  \int d\vec{r}' f(\vec{r}' - \vec{r}_1) g(\vec{r}' - \vec{r}_2).
+\end{equation*}
+\todo{Also, the standard convolution symbol is an asterisk, not an outer product.}
+Applying the convolution theorem allows the Fourier transform of \eqref{eq:fmt-direct-correlations-uniform-density} to be written rather succinctly as
+\begin{equation}
+  \tilde{c}^{(n)}(\vec{k}^n) =
+  - \sum_{\alpha_1, \alpha_2, \cdots, \alpha_n}
+  \partial^n_{\alpha_1, \alpha_2, \cdots, \alpha_n} \beta\Phi_{ex} \;
+  \left( \prod_{i=1}^n \widetilde{\omega}_{\alpha_i}(\vec{k}_i) \right)
+  \delta(\vec{k}_1 + \vec{k}_2 + \cdots + \vec{k}_n).
+\end{equation}
+The delta function enforces the `ring' condition $\sum_{i=1}^n \vec{k}_i = 0$ which emerges from translational symmetry of the weight functions%
+\marginfootnote{In the previous note this occurred by change of integration variables to a relative displacement, which was only possible because of this translational symmetry.}[-3cm],
+reducing the dimensionality of the domain by $d$.
+A further $d(d-1)/2$ degrees of freedom%
+\marginfootnote{This many degrees of freedom can be removed for general $n \ge d$, but there are fewer for $n < d$.
+  For example, $n=2$ arrangements (a dimer) are isomorphic to a line so they possess $d-1$ rotational degrees of freedom.}
+can be removed by exploiting rotational symmetry.
+
+From \cite{Rosenfeld1990}:
+\begin{align}
+  \widetilde{\omega}_0 &= \cos{(kR)} \\
+  \widetilde{\omega}_1 &= 2\frac{\sin{(kR)}}{k} \\
+  \widetilde{\omega}_0 &= \cos{(kR)}
+\end{align}
+
+White bear I:
+\begin{equation}
+  c^{(2)}(r)
+\end{equation}
+
+The Ornstein-Zernike equation
+\begin{equation}
+  h^{(2)}(\vec{r}) =
+  c^{(2)}(\vec{r}) +
+  \rho \int d\vec{r}' h^{(2)}(\vec{r}') c^{(2)}(\vec{r} - \vec{r}')
+\end{equation}
+in Fourier space
+\begin{equation*}
+  \tilde{h}^{(2)}(\vec{k}) =
+  \tilde{c}^{(2)}(\vec{k}) +
+  \rho \tilde{h}^{(2)}(\vec{k}) \tilde{c}^{(2)}(\vec{k})
+\end{equation*}
+after rearranging
+\begin{equation}
+  \tilde{h}^{(2)}(\vec{k}) =
+  \frac{\tilde{c}^{(2)}(\vec{k})}{1 - \rho \tilde{c}^{(2)}(\vec{k})}
+\end{equation}
+
+The two-point static structure factor
+\begin{equation}
+  \begin{aligned}
+    S^{(2)}(\vec{k}) &\equiv 1 + \rho \tilde{g}^{(2)}(\vec{k}) \\
+    &= 1 + \rho \delta(\vec{k}) + \rho \tilde{h}^{(2)}(\vec{k})
+  \end{aligned}
+\end{equation}
+
+\begin{SCfigure}[H]
+  \missingfigure[figwidth=\linewidth]{}
+  \caption{Static structure factor for convolution, Rosenfeld and White Bear closures.}
+\end{SCfigure}
+
+\begin{SCfigure}[H]
+  \missingfigure[figwidth=\linewidth]{}
+  \caption{Triplet static structure factors for convolution, Rosenfeld and White Bear closures.}
+\end{SCfigure}
+
+\section{Superposition and convolution approximations}
+
+In the Kirkwood superposition approximation \cite{Kirkwood1935} many-body correlations are expressed as pairwise products of the two-body correlation function, i.e.
+\begin{equation}
+  g^{(n)}(\vec{r}^n) =
+  \prod_{i < j} g^{(2)}(\vec{r}_i, \vec{r}_j),
+\end{equation}
+which correctly satisfies the hard-core condition, but violates the sum rule
+\begin{equation}
+  \begin{aligned}
+    \rho^{(n)}(\vec{r}^n) &=
+    \frac{1}{\Xi} \sum_{N=n}^\infty \frac{z^N}{(N-n)!} \int e^{-\beta U_N} \, d\vec{r}^{(N-n)} \\
+    &=
+    \frac{1}{N-n}
+    \int d\vec{r}_n \left(
+    \frac{1}{\Xi} \sum_{N=n}^\infty \frac{z^N}{(N-(n+1))!} \int e^{-\beta U_N} \, d\vec{r}^{(N-(n+1))}
+    \right) \\
+    &=
+    \frac{1}{N-n}
+    \int \rho^{(n+1)}(\{\vec{r}^n, \vec{r}_{n+1}\}) d\vec{r}_{n+1},
+  \end{aligned}
+\end{equation}
+and the related convolution approximation \cite{Jackson1962,Ichimaru1970,Barrat1988}%
+\todo{Check this expression is correct - it almost certainly is not.}
+\begin{equation}
+  S^{(n)}(\vec{k}^n) =
+  (1 + \tilde{c}^{(n)}(\vec{k}^n))
+  \prod_{i < j} S^{(2)}(\vec{k}_i, \vec{k}_j)
+\end{equation}
+satisfies the sum rule but fails to satisfy the hard-core condition.
+
+%% In equilibrium
+%% \begin{equation}
+%%   c^{(n)}(\vec{r}^n) =
+%%   \left.
+%%   \frac{\delta^n \beta F_{ex}}{\delta \rho(\vec{r}_1)\delta \rho(\vec{r}_2) \cdots \delta \rho(\vec{r}_n)}
+%%   \right|_{\rho(\vec{r})=\rho}
+%% \end{equation}

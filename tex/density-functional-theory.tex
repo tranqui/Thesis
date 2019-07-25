@@ -1,0 +1,778 @@
+\section{Density functional theory}
+
+\subsection{Functional form of the thermodynamic potentials}
+
+\todo{Insert references to classic texts i.e.\ \cite{Evans1979,Evans1992}}
+
+For inhomogeneous systems the Legendre transform of $\Omega$ \eqref{eq:grand-potential-legendre-transform} generalises to
+\begin{equation}
+  \Omega = F - \int \rho^{(1)}(\vec{r}) \mu \, d\vec{r}.
+\end{equation}
+Subtracting external potential contributions from the Helmholtz free energy defines an \emph{intrinsic free energy} containing contributions arising solely from the internal interactions, i.e.\
+\begin{equation}\label{eq:intrinsic-free-energy}
+  \mathcal{F}
+  =
+  F - \int \rho^{(1)}(\vec{r}) \phi_\mathrm{ext}(\vec{r}) \, d\vec{r}
+\end{equation}
+so that the grand potential becomes
+\begin{equation}\label{eq:dft-grand-potential}
+  \begin{split}
+    \Omega
+    &=
+    \mathcal{F}
+    - \int \rho^{(1)}(\vec{r}) (\mu - \phi_\mathrm{ext}(\vec{r})) \, d\vec{r}
+    \\ &=
+    \mathcal{F}
+    - \int \rho^{(1)}(\vec{r}) \psi(\vec{r}) \, d\vec{r}
+  \end{split}
+\end{equation}
+where we defined the \emph{intrinsic chemical potential} $\psi(\vec{r}) = \mu - \phi_\mathrm{ext}(\vec{r})$ in the final step.
+
+Furthermore, the intrinsic free energy can be decomposed into an \emph{ideal} and \emph{excess} part as in
+\begin{equation}\label{eq:F-decomposition}
+  \mathcal{F}
+  =
+  \mathcal{F}^\mathrm{id} +
+  \mathcal{F}^\mathrm{ex}.
+\end{equation}
+The excess component emerges as from the interactions between particles and in general it is intractably hard to determine this exactly except in special limits (e.g.\ in the one-dimensional limit).
+As such, approximate forms for $\mathcal{F}^\mathrm{ex}$ must be used in general which contrains the success of applications of DFT to the accuracy of this contribution.
+By contrast, the ideal component can be computed explicitly.
+The partition function for the ideal gas is easily calculated giving
+\begin{equation}\label{eq:ideal-grand-canonical-partition}
+  \Xi^\mathrm{id}
+  =
+  \sum_{N=0}^\infty
+  \frac{(e^{\beta\mu} Z_1)^N}{N!}
+  =
+  \exp{\left( \frac{Z_1 e^{\beta \mu}}{\Lambda^d} \right)}.
+\end{equation}
+Then, following Ref.\ \cite{Ashcroft1996}, we write the equilibrium single-particle density as
+\begin{equation*}
+  \rho^{(1)}(\vec{r})
+  =
+  \left\langle
+  \sum_{i=1}^N \delta(\vec{r} - \vec{r}_i)
+  e^{-\beta \phi_\mathrm{ext}(\vec{r})}
+  \right\rangle
+\end{equation*}
+which in the absence of particle interactions reduces to
+\begin{equation}\label{eq:ideal-density}
+  \rho^{(1)}(\vec{r})
+  =
+  \frac{
+    \langle N \rangle e^{-\beta \phi_\mathrm{ext}(\vec{r})}
+  }{
+    \int e^{-\beta \phi_\mathrm{ext}(\vec{r}')} \, d\vec{r}'
+  }
+  =
+  \frac{e^{-\beta (\mu - \phi_\mathrm{ext}(\vec{r}))}}{\Lambda^d}.
+\end{equation}
+We can express the grand potential for the non-interacting system as a functional of the external potential from the partition function \eqref{eq:ideal-grand-canonical-partition} as
+\begin{equation*}
+  \beta\Omega^\mathrm{id}
+  =
+  - \ln{\Xi^\mathrm{id}}
+  =
+  - \int \frac{e^{-\beta (\phi_\mathrm{ext}(\vec{r}) - \mu)}}{\Lambda^d} d\vec{r}
+\end{equation*}
+or in its dual form as a functional of density \eqref{eq:dft-grand-potential} as
+\begin{equation*}
+  \beta\Omega^\mathrm{id}
+  =
+  \beta \mathcal{F}^\mathrm{id}
+  - \int \rho^{(1)}(\vec{r}) \beta \psi(\vec{r}) \, d\vec{r}.
+\end{equation*}
+Equating these two forms and rearranging we find the ideal part of the Helmholtz free energy as
+\begin{align}\
+  \beta \mathcal{F}^\mathrm{id}
+  &=
+  \int
+  \left(
+  \rho^{(1)}(\vec{r}) \beta (\phi_\mathrm{ext}(\vec{r}) - \mu)
+  - \frac{e^{-\beta (\phi_\mathrm{ext}(\vec{r}) - \mu)}}{\Lambda^d}
+  \right)
+  \, d\vec{r}
+  \nonumber \\ &=
+  \int
+  \rho^{(1)}(\vec{r})
+  \left(
+  \ln{(\Lambda^d \rho^{(1)}(\vec{r}))} - 1
+  \right)
+  \, d\vec{r}
+  \label{eq:ideal-free-energy-functional}
+\end{align}
+using the ideal density \eqref{eq:ideal-density} in the final step.
+The inhomogeneous ideal gas free energy density is thus identical to the homogeneous case \eqref{eq:ideal-free-energy-density} after replacing the global density with a local one.
+
+\subsection{Thermodynamic potentials as generating functionals}
+
+The fundamental thermodynamic relation describing an infinitesimal change in the Helmholtz free energy, i.e.\
+\begin{equation*}
+  dF = -S dT - p dV + \mu dN,
+\end{equation*}
+generalises to an inhomogeneous system as
+\begin{equation*}
+  \begin{split}
+    \delta F
+    =
+    - S \delta T
+    + \int \rho^{(1)}(\vec{r}) \delta \phi_\mathrm{ext}(\vec{r}) \, d\vec{r}
+    + \int \mu \delta \rho^{(1)}(\vec{r}) \, d\vec{r}
+  \end{split}
+\end{equation*}
+The change in the intrinsic free energy is then
+\begin{equation}\label{eq:infinitesimal-free-energy}
+  \begin{split}
+    \delta \mathcal{F}
+    &=
+    \delta F
+    - \int \delta \rho^{(1)}(\vec{r}) \phi_\mathrm{ext}(\vec{r}) \, d\vec{r}
+    - \int \rho^{(1)}(\vec{r}) \delta \phi_\mathrm{ext}(\vec{r}) \, d\vec{r}
+    \\ &=
+    - S \delta T
+    + \int \delta \rho^{(1)}(\vec{r}) \psi(\vec{r}) \, d\vec{r}.
+  \end{split}
+\end{equation}
+By similar steps, or using the Legendre transform of the grand potential \eqref{eq:grand-potential-legendre-transform}, it follows that
+\begin{equation}\label{eq:infinitesimal-grand-potential}
+  \delta \Omega
+  =
+  - S \delta T
+  - \int \rho^{(1)}(\vec{r}) \delta \psi(\vec{r}) \, d\vec{r}
+\end{equation}
+Hence, from functional differentiation of \eqref{eq:infinitesimal-free-energy} and \eqref{eq:infinitesimal-grand-potential} it follows that
+\begin{align}
+  \label{eq:psi-generator}
+  \frac{\delta \mathcal{F}}{\delta \rho^{(1)}(\vec{r})}
+  &=
+  \psi(\vec{r})
+  \\
+  \label{eq:rho-generator}
+  \frac{\delta \Omega}{\delta \psi(\vec{r})}
+  &=
+  - \rho^{(1)}(\vec{r})
+\end{align}
+i.e.\ the intrinsic free energy and grand potentials act as \emph{generating functionals} for the intrinsic chemical potential and density respectively.
+
+Repeated functional differentiation of the thermodynamic potentials produces a whole hierarchy of correlation functions.
+The hierarchy obtained from the grand potential is the density-density correlations which we already introduced in \eqref{eq:density-density-correlations};
+these are generated by the grand potential as \cite{Hansen2013}
+\begin{equation}\label{eq:density-density-generator}
+  H^{(n)}(\vec{r}^n)
+  =
+  - \frac{
+    \delta^n \beta \Omega
+  }{
+    \delta \beta\psi(\vec{r}_1) \cdots \delta \beta\psi(\vec{r}_n)
+  }
+  =
+  \frac{
+    \delta^{n-1} \rho^{(1)}(\vec{r}_1)
+  }{
+    \delta \beta\psi(\vec{r}_2) \cdots \delta \beta\psi(\vec{r}_n)
+  }.
+\end{equation}
+The intrinsic free energy also generates a new hierarchy of correlation functions, however the contribution from the ideal part is not especially interesting.
+We thus define the \emph{direct correlation functions} emerging from the excess part as
+\begin{equation}\label{eq:direct-correlations}
+  c^{(n)}(\vec{r}^n)
+  =
+  - \frac{
+    \delta^n \beta \mathcal{F}^\mathrm{ex}
+  }{
+    \delta \rho^{(1)}(\vec{r}_1) \cdots \delta \rho^{(1)}(\vec{r}_n)
+  }.
+\end{equation}
+These correlation functions form the basis of integral equation theories which we will outline in the next section.
+
+\subsection{Integral equation theories}
+\label{sec:oz-equation}
+
+In this section we derive the Ornstein-Zernike equation which forms the basis of many theories of the liquid state.
+This is an integral equation which connects the density-density and direct correlation functions through the chain rule of functional calculus, i.e.\
+\begin{equation}\label{eq:oz-chain-rule}
+  \delta(\vec{r}_1 - \vec{r}_2) =
+  \int
+  \frac{\delta \rho^{(1)}(\vec{r}_1)}{\delta \beta\psi(\vec{r}')}
+  \frac{\delta \beta\psi(\vec{r}')}{\delta \rho^{(1)}(\vec{r}_2)}
+  \, d\vec{r}'.
+\end{equation}
+The first term appearing in the integrand is simply the pair density-density correlation function $H^{(2)}$ via \eqref{eq:density-density-generator},
+so we will require an explicit expression for the second term to proceed.
+
+The first functional derivative of the ideal intrinsic free energy \eqref{eq:ideal-free-energy-functional} yields
+\begin{equation*}
+  \frac{
+    \delta \beta \mathcal{F}^\mathrm{id}
+  }{
+    \delta \rho^{(1)}(\vec{r})
+  }
+  =
+  \ln{(\Lambda^d \rho^{(1)}(\vec{r}))}.
+\end{equation*}
+To obtain the higher order functional derivatives it is helpful to write this as an integral with a delta function
+\begin{equation*}
+  \frac{
+    \delta \beta \mathcal{F}^\mathrm{id}
+  }{
+    \delta \rho^{(1)}(\vec{r})
+  }
+  =
+  \int \delta{(\vec{r}' - \vec{r})}
+  \ln{(\Lambda^d \rho^{(1)}(\vec{r}'))} \, d\vec{r}',
+\end{equation*}
+so we can obtain the second derivative as
+\begin{equation*}
+  \frac{
+    \delta^2 \beta \mathcal{F}^\mathrm{id}
+  }{
+    \delta \rho^{(1)}(\vec{r}) \delta \rho^{(1)}(\vec{r}')
+  }
+  =
+  \frac{\delta(\vec{r}'-\vec{r})}{\rho^{(1)}(\vec{r})}.
+\end{equation*}
+%% Iterating this procedure gives us the $n$th functional derivative as
+%% \begin{equation}
+%%   \begin{split}
+%%     \frac{
+%%       \delta^n \beta \mathcal{F}^\mathrm{id}
+%%     }{
+%%       \delta \rho^{(1)}(\vec{r}_1) \cdots \delta \rho^{(1)}(\vec{r}_n)
+%%     }
+%%     &=
+%%     \frac{
+%%       \partial^{n-1} (\ln{(\Lambda^d \rho^{(1)}(\vec{r}))})
+%%     }{
+%%       \partial \rho^{(1)}(\vec{r})^{n-1}
+%%     }
+%%     \prod_{i=2}^n \delta(\vec{r}_i - \vec{r}_1)
+%%     \\ &=
+%%     (-1)^{n-1}
+%%     \frac{(n-2)!}{\rho^{(1)}(\vec{r})^{n-1}}
+%%     \prod_{i=2}^n \delta(\vec{r}_i - \vec{r}_1),
+%%   \end{split}
+%% \end{equation}
+%% where the last line is valid for all $n \ge 2$.
+From the free energy as a generating functional \eqref{eq:psi-generator} and the decomposition of the free energy into ideal and excess parts \eqref{eq:F-decomposition} it follows that
+\begin{equation*}
+  \begin{split}
+    \beta \psi(\vec{r})
+    =
+    \frac{\delta \beta \mathcal{F}}{\delta \rho^{(1)}(\vec{r})}
+    &=
+    \frac{\delta \beta \mathcal{F}^\mathrm{id}}{\delta \rho^{(1)}(\vec{r})}
+    + \frac{\delta \beta \mathcal{F}^\mathrm{ex}}{\delta \rho^{(1)}(\vec{r})}
+    \\
+    &=
+    \ln{(\Lambda^d \rho^{(1)}(\vec{r}))} - c^{(1)}(\vec{r}),
+  \end{split}
+\end{equation*}
+using the definition of the direct correlation function \eqref{eq:direct-correlations} in the latter step.
+Further functional differentiation yields
+\begin{equation*}\label{eq:intrinsic-chemical-potential-inverse-derivative}
+  \frac{\delta \beta \psi(\vec{r})}{\delta \rho^{(1)}(\vec{r}')}
+  =
+  \frac{\delta(\vec{r} - \vec{r}')}{\rho^{(1)}(\vec{r}')}
+  - c^{(2)}(\vec{r}, \vec{r}').
+\end{equation*}
+Inserting this expression into \eqref{eq:oz-chain-rule} gives
+\begin{equation*}
+  \begin{split}
+    \delta(\vec{r}_1 - \vec{r}_2)
+    &=
+    \int
+    H^{(2)}(\vec{r}_1, \vec{r}')
+    \left(
+    \frac{\delta(\vec{r}' - \vec{r}_2)}{\rho^{(1)}(\vec{r}')} -
+    c^{(2)}(\vec{r}', \vec{r}_2)
+    \right)
+    \, d\vec{r}'
+    %% \\ &=
+    %% \rho^{(1)}(\vec{r}_1)
+    %% \left(
+    %% h^{(2)}(\vec{r}_1, \vec{r}_2) -
+    %% c^{(2)}(\vec{r}_1, \vec{r}_2)
+    %% \right) +
+    %% \delta(\vec{r}_1 - \vec{r}_2) -
+    %% \\ &\qquad
+    %% \rho^{(1)}(\vec{r}_1)
+    %% \int
+    %% \rho^{(1)}(\vec{r}')
+    %% h^{(2)}(\vec{r}_1, \vec{r}')
+    %% c^{(2)}(\vec{r}', \vec{r}_2)
+    %% \, d\vec{r}'
+  \end{split}
+\end{equation*}
+which rearranges to give the Ornstein-Zernike equation
+\begin{equation}
+  h^{(2)}(\vec{r}_1, \vec{r}_2) =
+  c^{(2)}(\vec{r}_1, \vec{r}_2) +
+  \int
+  \rho^{(1)}(\vec{r}')
+  h^{(2)}(\vec{r}_1, \vec{r}')
+  c^{(2)}(\vec{r}', \vec{r}_2)
+  \, d\vec{r}',
+\end{equation}
+which is a classic result of liquid state theory (cf.\ Refs.\ \cite{OrnsteinPAS1914,Hansen2013,EvansAP1979}).
+
+For a uniform liquid interacting through a spherically symmetric pair potential the Ornstein-Zernike equation becomes
+\begin{equation}
+  \begin{split}
+    h^{(2)}(r)
+    &=
+    c^{(2)}(r) +
+    \rho
+    \int
+    h^{(2)}(r)
+    c^{(2)}(|\vec{r}' - \vec{r}|)
+    \, d\vec{r}'
+    \\ &=
+    c^{(2)}(r) + \rho \, (h^{(2)} * c^{(2)})(r),
+  \end{split}
+\end{equation}
+where $r = |\vec{r}_2 - \vec{r}_1|$ and $(f*g)(\vec{r})$ denotes a convolution between functions $f$ and $g$.
+In Fourier space the convolution becomes a product so we obtain
+\begin{equation*}
+  \tilde{h}^{(2)}(\vec{k})
+  =
+  \tilde{c}^{(2)}(\vec{k}) +
+  \rho \, \tilde{h}^{(2)}(\vec{k}) \tilde{c}^{(2)}(\vec{k})
+\end{equation*}
+where the tildes over a function denotes its Fourier transform.
+This rearranges to give
+\begin{equation*}
+  \tilde{h}^{(2)}(\vec{k})
+  =
+  \frac{\tilde{c}^{(2)}(\vec{k})}{1 - \rho \tilde{c}^{(2)}(\vec{k})}
+\end{equation*}
+which gives the static structure factor \eqref{eq:static-structure-factor} as
+\begin{equation*}
+  S^{(2)}(\vec{k})
+  =
+  \rho \delta(\vec{k}) +
+  \frac{1}{1 - \rho \tilde{c}^{(2)}(\vec{k})}.
+\end{equation*}
+If the pair direct correlation function is known it is thus straightforward to obtain the equation of state through the compressibility route \eqref{eq:compressibility-route}
+\begin{equation*}
+  \frac{\beta p}{\rho}
+  =
+  1 - \frac{1}{\rho} \int_0^\rho \tilde{c}^{(2)}(0) \rho' d\rho'.
+\end{equation*}
+
+The main task of integral equation approaches is to find approximate closures for $c^{(2)}$ and then solve the Ornstein-Zernike equation.
+The process of determining the direct correlation functions is equivalent (at least formally) to finding its generating function $\mathcal{F}^\mathrm{ex}$.
+
+\subsection{Generalised Ornstein-Zernike equations}
+
+This section follows \cite{Barrat1988}.\todo{Check this reference and rewrite accordingly}
+
+Thus for higher $n$ we have
+\begin{equation}
+  \begin{split}
+    c^{(n)}(\vec{r}^n)
+    &=
+    \frac{
+      \delta^{n-1} c^{(1)}(\vec{r}_1)
+    }{
+      \delta \rho^{(1)}(\vec{r}_2) \cdots \delta \rho^{(1)}(\vec{r}_n)
+    }
+    \\ &=
+    (-1)^n
+    \frac{(n-2)!}{\rho^{(1)}(\vec{r}_1)^{n-1}}
+    \prod_{i=2}^n \delta(\vec{r}_i - \vec{r}_1)
+    - \frac{
+      \delta^{n-1} \beta\psi(\vec{r}_1)
+    }{
+      \delta \rho^{(1)}(\vec{r}_2) \cdots \delta \rho^{(1)}(\vec{r}_n)
+    }
+  \end{split}
+\end{equation}
+or
+\begin{equation}
+  \frac{\delta^{n-1} \beta\psi(\vec{r}_1)}{\delta \rho^{(1)}(\vec{r}_2) \cdots \delta \rho^{(1)}(\vec{r}_n)}
+  =
+  (-1)^n
+  \frac{(n-2)!}{\rho^{(1)}(\vec{r}_1)^{n-1}}
+  \prod_{i=2}^n \delta(\vec{r}_i - \vec{r}_1)
+  - c^{(n)}(\vec{r}^n)
+\end{equation}
+
+\begin{equation*}
+  H^{(n)}(\vec{r}^n)
+  =
+  \frac{
+    \delta^{n-1} \rho^{(1)}(\vec{r}_1)
+  }{
+    \delta \beta\psi(\vec{r}_2) \cdots \delta \beta\psi(\vec{r}_n)
+  }.
+\end{equation*}
+
+Defining
+\begin{equation*}
+  K^{(n)}(\vec{r}^n)
+  =
+  \frac{
+    \delta^{n-1} \beta\psi(\vec{r}_1)
+  }{
+    \delta \rho^{(1)}(\vec{r}_2) \cdots \delta \rho^{(1)}(\vec{r}_n)
+  }
+\end{equation*}
+we have
+\begin{equation*}
+  \frac{
+    \delta K^{(n)}(\vec{r}^n)
+  }{
+    \delta \rho^{(1)}(\vec{r}_{n+1})
+  }
+  =
+  K^{(n+1)}(\vec{r}^{n+1}).
+\end{equation*}
+and
+\begin{equation*}
+  \begin{split}
+    \frac{\delta H^{(n)}(\vec{r}^n)}{\delta \rho^{(1)}(\vec{r}_{n+1})}
+    &=
+    \int
+    \frac{\delta H^{(n)}(\vec{r}^n)}{\delta \psi(\vec{r}')}
+    \frac{\delta \psi(\vec{r}')}{\delta \rho^{(1)}(\vec{r}_{n+1})}
+    \, d\vec{r}' \\
+    &=
+    \int
+    H^{(n+1)}(\vec{r}^n, \vec{r}')
+    K^{(2)}(\vec{r}', \vec{r}_{n+1})
+    \, d\vec{r}' \\
+    &=
+    H^{(n+1)} * K^{(2)}(\vec{r}^{n+1}).
+  \end{split}
+\end{equation*}
+In this form the Ornstein-Zernike equation can be written.
+\begin{equation*}
+  \begin{split}
+    \delta(\vec{r}_1 - \vec{r}_2)
+    &=
+    \int
+    \frac{\delta \rho^{(1)}(\vec{r}_1)}{\delta \psi(\vec{r}')}
+    \frac{\delta \psi(\vec{r}')}{\delta \rho^{(1)}(\vec{r}_2)}
+    \, d\vec{r}' \\
+    &=
+    \int
+    H^{(2)}(\vec{r}_1, \vec{r}') K^{(2)}(\vec{r}', \vec{r}_2)
+    \, d\vec{r}' \\
+    &=
+    H^{(2)} * K^{(2)} (\vec{r}^2)
+  \end{split}
+\end{equation*}
+Taking functional derivatives of this expression gives us a hierarchy of generalised Ornstein-Zernike equations.
+For example, the next equation in the hierarchy is
+\begin{equation*}
+  H^{(2)} * K^{(3)} (\vec{r}^3) +
+  H^{(3)} * K^{(2)} * K^{(2)} (\vec{r}^3)
+  = 0
+\end{equation*}
+The next functional derivative
+\begin{equation}
+  \begin{split}
+  H^{(2)} * K^{(4)} (\vec{r}^4) & \\
+  + \; 3 H^{(3)} * K^{(3)} * K^{(2)} (\vec{r}^4) & \\
+  + \; H^{(4)} * K^{(2)} * K^{(2)} * K^{(2)} (\vec{r}^4)
+  &= 0
+  \end{split}
+\end{equation}
+And the next one%
+\todo{Can we find a general formula? I notice some constraints on the indices: the sum of the indices $\{m\}$ in the $K^{(m)}$ terms must add up to $n-1$ so that the right number of independent variables are returned (the extra one is provided by the $H^{(l)}$ function giving the $\vec{r}^n$ total.}
+\begin{equation}
+  \begin{split}
+    H^{(2)} * K^{(5)} (\vec{r}^5) & \\
+    + \; 3 H^{(3)} * K^{(3)} * K^{(3)} (\vec{r}^5) & \\
+    + \; 4 H^{(3)} * K^{(4)} * K^{(2)} (\vec{r}^5) & \\
+    + \; 6 H^{(4)} * K^{(3)} * K^{(2)} * K^{(2)} (\vec{r}^5) & \\
+    + \; H^{(5)} * K^{(2)} * K^{(2)} * K^{(2)} * K^{(2)} (\vec{r}^5)
+    &=
+    0
+  \end{split}
+\end{equation}
+
+\subsection{Fundamental measure theory}
+
+\todo{Finish this section}
+FMT: a recent review \cite{Roth2010}.
+Also mention \cite{Lutsko2010} for more of a focus on crystallisation.
+This exposition follows \cite{Roth2010} mainly.
+
+%\subsection{Many-body correlations from fundamental measure theory}
+
+\begin{itemize}
+\item $d+1$ weight functions
+\item Exact decomposition of Mayer-f bond
+\end{itemize}
+
+We have 4 scalar weight functions
+\begin{subequations}
+  \begin{align}
+    \omega_3^i(\vec{r}) &= \Theta(R_i - r), \\
+    \omega_2^i(\vec{r}) &= \delta(R_i - r), \\
+    \omega_1^i(\vec{r}) &= \frac{\omega_2^i(\vec{r})}{4\pi R_i}, \\
+    \omega_0^i(\vec{r}) &= \frac{\omega_2^i(\vec{r})}{4\pi R_i^2},
+  \end{align}
+\end{subequations}
+and 2 vector weight functions
+\begin{subequations}
+  \begin{align}
+    \vec{\omega}_2^i(\vec{r}) &=
+    \frac{\vec{r}}{r} \delta(R_i - r), \\
+    \vec{\omega}_1^i(\vec{r}) &=
+    \frac{\vec{\omega}_1^i(\vec{r})}{4\pi R_i}.
+  \end{align}
+\end{subequations}
+
+Fourier transforming weight functions:
+\begin{equation}
+  \widetilde{\omega}_\alpha(\vec{k}) =
+  \int \omega_\alpha (\vec{r}) e^{-i \vec{k}\cdot\vec{r}} \, d\vec{r}
+\end{equation}
+%% \begin{align}
+%%   \widetilde{\omega}_3(\vec{k}) &=
+%%   4\pi \frac{\sin{kR} - kR\cos{kR}}{k^3} \\
+%%   \widetilde{\omega}_2(\vec{k}) &=
+%%   4\pi R^2 \frac{\sin{kR}}{kR} \\
+%%   \widetilde{\vec{\omega}}_2(\vec{k}) &=
+%%   - i \vec{k} \widetilde{\omega}_3(\vec{k})
+%% \end{align}
+\begin{equation}
+  \begin{aligned}
+    c_{22}(\vec{r} = \vec{r}_2 - \vec{r}_1) &=
+    \frac{1}{(2\pi)^3}
+    \iint
+    e^{-i (\vec{k}_1\cdot\vec{r}_1 + \vec{k}_2\cdot\vec{r}_2)}
+    \widetilde{\omega}_2(\vec{k}_1)
+    \widetilde{\omega}_2(\vec{k}_2)
+    \delta{(\vec{k}_1 + \vec{k}_2)}
+    \, d\vec{k}_1 d\vec{k}_2 \\
+    &=
+    \frac{1}{(2\pi)^3}
+    \int
+    e^{i \vec{k}_1 \cdot (\vec{r}_2 - \vec{r}_1)}
+    \widetilde{\omega}_2(\vec{k}_1)
+    \widetilde{\omega}_2(-\vec{k}_1)
+    \, d\vec{k}_1 \\
+    &=
+    \frac{1}{(2\pi)^3}
+    \int
+    e^{i \vec{k} \cdot \vec{r}}
+    \widetilde{\omega}_2(\vec{k})^2
+    \, d\vec{k}
+    =
+    \frac{8\pi^2 R^2}{(2\pi)^3}
+    \int
+    e^{i \vec{k} \cdot \vec{r}}
+    \left( \frac{\sin{kR}}{k} \right)^2
+    \, d\vec{k} \\
+    &=
+    \frac{R^2}{\pi}
+    \int
+    e^{i k r \cos\theta}
+    \left( \frac{\sin{kR}}{k} \right)^2
+    \, 2\pi k^2 \sin\theta \, dr d\theta \\
+    &=
+    2 R^2
+    \int
+    e^{i k r \cos\theta}
+    \sin^2{(kR)}
+    \, \sin\theta \, dr d\theta
+  \end{aligned}
+\end{equation}
+
+Following \cite{Rosenfeld1990} we have
+\begin{equation}\label{eq:fmt-direct-correlations}
+  \begin{aligned}
+    c^{(n)}(\vec{r}^n) &=
+    - \frac{
+      \delta^n \beta F_{ex}
+    }{
+      \delta \rho^{(1)}(\vec{r}_1) \cdots \delta \rho(\vec{r}_n)
+    }
+    \\ &=
+    - \sum_{\alpha_1, \alpha_2, \cdots, \alpha_n}
+    \int d\vec{r}'
+    \prod_{i=1}^n \Big( \omega_{\alpha_i}(\vec{r}' - \vec{r}_i) \Big)
+    \partial^n_{\alpha_1, \alpha_2, \cdots, \alpha_n} \beta\Phi_{ex}(\vec{r}')
+  \end{aligned}
+\end{equation}
+where
+\begin{equation*}
+  \partial^n_{\alpha_1, \alpha_2, \cdots, \alpha_n} \beta\Phi_{ex}(\vec{r}') =
+  \left.
+  \frac{\partial^n \beta\Phi_{ex}}{\partial n_{\alpha_1} \partial n_{\alpha_2} \cdots \partial n_{\alpha_n}}
+  \right|_{\{n_\alpha\} = \{n_\alpha(\vec{r}')\}}.
+\end{equation*}
+At uniform density $\partial^n_{\alpha_1, \alpha_2, \cdots, \alpha_n} \beta\Phi_{ex}$ is position independent, so \eqref{eq:fmt-direct-correlations} becomes
+\begin{equation}\label{eq:fmt-direct-correlations-uniform-density}
+  \begin{aligned}
+    c^{(n)}(\vec{r}^n) &=
+    - \sum_{\alpha_1, \alpha_2, \cdots, \alpha_n}
+    \partial^n_{\alpha_1, \alpha_2, \cdots, \alpha_n} \beta\Phi_{ex}
+    \int d\vec{r}'
+    \prod_{i=1}^n \Big( \omega_{\alpha_i}(\vec{r}' - \vec{r}_i) \Big) \\
+    &=
+    - \sum_{\alpha_1, \alpha_2, \cdots, \alpha_n}
+    \partial^n_{\alpha_1, \alpha_2, \cdots, \alpha_n} \beta\Phi_{ex} \;
+    \Big(
+    \omega_{\alpha_1} \otimes \omega_{\alpha_2} \otimes \cdots \otimes \omega_{\alpha_n}
+    (\vec{r}^n)
+    \Big)
+  \end{aligned}
+\end{equation}
+where the $\otimes$-notation in the latter step denotes the $n$-body convolution.
+For example, the two body convolution would be written%
+\todo{This is not the standard convolution! See \cite{Rosenfeld1997}.}
+%\marginfootnote{The `standard' convolution, i.e.\ $f \otimes g(\vec{r} \equiv \vec{r}_1 - \vec{r}_2)$, is recovered after transforming to the new integration variable $\vec{r}'' = \vec{r}' - \vec{r}_1$.}
+\begin{equation*}
+  f \otimes g(\vec{r}_1, \vec{r}_2) =
+  \int d\vec{r}' f(\vec{r}' - \vec{r}_1) g(\vec{r}' - \vec{r}_2).
+\end{equation*}
+\todo{Also, the standard convolution symbol is an asterisk, not an outer product.}
+Applying the convolution theorem allows the Fourier transform of \eqref{eq:fmt-direct-correlations-uniform-density} to be written rather succinctly as
+\begin{equation}
+  \tilde{c}^{(n)}(\vec{k}^n) =
+  - \sum_{\alpha_1, \alpha_2, \cdots, \alpha_n}
+  \partial^n_{\alpha_1, \alpha_2, \cdots, \alpha_n} \beta\Phi_{ex} \;
+  \left( \prod_{i=1}^n \widetilde{\omega}_{\alpha_i}(\vec{k}_i) \right)
+  \delta(\vec{k}_1 + \vec{k}_2 + \cdots + \vec{k}_n).
+\end{equation}
+The delta function enforces the `ring' condition $\sum_{i=1}^n \vec{k}_i = 0$ which emerges from translational symmetry of the weight functions%
+\marginfootnote{In the previous note this occurred by change of integration variables to a relative displacement, which was only possible because of this translational symmetry.}[-3cm],
+reducing the dimensionality of the domain by $d$.
+A further $d(d-1)/2$ degrees of freedom%
+\marginfootnote{This many degrees of freedom can be removed for general $n \ge d$, but we expect fewer for $n < d$.
+  For example, $n=2$ arrangements (a dimer) are isomorphic to a line so they possess $d-1$ rotational degrees of freedom.}
+can be removed by exploiting rotational symmetry.
+
+From \cite{Rosenfeld1990}:
+\begin{align}
+  \widetilde{\omega}_0 &= \cos{(kR)} \\
+  \widetilde{\omega}_1 &= 2\frac{\sin{(kR)}}{k} \\
+  \widetilde{\omega}_0 &= \cos{(kR)}
+\end{align}
+
+White bear I:
+\begin{equation}
+  c^{(2)}(r)
+\end{equation}
+
+\begin{tcolorbox}[title=Percus-Yevick theory in hard spheres]
+  Virial route
+  \begin{equation}
+    \frac{\beta p^\mathrm{PY-V}}{\rho}
+    =
+    \frac{1 + 2 \eta + 3 \eta^2}{(1 - \eta)^2}
+  \end{equation}
+  Compressibility route
+  \begin{equation}\label{eq:pyc-pressure}
+    \frac{\beta p^\mathrm{PY-C}}{\rho}
+    =
+    \frac{1 + \eta + \eta^2}{(1 - \eta)^3}
+  \end{equation}
+  The interpolation
+  \begin{equation}\label{eq:cs-pressure}
+    \begin{split}
+      \frac{\beta p^\mathrm{CS}}{\rho}
+      &=
+      \frac{1}{3} \frac{\beta p^\mathrm{PY-V}}{\rho}
+      + \frac{2}{3} \frac{\beta p^\mathrm{PY-C}}{\rho}
+      \\ &=
+      \frac{1 + \eta + \eta^2 - \eta^3}{(1-\eta)^3},
+    \end{split}
+  \end{equation}
+\end{tcolorbox}
+
+
+%% \begin{SCfigure}[H]
+%%   \missingfigure[figwidth=\linewidth]{}
+%%   \caption{Static structure factor for convolution, Rosenfeld and White Bear closures.}
+%% \end{SCfigure}
+
+%% \begin{SCfigure}[H]
+%%   \missingfigure[figwidth=\linewidth]{}
+%%   \caption{Triplet static structure factors for convolution, Rosenfeld and White Bear closures.}
+%% \end{SCfigure}
+
+\subsection{Superposition and convolution approximations}
+
+\todo{Finish this section}
+In the Kirkwood superposition approximation \cite{Kirkwood1935} many-body correlations are expressed as pairwise products of the two-body correlation function, i.e.
+\begin{equation}
+  g^{(n)}(\vec{r}^n) =
+  \prod_{i < j} g^{(2)}(\vec{r}_i, \vec{r}_j),
+\end{equation}
+which correctly satisfies the hard-core condition, but violates the sum rule
+\begin{equation}
+  \begin{aligned}
+    \rho^{(n)}(\vec{r}^n) &=
+    \frac{1}{\Xi} \sum_{N=n}^\infty \frac{z^N}{(N-n)!} \int e^{-\beta U_N} \, d\vec{r}^{(N-n)} \\
+    &=
+    \int d\vec{r}_n \left(
+    \frac{1}{\Xi} \sum_{N=n}^\infty \frac{z^N}{(N+1 - (n+1))!} \int e^{-\beta U_N} \, d\vec{r}^{(N-(n+1))}
+    \right) \\
+    &=
+    \int d\vec{r}_n \left(
+    \frac{1}{\Xi} \sum_{N=n}^\infty \frac{z^N}{(N - (n+1))!} \int e^{-\beta U_N} \, d\vec{r}^{(N-(n+1))}
+    \right) \\
+    &=
+    \frac{1}{N-n}
+    \int \rho^{(n+1)}(\{\vec{r}^n, \vec{r}_{n+1}\}) d\vec{r}_{n+1},
+  \end{aligned}
+\end{equation}
+and the related convolution approximation \cite{Jackson1962,Ichimaru1970,Barrat1988}%
+\todo{Check this expression is correct - it almost certainly is not.}
+\begin{equation}
+  S^{(n)}(\vec{k}^n) =
+  (1 + \tilde{c}^{(n)}(\vec{k}^n))
+  \prod_{i < j} S^{(2)}(\vec{k}_i, \vec{k}_j)
+\end{equation}
+satisfies the sum rule but fails to satisfy the hard-core condition.
+
+%% In equilibrium
+%% \begin{equation}
+%%   c^{(n)}(\vec{r}^n) =
+%%   \left.
+%%   \frac{\delta^n \beta F_{ex}}{\delta \rho(\vec{r}_1)\delta \rho(\vec{r}_2) \cdots \delta \rho(\vec{r}_n)}
+%%   \right|_{\rho(\vec{r})=\rho}
+%% \end{equation}
+
+\subsection{Variational formulation}
+
+In density functional theory the ...
+\todo{Finish this section}
+
+Properties:
+\begin{equation}
+  \Omega[\rho(\vec{r})] > \Omega[\rho^{(1)}(\vec{r})]
+\end{equation}
+and
+\begin{equation}\label{eq:dft-equilibrium}
+  \left.
+  \frac{
+    \delta \Omega[\rho(\vec{r})]
+  }{
+    \delta \rho
+  }
+  \right|_{\rho(\vec{r})=\rho^{(1)}(\vec{r})} = 0
+\end{equation}
+
+\begin{align*}
+  \Omega &\to \Omega[\rho]
+  \\
+  \mathcal{F}^\mathrm{id} &\to \mathcal{F}^\mathrm{id}[\rho]
+  \\
+  \mathcal{F}^\mathrm{ex} &\to \mathcal{F}^\mathrm{ex}[\rho]
+\end{align*}
+
+Which gives the equilibrium density as
+\begin{equation}
+  \rho^{(1)}(\vec{r})
+  =
+  \frac{
+    \exp{\left(\beta\psi(\vec{r}) + c^{(1)}(\vec{r})\right)}
+  }{ \Lambda^d }
+\end{equation}

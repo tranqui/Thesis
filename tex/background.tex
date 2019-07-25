@@ -1,0 +1,29 @@
+%TC: macro \marginfootnote [other]
+%TC: envir SCfigure [] other
+%TC: macrocount beginSCfigure [figure]
+\documentclass[11pt,twoside]{report}
+\usepackage{preamble}
+\setcounter{chapter}{1}
+\graphicspath{{../img/}}
+\def\includebibliography{}
+
+\begin{document}
+\chapter{Background}
+\epigraph{It tells me that the Creator used the wrong kind of circles.}{Terry Pratchett, \emph{Pyramids} (1989).}
+
+In this chapter we provide a \emph{concise} account of the foundational frameworks underlying the two themes of this thesis: \emph{integral geometry} and \emph{liquid state theory}.
+I expect the reader to have a background in statistical physics, so my account of liquid state theory is not intended to be exhaustive; for more in-depth treatments see the references therein.
+By contrast, I do \emph{not} expect much familiarity with integral geometry.
+Understanding the underlying mathematical detail is not essential to follow the rest of the thesis, so I will focus more on the key concepts and notation than detailed derivation.
+I anticipate the expert reader will skim over this chapter, so I have placed the important theorems in boxes as a guide to the most relevant parts.
+
+\input{integral-geometry}
+\input{liquid-state-theory}
+\input{density-functional-theory}
+%\input{supercooled-liquids}
+
+\ifdefined\includebibliography
+  \printbibliography
+\fi
+
+\end{document}

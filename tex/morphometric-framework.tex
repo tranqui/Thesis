@@ -1,15 +1,17 @@
 %TC: macro \marginfootnote [other]
 %TC: envir SCfigure [] other
 %TC: macrocount beginSCfigure [figure]
-\documentclass[11pt]{report}
+\documentclass[11pt,twoside]{report}
 \usepackage{preamble}
-\setcounter{chapter}{3}
+\setcounter{chapter}{2}
 \graphicspath{{../img/}}
 \def\includebibliography{}
 
+\externaldocument{background}
+
 \begin{document}
 \chapter{Many-body correlations from integral geometry}
-\epigraph{He said that the geometry of the dream-place he saw was abnormal, non-Euclidean, and loathsomely redolent of spheres and dimensions apart from ours.}{H.\ P.\ Lovecraft, \emph{The Call of Cthulhu} (1926).}
+\epigraph{Ninety percent of everything is crap.}{Theodore Sturgeon, \emph{Galaxy} (1956).}
 
 This chapter will focus on the morphological framework for the treatment of many-body correlations.
 This will cover two related topics:
@@ -17,1746 +19,945 @@ This will cover two related topics:
 \item \emph{Fundamental measure theory} which is ideally suited for correlations in Fourier space i.e.\ structure factors, and
 \item The \emph{morphometric approach}, which presents a highly accurate alternative for real space calculations, albeit with many caveats.
 \end{enumerate}
-These two approaches are related in that they both depend on integral geometry, which we introduced in \ref{sec:integral-geometry}.
+These two approaches are related in that they both depend on integral geometry, which we introduced in section \ref{sec:integral-geometry}.
 In fact, we will see that the latter approach can be seen as a limiting case of the former.
 We will focus on the theoretical developments in this chapter, and leave the main body of numerical work to the following chapter where we will apply this to local structure in the hard sphere liquid.
 
 I have tried to make this chapter a relatively self-contained account of the treatment of many-body correlations in hard spheres.
 As such there will be a mixture of original results, pure literature review and some original \emph{presentation} of established results.
 I will indicate where each of these is the case, though loosely speaking it will start off unoriginal and get progressively more original.
-The final sections are entirely original: we use integral geometry to calculate distribution functions in hard spheres, which is work now published as Ref.\ \cite{Robinson2019}.
-The results of this chapter only entered the supplementary material of Ref.\ \cite{Robinson2019}, whereas the results of the next chapter were described in the main text.
+The final sections are entirely original: we use integral geometry to calculate distribution functions in hard spheres, which is work now published as Ref.\ \cite{RobinsonPRL2019}.
+The results of this chapter only entered the supplementary material of Ref.\ \cite{RobinsonPRL2019}, whereas the results of the next chapter were described in the main text.
 
-\section{Preliminaries}
+\section{Introduction}
 
-Scaled particle theory and the Percus-Yevick correlation function theories were unified by Rosenfeld in a series of papers, in scaled field particle theory (homogeneous) and fundamental measure theory (inhomogeneous).
-Consider integrals of the form
+Since the beginnings of modern liquid state theory \cite{KirkwoodJCP1935}, the hard sphere liquid has remained the archetypal model for atomic systems and soft matter.
+The dynamics of the system at high density in the metastable regime above the freezing transition are hotly debated, despite relentless study.
+%In particular, deep questions remain concerning its nucleation kinetics and dynamical arrest approaching the glass transition.
+%Our central application will be to the treatment of many-body correlations in supercooled liquids, a potential new route for assessing causes of dynamical arrest.
+Proposed mechanisms for dynamical phenomena all loosely fall under the broad umbrella of many-body correlations; nucleation occurs via crystal seed formation \cite{SearJPCM2007}, and to explain dynamic arrest approaching the glass transition thermodynamic theories invoke cooperatively rearranging regions \cite{LubchenkoARPC2007} or elastic soft modes \cite{BritoJCP2009} while kinetic theories posit the existence of dynamical defects \cite{ChandlerARPC2010}.
+In a recent letter \cite{RobinsonPRL2019} we proposed a framework for treating many-body correlations, and developed an operational scheme for predicting the populations and dynamics of local structural motifs within a uniform liquid.
+Central to this is the use of the \emph{morphometric approach}.
+
+The morphometric approach provides an efficient means of treating the thermodynamics of a bulk liquid without fully determining its equilibrium density profile \cite{KonigPRL2004,RothPRL2006,Hansen-GoosPRL2007,RobinsonPRL2019}.
+Detailed investigations have shown that it is highly accurate in the hard sphere liquid regime \cite{OettelEL2009,AshtonPRE2011,LairdPRE2012,BlokhuisPRE2013,UrrutiaPRE2014,Hansen-GoosJCP2014}, so we can expect an accurate treatment where the bulk system provides background depletion interactions while its detailed microstates remain unimportant.
+This feature makes it ideally suited for many-body correlations if we can identify relevant dynamical degrees of freedom.
+While existing morphometric theories have been proven accurate in the liquid regime, we require a theory which works in the supercooled regime.
+Here we derive such a theory using scaled particle theory (SPT).
+
+SPT determines bulk properties from consideration of a spherical solute of varying radius.
+It remains one of most enduring theories of simple liquids; though 60 years old as of this year \cite{ReissJCP1959}, aspects of this approach remain in modern theories.
+This is particularly true for hard spheres where SPT has been unified with the Percus-Yevick integral equation solution \cite{WertheimPRL1963}, another old theory, in the form of fundamental measure theory (FMT) \cite{RosenfeldPRL1989}.
+Though originally a theory of single-component hard spheres \cite{ReissJCP1959}, SPT has been extended to other potentials \cite{ReissJCP1960,HelfandJCP1960,ReissJCP1961} and shapes \cite{GibbonsMP1969,GibbonsMP1970}, mixtures \cite{LebowitzJCP1965}, dimers \cite{StillingerJCP2006,ChatterjeeJCP2006} and disks \cite{HelfandJCP1961,MartinJCP2018,Hansen-GoosJCP2019}.
+Morphological thermodynamics can be seen as a modern generalisation of SPT for a wide class of physically relevant geometries.
+Its basis in integral geometry replaces the semi-empirical approach of classical SPT with clearly defined postulates.
+In this chapter we present the morphometric approach in the context of SPT and derive three theories for the single-component hard sphere liquid: the classical SPT coefficients, the White Bear II morphometric coefficients and a new theory suitable for high densities above freezing.
+%These extensions typically take a semi-empirical approach, and often the soundness of the assumptions are unclear.
+%The virial expansion provides a few exact results which can be used to explore the limitations of approximate theories.
+
+%% The morphometric approach can be seen as a limiting case of FMT, and this is more-or-less how specific theories have been derived \cite{Hansen-GoosJPCM2006}.
+%% FMT was conceived as a unification of SPT and the Percus-Yevick integral equation solution for hard spheres \cite{WertheimPRL1963,LebowitzPR1964}, which resulted in the Rosenfeld functional \cite{RosenfeldPRL1989}.
+%% SPT and the morphometric approach are obtained from the \emph{same} limit of FMT, so we can see the morphometric approach as a generalisation of SPT.
+%% Furthermore, as limits of FMT it is tempting to analyse them within this more general framework.
+%% However, we will find it instructive to study SPT/morphometry outside the context of FMT to incorporate more geometric intuition.
+%% In addition, SPT is more flexible than FMT\todo{Rewrite this}: it has recently found use in hard disks where FMT fails \cite{MartinJCP2018,Hansen-GoosJCP2019}.
+
+%% The seemingly unrelated Percus-Yevick correlation scaled particle and the theories approximation to the direct correlation for \emph{homogeneous} hard spheres were unified by Rosenfeld into a theory for \emph{inhomogeneous} fluids creating FMT \cite{RosenfeldPRL1989}.
+
+%Although FMT supercedes SPT, it is instructive to revisit a purely SPT approach to develop a deeper understand of the foundations of the morphometric approach as well as its limitations.
+
+%Summary of literature:
+%% \begin{itemize}
+%% \item Original for hard spheres: \cite{ReissJCP1959}
+%% \item Extension to real fluids \cite{ReissJCP1960,HelfandJCP1960,ReissJCP1961}
+%% \item Hard disks \cite{HelfandJCP1961}, \cite{MartinJCP2018,Hansen-GoosJCP2019}.
+%% \item Inclusion of non-morphological terms by expanding in a Laurent series \cite{MandellJSP1976}, scaling with a fractional power: \cite{Hansen-GoosJCP2019}
+%% \item Simplified treatment including mixtures \cite{LebowitzJCP1965}
+%% \item Nonspherical convex particles \cite{GibbonsMP1969}.
+%% \item Mixtures of nonspherical convex particles \cite{GibbonsMP1970}.
+%% \item More recently hard sphere pairs in \cite{StillingerJCP2006,ChatterjeeJCP2006}.
+%% \end{itemize}
+%% \hl{Other literature we should cite: Refs} \cite{FrischAiCP1964,ReissAiCP1965,ReissJCP1974,Tully-SmithJCP1970,HarrisJCP1971}.
+%% Not SPT: PY solution for mixtures of hard spheres \cite{LebowitzPR1964}.
+
+%% For hard interactions these integrals are known to reduce to a particularly simple form in terms of the morphological measures of each body, which we will describe below in detail.
+%% Mention one of the reasons for this is to develop a clear criterion for the validity of geometric approach: choice of dividing surface, valid geometries (no self-intersection).
+
+In section \ref{sec:many-body-correlations} we show how one can map the problem of treating many-body correlations onto a solvent-solute problem.
+We spend the rest of the chapter discussing the solvation problem through the lens of SPT.
+We argue for the morphometric approach as a useful generalisation of SPT in section~\ref{sec:morphometric-approach}.
+Then, through scaled particle arguments for hard spheres, we derive the classical SPT theory, the White Bear II morphometric theory \cite{Hansen-GoosJPCM2006} and a new set of coefficients well-suited for treating many-body correlations.
+In section \ref{sec:numerics} we numerically test these theories' two-- and three--body correlation functions to demonstrate their effectiveness in treating correlation functions.
+%The latter coefficients were first derived in the Supplementary Material of our earlier work \cite{RobinsonPRL2019}, and aim to give them a complete account here.
+
+\section{Solvation expression for many-body correlations}
+\label{sec:many-body-correlations}
+
+\subsection{Correlations in terms of the insertion cost}
+
+We will show that correlations of $n$ particles at positions $\vec{r}^n := \{\vec{r}_1, \cdots, \vec{r}_n\}$ can be expressed in terms of the free energy cost of inserting them at $\vec{r}^n$, by generalising the \emph{potential distribution theorem} \cite{WidomJCP1963,WidomJPC1982} to many particles.
+The classical approach, also known as \emph{Widom's insertion method}, expresses the (excess) chemical potential $\mu^\mathrm{ex}$ of a single-component system as the free energy cost of inserting an additional particle.
+See Ref.\ \cite{Rowlinson2002} and references therein for a detailed review of this classical approach.
+Our generalisation results in a \emph{potential of mean force} for interactions between the $n$ particles, which is formally identical to the chemical potential of a solute; this latter form is particularly suitable for geometric approximation schemes.
+
+We consider a bulk liquid (the solvent) of $N$ particles with interaction potential energy $U_N$ surrounding the $n$ particles (the solute).
+To coarse-grain onto the $n \ll N$ degrees of freedom we must perform an average over all arrangements of this solvent.
+Specifically, we will describe many-body correlations with the $n$-particle density defined in \eqref{eq:n-particle-density-pdf}; the specific form for grand-canonical ensemble is given already in \eqref{eq:n-particle-density} but we restate it here for ease of reference:
 \begin{equation*}
-  \mayerdiagram[.||]{3}
-\end{equation*}
-or
-\begin{equation*}
-  \mayerdiagram[.||]{2}
-\end{equation*}
-Following \cite{Hansen-Goos2014} for this part.
-
-\begin{tcolorbox}[title=Virial expansion of the pressure]
-The virial series for the equation of state is%
-\marginfootnote{The left-hand side of \eqref{eq:virial-series-pressure} can be thought of as the deviation from ideal gas behaviour, because $\beta p = \rho$ is the ideal gas law.}
-\begin{subequations}
-  \begin{equation}\label{eq:virial-series-pressure}
-    \frac{\beta p}{\rho} - 1 =
-    \sum_{k=2}^\infty
-    B_k \, \rho^{k-1}
-  \end{equation}
-\end{subequations}
-where $B_k$ are the virial coefficients
-\begin{subequations*}
-  \begin{equation}
-    B_k =
-    -\frac{k-1}{k!}
-    \sum \textrm{all }\textit{stars}\textrm{ with 1 root and } k-1 \textrm{ field points}.
-  \end{equation}
-\end{subequations*}
-The first few contributions are
-\begin{subequations}
-  \begin{align*}
-    B_2 &=
-    -\frac{1}{2!} \mayerdiagram[|][o.]{2} \\
-    B_3 &=
-    -\frac{2}{3!} \mayerdiagram[|||][o..]{3} \\
-    B_4 &=
-    -\frac{3}{4!} \left(
-    3 \mayerdiagram[|.||.||][o...]{4} +
-    6 \mayerdiagram[||||.||][o...]{4} +
-    \mayerdiagram[|||||||][o...]{4}
-    \right)
-  \end{align*}
-\end{subequations}
-\end{tcolorbox}
-
-The excess free energy per particle is determined from the equation of state by
-\begin{subequations}
-  \begin{equation}
-    \frac{\beta F^{ex}}{N} =
-    \int_0^\eta \left( \frac{\beta p}{\rho} - 1 \right) \, \frac{d\eta'}{\eta'} =
-    \sum_{k=2}^\infty
-    \frac{1}{k-1} B_k \, \rho^{k-1},
-  \end{equation}
-\end{subequations}
-or equivalently expressed per volume
-\begin{subequations*}
-  \begin{equation}
-    \frac{\beta F^{ex}}{V} =
-    \rho \frac{\beta F^{ex}}{N} =
-    \sum_{k=2}^\infty
-    \frac{1}{k-1} B_k \, \rho^k,
-  \end{equation}
-\end{subequations*}
-giving the a few equivalent expressions of the excess chemical potential
-\begin{equation}
-  \begin{split}
-    \beta \mu^{ex} &=
-    \beta \left( \frac{\partial F^{ex}}{\partial N} \right)_{V,T} =
-    \frac{\partial}{\partial \rho}
-    \left( \frac{\beta F^{ex}}{V} \right)_{V,T} \\
-    &=
-    \left( \frac{\beta p}{\rho} - 1 \right) +
-    \int_0^\eta \left( \frac{\beta p}{\rho} - 1 \right) \, \frac{d\eta'}{\eta'} \\
-    &=
-    \sum_{k=2}^\infty
-    \frac{k}{k-1} B_k \, \rho^{k-1}
-    =
-    \sum_{k=1}^\infty
-    \frac{k+1}{k} B_{k+1} \, \rho^{k}.
-  \end{split}
-\end{equation}
-Generalisation to $m$-component mixtures, the $k$th virial coefficient is a polynomial in the compositional mole fractions
-\begin{equation}
-  B_k(\{x_i\}) =
-  \sum_{\nu_1=1}^m \cdots \sum_{\nu_k=1}^m
-  B_{\nu_1, \cdots, \nu_k} \prod_{i=1}^k x_{\nu_i}
-\end{equation}
-where $x_i$ is the molar fraction of species $i$, giving free energy
-\begin{equation*}
-  \frac{\beta F^{ex}}{N} =
-  \sum_{k=2}^\infty
-  \frac{\rho^{k-1}}{k-1} \left(
-  \sum_{\nu_1=1}^m \cdots \sum_{\nu_k=1}^m
-  B_{\nu_1, \cdots, \nu_k} \prod_{i=1}^k x_{\nu_i}
-  \right)
-\end{equation*}
-or multiplying through by $\rho$ gives the excess free energy per unit volume as
-\begin{equation}
-  \frac{\beta F^{ex}}{V} =
-  \sum_{k=2}^\infty
-  \frac{1}{k-1} \left(
-  \sum_{\nu_1=1}^m \cdots \sum_{\nu_k=1}^m
-  B_{\nu_1, \cdots, \nu_k} \prod_{i=1}^k \rho_{\nu_i}
-  \right)
-\end{equation}
-where $B_{\nu_1, \cdots, \nu_k}$ are the composition independent virial coefficients.
-For binary mixtures this becomes
-\begin{equation}
-  \frac{\beta F^{ex}}{V} =
-  \sum_{k=2}^\infty \sum_{i=0}^k
-  \frac{1}{k-1} {k \choose i}
-  B_{i,k-i} \, \rho_1^{k-i} \rho_2^i.
-\end{equation}
-The chemical potential of species $i$ is
-\begin{equation}
-  \beta \mu^{ex}_i = 
-  \beta \left( \frac{\partial F^{ex}}{\partial N_i} \right)_{V,T} =
-  \frac{\partial}{\partial \rho_i}
-  \left( \frac{\beta F^{ex}}{V} \right)_{V,T}
-\end{equation}
-giving in the limit $\rho_2 \ll 1$
-\begin{equation}
-  \begin{split}
-    \beta \mu^{ex}_2 &=
-    \lim_{\rho_2 \to 0}
-    \sum_{k=2}^\infty \sum_{i=1}^k
-    \frac{i}{k-1} {k \choose i}
-    B_{i,k-i} \, \rho_1^{k-i} \rho_2^{i-1} \\
-    &=
-    \sum_{k=2}^\infty
-    \frac{k}{k-1}
-    B_{1,k-1} \, \rho_1^{k-1}
-    =
-    \sum_{k=1}^\infty
-    \frac{k+1}{k}
-    B_{1,k} \, \rho_1^k
-  \end{split}
-\end{equation}
-with the first few composition independent coefficients
-\begin{subequations}
-  \begin{align}
-    B_{1,1} &=
-    -\frac{1}{2!}
-    \mayerdiagram[|][t.]{2}
-    \\
-    B_{1,2} &=
-    -\frac{2}{3!}
-    \mayerdiagram[|||][t..]{3}
-    \\
-    B_{1,3} &=
-    -\frac{3}{4!}
-    \left(
-    3 \mayerdiagram[|.||.||][t...]{4} +
-    3 \mayerdiagram[||||.||][t...]{4} +
-    3 \mayerdiagram[|.|||||][t...]{4} +
-    \mayerdiagram[|||||||][t...]{4}
-    \right)
-  \end{align}
-\end{subequations}
-Giving the excess cost of insertion as
-\begin{equation}
-  \begin{split}
-    \beta \Omega^{ex} &= \beta \mu^{ex}_2 - \beta p \Delta V \\
-    &=
-    \sum_{k=1}^\infty
-    \left(
-    \frac{k+1}{k}
-    B_{1,k} -
-    B_k \, \Delta V
-    \right) \rho^k \\
-    &=
-    \sum_{k=1}^\infty
-    \beta\Omega^{ex}_k \rho^k.
-  \end{split}
-\end{equation}
-where the first few terms in the density expansion are
-\begin{subequations}
-  \begin{align}
-    \beta\Omega^{ex}_1 &=
-    - \mayerdiagram[|][t.]{2}
-    - \Delta V
-    \\
-    \beta\Omega^{ex}_2 &=
-    -\frac{1}{2!}
-    \left(
-    \mayerdiagram[|||][t..]{3}
-    - \Delta V \mayerdiagram[|][o.]{2}
-    \right)
-    \\
-    \beta\Omega^{ex}_3 &=
-    -\frac{1}{3!}
-    \left(
-    3 \mayerdiagram[|.||.|][t...]{4} +
-    3 \mayerdiagram[||||.|][t...]{4} +
-    3 \mayerdiagram[|.||||][t...]{4} +
-    \mayerdiagram[||||||][t...]{4}
-    - 2 \Delta V \mayerdiagram[|||][o..]{3}
-    \right)
-  \end{align}
-\end{subequations}
-We argue that $\beta\Omega^{ex}_1 = 0$ below, and for the second argument using the Ree-Hoover replacement rules we have
-\begin{equation}
-  \begin{split}
-    \beta\Omega^{ex}_2
-    &=
-    -\frac{1}{2!}
-    \left(
-    \mayerdiagram[|:|][t..]{3}
-    - \mayerdiagram[|.|][t..]{3}
-    - \Delta V \mayerdiagram[|][o.]{2}
-    \right) \\
-    &=
-    -\frac{1}{2!}
-    \left(
-    \mayerdiagram[|:|][t..]{3}
-    + \Delta V \mayerdiagram[|][o.]{2}
-    - \Delta V \mayerdiagram[|][o.]{2}
-    \right) \\
-    &=
-    -\frac{1}{2!} \mayerdiagram[|:|][t..]{3}.
-\end{split}
-\end{equation}
-and for the third one we have
-\begin{subequations}
-  \begin{align}
-    \mayerdiagram[|.||.|][t...]{4}
-    &=
-    \mayerdiagram[|.:|.|][t...]{4} -
-    \mayerdiagram[|..|.|][t...]{4} \\
-    \mayerdiagram[||||.|][t...]{4}
-    &=
-    %% \mayerdiagram[||:|.|][t...]{4} -
-    %% \mayerdiagram[||.|.|][t...]{4}
-    %% =
-    \mayerdiagram[|::|.|][t...]{4} -
-    \mayerdiagram[|.:|.|][t...]{4} -
-    \mayerdiagram[|:.|.|][t...]{4} +
-    \mayerdiagram[|..|.|][t...]{4} \\
-    \mayerdiagram[|.||||][t...]{4}
-    &=
-    \mayerdiagram[|.:|||][t...]{4} -
-    \mayerdiagram[|..|||][t...]{4} \\
-    \mayerdiagram[||||||][t...]{4}
-    &=
-    %% \mayerdiagram[||:|||][t...]{4} -
-    %% \mayerdiagram[||.|||][t...]{4}
-    %% =
-    \mayerdiagram[|::|||][t...]{4} -
-    \mayerdiagram[|.:|||][t...]{4} -
-    \mayerdiagram[|:.|||][t...]{4} +
-    \mayerdiagram[|..|||][t...]{4}
-  \end{align}
-\end{subequations}
-giving
-\begin{equation}
-  \begin{split}
-    3 \mayerdiagram[|.||.|][t...]{4} +
-    3 \mayerdiagram[||||.|][t...]{4} +
-    3 \mayerdiagram[|.||||][t...]{4} +
-    \mayerdiagram[||||||][t...]{4} &= \\
-    3 \mayerdiagram[|.:|.|][t...]{4} -
-    3 \mayerdiagram[|..|.|][t...]{4} +
-    3 \mayerdiagram[|::|.|][t...]{4} -
-    3 \mayerdiagram[|.:|.|][t...]{4} -
-    3 \mayerdiagram[|:.|.|][t...]{4} +
-    3 \mayerdiagram[|..|.|][t...]{4} +& \\
-    3 \mayerdiagram[|.:|||][t...]{4} -
-    3 \mayerdiagram[|..|||][t...]{4} +
-    \mayerdiagram[|::|||][t...]{4} -
-    \mayerdiagram[|.:|||][t...]{4} -
-    \mayerdiagram[|:.|||][t...]{4} +
-    \mayerdiagram[|..|||][t...]{4} &= \\
-    %3 \mayerdiagram[|.:|.|][t...]{4} -
-    %3 \mayerdiagram[|..|.|][t...]{4} +
-    3 \mayerdiagram[|::|.|][t...]{4} -
-    %3 \mayerdiagram[|.:|.|][t...]{4} -
-    3 \mayerdiagram[|:.|.|][t...]{4} +
-    %3 \mayerdiagram[|..|.|][t...]{4} +
-    \mayerdiagram[|.:|||][t...]{4} +
-    \mayerdiagram[|::|||][t...]{4} -
-    2 \mayerdiagram[|..|||][t...]{4} %-
-    %\mayerdiagram[|.:|||][t...]{4} -
-    %\mayerdiagram[|:.|||][t...]{4} %+
-    %\mayerdiagram[|..|||][t...]{4}
-    & = \\
-    3 \mayerdiagram[|::|.|][t...]{4} -
-    3 \mayerdiagram[|:.|.|][t...]{4} +
-    \mayerdiagram[|.:|||][t...]{4} +
-    \mayerdiagram[|::|||][t...]{4} +
-    2 \Delta V \mayerdiagram[|||][o..]{3} &
-  \end{split}
-\end{equation}
-so finally
-\begin{equation}
-  \begin{split}
-    \beta\Omega^{ex}_3 &=
-    -\frac{1}{3!}
-    \left(
-    3 \mayerdiagram[|::|.|][t...]{4} +
-    \mayerdiagram[|.:|||][t...]{4} +
-    \mayerdiagram[|::|||][t...]{4} -
-    3 \mayerdiagram[|:.|.|][t...]{4}
-    \right) \\
-    &=
-    -\frac{1}{3!}
-    \left(
-    3 \mayerdiagram[|::|.|][t...]{4} +
-    \mayerdiagram[|.:|||][t...]{4} +
-    \mayerdiagram[|::|||][t...]{4} +
-    3 V(B+B) \mayerdiagram[|:|][t..]{3}
-    \right)
-    %% \\
-    %% &=
-    %% -\frac{1}{3!}
-    %% \left(
-    %% 3 \mayerdiagram[|::|:|][t...]{4} +
-    %% 3 V(B+B) \mayerdiagram[|:|][t..]{3} +
-    %% \mayerdiagram[|.:|||][t...]{4} -
-    %% 2 \mayerdiagram[|::|||][t...]{4}
-    %% \right)
-  \end{split}
-\end{equation}
-Note to get the coefficients in front of the brackets we used
-\begin{equation*}
-  \frac{k + 1}{k} \frac{k}{(k+1)!} = \frac{1}{k!}.
-\end{equation*}
-
-The starting point for geometrical approaches is a recognition that for two hard bodies $A, B \in \mathcal{K}^d$ the Mayer-$f$ function reduces to
-\begin{equation}
-  f(A, B) =
-  \begin{cases}
-    0 & \qquad A \cap B = \emptyset\\
-    -1 & \qquad A \cap B \ne \emptyset
-  \end{cases}
-\end{equation}
-for convex bodies this is simply
-\begin{equation}
-  f(A, B) = - \mu_0(A \cap B)
-\end{equation}
-\todo{Comment on how these approaches break down for highly elongated shapes, \cite{Wertheim1994}.}
-For hard spheres this is particularly simple reducing to
-\begin{equation}
-  f(A, B) =
-  - \Theta \left(
-  \frac{\sigma_A + \sigma_B}{2} - |\vec{r}|
-  \right)
-\end{equation}
-where $\vec{r}$ is the separation between the centers of $A$ and $B$ and $\sigma_{\{A,B\}}$ their diameters.
-
-\section{Overview of approaches}
-
-The first virial coefficient for a general
-\begin{equation}
-  \frac{\beta F^{ex}}{N} =
-  B_2(T) \rho + \mathcal(\rho^2)
-\end{equation}
-or the chemical potential of a dilute binary system
-
-The second approach, we learn about uniform system by exploring inhomogeneous ones.
-The reversible work to insert infinite system directly gives the pressure.
-\begin{equation}
-  \lim_{V \to \infty} \frac{W(V)}{V} = p
-\end{equation}
-This is the essential idea behind scaled particle theory.
-Alternatively, the work required to insert arrangements of particles gives the equilibrium correlation functions in the uniform system.
-This is related to the fact that any particular inhomogeneity will be a fluctuation inside of the uniform system.
-We prove this relation in section \ref{sec:???}.
-
-Inhomogeneous system.
-To treat the inhomogeneous system we consider the inserting element as a solute and the rest of the liquid as a solvent.
-For a single solute we can consider the free energy of the binary system in the limit of infinite dilution of the solute/inserting component.
-From the virial series \eqref{eq:virial-series-binary} we obtain
-\begin{equation}
-  \begin{aligned}
-    \Phi &=
-    \sum_{n=2}^\infty \sum_{j=0}^{n}
-    \frac{1}{n-1} {n \choose j} B_n^{[j]} \rho_1^{n-j} \rho_2^j \\
-    &=
-    \sum_{n=2}^\infty
-    \frac{1}{n-1} B_n^{[0]} \rho^n
-  \end{aligned}
-\end{equation}
-where we took $\rho = \rho_1$ and we discarded the concentration of the solute $\rho_2 \ll 1$.
-
-The essential idea behind morphological approaches (i.e.\ FMT and the morphometric approach) is to extend this result for the dilute case up to arbitrary densities.
-We will find that this extension is approximate in general, and exact only in the case of one spatial dimension%
-\marginfootnote{As such this can be seen as in some sense opposite to mean field theories, which are in general exact in the limit of infinite spatial dimensions.
-  Because of the geometric nature of the one dimensional result and its extension into arbitrary dimensions, we argued in section \ref{sec:??} this class of theories could be called \emph{free volume theories}.}.
-
-\section{Inhomogeneity approach: scaled particle theory and the morphometric approach}
-
-\begin{SCfigure}[H]
-  \missingfigure[figwidth=\linewidth]{}
-  \caption{Scaled particle.}
-\end{SCfigure}
-
-The original argument went as follows
-
-\subsection{Solvation expression for many-body correlations}
-
-Here we derive an expression for the distribution functions in terms of the potential of mean force.
-This provides a form suitable for approximation/calculation.
-
-We write the $n$-particle distribution function $g^{(n)}$ as
-\begin{equation}\label{eq:n-density-pdf}
-  \textrm{Probability}\left( \textit{any } n \textrm{ particles in volume } d\vec{r}^n \right)
-  \equiv
-  \rho^n g^{(n)}(\vec{r}^n) \, d\vec{r}^n.
-\end{equation}
-In the main text, we expressed $g^{(n)}$ in terms of a generalised potential of mean force $\phi^{(n)}$: the reversible work required to insert $n$ particles into the liquid.
-We decomposed $\phi^{(n)}$ into a local (potential energy) and solvent (free energy) component.
-Although this quantity is quite intuitive and could be determined heuristically, here we give a short proof that this decomposition is formally exact and arises quite naturally from the definition of the distribution function.
-
-In the grand-canonical ensemble the $n$-particle density $\rho^{(n)}(\vec{r}^n) \equiv \rho^n g^{(n)}$ is determined by integrating over the remaining degrees of freedom~\cite{Hansen2013}
-\begin{equation}
   \rho^{(n)}(\vec{r}^n)
-  = \frac{1}{\Xi} \sum_{N=n}^\infty \frac{z^N}{(N-n)!} \int e^{-\beta U_N} \, d\vec{r}^{(N-n)},
-\end{equation}
-where the activity is written in terms of the thermal de Broglie wavelength $\Lambda$ as $z = \exp{\beta\mu} / \Lambda^d$.
+  =
+  \frac{1}{\Xi} \sum_{N=n}^\infty \frac{z^N}{(N-n)!} \int e^{-\beta U_N} \, d\vec{r}^{(N-n)}.
+\end{equation*}
 Changing the summation limits $N \rightarrow N+n$ we obtain
-\begin{equation}\label{eq:n-density}
+\begin{equation}\label{eq:n-particle-density-term-separation}
 \begin{aligned}
   \rho^{(n)}(\vec{r}^n)
-  &= \frac{z^n}{\Xi} \sum_{N=0}^\infty \frac{z^N}{N!} \int e^{-\beta U_{N+n}} \, d\vec{r}^{N} \\
- & = z^n e^{-\beta U_n} \left< e^{-\beta U_{n \leftrightarrow N}} \right>
+  &=
+  \frac{z^n}{\Xi} \sum_{N=0}^\infty \frac{z^N}{N!} \int e^{-\beta U_{N+n}} \, d\vec{r}^{N}
+  \\ &=
+  z^n e^{-\beta U_n} \left< e^{-\beta U_{n \leftrightarrow N}} \right>
 \end{aligned}
 \end{equation}
 where in the latter step we decomposed the total potential $U_{N+n}$ into purely local and solvent terms, i.e.\ $U_{N+n} = U_n + U_N + U_{n \leftrightarrow N}$, where $U_\alpha$ for $\alpha \in \{n,N\}$ indicates the internal interactions between particles in component $\alpha$.
 The ``interspecies'' interactions are contained within $U_{n \leftrightarrow N}$ which acts as an external field for the solvent.
-The angled brackets indicate ensemble averaging over all arrangements of the solvent, i.e.\
-\begin{equation}
-  \left< \cdots \right> =
-  \frac{1}{\Xi} \sum_{N=0}^\infty \frac{z^N}{N!} \int \left(\cdots\right) e^{-\beta U_N} \, d\vec{r}^N,
-\end{equation}
-with partition function of the unperturbed system $\Xi \equiv e^{-\beta \Omega_{hom}}$, where $\Omega_{hom} = -p V$ is the usual homogeneous grand potential.
-Thus, \eqref{eq:n-density} becomes
-\begin{equation}
+Thus, \eqref{eq:n-particle-density-term-separation} becomes
+\begin{equation*}
   \rho^{(n)}(\vec{r}^n)
-  = z^n e^{-\beta (U_n + \Omega - \Omega_{hom})}.
-\end{equation}
+  =
+  z^n e^{-\beta (U_n + \Omega - \Omega_\mathrm{hom})}.
+\end{equation*}
 where $\Omega$ is the grand potential of the solvent in the presence of the $n$-particle inhomogeneity.
-Splitting the chemical potential into its ideal and excess parts so that $\beta\mu = \ln{\Lambda^d \rho} + \beta\mu^{ex}$ gives
-\begin{equation}
+Splitting the chemical potential into its ideal and excess parts so that $\beta\mu = \ln{\Lambda^d \rho} + \beta\mu^\mathrm{ex}$ gives
+\begin{equation*}
   \rho^{(n)}(\vec{r}^n)
-  = \rho^n e^{-\beta (U_n + \Omega - \Omega_{hom} - n\mu^{ex})}.
+  =
+  \rho^n e^{-\beta (U_n + \Omega - \Omega_\mathrm{hom} - n\mu^\mathrm{ex})}.
+\end{equation*}
+The $n$-particle distribution functions are then determined from \eqref{eq:n-particle-distribution}
+\begin{equation}\label{eq:distribution-solvation}
+  g^{(n)}(\vec{r}^n)
+  := \frac{\rho^{(n)}(\vec{r}^n)}{\rho^n}
+  = e^{-\beta(U_n + \Delta\Omega - n\mu^\mathrm{ex})}
 \end{equation}
-The $n$-particle distribution functions are then determined from~\cite{Hansen2013}
-\begin{subequations}\label{eq:distribution-functions}
-  \begin{equation}
-    g^{(n)}(\vec{r}^n)
-    \equiv \frac{\rho^{(n)}(\vec{r}^n)}{\rho^n}
-    = e^{-\beta(U_n + \Delta\Omega - n\mu^{ex})}
-  \end{equation}
-\end{subequations}
-where
-\begin{subequations*}
-  \begin{equation}
-    \Delta\Omega = \Omega - \Omega_{hom}.
-  \end{equation}
-\end{subequations*}
-We can express the distribution functions in terms of a potential function i.e.\ $g^{(n)} = \exp{\left(-\beta \phi^{(n)}\right)}$ where
+where $\Delta\Omega := \Omega - \Omega_\mathrm{hom}$ is the reversible (free energy) cost of inserting the particles at fixed position $\vec{r}^n$, or equivalently describes the average depletion interactions between mobile particles.
+For $n=1$ we have $\Delta\Omega = \mu^\mathrm{ex}$ and this is identical to the potential distribution theorem of Widom \cite{WidomJCP1963,WidomJPC1982}.
+The distribution functions are written in terms of the potential
 \begin{equation}\label{eq:potential-mean-force}
   \begin{split}
-    \phi^{(n)}(\vec{r}^n) &\equiv
+    \phi^{(n)}(\vec{r}^n) &:=
     - k_B T \ln{g^{(n)}(\vec{r}^n)} \\
     &=
-    U_n + \Delta\Omega - n\mu^{ex},
+    U_n + \Delta\Omega - n\mu^\mathrm{ex},
   \end{split}
 \end{equation}
-which we call the \emph{generalised potential of mean force}%
-\marginfootnote{For the case $n=2$ this reduces to the potential commonly referred to as the potential of mean force in the liquid state literature \cite{Hansen2013}.}.
-The $n$-particle cavity distribution \[y^{(n)}(\vec{r}^n) \equiv e^{\beta U_n} g^{(n)}(\vec{r}^n)\] will be useful in certain contexts, and from \eqref{eq:distribution-functions} we find
-\begin{equation}\label{eq:cavity-functions}
-  y^{(n)}(\vec{r}^n) =
-  e^{-\beta(\Delta\Omega - n\mu^{ex})}.
-\end{equation}
+which we call the \emph{generalised potential of mean force}.
+For the case $n=2$ this reduces to the usual potential of mean force in the liquid state literature \cite{Hansen2013}.
 
-The above is essentially the generalisation of the \emph{potential distribution theorem} \cite{Widom1963,Widom1982} to many-particles. See Ref.\ \cite{Rowlinson2002} and references therein for a detailed review of this approach.
-\todo{Comment on applicability of these relations to non-pair potentials and mixtures. Also include the separation of volume and surface tension terms.}
+This completes our proof that the correlations can be transformed to a potential, and we can proceed with a geometrical construction for $\Delta \Omega$.
 
-\begin{SCfigure}\label{fig:system}
-  \includegraphics[width=\linewidth]{droplet-morph}
+\begin{SCfigure}
+  \includegraphics[width=\linewidth]{morph-droplet}
   \caption{
-    The system considered showing
+    The system considered for many-body correlations showing
     (a) the local particles surrounded by the remaining liquid acting as a thermal reservoir at fixed chemical potential and temperature, and
-    (b) partition of space into the local $\mathcal{L}$ and remaining $\mathcal{R}$ components with dividing surface $\partial\mathcal{L}$.
-    In this work $\mathcal{L}$ is chosen as the space inaccessible to the centre of a test particle (shown faded) representing the remaining liquid.
+    (b) possible partitions of space into the local $\mathcal{L}$ and remaining $\mathcal{R}$ components for two choices of dividing surface: $\partial\mathcal{L}_1$ is the molecular surface while $\partial\mathcal{L}_2$ is the solvent accessible surface (see discussion around Eq.\ \eqref{eq:exclusion-transform}).
   }
+  \label{fig:system}
 \end{SCfigure}
 
+%% Before moving on, we comment on extensions of the above result:
+%% \begin{itemize}
+%% \item \emph{Mixtures}: repeating the steps in the derivation of \eqref{eq:distribution-solvation} and \eqref{eq:potential-mean-force} to an $m$-component mixture gives a potential of mean force which is nearly identical
+%%   \begin{equation*}
+%%     \begin{split}
+%%       \phi^{(\{n_i\})}(\vec{r}^n) &:=
+%%       - k_B T \ln{g^{(n)}(\vec{r}^n)} \\
+%%       &=
+%%       U_n + \Delta\Omega - \sum_{i=1}^m n_i \mu_i^\mathrm{ex},
+%%     \end{split}
+%%   \end{equation*}
+%%   where the tuple $\{n_1, \cdots, n_m\}$ gives the number of each species of particle with $n = \sum_{i=1}^m n_i$, and $\mu_i^\mathrm{ex}$ as the excess chemical potential of species $i$.
+%% \item \emph{Many-body interactions}: for more complicated interaction potentials (i.e.\ beyond pair potentials) \eqref{eq:distribution-solvation} and \eqref{eq:potential-mean-force} are still correct but the decomposition between internal interactions and grand potential is not as clean.
+%%   For example, consider a system interacting with an additional three-body potential $u_{i,j,k}$.
+%%   In addition to a contribution to $U_{n \leftrightarrow N}$ which acts as an effective external field, a term develops which includes interactions between \emph{two} solvent particles and each solute particle:
+%%   \begin{equation*}
+%%     \begin{split}
+%%     U_{n \leftrightarrow N}
+%%     =& \phantom{+}
+%%     \sum_{k=n+1}^{N} \underbrace{\sum_{i=0}^n \left( u_{i,j} + \sum_{j=0}^n u_{i,j,k} \right)}_\textrm{effective external field}
+%%     \\ & +
+%%     \sum_{n < i < j} \left( \sum_{k = 0}^n u_{i,j,k} \right).
+%%     \end{split}
+%%   \end{equation*}
+%%   The latter term acts as an effective pair potential between $i$ and $j$, so
+%%   the inhomogeneity can be thought of as perturbing the pair-potential of the surrounding liquid and $\Delta\Omega$ must reflect this change.
+%% \end{itemize}
+
+\subsection{Representing the insertion cost as a solvation problem}
+
 For systems with excluded volume interactions, we can divide the space into a local component $\mathcal{L} \subset \mathbb{R}^d$ of volume $V_\mathcal{L}$ inaccessible to solvent degrees of freedom and the remaining space $\mathcal{R} = \mathbb{R}^d \setminus \mathcal{L}$ of volume $V_\mathcal{R}$ filled by the rest of the liquid (Fig. \ref{fig:system}).
-The total volume is $V_\mathcal{L} + V_\mathcal{R}$ so the homogeneous grand potential is
+The total volume is $V = V_\mathcal{L} + V_\mathcal{R}$ so the homogeneous grand potential is
 \begin{equation*}
-  \Omega_{hom} = -p (V_\mathcal{L} + V_\mathcal{R}).
+  \Omega_\mathrm{hom} = -p V.
 \end{equation*}
 After inserting the inhomogeneity the total volume accessible to the rest of the liquid will be reduced by $V_\mathcal{L}$, so the grand potential becomes
 \begin{equation*}
-  \Omega = -p V_\mathcal{R} + \Omega_{ex}[\partial\mathcal{L}],
+  \Omega = -p V_\mathcal{R} + \Omega_\mathrm{ex}[\partial\mathcal{L}],
 \end{equation*}
-where $\Omega_{ex}$ is an excess term brought about by the introduction of a dividing surface $\partial\mathcal{L}$ between the two liquid components.
+where $\Omega_\mathrm{ex}$ is an excess term brought about by the introduction of a dividing surface $\partial\mathcal{L}$ between the two liquid components.
 Subtracting these two expressions gives
 \begin{equation*}
-  \Delta \Omega = p V_\mathcal{L} + \Omega_{ex}[\partial\mathcal{L}].
+  \Delta \Omega
+  := \Omega - \Omega_\mathrm{hom}
+  = p V_\mathcal{L} + \Omega_\mathrm{ex}[\partial\mathcal{L}].
 \end{equation*}
 This dividing surface has area $A_{\partial\mathcal{L}}$, creating a surface tension $\gamma$ so we can write the excess term as
 \begin{equation*}
-  \Omega_{ex}[\partial\mathcal{L}] =
+  \Omega_\mathrm{ex}[\partial\mathcal{L}] =
   \gamma[\partial\mathcal{L}] A_{\partial\mathcal{L}}
 \end{equation*}
-which is a formal definition of surface tension for a choice of dividing surface.
-We know from density functional theory that the excess free energy will be a functional of the inhomogeneous density profile, which will in turn depend on the shape of boundary; we write $\gamma = \gamma[\partial \mathcal{L}]$ to indicate this functional dependance on the surface shape.
+which is a formal definition of surface tension and depends on the choice of dividing surface (see two examples in Fig.\ \ref{fig:system}b).
+We know from density functional theory \cite{EvansAP1979} that the excess free energy is a functional of the density profile, which will in turn depend on the shape of the boundary; we write $\gamma = \gamma[\partial \mathcal{L}]$ to indicate this functional dependence on the surface shape.
 The \emph{solvation form} of the inhomogeneous grand potential term in \eqref{eq:potential-mean-force} is then
 \begin{equation}\label{eq:surface-tension}
   \Delta \Omega[\mathcal{L}] =
   p V_\mathcal{L} + \gamma[{\partial\mathcal{L}}] A_{\partial\mathcal{L}}.
 \end{equation}
 The problem of determining the $n$-particle distributions has been reduced to a solvation problem: we must find the surface tension between a solute (the specific local arrangement) and a solvent (the rest of the liquid).
-We will use the solute--solvent language interchangeably with the local--bulk description.
+We will use the solute--solvent terminology, but one could also think of local--bulk nomenclature.
 
-Note that the surface tension is not unique as only the total grand potential must be independent of the choice of $\partial\mathcal{L}$ and can even change its sign for some choices of dividing surface \cite{Bryk2003}.
-We will primarily focus on one-component liquids with particles of diameter $\sigma$.
-We choose the \emph{solvent accessible surface} \cite{Lee1971} as the dividing surface such that $\mathcal{L} = \cup_{i=1}^n B^d_\sigma(\vec{r}_i)$ (Fig.\ \ref{fig:system}).
+\section{Scaled particle ansatz}
+\label{sec:morphometric-approach}
 
-Before moving on, we will briefly comment on extensions of the results of this section.
-First, it is straightforward to extend \eqref{eq:distribution-functions} and \eqref{eq:potential-mean-force} to mixtures; for an $m$-component mixture the potential of mean force is nearly identical
-\begin{equation}
-  \begin{split}
-    \phi^{(\{n_i\})}(\vec{r}^n) &\equiv
-    - k_B T \ln{g^{(n)}(\vec{r}^n)} \\
+In every formulation of scaled particle theory one considers a hard \emph{spherical} solute of radius $R$.
+In most approaches, the cost $\Delta \Omega$ is assumed to have an analytic expansion in powers of the radius; in classical approaches this was simply postulated, however we will be able provide proper justification below through geometric arguments.
+Recognising that terms scaling faster than $R^3$ must be zero for it to remain well-defined in the limit of large solutes leads to the third order polynomial \cite{ReissJCP1959}
+\begin{equation}\label{eq:spt-ansatz}
+  \Delta\Omega(R) =
+  p \, \frac{4\pi R^3}{3} + a_2 \, 4 \pi R^2 + a_1 \, 4 \pi R + a_0 \, 4 \pi,
+\end{equation}
+where we identified the largest power with the work term $pV$ from comparison with \eqref{eq:surface-tension}, and $\{a_0, a_1, a_2\}$ are thermodynamic coefficients describing the subleading corrections.
+We have chosen to introduce factors of $4\pi$ in front of subleading terms to suggest how we will generalise beyond spherical geometries.
+For a general solute $K \subset \mathbb{R}^3$ we write the morphometric insertion cost as
+\begin{equation}\label{eq:morph-ansatz}
+  \Delta\Omega[K] =
+  p V[K]
+  + a_2 A[K]
+  + a_1 C[K]
+  + a_0 X[K],
+\end{equation}
+where $C$ and $X$ are the integrated mean and Gaussian curvatures.
+All of these functionals act on $K$ but the latter three can also be \emph{expressed} as surface integrals, as in
+\begin{subequations}
+  \begin{align}
+    A[K]
     &=
-    U_n + \Delta\Omega - \sum_{i=1}^m n_i \mu_i^{ex},
-  \end{split}
-\end{equation}
-where $\{n_i\}$ for $i = 1, \cdots, m$ is the number of each species of particle, and $\mu_i^{ex}$ is the excess chemical potential of species $i$.
-Second, for more complicated interaction potentials (i.e.\ beyond pair potentials) the decomposition between internal interactions and grand potential breaks down; the internal structure of droplet the matters more\todo{rephrase this sentence}.
-Finally, for soft potentials the definition of the potential of mean force is unaffected as we did not rely on particles being hard in its derivation, however the solvation expression will be affected.
-For soft interactions it is impossible to define meaningful volumes which divide the local and bulk degrees of freedom: use of \eqref{eq:surface-tension} would be an approximation for soft potentials.
-However, a plausible extension would be to replace the volume term by
-\begin{equation}
-  V_\mathcal{L} \to \int e^{-\beta \phi(\vec{r})} \, d\vec{r}
-\end{equation}
-where $\phi$ is the external potential caused by the inhomogeneity.
-This reduces to the accessible volume as $\phi$ becomes a hard interaction.\todo{Can logarithmic surface tension corrections (capillary waves) destroy the formal result?}
-
-\subsection{Grand potential is not an analytic function}
-
-Here we demonstrate that the grand canonical cost of insertion contains singularities, so \emph{any} representation as an analytic function must necessarily be approximate.
-This argument is a reformulation of those arguments made in the original scaled particle theories, as it was originally made for three-dimensional hard spheres by Reiss and coworkers in \cite{Reiss1959,Reiss1960,Mandell1976} discussed in detail in references
-generalised to the noble gases \cite{Helfand1960}, hard disks \cite{Helfand1961}, mixtures \cite{Lebowitz1965} and more recently to hard sphere pairs in \cite{Stillinger2006,Chatterjee2006}.
-Not sure: \cite{Reiss1961,Frisch1964,Reiss1965,Reiss1974,Tully-Smith1970,Harris1971}.
-
-Discontinuity argument: probabilty that \emph{exactly} zero hard spheres contained in a spherical region of radius $R$ is \cite{Mandell1976}
-\todo{I have lifted this wording almost exactly from Mandell \& Reiss, so rewrite this to avoid plagiarism}
-\begin{equation}\label{eq:spt-zero-cavity-p}
-  p_0(R) = 1 + \sum_{n=1}^{\infty} (-1)^n F^{(n)}(R)
-\end{equation}
-where $F^{(n)}(R)$ is the average number of $n$-tuples of hard spheres contained in the region defined via
-\begin{equation}\label{eq:spt-tuple-function}
-  F^{(n)} = \frac{\rho^n}{n!} \int_{\mathbb{V}_R} g^{(n)}(\vec{r}^n) \, d\vec{r}^n
-\end{equation}
-clearly $F^{(n)}(R) = 0$ for $R < R_n$, the minimum radius capable of containing the $n$ hard spheres.
-At any given state point $g^{(n)}$ will be bounded from above by some finite number%
-\marginfootnote{Typically we would expect this to occur where the maximum number of particles are in contact, however that is not a necessary assumption for this argument.},
-so we can write the inequality
-\begin{equation}\label{eq:spt-tuple-function-upper-bound}
-  \begin{split}
-    F^{(n)}(R) &\le
-    \frac{\rho^n}{n!}
-    \max_{\mathbb{R}^{dn}}{\left(g^{(n)}\right)}
-    \int_{\mathbb{V}_R} \, d\vec{r}^n \\
+    \int_{\partial K} \, dA
+    \\
+    C[K]
     &=
-    \frac{\rho^n}{n!}
-    \max_{\mathbb{R}^{dn}}{\left(g^{(n)}\right)}
-    (V_R)^n,
-  \end{split}
-\end{equation}
-but because of the hard core interaction there will be heavy restrictions on allowable values of $n$ for any $R$.
-Defining $R_n$ as the smallest $R$ such that $n$ particles can be accommodated, we expect
-\begin{subequations}\label{eq:F-scaling}
-  \begin{equation}
-    F^{(n)}(R) =
-    \begin{cases}
-      0 & \quad R < R_n \\
-      \mathcal{O}\left( \left(V_R\right)^n \right) & \quad R > R_n
-    \end{cases}
-  \end{equation}
-\end{subequations}
-where the latter polynomial is motivated by the same argument as used in \eqref{eq:spt-tuple-function-upper-bound}.
-Noting that $V_R \propto R^d$ this can be expressed alternatively as a polynomial in $R$
-\begin{subequations*}
-  \begin{equation}
-    F^{(n)}(R) =
-    \begin{cases}
-      0 & \quad R < R_n \\
-      \mathcal{O}\left( R^{dn} \right) & \quad R > R_n
-    \end{cases}
-  \end{equation}
-\end{subequations*}
-Applying this bound to \eqref{eq:spt-zero-cavity-p} gives bounds on the scaling of $p_0$ as
-\begin{equation}\label{eq:spt-p-scaling}
-  p_0(R) =
-  \mathcal{O}\left( R^{dn} \right)
-  \quad R_n < R < R_{n+1}.
-\end{equation}
-From \eqref{eq:spt-p-scaling} we expect to see singular behaviour at the points $\{R_n\}$.
-To look at this in detail we define
-\begin{equation}
-  p_0^{(n)}(R) = 1 + \sum_{m=1}^n (-1)^m F^{(m)}(R)
-\end{equation}
-such that $p_0 = p_0^{(n)}$ for $R \le R_{n+1}$.
-Approaching the singular point $R_n$ we find the deviation from the solution for $R < R_n$ is thus
-\begin{equation}
-  \Delta p_0(R) \equiv
-  p_0(R) - p_0^{(n-1)}(R) = (-1)^n F^{(n)}(R)
-  \qquad R < R_{n+1}
-\end{equation}
-i.e.\ the singular behaviour is entirely contained in $F^{(n)}$.
-Noting that polynomials of degree $n$ have vanishing $(n+1)$th derivatives, and $V_R \propto R^d$, we thus expect a discontinuity in the $(dn)$th derivative of $p_0$ about $R=R_n$.
-Note that a discontinuity in the $dn$th derivative of $f(p_0(R))$ will be inherited from $p_0$ so long as $f$ is a suitably smooth function.
-Thus $\Omega$ will feature a discontinuity in its $dn$th derivative about $R_n$, and $G$ in its $(dn+1)$th derivative.
-
-Note that we have not quite proven that the singular behaviour actually occurs at any of the points $\{R_n\}$, because it is possible for the form of $g^{(n)}$ to eliminate singular behaviour.
-We will eliminate this physically implausible scenario by showing that $F^{(n)}$ is bounded from below by $\mathcal{O}(R^{dn})$ so that it must take the form of this polynomial in the region $R > R_n$.
-Then the argument above shows that singularities must occur in the indicated derivatives for hard spheres.
-
-First, we note that for hard interactions the pair potential restricts the domain of integration in \eqref{eq:spt-tuple-function} to those configurations where particles do not overlap $\mathbb{V}_R'$, that is
-\begin{equation}\label{eq:spt-tuple-integrand-lower-bound}
-  \int_{\mathbb{V}_R} g^{(n)}(\vec{r}^n) d\vec{r}^n =
-  \int_{\mathbb{V}_R'} y^{(n)}(\vec{r}^n) d\vec{r}^n \ge
-  \min_{\mathbb{R}^{dn}}{\left(y^{(n)}(\vec{r}^n)\right)} V(\mathbb{V}_R')
-\end{equation}
-using the definition of the cavity function $y^{(n)}$ in \eqref{eq:cavity-functions}.
-Note that in general $y^{(n)}(\vec{r}^n) > 0$, so as long as we just need to find some minimal set of configurations where $V(\mathbb{V}_R')$ is nonzero and scales as $\mathcal{O}(R^{dn})$ in order to complete the lower bound.
-We consider a cavity of size $R=R_n$ where an arrangement%
-\marginfootnote{It is possible that multiple arrangements become viable at the same radius, though this does not effect the substance of the argument.
-  In this case the lower bound \eqref{eq:spt-tuple-function-lower-bound} will be multiplied by the degeneracy of $n$-particle packings at $R=R_n$, not affecting the scaling with $R$.}
-of $n$ spheres becomes possible.
-As this is the minimum radius required, the particles will be in contact.
-If the cavity size $R$ is increased infinitesimally by an amount $\epsilon$, it is possible to affinely transform the particle positions
-\begin{equation*}
-  \vec{r}^{(n)} \to \left(1 + \frac{\epsilon}{2}\right) \vec{r}^{(n)}
-\end{equation*}
-so every particle can move up to $\epsilon/2$ in any direction without leaving the cavity or overlapping another sphere.
-This gives us
-\begin{equation*}
-  V\left(\mathbb{V}_{R+\epsilon}'\right) \ge
-  \left[ \omega_d \left(\frac{\epsilon}{2}\right)^d \right]^n
-\end{equation*}
-so from \eqref{eq:spt-tuple-function} and \eqref{eq:spt-tuple-integrand-lower-bound} we have
-\begin{equation}\label{eq:spt-tuple-function-lower-bound}
-  F^{(n)}(R_n+\epsilon) \ge
-  \min_{\mathbb{R}^{dn}}{\left(y^{(n)}(\vec{r}^n)\right)}
-  \, \left[ \omega_d \left(\frac{\epsilon}{2}\right)^d \right]^n \ge
-  \mathcal{O}(\epsilon^{dn})
-\end{equation}
-where the right hand side is also a polynomial in $R$ so $F^{(n)}(R)$ is bounded from below by $\mathcal{O}(R^{dn})$.
-Thus comparing the bounds \eqref{eq:spt-tuple-function-lower-bound} and \eqref{eq:spt-tuple-function-upper-bound} we see that
-\begin{equation}
-  \mathcal{O}(R^{dn}) \le F^{(n)}(R) \le \mathcal{O}(R^{dn})
-  \quad R > R_n
-\end{equation}
-and so $F^{(n)}$ must scale as $R^{dn}$, thus completing the proof.
-
-%A spherical cavity of radius $R=$ can accommodate the centres of 3 hard spheres
-%Finding the arrangement of $n$ spheres which minimises its bounding sphere is a hard problem, but we can .
-
-\begin{SCtable}
-  \begin{minipage}[b]{\linewidth}
-  \centering
-  \begin{tabular}{ccc}
-    \toprule
-    $n$ & $R_n$ & Discontinuity \\
-    \midrule
-    \multicolumn{3}{c}{$d = 3$} \\
-    \midrule
-    1 & 0 & -- \\
-    2 & $\frac{\sigma}{2}$ & $\Omega'', g'$ \\
-    3 & $\frac{\sigma}{\sqrt{3}}$ &
-    $\frac{\partial^6 \Omega}{\partial R^6}, \frac{\partial^5 g}{\partial R^5}$ \\
-    4 & ${\sqrt{\frac{3}{8}}} \sigma$ &
-    $\frac{\partial^9 \Omega}{\partial R^9}, \frac{\partial^8 g}{\partial R^8}$ \\
-    \multicolumn{3}{c}{$d = 1$} \\
-    \midrule
-    1 & 0 & -- \\
-    \midrule
-    \multicolumn{3}{c}{$d = 2$} \\
-    \midrule
-    1 & 0 & -- \\
-    \bottomrule
-  \end{tabular}
-  \end{minipage}
-  \caption{Abc.}
-\end{SCtable}
-
-\subsection{Scaled particle theory}
-
-\todo{Write down other exact sum rules that could be used.}
-We describe here in more detail the derivation of the first set of morphometric coefficients, equivalent to those given in \cite{Hansen-Goos2006} through fundamental measure theory (FMT).
-The derivation sketched below avoids use of FMT, instead favouring a geometric formulation equivalent to the scaled particle approach of Reiss \emph{et al}.\ \cite{Reiss1959,Reiss1960}.
-The standard scaled particle approach considers an expansion of the grand potential surrounding a spherical solute in powers of radii; here, we modify the \emph{ansatz} to use morphological measures instead, so that the resulting theory is more naturally extended to geometries of arbitrary shapes.
-Additionally, we impose the Carnahan-Starling equation of state as an \emph{input} whereas the Percus-Yevick equation of state is an \textit{output} of standard scaled particle approaches.
-
-Following the protocol of scaled particle theories, we consider the insertion of a hard ball of radius $R-\frac{\sigma}{2}$ into the liquid at the origin.
-This choice of radius ensures that contact with the \emph{center} of solvent particles occurs at distance $R$ from the point of insertion i.e.\ $\rho(r) = 0$ for $r < R$.
-Writing the change in the grand potential due to the insertion of the ball in its morphometric form (from \eqref{eq:surface-tension} and \eqref{eq:morphometric-surface-tension} of the main text), we have the \emph{ansatz}
-\begin{equation}\label{eq:morph-ball-solvation}
-  \Delta \Omega(R) =
-  \frac{4\pi R^3}{3} p +
-  4\pi R^2 \, \gamma_\infty +
-  4\pi R \, \kappa +
-  4 \pi \, \overline{\kappa}.
-\end{equation}
-If an equation of state for the pressure is taken as input, only three equations are needed to set the remaining coefficients of surface tension $\gamma_\infty, \kappa$ and $\overline{\kappa}$.
-
-Restating the expressions for the insertion of a hard point and a new particle from the main text as
-\begin{align}
-  \label{eq:spt-point} \Delta\Omega(R=0) &= -k_B T \ln{(1- \eta)}, \\
-  \label{eq:spt-mu} \Delta\Omega\left(R=\frac{\sigma}{2}\right) &= \mu^{ex},
-\end{align}
-we need one more equation to set the thermodynamic coefficients for the theory.
-Following Ref.\ \cite{Bryk2003} we take the normal derivative of $\Omega$ with respect to $R$, and noting that $\Delta\Omega(R) = \Omega(R) - \Omega_{hom}$ gives
-\begin{equation}\label{eq:spt-derivative}
-  \left( \frac{\partial \Delta \Omega}{\partial R} \right)_{\mu,V,T} =
-  \left( \frac{\partial \Omega}{\partial R} \right)_{\mu,V,T} =
-  \int
-  \frac{\delta \Omega[\rho_0(\vec{r})]}{\delta \rho}
-  \left( \frac{\partial \rho_0(\vec{r})}{\partial R} \right)_{\mu,V,T}
-  \, d\vec{r} +
-  \int
-  \rho_0(\vec{r})
-  \left( \frac{\partial \phi_{ext}(\vec{r})}{\partial R} \right)_{\mu,V,T}
-  \, d\vec{r},
-\end{equation}
-where $\rho_0$ is the equilibrium density profile and $\phi_{ext}$ is the external potential (i.e.\ the potential of the ball).
-In equilibrium $\Omega$ is minimised so
-\begin{equation}
-  \left.
-  \frac{\delta \Omega[\rho(\vec{r}); \phi_{ext}]}{\delta \rho}
-  \right|_{\rho(\vec{r})=\rho_0(\vec{r})} = 0,
-\end{equation}
-so the first integral in \eqref{eq:spt-derivative} vanishes.
-As the ball is hard, the external potential and its derivative are zero everywhere except at the surface $R$ where both $\rho_0$ and $\phi_{ext}$ are discontinuous.
-We consider its Boltzmann weight, i.e.\
-\begin{equation}
-  e^{-\beta\phi_{ext}(\vec{r})} = \Theta(|\vec{r}| - R).
-\end{equation}
-Taking the derivative of both sides gives
-\begin{equation}
-  \beta\left( \frac{\partial\phi_{ext}(\vec{r})}{\partial R} \right)_{\mu,V,T} =
-  \delta(|\vec{r}| - R) e^{\beta\phi_{ext}(\vec{r})}
-\end{equation}
-Inserting this expression into \eqref{eq:spt-derivative} and using the fact that $\rho(\vec{r}) e^{\beta\phi_{ext}(\vec{r})}$ is continuous (c.f.\ Ref.\ \cite{Hansen2013}) gives the contact theorem
-\begin{equation}
-  \beta \left( \frac{\partial \Omega}{\partial R} \right)_{\mu,V,T} =
-  4\pi R^2 \rho(R).
-\end{equation}
-When $R = \sigma$ the inserted ball is equivalent to the hard sphere particles themselves, so $\Omega = \mu^{ex}$ and the contact density is $\rho(\sigma) = \rho \, g^{(2)}(\sigma)$ giving
-\begin{equation}\label{eq:spt-contact-density}
-  \left. \beta \left( \frac{\partial \Delta \Omega}{\partial R} \right)_{\mu,V,T}
-  \right|_{R = \sigma}
-  =
-  \left. \beta \left( \frac{\partial \Omega}{\partial R} \right)_{\mu,V,T}
-  \right|_{R = \sigma}
-  =
-  %\beta \frac{\partial \mu^{ex}}{\partial \sigma} =
-  4\pi \sigma^2 \rho \, g^{(2)}(\sigma),
-\end{equation}
-or written in morphometric form using \eqref{eq:morph-ball-solvation} we have
-\begin{equation}
-  4\pi \sigma^2 \, p +
-  8\pi \sigma \, \gamma_\infty +
-  4\pi \, \kappa =
-  \frac{4\pi \sigma^2 \rho}{\beta} \, g^{(2)}(\sigma).
-\end{equation}
-Applying the virial theorem (equation \eqref{eq:contact-g} in the main text) to the right hand side gives the final expression:
-\begin{equation}\label{eq:spt-virial}
-  4\pi \sigma^2 \, p +
-  8\pi \sigma \, \gamma_\infty +
-  4\pi \, \kappa =
-  \frac{6}{\beta\sigma} \left( \frac{\beta p}{\rho} - 1 \right).
-\end{equation}
-Together \eqref{eq:spt-point}, \eqref{eq:spt-mu} and \eqref{eq:spt-virial} form a complete system of equations which we solve to obtain the coefficients
-\begin{subequations}
-  \begin{align}
-    \frac{\beta \gamma_\infty^{WBII}}{R \rho} &=
-    \left(\frac{\pi}{6\eta^2} - \frac{5\pi}{18\eta}\right) p -
-    \frac{\mu^{ex}[p]}{3\eta} -
-    \frac{\ln{(1-\eta)}}{3\eta} -
-    \frac{1}{\eta}
-    \label{eq:spt-gamma}
+    \frac{1}{2} \int_{\partial K} \Tr{\kappa} \, dA
     \\
-    \frac{\beta \kappa^{WBII}}{R^2\rho} &=
-    \left( \frac{4\pi}{9\eta} - \frac{\pi}{2\eta^2} \right) p +
-    \frac{4\mu^{ex}[p]}{3\eta} + \frac{4\ln{(1-\eta)}}{3\eta} + \frac{3}{\eta}
-    \\
-    \frac{\beta \overline{\kappa}^{WBII}}{R^3\rho} &=
-    \left( \frac{\pi}{3\eta^2} - \frac{2\pi}{9\eta} \right) p -
-    \frac{\mu^{ex}[p]}{\eta} - \frac{4\ln{(1-\eta)}}{3\eta} - \frac{2}{\eta}.
-  \end{align}
-\end{subequations}
-Inserting the Carnahan-Starling parameters \eqref{eq:cs-pressure} and \eqref{eq:cs-mu} gives the coefficients explicitly as
-\begin{subequations}
-  \begin{align}
-    \frac{\beta p^{WBII}}{\rho} &=
-    \frac{1 + \eta + \eta^2 - \eta^3}{(1-\eta)^3}
-    \\
-    \frac{\beta \gamma_\infty^{WBII}}{R\rho} &=
-    -\frac{1 + 2\eta + 8\eta^2 - 5\eta^3}{3(1-\eta)^3}
-    - \frac{\ln{(1-\eta)}}{3\eta}
-    \\
-    \frac{\beta \kappa^{WBII}}{R^2\rho} &=
-    \frac{4 - 10\eta + 20\eta^2 - 8\eta^3}{3(1-\eta)^3} + \frac{4 \ln{(1-\eta)}}{3\eta}
-    \\
-    \frac{\beta \overline{\kappa}^{WBII}}{R^3\rho} &=
-    - \frac{4 - 11\eta + 13\eta^2 - 4\eta^3}{3(1-\eta)^3} - \frac{4 \ln{(1-\eta)}}{3\eta},
-  \end{align}
-\end{subequations}
-which are \emph{identical} to the coefficients derived from the WBII free energy functional in Ref.\ \cite{Hansen-Goos2006}.
-Remarkably, we have obtained these coefficients through a route completely different from their original derivation.
-In Ref.\ \cite{Hansen-Goos2006} the coefficients were determined within FMT by taking the limit of a binary mixture where one component is infinitely dilute.
-Here we completely avoided FMT, in favour of geometrical arguments similar to standard scaled particle approaches.
-This suggests that the above scaled particle argument is somehow built into the structure of the WBII functional; we note that this is a nonobvious fact which cannot be determined from the form of the functional alone, nor is it obvious how it emerges from its original derivation.
-
-Finally, note that (as described in the main text) the resulting $g^{(2)}$ performs poorly in the supercooled regime as compared with the ``exact'' result from virial theorem i.e.\ Eq.\ \eqref{eq:contact-g} in the main text.
-In Fig.\ \ref{fig:contact-g} we plot the contact value with this set of coefficients, finding that it is reasonably accurate until around the freezing density where contact correlations spuriously decay.
-The next section will detail how to modify the derivation to produce coefficients which describe more accurate correlation functions at high densities.
-
-\begin{SCfigure}[h]
- \includegraphics[width=\linewidth]{g2_contact}
- \caption{
-   Contact values of the radial distribution function against volume fraction $\eta$ and reduced pressure $Z = \beta p / \rho$ for the hard sphere liquid using Eq.\ \eqref{eq:contact-g} from the main text with Eq. \eqref{eq:g2-explicit} for the explicit form of $g^{(2)}$, assuming the Carnahan-Starling equation of state.
-   Contact values are determined with two sets of morphometric coefficients: WBII (section \ref{sec:spt-route} and Ref.\ \cite{Hansen-Goos2006}) which performs poorly in the supercooled regime, and coefficients derived in this work (section \ref{sec:virial-route}) using the virial theorem which is exact by construction.
-   The hard sphere freezing and melting volume fractions are indicated by vertical dashed lines.
-   Inset: the errors $\Delta g = g^{(2)} - g^{(2)}_{MD}$ where $g^{(2)}_{MD}$ is determined from molecular dynamics simulations (c.f.\ section \ref{SI:molecular-dynamics}), showing the new theory also improves the accuracy away from contact.
-   %\todo{Remove the inset and make that its own figure.}
- }
-\label{fig:contact-g}
-\end{SCfigure}
-
-\subsection{Aside: scaled particle theory extension for dimers}
-
-I was unaware of work by Stillinger et al \cite{Stillinger2006} before publishing on the morphometric approach, but upon discovering this work I realised their ideas are very similar in nature.
-Here I present similar results but using the morphometric notation.%
-\todo{The purpose of this section needs to be fleshed out and made \emph{very} clear, otherwise the reader will get lost quickly.
-  This section \emph{is} important as we explore the boundaries of where the morphometric approach can fail: this is a great testbed for continuity, and allows us to argue the accuracy of the approach applied to local structures.}
-
-We have the probability of any number of particles existing inside the cavity
-\begin{equation}
-  \sum_{n=0}^\infty p_n (\lambda) = 1
-\end{equation}
-Giving the probability the cavity is empty due to a spontaneous thermal fluctuation
-as
-\begin{equation}
-  p_0 (\lambda) = e^{-\beta W(\lambda)}
-  = 1 - \sum_{n=1}^\infty p_n (\lambda).
-\end{equation}
-The singular nature of the hard sphere interaction ensures there is a maximum number of particles that can fit inside any finite sized cavity (the optimal packing), so we define
-\begin{equation}
-  n^*(\lambda) = \max{n(\lambda)},
-\end{equation}
-and thus
-\begin{equation}
-  p_0 (\lambda) = e^{-\beta W(\lambda)}
-  = 1 - \sum_{n=1}^{n^*(\lambda)} p_n (\lambda).
-\end{equation}
-
-Following Stillinger we generalise to two cavities.
-Define work to insert both cavities as $W^{(2)}(r,\lambda)$.
-We then have the generalisaton
-\begin{equation}
-  p_0^{(2)} (\lambda) = e^{-\beta W^{(2)}(\lambda)}
-  = 1 - \sum_{n=1}^{\max{n^{(2)}(\lambda)}} p_n^{(2)} (\lambda).
-\end{equation}
-We have the conditions:%
-\todo{Make this notation more consistent and able to handle different numbers of cavities. We don't want to just recycle Stillinger's notation: we want to be consistent with the rest of the thesis.}
-\begin{align}
-  \lim_{r \to 0} W^{(2)}(r; \lambda) &= W^{(1)}(\lambda) \\
-  \max{n^{(2)}(r; \lambda)} &= 1
-  \quad \forall \; r + 2\lambda < 1 \\
-  \lim_{r \to \infty} W^{(2)}(r; \lambda) &= 2 W^{(1)}(\lambda) \\
-  \max{n^{(2)}(r; \lambda)} &\le 2 \max{n^{(1)}(\lambda)}
-  \quad \forall \; r > 2\lambda
-\end{align}
-\todo{Need to define $\lambda$ as the cavity diameter}[4cm]
-Which gives us the `point' insertion condition (where $\max{n^{(2)}(r; \lambda)} = 1$)
-\begin{equation}
-  \beta W^{(2)}(r; \lambda) = -\ln (1 - \rho V(r; \lambda))
-\end{equation}
-
-Hausdorff distance is simply $r$, so how the hell is the Euler characteristic of their union continuous with respect to $r$? It is discontinuous at $r = 2\lambda$.
-
-\subsection{Morphometric approach}
-
-Justification of assumptions: additivity, continuity and motion invariance.
-
-\subsection{Virial route}
-
-In this section we give the detailed steps used in the derivation of the new set of morphometric coefficients, following the direction laid out in the main text.
-In section \ref{SI:two-particles} above the morphological form of $g^{(2)}$ was computed explicitly; this derivation imposes the contact density using $\rho(\sigma) = \rho \, g^{(2)}(\sigma)$ with this explicit form.
-
-From \eqref{eq:g2-explicit} the potential of mean force for neighbouring particles reduces to $\phi^{(2)}(r) = \Delta\Omega(r) - 2\mu^{ex}$ if they do not overlap, giving
-\begin{equation}
-  \begin{split}
-  \phi^{(2)}(r) &\equiv - k_B T \ln g^{(2)}(r) \\
-  &= pV(r) + \gamma_\infty A(r) + \kappa C(r) + \overline{\kappa} X(r) - 2\mu^{ex}
-  \quad \forall \; \sigma \le r \le 2\sigma.
-  \end{split}
-\end{equation}
-Inserting the morphological quantities at contact from \eqref{eq:g2-explicit-morph} gives
-\begin{equation}
-  \phi^{(2)}(\sigma) =
-  \frac{9\pi \sigma^3}{4} p +
-  6\pi\sigma^2 \, \gamma_\infty +
-  \left( 6\pi\sigma - \frac{\pi^2\sigma}{2\sqrt{3}} \right) \, \kappa +
-  4\pi \, \overline{\kappa}
-  - 2\mu^{ex}[p].
-\end{equation}
-Equating this with $-k_B T \ln g^{(2)}(\sigma)$ and using the virial theorem (Eq.\ \eqref{eq:contact-g} in the main text) gives the final expression
-\begin{equation}\label{eq:v-virial}
-  \frac{9\pi \sigma^3}{4} p +
-  6\pi\sigma^2 \, \gamma_\infty +
-  \left( 6\pi\sigma - \frac{\pi^2\sigma}{2\sqrt{3}} \right) \, \kappa +
-  4\pi \, \overline{\kappa} =
-  2\mu^{ex}[p] - \beta^{-1} \ln{\frac{3}{2\pi \rho \sigma^3} \left( \frac{\beta p}{\rho} - 1 \right)}.
-\end{equation}
-We will use this last expression instead of the contact theorem \eqref{eq:spt-virial} in order to obtain new coefficients.
-Together \eqref{eq:spt-point}, \eqref{eq:spt-mu} and \eqref{eq:v-virial} solve to give coefficients:
-\begin{subequations}
-  \begin{align}
-    \frac{\beta \gamma_\infty^{V}}{R\rho} &=
-    \frac{ (18\pi - 7\sqrt{3} \pi^2) p + 6\sqrt{3}\pi \mu^{ex}[p]
-      - 6(12 - \sqrt{3}\pi) \ln{(1-\eta)}
-      - 72\ln{\left( \frac{\pi p - 6\eta}{24\eta^2} \right)} }
-    {54(\sqrt{3}\pi - 4) \eta}
-    \label{eq:virial-gamma}
-    \\
-    \frac{\beta \kappa^{V}}{R^2\rho} &=
-    \frac{ 5\pi p - 12 \mu^{ex}[p] + 24 \ln{(1-\eta)}
-      + 36\ln{\left( \frac{\pi p - 6\eta}{24\eta^2} \right)} }
-    {9(\sqrt{3}\pi - 4) \eta}
-    \\
-    \frac{\beta \overline{\kappa}^{V}}{R^3\rho} &=
-    - \frac{
-      (18\pi - 2\sqrt{3} \pi^2) p - (36 - 3\sqrt{3}\pi) \mu^{ex}[p] + 12\sqrt{3}\pi \ln{(1-\eta)}
-      + 72\ln{\left( \frac{\pi p - 6\eta}{24\eta^2} \right)} }
-    {27(\sqrt{3}\pi - 4) \eta},
-  \end{align}
-\end{subequations}
-which upon insertion of the Carnahan-Starling parameters \eqref{eq:cs-pressure} and \eqref{eq:cs-mu} gives the coefficients explicitly as
-\begin{subequations}
-  \begin{align}
-    \frac{\beta p^{V}}{\rho} &=
-    \frac{1 + \eta + \eta^2 - \eta^3}{(1-\eta)^3} \\
-    \frac{\beta \gamma_\infty^{V}}{R\rho} &=
-    \frac{ 18\eta \frac{1 + \eta + \eta^2 - \eta^3}{(1-\eta)^3}
-      + \sqrt{3}\pi\eta \frac{1 - 16\eta - 4\eta^2 + 7\eta^3}{(1-\eta)^3}
-      - (12 - \sqrt{3}\pi) \ln{(1-\eta)}
-      - 12\ln{\left( \frac{2 - \eta}{2(1-\eta)^3} \right)} }
-    {9(\sqrt{3}\pi - 4) \eta} \\
-    \frac{\beta \kappa^{V}}{R^2\rho} &= -
-    \frac{ 2\eta \frac{11 - 23\eta + \eta^2 + 5\eta^3}{(1-\eta)^3}
-      - 8 \ln{(1-\eta)}
-      - 12\ln{\left( \frac{2 - \eta}{2(1-\eta)^3} \right)} }
-    {3(\sqrt{3}\pi - 4) \eta} \\
-    \frac{\beta \overline{\kappa}^{V}}{R^3\rho} &=
-    \frac{ 12\eta \frac{5 - 12\eta + 3\eta^3}{(1-\eta)^3}
-      - \sqrt{3}\pi\eta \frac{4 - 13\eta - \eta^2 + 4\eta^3}{(1-\eta)^3}
-      - 4\sqrt{3}\pi \ln{(1-\eta)}
-      - 24\ln{\left( \frac{2 - \eta}{2(1-\eta)^3} \right)} }
-    {9(\sqrt{3}\pi - 4) \eta}.
-  \end{align}
-\end{subequations}
-Unlike the WBII coefficients above these are entirely new, and produce significantly more accurate correlation functions at high densities as described in the main text.
-The pair correlation produced by these coefficients (black line in Fig.\ \ref{fig:contact-g}) is self-consistent with CS at contact by construction, but as an additional bonus we find that the new coefficients provide a theory that outperforms the older WBII approach across the whole range of distances typical of neighbouring particles (inset of Fig.\ \ref{fig:contact-g}).
-The latter observation enables us to accurately model complex many-particle local structures.
-
-However, it should be noted that the planar surface tension $\gamma_\infty^{V}$ is considerably less accurate than $\gamma_\infty^{WBII}$ as compared with molecular dynamics studies in \cite{Davidchack2016}.
-For this reason, WBII coefficients may give more accurate grand potentials (and thus correlations) for large solutes where the surface becomes approximately planar.
-
-\section{Bulk virial approach}
-
-\subsection{Outline}
-
-As far as I know this is an original calculation, however it should be emphasised that this is merely an application of ideas from FMT to the (simpler) uniform system.
-\todo{Emphasise that the resulting equations of state should be bad for anisotropic particles: it won't find any liquid crystalline transitions, and we expect multiple intersections to be a general rule for highly anistropic particles.}
-My aim here is to introduce the ideas of FMT gradually in order to emphasise the role played by integral geometry.
-
-Note that in mean field $d \gg 1$ it is argued that the dominant contributions come from the ring diagrams, i.e.\
-\begin{equation*}
-  \lim_{d \to \infty}
-  \frac{\beta F_{ex}}{N} =
-  \rho^2 \mayerdiagram{2} +
-  \rho^3 \mayerdiagram{3} +
-  \rho^4 \mayerdiagram[|.||.|]{4} +
-  \rho^5 \, \mayerdiagram[|..||..|.|]{5} +
-  \mathcal{O}(\rho^6)
-\end{equation*}
-whereas the contributing diagrams in for $d=1$ are the fully connected Ree-Hoover diagrams, i.e.\
-\begin{equation*}
-  \begin{aligned}
-    \lim_{d \to 1}
-    \frac{\beta F_{ex}}{N} &=
-    \rho^2 \mayerdiagram{2} +
-    \rho^3 \mayerdiagram{3} +
-    \rho^4 \mayerdiagram{4} +
-    \rho^5 \, \mayerdiagram{5} +
-    \mathcal{O}(\rho^6) \\
+    X[K]
     &=
-    \rho^2 \fmtdiagram{2} +
-    \rho^3 \fmtdiagram{3} +
-    \rho^4 \fmtdiagram{4} +
-    \rho^5 \fmtdiagram{5} +
-    \mathcal{O}(\rho^6)
-  \end{aligned}
-\end{equation*}
+    \int_{\partial K} \det{\kappa} \, dA
+  \end{align}
+\end{subequations}
+where $\kappa$ is the curvature tensor for the surface $\partial K$.
+For a spherical solute these reduce to the values given in \eqref{eq:spt-ansatz}, so this represents a proper generalisation of SPT for more general geometries.
 
-\subsection{Exact result in one dimensions: hard rods}
+We now give a brief justification of the above \emph{ansatzes}, in particular why there are only four terms in the expansion.
+Radius is the only natural parameter for a sphere, however for more general geometries there might be arbitrarily many parameters so one may wonder if they should be included in a general geometric expansion.
+Nevertheless, there are compelling arguments from integral geometry \cite{KonigPRL2004} to only retain the four terms listed which we will summarise below.
 
-Spheres in one dimensions are just line segments%
-\marginfootnote{In fact, line segments are the only possible convex shape in one dimensions so hard rods are the one dimensional starting point for arbitrary (convex) shapes in higher dimensions.},
-or rods, so one dimensional hard spheres are conventionally called hard rods.
-The hard rod system is sufficiently simple that all of its equilibrium properties can be determined exactly, so it provides a good starting point for theories in higher dimensions.
-Here we show how integral geometry can be used to determine the exact free energy (and thus the equation of state) for the hard rod system; this suggests approximations in higher dimensions to be discussed in the next section.
-
-\begin{tcolorbox}[title=Multiple intersections of hard rods]
-  Where every pairwise combination of $n$ rods overlap, there must be a region where all of them intersect, i.e.\
-  \begin{equation}
-    \prod_{i \le j} \mu_0(B_i \cap B_j) =
-    \mu_0(\cap_{i=1}^n B_i)
-  \end{equation}
-  \emph{Proof:} Consider three rods whose centers are placed at $x_1, x_2, x_3$.
-  Each rod overlaps so we have
-  \begin{subequations}
-    \begin{align}
-      |x_2 - x_1| &\le \sigma \\
-      |x_3 - x_1| &\le \sigma \\
-      |x_3 - x_2| &\le \sigma
-    \end{align}
-  \end{subequations}
-  The region of overlap between the first two particles is
-  \begin{equation*}
-    B_1 \cap B_2 =
-    [\max{(x_1,x_2)} - \sigma, \min{(x_1,x_2)} + \sigma].
+The basis of the morphometric approach is that the functionals $\{V,A,C,X\}$ are normalisations of the so-called \emph{intrinsic volumes}.
+These play a central role in integral geometry as the \emph{only} physically meaningful size measures in the sense that they:
+\begin{enumerate}
+\item Are invariant with respect to translations and rotations.
+\item Increase additively, i.e.\ they transform under combination of subsystems via the inclusion/exclusion relation e.g.\
+  \begin{equation*}\label{eq:additivity}
+    V[A \cup B] = V[A] + V[B] - V[A \cap B],
   \end{equation*}
-  which implies
-  \begin{equation}
-    \max{(x_1,x_2)} - \sigma \le x_3 \le \min{(x_1,x_2)} + \sigma
-  \end{equation}
-  or $x_3 \in (B_1 \cap B_2)$.
-\end{tcolorbox}
+  and similar expressions for $A$, $C$, and $X$.
+\item Are continuous (specifically with respect to the Hausdorff metric).
+  Loosely speaking, this means that the size measures converge as the object is approximated by increasingly finely meshed polyhedra excluding e.g.\ fractal geometries.
+  As a simple intuitive example, the measurement of a length will converge continuously to some number as one uses rulers with progressively finer distance markings.
+\end{enumerate}
+More details on properties of intrinsic volumes can be found in standard texts, e.g.\ Refs.\ \cite{Santalo2004,Klain1997}.
+%\cite{Santalo2004,SchneiderACIG1984,Schneider2008,Klain1997}.
 
-\begin{SCfigure}[H]
-  \missingfigure[figwidth=\linewidth]{}
-  \caption{If each pair of three hard rods overlap then this implies a region where all three mutually intersect.}
-\end{SCfigure}
+The central assertion of the morphometric approach is that the insertion cost $\Delta \Omega$ \emph{exactly} possesses the properties above, providing the connection between geometry and thermodynamics \cite{KonigPRL2004}.
+A classic theorem of integral geometry due to Hadwiger \cite{Hadwiger1957} states that the intrinsic volumes are the \emph{only} class of functionals with the properties listed above; a corollary of this is that they form a linear vector space for any functional possessing these properties.
+The morphometric form \eqref{eq:morph-ansatz} then follows.
+In addition to providing a more general \emph{ansatz} than SPT, this approach lays out its underlying assumptions explicitly eschewing the ad-hoc way in which the original SPT \emph{ansatz} \eqref{eq:spt-ansatz} was obtained.
 
-Therefore the diagram for the third virial coefficient becomes
-\begin{equation}\label{eq:third-virial-diagram-replacement-1d}
-  \mayerdiagram{3} = \fmtdiagram{3}
-\end{equation}
-where the latter \emph{intersection} diagram denotes an integral of the form
-\begin{equation}
-  \fmtdiagram{3} =
-  \int_{\mathbb{E}_d^3}
-  \mu_0 (g_1 B^d \cap g_2 B^d \cap g_3 B^d)
-  \, dg_1 dg_2 dg_3.
-\end{equation}
-The result of \eqref{eq:third-virial-diagram-replacement-1d} generalises straightforwardly to the other fully connected diagrams.
-For example, the fourth and fifth terms in the virial series are replaced by
-\begin{align*}
-  \mayerdiagram{4} &= \fmtdiagram{4} =
-  \int_{\mathbb{E}^4}
-  \mu_0 (\cap_{i=1}^4 g_i B^1)
-  \, dg^4
-  \\
-  \mayerdiagram{5} &= \fmtdiagram{5} =
-  \int_{\mathbb{E}^5}
-  \mu_0 (\cap_{i=1}^5 g_i B^1)
-  \, dg^5,
-\end{align*}
-and in general the $n$th fully connected diagram can be replaced by the integral
-\begin{equation}
-  \int_{\mathbb{E}_d^n}
-  \mu_0 (\cap_{i=1}^n g_i B^1)
-  \, dg^n \equiv \Gamma_n,
-\end{equation}
-without approximation.
+The morphometric approach is certainly an approximation, as the insertion cost will not rigorously possess the three properties above in reality.
+Notably, in SPT $\Delta\Omega$ is known to contain singularities in its high order derivatives with solute radius \cite{ReissJCP1959}; these non-analytic terms result from violations of the additivity assumption.
+Nevertheless, the approximation is accurate in hard spheres \cite{OettelEL2009,AshtonPRE2011,LairdPRE2012,BlokhuisPRE2013,UrrutiaPRE2014,Hansen-GoosJCP2014} so these violations should be small.
 
-We can do much better in $d=1$, for hard rods.
-We have the pressure defined by
-\begin{equation}
-  \frac{\beta p}{\rho} =
-  1 + \sum_{n=2}^\infty c_n (n-1) \rho^{n-1} \Gamma_n
-\end{equation}
-with $c_n = 1/n(n-1)$ \todo{I think you can get $c_n$ from the $d=0$ case: check this} giving
-\begin{equation}
-  \Gamma_n = \int_{\mathbb{E}_d^n} \mu_0 (B^d \cap_{i=2}^n g_i B^d) \, d^n g
-\end{equation}
-For $d=1$ we have
-\begin{equation}
-  \int_{\mathbb{E}} \mu_k (A \cap g B^1) \, dg =
-  \begin{cases}
-    \mu_0(A) \mu_1(B^1) + \mu_1(A) & \qquad k=0 \\
-    \mu_1(A) \mu_1(B^1) & \qquad k=1
-  \end{cases}
-\end{equation}
-which gives
-\begin{equation}
-  \begin{split}
-    \Gamma_n &= \int_{\mathbb{E}^{n-1}} \Big(
-    \mu_0 \left( B^1 \cap_{i=2}^{n-1} g_i B^1 \right)
-    \mu_1(B^1) +
-    \mu_1 \left( B^1 \cap_{i=2}^{n-1} g_i B^1 \right)
-    \Big) \, d^{n-1} g \\
-    &=
-    \Gamma_{n-1} \mu_1(B^1) +
-    \mu_1(B^1)^{n-1}.
-  \end{split}
-\end{equation}
-Applying this formula iteratively gives
-\begin{equation}
-  \Gamma_n = n \mu_1(B^1)^{n-1}.
-\end{equation}
-\begin{equation}
-  \frac{\beta p}{\rho} =
-  1 + \sum_{n=2}^\infty \rho^{n-1} \mu_1(B^1)^{n-1}
-\end{equation}
-But $\rho = \eta / \mu_1(B^1)$ so we have
-\begin{equation}
-  \frac{\beta p}{\rho} =
-  1 + \sum_{n=2}^\infty \eta^{n-1} =
-  \sum_{n=0}^\infty \eta^{n} = \frac{1}{1 - \eta}
-\end{equation}
-which is convergent for all $|\eta| < 1$ although only positive volume fractions i.e.\ in the range $\eta \in [0,1]$ have any physical meaning.
-
-\subsection{Approximate extension to $d > 1$ dimensions}
-
-We make the replacement
-\begin{equation}\label{eq:third-virial-diagram-replacement-general}
-  \mayerdiagram{3} \approx \fmtdiagram{3}
-\end{equation}
-which is now approximate as can be seen from the counter example in Figure \ref{fig:lost-cases}.
-
-\begin{SCfigure}[H]
-  \missingfigure[figwidth=\linewidth]{}
-  \caption{Lost cases of FMT.}
-  \label{fig:lost-cases}
-\end{SCfigure}
-
-Simple example: Mayer-f two balls:
-\begin{equation}
-  \frac{\beta p}{\rho} - 1 =
-  - \sum_{i=1}^\infty \frac{i}{i+1} \beta_i \rho^i =
-  \frac{\rho}{2} \int_{\mathbb{E}_d} \mu_0 (B_d \cap g B_d) \, dg
-  + \mathcal{O}(\rho^2)
-\end{equation}
-Volume fraction $\eta = \rho \omega_d$
-\begin{equation}
-  \frac{\beta p}{\rho} - 1 =
-  \frac{\eta}{2 \omega_d}
-  \int_{\mathbb{E}_d} \mu_0 (B_d \cap g B_d) \, dg
-  + \mathcal{O}(\eta^2)
-\end{equation}
-For $d = 3$ this gives $4\eta + \mathcal{O}(\eta^2)$.
-\begin{align*}
-  \frac{\eta}{2 \omega_d}
-  \int_{\mathbb{E}_d} \mu_0 (B_d \cap g B_d) \, dg &=
-  \sum_{i=0}^{d}
-  {d \brack i}^{-1}
-  \mu_i(B_d) \mu_{d-i}(B_d) \\
-  &=
-  \frac{\eta}{2 \omega_d}
-  \sum_{i=0}^{d}
-  {d \brack i}^{-1}
-  {d \brack i} \omega_i
-  {d \brack d-i} \omega_{d-i} \\
-  &=
-  \frac{\eta}{2 \omega_d}
-  \sum_{i=0}^{d}
-  {d \brack i} \omega_i \omega_{d-i} \\
-  &=
-  \begin{cases}
-    \frac{\eta}{2 \omega_2}
-    (2 \omega_0 \omega_2 + \frac{\pi}{2} \omega_1^2)
-    & \qquad d=2 \\
-    \frac{\eta}{\omega_3}
-    (\omega_0 \omega_3 + 2 \omega_1 \omega_2)
-    & \qquad d=3
-  \end{cases} \\
-  &=
-  \begin{cases}
-    2 \eta & \qquad d=2 \\
-    4 \eta & \qquad d=3
-  \end{cases}
-\end{align*}
-using \eqref{eq:flag-coefficients-symmetry} and \eqref{eq:intrinsic-volume-ball-flag}.
-\begin{equation*}
-\end{equation*}
-
-Ree-Hoover diagrams.
-From the relation:
-\begin{equation*}
-  1 = e_{ij} - f_{ij}
-\end{equation*}
-we have the graphical representation of this rule as
-\begin{equation*}
-  \mayerdiagram[.]{2} =
-  \mayerdiagram[:]{2} -
-  \mayerdiagram[|]{2}
-\end{equation*}
-so
-\begin{equation*}
-  \begin{aligned}
-    \mayerdiagram[|.||.|]{4} &=
-    \mayerdiagram[|.||:|]{4} -
-    \mayerdiagram[|.||||]{4} \\
-    &=
-    \mayerdiagram[|:||:|]{4} +
-    \mayerdiagram[||||||]{4} -
-    \mayerdiagram[|:||||]{4} -
-    \mayerdiagram[||||:|]{4} \\
-    &=
-    \mayerdiagram[|:||:|]{4} +
-    \mayerdiagram[||||||]{4} -
-    2 \mayerdiagram[|:||||]{4}
-  \end{aligned}
-\end{equation*}
-after using permutation invariance in the final step.
-We will extend this by considering only the fully connected Ree-Hoover diagrams, as in
-\begin{equation}
-  \frac{\beta F^{ex}}{N} \approx
-  \rho^2 \mayerdiagram{2} +
-  \rho^3 \mayerdiagram{3} +
-  \rho^4 \mayerdiagram{4} +
-  \rho^5 \mayerdiagram{5}
-  + \mathcal{O}(\rho^6)
-\end{equation}
-and then approximate these by considering only the subset of $n$-particle intersections as in
-\begin{equation}
-  \frac{\beta F^{ex}}{N} \approx
-  \rho^2 \fmtdiagram{2} +
-  \rho^3 \fmtdiagram{3} +
-  \rho^4 \fmtdiagram{4} +
-  \rho^5 \fmtdiagram{5}
-  + \mathcal{O}(\rho^6)
-\end{equation}
-
-Defining the more general integral
-\begin{equation}
-  \Gamma_n^{(k)} = \int_{\mathbb{E}_d^n} \mu_k (B^d \cap_{i=2}^n g_i B^d) \, d^n g
-\end{equation}
-For $d=3$ we have
-\begin{equation}
-  \int_{\mathbb{E}} \mu_k (A \cap g B^3) \, dg =
-  \begin{cases}
-    \omega_3 \mu_0(A) + \omega_2 \mu_1(A) +
-    \omega_1 \mu_2(A) + \omega_0 \mu_3(A)
-    & \qquad k=0 \\
-    \omega_3 \mu_1(A) + \frac{\pi}{2} \omega_2 \mu_2(A)
-    + 2 \omega_1 \mu_3(A)
-    & \qquad k=1 \\
-    \omega_3 \mu_2(A) + 2 \omega_2 \mu_3(A) & \qquad k=2 \\
-    \omega_3 \mu_3(A) & \qquad k=3
-  \end{cases}
-\end{equation}
-so the lowest-order integrals for $n=2$ evaluate to
-\begin{align}
-  \Gamma_2^{(0)} &= 2 \omega_0 \omega_3 + 4 \omega_1 \omega_2 \\
-  \Gamma_2^{(1)} &= 4 \omega_1 \omega_3 + \pi \omega_2^2 \\
-  \Gamma_2^{(2)} &= 4 \omega_2 \omega_3 \\
-  \Gamma_2^{(3)} &= \omega_3^2.
-\end{align}
-Iterating the integrals gives (evaluated in order of simplicity)
-\begin{align}
-  \Gamma_n^{(3)} &=
-  \omega_3 \Gamma_{n-1}^{(3)}
-  = \omega_3^n \\
-  \Gamma_n^{(2)} &=
-  \omega_3 \Gamma_{n-1}^{(2)} + 2 \omega_2 \Gamma_{n-1}^{(3)}
-  \nonumber \\ &=
-  \omega_3 \Gamma_{n-1}^{(2)} + 2 \omega_2 \omega_3^{n-1}
-  = 2 n \omega_2 \omega_3^{n-1} \\
-  \Gamma_n^{(1)} &=
-  \omega_3 \Gamma_{n-1}^{(1)} +
-  \frac{\pi}{2} \omega_2 \Gamma_{n-1}^{(2)} +
-  2 \omega_1 \Gamma_{n-1}^{(3)}
-  \nonumber \\ &=
-  \omega_3 \Gamma_{n-1}^{(1)} +
-  (n-1) \pi \omega_2^2 \omega_3^{n-2} +
-  2 \omega_1 \omega_3^{n-1}
-  \nonumber \\ &=
-  \frac{n(n-1)}{2} \pi \omega_2^2 \omega_3^{n-2} +
-  2n \omega_1 \omega_3^{n-1}
-  \\
-  \Gamma_n^{(0)} &=
-  \omega_3 \Gamma_{n-1}^{(0)} +
-  \omega_2 \Gamma_{n-1}^{(1)} +
-  \omega_1 \Gamma_{n-1}^{(2)} +
-  \omega_0 \Gamma_{n-1}^{(3)}
-  \nonumber \\ &=
-  \omega_3 \Gamma_{n-1}^{(0)} +
-  \frac{(n-1)(n-2)}{2} \pi \omega_2^3 \omega_3^{n-3} +
-  2(n-1) \omega_1 \omega_2 \omega_3^{n-2} +
-  \nonumber \\ & \quad
-  2(n-1) \omega_1 \omega_2 \omega_3^{n-2} +
-  \omega_0 \omega_3^{n-1}
-  \nonumber \\ &=
-  \frac{n(n-1)(n-2))}{6} \pi \omega_2^3 \omega_3^{n-3} +
-  2 n(n-1) \omega_1 \omega_2 \omega_3^{n-2} +
-  n \omega_0 \omega_3^{n-1}
-\end{align}
-This gives
-\begin{equation}
-  \begin{split}
-    \frac{\beta p}{\rho} &=
-    1 + \sum_{n=2}^\infty \frac{1}{n} \frac{\eta^{n-1}}{\omega_3^{n-1}} \Gamma_n
-    =
-    1 + \sum_{n=1}^\infty \frac{1}{n+1} \frac{\eta^n}{\omega_3^n} \Gamma_{n+1}
-    \\ &=
-    1 + \sum_{n=1}^\infty \frac{1}{n+1} \frac{\eta^n}{\omega_3^n}
-    \left(
-    \frac{n(n-1)(n+1))}{6} \pi \omega_2^3 \omega_3^{n-2} +
-    2 n(n+1) \omega_1 \omega_2 \omega_3^{n-1} +
-    (n+1) \omega_0 \omega_3^{n}
-    \right)
-    \\ &=
-    1 + \sum_{n=1}^\infty \eta^n
-    \left(
-    \frac{n(n-1)}{6} \pi \frac{\omega_2^3}{\omega_3^2} +
-    2 n \frac{\omega_1 \omega_2}{\omega_3} +
-    \omega_0
-    \right)
-    \\ &=
-    \pi \frac{\omega_2^3}{6\omega_3^2}
-    \sum_{n=0}^\infty
-    n(n-1) \eta^n
-    +
-    2 \frac{\omega_1 \omega_2}{\omega_3}
-    \sum_{n=0}^\infty n \eta^n
-    +
-    \left( 1 + \omega_0 \sum_{n=1}^\infty \eta^n \right)
-    \\ &=
-    \pi \frac{\omega_2^3}{6\omega_3^2}
-    \eta^2
-    \sum_{n=0}^\infty
-    n(n-1) \eta^{n-2}
-    +
-    2 \frac{\omega_1 \omega_2}{\omega_3}
-    \eta
-    \sum_{n=0}^\infty n \eta^{n-1}
-    +
-    \sum_{n=0}^\infty \eta^n
-    \\ &=
-    \pi \frac{\omega_2^3}{6\omega_3^2}
-    \eta^2
-    \frac{2}{(1-\eta)^3}
-    +
-    2 \frac{\omega_1 \omega_2}{\omega_3}
-    \eta
-    \frac{1}{(1-\eta)^2}
-    +
-    \frac{1}{1-\eta}
-    \\ &=
-    \pi \frac{\pi^3}{6 (16 \pi^2 / 9)}
-    \eta^2
-    \frac{2}{(1-\eta)^3}
-    +
-    2 \frac{2 \pi}{4 \pi / 3}
-    \eta
-    \frac{1}{(1-\eta)^2}
-    +
-    \frac{1}{1-\eta}
-    \\ &=
-    \frac{3 \pi^2}{16}
-    \eta^2
-    \frac{1}{(1-\eta)^3}
-    +
-    3
-    \eta
-    \frac{1}{(1-\eta)^2}
-    +
-    \frac{1}{1-\eta}
-    \\ &=
-    \frac{A\eta^2}{(1-\eta)^3}
-    +
-    \frac{3\eta (1-\eta)}{(1-\eta)^3}
-    +
-    \frac{(1-\eta)^2}{(1-\eta)^3}
-    \\ &=
-    \frac{A \eta^2
-    +
-    3\eta - 3\eta^2
-    +
-    1-2\eta + \eta^2}{(1-\eta)^3}
-    \\ &=
-    \frac{1 + \eta + (A - 2) \eta^2}{(1-\eta)^3}
-  \end{split}
-\end{equation}
-\begin{align*}
-  A = 3 &= \frac{3\pi^2}{16} + B \\
-  B &= 3\left( 1 - \frac{\pi^2}{16} \right) \\
-  B &= \frac{48 - 3\pi^2}{16} \\
-  B &= 3 - \frac{\pi \omega_2^2}{\omega_3^2} \\
-\end{align*}
-For $d=2$ we have
-\begin{equation}
-  \int_{\mathbb{E}} \mu_k (A \cap g B^2) \, dg =
-  \begin{cases}
-    \omega_2 \mu_0(A) + \omega_1 \mu_1(A) + \omega_0 \mu_2(A) & \qquad k=0 \\
-    \omega_2 \mu_1(A) + \frac{\pi}{2} \omega_1 \mu_2(A) & \qquad k=1 \\
-    \omega_2 \mu_2(A) & \qquad k=2
-  \end{cases}
-\end{equation}
-so the lowest-order integrals for $n=2$ evaluate to
-\begin{align}
-  \Gamma_2^{(0)} &= 2 \omega_0 \omega_2 + \omega_1^2 \\
-  \Gamma_2^{(1)} &= \pi \omega_1 \omega_2 \\
-  \Gamma_2^{(2)} &= \omega_2^2.
-\end{align}
-Iterating the integrals gives (evaluated in order of simplicity)
-\begin{align}
-  \Gamma_n^{(2)} &=
-  \omega_2 \Gamma_{n-1}^{(2)}
-  = \omega_2^n \\
-  \Gamma_n^{(1)} &=
-  \omega_2 \Gamma_{n-1}^{(1)}
-  + \frac{\pi}{2} \omega_1 \Gamma_{n-1}^{(2)}
-  \nonumber \\ &=
-  \omega_2 \Gamma_{n-1}^{(1)}
-  + \frac{\pi}{2} \omega_1 \omega_2^{n-1}
-  = \frac{n \pi}{2} \omega_1 \omega_2^{n-1} \\
-  \Gamma_n^{(0)} &=
-  \omega_2 \Gamma_{n-1}^{(0)}
-  + \omega_1 \Gamma_{n-1}^{(1)}
-  + \omega_0 \Gamma_{n-1}^{(2)}
-  \nonumber \\ &=
-  \omega_2 \Gamma_{n-1}^{(0)}
-  + \frac{(n-1) \pi}{2} \omega_1^2 \omega_2^{n-2}
-  + \omega_0 \omega_2^{n-1}
-  \nonumber \\ &=
-  \sum_{m=1}^n \omega_2^{n-m} \left(
-  \frac{(m-1)\pi}{2} \omega_1^2 \omega_2^{m-2}
-  + \omega_0 \omega_2^{m-1}
-  \right)
-  \nonumber \\ &=
-  \omega_2^{n-2}
-  \sum_{m=1}^n \left(
-  \frac{(m-1)\pi}{2} \omega_1^2
-  + \omega_0 \omega_2
-  \right)
-  \nonumber \\ &=
-  \omega_2^{n-2}
-  \left(
-  \frac{n(n-1)\pi}{4} \omega_1^2
-  + n \omega_0 \omega_2
-  \right)
-\end{align}
-This gives
-\begin{equation}
-  \begin{split}
-    \frac{\beta p}{\rho} &=
-    1 + \sum_{n=2}^\infty \frac{1}{n} \frac{\eta^{n-1}}{\omega_2^{n-1}} \Gamma_n
-    \\ &=
-    1 + \sum_{n=1}^\infty \frac{1}{n+1} \frac{\eta^n}{\omega_2^n} \Gamma_{n+1}
-    \\ &=
-    1 + \sum_{n=1}^\infty \frac{1}{n+1} \frac{\eta^n}{\omega_2^n}
-    \omega_2^{n-1}
-    \left(
-    \frac{n(n+1)\pi}{4} \omega_1^2
-    + (n+1) \omega_0 \omega_2
-    \right)
-    \\ &=
-    1 + \sum_{n=1}^\infty \eta^n
-    \left(
-    \frac{n\pi}{4} \frac{\omega_1^2}{\omega_2}
-    + \omega_0
-    \right)
-    \\ &=
-    1 + \sum_{n=1}^\infty (n+1) \eta^n =
-    \sum_{n=0}^\infty n \eta^{n-1}
-    = \frac{1}{(1-\eta)^2}
-  \end{split}
-\end{equation}
-which is absolutely convergent for all $|\eta| < 1$, although only values in the range $\eta \in [0,1]$ have any physical meaning.
-
-\subsection{Fundamental measure theory (FMT)}
-
-\subsection{Many-body correlations from fundamental measure theory}
-
-\begin{itemize}
-\item $d+1$ weight functions
-\item Exact decomposition of Mayer-f bond
-\end{itemize}
-
-We have 4 scalar weight functions
-\begin{subequations}
-  \begin{align}
-    \omega_3^i(\vec{r}) &= \Theta(R_i - r), \\
-    \omega_2^i(\vec{r}) &= \delta(R_i - r), \\
-    \omega_1^i(\vec{r}) &= \frac{\omega_2^i(\vec{r})}{4\pi R_i}, \\
-    \omega_0^i(\vec{r}) &= \frac{\omega_2^i(\vec{r})}{4\pi R_i^2},
-  \end{align}
-\end{subequations}
-and 2 vector weight functions
-\begin{subequations}
-  \begin{align}
-    \vec{\omega}_2^i(\vec{r}) &=
-    \frac{\vec{r}}{r} \delta(R_i - r), \\
-    \vec{\omega}_1^i(\vec{r}) &=
-    \frac{\vec{\omega}_1^i(\vec{r})}{4\pi R_i}.
-  \end{align}
-\end{subequations}
-
-Fourier transforming weight functions:
-\begin{equation}
-  \widetilde{\omega}_\alpha(\vec{k}) =
-  \int \omega_\alpha (\vec{r}) e^{-i \vec{k}\cdot\vec{r}} \, d\vec{r}
-\end{equation}
-%% \begin{align}
-%%   \widetilde{\omega}_3(\vec{k}) &=
-%%   4\pi \frac{\sin{kR} - kR\cos{kR}}{k^3} \\
-%%   \widetilde{\omega}_2(\vec{k}) &=
-%%   4\pi R^2 \frac{\sin{kR}}{kR} \\
-%%   \widetilde{\vec{\omega}}_2(\vec{k}) &=
-%%   - i \vec{k} \widetilde{\omega}_3(\vec{k})
-%% \end{align}
-\begin{equation}
-  \begin{aligned}
-    c_{22}(\vec{r} = \vec{r}_2 - \vec{r}_1) &=
-    \frac{1}{(2\pi)^3}
-    \iint
-    e^{-i (\vec{k}_1\cdot\vec{r}_1 + \vec{k}_2\cdot\vec{r}_2)}
-    \widetilde{\omega}_2(\vec{k}_1)
-    \widetilde{\omega}_2(\vec{k}_2)
-    \delta{(\vec{k}_1 + \vec{k}_2)}
-    \, d\vec{k}_1 d\vec{k}_2 \\
-    &=
-    \frac{1}{(2\pi)^3}
-    \int
-    e^{i \vec{k}_1 \cdot (\vec{r}_2 - \vec{r}_1)}
-    \widetilde{\omega}_2(\vec{k}_1)
-    \widetilde{\omega}_2(-\vec{k}_1)
-    \, d\vec{k}_1 \\
-    &=
-    \frac{1}{(2\pi)^3}
-    \int
-    e^{i \vec{k} \cdot \vec{r}}
-    \widetilde{\omega}_2(\vec{k})^2
-    \, d\vec{k}
-    =
-    \frac{8\pi^2 R^2}{(2\pi)^3}
-    \int
-    e^{i \vec{k} \cdot \vec{r}}
-    \left( \frac{\sin{kR}}{k} \right)^2
-    \, d\vec{k} \\
-    &=
-    \frac{R^2}{\pi}
-    \int
-    e^{i k r \cos\theta}
-    \left( \frac{\sin{kR}}{k} \right)^2
-    \, 2\pi k^2 \sin\theta \, dr d\theta \\
-    &=
-    2 R^2
-    \int
-    e^{i k r \cos\theta}
-    \sin^2{(kR)}
-    \, \sin\theta \, dr d\theta
-  \end{aligned}
-\end{equation}
-
-Following \cite{Rosenfeld1990} we have
-\begin{equation}\label{eq:fmt-direct-correlations}
-  \begin{aligned}
-    c^{(n)}(\vec{r}^n) &=
-    - \frac{\delta^n \beta F_{ex}}{\delta \rho(\vec{r}_1)\delta \rho(\vec{r}_2) \cdots \delta \rho(\vec{r}_n)} \\
-    &=
-    - \sum_{\alpha_1, \alpha_2, \cdots, \alpha_n}
-    \int d\vec{r}'
-    \prod_{i=1}^n \Big( \omega_{\alpha_i}(\vec{r}' - \vec{r}_i) \Big)
-    \partial^n_{\alpha_1, \alpha_2, \cdots, \alpha_n} \beta\Phi_{ex}(\vec{r}')
-  \end{aligned}
-\end{equation}
-where
-\begin{equation*}
-  \partial^n_{\alpha_1, \alpha_2, \cdots, \alpha_n} \beta\Phi_{ex}(\vec{r}') =
-  \left.
-  \frac{\partial^n \beta\Phi_{ex}}{\partial n_{\alpha_1} \partial n_{\alpha_2} \cdots \partial n_{\alpha_n}}
-  \right|_{\{n_\alpha\} = \{n_\alpha(\vec{r}')\}}.
-\end{equation*}
-At uniform density $\partial^n_{\alpha_1, \alpha_2, \cdots, \alpha_n} \beta\Phi_{ex}$ is position independent, so \eqref{eq:fmt-direct-correlations} becomes
-\begin{equation}\label{eq:fmt-direct-correlations-uniform-density}
-  \begin{aligned}
-    c^{(n)}(\vec{r}^n) &=
-    - \sum_{\alpha_1, \alpha_2, \cdots, \alpha_n}
-    \partial^n_{\alpha_1, \alpha_2, \cdots, \alpha_n} \beta\Phi_{ex}
-    \int d\vec{r}'
-    \prod_{i=1}^n \Big( \omega_{\alpha_i}(\vec{r}' - \vec{r}_i) \Big) \\
-    &=
-    - \sum_{\alpha_1, \alpha_2, \cdots, \alpha_n}
-    \partial^n_{\alpha_1, \alpha_2, \cdots, \alpha_n} \beta\Phi_{ex} \;
-    \Big(
-    \omega_{\alpha_1} \otimes \omega_{\alpha_2} \otimes \cdots \otimes \omega_{\alpha_n}
-    (\vec{r}^n)
-    \Big)
-  \end{aligned}
-\end{equation}
-where the $\otimes$-notation in the latter step denotes the $n$-body convolution.
-For example, the two body convolution would be written%
-\todo{This is not the standard convolution! See \cite{Rosenfeld1997}.}
-%\marginfootnote{The `standard' convolution, i.e.\ $f \otimes g(\vec{r} \equiv \vec{r}_1 - \vec{r}_2)$, is recovered after transforming to the new integration variable $\vec{r}'' = \vec{r}' - \vec{r}_1$.}
-\begin{equation*}
-  f \otimes g(\vec{r}_1, \vec{r}_2) =
-  \int d\vec{r}' f(\vec{r}' - \vec{r}_1) g(\vec{r}' - \vec{r}_2).
-\end{equation*}
-\todo{Also, the standard convolution symbol is an asterisk, not an outer product.}
-Applying the convolution theorem allows the Fourier transform of \eqref{eq:fmt-direct-correlations-uniform-density} to be written rather succinctly as
-\begin{equation}
-  \tilde{c}^{(n)}(\vec{k}^n) =
-  - \sum_{\alpha_1, \alpha_2, \cdots, \alpha_n}
-  \partial^n_{\alpha_1, \alpha_2, \cdots, \alpha_n} \beta\Phi_{ex} \;
-  \left( \prod_{i=1}^n \widetilde{\omega}_{\alpha_i}(\vec{k}_i) \right)
-  \delta(\vec{k}_1 + \vec{k}_2 + \cdots + \vec{k}_n).
-\end{equation}
-The delta function enforces the `ring' condition $\sum_{i=1}^n \vec{k}_i = 0$ which emerges from translational symmetry of the weight functions%
-\marginfootnote{In the previous note this occurred by change of integration variables to a relative displacement, which was only possible because of this translational symmetry.}[-3cm],
-reducing the dimensionality of the domain by $d$.
-A further $d(d-1)/2$ degrees of freedom%
-\marginfootnote{This many degrees of freedom can be removed for general $n \ge d$, but there are fewer for $n < d$.
-  For example, $n=2$ arrangements (a dimer) are isomorphic to a line so they possess $d-1$ rotational degrees of freedom.}
-can be removed by exploiting rotational symmetry.
-
-From \cite{Rosenfeld1990}:
-\begin{align}
-  \widetilde{\omega}_0 &= \cos{(kR)} \\
-  \widetilde{\omega}_1 &= 2\frac{\sin{(kR)}}{k} \\
-  \widetilde{\omega}_0 &= \cos{(kR)}
-\end{align}
-
-White bear I:
-\begin{equation}
-  c^{(2)}(r)
-\end{equation}
-
-The Ornstein-Zernike equation
-\begin{equation}
-  h^{(2)}(\vec{r}) =
-  c^{(2)}(\vec{r}) +
-  \rho \int d\vec{r}' h^{(2)}(\vec{r}') c^{(2)}(\vec{r} - \vec{r}')
-\end{equation}
-in Fourier space
-\begin{equation*}
-  \tilde{h}^{(2)}(\vec{k}) =
-  \tilde{c}^{(2)}(\vec{k}) +
-  \rho \tilde{h}^{(2)}(\vec{k}) \tilde{c}^{(2)}(\vec{k})
-\end{equation*}
-after rearranging
-\begin{equation}
-  \tilde{h}^{(2)}(\vec{k}) =
-  \frac{\tilde{c}^{(2)}(\vec{k})}{1 - \rho \tilde{c}^{(2)}(\vec{k})}
-\end{equation}
-
-The two-point static structure factor
-\begin{equation}
-  \begin{aligned}
-    S^{(2)}(\vec{k}) &\equiv 1 + \rho \tilde{g}^{(2)}(\vec{k}) \\
-    &= 1 + \rho \delta(\vec{k}) + \rho \tilde{h}^{(2)}(\vec{k})
-  \end{aligned}
-\end{equation}
-
-\begin{SCfigure}[H]
-  \missingfigure[figwidth=\linewidth]{}
-  \caption{Static structure factor for convolution, Rosenfeld and White Bear closures.}
-\end{SCfigure}
-
-\begin{SCfigure}[H]
-  \missingfigure[figwidth=\linewidth]{}
-  \caption{Triplet static structure factors for convolution, Rosenfeld and White Bear closures.}
-\end{SCfigure}
-
-\section{Superposition and convolution approximations}
-
-In the Kirkwood superposition approximation \cite{Kirkwood1935} many-body correlations are expressed as pairwise products of the two-body correlation function, i.e.
-\begin{equation}
-  g^{(n)}(\vec{r}^n) =
-  \prod_{i < j} g^{(2)}(\vec{r}_i, \vec{r}_j),
-\end{equation}
-which correctly satisfies the hard-core condition, but violates the sum rule
-\begin{equation}
-  \begin{aligned}
-    \rho^{(n)}(\vec{r}^n) &=
-    \frac{1}{\Xi} \sum_{N=n}^\infty \frac{z^N}{(N-n)!} \int e^{-\beta U_N} \, d\vec{r}^{(N-n)} \\
-    &=
-    \frac{1}{N-n}
-    \int d\vec{r}_n \left(
-    \frac{1}{\Xi} \sum_{N=n}^\infty \frac{z^N}{(N-(n+1))!} \int e^{-\beta U_N} \, d\vec{r}^{(N-(n+1))}
-    \right) \\
-    &=
-    \frac{1}{N-n}
-    \int \rho^{(n+1)}(\{\vec{r}^n, \vec{r}_{n+1}\}) d\vec{r}_{n+1},
-  \end{aligned}
-\end{equation}
-and the related convolution approximation \cite{Jackson1962,Ichimaru1970,Barrat1988}%
-\todo{Check this expression is correct - it almost certainly is not.}
-\begin{equation}
-  S^{(n)}(\vec{k}^n) =
-  (1 + \tilde{c}^{(n)}(\vec{k}^n))
-  \prod_{i < j} S^{(2)}(\vec{k}_i, \vec{k}_j)
-\end{equation}
-satisfies the sum rule but fails to satisfy the hard-core condition.
-
-%% In equilibrium
-%% \begin{equation}
-%%   c^{(n)}(\vec{r}^n) =
-%%   \left.
-%%   \frac{\delta^n \beta F_{ex}}{\delta \rho(\vec{r}_1)\delta \rho(\vec{r}_2) \cdots \delta \rho(\vec{r}_n)}
-%%   \right|_{\rho(\vec{r})=\rho}
+%% The connection between intrinsic volumes and thermodynamics was made by K\"onig et al \cite{KonigPRL2004}.
+%% They argued that $\Delta \Omega$ possesses all three properties above, so it must be expressable as a linear sum of the volumes $\{V_k\}$ through the theorem of Hadwiger \cite{Hadwiger1957}.
+%% In this case we say that the insertion cost of a solute $K$ is of \emph{morphometric form} and can be written as
+%% \begin{equation}\label{eq:morph-ansatz}
+%%   \Delta \Omega[K] = \sum_{k=0}^d a_k V_k(K)
 %% \end{equation}
 
-\section{Accuracy of predicted distribution functions in $d = 3$}
+%% Given the plausibilty of the rigid-motion invariance and continuity, additivity is the most highly restrictive condition on $\Delta \Omega$.
+%% In section~\ref{sec:finite-densities} we obtain a contribution to the insertion cost which \emph{is} strictly additive, but it is not the only term in $\Delta\Omega$ except in limiting cases which we will discuss in subsequent sections.
+%% %Additionally, for soft interaction potentials we do not expect it to hold exactly in any limit.
+%% On the other hand, additivity implies extensivity and on thermodynamic grounds we generally expect extensivity to hold for very large objects; as such, it is plausible for additivity to hold in general in the limit of large solutes.
+%% Nevertheless, there is much evidence that the additivity assumption is not exact in hard spheres
+%% \cite{LairdPRE2012,BlokhuisPRE2013,UrrutiaPRE2014,Hansen-GoosJCP2014}.
+%% In particular, comparison of the cluster expansion of $\Delta \Omega$ for spheres and cylinders shows unambiguous deviations from morphometric form which do not disappear in the large solute limit \cite{UrrutiaPRE2014}.
+%% These deviations were found to be small for hard spheres, so while approximate it seems to be a useful assumption.
 
-\begin{SCfigure}[h]
- \includegraphics[width=\linewidth]{g2_phi045}
- \caption{$g^{(2)}(r)$ for $\eta = 0.45$.}
+\section{Obtaining thermodynamic coefficients}
+\label{sec:spt}
+
+We will consider a single-component hard sphere fluid, for particles of diamter $\sigma$ and bulk volume fraction $\eta$.
+We will take the morphometric \emph{ansatz} \eqref{eq:morph-ansatz} and obtain coefficients for this system using scaled particle arguments.
+However, unlike the classical arguments this \emph{ansatz} is more general in its scope; we will exploit this feature of the morphometric approach to construct new theories suitable for the treatment of many-body correlations with high accuracy.
+Before we obtain new coefficients we will rederive the classical SPT and the White Bear II coefficients.
+The latter set of coefficients was originally obtained as a limiting case of FMT \cite{Hansen-GoosJPCM2006}; here we obtain them through purely scaled particle arguments, which lays the groundwork for construction of the new coefficients.
+
+All coefficients we give are for the molecular geometry bounded by the \emph{molecular surface} ($\partial \mathcal{L}_1$ in Fig.\ \ref{fig:system}b), the surface where interactions occur between the solute and a test particle representing the remaining liquid.
+However, it is usually more convenient to do calculations with the excluded geometry: the space inaccessible to the \emph{center} of a test particle bounded by the \emph{solvent accessible surface} ($\partial \mathcal{L}_2$ in Fig.\ \ref{fig:system}b).
+Note that there is also an infinite family of well-defined parallel surfaces between these two extremes, but they are not widely used in practice so we will not consider them \cite{OettelEL2009}.
+The choice of dividing surface will change the surface tension, and thus requires new coefficients $\{a_0', a_1', a_2'\}$ i.e.\
+\begin{equation}
+  \Delta\Omega[K]
+  =
+  p V_+[K]
+  + a_2' A_+[K]
+  + a_1' C_+[K]
+  + a_0' X_+[K],
+\end{equation}
+where the excluded geometry terms transform via the canonical relations \cite{Hansen-GoosJPCM2006,OettelEL2009,Santalo2004,Klain1997}
+\begin{subequations}\label{eq:exclusion-transform-volumes}
+  \begin{align}
+    X_+[K]
+    &=
+    X[K],
+    \\
+    C_+[K]
+    &=
+    C[K] + \frac{\sigma}{2} X[K],
+    \\
+    A_+[K]
+    &=
+    A[K] + \sigma C[K] + \frac{\sigma^2}{4} X[K],
+    \\
+    V_+[K]
+    &=
+    V[K]
+    + \frac{\sigma}{2} A[K]
+    + \frac{\sigma^2}{4} C[K]
+    + \frac{\sigma^3}{24} X[K].
+  \end{align}
+\end{subequations}
+%$+$-subscripts on the geometric terms indicate that they are for the exclusion geometry.
+It is straightforward to transform between these two conventions via \cite{Hansen-GoosJPCM2006,OettelEL2009}
+\begin{subequations}\label{eq:exclusion-transform}
+  \begin{align}
+    a_0'
+    &=
+    a_0
+    - \frac{\sigma}{2} a_1
+    + \frac{\sigma^2}{4} a_2
+    - \frac{\sigma^3}{24} p,
+    \\
+    a_1'
+    &=
+    a_1
+    - \sigma a_2
+    + \frac{\sigma^2}{4} p,
+    \\
+    a_2'
+    &=
+    a_2 - \frac{\sigma}{2} p.
+  \end{align}
+\end{subequations}
+The resulting $\Delta \Omega$ will be identical whichever surface is chosen, except when there is a topological change in the molecular surface marking the breakdown of the theory; this is discussed in detail in Ref.\ \cite{OettelEL2009}.
+
+A crucial component of scaled particle approaches is thermodynamic consistency of the (osmotic) pressure via
+\begin{equation}\label{eq:osmotic-consistency-1}
+  \beta p
+  =
+  \rho - \beta f^\mathrm{ex}
+  + \rho \left( \frac{\partial \beta f^\mathrm{ex}}{\partial \rho} \right)_{V,T}
+\end{equation}
+where $f^\mathrm{ex} = F^\mathrm{ex}/V$ is the (excess) free energy density.
+The form most useful for a single-component system comes from taking the derivative with respect to density, and noting the definition of the excess chemical potential
+\begin{equation*}
+  \beta \mu^\mathrm{ex}
+  =
+  \left( \frac{\beta f^\mathrm{ex}}{\partial \rho} \right)_{V,T},
+\end{equation*}
+giving
+\begin{equation}\label{eq:osmotic-consistency-2}
+  %\begin{split}
+    \left( \frac{\partial \beta p}{\partial \rho} \right)_{V,T}
+    %&=
+    =
+    \rho \left( \frac{\partial \beta \mu}{\partial \rho} \right)_{V,T}
+    %\\
+    =
+    1 + \rho \left( \frac{\partial \beta \mu^\mathrm{ex}}{\partial \rho} \right)_{V,T}.
+  %\end{split}
+\end{equation}
+Note that the consistency relation \eqref{eq:osmotic-consistency-1} provides the route to generalising all of the arguments to arbitrary mixtures \cite{RosenfeldPRL1989,SollichAiCP2001,SantosPRE2012}.
+The free energy remains well-defined, even for polydisperse mixtures, if the composition dependence enters only through a set of weighted moments of the density $\{\xi_k\}$.
+Then \eqref{eq:osmotic-consistency-1} becomes
+\begin{equation}\label{eq:osmotic-consistency-3}
+  \beta p
+  %% &=
+  %% \rho - \beta f^\mathrm{ex}
+  %% + \rho \left( \frac{\partial \beta f^\mathrm{ex}}{\partial \rho} \right)_{V,T}
+  %% \\ &=
+  =
+  \rho - \beta f^\mathrm{ex}
+  + \sum_k
+  \xi_k \left( \frac{\partial \beta f^\mathrm{ex}}{\partial \xi_k} \right)_{V,T}.
+\end{equation}
+For weighted densities consistent with an SPT (or FMT) approach, it has been shown Ref.\ \cite{SantosPRE2012} that the thermodynamic coefficients for mixtures are determined once an equation of state for the single-component system is known.
+
+\subsection{Classical scaled particle relations}
+\label{sec:classical-spt}
+
+\begin{SCfigure}
+  \begin{minipage}{\linewidth}
+    \centering
+    \includegraphics[width=0.75\linewidth]{g2-contact}
+  \end{minipage}
+  \caption{
+    Contact values of the radial distribution function against volume fraction $\eta$ and reduced pressure for the hard sphere liquid using \eqref{eq:contact-g} with \eqref{eq:distribution-solvation} and \eqref{eq:morph-ansatz} for the explicit form of $g^{(2)}$, assuming the Carnahan-Starling (CS) equation of state.
+    Contact values are determined with two sets of morphometric coefficients: SPT/CS (section \ref{sec:cs-spt}, specifically \eqref{eq:cs-spt-coefficients}, or equivalently the White Bear II bulk coefficients of Ref.\ \cite{Hansen-GoosJPCM2006}) which performs poorly in the supercooled regime (shaded area), and coefficients derived in this chapter (section \ref{sec:virial-spt}) using the virial theorem which is exact by construction.
+    The hard sphere freezing and melting volume fractions are indicated by purple dashed lines to show the onset of the supercooled regime.
+  }
+  \label{fig:contact-g}
 \end{SCfigure}
 
-\subsection{Comparison with molecular dynamics simulations}
-\subsection{Comparison with Kirkwood superposition approximation}
+The key advantage of a geometric expansion of the free energy is that the role of thermodynamics and geometry are kept separate.
+Thermodynamics only enters through the coefficients $\{p,a_2,a_1,a_0\}$, so they can be determined in simple geometries to obtain a general theory.
+After determining these coefficients all the complexity of computing $\Delta \Omega$ is reduced to measuring the geometric quantities $\{V,A,C,X\}$ of the specific solute.
+
+Following the protocol of scaled particle theories, we consider the insertion of a hard spherical solute of radius $R$ into the liquid.
+Assuming the morphometric form for the insertion cost returns us to the \emph{ansatz} \eqref{eq:spt-ansatz}.
+The approximate theory is linear so we need \emph{only} 4 equations to set the thermodynamic coefficients.
+With many thermodynamic relations to choose from the theory is overconstrained in general.
+We must use physical intuition to choose suitable equations, after which the accuracy of the resulting coefficients can be assessed.
+Below we give the exact thermodynamic relations for hard spheres which produce the classical SPT coefficients.
+
+It is possible to consider the insertion of a solute with a \emph{negative} radius: the hard core interaction between the two particles only occurs when the solute is `inside' a solvent particle.
+In this limit the insertion cost can be determined exactly as \cite{ReissJCP1959}
+\begin{equation}
+  \beta \Delta \Omega =
+  -\ln{\left(
+    1 - \frac{4\pi \left(R + \frac{\sigma}{2}\right)^3}{3} \rho
+    \right)}
+\end{equation}
+for $-\frac{\sigma}{2} \le R \le 0$.
+It may appear concerning that this result does not possess the morphometric form \eqref{eq:morph-ansatz}; however, this does not discount the validity of the morphometric approach as the nonphysical geometry violates the continuity assumption (section~\ref{sec:morphometric-approach}) because it cannot be approximated by polyhedra.
+This places the result for $R < 0$ outside the theory's stated regime of validity, however $\Delta\Omega$ is continuous up to its second derivative across $R=0$ with a discontinuity in its third derivative \cite{ReissJCP1959}.
+In the limit $R \to 0$ the expression above corresponds to the cost of inserting a hard point giving
+\begin{subequations}\label{eq:spt-origin-continuity}
+  \begin{align}
+    \label{eq:spt-point}
+    \beta \Delta\Omega(R=0)
+    &=
+    -\ln{(1- \eta)},
+    \\
+    \label{eq:spt-point-d1}
+    \beta \left. \left(
+    \frac{\partial \Delta\Omega}{\partial R}
+    \right)_{\mu, V, T} \right|_{R=0}
+    &=
+    \frac{6\eta}{\sigma (1- \eta)},
+    \\
+    \label{eq:spt-point-d2}
+    \beta \left. \left(
+    \frac{\partial^2 \Delta\Omega}{\partial R^2}
+    \right)_{\mu, V, T} \right|_{R=0}
+    &=
+    \frac{12\eta^2 + 24\eta}{\sigma^2 (1- \eta)^2}.
+ \end{align}
+\end{subequations}
+Note that \eqref{eq:spt-point} can also be justified by considering that the probability of a randomly selected position in space being empty is simply the free volume $1-\eta$.
+
+Together applying \eqref{eq:spt-origin-continuity} to \eqref{eq:spt-ansatz} fixes the coefficients $\{a_0, a_1, a_2\}$, so the theory requires an additional thermodynamic relation to determine the pressure.
+When $R = \frac{\sigma}{2}$ the solute is equivalent to the solvent particles themselves and we recover $\Delta\Omega = \mu^\mathrm{ex}$, so from \eqref{eq:spt-ansatz} we have
+\begin{equation}\label{eq:spt-mu}
+  \Delta\Omega\left(R=\frac{\sigma}{2}\right) =
+  \frac{\pi \sigma^3}{6} p
+  + \pi \sigma^2 \, a_2
+  + 2 \pi \sigma \, a_1
+  + 4\pi \, a_0
+  =
+  \mu^\mathrm{ex}.
+\end{equation}
+Combining this expression with the thermodynamic relation \eqref{eq:osmotic-consistency-2} gives a differential equation for $\beta p$ whose solution gives the classical SPT coefficients for hard spheres as \cite{ReissJCP1959,LebowitzJCP1965}
+\begin{subequations}\label{eq:py-coefficients}
+  \begin{align}
+    \beta a_0^\mathrm{SPT/PY}
+    &=
+    -\frac{\ln{(1- \eta)}}{4\pi}, \\
+    \beta a_1^\mathrm{SPT/PY}
+    &=
+    \frac{3\eta}{2\pi \sigma (1- \eta)},
+    \\
+    \beta a_2^\mathrm{SPT/PY}
+    &=
+    \frac{6\eta + 3\eta^2}{2\pi \sigma^2 (1- \eta)^2},
+    \\
+    \frac{\beta p^\mathrm{SPT/PY}}{\rho}
+    &=
+    \frac{1 + \eta + \eta^2}{(1 - \eta)^3}.
+    \label{eq:py-pressure}
+ \end{align}
+\end{subequations}
+The equation of state \eqref{eq:py-pressure} is equivalent to the one obtained through the solution of the Percus-Yevick (PY) integral equation \cite{WertheimPRL1963}; these two routes have been unified within FMT \cite{RosenfeldPRL1989}.
+
+Before we move on to generalisations of SPT, we will review one more thermodynamic relation which is satisfied by the classical solution \eqref{eq:py-coefficients}.
+This emphasises the remarkable degree of self-consistency of SPT, and the additional relation will be used to construct new theories in subsequent sections.
+
+We can relate the radial derivative of $\Delta\Omega(R)$ to the solvent density at contact; by connecting this to the virial theorem we can obtain a new thermodynamic relation.
+Following Ref.\ \cite{BrykPRE2003} we take the normal derivative of $\Omega$ with respect to $R$, and noting that $\Delta\Omega(R) = \Omega(R) - \Omega_\mathrm{hom}$ gives
+\begin{equation}\label{eq:spt-derivative}
+  \begin{split}
+    \left( \frac{\partial \Delta \Omega}{\partial R} \right)_{\mu,V,T}
+    =&
+    \left( \frac{\partial \Omega}{\partial R} \right)_{\mu,V,T}
+    \\ =&
+    \int
+    \frac{\delta \Omega[\rho^{(1)}(\vec{r})]}{\delta \rho}
+    \left( \frac{\partial \rho^{(1)}(\vec{r})}{\partial R} \right)_{\mu,V,T}
+    \, d\vec{r}
+    \\ &
+    + \int
+    \rho^{(1)}(\vec{r})
+    \left( \frac{\partial \phi_\mathrm{ext}(\vec{r}; R)}{\partial R} \right)_{\mu,V,T}
+    \, d\vec{r},
+  \end{split}
+\end{equation}
+where $\phi_\mathrm{ext}$ is the external potential (i.e.\ the potential of the solute).
+As a reminder, we defined $\rho^{(1)}$ as the equilibrium density profile in \eqref{eq:single-particle-density}.
+In equilibrium $\Omega$ is minimised \eqref{eq:dft-equilibrium} so the first integral in \eqref{eq:spt-derivative} vanishes.
+As the solute is hard, the external potential and its derivative are zero everywhere except at a distance $\frac{\sigma}{2}$ from the surface where both $\rho^{(1)}$ and $\phi_\mathrm{ext}$ are discontinuous.
+We consider its Boltzmann weight, i.e.\
+\begin{equation*}
+  e^{-\beta\phi_\mathrm{ext}(\vec{r})}
+  =
+  \Theta\left( |\vec{r}| - R - \frac{\sigma}{2} \right).
+\end{equation*}
+Taking the (distributional) derivative of both sides gives
+\begin{equation*}
+  \beta\left( \frac{\partial\phi_\mathrm{ext}(\vec{r})}{\partial R} \right)_{\mu,V,T}
+  =
+  \delta\left( |\vec{r}| - R - \frac{\sigma}{2} \right)
+  e^{\beta\phi_\mathrm{ext}(\vec{r})}.
+\end{equation*}
+Inserting this expression into \eqref{eq:spt-derivative} and using the fact that $\rho^{(1)}(\vec{r}) e^{\beta\phi_\mathrm{ext}(\vec{r})}$ is a continuous function (cf.\ Ref.\ \cite{Hansen2013}) gives the contact theorem
+\begin{equation*}
+  \beta \left( \frac{\partial \Omega}{\partial R} \right)_{\mu,V,T}
+  =
+  4\pi \left( R + \frac{\sigma}{2} \right)^2
+  \rho^{(1)}\left( R + \frac{\sigma}{2} \right)
+\end{equation*}
+and the contact density in this inhomogeneous system is $\rho^{(1)}(\sigma; \phi_\mathrm{ext}) := \rho^{(2)}(\sigma)/\rho = \rho \, g^{(2)}(\sigma)$ recalling the definition of $\rho^{(n)}$ for the homogeneous system%
+\marginfootnote{This is argument, due to Percus \cite{PercusPRL1962}, is ordinarily used to construct integral equation theories (cf.\ Ch.\ 4 of Ref.\ \cite{Hansen2013}).}
+\eqref{eq:n-particle-density-pdf}, so we have
+\begin{equation*}\label{eq:spt-contact-density}
+  \begin{split}
+    \left. \beta \left( \frac{\partial \Delta \Omega}{\partial R} \right)_{\mu,V,T}
+    \right|_{R = \frac{\sigma}{2}}
+    &=
+    \left. \beta \left( \frac{\partial \Omega}{\partial R} \right)_{\mu,V,T}
+    \right|_{R = \frac{\sigma}{2}}
+    \\ &=
+    4\pi \sigma^2 \rho \, g^{(2)}(\sigma).
+  \end{split}
+\end{equation*}
+So inserting the SPT \emph{ansatz} \eqref{eq:spt-ansatz} gives
+\begin{equation}\label{eq:spt-virial-g}
+  \pi \sigma^2 \, p
+  + 4\pi \sigma \, a_2
+  + 4\pi \, a_1
+  =
+  \frac{4\pi \sigma^2 \rho}{\beta} \, g^{(2)}(\sigma).
+\end{equation}
+The \emph{virial theorem} gives the value of $g^{(2)}(r)$ at contact as \cite{Hansen2013}
+\begin{equation}\label{eq:contact-g}
+  g^{(2)}(\sigma) =
+  \frac{3}{2\pi \sigma^3 \rho} \left( \frac{\beta p}{\rho} - 1 \right),
+\end{equation}
+which we insert into the right-hand side of \eqref{eq:spt-virial-g} to obtain the final expression:
+\begin{equation}\label{eq:spt-virial}
+  \pi \sigma^2 \, p
+  + 4\pi \sigma \, a_2
+  + 4\pi \, a_1
+  =
+  \frac{6}{\beta\sigma} \left( \frac{\beta p}{\rho} - 1 \right).
+\end{equation}
+This relation is satisfied by the coefficients \eqref{eq:py-coefficients}, which is surprising given that it was obtained from a completely different thermodynamic route and the \emph{ansatz} \eqref{eq:spt-ansatz} is inexact.
+Nonetheless, this self-consistency is a testament to the effectiveness of SPT and related approaches.
+
+\begin{SCfigure}
+  \begin{minipage}{\linewidth}
+    \centering
+    \includegraphics[width=0.75\linewidth]{g2-phi045}
+  \end{minipage}
+  \caption{Comparing radial distribution functions of the morphometric theories with coefficients of \eqref{eq:cs-spt-coefficients} (SPT/CS), equivalent to the White Bear II in the bulk limit \cite{Hansen-GoosJPCM2006}; and \eqref{eq:virial-coefficients} with the Carnahan-Starling equation of state \eqref{eq:cs-pressure} (virial/CS), against results of molecular dynamics (MD) simulations at volume fraction $\eta = 0.45$.
+    The inset shows the difference between the two theoretical distribution functions and the molecular dynamics.
+    The purple dashed line indicates where the molecular surface self-intersects at $r = \sqrt{3} \sigma$, marking the end of the theory's regime of validity.}
+  \label{fig:g2-full}
+\end{SCfigure}
+
+\subsection{First generalisation: SPT with an empirical equation of state}
+\label{sec:cs-spt}
+
+In the classical SPT approach described in the previous section, the SPT/PY equation of state emerges as an \emph{output} of the theory.
+Taking inspiration from the White Bear free energy functional \cite{RothJPCM2002}, we reformulate the SPT argument so that the equation of state is an \emph{input} to the theory.
+In so doing we aim to construct a theory from a more accurate equation of state, with the trade-off being that we must sacrifice some self-consistency.
+The main equation of state we will impose is the Carnahan-Starling (CS) relation \cite{CarnahanJCP1969}\todo{Move equations of state into the background chapter.}
+\begin{equation}\label{eq:cs-pressure}
+  \frac{\beta p}{\rho} = \frac{1 + \eta + \eta^2 - \eta^3}{(1-\eta)^3},
+\end{equation}
+which is known to be accurate across the whole stable liquid regime, and even at the limits of the supercooled liquid accessible to simulations \cite{BerthierPRL2016}.
+%The price we pay for a more accurate equation of state will be the loss of self consistency; we will no longer be able to satisfy all five of the previous equations \eqref{eq:spt-origin-continuity}, \eqref{eq:spt-mu-density-derivative} and \eqref{eq:spt-virial} simultaneously.
+%Instead we must make some choice over which ones to retain.
+Since the pressure is now a known input, the excess chemical potential can be determined by integrating \eqref{eq:osmotic-consistency-2} i.e.\
+\begin{equation}\label{eq:excess-chemical-potential}
+  \beta \mu^\mathrm{ex}[p]
+  = \left( \frac{\beta p}{\rho} - 1 \right)
+  + \int_0^\eta \left( \frac{\beta p}{\rho} - 1 \right) \, \frac{d\eta'}{\eta'}.
+\end{equation}
+To keep the expressions simple we will not evaluate the chemical potential until the very end, but it should be recognised as a known variable wherever it appears.
+%% In particular, for the CS equation of state \eqref{eq:cs-pressure} this yields
+%% \begin{equation}\label{eq:cs-mu}
+%%   \beta \mu^\mathrm{ex} = \frac{8\eta - 9\eta^2 + 3\eta^3}{(1-\eta)^3}.
+%% \end{equation}
+
+With the pressure fixed we have three free parameters in the theory $\{a_0, a_1, a_2\}$;
+we must thus choose three out of the five available thermodynamic relations in \eqref{eq:spt-origin-continuity}, \eqref{eq:spt-mu} and \eqref{eq:spt-virial} to satisfy%
+\marginfootnote{Attempting to satisfy \emph{all} relations would necessarily require the previously obtained pressure \eqref{eq:py-pressure}.}.
+Therefore, we must lose consistency with two of these relations to obtain a more accurate theory for practical applications.
+
+To set the correct energy scale we choose to fix $\Delta \Omega(R=0)$ and $\Delta \Omega(R=\sigma/2)$ through equations \eqref{eq:spt-point} and \eqref{eq:spt-mu} using the chemical potential determined above in \eqref{eq:excess-chemical-potential}.
+This in turn imposes the consistency of the osmotic pressure \eqref{eq:osmotic-consistency-1}.
+For the final equation we choose to set the contact value of $g^{(2)}$ through \eqref{eq:spt-virial} which better represents solutes of interest than the two relations for point geometries at $R=0$.
+%where the geometry is smaller than typical solutes of interest.
+%occur at larger lengthscales than point insertions it makes sense to favour relations emphasising accuracy for $R \gtrsim \sigma/2$.
+Solving these three equations gives the generalised SPT coefficients
+% \eqref{eq:spt-point}, \eqref{eq:spt-mu} and \eqref{eq:spt-virial}
+\begin{subequations}\label{eq:general-spt-coefficients}
+  \begin{align}
+    \beta a_0^\mathrm{SPT}
+    &=
+    -\frac{\ln{(1- \eta)}}{4\pi},
+    \\
+    \beta a_1^\mathrm{SPT}
+    &=
+    \frac{1}{2\pi\sigma} \left(
+    (\eta - 3) \frac{\beta p}{\rho}
+    + 2 \beta \mu^\mathrm{ex}[p]
+    + \ln{(1 - \eta)}
+    + 3
+    \right),
+    \\
+    \beta a_2^\mathrm{SPT}
+    &=
+    - \frac{1}{\pi \sigma^2} \left(
+    (2 \eta - 3) \frac{\beta p}{\rho}
+    + \beta \mu^\mathrm{ex}[p]
+    + \ln{(1 - \eta)}
+    + 3
+    \right).
+ \end{align}
+\end{subequations}
+It can be verified that inserting the Percus-Yevick equation of state \eqref{eq:py-pressure} into these expressions yields the previously obtained coefficients \eqref{eq:py-coefficients}, as expected.
+For the CS equation of state we obtain
+\begin{subequations}\label{eq:cs-spt-coefficients}
+  \begin{align}
+    \beta a_0^\mathrm{SPT/CS}
+    &=
+    -\frac{\ln{(1- \eta)}}{4\pi},
+    \\
+    \beta a_1^\mathrm{SPT/CS}
+    &=
+    \frac{1}{2\pi\sigma} \left(
+    \frac{5 + \eta}{1 - \eta}
+    + 2 \ln{(1 - \eta)}
+    \right),
+    \\
+    \beta a_2^\mathrm{SPT/CS}
+    &=
+    \frac{1}{\pi \sigma^2} \left(
+    \frac{\eta (2 + 3\eta - 2\eta^2)}{(1 - \eta)^2}
+    - \ln{(1 - \eta)}
+    \right),
+    \\
+    \frac{\beta p^\mathrm{SPT/CS}}{\rho}
+    &=
+    \frac{1 + \eta + \eta^2 - \eta^3}{(1-\eta)^3},
+ \end{align}
+\end{subequations}
+which are \emph{identical} to the coefficients derived from the WBII free energy functional in Ref.\ \cite{Hansen-GoosJPCM2006}, although this is only clear after transforming to the excluded geometry through the canonical relations \eqref{eq:exclusion-transform}.
+Remarkably, we have obtained these coefficients through a route completely different from their original derivation.
+
+In Ref.\ \cite{Hansen-GoosJPCM2006} the coefficients were determined within FMT by taking the limit of a binary mixture where one component is infinitely dilute.
+Here we completely avoided FMT, in favour of geometrical arguments similar to the classical SPT approach outlined in the previous section.
+This suggests that this generalised scaled particle argument is built into the structure of the FMT functional (WBII) of Ref.\ \cite{Hansen-GoosJPCM2006}; this is not an obvious fact as the derivation of the WBII functional did not explicitly involve these arguments.
+Rather, the WBII functional was constructed based on a novel extension of the CS equation to mixtures by requiring self-consistency of the pressure in \eqref{eq:osmotic-consistency-3} \cite{Hansen-GoosJCP2006}.
+%The fact that these two routes lead to the same thermodynamic coefficients suggests there is an equivalence between the selected thermodynamic relations.
+We imposed this relation by setting the chemical potential in \eqref{eq:spt-mu} using the chemical potential obtained via \eqref{eq:osmotic-consistency-2}.
+It is unclear to us how our final choice of using \eqref{eq:spt-mu} instead of one of the two relations at the origin, i.e.\ \eqref{eq:spt-point-d1} or \eqref{eq:spt-point-d2}, is built into the WBII functional.
+
+Finally, note that the resulting $g^{(2)}$ obtained from direct evaluation of the potential of mean force \eqref{eq:potential-mean-force} with the SPT/CS coefficients performs poorly in the supercooled regime compared with the ``exact'' result from the virial theorem i.e.\ equation \eqref{eq:contact-g}.
+To demonstrate this we plot the contact value in Fig.\ \ref{fig:contact-g} for this set of coefficients, finding that it is reasonably accurate until around the freezing density where contact correlations spuriously decay.
+The next section will detail how to modify this argument to produce coefficients which describe more accurate correlation functions at high densities.
+
+\begin{SCfigure}
+  \begin{minipage}{\linewidth}
+    \centering
+    \includegraphics[width=0.75\linewidth]{g3}
+  \end{minipage}
+  \caption{Comparison of predicted correlations for triangular geometries against molecular dynamics simulations at volume fraction $\eta = 0.45$.}
+  \label{fig:g3}
+\end{SCfigure}
+
+\subsection{Second generalisation: self-consistency of the contact value of $g(r)$ with the virial equation}
+\label{sec:virial-spt}
+
+Our goal is to develop a morphometric theory which produces accurate correlation functions $g^{(n)}$.
+As described at the end of the last section, the correlation functions produced by an SPT approach are inaccurate at high densities.
+We will correct the spurious decay of the contact value of the $g^{(2)}(r)$ at high densities by building this into the theory explicitly, with the aim of producing more accurate correlation functions.
+
+%% This represents a significant departure from strictly scaled particle arguments, 
+%% The great strength of the morphometric approach over scaled particle arguments is that we are not restricted to purely rescaling; in principle the form should be valid for arbitrary geometries.
+%% We can use this strength of the morphometric approach to construct a new theory which satisfies the virial theorem.}
+
+The potential of mean force \eqref{eq:potential-mean-force} for non-overlapping spheres with the morphometric \emph{ansatz} \eqref{eq:morph-ansatz} is written
+\begin{equation}\label{eq:phi2}
+  \begin{split}
+    \phi^{(2)}(r)
+    :=&
+    - k_B T \ln g^{(2)}(r)
+    \\ =&
+    p V_3(r) + a_2 A (r) + a_1 C(r) + a_0 X(r) - 2\mu^\mathrm{ex}[p]
+  \end{split}
+\end{equation}
+so we need the size measures for the two particle solute resembling a ``dumbbell''.
+It is easier to calculate the excluded volume geometry, after which we can obtain the molecular volumes using the canonical relations given in e.g.\ Ref.\ \cite{OettelEL2009}.
+The excluded volume consists of the union of two balls of radius $\sigma$ separated by a distance $r$.
+The geometric properties at contact are then \cite{OettelEL2009}
+\begin{align*}
+  X_+(\sigma)
+  &=
+  4 \pi
+  \\
+  C_+(\sigma)
+  &=
+  \left( 6 - \frac{\pi}{2\sqrt{3}} \right) \pi \sigma,
+  \\
+  A_+(\sigma)
+  &=
+  6 \pi \sigma^2,
+  \\
+  V_+(\sigma)
+  &=
+  \frac{9 \pi \sigma^3}{4}.
+\end{align*}
+Transforming to the parallel molecular surface using the inverse transformation of \eqref{eq:exclusion-transform-volumes} gives the solute parameters as
+\begin{subequations}
+  \begin{align}
+    C(\sigma)
+    &=
+    \left( 4 - \frac{\pi}{2\sqrt{3}} \right) \pi \sigma,
+    \\
+    A(\sigma)
+    &=
+    \left( 1 + \frac{\pi}{2\sqrt{3}} \right) \pi \sigma^2,
+    \\
+    V(\sigma)
+    &=
+    \left( \frac{7}{12} - \frac{\pi}{8\sqrt{3}} \right) \pi \sigma^3.
+  \end{align}
+\end{subequations}
+Inserting these volumes into \eqref{eq:phi2} and applying the virial theorem \eqref{eq:contact-g} for the contact value of $g^{(2)}$ gives the final expression
+\begin{align}\label{eq:v-virial}
+  &
+  p \left( \frac{7}{12} - \frac{\pi}{8\sqrt{3}} \right) \pi \sigma^3
+  + a_2 \left( 1 + \frac{\pi}{2\sqrt{3}} \right) \pi \sigma^2
+  + a_1 \left( 4 - \frac{\pi}{2\sqrt{3}} \right) \pi \sigma
+  + a_0 \, 4\pi
+  \nonumber \\ = \; &
+  2\mu^\mathrm{ex}[p] - \beta^{-1} \ln{\frac{3}{2\pi \rho \sigma^3} \left( \frac{\beta p}{\rho} - 1 \right)}.
+\end{align}
+We will use this last expression instead of the contact theorem \eqref{eq:spt-virial} in order to obtain new coefficients.
+Together \eqref{eq:spt-point}, \eqref{eq:spt-mu} and \eqref{eq:v-virial} solve to give coefficients:
+\begin{subequations}\label{eq:virial-coefficients}
+  \begin{align}
+    \beta a_0^\mathrm{virial}
+    &=
+    -\frac{\ln{(1- \eta)}}{4\pi},
+    \\
+    \beta a_1^\mathrm{virial}
+    &=
+    \frac{1}{(\sqrt{3}\pi - 4)\pi\sigma}
+    \left[
+    \vphantom{\ln{\left( \frac{\frac{\beta p}{\rho} - 1 }{4\eta} \right)}}
+    \left(5 - \frac{5\pi}{2\sqrt{3}}\right)
+    \eta \frac{\beta p}{\rho}
+    - \left( 2 - \frac{\pi}{\sqrt{3}} \right) \beta \mu^\mathrm{ex}[p]
+    \right.
+    \nonumber \\
+    & \qquad \qquad \qquad \qquad
+    \left.
+    + \frac{\pi}{\sqrt{3}} \ln{(1 - \eta)}
+    + 2 \ln{\left( \frac{\frac{\beta p}{\rho} - 1 }{4\eta} \right)}
+    \right],
+    \\
+    \beta a_2^\mathrm{virial}
+    &=
+    - \frac{1}{(\sqrt{3}\pi - 4)\pi \sigma^2}
+    \left[
+    \vphantom{\ln{\left( \frac{\frac{\beta p}{\rho} - 1 }{4\eta} \right)}}
+    \left(6 - \frac{2\pi}{\sqrt{3}}\right)
+    \eta \frac{\beta p}{\rho}
+    - \frac{\pi}{\sqrt{3}} \beta \mu^\mathrm{ex}[p]
+    \right.
+    \nonumber \\
+    & \qquad \qquad \qquad
+    \left.
+    + \left( 4 - \frac{\pi}{\sqrt{3}} \right) \ln{(1 - \eta)}
+    + 4 \ln{\left( \frac{\frac{\beta p}{\rho} - 1 }{4\eta} \right)}
+    \right].
+ \end{align}
+\end{subequations}
+We refer to coefficients obtained this way for the CS pressure \eqref{eq:cs-pressure} as virial/CS, but we will not give them explicitly.
+Unlike the WBII coefficients above these are new.
+The pair correlation produced by these coefficients (black line in Fig.\ \ref{fig:contact-g}) is self-consistent with CS at contact by construction.
+
+\begin{SCfigure}
+  \begin{minipage}{\linewidth}
+    \centering
+    \includegraphics[width=0.75\linewidth]{sp3}
+  \end{minipage}
+  \caption{Concentration of triangles in the hard sphere liquid with side lengths $r,s,t \in [\sigma, \sigma + \delta]$ versus volume fraction.
+    Direct measurements by molecular dynamics using a single-component system and an 8\% polydisperse system, while the lines show predictions from the morphometric theories described in text.
+    The hard sphere freezing and melting volume fractions are indicated by pink dashed lines to show the onset of the supercooled regime.
+    Inset: contact value of $g^{(3)}$ showing how the errors in the SPT/CS theory arise from underestimation close to contact.}
+  \label{fig:sp3}
+\end{SCfigure}
+
+\begin{SCfigure}
+  \begin{minipage}{\linewidth}
+    \centering
+    \includegraphics[width=0.75\linewidth]{a2-errors}
+  \end{minipage}
+  \caption{Errors in different morphometric theories for hard spheres.
+    Top panel: error in the coordination defined in \eqref{eq:coordination}, giving the average number of neighbours in the shell $r < 1.4\sigma$ around a particle.
+    Bottom panel: planar surface tensions against volume fraction, using the highly accurate result \eqref{eq:quasi-exact-surface-tension} from Ref.\ \cite{DavidchackMP2015} valid until $\eta \sim 0.5$.
+  The theories compared are virial/CS, new coefficients given in \eqref{eq:virial-coefficients}; SPT/CS, equivalent to the White Bear II \cite{Hansen-GoosJPCM2006} given in \eqref{eq:cs-spt-coefficients}; and SPT/PY, the classical scaled particle theory \cite{ReissJCP1959} given in \eqref{eq:py-coefficients}.}
+  \label{fig:surface-tension}
+\end{SCfigure}
+
+\section{Numerical results}
+\label{sec:numerics}
+
+We apply the thermodynamic coefficients determined in previous sections for a system of hard spheres to obtain two-- and three--body distribution functions using the generlaised potential of mean force \eqref{eq:potential-mean-force} with the morphometric approach \eqref{eq:morph-ansatz}, and compare these against molecular dynamics simulations.
+For the analytics we determine the input geometric quantities $\{V,A,C,X\}$ using the algorithms of Refs.\ \cite{MeckeAA1994,KleninJCC2011}.
+For the simulations we performed event-driven molecular dynamics of $N=1372$ monodisperse hard spheres using the DynamO software package \cite{BannermanJCP2010}.
+We measure the pair and triplet distribution functions $g^{(2)}$ and $g^{(3)}$ for simulations at $\eta = 0.45$.
+For simulations above freezing $\eta \simeq 0.494$ we used a 5-component equimolar distribution with $\sim8\%$ polydispersity.
+
+For $g^{(2)}$ shown in Fig.\ \ref{fig:g2-full} we find the virial/CS theory outperforms the SPT/CS theory even away from contact.
+The agreement with the molecular dynamics simulations is excellent, until $r \gtrsim \sqrt{3}\sigma$ where the solute boundary self-intersects and outside the regime of the theory's validity (see discussion in Ref.\ \cite{OettelEL2009}).
+The physical interpretation of this breakdown is that for $r > \sqrt{3}\sigma$ interactions between solvent particles can occur \emph{through} the solute, so these correlations will not be captured by the theory.
+Only the contact value was fixed, so accuracy for $r > \sigma$ was not guaranteed; the accuracy is a welcome bonus.
+We can quantify this accuracy through the integrated value
+\begin{equation}\label{eq:coordination}
+  z(\delta)
+  =
+  4\pi \int_\sigma^{\sigma+\delta}
+  \rho^{(2)}(r) \, r^2 \, dr
+\end{equation}
+shown in the top panel of Fig.\ \ref{fig:surface-tension} where we take $\delta = 0.4\sigma$.
+
+Now we look at the three-body correlation functions.
+Triplet geometries are characterised by a triangle of side lengths $r,s,t$ so $g^{(3)} = g^{(3)}(r,s,t)$.
+We also compare the morphometric theories against the Kirkwood approximation \cite{KirkwoodJCP1935} i.e.\
+\begin{equation}
+  g^{(3)}(r, s, t)
+  \approx
+  g^{(2)}(r) g^{(2)}(s) g^{(2)}(t)
+\end{equation}
+where we take the values of $g^{(2)}$ from the virial/CS theory because of its already demonstrated accuracy at the two body level.
+Comparison of the morphometric correlation functions, including with the Kirkwood closure, against molecular dynamics are shown in Fig.\ \ref{fig:g3}.
+The virial/CS closure most closely matches the simulations at high densities, suggesting the theory is suitable for modeling complex many-particle local structures \cite{RobinsonPRL2019}.
+To illustrate this we consider the concentration of triangles with side lengths $r,s,t \in [\sigma, \sigma + \delta]$ in the bulk liquid, from \eqref{eq:n-particle-density-pdf} we find this as%
+\marginfootnote{We state the measure here without proof, though we present a general method to obtain this (at least numerically) for arbitrary $n$ in the next chapter.
+  The analytic form $rst \, dr ds dt$ for the specific three-body case is presented in e.g.\ Ref.\ \cite{KrumhanslJCP1972}.}
+\begin{equation}
+  C_\Delta(\delta)
+  =
+  8\pi^2 \int_\sigma^{\sigma+\delta}\int_\sigma^{\sigma+\delta}\int_\sigma^{\sigma+\delta}
+  %e^{-\beta\phi^{(3)}
+  \rho^{(3)}(r,s,t) \, rst \, dr ds dt.
+\end{equation}
+Comparison of this quantity against molecular dynamics simulations shows similar levels of accuracy for small $\delta$, though the performance decreases as it is increased above the first minimum of the $g^{(2)}(r)$; this is not surprising as our virial closure emphasised accuracy at contact.
+Notably, the Kirkwood approximation performs surprisingly well at the three-body level in both of these tests.
+
+Next we compare the theories' predicted surface tension against simulation data.
+The surface tension at an infinite planar wall is simply $a_2$ because it conjugates with the area.
+In Ref.\ \cite{DavidchackMP2015} a highly accurate $a_2$ was measured for hard spheres through extensive simulation, which was parameterised by the following expression
+\begin{equation}\label{eq:quasi-exact-surface-tension}
+  %\begin{split}
+  \beta a_2
+  =
+  \frac{1}{\pi \sigma^2} \left(
+  \frac{\eta (2 + 3\eta - \frac{9}{5}\eta^2 - \frac{4}{5}\eta^3 - (5 \times 10^4) \eta^{20})}{(1 - \eta)^2}
+  %% \right.
+  %% \\
+  %% &
+  %% \left.
+  %% \vphantom{\frac{1}{1}}
+  - \ln{(1 - \eta)}
+  \right).
+  %\end{split}
+\end{equation}
+Comparing this highly accurate expression against the values predicted from the morphometric coefficients, we find the virial/CS surface tension is less accurate than the SPT/CS prediction (Fig.\ \ref{fig:surface-tension}) despite its superior correlation functions at high densities.
+One of the great strengths of the SPT/CS theory is its accuracy in the planar limit \cite{Hansen-GoosJPCM2006}, so this suggests that the virial/CS theory sacrifices asymptotic accuracy for more self-consistency in the correlation functions.
+For this reason, SPT/CS coefficients may give more accurate grand potentials (and thus correlations) for large solutes where the surface becomes approximately planar.
+
+\section{Discussion and summary}
+
+We have presented the morphometric approach as a generalisation of SPT, thus placing the scaled particle \emph{ansatz} on more precise and physically motivated assumptions i.e.\ those underlying the theorems of integral geometry.
+Using the scaled particle approach we have systematically derived several theories for the hard sphere liquid.
+This included the classical SPT solution and the morphometric theory obtained in the bulk limit of the White Bear II density functional, although our method of deriving the latter functional is new.
+The third theory we derived is particularly suited for treating many-body correlations, which we used to accurately treat local structures in the hard sphere liquid in Ref.\ \cite{RobinsonPRL2019}.
+
+By making the underlying assumptions explicit we can better understand the limits of the theory: any deviation from the morphometric/SPT \emph{ansatz} must be due to a violation of translation/rotation invariance, additivity or continuity.
+The fact that these theories are very accurate for hard spheres suggests that the assumptions are only weakly violated for this system.
+While translational/rotational invariance and continuity are physically plausible conditions on $\Delta \Omega$, additivity is a very strong assumption.
+In particular, we expect significant deviations from additivity where the liquid develops a static length scale exceeding the size of the solute \cite{KonigPRL2004}.
+As such, we expect the validity of the morphometric approach to require the solute to be larger than the point-to-set length \cite{MontanariJSP2006}, which acts as an upper bound for all structural length scales \cite{YaidaPRE2016}.
+The morphometric \emph{ansatz} must break down approaching a critical point, so it cannot be used to obtain asymptotics in the event of a thermodynamic glass transition.
+
+Finally, we remark that while it is tempting to call the treatment of bulk degrees of freedom with the morphometric approach mean-field, this is not a completely accurate characterisation.
+Mean-field theories typically become formally exact in the limit of infinite spatial dimensions, where the thermodynamic role of fluctuations disappears.
+By contrast, the morphometric approach (and related theories like SPT and FMT) become formally exact in the one-dimensional limit of hard rods.
+Though this theory does not explicitly describe fluctuations, they are built into the choice of thermodynamic coefficients entering the theory.
+In this sense it is more accurate to describe the morphometric approach (and related theories) as an \emph{excluded volume} theory, or as a \emph{free volume} theory because the thermodynamics only shows divergent behaviour as $\eta \to 1$.
+
+%Possible other things to mention:
+%\begin{itemize}
+%%   \item We have obtained these morphometric theories independent of FMT, though we the two theories are intimately related.
+%% In particular, they are both rooted in ideas of integral geometry and morphometry is obtained as a limit case of FMT.
+%The morphometric approach enables much more 
+%\item
+%As a model for depletion interactions it generalises and supercedes earlier theories like the Asakura-Oosawa model or its extensions using the Derjaguin approximation \cite{OettelEL2009}.
+%\end{itemize}
 
 \ifdefined\includebibliography
   \printbibliography

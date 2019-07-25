@@ -1,0 +1,169 @@
+\section{Bulk virial approach}
+
+\subsection{Outline}
+
+As far as I know this is an original calculation, however it should be emphasised that this is merely an application of ideas from FMT to the (simpler) uniform system.
+\todo{Emphasise that the resulting equations of state should be bad for anisotropic particles: it won't find any liquid crystalline transitions, and we expect multiple intersections to be a general rule for highly anistropic particles.}
+My aim here is to introduce the ideas of FMT gradually in order to emphasise the role played by integral geometry.
+
+Note that in mean field $d \gg 1$ it is argued that the dominant contributions come from the ring diagrams, i.e.\
+\begin{equation*}
+  \lim_{d \to \infty}
+  \frac{\beta F_{ex}}{N} =
+  \rho^2 \mayerdiagram{2} +
+  \rho^3 \mayerdiagram{3} +
+  \rho^4 \mayerdiagram[|.||.|]{4} +
+  \rho^5 \, \mayerdiagram[|..||..|.|]{5} +
+  \mathcal{O}(\rho^6)
+\end{equation*}
+whereas the contributing diagrams in for $d=1$ are the fully connected Ree-Hoover diagrams, i.e.\
+\begin{equation*}
+  \begin{aligned}
+    \lim_{d \to 1}
+    \frac{\beta F_{ex}}{N} &=
+    \rho^2 \mayerdiagram{2} +
+    \rho^3 \mayerdiagram{3} +
+    \rho^4 \mayerdiagram{4} +
+    \rho^5 \, \mayerdiagram{5} +
+    \mathcal{O}(\rho^6) \\
+    &=
+    \rho^2 \fmtdiagram{2} +
+    \rho^3 \fmtdiagram{3} +
+    \rho^4 \fmtdiagram{4} +
+    \rho^5 \fmtdiagram{5} +
+    \mathcal{O}(\rho^6)
+  \end{aligned}
+\end{equation*}
+
+\subsection{Exact result in one dimensions: hard rods}
+
+Spheres in one dimensions are just line segments%
+\marginfootnote{In fact, line segments are the only possible convex shape in one dimensions so hard rods are the one dimensional starting point for arbitrary (convex) shapes in higher dimensions.},
+or rods, so one dimensional hard spheres are conventionally called hard rods.
+The hard rod system is sufficiently simple that all of its equilibrium properties can be determined exactly, so it provides a good starting point for theories in higher dimensions.
+Here we show how integral geometry can be used to determine the exact free energy (and thus the equation of state) for the hard rod system; this suggests approximations in higher dimensions to be discussed in the next section.
+
+\begin{tcolorbox}[title=Multiple intersections of hard rods]
+  Where every pairwise combination of $n$ rods overlap, there must be a region where all of them intersect, i.e.\
+  \begin{equation}
+    \prod_{i \le j} \mu_0(B_i \cap B_j) =
+    \mu_0(\cap_{i=1}^n B_i)
+  \end{equation}
+  \emph{Proof:} Consider three rods whose centers are placed at $x_1, x_2, x_3$.
+  Each rod overlaps so we have
+  \begin{subequations}
+    \begin{align}
+      |x_2 - x_1| &\le \sigma \\
+      |x_3 - x_1| &\le \sigma \\
+      |x_3 - x_2| &\le \sigma
+    \end{align}
+  \end{subequations}
+  The region of overlap between the first two particles is
+  \begin{equation*}
+    B_1 \cap B_2 =
+    [\max{(x_1,x_2)} - \sigma, \min{(x_1,x_2)} + \sigma].
+  \end{equation*}
+  which implies
+  \begin{equation}
+    \max{(x_1,x_2)} - \sigma \le x_3 \le \min{(x_1,x_2)} + \sigma
+  \end{equation}
+  or $x_3 \in (B_1 \cap B_2)$.
+\end{tcolorbox}
+
+\begin{SCfigure}[H]
+  \missingfigure[figwidth=\linewidth]{}
+  \caption{If each pair of three hard rods overlap then this implies a region where all three mutually intersect.}
+\end{SCfigure}
+
+
+Therefore the diagram for the third virial coefficient becomes
+\begin{equation}\label{eq:third-virial-diagram-replacement-1d}
+  \mayerdiagram{3} = \fmtdiagram{3}
+\end{equation}
+where the latter \emph{intersection} diagram denotes an integral of the form
+\begin{equation}
+  \fmtdiagram{3} =
+  \int_{\mathbb{E}_d^3}
+  \mu_0 (g_1 B^d \cap g_2 B^d \cap g_3 B^d)
+  \, dg_1 dg_2 dg_3.
+\end{equation}
+The result of \eqref{eq:third-virial-diagram-replacement-1d} generalises straightforwardly to the other fully connected diagrams.
+For example, the fourth and fifth terms in the virial series are replaced by
+\begin{align*}
+  \mayerdiagram{4} &= \fmtdiagram{4} =
+  \int_{\mathbb{E}^4}
+  \mu_0 (\cap_{i=1}^4 g_i B^1)
+  \, dg^4
+  \\
+  \mayerdiagram{5} &= \fmtdiagram{5} =
+  \int_{\mathbb{E}^5}
+  \mu_0 (\cap_{i=1}^5 g_i B^1)
+  \, dg^5,
+\end{align*}
+and in general the $n$th fully connected diagram can be replaced by the integral
+\begin{equation}
+  \int_{\mathbb{E}_d^n}
+  \mu_0 (\cap_{i=1}^n g_i B^1)
+  \, dg^n \equiv \Gamma_n,
+\end{equation}
+without approximation.
+
+We make the replacement
+\begin{equation}\label{eq:third-virial-diagram-replacement-general}
+  \mayerdiagram{3} \approx \fmtdiagram{3}
+\end{equation}
+which is now approximate as can be seen from the counter example in Figure \ref{fig:lost-cases}.
+
+\begin{SCfigure}[H]
+  \missingfigure[figwidth=\linewidth]{}
+  \caption{Lost cases of FMT.}
+  \label{fig:lost-cases}
+\end{SCfigure}
+
+Ree-Hoover diagrams.
+From the relation:
+\begin{equation*}
+  1 = e_{ij} - f_{ij}
+\end{equation*}
+we have the graphical representation of this rule as
+\begin{equation*}
+  \mayerdiagram[.]{2} =
+  \mayerdiagram[:]{2} -
+  \mayerdiagram[|]{2}
+\end{equation*}
+so
+\begin{equation*}
+  \begin{aligned}
+    \mayerdiagram[|.||.|]{4} &=
+    \mayerdiagram[|.||:|]{4} -
+    \mayerdiagram[|.||||]{4} \\
+    &=
+    \mayerdiagram[|:||:|]{4} +
+    \mayerdiagram[||||||]{4} -
+    \mayerdiagram[|:||||]{4} -
+    \mayerdiagram[||||:|]{4} \\
+    &=
+    \mayerdiagram[|:||:|]{4} +
+    \mayerdiagram[||||||]{4} -
+    2 \mayerdiagram[|:||||]{4}
+  \end{aligned}
+\end{equation*}
+after using permutation invariance in the final step.
+We will extend this by considering only the fully connected Ree-Hoover diagrams, as in
+\begin{equation}
+  \frac{\beta F^{ex}}{N} \approx
+  \rho^2 \mayerdiagram{2} +
+  \rho^3 \mayerdiagram{3} +
+  \rho^4 \mayerdiagram{4} +
+  \rho^5 \mayerdiagram{5}
+  + \mathcal{O}(\rho^6)
+\end{equation}
+and then approximate these by considering only the subset of $n$-particle intersections as in
+\begin{equation}
+  \frac{\beta F^{ex}}{N} \approx
+  \rho^2 \fmtdiagram{2} +
+  \rho^3 \fmtdiagram{3} +
+  \rho^4 \fmtdiagram{4} +
+  \rho^5 \fmtdiagram{5}
+  + \mathcal{O}(\rho^6)
+\end{equation}

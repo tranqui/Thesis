@@ -1,12 +1,18 @@
 %TC: macro \marginfootnote [other]
 %TC: envir SCfigure [] other
 %TC: macrocount beginSCfigure [figure]
-\documentclass[11pt]{report}
+\documentclass[11pt,twoside]{report}
 \usepackage{preamble}
-\setcounter{chapter}{7}
+\setcounter{chapter}{6}
 \graphicspath{{../img/}}
+\def\includebibliography{}
 
 \begin{document}
 \chapter{Conclusion}
 To conclude...
+
+\ifdefined\includebibliography
+  \printbibliography
+\fi
+
 \end{document}

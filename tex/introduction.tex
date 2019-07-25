@@ -1,9 +1,11 @@
 %TC: macro \marginfootnote [other]
 %TC: envir SCfigure [] other
 %TC: macrocount beginSCfigure [figure]
-\documentclass[11pt]{report}
+\documentclass[11pt,twoside]{report}
 \usepackage{preamble}
+\setcounter{chapter}{0}
 \graphicspath{{../img/}}
+\def\includebibliography{}
 
 \begin{document}
 \chapter{Introduction}
@@ -20,6 +22,7 @@ Physics is filled with toy models.
 The Ising model is the most widely studied magnetic model, and the usual starting point for students learning statistical mechanics/phase transitions particular the critical point where this is \emph{the} model system.
 
 What are simple liquids, with hard spheres at the forefront.
+\hl{Hard spheres serve as a good touchstone for some of the fundamental knowns and controversies in liquid state theory and, by extension, soft matter.}
 The physicists favourite toy model is the hard sphere liquid.
 Interaction potential is the no-overlap condition%
 \marginfootnote{I like to imagine them as ideal billiard balls, i.e.\ without any dissipative forces like friction so they continue to bounce off one another forever.}:
@@ -181,5 +184,61 @@ So the central question of glass is what happens in $d=3$, is there a vanishing 
 In mean-field, formally in the limit of infinite spatial dimensions $d \to \infty$, the hard sphere system has been shown to have a true transition, however the critical dimensions are unknown so it is unclear what happens in $d=3$ \cite{Parisi,Zamboni,Charbonneau,Kurchan,?,?}.
 
 \todo{Jamming: how does it relate to glass}
+
+\section{Notes from Tarjus}
+
+Overview of the glass transition.
+Salient features: why hard, interesting, unique.
+
+What is a glass?
+Frozen in a (apparently) disordered state.
+All sorts of glasses, structural, spin, orientational, electron, vortex.
+Glasses formed by liquids, colloidal suspensions and polymers: traditional structural glasses.
+Solid: doesn't flow on observational time, resists small/infinitesimal shear (acts like solid).
+Amorphous, apparently amorphous: no periodic arrangement like in crystal.
+Homogeneous makes useful for technology: useful for e.g.\ optical properties.
+
+Hard glasses: high elastic constants.
+Colloidal suspensions: soft matter version, small elastic constants.
+Same phenomenology though.
+
+Cooling a liquid.
+Take thermodynamic quantity (e.g.\ volume, entropy, enthalpy): usually crystallise.
+(Picture)
+First-order transition bypassed by quick cooling.
+Enter supercooled liquid phase.
+No longer equilibrates/relax/flows, call it a glass: occurs at glass transition.
+Glass is a solid for all practical purposes.
+
+SC liquid: same characteristics as at equilibrium.
+Independent of preparation: loses memory of initial preparation.
+Measureable properties have time translational invariance/are stationary.
+Time independence of all observables, i.e.\
+\begin{equation}
+  \langle A(t) \rangle = \langle A \rangle
+\end{equation}
+including correlation functions e.g.\
+\begin{equation}
+  \langle A(t) A(t') \rangle = \langle A(0) A(t - t') \rangle
+\end{equation}
+(equation for stationary)
+Fluctuation-dissipation theorems.
+Linear response regime: response to perturbation related to correlation function (spontaneous fluctuations).
+\begin{equation}
+  \chi_A (t, t')
+  =
+  - \beta \Theta(t - t')
+  \frac{d}{dt}
+  \left(
+  \bigg\langle
+  (A(t) - \langle A \rangle)
+  (A(0) - \langle A \rangle)
+  \bigg\rangle
+  \right)
+\end{equation}
+
+\ifdefined\includebibliography
+  \printbibliography
+\fi
 
 \end{document}
