@@ -6,29 +6,50 @@
 \usepackage{standalone}
 \graphicspath{{../img/}}
 
-\title{TBD}
-\author{\href{mailto:joshua.fe.robinson@gmail.com}{Joshua Robinson}}
-\date{\today}
-
 \begin{document}
 
 \newgeometry{margin=1in}
 
-\maketitle
+%\maketitle
+\thispagestyle{empty}
+\begin{center}
+  \begin{minipage}{0.8\linewidth}
+    \centering
+    \vspace{1cm}
+    \includegraphics[width=0.6\linewidth]{bristol-logo}\par
+    %\rule{0.4\linewidth}{0.15\linewidth}\par
+    \vspace{2cm}
+    {\Large \textbf{Some equilibrium approaches to the high-density liquid (working title)} \par}
+    \vspace{2cm}
+    {\Large \textbf{\href{mailto:joshua.robinson@bristol.ac.uk}{Joshua F.\ Robinson}} \par}
+    \vspace{3cm}
+    {\large H.\ H.\ Wills Physics Laboratory \\ University of Bristol \par}
+    \vspace{2cm}
+   {\large A dissertation submitted to the University of Bristol in accordance with the requirements for award of the degree of Doctor of Philosophy in the Faculty of Science. \par}
+    \vspace{2cm}
+    {\large August 2019 \par}
+    \vspace{2cm}
+    \raggedleft
+    {\large \emph{\input{thesis.wordcountsum} words}}
+\end{minipage}
+\end{center}
 
-\include{abstract}
-\include{dedication}
-\include{declaration}
-\include{acknowledgements}
-\include{word-count}
-\include{opening-quote}
+\pagenumbering{roman}
+\cleardoublepage\include{abstract}
+\cleardoublepage\include{dedication}
+\cleardoublepage\include{acknowledgements}
+\cleardoublepage\include{declaration}
+%\cleardoublepage\include{word-count}
+\cleardoublepage\include{opening-quote}
 
-\tableofcontents
-\listoffigures
-\listoftodos
+\cleardoublepage\tableofcontents
+\cleardoublepage\listoffigures
+\cleardoublepage\listoftodos
 
 \restoregeometry
 
+\pagenumbering{arabic}
+\setcounter{page}{1}
 \include{introduction}
 \include{background}
 \include{morphometric-framework}
