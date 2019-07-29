@@ -31,7 +31,8 @@
 \usepackage{tcolorbox}
 \tcbset{fonttitle=\bfseries}
 \newtcolorbox[auto counter]{theorem}[2][]{%
-  colback=green!10,colframe=green!65!black,fonttitle=\bfseries,%
+  %colback=green!10,colframe=green!65!black,
+  fonttitle=\bfseries,%
   title=Theorem~\thetcbcounter: #2,#1}
 
 \usepackage{caption}
@@ -60,6 +61,7 @@
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
 \DeclareMathOperator*{\Tr}{Tr}
+\DeclareMathOperator*{\erf}{erf}
 
 \usepackage{verbatim}
 \newcommand\wordcount{\verbatiminput{\jobname.wordcount}}

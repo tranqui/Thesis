@@ -37,7 +37,7 @@
 
 In this section we \emph{briefly} introduce the statistical ensembles used throughout the rest of the thesis.
 These emerge by considering typical fluctuations of thermodynamic quantities for a subsystem within a macroscopic system called the \emph{ensemble}; the properties of this larger system define average quanties of the subsystem \cite{Landau2008}.
-Alternatively, from a Bayesian perspective the probability distributions given below emerge from maximising the entropy%
+Alternatively, the same formalism can be interpretted from a Bayesian perspective to emerge from maximisation of the entropy%
 \marginfootnote{The entropy represents a thermodynamic quantity in the former picture, whereas it represents our own \emph{uncertainty} about the system in the latter.}
 subject to the constraint of average energy and (optionally) the average particle number \cite{JaynesPR1957,JaynesPR1957a}.
 
@@ -206,7 +206,7 @@ This property causes the distribution functions to decay to their ideal gas valu
 Moreover, the product property suggests that there is a great deal of redundancy inside the distribution functions; in certain applications it is convenient to introduce an additional hierarchy of correlation functions which only capture the excess correlations.
 If we imagine the normalisation of the distribution functions $g^{(n)}$ as \emph{moments} of an unspecified probability distribution, then we can formally imagine a dual set of correlation functions $h^{(n)}$ which generate the \emph{cumulants}.
 Formally, this relationship is expressed \cite{Santos2016}
-\begin{equation}\label{eq:correlation-moment-generating-function}
+\begin{equation*}\label{eq:correlation-moment-generating-function}
   1
   + \sum_{n=1}^\infty \frac{\epsilon^n}{n!}
   \int_{V^n} g^{(n)}(\vec{r}^n) \, d\vec{r}^n
@@ -217,9 +217,9 @@ Formally, this relationship is expressed \cite{Santos2016}
     \int_{V^n} h^{(n)}(\vec{r}^n) \, d\vec{r}^n
     \right)
   },
-\end{equation}
+\end{equation*}
 with $\epsilon$ as a formal expansion parameter of the moment generating function.
-In addition, we require that these new functions share the same symmetries as $g^{(n)}$ e.g.\ permutation invariance of the arguments.
+In addition, we require that these new functions share the same symmetries as $g^{(n)}$ e.g.\ permutation invariance in the arguments.
 These conditions specify a new hierarchy: the \emph{cluster correlation functions}%
 \marginfootnote{These are so-named because they possess a \emph{cluster property} where they decay to zero in the limit where any particles become macroscopically separated \cite{UhlenbeckJMP1963}.
   This feature directly emerges from, and is dual to, the product property for $g^{(n)}$.}
@@ -443,7 +443,7 @@ The first option for determining the free energy is through the compressibility,
   %% \left( \frac{\partial^2 F}{\partial \rho^2} \right)_{N,T}
 \end{equation}
 Integrating this relation over the density and making use of the isothermal compressibility identity for a uniform system \eqref{eq:compressibility-h2} gives
-\begin{equation}\label{eq:compressibility-route}
+\begin{equation}\label{eq:compressibility-route-pressure}
   \beta p
   %% =
   %% \int_0^\rho \frac{1}{\rho' k_B T \kappa_T} d\rho'
@@ -618,7 +618,7 @@ Low density expansion of pressure in series with virial coefficients.
 \end{equation}
 where $B_i$ are the virial coefficients.
 
-Generalisation to a binary mixture \todo{Where does this come from? What do the diagrams look like? Are they simpler than the distribution function diagrams?}: \cite{Hansen-Goos2014}
+Generalisation to a binary mixture \todo{Where does this come from? What do the diagrams look like? Are they simpler than the distribution function diagrams?}: \cite{Hansen-GoosJCP2014}
 \begin{equation}\label{eq:virial-series-binary}
   \Phi = \sum_{n=2}^\infty \sum_{j=0}^{n}
   \frac{1}{n-1} {n \choose j} B_n^{[j]} \rho_1^{n-j} \rho_2^j

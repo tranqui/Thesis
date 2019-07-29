@@ -32,7 +32,7 @@ We will see that the only reasonable notion of size is a \emph{continuous} rigid
 I will assume some familiarity with differential geometry.
 I will review some results concerning curvature measures.
 
-\subsubsection{Curvature measures}
+\subsection{Curvature measures}
 
 Curvature tensors
 \begin{equation}
@@ -40,7 +40,7 @@ Curvature tensors
 \end{equation}
 Note this is a symmetric tensor i.e.\ $\kappa_{\alpha\beta} = \kappa_{\beta\alpha}$.
 
-\subsubsection{Worked example: 2d hinges}
+\subsection{Worked example: 2d hinges}
 
 This example is to illustrate how the curvature measures can be integrated over general bodies making them quite generic.
 Even though the curvature measure is not locally defined at the cusp, the resulting integrated measure is still well defined.
@@ -71,7 +71,7 @@ Note that as the dependence on $r$ dropped out in the second line, this even wor
 Graphical example.
 
 \subsection{Generalised functions acting on sets}
-\subsubsection{Set arithmetic}
+\subsection{Set arithmetic}
 
 Scalar multiplication or \emph{dilate}:
 \begin{equation}
@@ -110,9 +110,9 @@ Instead, set addition and subtraction operations are related through
   \caption{Minkowski addition and difference not the inverse of each other.}
 \end{SCfigure}
 
-\subsubsection{Distances between sets}
+\subsection{Distances between sets}
 The Hausdorff metric.
-\subsubsection{Valuations on sets}
+\subsection{Valuations on sets}
 Additivity criterion and its significance
 
 Examples:
@@ -121,7 +121,7 @@ Examples:
 \item Connection between sets and events: probabilistic interpretation of measures.
 \end{itemize}
 
-\subsubsection{Which sets do we consider}
+\subsection{Which sets do we consider}
 
 We consider Polyconvex sets (convex ring).
 
@@ -130,7 +130,7 @@ We want a well-defined volume, so need to avoid sets which allow this.
 \marginfootnote{Have to be formed by countable union of convex objects.
 Covers most physically realistic geometries.}
 
-\subsubsection{Euler characteristic}
+\subsection{Euler characteristic}
 
 Aim of this section is to provide intuition over Euler characteristic.
 
@@ -180,7 +180,7 @@ For $d=3$ we have the important Gauss-Bonnet theorem.
 
 \subsection{Important theorems for continuous invariant valuations}
 
-\subsubsection{Invariant measures}
+\subsection{Invariant measures}
 
 \begin{itemize}
 \item Introduce intrinsic volumes $\{\mu_k\}_{k=0}^d$
@@ -248,43 +248,7 @@ where $c_i$ are some coefficients independent of $A$.
 %% \end{equation}
 %% where $K \in \mathcal{K}$.
 
-\begin{SCtable}
-  \begin{minipage}[b]{\linewidth}
-  \centering
-  \begin{tabular}{ccc}
-    \toprule
-    \multicolumn{2}{c}{Geometric property} \\
-    \cmidrule(r){1-2}
-    Name & Symbol & Functional \\
-    \midrule
-    \multicolumn{3}{c}{$d = 1$} \\
-    \midrule
-    Euler characteristic & $\chi$ & $\mu_0$ \\
-    Length & $L$ & $\mu_1$ \\
-    \midrule
-    \multicolumn{3}{c}{$d = 2$} \\
-    \midrule
-    Euler characteristic & $\chi$ & $\mu_0$ \\
-    Perimeter & $L$ & $2 \mu_1$ \\
-    Area & $A$ & $\mu_2$ \\
-    \midrule
-    \multicolumn{3}{c}{$d = 3$} \\
-    \midrule
-    Euler characteristic & $\chi$ & $\mu_0$ \\
-    Integrated Gaussian curvature & $X$ & $4 \pi \mu_0$ \\
-    Integrated mean curvature & $C$ & $\pi \mu_1$ \\
-    Mean width & $b$ & $\frac{1}{2} \mu_1$ \\
-    Surface area & $A$ & $2 \mu_2$ \\
-    Volume & $V$ & $\mu_3$ \\
-    \bottomrule
-  \end{tabular}
-  \end{minipage}
-  \caption{The intrinsic volumes $\{\mu_k\}$ are evaluated on some $K \in \mathcal{K}$.
-    The corresponding geometric interpretation of $\mu_k$ for $k < d$ typically involves integrations of the boundary $\partial K$, e.g. $C,X,A$ for $d=3$.
-    However, the intrinsic volumes are more general (they can be calulated for shapes where curvatures not locally definable, e.g. at vertices).}
-\end{SCtable}
-
-\subsubsection{Principal kinematic formula}
+\subsection{Principal kinematic formula}
 
 We have the invariant measure on 1-dimensional linear subspaces of $\mathbb{R}^d$ (\emph{Grassmanians}) as
 \begin{equation}
@@ -375,11 +339,7 @@ So we have
   \frac{\omega_n}{\omega_p \omega_{k-p} \omega_{n-k}}
 \end{equation*}
 
-\subsection{Physical examples}
-
-\subsubsection{Additivity and extensivity}
-
-\subsubsection{Free volume calculations}
+\subsection{Notes}
 
 The free volume from Steiner's theorem.
 
@@ -391,3 +351,215 @@ Free volume theories in polymers are probably the best well known.
 Free volume theory in glasses?}
 We could argue that fundamentally these theories are based on measuring physical sizes.
 Integral geometry offers a mathematically rigorous formalism for describing sizes, so presents a possible starting point for free volume theories.
+
+\subsection{SPT paper}
+
+In every formulation of scaled particle theory one considers a hard \emph{spherical} solute of radius $R$.
+In most approaches, the cost $\Delta \Omega$ is assumed to have an analytic expansion in powers of the radius; in classical approaches this was simply postulated, however we will be able provide proper justification below through geometric arguments.
+Recognising that terms scaling faster than $R^3$ must be zero for it to remain well-defined in the limit of large solutes leads to the third order polynomial \cite{ReissJCP1959}
+\begin{equation}\label{eq:spt-ansatz}
+  \Delta\Omega(R) =
+  p \, \frac{4\pi R^3}{3} + a_2 \, 4 \pi R^2 + a_1 \, 4 \pi R + a_0 \, 4 \pi,
+\end{equation}
+where we identified the largest power with the work term $pV$ from comparison with \eqref{eq:surface-tension}, and $\{a_0, a_1, a_2\}$ are thermodynamic coefficients describing the subleading corrections.
+We have chosen to introduce factors of $4\pi$ in front of subleading terms to suggest how we will generalise beyond spherical geometries.
+For a general solute $K \subset \mathbb{R}^3$ we write the morphometric insertion cost as
+\begin{equation}\label{eq:morph-ansatz}
+  \Delta\Omega[K] =
+  p V[K]
+  + a_2 A[K]
+  + a_1 C[K]
+  + a_0 X[K],
+\end{equation}
+where $C$ and $X$ are the integrated mean and Gaussian curvatures.
+All of these functionals act on $K$ but the latter three can also be \emph{expressed} as surface integrals, as in
+\begin{subequations}
+  \begin{align}
+    A[K]
+    &=
+    \int_{\partial K} \, dA
+    \\
+    C[K]
+    &=
+    \frac{1}{2} \int_{\partial K} \Tr{\kappa} \, dA
+    \\
+    X[K]
+    &=
+    \int_{\partial K} \det{\kappa} \, dA
+  \end{align}
+\end{subequations}
+where $\kappa$ is the curvature tensor for the surface $\partial K$.
+For a spherical solute these reduce to the values given in \eqref{eq:spt-ansatz}, so this represents a proper generalisation of SPT for more general geometries.
+
+We now give a brief justification of the above \emph{ansatzes}, in particular why there are only four terms in the expansion.
+Radius is the only natural parameter for a sphere, however for more general geometries there might be arbitrarily many parameters so one may wonder if they should be included in a general geometric expansion.
+Nevertheless, there are compelling arguments from integral geometry \cite{KonigPRL2004} to only retain the four terms listed which we will summarise below.
+
+The basis of the morphometric approach is that the functionals $\{V,A,C,X\}$ are normalisations of the so-called \emph{intrinsic volumes}.
+These play a central role in integral geometry as the \emph{only} physically meaningful size measures in the sense that they:
+\begin{enumerate}
+\item Are invariant with respect to translations and rotations.
+\item Increase additively, i.e.\ they transform under combination of subsystems via the inclusion/exclusion relation e.g.\
+  \begin{equation*}\label{eq:additivity}
+    V[A \cup B] = V[A] + V[B] - V[A \cap B],
+  \end{equation*}
+  and similar expressions for $A$, $C$, and $X$.
+\item Are continuous (specifically with respect to the Hausdorff metric).
+  Loosely speaking, this means that the size measures converge as the object is approximated by increasingly finely meshed polyhedra excluding e.g.\ fractal geometries.
+  As a simple intuitive example, the measurement of a length will converge continuously to some number as one uses rulers with progressively finer distance markings.
+\end{enumerate}
+More details on properties of intrinsic volumes can be found in standard texts, e.g.\ Refs.\ \cite{Santalo2004,Klain1997}.
+%\cite{Santalo2004,SchneiderACIG1984,Schneider2008,Klain1997}.
+
+The central assertion of the morphometric approach is that the insertion cost $\Delta \Omega$ \emph{exactly} possesses the properties above, providing the connection between geometry and thermodynamics \cite{KonigPRL2004}.
+A classic theorem of integral geometry due to Hadwiger \cite{Hadwiger1957} states that the intrinsic volumes are the \emph{only} class of functionals with the properties listed above; a corollary of this is that they form a linear vector space for any functional possessing these properties.
+The morphometric form \eqref{eq:morph-ansatz} then follows.
+In addition to providing a more general \emph{ansatz} than SPT, this approach lays out its underlying assumptions explicitly eschewing the ad-hoc way in which the original SPT \emph{ansatz} \eqref{eq:spt-ansatz} was obtained.
+
+The morphometric approach is certainly an approximation, as the insertion cost will not rigorously possess the three properties above in reality.
+Notably, in SPT $\Delta\Omega$ is known to contain singularities in its high order derivatives with solute radius \cite{ReissJCP1959}; these non-analytic terms result from violations of the additivity assumption.
+Nevertheless, the approximation is accurate in hard spheres \cite{OettelEL2009,AshtonPRE2011,LairdPRE2012,BlokhuisPRE2013,UrrutiaPRE2014,Hansen-GoosJCP2014} so these violations should be small.
+
+\subsection{Resummation paper}
+
+It is usual for liquid state theories to focus on spherically symmetric potentials, however integral geometry more naturally deals with non-spherical objects so we can consider this generalisation at the small cost of additional notation.
+In addition to integrations over particle positions $\{\vec{r}_1, \cdots, \vec{r}_n\}$ we also have to consider their orientations $\{\vec{\theta}_1, \cdots, \vec{\theta}_n\}$ where each $\vec{\theta}_i$ represents an Euler angle tuple.
+Then, assuming an isotropic phase where all orientations are equally likely each positional integral generalises to
+\begin{equation*}
+  \int_{\mathbb{R}^d} d\vec{r}
+  \to
+  \int_{\mathbb{R}^d \times SO(d)} d\vec{r} d\vec{\theta}
+  :=
+  \int_{G_d} dg,
+\end{equation*}
+with the normalisation in the angular measure such that $\int d\vec{\theta} = 1$. In the right-most equality we introduced the rigid motion operation acting on a body $A \subset \mathbb{R}^d$ as
+\begin{equation*}
+  g A := \{\mathcal{R}(\vec{\theta}) \vec{a} + \vec{r} \, | \, \vec{a} \in A\},
+  %(\mathcal{T} \circ \mathcal{R})(\vec{r}, \vec{\theta}),
+\end{equation*}
+a member of the rigid motion group $g \in G_d := \mathbb{R}^d \times SO(d)$, and where $\mathcal{R} \in SO(d)$ is the rotation matrix parameterised by $\vec{\theta}$.
+We can take standard results for simple liquids interacting via spherically symmetric pair potentials, and make the above replacement to obtain the correct generalisation for arbitrary shapes.
+
+To obtain results for all physical dimensions $d \le 3$ it is convenient to generalise the morphometric \emph{ansatz} \eqref{eq:morphometric-approach} to arbitrary $d$ and substitute $d \in \{1, 2, 3\}$ at the end of our derivation.
+To that end it is convenient to introduce generalisations of the geometric parameters $\{V,A,C,X\}$: the \emph{intrinsic volumes} $\{V_d, V_{d-1}, \cdots, V_0\}$.
+To introduce the intuition behind these generalised volumes we start from the observation that the quantities $\{V,A,C,X\}$ can be imagined as size descriptors for projections onto $k$-dimensional subspaces in $\mathbb{R}^3$; for a compact body $K \subset \mathbb{R}^3$ we have:
+\begin{enumerate}
+\item $V(K)$ is trivially the volume of the intersection of $K$ with the 3-dimensional subspace i.e.\ all of Euclidean space.
+\item $A(K)$ can be thought of as the typical size of two-dimensional images formed by projections onto planes.
+\item $C(K)$ is related to the projections onto one-dimensional subspaces i.e.\ lines.
+  This curvature measure is normally thought of as a surface property, but this definition suggests an equivalence (up to a different normalisation) with \emph{mean width} $L(K)$ of the body.
+\item $X(K)$ is obtained from projections onto a single point; this surface measure is thus equivalent to the Euler characteristic $\chi(K)$.
+  This connection results in the celebrated Gauss-Bonnet theorem of differential geometry, which we would write
+  \begin{equation*}
+    X(K) = 2\pi \chi(K)
+  \end{equation*}
+  in our notation.
+\end{enumerate}
+
+Generalising the above intuition to $d$-dimensions, we see that in general we can imagine $d+1$ projections and so expect $d+1$ corresponding volumes.
+We define the define the $k$th intrisic volume as the average size of the projections onto $k$-dimensional linear subspaces of $\mathbb{R}^d$, i.e.\
+%Denoting the space of all $k$ dimensional linear subspaces in $\mathbb{R}^d$ as $\mathrm{Graff}(d,k)$ (the affine Grassmanian), the intrinsic volume is obtained by
+\begin{equation}\label{eq:intrinsic-volumes}
+  V_k(K)
+  =
+  C_{k,d-k}
+  \int \chi(K \cap E_{d-k}) \, d\mu(E_{d-k})
+\end{equation}
+where the integral is taken over all affine transformations of the plane $E_k$ in $\mathbb{R}^d$ and the flag coefficient is
+\begin{equation}\label{eq:flag-coefficients}
+  C_{k,d-k}
+  :=
+  \frac{d!}{k! (d-k)!} \frac{\omega_d}{\omega_k \omega_{d-k}},
+\end{equation}
+where the volume of the $d$-dimensional unit ball is
+\begin{equation}
+  \omega_d := V_d(B^d) = \frac{\pi^{d/2}}{\Gamma(\frac{d}{2} + 1)}.
+\end{equation}
+The flag coefficients $C_{k,d-k}$ have a similar structure to binomial coefficients, and play a similar \emph{combinatorial} role for combining subspaces \cite{Klain1997}.
+By convention, the normalisation of the measure $d\mu(E_{d-k})$ in \eqref{eq:intrinsic-volumes} is chosen to give the intrinsic volumes for the $d$-dimensional unit ball $B^d$ as
+\begin{equation}\label{eq:intrinsic-volume-ball}
+  V_k (B^d)
+  =
+  {d \choose k} \frac{\omega_d}{\omega_{d-k}}.
+\end{equation}
+%The intrinsic volumes thus only depend on the dimensionality of the body, not the embedding space.
+A set of common geometrical quantities and their reduction to the intrinsic volumes in physical dimensions $d \le 3$ is given in Table~\ref{table:geometric-quantities}.
+Finally, with the intrinsic volumes the generalisation of the morphometric apparoach \eqref{eq:morphometric-approach} for a solute $K$ in $d$-dimensions reads
+\begin{equation}\label{eq:morphometric-approach-d}
+  \Delta \Omega(K)
+  =
+  \sum_{k=0}^d a_k V_k(K).
+\end{equation}
+
+\begin{SCtable}
+  \begin{minipage}[b]{\linewidth}
+    \centering
+    \begin{tabular}{ccc}
+      \toprule
+      \multicolumn{2}{c}{Geometric property} \\
+      \cmidrule(r){1-2}
+      Name & Symbol & Functional \\
+      \midrule
+      \multicolumn{3}{c}{$d = 1$} \\
+      \midrule
+      Euler characteristic & $\chi$ & $V_0$ \\
+      Length & $L$ & $V_1$ \\
+      \midrule
+      \multicolumn{3}{c}{$d = 2$} \\
+      \midrule
+      Euler characteristic & $\chi$ & $V_0$ \\
+      Perimeter & $L$ & $2 V_1$ \\
+      Area & $A$ & $V_2$ \\
+      \midrule
+      \multicolumn{3}{c}{$d = 3$} \\
+      \midrule
+      Euler characteristic & $\chi$ & $V_0$ \\
+      Mean width & $L$ & $\frac{1}{2} V_1$ \\
+      Surface area & $A$ & $2 V_2$ \\
+      Volume & $V$ & $V_3$ \\
+      Integrated Gaussian curvature & $X$ & $4 \pi V_0$ \\
+      Integrated mean curvature & $C$ & $\pi V_1$ \\
+      \bottomrule
+    \end{tabular}
+  \end{minipage}
+  \caption{Common geometrical properties and their representation in terms of the intrinsic volumes $\{V_k\}$.
+    The intrinsic volumes are morphological measures describing the size of a body.
+    The common geometric interpretations of $V_k$ for $k < d$ typically involves integrations over the boundary $\partial K$ rather than $K$ itself, leading to the curvature measures $\{C,X\}$ in $d=3$ giving an equivalent description as one involving Euler characteristic and the typical width $\{\chi, L\}$.
+    However, the intrinsic volumes are more general as they can be evaluated for shapes where curvatures are not locally defined, e.g. at lines and vertices.}
+  \label{table:geometric-quantities}
+\end{SCtable}
+
+\subsection{Resummation 2}
+
+Noting that $\chi = V_0$ is the lowest order intrinsic volume, the latter line of \eqref{eq:low-density-insertion} is ideally suited to a treatment within integral geometry.
+A central result of this field is the principal kinematic formula of Blaschke and Santal\'o \cite{BlaschkeMZ1936,Blaschke1937,SantaloASI1936} which gives the explicit form of integrals of this type as \cite{Santalo2004,Klain1997}
+%\cite{Santalo2004,SchneiderACIG1984,Schneider2008,Klain1997}
+\begin{equation}\label{eq:binomial-kinematic-equation}
+  \int_{G_d} \chi(A \cap gB) \, dg
+  =
+  \sum_{k=0}^d (C_{k,d-k})^{-1} V_k(A) V_{d-k}(B)
+\end{equation}
+We see the flag coefficients \eqref{eq:flag-coefficients} play an analogous role in conjugating the intrinsic volumes above as binomial coefficients do in algebraic expansions \cite{Klain1997}.
+
+The principal kinematic formula \eqref{eq:binomial-kinematic-equation} can be iterated for the intersections of many bodies $\{K_i\}$ giving \cite{Santalo2004,MarechalPRE2014}
+\begin{subequations}\label{eq:multinomial-kinematic-equation}
+  \begin{equation}
+    \Lambda_{s_1, \cdots, s_n}
+    =
+      \sum_{\substack{i_0, \cdots, i_n = 0 \\ i_0 + \cdots + i_n = nd}}^d
+      (C_{i_0, \cdots, i_n})^{-1}
+      V_{i_0}(K_0)
+      \prod_{j=1}^n
+      \widetilde{V}_{i_j}(K_{s_j})
+  \end{equation}
+  \begin{equation}
+    \textrm{with} \qquad
+    C_{i_0, \cdots, i_n}
+    := \frac{1}{i_0! \omega_{i_0}}
+    \prod_{j=1}^n
+    \left(
+    \frac{d!}{i_j!} \frac{\omega_d}{\omega_{i_j}}
+    \right)
+  \end{equation}
+\end{subequations}
+where $C_{i_0, \cdots, i_n}$ would be the multinomial generalisation of the flag coefficients \eqref{eq:flag-coefficients}.
