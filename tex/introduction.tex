@@ -12,9 +12,16 @@
 
 \section{Overview}
 
-$\cdots$
-
 %Begin with a short (1–2 pages) broader introduction for a general audience: one that my mother could understand so she knows what I’ve been working on all these years.
+
+What precisely is covered by soft matter, and how to properly demarcate, is a matter of some academic debate.
+In some sense soft matter can be most easily understood by : it is the science of ``squishy'' things.
+The eminent soft matter physicist Wilson Poon describes soft matter as ``liquids with bits'' in them.
+A more precise and scientific definition posits that the energy scale is subject to thermal fluctuations.
+So e.g.\ chemical bonds break and reform allowing flow, but the physical processes may be arbitrarily more complex than simple liquids.
+
+Soft matter was clearly preceded by liquids, and it is up to the individual whether liquids should be considered as the antecedent to or subsumed by soft matter.
+My personal bias is that liquids represent a subset of soft matter, the zeroth order approximation to real systems.
 
 \section{Simple liquids}
 
@@ -51,17 +58,17 @@ It turns out that to a large degree simple liquids can be considered as hard sph
 
 \begin{SCfigure}
   \includegraphics[width=\linewidth]{shade-balls}
-  \caption{
+  \caption[Shade balls in Los Angeles]{
     Shade balls covering the Los Angeles reservoir to prevent water evaporation.
     These balls spontaneously form long-range hexagonal ordering, reminiscent of crystallisation in atomic systems.
     As macroscopic objects these balls interact primarily as hard spheres.
-    Image by Gerd Ludwig, \emph{National Geographic}.}
+    Image by Gerd Ludwig, \emph{National Geographic} (2007).}
   \label{fig:shade-balls}
 \end{SCfigure}
 
 Despite their coarse simplification of real atomic interactions, we see that hard spheres actually capture a lot of the essential physics.
-To illustrate this consider the phase diagram of hard spheres Fig.\ \ref{?}.
-We see there is a freezing transition at $\eta = 0.493$, suggesting that the liquid will spontaneously order into a crystal at high densities.
+To illustrate this consider the phase diagram of hard spheres Figure \ref{fig:hs-phase-diagram}.
+We see there is a freezing transition at $\eta = 0.494$, suggesting that the liquid will spontaneously order into a crystal at high densities.
 This is surprising, in everyday scenarios (e.g.\ water) we are used to seeing crystallisation as one lowers temperature and the explanation normally given in classrooms is that the crystal is favoured due to attractions between molecules.
 Now, in real systems crystallisation can also be triggered by changes to density also so density being a control parameter is not a problem, however the lack of attractions should, if this intuition were correct, prohibit crystallisation.
 
@@ -73,14 +80,10 @@ Including both these contributions leads to the phase diagram that we know today
 
 A similar effect is seen in balls floating on water as in e.g.\ peas in a saucepan or shade balls covering a reservoir.
 The hard interactions between the balls causes%
-\marginfootnote{In my desperate desire to use everyday examples I am cheating somewhat: while the balls certainly interact as hard spheres close to contact, I suspect there are in fact effective attractions at mid-range due to \emph{hydrodynamic} interactions at the water surface.
-  When cooking peas in a saucepan one sees that they group together hexagonally even when very few of them float on the surface, i.e.\ at low densities.
-  By contrast, hard disks in a vacuum should only do this at high densities.}[-8cm]
-them to `crystallise'%
-\marginfootnote{I am cheating again, though in a smaller way this time.
-  Strictly speaking, floating balls are two dimensionsal as they are confined to the water surface.
-  In two dimensions it is not possible to form a crystal in the sense of long-range \emph{translational} order\cite{Mermin}, however it is possible to form a `crystal' in a less formal way through long-range \emph{orientational} order.}[-1cm]
-at high densities as seen in Figure \ref{fig:shade-balls}.
+\marginfootnote{In an attempt to find an everyday example, I have taken liberties with the interaction being purely hard; I suspect that floating balls feature effective attractions due to \emph{hydrodynamic} interactions at the water surface.}[-3cm]
+them to `crystallise' at high densities as seen in Figure \ref{fig:shade-balls}..
+Strictly speaking these are not crystals in the sense of long-range \emph{translational} order, instead they are said to possess long-range \emph{orientational} order.
+This subtlety emerges because the floating balls are confined to the water surface making them effectively two dimensional; fluctuations are strong enough in two dimensions to overcome truly long-ranged positional ordering \cite{MerminPRL1966,MerminPR1968}.
 
 We have extolled the virtues of hard spheres, however this should not be interpretted as saying that this model system capture \emph{all} of the physics of real systems: it is a toy system after all.
 They are merely a very good starting point for more complex systems.
@@ -95,15 +98,34 @@ Colloidal particles are typically at the micron-scale.
 These typically feature complex interactions \cite{Royall?,?,?} however these can be tailored to closely approximate hard sphere like interactions through steric stabilisation.
 \todo{What is an aerosol? What is a dispersion?}
 Colloidal experiments closely match hard simulations and theoretical predicitons \cite{?}.
-Notably one can determine the phase diagram see Fig.\ \ref{?}.
+Notably one can determine the phase diagram see Figure \ref{fig:hs-phase-diagram}.
 Note the glass at very high densities.
 
-\begin{SCfigure}[H]
+\begin{SCfigure}
   \missingfigure[figwidth=\linewidth]{}%
-  \caption{The hard sphere phase diagram, including the metastable branch.
+  \caption[The hard sphere phase diagram]{
+    The hard sphere phase diagram, including the metastable branch.
     a: theoretical phase diagram.
     b: experiments, including the glass (image reproduced from \cite{?}).
     This is one of the most iconic images in the field, and no discussion of colloidal hard spheres would be complete without it.}
+  \label{fig:hs-phase-diagram}
+\end{SCfigure}
+
+\begin{SCfigure}
+  \includegraphics[width=\linewidth]{ball-pit-horizontal}
+  \caption[Random close packing in a ball pit]{
+    Random close packing of hard spheres in a ball bit.
+    Image by Peter Ong.}
+  \label{fig:rcp}
+\end{SCfigure}
+
+\begin{SCfigure}
+  \includegraphics[width=\linewidth]{cannonballs}
+  %\includegraphics[width=\linewidth]{close-packed-spheres}
+  \caption[Close packed cannonballs]{
+    Sketch of close-packed stacks of cannonballs in Fortress Monroe.
+    Image by Stacy, \emph{Harper's weekly} (1861)}
+  \label{fig:fcc}
 \end{SCfigure}
 
 As the most widely studied model interaction potential we know a lot about its equilibrium structure (phase diagram) in bulk and even inhomogeneous thanks to density functional theory \cite{?,?,?}.
@@ -141,8 +163,8 @@ I have done this to the best of my ability, but my primary skills lie in numeric
 It is widely reported that glass is actually liquid, and as evidence of this the thickness of old windows at the bottom is pointed to.
 This is actually a matter of some dispute, but contains a grain of truth.
 Pre-modern methods of creating window glass involved spinning molten glass on magma to flatten it out.
-Centrifugal forces caused the glass to be thicker on the outer disk, so panes of glass would always be heavier in one direction.
-Personally, if I were setting a pane of glass in place, which was significantly heavier at one end, I would place the heavy part at the bottom.
+Centrifugal forces caused the glass to be thicker on the outer disk, so panes of glass would always be heavier in one direction%
+\marginfootnote{And personally, if I were setting an uneven pane of glass I would place the heavy part at the bottom.}.
 
 To a soft matter physicist glass is a broader term, referring to a wide class of materials while the window glass of common parlance is referred to by its chemical name \emph{silicate}.
 This class of materials share many features of being disordered etc \cite{?} although in some sense they are connected by what they do \emph{not} do: which is flow on human timescales.
@@ -240,5 +262,5 @@ Linear response regime: response to perturbation related to correlation function
 \ifdefined\includebibliography
   \printbibliography
 \fi
-
+  
 \end{document}
