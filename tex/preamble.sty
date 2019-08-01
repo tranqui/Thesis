@@ -57,11 +57,15 @@
 \setcounter{secnumdepth}{2}
 \setcounter{tocdepth}{4}
 
+\let\emptyset\varnothing
+\newcommand{\minkplus}{\oplus}
+\newcommand{\minkminus}{\ominus}
 \renewcommand{\vec}[1]{\boldsymbol{\mathbf{#1}}}
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
 \DeclareMathOperator*{\Tr}{Tr}
-\DeclareMathOperator*{\erf}{erf}
+\DeclareMathOperator{\erf}{erf}
+\DeclareMathOperator{\interior}{int}
 
 \usepackage{verbatim}
 \newcommand\wordcount{\verbatiminput{\jobname.wordcount}}
