@@ -89,10 +89,7 @@ Crystallisation of multiple \ce{NaCl} droplets occurred reproducibly \SI{1}{\sec
 The stochastic behaviour persists when the experiment was repeated for the \emph{same} \ce{NaNO3} droplet over a cycle of repeatedly lowering and raising the RH (described in more detail in Ref.\ \cite{GregsonTBD2019}), ruling out impurity-driven heterogeneous nucleation.
 
 \begin{SCfigure}
-  \begin{minipage}{\linewidth}
-    \centering
-    \includegraphics[width=0.75\linewidth]{aerosol-droplet}
-  \end{minipage}
+  \includegraphics[width=0.75\linewidth,outer]{aerosol-droplet}
   \caption[Model drying aerosol droplet]{
     A drying droplet solution of radius $r=R(t)$ surrounded by a gas of temperature $T_\infty$ and relative humidity RH.
     Evaporation of the solvent (water) causes the droplet to shrink and surface enrichment of solute concentration $\rho^{(s)}$ together with evaporative cooling $T < T_\infty$.}
@@ -279,10 +276,7 @@ We obtain $a=\SI{0.169}{\nano\metre}$ for \ce{NaCl} and $a=\SI{0.167}{\nano\metr
 The resulting diffusion coefficients entering the droplet evolution equation are shown in Fig.\ \ref{fig:diffusion-fit} (bottom panel).
 
 \begin{SCfigure}
-  \begin{minipage}{\linewidth}
-    \centering
-    \includegraphics[width=0.9\linewidth]{aerosol-diffusion-fit}
-  \end{minipage}
+  \includegraphics[width=0.9\linewidth,outer]{aerosol-diffusion-fit}
   \caption[Viscosity and diffusion coefficients of aqueous ionic solutions]{
     Numerical fits of binary diffusion coefficients for aqueous ionic solutions.
     Top panel: fits of viscosity to an Arrhenius-like form \eqref{eq:vft-fit} to experimental values \cite{?,PowerCS2013}.
@@ -494,10 +488,7 @@ Fitting the early part of the experimental trajectory gives the initial $\tfrac{
 \subsection{Implementation and results}
 
 \begin{SCfigure}
-  \begin{minipage}{\linewidth}
-    \centering
-    \includegraphics[width=0.9\linewidth]{nano3-trajectory}
-  \end{minipage}
+  \includegraphics[width=0.9\linewidth,outer]{nano3-trajectory}
   \caption[Evolution of drying droplet radii]{
     Evolution of \ce{NaNO3} aerosol droplet radii from simulations (dashed lines) and experiments shown by points with 1\% transparency, showing reasonable agreement at short times until longer times when the evaporation rate is underestimated.
     Top panel: varying relative humidity while ambient temperature is kept fixed, for an initial solute mass fraction of $Y^{(s)} = 0.125$.
@@ -553,10 +544,7 @@ We achieve good agreement with experiments for \ce{NaCl} across their entire tra
 \subsection{Droplet nucleation rates}
 
 \begin{SCfigure}
-  \begin{minipage}{\linewidth}
-    \centering
-    \includegraphics[width=0.9\linewidth]{aerosol-cnt}
-  \end{minipage}
+  \includegraphics[width=0.9\linewidth,outer]{aerosol-cnt}
   \caption[Nucleation rates predicted by classical nucleation theory]{
     Shell nucleation rate $J\xi$ (\si{\per\micro\metre\squared\per\second}) predicted by classical nucleation theory for aqueous \ce{NaNO3} and \ce{NaCl} solutions at different state points.
     The dark blue and bright yellow regions show where nucleation is essentially impossible or instantaneous on the experimental timescale.
@@ -656,10 +644,7 @@ This is qualitatively correct for \ce{NaCl}, so we are able to accurately predic
 By contrast, the experiments show that the final survival probability for \ce{NaNO3} droplets is often in the range $0 < p_\mathrm{liq} < 1$ which is not consistent with nucleation rates being characterised by a step function, which we will make more quantitative in the next section.
 
 \begin{SCfigure}
-  \begin{minipage}{\linewidth}
-    \centering
-    \includegraphics[width=0.9\linewidth]{nacl-trajectory}
-  \end{minipage}
+  \includegraphics[width=0.9\linewidth,outer]{nacl-trajectory}
   \caption[Evolution of \ce{NaCl} droplets: theory and experiments]{
     Evolution of \ce{NaCl} droplets in dry air $\mathrm{RH}=0\%$ from experiments (points) and simulations (lines) for different ambient temperatures and initial solute mass fractions.
     Bottom panel: evolution of droplet radius showing good treatment of solvent evaporation rates.
@@ -711,10 +696,7 @@ The resulting nucleation rates show non-mononic behaviour, increasing to a maxim
 This results in a finite final survival probability $p_\mathrm{liq} > 0$, and starkly contrasts with the picture predicted by CNT where $p_\mathrm{liq}$ would remain close to unity for most of the experiment before sharply dropping to zero as all droplets reproducibly crystallise.
 
 \begin{SCfigure}
-  \begin{minipage}{\linewidth}
-    \centering
-    \includegraphics[width=0.9\linewidth]{nano3-nucleation-rates}
-  \end{minipage}
+  \includegraphics[width=0.9\linewidth,outer]{nano3-nucleation-rates}
   \caption[Experimentally observed nucleation rates in \ce{NaNO3} droplets]{
     State points explored by experiments with drying \ce{NaNO3}--\ce{H2O} aerosol droplets as determined from simulation for 9 datasets for different initial conditions.
     Top panel: the survival probability in the experiments (i.e.\ the probability that a droplet has not crystallised), with state-point inferred from the simulations.

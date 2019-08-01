@@ -17,6 +17,178 @@
 
 \section{Introduction}
 
+\emph{Introduction.}---While mean-field theories provide insight into complex phenomena, physical accuracy is ensured only by a proper treatment of correlations.
+For example, the simplest case of two-body correlations is at the foundation of predictive theories of the liquid state \cite{Hansen2013}, colloids, and complex plasmas \cite{likos2001,Ivlev2012}.
+%, and some forms of active matter \cite{Bechinger2016}.
+In particular, the thermodynamics of simple liquids with solely pairwise interactions can be exactly expressed in terms of two-body correlations \cite{Hansen2013}. However, to resolve these integrated quantities \emph{spatially} into structural motifs, and \emph{temporally} into specific dynamical events, one needs to calculate many-body correlations.
+While such a many-body approach may often be neglected in normal liquids, long-standing challenges such as the dramatic dynamical changes occurring in supercooled liquids approaching their glass transition \cite{Berthier2011,Royall2015} and phase transitions such as crystal nucleation \cite{Russo2012} call for a many-body description.
+
+In the case of supercooled liquids, theories based on pair correlations such as the standard mode-coupling framework \cite{goetze} fail to account for activated events thus predicting a spurious ergodicity breaking transition \cite{Brambilla2009,Hallett2018}.
+Activated dynamics are often rationalised through collective (i.e.\ many-body) effects within contrasting thermodynamic and purely dynamic scenarios \cite{Lubchenko2007,Tarjus2005,Biroli2006,Janssen2015,Szamel2013,Chandler2010}.
+These include exact mean-field results in high dimensions \cite{Parisi2010,Charbonneau2017} whose relevance in finite-dimensional systems is hotly debated \cite{Wyart2017}.
+A finite-dimensional theoretical description of many-body effects is therefore much needed.
+
+However, many-body correlations are challenging to compute and typically combine both energetic and entropic contributions.
+Physical insight can be gleaned by exploring the potential energy landscape of isolated clusters \cite{Wales2004,Arkus2009}, but such methods are only exhaustive for small system sizes.
+This limitation has been partly addressed by embedding clusters in a mean-field approximation of the surrounding liquid \cite{Mossa2003}.
+Nonetheless, this approach neglects by construction the intra-cluster entropic contributions that may dominate in the supercooled regime of interest.
+Furthermore, computer simulations, which naturally deliver full many-body correlations are limited in the range of dynamics they can access, hampering an approach to the glass transition, except for recent developments for certain models \cite{Berthier2016}.
+
+Here we place theoretical predictions of many-body local structure on a fundamentally more rigorous footing using inhomogeneous liquid state theory \cite{Evans1979}.
+We model the many-body interactions between a local subsystem and the remaining liquid, directly accessing the many-body \textit{free} energy of local arrangements of particles.
+This allows us to predict the populations of specific local structures in the bulk system across the entire liquid phase and beyond the dynamically accessible supercooled regime.
+
+\emph{Many-body correlations and surface tension.}---We conceptually separate the liquid into $n$ spatially adjacent particles and the remaining degrees of freedom, acting as a solvent, which we treat within the grand-canonical ensemble, as sketched in Fig.\ \ref{fig:system}(a).
+The joint probability density for simultaneously finding $n$ identical particles embedded in $\mathbb{R}^d$ at positions $\vec{r}^n := \{\vec{r}_1, \dots,\vec{r}_n\}$ is proportional to the \emph{$n$-particle distribution function} $g^{(n)}(\vec{r}^n)$ \cite{Hansen2013}.
+For a homogeneous system, this can be formally expressed in terms of the \emph{potential of mean force}, the reversible work required to insert the particles at $\vec{r}^n$:
+\begin{equation}\label{eq:potential-mean-force}
+  \begin{split}
+    \phi^{(n)}(\vec{r}^n) &\equiv - k_B T \ln g^{(n)}(\vec{r}^n) \\
+    &= U(\vec{r}^n) + \Delta \Omega(\vec{r}^n) - n\mu^{ex}.
+  \end{split}
+\end{equation}
+We denote by $U$ the total potential energy of the $n$ interacting particles and by $\Delta\Omega := \Omega - \Omega_\textrm{hom}$ the difference between the grand potential of the homogeneous liquid $\Omega_\textrm{hom}$ (related to the total volume and pressure by the relation $\Omega_\textrm{hom} = -pV$) and the grand potential of the system including the $n$-particle inhomogeneity. Finally, $k_B T$ and $\mu^{ex}$ are the thermal energy and the excess chemical potential (with respect to the ideal gas) of the homogeneous liquid respectively.
+
+For systems with excluded volume interactions, we can divide the space into a local component $\mathcal{L} \subset \mathbb{R}^d$ of volume $V_\mathcal{L}$ inaccessible to solvent degrees of freedom and the remaining space $\mathcal{R} = \mathbb{R}^d \setminus \mathcal{L}$ filled by solvent (Fig. \ref{fig:system}).
+The dividing surface $\partial\mathcal{L}$ separates these two components with surface area $A_{\partial\mathcal{L}}$, creating a surface tension $\gamma$.
+The solvent contribution to Eq.\ \eqref{eq:potential-mean-force} is then \begin{equation}\label{eq:surface-tension}
+  \Delta \Omega[\mathcal{L}] =
+  p V_\mathcal{L} + \gamma[{\partial\mathcal{L}}] A_{\partial\mathcal{L}}.
+\end{equation}
+Note that the surface tension is not unique as only the total grand potential must be independent of the choice of $\partial\mathcal{L}$ and can even change its sign for some choices of dividing surface \cite{Bryk2003}.
+For simplicity we will consider one-component liquids with particles of diameter $\sigma$.
+Letting $B_R(\vec{r}_i)$ denote a ball of radius $R$ at site $\vec{r}_i$, we choose the \emph{solvent accessible surface} \cite{Lee1971} as the dividing surface such that $\mathcal{L} = \cup_{i=1}^n B_\sigma(\vec{r}_i)$ (Fig.\ \ref{fig:system}).
+
+\emph{Integral geometry approximation for surface tension.}---While approaches rooted in classical density functional theory \cite{Evans1992} would derive the surface tension $\gamma$ in terms of complex functionals for the grand potential $\Delta\Omega[\rho(\vec{r})]$ dependent on the solvent density profile \cite{Rosenfeld1989,Roth2010}, we directly expand $\gamma[\partial\mathcal{L}]$ in terms of the morphological properties of the dividing surface $\partial\mathcal{L}$.
+With the use of theorems from integral geometry \cite{Hadwiger1957} we are able to dramatically reduce the computational cost of the calculation and accurately predict correlations at very high densities representative of the metastable supercooled state.
+
+Following Ref.\ \cite{Konig2004} we assume $\Delta\Omega$ is translation and rotation invariant, continuous (with respect to the Hausdorff metric), and additive.
+Hadwiger's characterisation theorem \cite{Hadwiger1957} then ensures the surface tension adopts the so-called \emph{morphometric} form
+\begin{equation}\label{eq:morphometric-surface-tension}
+  \gamma[\partial\mathcal{L}] =
+  \gamma_\infty +
+  \frac{\kappa \, C_{\partial\mathcal{L}} + \overline{\kappa} \, X_{\partial\mathcal{L}}}
+       {A_{\partial\mathcal{L}}},
+\end{equation}
+with integrated mean and Gaussian curvatures $C_{\partial\mathcal{L}}$ and $X_{\partial\mathcal{L}}$, and $\gamma_\infty,\kappa,\overline{\kappa}$ as thermodynamic coefficients to be determined.
+$\gamma_\infty$ is the surface tension at a planar wall (i.e.\ the familiar macroscopic surface tension), whilst $\kappa$ and $\overline{\kappa}$ are ``bending energies'' accounting for curvature corrections occurring at small length scales.
+These values are system (and state point) dependent, but do not depend on the local geometry, making the linear form of Eq.\ \eqref{eq:morphometric-surface-tension} desirable for calculation.
+While strictly an approximation, we motivate Eq.\ \eqref{eq:morphometric-surface-tension} from numerical studies where it has been found to be highly accurate below the freezing volume fraction in hard spheres \cite{Roth2006,Laird2012,Blokhuis2013,Urrutia2014,Hansen-Goos2014}, and from the early success of scaled particle theories \cite{Reiss1959,Reiss1960}.
+
+%% \begin{figure*}
+%%   \includegraphics[width=\linewidth]{structure_populations}
+%%   \caption{
+%%     (color online)
+%%     Static many-body structure in the hard sphere liquid.
+%%     Left: populations of small local structures in the hard sphere liquid determined from molecular dynamics simulations of 1372 monodisperse (open circles) and 8\% polydisperse (solid triangles) hard spheres against the theoretical prediction of this work (lines).
+%%     Variations against volume fraction $\eta$ and compressibility $Z = \beta p/\rho$ shown.
+%%     The hard sphere freezing and melting volume fractions are indicated by vertical dashed lines.
+%%     Right: theoretical free energy distribution for the $n=12$ local library of states at several volume fractions.
+%%     The distribution is shifted to lower energies at higher volume fractions, and develops an increasingly bimodal structure.
+%%     Populations are decomposed into those structures containing pentagonal bipyramids without octahedra (light fill) and the remaining structures (dark fill).
+%%   }
+%%   \label{fig:structure-populations}
+%% \end{figure*}
+
+\emph{Existing morphological theories.}---We focus on the hard sphere system because of its fundamental interest in the theory of liquids \cite{Widom1967,Hansen2013}.
+This allows suitable coefficients of Eq.\ \eqref{eq:morphometric-surface-tension} to be derived analytically by exploiting the geometric nature of hard spheres.
+We compute morphological quantities and their derivatives following Ref.\ \cite{Klenin2011}, which we have extended to calculate curvature measures [see details in the Supplementary Material (SM)].
+Note that hard spheres are athermal meaning density is the only control parameter and all free energies are really entropies; here we use ``supercooled'' to mean high density.
+
+To proceed we need estimates of the thermodynamic coefficients $\gamma_\infty,\kappa,\overline{\kappa}$ accurate at high volume fractions and for typical $\partial\mathcal{L}$ morphologies.
+The so-called White Bear II (WBII) theory provides coefficients \cite{Hansen-Goos2006} that are highly accurate in the limit of a planar $\partial\mathcal{L}$; however, we find they predict inaccurate correlations for molecular geometries at densities above freezing.
+In particular the contact value of $g^{(2)}$ with WBII coefficients spuriously decays to zero at the high densities of interest here (see SM).
+For this reason we require a derivation of a new set of coefficients which we sketch below (full details in SM).
+The derivation consists of a small modification to scaled particle theory  \cite{Reiss1959,Reiss1960} such that the virial theorem can be directly imposed,
+\begin{equation}\label{eq:contact-g}
+  g^{(2)}(\sigma) =
+  \frac{3}{2\pi \sigma^3 \rho} \left( \frac{\beta p}{\rho} - 1 \right).
+\end{equation}
+
+\emph{Deriving new thermodynamic coefficients.}---We assume the Carnahan-Starling (CS) equation of state \cite{Carnahan1969} because this pressure is used in the WBII theory and is accurate deep within the supercooled regime \cite{Berthier2016} although it will fail at very large densities nearing random close packing.
+We need three other equations to set the thermodynamic coefficients in Eq.\ \eqref{eq:morphometric-surface-tension} and obtain generic many-body correlations in the hard-sphere liquid.
+
+First, by geometrical considerations \cite{Reiss1959}, we note that the cost of inserting a single hard point is exactly $\Delta \Omega[B_{\frac{\sigma}{2}}] = -k_B T \ln{(1- \eta)}$, where the (occupied) volume fraction is $\eta = \rho \pi \sigma^3 / 6$.
+Second, the excess chemical potential is identically the cost of inserting an additional particle giving \cite{Widom1963} $\Delta \Omega[B_{\sigma}] = \mu^{ex}.$
+The third equation comes by directly imposing the virial theorem \cite{Hansen2013} on the morphometric form of $g^{(2)}$ (Eqs.\ \ref{eq:contact-g} and \eqref{eq:spt-virial} in SM).
+For two particles, the dividing surface $\partial\mathcal{L}$ resembles a ``dumbbell'' and the morphological quantities (and thus $g^{(2)}$ by Eqs.\ \eqref{eq:potential-mean-force} and \eqref{eq:morphometric-surface-tension}) have a simple form which can be calculated explicitly (see Ref.\ \cite{Oettel2009} and SM).
+Solving the above expressions with the \emph{ansatz} \eqref{eq:morphometric-surface-tension} gives a new set of coefficients given explicitly in the SM.
+The pair correlation produced by these coefficients is self-consistent with CS at contact by construction; moreover, the new coefficients provide a theory that outperforms the older WBII approach across the whole range of distances typical of neighbouring particles (SM).
+This enables us to accurately model complex many-particle local structures.
+
+\emph{Free energy of local structures.}---Owing to the high accuracy of the correlations produced with the new morphometric coefficients, we can now calculate many-body correlations in the supercooled regime.
+We denote the population of some chosen local structure as $\mathcal{N} = \rho^n V \sigma^{3(n-1)} e^{-\beta F}$, where $F$ is the free energy of the local structure.
+From the definition of $g^{(n)}$ as a probability distribution we write the free energy as
+\begin{equation}\label{eq:local-structure-free-energy}
+  \beta F = -\ln{
+    \frac{1}{V \sigma^{3(n-1)}}
+    \left(
+    \int_{\mathcal{D}}
+    g^{(n)}(\vec{r}^n) \, d\vec{r}^n
+    \right)
+  },
+\end{equation}
+where the domain of integration $\mathcal{D}$ \emph{defines} the local structure, and $g^{(n)}$ is calculated from the morphometric potential of mean force using Eqs.\ \eqref{eq:potential-mean-force}, \eqref{eq:surface-tension} and \eqref{eq:morphometric-surface-tension} (computational details in SM).
+We define a particular local structure by its bond topology, using a pairwise cutoff $\sigma_{cut}$ such that separations between particles are in the range $r_{ij} \in [\sigma, \sigma_{cut}]$ if they are ``bonded'' and $r_{ij} > \sigma$ otherwise.
+All results presented use a cutoff of $\sigma_{cut}=1.2 \sigma$, but we have tested our findings are are not significantly affected by a choice of $\sigma_{cut}=1.4 \sigma$ indicating their robustness.
+
+To demonstrate the effectiveness of this approach we have taken rigid structures for $3 \le n \le 13$ which are global minima of clusters in simple liquids \cite{Wales2004}.
+We determined their free energies at arbitrary volume fraction by thermodynamic integration (details in SM) of Eq.\ \eqref{eq:local-structure-free-energy}.
+In the left panel of Fig.\ \ref{fig:structure-populations} we find excellent agreement between the theoretical prediction and the observed concentration of local structure seen in molecular dynamics simulations of both mono- and moderately polydisperse (8\%) hard spheres at all volume fractions accessed by the simulations i.e.\ $\eta \lesssim 0.585$ (details in SM).
+
+Our approach is able to predict populations of local structures well beyond the regime dynamically accessible to simulation, finding nontrivial structural change deep in the glassy regime highlighted by a rescaling with respect to the trivial $\rho^n$ density contribution.
+The free energy of considered structures changes approximately linearly across the entire liquid regime, with deviations from linear becoming more apparent in the supercooled regime.
+
+All structures apart from the fourfold symmetric octahedron in Fig.\ \ref{fig:structure-populations} are subunits of the icosahedron, and increase in concentration more rapidly than the octahedron until high density.
+For $n=6$ we consider the free energies of two structures: the tripyramid and octahedron.
+We find that the tripyramid occurs $\sim20$ times more often than the octahedron, their free energy difference being dominated by the different point group symmetries following \cite{Malins2009,Meng2010}.
+We can also estimate vibrational contributions, which allow us to match not only the relative but also the absolute values of free energies obtained from simulation.
+In particular, we are able to capture the gradual reduction of the population of octahedral motifs in favour of the tripyramids at high volume fractions.
+This is related to the previously observed emergence of fivefold symmetric motifs (such as the full and partial icosahedron) \cite{Royall2015,Tarjus2005,Hallett2018,Dunleavy2015}, which is here directly predicted from liquid state theory.
+
+Having tested that the theory is accurate for selected geometries, we now take the exhaustive list of 11980 rigid structures for $n=12$ determined in Ref.\ \cite{Holmes-Cerfon2016} to obtain a local density of states for a given sized inhomogeneity.
+These rigid structures correspond to unique contact topologies, but in thermal systems (i.e. with finite gaps between particles) we expect many of them to be indistinguishable as found in Ref.\ \cite{Trombach2018}.
+Nevertheless, because of their exhaustiveness these represent a complete local density of states in the liquid, of fundamental interest to random first-order transition theory \cite{Lubchenko2007}.
+We calculated the free energy of all (first-order) rigid (nonsingular) structures using Eq.\ \eqref{eq:local-structure-free-energy} (right panel of Fig.\ \ref{fig:structure-populations}), finding a bimodal distribution with two main peaks separated by a free energy difference that increases with increasing volume fraction.
+We find the that lower energy distribution consists of structures rich in fivefold (icosahedral) symmetry in the absence of fourfold (octahedral) symmetry.
+
+%% \begin{figure}
+%%   \includegraphics{reaction}
+%%   \caption{
+%%     (color online)
+%%     Reaction for transition between tripyramid and octahedron $n = 6$ structures.
+%%     Stationary points are indicated by markers: there is a discontinuity in free energy at the end points due to the additional integration over the reaction coordinate, and symmetry in the case of the octahedron.
+%%     Inset: variation of activation barrier with volume fraction $\eta$ and compressibility $Z = \beta p/\rho$ from this theoretical reaction path (dashed line) and measured $\alpha$-relaxation times in bulk molecular dynamics simulations (solid line), where $\eta = 0.45$ is indicated with a vertical dotted line.
+%%   }
+%%   \label{fig:reaction}
+%% \end{figure}
+
+\emph{Dynamics: free energy along a reaction path.}---We have thus far focused on static thermodynamic properties: yet a connection with dynamics can be made by calculating the free energy along reaction paths between (geometrically similar) structures.
+This calculation along unstable directions in the free energy landscape requires an analytic approach (described in the SM), and generates paths such as the one in Fig.\ \ref{fig:reaction}.
+Here we consider transitions between the tripyramid and the octahedron with $n=6$ because this is the simplest nontrivial transition between distinct hard sphere packings (SM).
+Comparing this dynamical barrier to the structural relaxation for ($\alpha$-) relaxation timescale $\tau_\alpha$ extracted from simulations relative to a microscopic time $\tau_0$ (inset of Fig.\ \ref{fig:reaction}), we find this single reaction path barrier agrees with the low density scaling of $\tau_\alpha$ (linear in the compressibility factor $Z$ \cite{Berthier2009}).
+However, activated dynamics are not expected in this regime so this agreement may be coincidental.
+%Moving to high densities, hard spheres exhibit two-step relaxation when vibrational ($\beta$--) and full ($\alpha$--) relaxations decouple as the system approaches its glass transition \cite{Berthier2011}.
+%However, dynamics along the tripyramid--octahedron path continues to increase in an ``Arrhenius'' fashion quite unlike the super-Arrhenius increase exhibited by the $\alpha$--relaxation in the computer simulations (inset of Fig.\ \ref{fig:reaction}).
+%It has been shown in molecular systems that $\beta$--relaxation can be Arrhenius in the deeply supercooled regime where $\alpha$-- relaxation is super-Arrhenius \cite{Yu2015}.
+%Given that typical particle displacements in the tripyramid--octahedron path are around 0.15$\sigma$ per particle, we observe that this relaxation mechanism may be more characteristic of ($\beta$--) relaxation than full ($\alpha$--) relaxation.
+It is possible to extend our methodology for larger rearrangements, which may be sufficient to access ($\alpha$-) relaxation \emph{at very deep supercooling} for equilibrium systems.
+However, the rapid growth in the number of possible states presents a considerable numerical challenge requiring new methods and approximations, so we leave this exciting avenue for future study.
+
+\emph{Conclusions.}---We have presented a formalism for describing many-body correlations in liquids and developed it into an accurate and computationally efficient parameter-free theory for hard spheres using integral geometry relying solely on the choice of the equation of state.
+The key approximations involved treating the grand potential as continuous and additive (related to extensivity), and imposing the correct contact value of $g^{(2)}(r)$.
+
+We applied the framework to a selection of local structural correlations, therefore predicting nontrivial changes in the energy landscape with supercooling putting previous empirical observations on more solid ground.
+In particular, our analysis provides evidence for the existence of two populations of structures with distinct symmetries and free energies which causes the local density of states to become increasingly bimodal at high densities.
+We note that we have treated densities corresponding to a degree of supercooling only accessible using novel swap Monte Carlo techniques \cite{Berthier2016}; however, these simulations introduce large polydispersity, changing the local structure \cite{Coslovich2018} and thus limiting direct comparison with our calculations for the monodisperse liquid.
+
+Our framework can be easily adapted to more complex liquids such as systems with soft repulsive interactions and polydisperse mixtures \cite{Kodama2011}.
+Integral geometry underlies the core equation \eqref{eq:morphometric-surface-tension}, so this approach can extend to hard particles of more complex shapes where the interaction potential is still geometric in nature.
+It is applicable to a more general class of liquids where the soft part of the potential may be treated as a perturbation around a hard core \cite{Hansen2013} such that a geometric decomposition still applies.
+This suggests a new route for predicting static properties of equilibrium liquids, with direct applications to self-assembly, nucleation and protein structure.
+
+\section{New notes.}
+
 We wish to describe local structure.
 Ultimately, we wish to learn about the structure of the energy landscape in hard spheres.
 To do so we must characterise the main features of the landscape, namely the different geometric packings and assign weights (free energies) to them.
@@ -45,7 +217,7 @@ The path we take is as follows:
 \end{itemize}
 
 \begin{SCfigure}[H]
-  \includegraphics[width=\linewidth]{toy-landscape}
+  \includegraphics[width=\linewidth,outer]{toy-landscape}
   \caption{A cartoon energy landscape for a 2-dimensional phase space.
     The landscape features two local minima: $A$ and $B$.
     The area surrounding each minima defines its basin: any point from which the minima can be found by moving downhill belongs to the basin.}
