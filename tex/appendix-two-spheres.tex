@@ -1,18 +1,22 @@
 %TC: macro \marginfootnote [other]
 %TC: envir SCfigure [] other
 %TC: macrocount beginSCfigure [figure]
-\documentclass[11pt]{report}
+\documentclass[11pt,twoside]{report}
 \usepackage{preamble}
-\setcounter{chapter}{0}
+\setcounter{chapter}{1}
+\graphicspath{{../img/}}
+\def\includebibliography{}
 \renewcommand{\chaptername}{Appendix}
 \renewcommand{\thechapter}{\Alph{chapter}}
-\graphicspath{{../img/}}
 
 \begin{document}
 \chapter{Explicit morphology for two particles}
+\label{appendix:two-spheres}
+
 In the previous section we gave computational details for calculating morphological quantities of the solvent accessible surfaces.
 Here we give the explicit form for the special case where there are two particles.
 These formulas can provide some intuition for the general case, and will be directly used in section \ref{SI:coefficients} to derive new thermodynamic coefficients.
+\todo{Tidy this appendix up so it is more thesis-y, and fix references!}
 
 For two particles $g^{(2)}(\vec{r}_1, \vec{r}_2)$ reduces to $g^{(2)}(|\vec{r}_1 - \vec{r}_2|)$ as the system is completely isotropic.
 All morphological quantities are then functions of $r = |\vec{r}_1 - \vec{r}_2|$.
@@ -47,6 +51,11 @@ with morphological quantities
 \end{align}
 \end{subequations}
 where $\Theta(\cdots)$ is the Heaviside step function.
-The mean curvature stated is a special case of the more general result worked out in \cite{Oettel2009}.
+The mean curvature stated is a special case of the more general result worked out in \cite{OettelEL2009}.
 The first term of the expressions for $V,A,C$ contains the morphological measures for two \emph{independent} particles (e.g.\ twice the volume of a single particle), whilst the remaining terms are corrections due to their mutual intersections.
+
+\ifdefined\includebibliography
+  \printbibliography
+\fi
+
 \end{document}

@@ -1,9 +1,9 @@
 %TC: macro \marginfootnote [other]
 %TC: envir SCfigure [] other
 %TC: macrocount beginSCfigure [figure]
-\documentclass[11pt]{report}
+\documentclass[11pt,twoside]{report}
 \usepackage{preamble}
-\setcounter{chapter}{1}
+\setcounter{chapter}{2}
 \graphicspath{{../img/}}
 \def\includebibliography{}
 \renewcommand{\chaptername}{Appendix}
@@ -11,6 +11,7 @@
 
 \begin{document}
 \chapter{Computational geometry for the union of many spheres}
+\label{appendix:computational-geometry}
 
 \section{Introduction}
 
@@ -19,6 +20,7 @@ In this section we give details on their geometric construction to aid morpholog
 The relevant formulas for $C_{\partial\mathcal{L}}$ and $X_{\partial\mathcal{L}}$ in hard sphere systems have previously been given in references \cite{MeckeAA1994} and \cite{RothPRL2006}.
 Here, we restate these formulas and extend them by computing their derivatives with respect to atomic coordinates.
 This technical description is only likely to be of interest to those wishing to do morphological calculations of their own.
+\todo{Tidy this appendix up so it is more thesis-y, and fix references!}
 
 To briefly motivate these derivative calculations, we remind the reader that derivatives were used in the main text in the calculation of the free energy of local structures along the octahedron-tripyramid reaction path.
 Gradients were required for this calculation, providing an analytic method (with perturbation theory) where the numerical method (thermodynamic integration) fails due the instability of intermediate points along the reaction path.

@@ -1,9 +1,22 @@
-\section{Insertion cost is not generally analytic in geometric measures}
-\label{sec:singularities}
+%TC: macro \marginfootnote [other]
+%TC: envir SCfigure [] other
+%TC: macrocount beginSCfigure [figure]
+\documentclass[11pt,twoside]{report}
+\usepackage{preamble}
+\setcounter{chapter}{0}
+\graphicspath{{../img/}}
+\def\includebibliography{}
+\renewcommand{\chaptername}{Appendix}
+\renewcommand{\thechapter}{\Alph{chapter}}
 
-Here we review the arguments made by Reiss and coworkers \cite{ReissJCP1959,ReissJCP1960} that the grand canonical cost of insertion contains singularities.
+\begin{document}
+\chapter{Singularities in the hard sphere chemical potential}
+\label{appendix:spt-singularities}
+
+Here we show that the cost of inserting a solute is not generally analytic in geometric measures by revisiting the arguments made by Reiss and coworkers \cite{ReissJCP1959,ReissJCP1960}.
 This argument is worth revisiting as it demonstrates that \emph{any} regular expansion of $\Delta \Omega$ in terms of geometrical measures like curvature must necessarily be approximate.
 In sections \ref{sec:morphometric-theory} and \ref{sec:spt} we will contribute to the theory of such an expansion, so the purpose of this section is to emphasise its approximate nature from the outset as a disclaimer.
+\todo{Fix references and make this appendix more thesis-y}
 
 We consider a single-component hard sphere liquid with particles of diameter $\sigma$, and we imagine inserting a hard spherical solute of radius $R$.
 A sphere of radius $R + \sigma/2$ around the solute is excluded to the centers of solvent particles.
@@ -83,16 +96,18 @@ Approaching the singular point $R_n$ we find the deviation from the solution for
 \end{equation*}
 i.e.\ the singular behaviour is entirely contained in $F^{(n)}$.
 Noting that polynomials of degree $n$ have vanishing $(n+1)$th derivatives, and $V_\mathrm{ex} \propto R^d$, we thus expect a discontinuity in the $dn$th derivative of $p_0$ about $R=R_n$; from \eqref{eq:insertion-from-p} we find $\Delta \Omega$ will similarly feature a discontinuity in its $dn$th derivative at $R=R_n$.
-A summary of the first few singularities in three-dimensions is given in Table~\ref{table:singularities}.
+A summary of the first few singularities in three-dimensions is given in Table~\ref{table:spt-singularities}.
 
 Again, these singularities have long been known since the first papers on scaled particle theory \cite{ReissJCP1959,ReissJCP1960}.
 They are worth reiterating because any geometric expansion in simple powers of $R$ will not capture these singularities; the morphometric approach is an example of such an expansion, albeit generalised beyond spherical solutes, so it must necessarily be approximate.
 
-\begin{table}
-  \begin{ruledtabular}
+\begin{SCtable}
+  \begin{minipage}[b]{\linewidth}
+    \centering
     \begin{tabular}{ccc}
+      \toprule
       $n$ & $R_n / \sigma$ & Discontinuity \\
-      \hline
+      \midrule
       %% 2 & $\frac{\sigma}{2}$ & $\Delta \Omega'''(R)$
       %% \\
       %% 3 & $\frac{\sigma}{\sqrt{3}}$ &
@@ -106,10 +121,18 @@ They are worth reiterating because any geometric expansion in simple powers of $
       $\dfrac{\partial^6 \Delta \Omega}{\partial R^6}$
       \vspace{0.25em} \\
       4 & $\sqrt{\dfrac{3}{8}} - \dfrac{1}{2}$ &
-      $\dfrac{\partial^9 \Delta \Omega}{\partial R^9}$
+      $\dfrac{\partial^9 \Delta \Omega}{\partial R^9}$ \\
+      \bottomrule
     \end{tabular}
-  \end{ruledtabular}
-  \caption{First few singularities in the cost of inserting a sphere of radius $R$ into a one-component hard sphere liquid of diameter $\sigma$ in $d=3$.
+  \end{minipage}
+  \caption[First few singularities in the insertion cost]{
+    First few singularities in the cost of inserting a sphere of radius $R$ into a one-component hard sphere liquid of diameter $\sigma$ in $d=3$.
     $R = R_n$ is the minimum radius required for a sphere to contain $n$ spheres, and the corresponding singularity is determined from equations \eqref{eq:insertion-from-p} and \eqref{eq:spt-p-scaling}.}
-  \label{table:singularities}
-\end{table}
+  \label{table:spt-singularities}
+\end{SCtable}
+
+\ifdefined\includebibliography
+  \printbibliography
+\fi
+
+\end{document}
