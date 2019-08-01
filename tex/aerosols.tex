@@ -10,18 +10,21 @@
 \begin{document}
 \chapter{Nucleation kinetics of drying aerosols}
 \epigraph{Remove the plastic.}{Sears\textsuperscript{\textregistered} cross-trainer manual.}
+\label{chapter:aerosols}
 
 This work was undertaken in collaboration with members of the Reid group in the School of Chemistry at the University of Bristol.
 In particular, the experiments were carried out by Flo Gregson.
-My main contribution was in theory and simulations to better understand the experimental data.
-Consequently, while I will describe the experiments the focus of the chapter will be on the theory and numerics.
+My contribution to this work was through theory and numerical modelling to better understand the experimental data.
+Consequently, while I will describe the experiments the focus of the chapter will be theoretical.
+Some of this work has appeared in Ref.\ \cite{GregsonJPCB2019}.
 
 \section{Introduction}
 
-We have concentrated on the problem of modelling hard spheres at high densities, with a paritcular focus on supercooled liquids and glasses.
+We have concentrated on the problem of modelling hard spheres at high densities, with a particular focus on supercooled liquids and glasses.
 Another problem at high densities is crystal nucleation.
 In this chapter we will address a practical application of nucleation: nucleation of salt crystals inside of aerosol droplets, with applications to climate modelling and industrial spray drying.
 We will describe these applications in more detail below.
+\todo{Tidy up this introduction}
 
 Nucleation rates of salt solutions are a much harder problem than hard spheres, a toy system, so our microscopic morphometric formalism will be unlikely to work here at present.
 In stead we will start from the other mesoscale limit, where the droplet can be treated as a continuum.
@@ -31,23 +34,22 @@ We hope one day theory will allow a connection between microscopic and mesoscopi
 The impact of atmospheric aerosols on the climate remains the leading single uncertainty in climate predictions \cite{BoucherIPCC2013,CarslawN2013,LeePNAS2016,RegayreACP2018}.
 In particular, the radiative forcing caused by anthropogenic aerosols in clouds features large uncertainties due to the difficulty of direct measurement, and the large parameter spaces of theoretical models \cite{LeePNAS2016}.
 Thus, the importance of improving models for atmospheric aerosols to better predict climate change and inform policy cannot be understated.
-In addition, atmospheric aerosols have potential application in geoengineering \cite{PringleACP2012}.
+In addition, atmospheric aerosols have potential applications in geoengineering \cite{PringleACP2012}.
 
 Notably, radiative forcing of atmospheric aerosols is stongly influenced by their optical properties \cite{HodasACP2015,CotterellACP2017}.
 The solute concentration and physical state (i.e.\ whether it is crystalline or amorphous) can thus have a dramatic effect on climate predictions.
 Central to this is the nucleation and drying kinetics of atmospheric droplets.
-Where aerosols are included in climate models the focus is typically on sulphates.
-Sea salt (\ce{NaCl}) aerosols, deposited into the atmosphere through natural processes, are more prevalent in the atmosphere than sulphates making up the second largest component of atmospheric aerosols by mass \cite{KeeneJAS1998}; a major component of aged \ce{NaCl} aerosols is sodium nitrate (\ce{NaNO3}) formed through reactions with nitrogen oxides \cite{TolockaJPCA2004}, a significant industrial emission.
+Where aerosols are included in climate models the focus is typically on sulphates\todo{Citation needed}.
+Sea salt aerosols (e.g.\ those containing \ce{NaCl}), deposited into the atmosphere through natural processes, are more prevalent in the atmosphere than sulphates making up the second largest component of atmospheric aerosols by mass \cite{KeeneJAS1998}; a major component of aged \ce{NaCl} aerosols is sodium nitrate (\ce{NaNO3}) formed through reactions with nitrogen oxides \cite{TolockaJPCA2004}, a significant industrial emission.
 Subsequent reactions form secondary organic aerosols which further impact the climate \cite{ScottACP2014,PoschlCR2015} and are associated with adverse health effects \cite{PoschlCR2015}.
 Given their abundance and relative simplicity we focus on \ce{NaCl} and \ce{NaNO3} aerosol droplets.
 
-Understanding the droplet drying and crystallisation is also important for industrial applications, most notably in spray-drying.
-The goal in these applications is to control the distribution of sizes, morphology and phase of the final droplets, which are very sensitive to processing conditions such as solvent \cite{CarverIECR2012,LintingreSM2016}, temperature \cite{IveyAST2018,YouDT2014,LinPT2015}, pH \cite{YuJPS2002,DubbiniIJP2014} and co-spray dried components \cite{ZhongAP2018,NandiyantoAPT2011,LyuJCG2017}.
-Tailoring crystallisation is particularly important because of crystal and amorphous states have fundamentally different properties: crystalline droplets are typically more stable, suitable for e.g.\ long-term storage \cite{VehringJAS2007,CostantinoJPS1998}, whereas amorphous droplets are more soluble which is desirable for e.g.\ drug delivery \cite{AmstadJPCB2016,BroughIJP2013}.
+Understanding the droplet drying and crystallisation process is also important for industrial applications, most notably in spray-drying.
+The goal in these applications is to control the distribution of sizes, morphology and phase of the final droplets, which are very sensitive to processing conditions such as solvent \cite{CarverIECR2012,LintingreSM2016}, temperature \cite{IveyAST2018,YouDT2014,LinPT2015}, pH \cite{YuJPS2002,DubbiniIJP2014} and additional co-excipients \cite{ZhongAP2018,NandiyantoAPT2011,LyuJCG2017}.
+Tailoring crystallisation is particularly important because crystal and amorphous states have fundamentally different properties: crystalline droplets are typically more stable, suitable for e.g.\ product storage \cite{VehringJAS2007,CostantinoJPS1998}, whereas amorphous droplets are more soluble which is desirable for e.g.\ drug delivery \cite{AmstadJPCB2016,BroughIJP2013}.
 Our investigation of crystal nucleation rates can be inverted to design spray-drying conditions to achieve a desired final state.
-\todo{I copied this section pretty closely from Flo, so probably needs a lot of rewording}
 
-In this work we will investigate drying and crystal nucleation of free aerosol droplets, by combining experiments and numerical simulations of free aerosol droplets.
+In this chapter we will investigate drying and crystal nucleation of free aerosol droplets, by combining experiments and numerical simulations of free aerosol droplets.
 The experiments are described in section \ref{sec:experiments}, and we report matching simulations of droplet evolution with a diffusional model in section \ref{sec:evolution}.
 We find that classical nucleation theory accurately predicts the crystallisation times for \ce{NaCl} aerosols, but not for \ce{NaNO3}, in section \ref{sec:nucleation}.
 For \ce{NaNO3} we report nucleation rates with non-monotonic behaviour with increasing solute concentration.
@@ -55,45 +57,44 @@ For \ce{NaNO3} we report nucleation rates with non-monotonic behaviour with incr
 \section{Experiments}
 \label{sec:experiments}
 
-The kinetics of drying \ce{NaCl} and \ce{NaNO3} droplets was measured using Comparative-Kinetics Electrodynamic Balance (CK-EDB).
-In all experiments HPLC-grade water, BioXtra $\ge 99.5\%$ \ce{NaCl} (Sigma-Aldrich) and $X \%$ \ce{NaNO3} \hl{(brand)} were used.
-The CK-EDB instrument has been detailed in previous work\cite{DaviesAST2012,DaviesAC2013} \hl{(which is correct reference?)} so we will only describe it briefly here.
+The kinetics of drying \ce{NaCl} and \ce{NaNO3} droplets was measured using the Comparative-Kinetics Electrodynamic Balance (CK-EDB).
+In all experiments HPLC-grade water, BioXtra $\ge 99.5\%$ \ce{NaCl} (Sigma-Aldrich) and analytic grade \ce{NaNO3} (Fisher-Scientific) were used.
+The CK-EDB instrument has been detailed in previous work \cite{DaviesAST2012} so we will only describe it briefly here.
 Droplets of known concentration are produced by a droplet-on-demand generator (MicroFab) and injected into the CK-EDB instrument.
-Upon generation the droplets are charged ($<\SI{10}{\femto\coulomb}$ through e.g.\ an ionic imbalance) with an induction electrode so they can be levitated by application of a DC field to counteract gravity.
-An AC field is applied in the perpendicular direction to trap the droplet.
+Upon generation the droplets are charged ($<\SI{10}{\femto\coulomb}$ through e.g.\ an ionic imbalance) with an induction electrode such that they become trapped within the centre of the electrodynamic field, produced by the application of an AC field between two sets of concentric cylindrical electrodes.
+An additional DC field is applied to the lower set of electrodes to counteract gravity and drag forces acting on the droplet.
 A circulating current of ethylene glycol coolant across the electrodes controls the chamber temperature $T_{\infty}$ in the range 273--\SI{323}{\kelvin}.
 
 To determine the size and physical state of the droplet, it is illuminated with a \SI{512}{\milli\watt} continuous-wave laser.
 The resulting scattering pattern is recorded by a CCD camera placed at \SI{45}{\degree} to the beam over an angular range of $\SI{\sim24}{\degree}$.
-For isotropic droplets in an amorphous state the droplet radius $R$ determines the angular separation between the fringes in the pattern $\Delta \theta$.
+For isotropic droplets in a liquid or dried amorphous state the droplet radius $R$ determines the angular separation between the fringes in the pattern $\Delta \theta$.
 Assuming the geometric optics approximation of Mie theory, this relationship is given by
-\begin{equation}
+\begin{equation*}
   R
   =
   \frac{\lambda}{\Delta \theta} \left(
   \cos{\left(\frac{\theta}{2}\right)}
   + \frac{n \sin{\left(\frac{\theta}{2}\right)}}{\sqrt{1 + n^2 - 2n \cos{\left(\frac{\theta}{2}\right)}}}
   \right)^{-1}
-\end{equation}
-where $\lambda$ is the laser wavelength, $\theta$ is the central viewing angle and $n$ is the droplet refractive index.
+\end{equation*}
+where $\lambda \SI{532}{\nano\metre}$ is the laser wavelength, $\theta$ is the central viewing angle and $n$ is the droplet refractive index.
 This approximation scheme determines the droplet radius within an accuracy of $\SI{\pm100}{\nano\metre}$.
 This method fails when crystallisation occurs breaking isotropy and the scattering pattern dramatically changes; this feature allows the time of crystallisation to be determined to within the time interval of recording $\SI{\sim10}{\milli\second}$.
-Nucleation and growth occur on such a short time scale that it is not possible to obtain information from the experiments on where inside the droplet this occurs or how many initial nucleation sites there were; we can only determine that the droplet has crystallised.
+Nucleation and growth occur on such a short time scale that it is not possible to obtain information from the experiments on where inside the droplet this occurs or how many initial nucleation sites there were; we can only determine that the droplet has nucleated crystals.
 
 The instrument features two gas flows for wet and dry nitrogen applied to the droplet at a rate of \SI{0.03}{\metre\per\second}.
 Controlling the ratio of these two flows through a mass-flow controller \hl{(brand)} sets the relative humidity (RH) inside the CK-EDB chamber.
-Liquid \ce{NaCl}--\ce{H2O} and \ce{NaNO3}--\ce{H2O} droplets were placed in the instrument at constant RH for a short time to ensure well-mixed initial droplets, after which the RH was dropped to initiate drying.
-The switches in RH occur rapidly over $\SI{\sim0.1}{\second}$.
-Crystallisation of \ce{NaCl} droplets occurred within $\SI{\sim1.7}{\second}$, whereas \ce{NaNO3} droplets showed stochastic behaviour with a fraction of droplets not crystallisation over the timescale of the experiment.
-The stochastic behaviour persists when the experiment was repeated for the \emph{same} droplet over a cycle of lowering and raising the RH, ruling out impurity-driven heterogeneous nucleation.
-\todo{Should probably cite previous paper somewhere?}
+Liquid aqueous \ce{NaCl} and aqueous \ce{NaNO3} droplets (20\% solute concentration by weight) were evaporated into dry conditions at \SI{20}{\celsius}.
+Crystallisation of multiple \ce{NaCl} droplets occurred reproducibly \SI{1}{\second} after droplet generation \cite{GregsonJPCB2019}, whereas \ce{NaNO3} droplets showed stochastic behaviour with a fraction of droplets not crystallising over the timescale of the experiment (droplets were typically trapped for \SI{10}{\second}).
+The stochastic behaviour persists when the experiment was repeated for the \emph{same} \ce{NaNO3} droplet over a cycle of repeatedly lowering and raising the RH (described in more detail in Ref.\ \cite{GregsonTBD2019}), ruling out impurity-driven heterogeneous nucleation.
 
 \begin{SCfigure}
   \begin{minipage}{\linewidth}
     \centering
     \includegraphics[width=0.75\linewidth]{aerosol-droplet}
   \end{minipage}
-  \caption{A drying droplet solution of radius $r=R(t)$ surrounded by a gas of temperature $T_\infty$ and relative humidity RH.
+  \caption[Model drying aerosol droplet]{
+    A drying droplet solution of radius $r=R(t)$ surrounded by a gas of temperature $T_\infty$ and relative humidity RH.
     Evaporation of the solvent (water) causes the droplet to shrink and surface enrichment of solute concentration $\rho^{(s)}$ together with evaporative cooling $T < T_\infty$.}
   \label{fig:aerosol-droplet}
 \end{SCfigure}
@@ -144,7 +145,7 @@ In the absence of any chemical reactions the continuity equation for each specie
   \vec{\nabla} \cdot (\rho^{(i)} \vec{v}^{(i)}) = 0
   \qquad i \in \{f,s\}
 \end{equation}
-where $\vec{v}^{(i)}$ is the velocity of species $i$.
+where $\vec{v}^{(i)}$ is the velocity of species $i$, or in terms of relative flows
 %% and the mass-averaged fluid velocity is
 %% \begin{equation}
 %%   \vec{v} = \sum_i Y^{(i)} \vec{v}^{(i)}
@@ -186,23 +187,24 @@ Volume additivity holds to a good approximation \cite{HandscombCES2009}, i.e.\ t
 where $\rho_0^{(s)}$ and $\rho_0^{(f)}$ are the densities of the pure substances in the liquid phase; as no stable amorphous phases of \ce{NaCl} or \ce{NaNO3} are known we approximate $\rho_0^{(s)}$ by the density in the crystal phase.
 
 By considering mass conservation one obtains
-\begin{equation}
+\begin{equation*}
   \vec{\nabla} \cdot \vec{v}
   =
   \frac{1}{\rho^2}
   \frac{\partial \rho}{\partial Y^{(s)}}
   \vec{\nabla} \cdot \vec{j}^{(s)}
-\end{equation}
+\end{equation*}
 so assuming volume additivity \eqref{eq:volume-additivity} we can define the mass difference parameter as
 \begin{equation}\label{eq:lambda}
-  \Lambda =
+  \Lambda
+  =
   \frac{1}{\rho^2} \frac{\partial \rho}{\partial Y^{(s)}} \\
   =
   \frac{1}{\rho^{(f)}_0} -
   \frac{1}{\rho^{(s)}_0}.
 \end{equation}
 giving $\vec{v} = \Lambda \vec{j}^{(s)}$.
-This simplifies the advective term in \eqref{eq:species-continuity-relative} leading to
+This simplifies the advective term in the continuity equation \eqref{eq:species-continuity-relative} leading to
 \begin{equation}\label{eq:species-continuity-relative-without-advection}
   \frac{\partial \rho^{(s)}}{\partial t} +
   \vec{\nabla} \cdot \left(
@@ -258,7 +260,7 @@ By comparison, the mass fraction is widely used in the literature which leads to
   = 0.
 \end{equation*}
 
-Bulk viscosity measurements are unavailable at high densities because of the propensity for the salts to crystallise, so we extrapolate the available experimental data\cite{PowerCS2013} \todo{Need reference for sodium chloride experimental viscosities.} assuming the Arrhenius-like form
+Bulk viscosity measurements are unavailable at high densities because of the propensity for the salts to crystallise, so we extrapolate the available experimental data \cite{PowerCS2013} \todo{Need reference for sodium chloride experimental viscosities.} assuming the Arrhenius-like form
 \begin{equation}\label{eq:vft-fit}
   \log{\eta}
   =
@@ -281,14 +283,15 @@ The resulting diffusion coefficients entering the droplet evolution equation are
     \centering
     \includegraphics[width=0.9\linewidth]{aerosol-diffusion-fit}
   \end{minipage}
-  \caption{Numerical fits of binary diffusion coefficients for aqueous ionic solutions.
+  \caption[Viscosity and diffusion coefficients of aqueous ionic solutions]{
+    Numerical fits of binary diffusion coefficients for aqueous ionic solutions.
     Top panel: fits of viscosity to an Arrhenius-like form \eqref{eq:vft-fit} to experimental values \cite{?,PowerCS2013}.
     Bottom panel: diffusion coefficient from the viscosity fits assuming a Stokes-Einstein form \eqref{eq:stokes-einstein}, where the Stokes radius is obtained by calibration with direct measurements of diffusion at \SI{300}{\kelvin} for \ce{NaCl} \cite{LyubartsevJPC1996} and \SI{25}{\celsius} for \ce{NaNO3} \cite{YehJCED1970}.
     The dashed-purple horizontal line shows the diffusion constant of pure \ce{H2O} for reference, to be distinguished from the binary diffusion constants in the limit $Y^{(s)} \to 0$.}
   \label{fig:diffusion-fit}
 \end{SCfigure}
 
-We employ two simplifying in our calculations concerning the effects of droplet temperature.
+We employ two simplifications in our calculations concerning the effects of droplet temperature.
 First, our volume additivity assumption \eqref{eq:volume-additivity} makes the density temperature independent; this neglects conduction forces caused by temperature gradients and results in more heterogeneous droplets.
 %In reality temperature gradients will be present in a drying droplet from evaporative cooling, so conductive forces will help keep the solution well-mixed; we will thus overestimate the inhomogeneities of the concentration profile.
 Secondly, we approximate $T \sim T_\infty$ in the Stokes-Einstein relation \eqref{eq:stokes-einstein}
@@ -299,11 +302,11 @@ Note: later we model the droplet temperature $T$ explicitly for treating solvent
 
 \subsection{Droplet boundary conditions}
 
-Initially the droplets are prepared in equilibrium, so they are well-mixed solutions and we can assume an initial uniform concentration profile.
+Initially the droplets are prepared in equilibrium, so they are well-mixed solutions and we can assume a uniform initial concentration profile.
 At $t=0$ the humidity is dropped leading to evaporation of the solvent.
-The evaporation rate determines the boundary conditions for \eqref{eq:final-diffusion}.
+The evaporation rate determines the boundary conditions for the diffusion equation \eqref{eq:final-diffusion}.
 
-Integrating \eqref{eq:species-continuity} gives the total mass flow into the droplet (of each species) as
+Integrating the species continuity equation \eqref{eq:species-continuity} gives the total mass flow into the droplet (of each species) as
 \begin{equation}\label{eq:integral-continuity}
   \frac{d m^{(i)}}{dt} =
   \int_{V(t)} \frac{\partial \rho^{(i)}}{\partial t} \, d V +
@@ -336,193 +339,112 @@ For spherical droplets this gives the boundary condition
 %% \end{equation}
 %% so
 \begin{equation}
-  \left. \frac{\partial \rho^{(s)}}{\partial r} \right|_{r=R(t)} =
+  \left. \frac{\partial \rho^{(s)}}{\partial r} \right|_{r=R(t)}
+  =
   -
   \frac{\rho^{(s)}}{D_\mathrm{eff}(R)}
   \frac{dR}{dt}.
 \end{equation}
 Assuming volume additivity \eqref{eq:volume-additivity} we can determine the radial evolution from mass conservation as
 \begin{equation}\label{eq:radial-evolution}
-  \frac{dR}{dt} =
-  \frac{1}{4\pi R^2 \rho^{(f)}_0} \frac{dm^{(f)}}{dt}
+  \frac{dR}{dt}
+  =
+  \frac{\dot{m}}{4\pi R^2 \rho^{(f)}_0}
 \end{equation}
-so we need a model of the evaporation rate $\tfrac{dm^{(f)}}{dt}$ to close this system of equations.
+so we need a model of the evaporation rate $\dot{m} := \tfrac{dm^{(f)}}{dt}$ to close this system of equations.
 
-\subsection{Vapour phase analysis}
-
-Key assumptions\todo{Also reference Slattery, \emph{Advanced transport phenomena}, (1999)}
-\begin{enumerate}
-\item Spherical symmetry
-\item Quasi-steady
-%\item Lack of convection currents: $\vec{j} = D \vec{\nabla} \rho$ omits $-\vec{u} \rho$ term.
-\end{enumerate}
-
-Starting from the continuity equation\todo{Insert key reference for this section is: Sirignano, W. A. \emph{Fluid dynamics and transport of droplets and sprays - Second edition} (2010).}:
-\begin{equation}\label{eq:continuity-eqn}
-  \frac{\partial \rho}{\partial t}
-  + \vec{\nabla} \cdot \vec{j} = 0,
+We now derive the classical result for quasistatic droplet vaporisation, loosely following the exposition of standard texts e.g.\ Refs.\ \cite{Slattery1999, Sirignano2010}.
+Relaxation in the vapour phase occurs much faster than inside the liquid droplet, so we can assume that the flows in the vapour phase are quasi-steady.
+The time-derivative in the continuity equations \eqref{eq:species-continuity} and \eqref{eq:species-continuity-relative} thus vanishes leaving
+\begin{subequations}
+  \begin{align}
+    \vec{\nabla} \cdot (\rho \vec{v})
+    &=
+    0
+    \\
+    \vec{\nabla} \cdot (\rho^{(i)} \vec{v}^{(i)})
+    =
+    \vec{\nabla} \cdot (\rho^{(i)} \vec{v} + \vec{j}^{(i)})
+    &=
+    0
+    \qquad i \in \{f,g\}
+    %% \frac{1}{r^2} \frac{d}{dr} \left(
+    %% r^2 \rho u Y_i - r^2 D_V \frac{d(\rho Y_i)}{dr}
+    %% \right)
+  \end{align}
+\end{subequations}
+with the total mass continuity equation obtained by summing over both species in \eqref{eq:species-continuity} and using $\sum_i \rho^{(i)} = \rho$.
+Assuming spherical symmetry we find that total mass conservation obeys
+\begin{equation}\label{eq:vapour-mass-conservation}
+  r ^2 \rho v
+  =
+  \textrm{constant}
+  =
+  -\frac{\dot{m}}{4\pi}
 \end{equation}
-where the divergence term in spherical coordinates is
-\begin{equation}
-  \vec{\nabla} \cdot \vec{j} =
-  \frac{1}{r^2} \frac{\partial (r^2 \rho u)}{\partial r}
-\end{equation}
-
-We treat the vapour phase as a binary system of the water vapour and an ambient gas phase, $Y_W + Y_A = 1$%
-\marginfootnote{We have a solute (\ce{NaCl} or \ce{NaNO3}) and an evaporating solvent (water), which unfortunately both have the initial $S$ so we need an alternative subscript to distinguish them.
-  \textbf{What to use for the solute?}
-  We use $W$ for the water component and $A$ for the ambient gas phase.
-I find it more memorable to think of the subscript $A$ as standing for `atmosphere'.}[-2cm].
-Absent any chemical reactions the total number of each species is conserved, so the continuity equation must be satisfied for each constituent:
-\begin{equation}
-  \frac{\partial (\rho Y_i)}{\partial t}
-  + \vec{\nabla} \cdot \vec{j}_i = 0
-\end{equation}
-\begin{equation}
-  \vec{\nabla} \cdot \vec{j}_i =
-  \frac{1}{r^2} \frac{d}{dr} \left(
-  r^2 \rho u Y_i - r^2 D_V \frac{d(\rho Y_i)}{dr}
-  \right)
-\end{equation}
-here $D_V$ is understood as a binary diffusion constant%
-\marginfootnote{The subscript $V$ stands for vapour.},
-the same for both species, as there is no net flow of mass: the species merely mix.
-
-If we assume relaxation in the vapour phase a quasi-steady vapour relaxation the time derivative in \eqref{eq:continuity-eqn} disappears leaving
-\begin{equation}
-  \frac{d}{dr} ( r^2 \rho u ) = 0
-\end{equation}
-which allows us to write
-\begin{equation}\label{eq:mass-conservation}
-  r ^2 \rho u = \textrm{constant} = -\frac{\dot{m}}{4\pi}.
-\end{equation}
-Similarly, for the species equation we have
-\begin{equation}
-  \frac{d}{dr} \left(
-  r^2 \rho u Y_i - r^2 \rho D_V \frac{d Y_i}{dr}
-  \right) = 0
-  \label{eq:quasistatic-vapour-species-conservation}
-\end{equation}
-Using \eqref{eq:mass-conservation} we have
-\begin{equation}\label{eq:ambient-gas-ode}
-  -\frac{\dot{m}}{4\pi r^2 \rho D_V} Y_A - \frac{d Y_A}{dr} = 0.
-\end{equation}
-Defining
-\begin{equation*}
-  \phi_A(r) = -\frac{\dot{m}}{4\pi}
-  \int_r^\infty  \frac{1}{\rho D_V (r')^2} \, dr'
+with radial speeds $v = |\vec{v}|$ and $v^{(i)} = |\vec{v}^{(i)}|$.
+Similarly, for the evaporating component we obtain the ordinary differential equation
+\begin{equation*}\label{eq:quasistatic-vapour-species-conservation}
+  r^2 \rho v Y^{(f)} - r^2 \rho D_v \frac{d Y^{(f)}}{dr}
+  =
+  -\frac{\dot{m}}{4\pi}
 \end{equation*}
-\eqref{eq:ambient-gas-ode} becomes
-\begin{equation}
-  \frac{d\phi_A}{dr} Y_A - \frac{d Y_A}{dr} = 0.
+where we assumed Fickian diffusion for the relative flux term with $D_v$ as the effective binary diffusion constant for the vapour.
+Using total mass conservation \eqref{eq:vapour-mass-conservation} we can rewrite this as
+\begin{equation}\label{eq:vapour-ode}
+  \frac{d Q}{dr} (Y^{(f)} - 1)
+  - \frac{d (Y^{(f)} - 1)}{dr}
+  = 0
 \end{equation}
-which can be integrated%
-\marginfootnote{One way to do this integral involves multiplying through by the integrating factor $e^{-\phi_A(r)}$.}
-giving
-\begin{equation}
-  Y_A(r) e^{-\phi_A(r)} = \textrm{constant}.
+with
+\begin{equation}\label{eq:vapour-ode-integration-factor}
+  Q(r)
+  =
+  \frac{\dot{m}}{4\pi}
+  \int_r^\infty  \frac{1}{\rho D_v (r')^2} \, dr'.
 \end{equation}
-Thus, we have
-\begin{equation}
-  \frac{Y_A(R)}{\displaystyle{\lim_{r \to \infty}} Y_A(r)} = e^{\phi_A(R)}.
+Upon integration%
+\marginfootnote{One way to evaluate this integral involves multiplying through by the integrating factor $e^{-Q(r)}$.}
+we find
+\begin{equation*}
+  (Y^{(f)}(r) - 1) e^{-Q(r)}
+  =
+  \textrm{constant}.
+\end{equation*}
+or
+\begin{equation*}
+  \frac{1 - Y^{(f)}(R^+)}{\displaystyle{1 - \lim_{r \to \infty}} Y^{(f)}(r)}
+  =
+  1 + B
+  =
+  e^{Q(R)}
+\end{equation*}
+where the superscript in $Y^{(f)}(R^+)$ indicates the mass fraction of the solvent component is taken on the vapour side of the boundary and we have defined the \emph{Spalding number} as
+\begin{equation}\label{eq:spalding-number}
+  B
+  =
+  \frac{
+    \displaystyle{\lim_{r \to \infty}} Y^{(f)}(r) - Y^{(f)}(R^+)
+  }{
+    1 - \displaystyle{\lim_{r \to \infty}} Y^{(f)}(r)
+  }.
 \end{equation}
-using the fact that $\displaystyle{\lim_{r \to \infty} \phi_A(r) = 0}$.
-Transforming this in terms of the mass fraction of the water component $Y_F = 1 - Y_A$ we have
-\begin{equation}
-  \frac{1 - Y_F(R)}{1 - \displaystyle{\lim_{r \to \infty}} Y_F(r)} =
-  1 + B = e^{\phi_A(R)},
-\end{equation}
-where we have defined the \emph{Spalding number} as
-\begin{equation}
-  %B(Y_F(R); \displaystyle{\lim_{r \to \infty}} Y_F(r)) =
-  B =
-  \frac{\displaystyle{\lim_{r \to \infty}} Y_F(r) - Y_F(R)}
-       {1 - \displaystyle{\lim_{r \to \infty}} Y_F(r)}.
-\end{equation}
-Upon reinserting the definition of $\phi_A$ and rearranging we obtain the equation for the evaporation rate as
-\begin{equation}
-  \dot{m} = -
-  \frac{4\pi \ln{(1 + B)}}
-       {\int_r^\infty  \frac{1}{\rho D_V (r')^2} \, dr'}
-\end{equation}
-If we take the product $\rho D_V$ as a constant in the vapour phase, then we obtain the classic result for quasistatic evaporation:
-\begin{equation}
-  \dot{m} = - 4\pi \rho D_V R \ln{(1 + B)}.
-\end{equation}
-
-%Gas phase assumptions: spherical symmetry, ideal gas, quasi-steady evaporation.
-We assume the classic result for quasistatic vaporisation\cite{Slattery1999,Sirignano2010}
-\begin{equation}\label{eq:vaporisation}
+Upon reinserting the definition of $Q(r)$ \eqref{eq:vapour-ode-integration-factor} and rearranging we obtain 
+\begin{equation*}
+  \frac{dm^{(f)}}{dt}
+  =
+  \frac{
+    4\pi \ln{(1 + B)}
+  }{
+    \int_r^\infty  \frac{1}{\rho D_v (r')^2} \, dr'
+  }.
+\end{equation*}
+If we take $\rho = \rho_v$ and $D_v$ as constants in the vapour phase, then we obtain the classical result for quasistatic vaporisation as \cite{Slattery1999,Sirignano2010}
+\begin{equation}\label{eq:quasistatic-vaporisation}
   \frac{dm^{(f)}}{dt}
   =
   4\pi \rho_v D_v R \ln{(1 + B)}.
 \end{equation}
-where $\rho_v$ and $D_v$ are the density and diffusion constant in the vapour phase, and the \emph{Spalding number} is defined as
-\begin{equation}\label{eq:spalding}
-  B =
-  \frac{\displaystyle{\lim_{r \to \infty}} Y^{(f)}(r) - Y^{(f)}(R^+)}
-       {1 - \displaystyle{\lim_{r \to \infty}} Y^{(f)}(r)}.
-\end{equation}
-with $Y^{(f)}(R^+)$ indicating that it is the mass fraction of the solvent component on the vapour side of the boundary.
-
-The mass fraction at the surface, and thus $B$, is determined through the Clausius-Clapeyron relation.
-We have
-\begin{equation}\label{eq:Clausius-Clapeyron}
-  \frac{d P}{dT} = \frac{L}{T \Delta v}
-\end{equation}
-where $L$ is the specific latent heat of evaporation, and $\Delta v$ is the specific volume change between the liquid and vapour
-\begin{equation}
-  \Delta v
-  \equiv v_g - v_l
-  \sim v_g
-  = \frac{RT}{P}
-\end{equation}
-where the approximation holds for the gas-liquid transition because $v_l \ll 1$ and we used the ideal gas law in the last step.
-Taking $L$ as constant with respect to $T$ \eqref{eq:Clausius-Clapeyron} becomes
-\todo{We use $R$ for both the droplet radius and the molar gas constant, so we need to change the symbol for the radius to e.g.\ $a$.}
-\begin{equation}
-  \int_{P_1}^{P_2} \frac{d P}{P} =
-  \frac{L}{R} \int_{T_1}^{T_2} \frac{dT}{T^2}
-\end{equation}
-giving
-\begin{equation}\label{eq:Clausius-Clapeyron-pressure-difference-mono}
-  \begin{aligned}
-    P_2 &=
-    P_1 \exp{\left( \frac{L}{R} \left(\frac{1}{T_1} - \frac{1}{T_2} \right) \right)} \\
-    &=
-    P_1 \exp{\left( \frac{L}{R} \frac{T_2 - T_1}{T_1 T_2} \right)}
-  \end{aligned}
-\end{equation}
-though for a binary mixture $P_i$ represents the partial pressures of the evaporating components,
-where the partial pressure is determined from the solvent activity by
-\begin{subequations}
-  \begin{align}
-    P_1 &= a_w(Y^{(f)}) P_{eq} \\
-    P_2 &= P(R^-) \\
-    T_1 &= T_\infty
-  \end{align}
-\end{subequations}
-so \eqref{eq:Clausius-Clapeyron-pressure-difference-mono} becomes
-\todo{We use lower case $p$ to mean pressure in the rest of the thesis, so we should change $P \to p$ here too.}
-\begin{equation}\label{eq:Clausius-Clapeyron-pressure-difference-binary}
-  P(R^-) =
-  a_w(Y^{(f)}) P_{eq}
-  \exp{\left( \frac{L}{R} \frac{T(R) - T_\infty}{T(R) T_\infty} \right)}
-\end{equation}
-Finally, the molar fraction of the fluid component at the surface is obtained from
-\begin{equation}
-  P(R^-) = X^{(f)}(R^+) P
-\end{equation}
-giving the mass fraction as
-\begin{equation}
-  \begin{aligned}
-    Y^{(f)}(R^+) &=
-    \frac{X^{(f)}(R^+) W^{(f)}}{X^{(f)}(R^+) W^{(f)} + X^{(g)} W^{(g)}} \\
-    &=
-    \frac{X^{(f)}(R^+) W^{(f)}}{X^{(f)}(R^+) W^{(f)} + (1 - X^{(f)}(R^+)) W^{(g)}}.
-  \end{aligned}
-\end{equation}
-where $W^{(f)}$ and $W^{(g)}$ are the molar masses of the solvent and air components respectively.
 Matching the partial pressures of the solvent on either side of the boundary through the Clausius-Clapeyron relation gives% the molar fraction
 \begin{equation}\label{eq:molar-fraction}
   %X^{(f)}(R^+) =
@@ -532,7 +454,7 @@ Matching the partial pressures of the solvent on either side of the boundary thr
   p_f(R^-)
   \exp{\left( \frac{L}{R} \frac{T - T_\infty}{T T_\infty} \right)}
 \end{equation}
-where $p_f(R^\pm)$ are the partial pressures on either side of the surface which we relate to the mass fractions using Raoult's law in the gas phase and experimental fits of the solvent activity \hl{(do we need to say where from?)}.
+where $p_f(R^\pm)$ are the partial pressures on either side of the surface which we can convert to mass fractions assuming Raoult's law in the gas phase combined with experimental fits of the solvent activity \cite{CleggJPCA1998}.
 %The mass fraction $Y^{(f)}(R^+)$ can then be obtained from $X^{(f)}(R^+)$.
 %% Neglecting the effects of radiative heat transfer, the steady state heat flux through the droplet boundary in the steady state is \cite{KulmalaJAS1992,RovelliJPCA2016}
 %% \begin{equation}
@@ -549,9 +471,9 @@ Finally, assuming a steady state heat flux through the boundary, and neglecting 
 \end{equation}
 % $L = h_v - h_l$
 where $L$ is the specific latent heat of vaporisation, and $K$ is the thermal conductivity of the vapour phase.
-Together, Eqs.\ \eqref{eq:vaporisation}, \eqref{eq:spalding}, \eqref{eq:molar-fraction} and \eqref{eq:temperature-difference} form a complete set of equations that can be solved (numerically) to obtain the evaporation rate.
+Together, Eqs.\ \eqref{eq:quasistatic-vaporisation}, \eqref{eq:spalding-number}, \eqref{eq:molar-fraction} and \eqref{eq:temperature-difference} form a complete set of equations that can be solved (numerically) to obtain the evaporation rate.
 
-Typically the classic vaporisation rate equation \eqref{eq:vaporisation} requires semi-empirical corrections to treat more complex mass and heat transport phenomena at the boundary.
+Typically the classic vaporisation rate equation \eqref{eq:quasistatic-vaporisation} requires semi-empirical corrections to treat more complex mass and heat transport phenomena at the boundary.
 We introduce the \emph{Sherwood number} $\sherwood$ to correct the vaporisation rate giving
 \begin{equation}\label{eq:sherwood-correction}
   \frac{dm^{(f)}}{dt}
@@ -576,7 +498,8 @@ Fitting the early part of the experimental trajectory gives the initial $\tfrac{
     \centering
     \includegraphics[width=0.9\linewidth]{nano3-trajectory}
   \end{minipage}
-  \caption{Evolution of \ce{NaNO3} aerosol droplet radii from simulations (dashed lines) and experiments shown by points with 1\% transparency, showing reasonable agreement at short times until longer times when the evaporation rate is underestimated.
+  \caption[Evolution of drying droplet radii]{
+    Evolution of \ce{NaNO3} aerosol droplet radii from simulations (dashed lines) and experiments shown by points with 1\% transparency, showing reasonable agreement at short times until longer times when the evaporation rate is underestimated.
     Top panel: varying relative humidity while ambient temperature is kept fixed, for an initial solute mass fraction of $Y^{(s)} = 0.125$.
     Bottom panel: varying ambient temperature while relative humidity is kept fixed, for an initial solute mass fraction of $Y^{(s)} = 0.2$.}
   \label{fig:nano3-trajectory}
@@ -590,7 +513,7 @@ In addition, it is convenient to introduce $\dot{R}$ as its own variable so that
 This gives us the evolving droplet state variable $\vec{x} = (\vec{\rho}, R, \dot{R})$.
 
 To integrate a timestep $\Delta t$ we use the Crank-Nicolson \cite{CrankMPCPS1947} method where
-\begin{equation}
+\begin{equation*}
   \frac{\vec{x}(t + \Delta t) - \vec{x}(t)}{\Delta t}
   =
   \frac{1}{2}
@@ -600,11 +523,11 @@ To integrate a timestep $\Delta t$ we use the Crank-Nicolson \cite{CrankMPCPS194
   \left. \frac{\partial \vec{x}}{\partial t} \right|_t
   \right)
   + \mathcal{O}(\Delta t^2).
-\end{equation}
+\end{equation*}
 As the evolution equations are nonlinear this must be solved iteratively to find a self-consistent solution.
 Introducing the $k$th approximation for $\vec{x}(t + \Delta t)$ as $\vec{x}^{(k)}(t + \Delta t)$, we write the next term in the sequence as $\vec{x}^{(k+1)} = \vec{x}^{(k)} + \delta \vec{x}^{(k)}$
 We obtain
-\begin{equation}
+\begin{equation*}
   \frac{\vec{x}_{n+1}^{(k)} + \delta\vec{x}_{n+1}^{(k)} - \vec{x}_n}{\Delta t}
   =
   \frac{1}{2}
@@ -613,7 +536,7 @@ We obtain
   +
   \frac{\partial \vec{x}_n}{\partial t}
   \right)
-\end{equation}
+\end{equation*}
 using the subscript $n$ as shorthand for the time.
 This is a matrix equation that can be inverted for $\delta \vec{x}^{(k)}$.
 Convergence is deemed to occur where $\delta \vec{x}^{(k)}$ falls below some threshold value.
@@ -634,7 +557,8 @@ We achieve good agreement with experiments for \ce{NaCl} across their entire tra
     \centering
     \includegraphics[width=0.9\linewidth]{aerosol-cnt}
   \end{minipage}
-  \caption{Shell nucleation rate $J\xi$ (\si{\per\micro\metre\squared\per\second}) predicted by classical nucleation theory for aqueous \ce{NaNO3} and \ce{NaCl} solutions at different state points.
+  \caption[Nucleation rates predicted by classical nucleation theory]{
+    Shell nucleation rate $J\xi$ (\si{\per\micro\metre\squared\per\second}) predicted by classical nucleation theory for aqueous \ce{NaNO3} and \ce{NaCl} solutions at different state points.
     The dark blue and bright yellow regions show where nucleation is essentially impossible or instantaneous on the experimental timescale.
     Different estimates of solid-liquid surface tension $\gamma$ (given in \si{\newton\per\metre}) do not result in a different qualitative picture: a nucleation rate which monotonically increases with supersaturation and temperature.}
   \label{fig:cnt}
@@ -652,8 +576,8 @@ Both the local $J$ and total rates $W$ contain an implciit time dependence becau
 For homogeneous nucleation $J$ depends solely on the state variables $\rho^{(s)}$ and $T$.
 Nucleation rates are typically strongly concentration dependent \cite{ValerianiJCP2005,DesarnaudJPCL2014,SearJPCM2007}, so we anticipate nucleation to occur at the boundary $r=R(t)$ where the solute concentration is greatest.
 Allowing for heterogeneous nucleation $J$ could acquire an additional dependence on the inhomogeneities in the system; as the experiments were performed with high-purity precursor compounds to mitigate the effect of chemical impurities, we expect the main potential site for heterogeneous nucleation to be the liquid-air interface.
-Whichever nucleation mechanism dominates, we expect it to occur at the boundary so the total rate \eqref{eq:droplet-nucleation-rate} reduces to
-\begin{equation}\label{eq:droplet-nucleation-rate}
+Whichever nucleation mechanism dominates, we expect it to occur at the boundary so the total rate \eqref{eq:boundary-nucleation-rate} reduces to
+\begin{equation}\label{eq:boundary-nucleation-rate}
   W
   \sim
   4\pi R^2 J \xi
@@ -662,7 +586,7 @@ where $J$ is now evaluated at the boundary, and we introduced $\xi$ as the thick
 We will give nucleation rates in terms of $J \xi$, assuming a value $\xi = \SI{1}{\micro\metre}$.
 
 We can relate the nucleation rates to the experimentally observed events by assuming Poisson statistics.
-We define the surfival probability as
+We define the survival probability as
 \begin{equation*}
   p_\mathrm{liq}(t)
   :=
@@ -678,13 +602,13 @@ Taking the infinitesimal limit and using the fact that droplets are prepared in 
   =
   \exp{\left( -\int_0^t W \, dt \right)}.
 \end{equation}
-As we have already determined the droplet's radius and concentration profile from the evolution equations described in Section\ \ref{sec:evolution}, we are left missing a model for the nucleation rate per unit volume $J$ before we can determine $p_\mathrm{liq}$.
+As we have already determined the droplet's radius and concentration profile from the evolution equations described in section\ \ref{sec:evolution}, we are left missing a model for the nucleation rate per unit volume $J$ before we can determine $p_\mathrm{liq}$.
 
 \subsection{Nucleation models}
 
 %From \eqref{eq:cnt-barrier} we expect a homogeneous nucleation rate per unit volume as
 For nucleation processes with a single barrier the rate per unit volume goes as
-\begin{equation}\label{eq:nucleation-rate}
+\begin{equation}\label{eq:nucleation-rate-barrier}
   J = \kappa \exp{\left(-\frac{\Delta G^{*}}{k_B T}\right)}
 \end{equation}
 where $\kappa$ is a kinetic prefactor and $\Delta G^*$ is thermodynamic barrier for the process.
@@ -736,28 +660,18 @@ By contrast, the experiments show that the final survival probability for \ce{Na
     \centering
     \includegraphics[width=0.9\linewidth]{nacl-trajectory}
   \end{minipage}
-  \caption{Evolution of \ce{NaCl} droplets in dry air $\mathrm{RH}=0\%$ from experiments (points) and simulations (lines) for different ambient temperatures and initial solute mass fractions.
+  \caption[Evolution of \ce{NaCl} droplets: theory and experiments]{
+    Evolution of \ce{NaCl} droplets in dry air $\mathrm{RH}=0\%$ from experiments (points) and simulations (lines) for different ambient temperatures and initial solute mass fractions.
     Bottom panel: evolution of droplet radius showing good treatment of solvent evaporation rates.
     Top panel: probaility that a droplet survives without nucleating, assuming the liquid-crystal surface tension $\gamma = \SI{0.08}{\newton\per\metre}$ \cite{DesarnaudJPCL2014} for the simulations.}
   \label{fig:nacl-trajectory}
-\end{SCfigure}
-
-\begin{SCfigure}
-  \begin{minipage}{\linewidth}
-    \centering
-    \includegraphics[width=0.9\linewidth]{nano3-nucleation-rates}
-  \end{minipage}
-  \caption{State points explored by experiments with drying \ce{NaNO3}--\ce{H2O} aerosol droplets as determined from simulation for 9 datasets for different initial conditions.
-    Top panel: the survival probability in the experiments (i.e.\ the probability that a droplet has not crystallised), with state-point inferred from the simulations.
-    Bottom panel: corresponding nucleation rates assuming boundary-dominated nucleation \eqref{eq:droplet-nucleation-rate} showing non-monotonic behaviour in increased concentration and temperature in contrast with the predictions of classical nucleation theory in Fig.\ \ref{fig:cnt}.}
-  \label{fig:state-points}
 \end{SCfigure}
 
 \subsection{Inferring nucleation rates from experiments}
 
 We can try to determine the nucleation rates directly from experiments by observing the stochastic nucleation behaviour over repeat trajectories and comparing these against the numerical model.
 The experiments give us the true survival probabilities $p_\mathrm{liq}$ of which we can determine the droplet nucleation rate $W$ exactly by numerical differentiation.
-Combined with the numerical model, which gives us the precise state of the droplet, we can infer $J\xi$ from inversion of the rate formula \eqref{eq:droplet-nucleation-rate} under the assumption that nucleation is boundary-dominated.
+Combined with the numerical model, which gives us the precise state of the droplet, we can infer $J\xi$ from inversion of the rate formula \eqref{eq:boundary-nucleation-rate} under the assumption that nucleation is boundary-dominated.
 %% We can make some progress by making some strong assumptions about the form of $J \xi$ based on physical intuition.
 %% We will then test for self-consistency to justify this approach in an ad-hoc manner.
 
@@ -767,7 +681,7 @@ Differentiation of the survival probability \eqref{eq:survival} yields
   =
   - W p_\mathrm{liq},
 \end{equation}
-upon combining this with our assumption that nucleation occurs near the boundary \eqref{eq:droplet-nucleation-rate} allows to write the nucleation rate as
+upon combining this with our assumption that nucleation occurs near the boundary \eqref{eq:boundary-nucleation-rate} allows to write the nucleation rate as
 \begin{equation}
   J\xi
   =
@@ -796,6 +710,18 @@ We perform this inversion procedure for the \ce{NaNO3} droplets in Fig.\ \ref{fi
 The resulting nucleation rates show non-mononic behaviour, increasing to a maximum before decreasing to essentially zero over the duration of the experiment.
 This results in a finite final survival probability $p_\mathrm{liq} > 0$, and starkly contrasts with the picture predicted by CNT where $p_\mathrm{liq}$ would remain close to unity for most of the experiment before sharply dropping to zero as all droplets reproducibly crystallise.
 
+\begin{SCfigure}
+  \begin{minipage}{\linewidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{nano3-nucleation-rates}
+  \end{minipage}
+  \caption[Experimentally observed nucleation rates in \ce{NaNO3} droplets]{
+    State points explored by experiments with drying \ce{NaNO3}--\ce{H2O} aerosol droplets as determined from simulation for 9 datasets for different initial conditions.
+    Top panel: the survival probability in the experiments (i.e.\ the probability that a droplet has not crystallised), with state-point inferred from the simulations.
+    Bottom panel: corresponding nucleation rates assuming boundary-dominated nucleation \eqref{eq:boundary-nucleation-rate} showing non-monotonic behaviour in increased concentration and temperature in contrast with the predictions of classical nucleation theory in Fig.\ \ref{fig:cnt}.}
+  \label{fig:state-points}
+\end{SCfigure}
+
 \section{Discussion}
 
 We found that CNT works well for predicting crystal nucleation in \ce{NaCl} but not \ce{NaNO3} aerosols.
@@ -809,13 +735,13 @@ This leaves the gas-liquid phase boundary itself as a site for hetereogeneous nu
 \hl{(Paddy said he had some things to mumble about CNT?)}
 
 It is highly likely that the model overestimates the surface enrichment because at long times the simulated evaporation rates become limited by solute diffusion at the boundary.
-The diffusion limit would persist even in more sophisticated transport phenomena were modelled in the evaporation model.
-Surface enrichment is overestimated because we have neglected the effect of temperature gradients inside the droplet, and because we have used an extrapolation of low concentration diffusion data which is likely underestimates diffusion at high concentrations.
+The diffusion limit would persist even if more sophisticated transport phenomena were introduced to the evaporation model.
+Surface enrichment is overestimated because we have neglected the effect of temperature gradients inside the droplet, and because we have used an extrapolation of low concentration diffusion data which is likely to underestimate diffusion at high concentrations.
 Temperature gradients create inward convection currents reducing surface enrichment.
 Our extrapolation of the diffusion constant assumed the Stokes-Einstein relation holds across the whole state space, however this relation can be violated \hl{(citation for SE breakdown)} at high viscosities.
 The rapid increase of viscosity with salt concentration in our model leads to a feedback loop where diffusion becomes increasingly difficult as the surface is enriched.
 Correcting for these effects, we expect the surface concentrations explored by the experiments to increase to a maximum before decreasing which could explain non-monoticity.
-However, this can only partially explain the observed behaviour because of the extreme sensitivity of CNT to concentration.
+However, this can only partially explain the observed behaviour because CNT is extremely sensitive to concentration.
 
 %Our evaporation model considerably simplifies the transport phenomena at the phase boundary, though it becomes limited by the rate of solute diffusion at the boundary at long times suggesting that we are underestimating the rate of mixing.
 
