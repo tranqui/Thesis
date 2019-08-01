@@ -8,7 +8,7 @@ for p in *.tex; do
     fi
 
     (texcount $p -merge -sum | head -n 10 | tail -n +3) > $filename.wordcount 2> /dev/null
-    texcount $p -merge -sum -1 > $filename.wordcountsum 2> /dev/null
     summary=($(head -n 1 $filename.wordcount))
     echo ${summary[2]} $'\t' $filename
+    printf "%'d" ${summary[2]} > $filename.wordcountsum
 done
