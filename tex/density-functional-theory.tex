@@ -189,7 +189,8 @@ These correlation functions form the basis of integral equation theories which w
 \subsection{Integral equation theories}
 \label{sec:oz-equation}
 
-In this section we derive the Ornstein-Zernike equation which forms the basis of many theories of the liquid state.
+In this section we derive the Ornstein-Zernike equation which forms the basis of many theories of the liquid state%
+\marginfootnote{Conventionally this is class of theories are presented in their own right rather than as a special case of density functional theory; we have opted for this more modern presentation to be economical with chapter length.}.
 This is an integral equation which connects the density-density and direct correlation functions through the chain rule of functional calculus, i.e.\
 \begin{equation}\label{eq:oz-chain-rule}
   \delta(\vec{r}_1 - \vec{r}_2) =
@@ -353,7 +354,7 @@ which gives the static structure factor \eqref{eq:static-structure-factor} as
   \rho \delta(\vec{k}) +
   \frac{1}{1 - \rho \tilde{c}^{(2)}(\vec{k})}.
 \end{equation*}
-If the pair direct correlation function is known it is thus straightforward to obtain the equation of state through the compressibility route \eqref{eq:compressibility-route}
+If the pair direct correlation function is known it is thus straightforward to obtain the equation of state through the compressibility route \eqref{eq:compressibility-route-pressure}
 \begin{equation*}
   \frac{\beta p}{\rho}
   =
@@ -363,135 +364,135 @@ If the pair direct correlation function is known it is thus straightforward to o
 The main task of integral equation approaches is to find approximate closures for $c^{(2)}$ and then solve the Ornstein-Zernike equation.
 The process of determining the direct correlation functions is equivalent (at least formally) to finding its generating functional $\mathcal{F}^\mathrm{ex}$.
 
-\subsection{Generalised Ornstein-Zernike equations}
+%% \subsection{Generalised Ornstein-Zernike equations}
 
-This section follows \cite{BarratMP1988}.\todo{Check this reference and rewrite accordingly}
+%% This section follows \cite{BarratMP1988}.\todo{Check this reference and rewrite accordingly}
 
-Thus for higher $n$ we have
-\begin{equation}
-  \begin{split}
-    c^{(n)}(\vec{r}^n)
-    &=
-    \frac{
-      \delta^{n-1} c^{(1)}(\vec{r}_1)
-    }{
-      \delta \rho^{(1)}(\vec{r}_2) \cdots \delta \rho^{(1)}(\vec{r}_n)
-    }
-    \\ &=
-    (-1)^n
-    \frac{(n-2)!}{\rho^{(1)}(\vec{r}_1)^{n-1}}
-    \prod_{i=2}^n \delta(\vec{r}_i - \vec{r}_1)
-    - \frac{
-      \delta^{n-1} \beta\psi(\vec{r}_1)
-    }{
-      \delta \rho^{(1)}(\vec{r}_2) \cdots \delta \rho^{(1)}(\vec{r}_n)
-    }
-  \end{split}
-\end{equation}
-or
-\begin{equation}
-  \frac{\delta^{n-1} \beta\psi(\vec{r}_1)}{\delta \rho^{(1)}(\vec{r}_2) \cdots \delta \rho^{(1)}(\vec{r}_n)}
-  =
-  (-1)^n
-  \frac{(n-2)!}{\rho^{(1)}(\vec{r}_1)^{n-1}}
-  \prod_{i=2}^n \delta(\vec{r}_i - \vec{r}_1)
-  - c^{(n)}(\vec{r}^n)
-\end{equation}
+%% Thus for higher $n$ we have
+%% \begin{equation}
+%%   \begin{split}
+%%     c^{(n)}(\vec{r}^n)
+%%     &=
+%%     \frac{
+%%       \delta^{n-1} c^{(1)}(\vec{r}_1)
+%%     }{
+%%       \delta \rho^{(1)}(\vec{r}_2) \cdots \delta \rho^{(1)}(\vec{r}_n)
+%%     }
+%%     \\ &=
+%%     (-1)^n
+%%     \frac{(n-2)!}{\rho^{(1)}(\vec{r}_1)^{n-1}}
+%%     \prod_{i=2}^n \delta(\vec{r}_i - \vec{r}_1)
+%%     - \frac{
+%%       \delta^{n-1} \beta\psi(\vec{r}_1)
+%%     }{
+%%       \delta \rho^{(1)}(\vec{r}_2) \cdots \delta \rho^{(1)}(\vec{r}_n)
+%%     }
+%%   \end{split}
+%% \end{equation}
+%% or
+%% \begin{equation}
+%%   \frac{\delta^{n-1} \beta\psi(\vec{r}_1)}{\delta \rho^{(1)}(\vec{r}_2) \cdots \delta \rho^{(1)}(\vec{r}_n)}
+%%   =
+%%   (-1)^n
+%%   \frac{(n-2)!}{\rho^{(1)}(\vec{r}_1)^{n-1}}
+%%   \prod_{i=2}^n \delta(\vec{r}_i - \vec{r}_1)
+%%   - c^{(n)}(\vec{r}^n)
+%% \end{equation}
 
-\begin{equation*}
-  H^{(n)}(\vec{r}^n)
-  =
-  \frac{
-    \delta^{n-1} \rho^{(1)}(\vec{r}_1)
-  }{
-    \delta \beta\psi(\vec{r}_2) \cdots \delta \beta\psi(\vec{r}_n)
-  }.
-\end{equation*}
+%% \begin{equation*}
+%%   H^{(n)}(\vec{r}^n)
+%%   =
+%%   \frac{
+%%     \delta^{n-1} \rho^{(1)}(\vec{r}_1)
+%%   }{
+%%     \delta \beta\psi(\vec{r}_2) \cdots \delta \beta\psi(\vec{r}_n)
+%%   }.
+%% \end{equation*}
 
-Defining
-\begin{equation*}
-  K^{(n)}(\vec{r}^n)
-  =
-  \frac{
-    \delta^{n-1} \beta\psi(\vec{r}_1)
-  }{
-    \delta \rho^{(1)}(\vec{r}_2) \cdots \delta \rho^{(1)}(\vec{r}_n)
-  }
-\end{equation*}
-we have
-\begin{equation*}
-  \frac{
-    \delta K^{(n)}(\vec{r}^n)
-  }{
-    \delta \rho^{(1)}(\vec{r}_{n+1})
-  }
-  =
-  K^{(n+1)}(\vec{r}^{n+1}).
-\end{equation*}
-and
-\begin{equation*}
-  \begin{split}
-    \frac{\delta H^{(n)}(\vec{r}^n)}{\delta \rho^{(1)}(\vec{r}_{n+1})}
-    &=
-    \int
-    \frac{\delta H^{(n)}(\vec{r}^n)}{\delta \psi(\vec{r}')}
-    \frac{\delta \psi(\vec{r}')}{\delta \rho^{(1)}(\vec{r}_{n+1})}
-    \, d\vec{r}' \\
-    &=
-    \int
-    H^{(n+1)}(\vec{r}^n, \vec{r}')
-    K^{(2)}(\vec{r}', \vec{r}_{n+1})
-    \, d\vec{r}' \\
-    &=
-    H^{(n+1)} * K^{(2)}(\vec{r}^{n+1}).
-  \end{split}
-\end{equation*}
-In this form the Ornstein-Zernike equation can be written.
-\begin{equation*}
-  \begin{split}
-    \delta(\vec{r}_1 - \vec{r}_2)
-    &=
-    \int
-    \frac{\delta \rho^{(1)}(\vec{r}_1)}{\delta \psi(\vec{r}')}
-    \frac{\delta \psi(\vec{r}')}{\delta \rho^{(1)}(\vec{r}_2)}
-    \, d\vec{r}' \\
-    &=
-    \int
-    H^{(2)}(\vec{r}_1, \vec{r}') K^{(2)}(\vec{r}', \vec{r}_2)
-    \, d\vec{r}' \\
-    &=
-    H^{(2)} * K^{(2)} (\vec{r}^2)
-  \end{split}
-\end{equation*}
-Taking functional derivatives of this expression gives us a hierarchy of generalised Ornstein-Zernike equations.
-For example, the next equation in the hierarchy is
-\begin{equation*}
-  H^{(2)} * K^{(3)} (\vec{r}^3) +
-  H^{(3)} * K^{(2)} * K^{(2)} (\vec{r}^3)
-  = 0
-\end{equation*}
-The next functional derivative
-\begin{equation}
-  \begin{split}
-  H^{(2)} * K^{(4)} (\vec{r}^4) & \\
-  + \; 3 H^{(3)} * K^{(3)} * K^{(2)} (\vec{r}^4) & \\
-  + \; H^{(4)} * K^{(2)} * K^{(2)} * K^{(2)} (\vec{r}^4)
-  &= 0
-  \end{split}
-\end{equation}
-And the next one%
-\todo{Can we find a general formula? I notice some constraints on the indices: the sum of the indices $\{m\}$ in the $K^{(m)}$ terms must add up to $n-1$ so that the right number of independent variables are returned (the extra one is provided by the $H^{(l)}$ function giving the $\vec{r}^n$ total.)}
-\begin{equation}
-  \begin{split}
-    H^{(2)} * K^{(5)} (\vec{r}^5) & \\
-    + \; 3 H^{(3)} * K^{(3)} * K^{(3)} (\vec{r}^5) & \\
-    + \; 4 H^{(3)} * K^{(4)} * K^{(2)} (\vec{r}^5) & \\
-    + \; 6 H^{(4)} * K^{(3)} * K^{(2)} * K^{(2)} (\vec{r}^5) & \\
-    + \; H^{(5)} * K^{(2)} * K^{(2)} * K^{(2)} * K^{(2)} (\vec{r}^5)
-    &=
-    0
-  \end{split}
-\end{equation}
+%% Defining
+%% \begin{equation*}
+%%   K^{(n)}(\vec{r}^n)
+%%   =
+%%   \frac{
+%%     \delta^{n-1} \beta\psi(\vec{r}_1)
+%%   }{
+%%     \delta \rho^{(1)}(\vec{r}_2) \cdots \delta \rho^{(1)}(\vec{r}_n)
+%%   }
+%% \end{equation*}
+%% we have
+%% \begin{equation*}
+%%   \frac{
+%%     \delta K^{(n)}(\vec{r}^n)
+%%   }{
+%%     \delta \rho^{(1)}(\vec{r}_{n+1})
+%%   }
+%%   =
+%%   K^{(n+1)}(\vec{r}^{n+1}).
+%% \end{equation*}
+%% and
+%% \begin{equation*}
+%%   \begin{split}
+%%     \frac{\delta H^{(n)}(\vec{r}^n)}{\delta \rho^{(1)}(\vec{r}_{n+1})}
+%%     &=
+%%     \int
+%%     \frac{\delta H^{(n)}(\vec{r}^n)}{\delta \psi(\vec{r}')}
+%%     \frac{\delta \psi(\vec{r}')}{\delta \rho^{(1)}(\vec{r}_{n+1})}
+%%     \, d\vec{r}' \\
+%%     &=
+%%     \int
+%%     H^{(n+1)}(\vec{r}^n, \vec{r}')
+%%     K^{(2)}(\vec{r}', \vec{r}_{n+1})
+%%     \, d\vec{r}' \\
+%%     &=
+%%     H^{(n+1)} * K^{(2)}(\vec{r}^{n+1}).
+%%   \end{split}
+%% \end{equation*}
+%% In this form the Ornstein-Zernike equation can be written.
+%% \begin{equation*}
+%%   \begin{split}
+%%     \delta(\vec{r}_1 - \vec{r}_2)
+%%     &=
+%%     \int
+%%     \frac{\delta \rho^{(1)}(\vec{r}_1)}{\delta \psi(\vec{r}')}
+%%     \frac{\delta \psi(\vec{r}')}{\delta \rho^{(1)}(\vec{r}_2)}
+%%     \, d\vec{r}' \\
+%%     &=
+%%     \int
+%%     H^{(2)}(\vec{r}_1, \vec{r}') K^{(2)}(\vec{r}', \vec{r}_2)
+%%     \, d\vec{r}' \\
+%%     &=
+%%     H^{(2)} * K^{(2)} (\vec{r}^2)
+%%   \end{split}
+%% \end{equation*}
+%% Taking functional derivatives of this expression gives us a hierarchy of generalised Ornstein-Zernike equations.
+%% For example, the next equation in the hierarchy is
+%% \begin{equation*}
+%%   H^{(2)} * K^{(3)} (\vec{r}^3) +
+%%   H^{(3)} * K^{(2)} * K^{(2)} (\vec{r}^3)
+%%   = 0
+%% \end{equation*}
+%% The next functional derivative
+%% \begin{equation}
+%%   \begin{split}
+%%   H^{(2)} * K^{(4)} (\vec{r}^4) & \\
+%%   + \; 3 H^{(3)} * K^{(3)} * K^{(2)} (\vec{r}^4) & \\
+%%   + \; H^{(4)} * K^{(2)} * K^{(2)} * K^{(2)} (\vec{r}^4)
+%%   &= 0
+%%   \end{split}
+%% \end{equation}
+%% And the next one%
+%% \todo{Can we find a general formula? I notice some constraints on the indices: the sum of the indices $\{m\}$ in the $K^{(m)}$ terms must add up to $n-1$ so that the right number of independent variables are returned (the extra one is provided by the $H^{(l)}$ function giving the $\vec{r}^n$ total.)}
+%% \begin{equation}
+%%   \begin{split}
+%%     H^{(2)} * K^{(5)} (\vec{r}^5) & \\
+%%     + \; 3 H^{(3)} * K^{(3)} * K^{(3)} (\vec{r}^5) & \\
+%%     + \; 4 H^{(3)} * K^{(4)} * K^{(2)} (\vec{r}^5) & \\
+%%     + \; 6 H^{(4)} * K^{(3)} * K^{(2)} * K^{(2)} (\vec{r}^5) & \\
+%%     + \; H^{(5)} * K^{(2)} * K^{(2)} * K^{(2)} * K^{(2)} (\vec{r}^5)
+%%     &=
+%%     0
+%%   \end{split}
+%% \end{equation}
 
 \subsection{Fundamental measure theory}
 
@@ -507,8 +508,8 @@ This exposition follows \cite{RothJPCM2010} mainly.
 \end{itemize}
 
 %Rosenfeld started from the observation that
-The purely geometric character of the hard sphere interaction leads to the \emph{exact} decomposition of Mayer-$f$ bond in terms of intrinsic volumes
-\marginfootnote{Rosenfeld called these \emph{fundamental measures}.}
+The purely geometric character of the hard sphere interaction leads to the \emph{exact} decomposition of Mayer-$f$ bond in terms of intrinsic volumes%
+\marginfootnote{Rosenfeld called these \emph{fundamental measures} giving the theory its name.}
 \begin{equation*}
   \begin{split}
     -f_{ij}(\vec{r})
@@ -780,7 +781,7 @@ and then the direct correlation functions \eqref{eq:fmt-direct-correlations} for
   \marginfootnote{in Chapter \ref{chapter:morphometric-framework} we will refer to this as the scaled particle theory/Percus-Yevick (SPT/PY) equation of state because of this correpondence.}
   \eqref{eq:fmt-spt-pde}.
 
-  Curiously, the empirical interpolation between the two solutions of the Percus-Yevick theory yields the highly accurate Carnahan-Starling (CS) equation of state \cite{CarnahanJCP1969}
+  Curiously, an empirical interpolation between the two solutions of the Percus-Yevick theory yields the highly accurate Carnahan-Starling (CS) equation of state \cite{CarnahanJCP1969}
   \begin{equation}\label{eq:cs-pressure}
     \begin{split}
       \frac{\beta p^\mathrm{CS}}{\rho}
@@ -798,6 +799,7 @@ Taking the Carnahan-Starling White bear II:
 \begin{equation}
   c^{(2)}(r)
 \end{equation}
+\todo{Check mixture version of CS from Santos, and compare with Berthier. Cite Berthier for accuracy.}
 
 \subsection{FMT Structure factors}
 

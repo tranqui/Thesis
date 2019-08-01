@@ -143,6 +143,7 @@ Finally, for interacting systems the chemical potential and free energy are typi
 with the ideal contributions as expressed above.
 
 \subsection{Liquid structure}
+\label{sec:liquid-structure}
 
 Interparticle interactions induce spatial structure in the liquid which are characterised by several (equivalent) hierarchies of correlation functions.
 The most natural description of structure starts from the \emph{$n$-particle density}
@@ -160,14 +161,6 @@ For the single-component system this yields~\cite{Hansen2013}
   \sum_{N=n}^\infty \frac{z^N}{(N-n)!}
   \int_{V^N} e^{-\beta U_N} \, d\vec{r}^{(N-n)}.
 \end{equation}
-Importantly, the single-particle density is simply the equilibrium density profile i.e.\
-\begin{equation}\label{eq:single-particle-density}
-  \rho^{(1)}(\vec{r})
-  =
-  \langle \rho(\vec{r}) \rangle
-  =
-  \left\langle \sum_{i=1}^N \delta(\vec{r} - \vec{r}_i) \right\rangle.
-\end{equation}
 The $n$-particle density is an intuitive descriptor for liquid structure because it generalises the probability density function for a closed system, i.e.\
 \begin{equation*}
   \mathrm{Prob}\left[ N \textrm{ particles in volume } d\vec{r}^n \right]
@@ -178,18 +171,18 @@ to a subset of particles in an open system.
 $\rho^{(n)}$ thus provides the correct procedure for coarse-graining onto selected degrees of freedom within a bulk system.
 The analogy with canonical ensemble fails in that $\rho^{(n)}$ is unnormalised so it is not strictly a probability density function; integrating \eqref{eq:n-particle-density} over the remaining degrees of freedom yields%
 \marginfootnote{In keeping with the analogy to canonical ensemble we treat this integral as a partition function, and so account for indistinguishability of the $n$ particles by dividing through by $n!$.}
-\begin{equation}\label{eq:n-particle-density-normalisation}
+\begin{equation*}\label{eq:n-particle-density-normalisation}
   \frac{1}{n!}
   \int_{V^n} \rho^{(n)}(\vec{r}^n) \, d\vec{r}^n
   =
   \left\langle \frac{N!}{n! (N-n)!} \right\rangle
-\end{equation}
+\end{equation*}
 i.e.\ the average binomial coefficient.
 The $n$-particle density scales proportionally to $\rho^n$ so it is usual to remove this by defining the \emph{$n$-particle distribution function} as
 \begin{equation}\label{eq:n-particle-distribution}
   g^{(n)}(\vec{r}^n)
   :=
-  \frac{\rho^{(n)}(\vec{r}^n)}{\rho^n},
+  \frac{\rho^{(n)}(\vec{r}^n)}{\prod_{i=1}^n \rho^{(1)}(\vec{r}_i)},
 \end{equation}
 which provides our first (and primary) hierarchy of correlation functions.
 
@@ -228,27 +221,135 @@ where the first few terms are given by \cite{UhlenbeckJMP1963}
   \begin{align}
     h^{(1)}(\vec{r})
     =& \,
-    g^{(1)}(\vec{r}) = 1,
+    g^{(1)}(\vec{r}),
     \\
-    h^{(2)}(\vec{r}^2)
+    h^{(2)}(\vec{r}_1, \vec{r}_2)
     =& \,
     g^{(2)}(\vec{r}_1, \vec{r}_2)
     - g^{(1)}(\vec{r}_1) g^{(1)}(\vec{r}_2),
     \label{eq:pair-cluster-correlation-function}
     \\
-    h^{(3)}(\vec{r}^3)
+    h^{(3)}(\vec{r}_1, \vec{r}_2, \vec{r}_3)
     =& \,
     g^{(3)}(\vec{r}_1, \vec{r}_2, \vec{r}_3)
-    - g^{(2)}(\vec{r}_1, \vec{r}_2) g^{(1)}(\vec{r}_3)
-    - g^{(2)}(\vec{r}_1, \vec{r}_3) g^{(1)}(\vec{r}_2)
+    - \{3\} g^{(2)}(\vec{r}_1, \vec{r}_2) g^{(1)}(\vec{r}_3)
+    %- g^{(2)}(\vec{r}_2, \vec{r}_3) g^{(1)}(\vec{r}_1)
     \nonumber \\ & \,
-    - g^{(2)}(\vec{r}_2, \vec{r}_3) g^{(1)}(\vec{r}_1)
+    %- g^{(2)}(\vec{r}_3, \vec{r}_1) g^{(1)}(\vec{r}_2)
     + g^{(1)}(\vec{r}_1) g^{(1)}(\vec{r}_2) g^{(1)}(\vec{r}_3),
   \end{align}
 \end{subequations}
+where $\{\cdot\}$ indicates the number of similar terms which differ only by permutation of indices which we omit for brevity.
 The pair cluster correlation function%
 \marginfootnote{This is often called simply the \emph{total correlation function}, especially in the context of integral equation theories (cf.\ section \ref{sec:oz-equation}).}
 $h^{(2)}(\vec{r}_1, \vec{r}_2) = g^{(2)}(\vec{r}_1, \vec{r}_2) - 1$ is the main function we will use from this hierarchy.
+
+We can define two further hierarchies of correlation functions from the moments and fluctuations in the density.
+Writing the instantaneous density as
+\begin{equation*}\label{eq:instantaneous-density}
+  \hat\rho(\vec{r}) = \sum_{i=1}^N \delta(\vec{r} - \vec{r}_i)
+\end{equation*}
+where $\delta(\cdot)$ is the Dirac delta function, then the various \emph{density moments} are determined as
+%% Similarly, we can define higher-order moments of the instantaneous density in terms of $\rho^{(n)}$ giving e.g.\
+\begin{subequations}
+  \begin{align}
+    \langle \hat\rho(\vec{r}) \rangle
+    =& \,
+    \rho^{(1)}(\vec{r})
+    \label{eq:single-particle-density}
+    \\
+    \big\langle \hat\rho(\vec{r}_1) \hat\rho(\vec{r}_2) \big\rangle
+    =& \,
+    \rho^{(2)}(\vec{r}_1, \vec{r}_2) +
+    \rho^{(1)}(\vec{r}_1) \delta(\vec{r}_1 - \vec{r}_2)
+    \\
+    \big\langle \hat\rho(\vec{r}_1) \hat\rho(\vec{r}_2) \hat\rho(\vec{r}_3) \big\rangle
+    =& \,
+    \rho^{(3)}(\vec{r}_1, \vec{r}_2, \vec{r}_3) +
+    \{3\} \rho^{(2)}(\vec{r}_1, \vec{r}_2) \delta(\vec{r}_1 - \vec{r}_3)
+    \nonumber \\ & \,
+    + \rho^{(1)}(\vec{r}_1) \delta(\vec{r}_1 - \vec{r}_2) \delta(\vec{r}_1 - \vec{r}_3)
+  \end{align}
+\end{subequations}
+Importantly, \eqref{eq:single-particle-density} shows that the single-particle density is simply the equilibrium density profile.
+The normalisation of these functions gives the moments of particle number $N$, i.e.\
+\begin{equation}
+  \int_{V^n}
+  \left\langle
+  \prod_{i=1}^n \hat\rho(\vec{r}_i)
+  \right\rangle
+  \, d\vec{r}^n
+  =
+  \left\langle N^n \right\rangle.
+\end{equation}
+We can define a dual hierarchy of \emph{density-density correlation functions} $H^{(n)}$ by the same procedure used to generate $h^{(n)}$ from $g^{(n)}$, i.e.\ through a cumulant generating function.
+The first few functions in this hierarchy are
+\begin{subequations}
+  \begin{align}
+    H^{(1)}(\vec{r})
+    =& \,
+    %% \big\langle \hat\rho(\vec{r}) \big\rangle
+    %% =
+    \rho^{(1)}(\vec{r}),
+    \\
+    H^{(2)}(\vec{r}_1, \vec{r}_2)
+    =& \,
+    \big\langle \hat\rho(\vec{r}_1) \hat\rho(\vec{r}_2) \big\rangle
+    - \rho^{(1)}(\vec{r}_1) \rho^{(1)}(\vec{r}_2),
+    \label{eq:pair-density-density-correlation}
+    \\
+    H^{(3)}(\vec{r}_1, \vec{r}_2, \vec{r}_3)
+    =& \,
+    \big\langle \hat\rho(\vec{r}_1) \hat\rho(\vec{r}_2) \hat\rho(\vec{r}_3) \big\rangle
+    - \{3\} \big\langle \hat\rho(\vec{r}_1) \hat\rho(\vec{r}_2) \big\rangle \rho^{(1)}(\vec{r}_3)
+    %- \big\langle \hat\rho(\vec{r}_2) \hat\rho(\vec{r}_3) \big\rangle \rho^{(1)}(\vec{r}_1)
+    \nonumber \\ & \,
+    %- \big\langle \hat\rho(\vec{r}_3) \hat\rho(\vec{r}_1) \big\rangle \rho^{(1)}(\vec{r}_2)
+    + \rho^{(1)}(\vec{r}_1) \rho^{(1)}(\vec{r}_2) \rho^{(1)}(\vec{r}_3),
+  \end{align}
+\end{subequations}
+or more generally \cite{Hansen2013}
+\begin{equation}\label{eq:density-density-correlations}
+  H^{(n)}(\vec{r}^n)
+  =
+  \left\langle
+  \prod_{i=1}^n
+  \Big[ \rho(\vec{r}_i) - \rho^{(1)}(\vec{r}_i) \Big]
+  \right\rangle
+  \qquad \forall \; n \ge 2.
+\end{equation}
+The normalisations of $H^{(n)}$ give the cumulants in $N$ i.e.\
+\begin{equation*}
+  \int_{V^n} H^{(n)}(\vec{r}^n) \, d\vec{r}^n
+  =
+  \frac{d^n}{d\epsilon^n}
+  \left[
+  \log{\left(
+      1 + \sum_{m=1}^\infty
+      \frac{\epsilon^m}{m!} \left\langle N^m \right\rangle
+      \right)}
+  \right]_{\epsilon = 0}
+\end{equation*}
+or explicitly for the first few functions
+\begin{subequations}
+  \begin{align}
+    \int_V H^{(1)}(\vec{r}) \, d\vec{r}
+    &=
+    \langle N \rangle
+    \\
+    \int_{V^2} H^{(2)}(\vec{r}_1, \vec{r}_2) \, d\vec{r}_1 d\vec{r}_2
+    &=
+    \langle N^2 \rangle - \langle N \rangle^2
+    \label{eq:pair-density-density-norm}
+    \\
+    \int_{V^3} H^{(3)}(\vec{r}_1, \vec{r}_2, \vec{r}_3) \, d\vec{r}_1 d\vec{r}_2 d\vec{r}_3
+    &=
+    \langle N^3 \rangle
+    - 3 \langle N^2 \rangle \langle N \rangle
+    + 2 \langle N \rangle^3.
+  \end{align}
+\end{subequations}
+This class of correlation functions thus describes the fluctuations in density, which can play an important thermodynamic role; we will give a specific example of how these functions connect to thermodynamic response functions below.
 
 An important response function for liquid structure is the isothermal compressibility
 \begin{equation*}\label{eq:isothermal-compressibility}
@@ -259,7 +360,8 @@ An important response function for liquid structure is the isothermal compressib
   \frac{1}{\rho}
   \left( \frac{\partial \rho}{\partial p} \right)_{V,T}.
 \end{equation*}
-Using standard thermodynamic manipulations we can obtain the equivalent expression \begin{equation*}
+Using standard thermodynamic manipulations we can obtain the equivalent expression
+\begin{equation*}
   \kappa_T
   =
   \frac{1}{\rho^2}
@@ -279,15 +381,13 @@ It is straightforward to evaluate this through the grand canonical average \eqre
   =
   \frac{ \langle N^2 \rangle - \langle N \rangle^2 }{\langle N \rangle}.
 \end{equation}
-From the normalisation of $\rho^{(2)}$ \eqref{eq:n-particle-density-normalisation} we find
+From the normalisation of $H^{(2)}$ \eqref{eq:pair-density-density-norm} as the second cumulant in $N$, we find
 \begin{equation}\label{eq:compressibility-h2}
   \begin{split}
     \chi_T
     &=
-    1
-    + \frac{1}{\langle N \rangle}
-    \int_{V^2} \rho^{(2)}(\vec{r}_1, \vec{r}_2) \, d\vec{r}_1 d\vec{r}_2
-    - \langle N \rangle
+    \frac{1}{\langle N \rangle}
+    \int_{V^2} H^{(2)}(\vec{r}_1, \vec{r}_2) \, d\vec{r}_1 d\vec{r}_2
     \\ &=
     1
     + \rho \int_V h^{(2)}(\vec{r}) \, d\vec{r}
@@ -295,13 +395,15 @@ From the normalisation of $\rho^{(2)}$ \eqref{eq:n-particle-density-normalisatio
 \end{equation}
 where the latter step is valid for the homogeneous liquid where $g^{(2)}(\vec{r}_1, \vec{r}_2) = g^{(2)}(\vec{r}_2 - \vec{r}_1)$ and we used the pair cluster correlation function \eqref{eq:pair-cluster-correlation-function}.
 
-The above are the real space structural descriptors, but there are an equivalent set of Fourier space measures.
-The static structure factor
-Note that the static structure factor is defined from the Fourier transform of the pair distribution function, i.e.\
+The various correlation functions introduced are all structural descriptors in real space, but we can imagine equivalent descriptors in Fourier space.
+The most important Fourier space correlation are the static structure factors $S^{(n)}$, of which the pair structure factor $S^{(2)}$ is particularly important for scattering experiments.
+We define this from the Fourier transform of the pair distribution function in the case of the uniform liquid as
 \begin{equation}\label{eq:static-structure-factor}
   \begin{split}
     S^{(2)}(\vec{k})
     :=&
+    \big\langle \tilde{\rho}(\vec{k}) \tilde{\rho}(-\vec{k}) \big\rangle
+    =
     1 + \rho \tilde{g}^{(2)}(\vec{k})
     \\ =&
     1 + \rho \tilde{h}^{(2)}(\vec{k}) + \rho \delta(\vec{k})
@@ -309,56 +411,12 @@ Note that the static structure factor is defined from the Fourier transform of t
 \end{equation}
 where the tilde over a function denotes its Fourier transform.
 In terms of the structure factor \eqref{eq:compressibility-h2} is written succinctly as%
-\marginfootnote{The Dirac delta function at the origin in $S^{(2)}(\vec{k})$ is often left out in order to regularise the function, in which case the right-hand side can be written more simply as $S^{(2)}(0)$.}
+\marginfootnote{The Dirac delta function at the origin in $S^{(2)}(\vec{k})$ is often omitted to regularise the function, in which case the right-hand side can be written more simply as $S^{(2)}(0)$.}
 \begin{equation}
   \chi_T = \lim_{\vec{k} \to 0} S^{(2)}(\vec{k}).
 \end{equation}
 
-Kirkwood superposition and convolution approximations
-
-\subsection{Correlation functions I}
-
-\todo{Finish this section.}
-Density-density correlation functions
-\begin{equation}\label{eq:density-density-correlations}
-  H^{(n)}(\vec{r}^n)
-  =
-  \left\langle
-  \prod_{i=1}^n
-  \Big[ \rho(\vec{r}_i) - \big\langle\rho(\vec{r}_i)\big\rangle \Big]
-  \right\rangle
-  \qquad \forall \; n \ge 2
-\end{equation}
-e.g.\
-\begin{equation}
-  \begin{aligned}
-    H^{(2)}(\vec{r}_1, \vec{r}_2) &=
-    \left\langle
-    \left[ \rho(\vec{r}_1) - \rho^{(1)}(\vec{r}_1) \right]
-    \left[ \rho(\vec{r}_2) - \rho^{(1)}(\vec{r}_2) \right]
-    \right\rangle \\
-    &=
-    \big\langle \rho(\vec{r}_1) \rho(\vec{r}_2) \big\rangle -
-    \rho^{(1)}(\vec{r}_1) \rho^{(1)}(\vec{r}_2) \\
-    &=
-    \rho^{(2)}(\vec{r}_1, \vec{r}_2) +
-    \rho^{(1)}(\vec{r}_1) \delta(\vec{r}_1 - \vec{r}_2) -
-    \rho^{(1)}(\vec{r}_1) \rho^{(1)}(\vec{r}_2) \\
-    &=
-    \rho^{(1)}(\vec{r}_1) \rho^{(1)}(\vec{r}_2) h^{(2)}(\vec{r}_1, \vec{r}_2)
-    +
-    \rho^{(1)}(\vec{r}_1) \delta(\vec{r}_1 - \vec{r}_2)
-  \end{aligned}
-\end{equation}
-
-Higher moments of the instantaneous density are obtained through
-\begin{equation}
-  \left\langle \prod_{i=1}^n \rho(\vec{r}_1) \right\rangle
-  =
-  \sum_{m=1}^n {n \choose m}
-  \rho^{(m)}(\vec{r}^m)
-  \prod_{j=m+1}^n \delta(\vec{r}_j - \vec{r}_1)
-\end{equation}
+\todo{Kirkwood superposition and convolution approximations}
 
 \subsection{?}
 
@@ -420,7 +478,7 @@ Higher moments of the instantaneous density are obtained through
 
 \subsection{Thermodynamic routes to the free energy}
 
-Goal: obtain the free energy and we have everything.
+\hl{Goal: obtain the free energy and we have everything.}
 Ordinarily this is achieved by obtaining an equation of state for the pressure $p = p(\rho)$, giving the free energy implicitly through the thermodynamic relation
 \begin{equation}\label{eq:pressure-relation-1}
   p
@@ -457,7 +515,7 @@ Integrating this relation over the density and making use of the isothermal comp
 i.e.\ the \emph{compressibility route} to the pressure.
 
 Another option evaluates the pressure directly \eqref{eq:pressure-relation-1} from the partition function.
-In terms of the canonical partition function this gives
+In terms of the canonical partition function this is
 \begin{equation}\label{eq:pressure-relation-2}
   \beta p
   =
@@ -553,7 +611,7 @@ Despite the similar name, this approach has no relation to the virial series whi
 to the pressure.
 In the latter step we replaced the canonical average with the grand-canonical average \eqref{eq:grand-canonical-average} from ensemble equivalence in the thermodynamic limit.
 
-There are other routes involving different observables (e.g.\ the potential energy or the chemical potential \cite{Santos2016}) to obtain the equation of state from the correlation functions; however, we will not discuss them as we will only use the virial route in the results chapters.
+There are other routes involving different observables (e.g.\ through the potential energy or the chemical potential \cite{Santos2016}) to obtain the equation of state from the correlation functions; however, we will not discuss them as we will only use the virial route in the results chapters.
 The degree of self-consistency between different routes can act as a proxy for the accuracy of an approximate theory.
 
 \begin{tcolorbox}[title=Contact theorem for hard spheres]
@@ -600,8 +658,8 @@ which for $d$-dimensional hard spheres of diameter $\sigma$ yields the \emph{con
 \end{equation}
 \end{tcolorbox}
 
-Derivatives of free energy reduce to $g^{(2)}$, emblematic of the conventional routes.
-Absolute free energies require higher order correlation functions to appear.
+\hl{Derivatives of free energy reduce} to $g^{(2)}$,\hl{ emblematic of the conventional routes.
+Absolute free energies require higher order correlation functions to appear.}
 \todo{Talk about this. Also: entropy route.}
 
 The pair distribution function $g^{(2)}$ appears because the specified system interacts via a pair potential; we could reasonably expect the generalisation to an $n$-body interaction potential to give the equation of state in terms of the $n$-body distribution function $g^{(n)}$.
