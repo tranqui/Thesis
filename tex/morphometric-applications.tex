@@ -11,9 +11,10 @@
 \externaldocument{morphometric-framework}
 
 \begin{document}
-\chapter{Applications of morphometric correlations: local structure in the hard sphere liquid}
+\chapter{Local structure in the hard sphere liquid}
 \epigraph{\textbf{hardball 1.1} \emph{informal} Uncompromising and ruthless methods or dealings.}{Oxford English Dictionary}
 \label{chapter:morphometric-applications}
+\todo{Check which version of dictionary.}
 
 The majority of this chapter contains work published as Ref.\ \cite{RobinsonPRL2019}.
 Later stuff is new.
@@ -83,7 +84,7 @@ While strictly an approximation, we motivate Eq.\ \eqref{eq:morphometric-surface
 
 \begin{SCfigure}
   \includegraphics[width=\linewidth,center]{structure-populations}
-  \caption{
+  \caption[Concentration of local structures in the equilibrium liquid]{
     Static many-body structure in the hard sphere liquid: populations of small local structures in the hard sphere liquid determined from molecular dynamics simulations of 1372 monodisperse (open circles) and 8\% polydisperse (solid triangles) hard spheres against the theoretical prediction of this work (lines).
     Variations against volume fraction $\eta$ and compressibility $Z = \beta p/\rho$ shown.
     The hard sphere freezing and melting volume fractions are indicated by vertical dashed lines.
@@ -93,7 +94,7 @@ While strictly an approximation, we motivate Eq.\ \eqref{eq:morphometric-surface
 
 \begin{SCfigure}
   \includegraphics[width=0.9\linewidth,outer]{n12-dos}
-  \caption{
+  \caption[Free energy distribution of 12 particle structures]{
     Theoretical free energy distribution for the $n=12$ local library of states at several volume fractions.
     The distribution is shifted to lower energies at higher volume fractions, and develops an increasingly bimodal structure.
     Populations are decomposed into those structures containing pentagonal bipyramids without octahedra (light fill) and the remaining structures (dark fill).
@@ -150,7 +151,7 @@ We find the that lower energy distribution consists of structures rich in fivefo
 
 \begin{SCfigure}
   \includegraphics[width=0.9\linewidth,outer]{n6-reaction-path}
-  \caption{
+  \caption[The simplest nontrivial reaction path in hard spheres: octahedron to tripyramid]{
     Reaction for transition between tripyramid and octahedron $n = 6$ structures.
     Stationary points are indicated by markers: there is a discontinuity in free energy at the end points due to the additional integration over the reaction coordinate, and symmetry in the case of the octahedron.
     Inset: variation of activation barrier with volume fraction $\eta$ and compressibility $Z = \beta p/\rho$ from this theoretical reaction path (dashed line) and measured $\alpha$-relaxation times in bulk molecular dynamics simulations (solid line), where $\eta = 0.45$ is indicated with a vertical dotted line.
@@ -220,9 +221,11 @@ The path we take is as follows:
 
 \begin{SCfigure}[H]
   \includegraphics[width=\linewidth,outer]{toy-landscape}
-  \caption{A cartoon energy landscape for a 2-dimensional phase space.
+  \caption[A cartoon energy landscape]{A cartoon energy landscape for a 2-dimensional phase space.
     The landscape features two local minima: $A$ and $B$.
-    The area surrounding each minima defines its basin: any point from which the minima can be found by moving downhill belongs to the basin.}
+    The area surrounding each minima defines its basin: any point from which the minima can be found by moving downhill belongs to the basin.
+    Energy landscape approach: at low temperatures the system is expected to oscillate around potential energy minima, so the dynamics can be understood as rare events causing a change of basin.
+    Thus a decomposition of the phase space in terms of basins should become exact for the dynamics at low temperatures in the supercooled regime of interest.}
 \end{SCfigure}
 
 In the case of local arrangements of hard spheres, rigid packings seem to correspond to minima of the potential of mean force.
@@ -586,12 +589,6 @@ which diverges in the hard sphere limit $\gamma \to \infty$.
 The hard sphere limit is properly singular, and we must use nonperturbative methods to treat it.
 We will however take inspiration of the approach for soft potentials, and hope to adapt these into a framework for doing similar calculations.
 
-\begin{SCfigure}
-  \missingfigure[figwidth=\linewidth]{}
-  \caption{Energy landscape approach: at low temperatures the system is expected to oscillate around potential energy minima, so the dynamics can be understood as rare events causing a change of basin.
-    Thus a decomposition of the phase space in terms of basins should become exact for the dynamics at low temperatures in the supercooled regime of interest.}
-\end{SCfigure}
-
 To summarise this section, we note that the basin definition of structures for soft potentials has the properties that: \cite{Wales?}
 \begin{itemize}
 \item Each basin $B_i$ connects to a unique minimal energy state with a unique geometry.
@@ -727,15 +724,15 @@ We will explore thermodynamic integration using Monte Carlo, which is essentiall
 
 \subsection{Worked examples}
 
-\begin{SCfigure}
-  \missingfigure[figwidth=\linewidth]{}
-  \caption{Number of first shell neighbours in the hard sphere liquid.}
-\end{SCfigure}
+%% \begin{SCfigure}
+%%   \missingfigure[figwidth=\linewidth]{}
+%%   \caption{Number of first shell neighbours in the hard sphere liquid.}
+%% \end{SCfigure}
 
-\begin{SCfigure}
-  \missingfigure[figwidth=\linewidth]{}
-  \caption{Number of equilateral triangles in the hard sphere liquid.}
-\end{SCfigure}
+%% \begin{SCfigure}
+%%   \missingfigure[figwidth=\linewidth]{}
+%%   \caption{Number of equilateral triangles in the hard sphere liquid.}
+%% \end{SCfigure}
 
 We will consider two worked examples for simple geometries which are readily visualised and for which the metric $G(\vec{x})$ is known exactly and the partition function integral reduces to a simple form.
 
@@ -1026,7 +1023,8 @@ We will use an approximate method from Bayesian inference: expectation propagati
 
 \begin{SCfigure}
   \missingfigure[figwidth=\linewidth]{}
-  \caption{Sketch of integration scheme proposed as generalisation of harmonic approximation: true distribution modelled as a Gaussian.
+  \caption[Generalisation of harmonic approximation using machine learning]{
+    Sketch of integration scheme proposed as generalisation of harmonic approximation: true distribution modelled as a Gaussian.
     We use expectation propagation as criteria for optimal parameters for the Gaussian.}
 \end{SCfigure}
 
@@ -1319,6 +1317,9 @@ or for small $\sigma_i^2 - \tilde{\sigma_i^2}$ we use
     \frac{(x_i - \tilde{\mu}_i)^2}{2 \tilde{\sigma}_i^2} -a_i x_i \right)} \, dx_i \right)}&.
   \end{split}
 \end{equation}
+
+\marginfootnote{In the zeitgeist of our time this could be construed as a form of machine learning; techniques for Bayesian inference are often thrown in with machine learning in e.g.\ topical reviews like Ref.\ \cite{MehtaPR2019}.
+  Personally, I am hesitant to call this machine learning as the techniques more closely resemble the approximation schemes of traditional statistical mechanics (to me at least) than neural networks which have been driving the recent machine learning revolution.}
 
 \todo{Show that EP reduces to the previous integral in the limit that there are no additional constraints: we obtain hypercubic limits.}
 

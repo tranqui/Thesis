@@ -158,7 +158,7 @@ This completes our proof that the correlations can be transformed to a potential
 
 \begin{SCfigure}
   \includegraphics[width=\linewidth,outer]{morph-droplet}
-  \caption{
+  \caption[Our system: correlations as solvation physics]{
     The system considered for many-body correlations showing
     (a) the local particles surrounded by the remaining liquid acting as a thermal reservoir at fixed chemical potential and temperature, and
     (b) possible partitions of space into the local $\mathcal{L}$ and remaining $\mathcal{R}$ components for two choices of dividing surface: $\partial\mathcal{L}_1$ is the molecular surface while $\partial\mathcal{L}_2$ is the solvent accessible surface (see discussion around Eq.\ \eqref{eq:exclusion-transform}).
@@ -407,6 +407,7 @@ giving
     1 + \rho \left( \frac{\partial \beta \mu^\mathrm{ex}}{\partial \rho} \right)_{V,T}.
   %\end{split}
 \end{equation}
+\todo{A lot of this can be removed because we discuss it in the background chapter.}
 Note that the consistency relation \eqref{eq:osmotic-consistency-1} provides the route to generalising all of the arguments to arbitrary mixtures \cite{RosenfeldPRL1989,SollichAiCP2001,SantosPRE2012}.
 The free energy remains well-defined, even for polydisperse mixtures, if the composition dependence enters only through a set of weighted moments of the density $\{\xi_k\}$.
 Then \eqref{eq:osmotic-consistency-1} becomes
@@ -428,7 +429,7 @@ For weighted densities consistent with an SPT (or FMT) approach, it has been sho
 
 \begin{SCfigure}
   \includegraphics[width=\linewidth,outer]{g2-contact}
-  \caption{
+  \caption[Contact values of pair distribution function $g^{(2)}(r)$]{
     Contact values of the radial distribution function against volume fraction $\eta$ and reduced pressure for the hard sphere liquid using \eqref{eq:contact-g} with \eqref{eq:distribution-solvation} and \eqref{eq:morph-ansatz} for the explicit form of $g^{(2)}$, assuming the Carnahan-Starling (CS) equation of state.
     Contact values are determined with two sets of morphometric coefficients: SPT/CS (section \ref{sec:cs-spt}, specifically \eqref{eq:cs-spt-coefficients}, or equivalently the White Bear II bulk coefficients of Ref.\ \cite{Hansen-GoosJPCM2006}) which performs poorly in the supercooled regime (shaded area), and coefficients derived in this chapter (section \ref{sec:virial-spt}) using the virial theorem which is exact by construction.
     The hard sphere freezing and melting volume fractions are indicated by purple dashed lines to show the onset of the supercooled regime.
@@ -602,7 +603,8 @@ Nonetheless, this self-consistency is a testament to the effectiveness of SPT an
 
 \begin{SCfigure}
   \includegraphics[width=0.9\linewidth,outer]{g2-phi045}
-  \caption{Comparing radial distribution functions of the morphometric theories with coefficients of \eqref{eq:cs-spt-coefficients} (SPT/CS), equivalent to the White Bear II in the bulk limit \cite{Hansen-GoosJPCM2006}; and \eqref{eq:virial-coefficients} with the Carnahan-Starling equation of state \eqref{eq:cs-pressure} (virial/CS), against results of molecular dynamics (MD) simulations at volume fraction $\eta = 0.45$.
+  \caption[Accuracy of pair distribution functions $g^{(2)}(r)$]{
+    Comparing radial distribution functions of the morphometric theories with coefficients of \eqref{eq:cs-spt-coefficients} (SPT/CS), equivalent to the White Bear II in the bulk limit \cite{Hansen-GoosJPCM2006}; and \eqref{eq:virial-coefficients} with the Carnahan-Starling equation of state \eqref{eq:cs-pressure} (virial/CS), against results of molecular dynamics (MD) simulations at volume fraction $\eta = 0.45$.
     The inset shows the difference between the two theoretical distribution functions and the molecular dynamics.
     The purple dashed line indicates where the molecular surface self-intersects at $r = \sqrt{3} \sigma$, marking the end of the theory's regime of validity.}
   \label{fig:g2-full}
@@ -614,11 +616,7 @@ Nonetheless, this self-consistency is a testament to the effectiveness of SPT an
 In the classical SPT approach described in the previous section, the SPT/PY equation of state emerges as an \emph{output} of the theory.
 Taking inspiration from the White Bear free energy functional \cite{RothJPCM2002}, we reformulate the SPT argument so that the equation of state is an \emph{input} to the theory.
 In so doing we aim to construct a theory from a more accurate equation of state, with the trade-off being that we must sacrifice some self-consistency.
-The main equation of state we will impose is the Carnahan-Starling (CS) relation \cite{CarnahanJCP1969}\todo{Move equations of state into the background chapter.}
-\begin{equation}\label{eq:cs-pressure}
-  \frac{\beta p}{\rho} = \frac{1 + \eta + \eta^2 - \eta^3}{(1-\eta)^3},
-\end{equation}
-which is known to be accurate across the whole stable liquid regime, and even at the limits of the supercooled liquid accessible to simulations \cite{BerthierPRL2016}.
+The main equation of state we will impose is the empirical Carnahan-Starling (CS) relation \eqref{eq:cs-pressure} known to be accurate across the whole stable liquid regime \cite{CarnahanJCP1969}, and even at the high density limits accessible to simulation in the supercooled regime \cite{BerthierPRL2016}.
 %The price we pay for a more accurate equation of state will be the loss of self consistency; we will no longer be able to satisfy all five of the previous equations \eqref{eq:spt-origin-continuity}, \eqref{eq:spt-mu-density-derivative} and \eqref{eq:spt-virial} simultaneously.
 %Instead we must make some choice over which ones to retain.
 Since the pressure is now a known input, the excess chemical potential can be determined by integrating \eqref{eq:osmotic-consistency-2} i.e.\
@@ -627,6 +625,7 @@ Since the pressure is now a known input, the excess chemical potential can be de
   = \left( \frac{\beta p}{\rho} - 1 \right)
   + \int_0^\eta \left( \frac{\beta p}{\rho} - 1 \right) \, \frac{d\eta'}{\eta'}.
 \end{equation}
+\todo{Can we reference the background section for this equation?}
 To keep the expressions simple we will not evaluate the chemical potential until the very end, but it should be recognised as a known variable wherever it appears.
 %% In particular, for the CS equation of state \eqref{eq:cs-pressure} this yields
 %% \begin{equation}\label{eq:cs-mu}
@@ -714,16 +713,17 @@ The next section will detail how to modify this argument to produce coefficients
 
 \begin{SCfigure}
   \includegraphics[width=0.9\linewidth,outer]{g3}
-  \caption{Comparison of predicted correlations for triangular geometries against molecular dynamics simulations at volume fraction $\eta = 0.45$.}
+  \caption[Accuracy of triplet distribution functions $g^{(3)}(r,s,t)$]{
+    Comparison of predicted correlations for triangular geometries against molecular dynamics simulations at volume fraction $\eta = 0.45$.}
   \label{fig:g3}
 \end{SCfigure}
 
-\subsection{Second generalisation: self-consistency of the contact value of $g(r)$ with the virial equation}
+\subsection{Second generalisation: self-consistency of the contact value of $g^{(2)}(r)$ with the virial equation}
 \label{sec:virial-spt}
 
 Our goal is to develop a morphometric theory which produces accurate correlation functions $g^{(n)}$.
 As described at the end of the last section, the correlation functions produced by an SPT approach are inaccurate at high densities.
-We will correct the spurious decay of the contact value of the $g^{(2)}(r)$ at high densities by building this into the theory explicitly, with the aim of producing more accurate correlation functions.
+We will correct the spurious decay of the contact value of the pair distribution function $g^{(2)}(r)$ at high densities by building this into the theory explicitly, with the aim of producing more accurate correlation functions.
 
 %% This represents a significant departure from strictly scaled particle arguments, 
 %% The great strength of the morphometric approach over scaled particle arguments is that we are not restricted to purely rescaling; in principle the form should be valid for arbitrary geometries.
@@ -833,7 +833,8 @@ The pair correlation produced by these coefficients (black line in Fig.\ \ref{fi
 
 \begin{SCfigure}
   \includegraphics[width=0.9\linewidth,outer]{sp3}
-  \caption{Concentration of triangles in the hard sphere liquid with side lengths $r,s,t \in [\sigma, \sigma + \delta]$ versus volume fraction.
+  \caption[Number of triangles in the bulk liquid]{
+    Concentration of triangles in the hard sphere liquid with side lengths $r,s,t \in [\sigma, \sigma + \delta]$ versus volume fraction.
     Direct measurements by molecular dynamics using a single-component system and an 8\% polydisperse system, while the lines show predictions from the morphometric theories described in text.
     The hard sphere freezing and melting volume fractions are indicated by pink dashed lines to show the onset of the supercooled regime.
     Inset: contact value of $g^{(3)}$ showing how the errors in the SPT/CS theory arise from underestimation close to contact.}
@@ -842,7 +843,8 @@ The pair correlation produced by these coefficients (black line in Fig.\ \ref{fi
 
 \begin{SCfigure}
   \includegraphics[width=0.9\linewidth,outer]{a2-errors}
-  \caption{Errors in different morphometric theories for hard spheres.
+  \caption[Comparing of theoretical surface tensions against literature values]{
+    Errors in different morphometric theories for hard spheres.
     Top panel: error in the coordination defined in \eqref{eq:coordination}, giving the average number of neighbours in the shell $r < 1.4\sigma$ around a particle.
     Bottom panel: planar surface tensions against volume fraction, using the highly accurate result \eqref{eq:quasi-exact-surface-tension} from Ref.\ \cite{DavidchackMP2015} valid until $\eta \sim 0.5$.
   The theories compared are virial/CS, new coefficients given in \eqref{eq:virial-coefficients}; SPT/CS, equivalent to the White Bear II \cite{Hansen-GoosJPCM2006} given in \eqref{eq:cs-spt-coefficients}; and SPT/PY, the classical scaled particle theory \cite{ReissJCP1959} given in \eqref{eq:py-coefficients}.}
@@ -917,7 +919,7 @@ Comparing this highly accurate expression against the values predicted from the 
 One of the great strengths of the SPT/CS theory is its accuracy in the planar limit \cite{Hansen-GoosJPCM2006}, so this suggests that the virial/CS theory sacrifices asymptotic accuracy for more self-consistency in the correlation functions.
 For this reason, SPT/CS coefficients may give more accurate grand potentials (and thus correlations) for large solutes where the surface becomes approximately planar.
 
-\section{Discussion and summary}
+\section{Conclusions}
 
 We have presented the morphometric approach as a generalisation of SPT, thus placing the scaled particle \emph{ansatz} on more precise and physically motivated assumptions i.e.\ those underlying the theorems of integral geometry.
 Using the scaled particle approach we have systematically derived several theories for the hard sphere liquid.
