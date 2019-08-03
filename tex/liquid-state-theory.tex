@@ -217,7 +217,7 @@ These conditions specify a new hierarchy: the \emph{cluster correlation function
 \marginfootnote{These are so-named because they possess a \emph{cluster property} where they decay to zero in the limit where any particles become macroscopically separated \cite{UhlenbeckJMP1963}.
   This feature directly emerges from, and is dual to, the product property for $g^{(n)}$.}
 where the first few terms are given by \cite{UhlenbeckJMP1963}
-\begin{subequations}
+\begin{subequations}\label{eq:cluster-correlation-functions}
   \begin{align}
     h^{(1)}(\vec{r})
     =& \,
@@ -478,14 +478,15 @@ In terms of the structure factor \eqref{eq:compressibility-h2} is written succin
 
 \subsection{Thermodynamic routes to the free energy}
 
-\hl{Goal: obtain the free energy and we have everything.}
-Ordinarily this is achieved by obtaining an equation of state for the pressure $p = p(\rho)$, giving the free energy implicitly through the thermodynamic relation
+Often the main objective of a statistical physicist is to determine the phase diagram of a system, which can be deduced from the free energy if known.
+Liquid state theory contains several routes to calculate the free energy, of which we will describe two below.
+Ordinarily the end result of these approaches is an equation of state for the pressure $p = p(\rho)$, which gives the free energy implicitly through the thermodynamic relation
 \begin{equation}\label{eq:pressure-relation-1}
   p
   =
   - \left( \frac{\partial F}{\partial V} \right)_{N,T},
 \end{equation}
-although a state equation for any other thermodynamic observable would sufficiently determine $F$.
+although a state equation for any other thermodynamic observable would suffice.
 
 The first option for determining the free energy is through the compressibility, from the thermodynamic relation
 \begin{equation}
@@ -493,7 +494,7 @@ The first option for determining the free energy is through the compressibility,
   %% =
   %% - V \left( \frac{\partial p}{\partial V} \right)_{N,T}
   =
-  \left( \frac{\partial \beta p}{\partial \rho} \right)_{V,T}
+  \left( \frac{\partial \beta p}{\partial \rho} \right)_{V,T}.
   %% =
   %% V \left( \frac{\partial^2 F}{\partial V^2} \right)_{N,T}
   %% =
@@ -615,69 +616,253 @@ There are other routes involving different observables (e.g.\ through the potent
 The degree of self-consistency between different routes can act as a proxy for the accuracy of an approximate theory.
 
 \begin{tcolorbox}[title=Contact theorem for hard spheres]
-For a single-component system interacting through a spherically symmetric pair potential $u(r)$, the virial route \eqref{eq:virial-route-pressure} yields
-\begin{equation}\label{eq:virial-route-pressure-uniform}
-  \frac{\beta p}{\rho}
-  =
-  1
-  -
-  \frac{\rho}{2 d}
-  \int_V
-  r g^{(2)}(r) \frac{d \beta u}{d r} \, d\vec{r},
-\end{equation}
-using the definition of the 2-particle distribution function \eqref{eq:n-particle-distribution} as the average over the remaining degrees of freedom.
-In the case of hard spheres $u'(r)$ is not well-defined because the pair potential is singular, however the cavity function
-\begin{equation*}\label{eq:cavity-function}
-  y^{(2)}(r) = g^{(2)}(r) e^{\beta u(r)}
-\end{equation*}
-is continuous (see e.g.\ Refs.\ \cite{Hansen2013,Santos2016}) even in cases where the pair potential is not.
-In terms of the cavity function, the virial route \eqref{eq:virial-route-pressure-uniform} becomes
-\begin{equation*}\label{eq:virial-route-pressure-cavity}
-  \frac{\beta p}{\rho}
-  =
-  1
-  +
-  \frac{\rho}{2 d}
-  \int_V
-  r y^{(2)}(r) \frac{d f}{dr}
-  \, d\vec{r},
-\end{equation*}
-which for $d$-dimensional hard spheres of diameter $\sigma$ yields the \emph{contact theorem}:
-\begin{equation}
-  \frac{\beta p}{\rho}
-  =
-  1
-  +
-  \frac{\rho \omega_d \sigma^3}{2}
-  y^{(2)}(\sigma).
-  %% \\ &=
-  %% 1
-  %% +
-  %% \frac{2 \pi \rho \sigma^3}{3}
-  %% y^{(2)}(\sigma)
-\end{equation}
+  For a single-component system interacting through a spherically symmetric pair potential $u(r)$, the virial route \eqref{eq:virial-route-pressure} yields
+  \begin{equation}\label{eq:virial-route-pressure-uniform}
+    \frac{\beta p}{\rho}
+    =
+    1
+    -
+    \frac{\rho}{2 d}
+    \int_V
+    r g^{(2)}(r) \frac{d \beta u}{d r} \, d\vec{r},
+  \end{equation}
+  using the definition of the 2-particle distribution function \eqref{eq:n-particle-distribution} as the average over the remaining degrees of freedom.
+  In the case of hard spheres $u'(r)$ is not well-defined because the pair potential is singular, however the cavity function
+  \begin{equation*}\label{eq:cavity-function}
+    y^{(2)}(r) = g^{(2)}(r) e^{\beta u(r)}
+  \end{equation*}
+  is continuous (see e.g.\ Refs.\ \cite{Hansen2013,Santos2016}) even in cases where the pair potential is not.
+  In terms of the cavity function, the virial route \eqref{eq:virial-route-pressure-uniform} becomes
+  \begin{equation*}\label{eq:virial-route-pressure-cavity}
+    \frac{\beta p}{\rho}
+    =
+    1
+    +
+    \frac{\rho}{2 d}
+    \int_V
+    r y^{(2)}(r) \frac{d f}{dr}
+    \, d\vec{r},
+  \end{equation*}
+  which for $d$-dimensional hard spheres of diameter $\sigma$ yields the \emph{contact theorem}:
+  \begin{equation}
+    \frac{\beta p}{\rho}
+    =
+    1
+    +
+    \frac{\rho \omega_d \sigma^3}{2}
+    y^{(2)}(\sigma).
+    %% \\ &=
+    %% 1
+    %% +
+    %% \frac{2 \pi \rho \sigma^3}{3}
+    %% y^{(2)}(\sigma)
+  \end{equation}
+  The pair distribution function $g^{(2)}$ appeared in the virial route because the specified system interacts via a pair potential; we could reasonably expect the generalisation to an $n$-body interaction potential to give the equation of state in terms of the $n$-body distribution function $g^{(n)}$.
 \end{tcolorbox}
 
 \hl{Derivatives of free energy reduce} to $g^{(2)}$,\hl{ emblematic of the conventional routes.
 Absolute free energies require higher order correlation functions to appear.}
 \todo{Talk about this. Also: entropy route.}
 
-The pair distribution function $g^{(2)}$ appears because the specified system interacts via a pair potential; we could reasonably expect the generalisation to an $n$-body interaction potential to give the equation of state in terms of the $n$-body distribution function $g^{(n)}$.
+\subsection{Mixtures: truncatability of the free energy}
+
+\todo{Port in stuff from results chapters and discuss.}
 
 \subsection{Virial series}
 \label{sec:virial-series}
 
-Low density expansion of pressure in series with virial coefficients.
-\todo{Finish this section}
+The virial series is the only properly rigorous approach to evaluating the partition function, and thus the free energy, from first principles.
+We introduce it here as it will be used in chapter \ref{chapter:resummation} to place the fundamental approximation, the morphometric approach, underlying chapters \ref{chapter:morphometric-framework} and \ref{chapter:morphometric-applications} on firmer ground.
+This approach can be used to derive free energy functionals for application to (classical) density functional theory (section \ref{sec:dft}): cf.\ Refs.\ \cite{LeithallPRE2011,KordenPRE2012,MarechalPRE2014}.
+The series derived below is only valid for systems interacting via a pair potential $u(\vec{r})$.
 
+The partition function $\Xi$, defined in \eqref{eq:grand-canonical-partition}, is an expansion in \emph{fugacity} featuring intractable integrals; the trick to make calculations more tractable is to transform $\Xi$ into a \emph{density} expansion.
+The final series involves an infinite number of individually more tractable integrals.
+Traditionally, the virial series for the equation of the state is written
+\begin{equation}\label{eq:virial-series-pressure}
+  \frac{\beta p}{\rho}
+  =
+  1 + \sum_{n=2}^\infty B_n \rho^{n-1}
+\end{equation}
+where $\{B_n\}$ are the \emph{virial coefficients} to be determined.
+As a self-consistency check, observe that the ideal gas law is recovered in the low density limit $\rho \to 0$.
+Alternatively, the virial series can be expressed for the (excess) free energy density as
+\begin{equation}\label{eq:virial-series-excess-free-energy}
+  \frac{\beta F^\mathrm{ex}}{V} =
+  \sum_{n=2}^\infty
+  \frac{1}{n-1}
+  B_n
+  \rho^n
+\end{equation}
+which is more useful for connecting with density functional theory (section \ref{sec:dft}).
+\todo{Specify which thermodynamic relation.}
+
+To determine the coefficients in the virial series, we start by writing the Boltzmann factor for a pairwise interacting system as the product
 \begin{equation}
-  \frac{\beta p}{\rho} =
-  1 + \sum_{i=2}^\infty B_i(T) \rho^{i-1}
+  e^{-\beta U_N(\vec{r}^N)}
+  =
+  \prod_{1 \le i < j \le N} (1 + f_{ij})
 \end{equation}
-where $B_i$ are the virial coefficients.
+where we introduced the \emph{Mayer function}
+\begin{equation}
+  f_{ij} := e^{-\beta u(\vec{r}_i, \vec{r}_j)} - 1.
+\end{equation}
+Expanding out terms in the $n$-particle configurational integral leads to expressions like
+\begin{equation*}
+  \begin{split}
+    Z_3
+    =&
+    \frac{z^3}{3!}
+    \int (1 + f_{12}) (1 + f_{23}) (1 + f_{31})
+    \, d\vec{r}_1 d\vec{r}_2 d\vec{r}_3
+    \\ =&
+    \frac{z^3}{3!}
+    \int_{V^3} (1 + \{3\} f_{12} + \{3\} f_{12} f_{23} + f_{12} f_{23} f_{31} )
+    \, d\vec{r}_1 d\vec{r}_2 d\vec{r}_3
+  \end{split}
+\end{equation*}
+which is the term for $n=3$.
+In the above expression we used the $\{\cdot\}$ notation which we introduced to indicate different permutations in the various standard correlation functions e.g.\ \eqref{eq:cluster-correlation-functions}; this does not come as a surprise because the integrand above is really another correlation function.
+\todo{Fix clumsy wording.}
+Expressions involving Mayer functions can become unwieldly so it is usual practice to express them as diagrams, graphs with $n$ vertices connected by edges representing each $f_{ij}$.
+For example, the integrand in the above expression would be written
+\begin{align}
+  %\begin{split}
+  &\quad\, 1 &&+ \{3\} \;\;\; f_{12} &&+ \{3\} \; f_{12} f_{23} &&+ f_{12} f_{23} f_{31}
+  \\ =&
+  \mayerdiagram[...][ooo]{3}
+  &&+ \{3\} \mayerdiagram[|..][ooo]{3}
+  &&+ \{3\} \mayerdiagram[.||][ooo]{3}
+  &&+ \mayerdiagram[|||][ooo]{3}
+  .
+  %\end{split}
+\end{align}
+Integrations over the positions of each particle are represented by blackening the integrating vertices, so that the previous integral becomes
+\begin{align*}
+  Z_3
+  =&
+  \int_{V^3} (1 + \{3\} f_{12} + \{3\} f_{12} f_{23} + f_{12} f_{23} f_{31} )
+  \, d\vec{r}_1 d\vec{r}_2 d\vec{r}_3
+  \\ =&
+  \mayerdiagram[...]{3}
+  + \{3\} \mayerdiagram[|..]{3}
+  + \{3\} \mayerdiagram[.||]{3}
+  + \mayerdiagram[|||]{3}.
+\end{align*}
 
-Generalisation to a binary mixture \todo{Where does this come from? What do the diagrams look like? Are they simpler than the distribution function diagrams?}: \cite{Hansen-GoosJCP2014}
-\begin{equation}\label{eq:virial-series-binary}
-  \Phi = \sum_{n=2}^\infty \sum_{j=0}^{n}
-  \frac{1}{n-1} {n \choose j} B_n^{[j]} \rho_1^{n-j} \rho_2^j
+First step is to reduce the number of diagrams.
+We use the same trick as before: we treat the grand canonical partition function as a moment generating function, with fugacity as the control parameter, and consider its the dual cumulant generating function $\ln{\Xi} = -\beta\Omega$.
+It follows that
+\begin{equation*}
+  1 + \sum_{n=1} \frac{z^n}{n!} Z_n
+  =
+  \exp{
+    \left(
+    \sum_{n=1}^\infty \frac{z^n}{n!}
+    \int_{V^n} W^{(n)}(\vec{r}^n) \, d\vec{r}^n
+    \right)
+  },
+\end{equation*}
+which defines a new hierarchy of \emph{cluster functions}%
+\marginfootnote{These are also sometimes called \emph{Ursell functions}.}
+$W^{(n)}$.
+The transformation to cluster functions eliminates all disconnected diagrams, e.g.\ the first few are defined as \cite{Santos2016}
+\begin{subequations}
+  \begin{align}
+    W^{(1)}(\vec{r})
+    &=
+    1
+    \\
+    W^{(2)}(\vec{r}_1, \vec{r}_2)
+    &=
+    \mayerdiagram[|][oo]{2}
+    \\
+    W^{(3)}(\vec{r}_1, \vec{r}_2, \vec{r}_3)
+    &=
+    \{3\} \mayerdiagram[.||][ooo]{3}
+    +  \mayerdiagram[|||][ooo]{3}.
+  \end{align}
+\end{subequations}
+The normalisations of these new functions are the so-called \emph{cluster integrals} defined as
+\begin{equation}\label{eq:cluster-integral}
+  b_n :=
+  \frac{1}{n! V}
+  \int_{V^n} W^{(n)}(\vec{r}^n)
+  \, d\vec{r}^n,
 \end{equation}
+so that
+\begin{equation*}
+  \ln{\Xi} = V \sum_{n=1}^\infty b_n z^n.
+\end{equation*}
+The volume factor is pulled in front of the definition of $b_n$ because one obtains a volume factor from translation invariance.
+
+\todo{Check density expression is consistent with DFT section.}
+\begin{tcolorbox}[title=The virial coefficients]
+  Lastly, we transform to an expansion in density.
+  We then convert to pressure to get the irreducible cluster integrals (sometimes called stars, not to be confused with star diagrams of graph theory, 2-connected).
+  We can write the density as
+  \begin{equation}
+    \rho
+    =
+    \frac{z}{V} \frac{\partial (\ln \Xi)}{\partial z}
+    =
+    \sum_{n=1}^\infty n b_n z^n
+  \end{equation}
+  This expression, connecting density and fugacity, can be used to transform the expansion in fugacity to one in density i.e.\ \eqref{eq:virial-series-pressure}.
+  This gives the first few virial coefficients
+  \begin{subequations}
+    \begin{align}
+      B_2 &= -b_2
+      \\
+      B_3
+      &=
+      4 b_2^2 - 2 b_3
+      \\
+      B_4
+      &=
+      -20 b_2^3 + 18 b_2 b_3 - 3 b_4.
+    \end{align}
+  \end{subequations}
+  Further cancellations occur after inserting the explicit expressions for the cluster integrals \eqref{eq:cluster-integral} leaving only the \emph{stars}%
+  \marginfootnote{These are also called the \emph{irreducible diagrams} because they cannot be expressed as products of other diagrams.},
+  those diagrams which cannot be disconnected by deleting a single vertex.
+  We obtain the first few virial coefficients as
+  \begin{subequations}
+    \begin{align}
+      B_2
+      &=
+      - \frac{1}{2} \mayerdiagram[|][o.]{2}
+      \\
+      B_3
+      &=
+      - \frac{2}{3!} \mayerdiagram[|||][o..]{3}
+      \\
+      B_4
+      &=
+      - \frac{2}{3!}
+      \left(
+      3 \mayerdiagram[|.||.|][o...]{4}
+      + 6 \mayerdiagram[|.||||][o...]{4}
+      + \mayerdiagram[||||||][o...]{4}
+      \right).
+    \end{align}
+  \end{subequations}
+  and more generally \cite{Santos2016, Hansen2013}
+  \begin{equation}\label{eq:virial-coefficients}
+    B_n = - \frac{n - 1}{n! V}
+    \int_{V^n}
+    \sum \bigg( \textrm{all \emph{stars} with $n$ vertices} \bigg)
+    \, d\vec{r}^n
+  \end{equation}
+\end{tcolorbox}
+
+In the above derivation we only considered a single-component system, however the generalisation to mixtures is straightforward.
+Considering an $m$-component mixture we label each species with index $s \in \{1, \cdots, m\}$.
+The virial coefficients generalise to \cite{Santos2016}
+\begin{equation}\label{eq:virial-coefficients-mixtures}
+  B_n =
+  \sum_{s_1=1}^m \cdots \sum_{s_n=1}^m
+  B_{s_1, \cdots, s_n} \prod_{i=1}^n x_{s_i}
+\end{equation}
+where $x_i$ is the mole fraction of species $i$ such that $x_i > 0$ and $\sum_{i=1}^m x_i = 1$.
+$B_{s_1, \cdots, s_n}$ are the composition independent virial coefficients describing the contribution from interactions between $n$ particles of species $\{s_1, \cdots, s_n\}$.
