@@ -1,7 +1,58 @@
 \section{Density functional theory}
 \label{sec:dft}
 
-\subsection{Functional form of the thermodynamic potentials}
+\subsection{Variational principle}
+
+\todo{Finish this section}
+
+Hitherto we have defined all of the functionals for their equilibrium.
+We can imagine a generalisation to non-equilibrium density profiles.
+\begin{align*}
+  \Omega &\to \Omega[\rho]
+  \\
+  \mathcal{F}^\mathrm{id} &\to \mathcal{F}^\mathrm{id}[\rho]
+  \\
+  \mathcal{F}^\mathrm{ex} &\to \mathcal{F}^\mathrm{ex}[\rho]
+\end{align*}
+This generalised functional is not strictly the same as the thermodynamic grand potential, which concerns equilibrium properties, but the two potentials share an important correspondence due to the following two properties:
+\begin{enumerate}
+  \item It is bounded from below by the grand potential
+    \begin{equation}
+      \Omega[\rho] \ge \Omega[\rho^{(1)}]
+    \end{equation}
+  \item with equality only in the case of the equilibrium density profile, i.e.\
+    \begin{equation}
+      \Omega[\rho^{(1)}] = \Omega
+    \end{equation}
+\end{enumerate}
+\todo{Mermin-Evans argument, or simplified argument (Schmidt).}
+These two properties can be elegantly summarised by the following \emph{variational principle}:
+\begin{equation}\label{eq:dft-equilibrium}
+  \left.
+  \frac{
+    \delta \Omega[\rho(\vec{r})]
+  }{
+    \delta \rho
+  }
+  \right|_{\rho(\vec{r})=\rho^{(1)}(\vec{r})}
+  =
+  0
+\end{equation}
+This variational principle provides a route to numerical applications of DFT: minimising the grand potential provides an equilibrium density profile and free energy.
+
+Henceforth we will only deduce
+
+Which gives the equilibrium density as
+\begin{equation}
+  \rho^{(1)}(\vec{r})
+  =
+  \frac{
+    \exp{\left(\beta\psi(\vec{r}) + c^{(1)}(\vec{r})\right)}
+  }{ \Lambda^d }
+\end{equation}
+\todo{Move this until later}
+
+\subsection{Thermodynamic potentials in functional form}
 
 \todo{Insert references to classic texts i.e.\ \cite{EvansAP1979,Evans1989,EvansFoIF1992}}
 
@@ -872,50 +923,3 @@ satisfies the sum rule but fails to satisfy the hard-core condition.
 %%   \frac{\delta^n \beta F_{ex}}{\delta \rho(\vec{r}_1)\delta \rho(\vec{r}_2) \cdots \delta \rho(\vec{r}_n)}
 %%   \right|_{\rho(\vec{r})=\rho}
 %% \end{equation}
-
-\subsection{Variational principle}
-
-\todo{Finish this section}
-
-Hitherto we have defined all of the functionals for their equilibrium.
-We can imagine a generalisation to non-equilibrium density profiles.
-\begin{align*}
-  \Omega &\to \Omega[\rho]
-  \\
-  \mathcal{F}^\mathrm{id} &\to \mathcal{F}^\mathrm{id}[\rho]
-  \\
-  \mathcal{F}^\mathrm{ex} &\to \mathcal{F}^\mathrm{ex}[\rho]
-\end{align*}
-This generalised functional is not strictly the same as the thermodynamic grand potential, which concerns equilibrium properties, but the two potentials share an important correspondence due to the following two properties:
-\begin{enumerate}
-  \item It is bounded from below by the grand potential
-    \begin{equation}
-      \Omega[\rho] \ge \Omega[\rho^{(1)}]
-    \end{equation}
-  \item with equality only in the case of the equilibrium density profile, i.e.\
-    \begin{equation}
-      \Omega[\rho^{(1)}] = \Omega
-    \end{equation}
-\end{enumerate}
-These two properties can be elegantly summarised by the following \emph{variational principle}:
-\begin{equation}\label{eq:dft-equilibrium}
-  \left.
-  \frac{
-    \delta \Omega[\rho(\vec{r})]
-  }{
-    \delta \rho
-  }
-  \right|_{\rho(\vec{r})=\rho^{(1)}(\vec{r})}
-  =
-  0
-\end{equation}
-This variational principle provides a route to numerical applications of DFT: minimising the grand potential provides an equilibrium density profile and free energy.
-
-Which gives the equilibrium density as
-\begin{equation}
-  \rho^{(1)}(\vec{r})
-  =
-  \frac{
-    \exp{\left(\beta\psi(\vec{r}) + c^{(1)}(\vec{r})\right)}
-  }{ \Lambda^d }
-\end{equation}
