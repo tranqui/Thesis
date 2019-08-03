@@ -108,7 +108,7 @@ The SEM results for \ce{NaNO3} are inconclusive, although the resulting crystal 
 \subsection{Overview and notation}
 
 In order to obtain nucleation rates we require the time evolution of the droplet's concentration profile over its drying history, and a phenomenological model for nucleation rates based on concentration.
-To determine the concentration profile trajectory for a drying droplet we have to consider the relative motion of solute and solvent species inside the droplet, the relative motion of various species in the surrounding vapour phase, as well as the evaporation of solvent across the phase boundary.
+To determine the concentration profile trajectory for a drying droplet we have to consider the relative motion of solute and solvent species inside the droplet, of various species in the surrounding vapour phase, as well as the evaporation of solvent across the phase boundary.
 Our approximations will reduce this to a moving boundary problem with solely diffusional mixing.
 
 Prior to crystallisation a drying droplet will be approximately spherical, so we consider a phase boundary at radius $R(t)$ evolving in time $t$.
@@ -206,6 +206,7 @@ so assuming volume additivity \eqref{eq:volume-additivity} we can define the mas
   \frac{1}{\rho^{(f)}_0} -
   \frac{1}{\rho^{(s)}_0}.
 \end{equation}
+\hl{(paddy writes something illegible here)}
 giving $\vec{v} = \Lambda \vec{j}^{(s)}$.
 This simplifies the advective term in the continuity equation \eqref{eq:species-continuity-relative} leading to
 \begin{equation}\label{eq:species-continuity-relative-without-advection}
@@ -722,9 +723,9 @@ This leaves the gas-liquid phase boundary itself as a site for hetereogeneous nu
 
 It is highly likely that the model overestimates the surface enrichment because at long times the simulated evaporation rates become limited by solute diffusion at the boundary.
 The diffusion limit would persist even if more sophisticated transport phenomena were introduced to the evaporation model.
-Surface enrichment is overestimated because we have neglected the effect of temperature gradients inside the droplet, and because we have used an extrapolation of low concentration diffusion data which is likely to underestimate diffusion at high concentrations.
+Surface enrichment is overestimated because we have neglected the effect of temperature gradients inside the droplet, and because we have used an extrapolation of low concentration diffusion data which likely to underestimate diffusion at high concentrations.
 Temperature gradients create inward convection currents reducing surface enrichment.
-Our extrapolation of the diffusion constant assumed the Stokes-Einstein relation holds across the whole state space, however this relation can be violated \hl{(citation for SE breakdown)} at high viscosities.
+Our extrapolation of the diffusion constant assumed the Stokes-Einstein relation holds across the whole state space, however this relation can be violated at high viscosities \cite{BerthierRMP2011}.
 The rapid increase of viscosity with salt concentration in our model leads to a feedback loop where diffusion becomes increasingly difficult as the surface is enriched.
 Correcting for these effects, we expect the surface concentrations explored by the experiments to increase to a maximum before decreasing which could explain non-monoticity.
 However, this can only partially explain the observed behaviour because CNT is extremely sensitive to concentration.
