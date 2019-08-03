@@ -846,7 +846,7 @@ and then the direct correlation functions \eqref{eq:fmt-direct-correlations} for
       \frac{1 + \eta + \eta^2 - \eta^3}{(1-\eta)^3}.
     \end{split}
   \end{equation}
-  We will assume this equation of state to construct accurate theories of correlations in the hard sphere liquid in the later chapters.
+  We will assume this equation of state to construct an accurate theory for correlations in the hard sphere liquid in chapter \ref{chapter:morphometric-framework}.
 \end{tcolorbox}
 
 Taking the Carnahan-Starling White bear II:
@@ -855,13 +855,14 @@ Taking the Carnahan-Starling White bear II:
 \end{equation}
 \todo{Check mixture version of CS from Santos, and compare with Berthier. Cite Berthier for accuracy. ``is accurate deep within the supercooled regime \cite{BerthierPRL2016} although it will fail at very large densities nearing random close packing.''}
 
-\subsection{FMT Structure factors}
+\subsection{Bulk limits of fundamental measure theory}
 
 Applying the convolution theorem allows the Fourier transform of \eqref{eq:fmt-direct-correlations-uniform-density} to be written rather succinctly as
 \begin{equation}
-  \tilde{c}^{(n)}(\vec{k}^n) =
+  \tilde{c}^{(n)}(\vec{k}^n)
+  =
   - \sum_{\alpha_1, \alpha_2, \cdots, \alpha_n}
-  \partial^n_{\alpha_1, \alpha_2, \cdots, \alpha_n} \beta\Phi_{ex} \;
+  \partial^n_{\alpha_1, \alpha_2, \cdots, \alpha_n} \beta\Phi^\mathrm{ex} \;
   \left( \prod_{i=1}^n \widetilde{\omega}_{\alpha_i}(\vec{k}_i) \right)
   \delta(\vec{k}_1 + \vec{k}_2 + \cdots + \vec{k}_n).
 \end{equation}
@@ -880,6 +881,34 @@ can be removed by exploiting rotational symmetry.
 %%   \missingfigure[figwidth=\linewidth]{}
 %%   \caption{Triplet static structure factors for convolution, Rosenfeld and White Bear closures.}
 %% \end{SCfigure}
+
+\begin{subequations}\label{eq:cs-spt-coefficients-parallel}
+  \begin{align}
+    \beta a_0'
+    &=
+    - \frac{\eta(4 - 11\eta + 13\eta^2 - 4\eta^3)}{3(1-\eta)^3}
+    - 4 \ln{(1-\eta)},
+    \\
+    \beta a_1'
+    &=
+    \frac{1}{2\sigma} \left(
+    \frac{\eta(4 - 10\eta + 20\eta^2 - 8\eta^3)}{(1-\eta)^3}
+    + 4 \ln{(1-\eta)}
+    \right),
+    \\
+    \beta a_2'
+    &=
+    - \frac{2}{\pi \sigma^2}
+    \left(
+    \frac{\eta(1 + 2\eta + 8\eta^2 - 5\eta^3)}{(1-\eta)^3}
+    + \ln{(1-\eta)}
+    \right),
+    \\
+    \frac{\beta p}{\rho}
+    &=
+    \frac{1 + \eta + \eta^2 - \eta^3}{(1-\eta)^3},
+  \end{align}
+\end{subequations}
 
 \subsection{Superposition and convolution approximations}
 

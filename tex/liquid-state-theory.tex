@@ -80,14 +80,14 @@ where $\Lambda$ is the thermal de Broglie wavelength, and the configurational in
   e^{-\beta U_N}
   d\vec{r}^N.
 \end{equation}
-Average constants with $N$ fixed are obtained through
+Averaged quantities with $N$ fixed are obtained through
 \begin{equation*}\label{eq:canonical-average}
   \left< \cdots \right>_N
   =
   \frac{1}{Z_N}
   \int_{V^N} \left(\cdots\right) e^{-\beta U_N} d\vec{r}^N,
 \end{equation*}
-and the Helmholtz free energy is obtained through
+and the Helmholtz free energy is given by
 \begin{equation*}
   \beta F = -\ln{Z_N}.
 \end{equation*}
@@ -801,17 +801,17 @@ The volume factor is pulled in front of the definition of $b_n$ because one obta
   Lastly, we transform to an expansion in density.
   We then convert to pressure to get the irreducible cluster integrals (sometimes called stars, not to be confused with star diagrams of graph theory, 2-connected).
   We can write the density as
-  \begin{equation}
+  \begin{equation*}
     \rho
     =
     \frac{z}{V} \frac{\partial (\ln \Xi)}{\partial z}
     =
     \sum_{n=1}^\infty n b_n z^n
-  \end{equation}
+  \end{equation*}
   This expression, connecting density and fugacity, can be used to transform the expansion in fugacity to one in density i.e.\ \eqref{eq:virial-series-pressure}.
   This gives the first few virial coefficients
   \begin{subequations}
-    \begin{align}
+    \begin{align*}
       B_2 &= -b_2
       \\
       B_3
@@ -821,7 +821,7 @@ The volume factor is pulled in front of the definition of $b_n$ because one obta
       B_4
       &=
       -20 b_2^3 + 18 b_2 b_3 - 3 b_4.
-    \end{align}
+    \end{align*}
   \end{subequations}
   Further cancellations occur after inserting the explicit expressions for the cluster integrals \eqref{eq:cluster-integral} leaving only the \emph{stars}%
   \marginfootnote{These are also called the \emph{irreducible diagrams} because they cannot be expressed as products of other diagrams.},
