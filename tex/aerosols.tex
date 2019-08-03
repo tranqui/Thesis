@@ -16,7 +16,7 @@ This work was undertaken in collaboration with members of the Reid group in the 
 In particular, the experiments were carried out by Flo Gregson.
 My contribution to this work was through theory and numerical modelling to better understand the experimental data.
 Consequently, while I will describe the experiments the focus of the chapter will be theoretical.
-Some of this work has appeared in Ref.\ \cite{GregsonJPCB2019}.
+Some of this work has already been published in Ref.\ \cite{GregsonJPCB2019}, and we hope to publish the remainder in Refs.\ \cite{RobinsonTBD2019,GregsonTBD2019} later this year.
 
 \section{Introduction}
 
@@ -40,7 +40,7 @@ Notably, radiative forcing of atmospheric aerosols is stongly influenced by thei
 The solute concentration and physical state (i.e.\ whether it is crystalline or amorphous) can thus have a dramatic effect on climate predictions.
 Central to this is the nucleation and drying kinetics of atmospheric droplets.
 Where aerosols are included in climate models the focus is typically on sulphates\todo{Citation needed}.
-Sea salt aerosols (e.g.\ those containing \ce{NaCl}), deposited into the atmosphere through natural processes, are more prevalent in the atmosphere than sulphates making up the second largest component of atmospheric aerosols by mass \cite{KeeneJAS1998}; a major component of aged \ce{NaCl} aerosols is sodium nitrate (\ce{NaNO3}) formed through reactions with nitrogen oxides \cite{TolockaJPCA2004}, a significant industrial emission.
+However, sea salt aerosols (e.g.\ those containing \ce{NaCl}), deposited into the atmosphere through natural processes, are more prevalent in the atmosphere than sulphates making up the second largest component of atmospheric aerosols by mass \cite{KeeneJAS1998}; a major component of aged \ce{NaCl} aerosols is sodium nitrate (\ce{NaNO3}) formed through reactions with nitrogen oxides \cite{TolockaJPCA2004}, a significant industrial emission.
 Subsequent reactions form secondary organic aerosols which further impact the climate \cite{ScottACP2014,PoschlCR2015} and are associated with adverse health effects \cite{PoschlCR2015}.
 Given their abundance and relative simplicity we focus on \ce{NaCl} and \ce{NaNO3} aerosol droplets.
 
@@ -107,8 +107,8 @@ The SEM results for \ce{NaNO3} are inconclusive, although the resulting crystal 
 
 \subsection{Overview and notation}
 
-In order to obtain nucleation rates we require the trajectory of the droplet's concentration profile over its drying history, and a phenomenological model for nucleation rates based on concentration.
-To determine the concentration profile trajectory for a drying droplet we have to consider the relative motion of solute-solvent species inside the droplet, the relative motion of various species in the vapour phase, as well as the evaporation of solvent across the phase boundary.
+In order to obtain nucleation rates we require the time evolution of the droplet's concentration profile over its drying history, and a phenomenological model for nucleation rates based on concentration.
+To determine the concentration profile trajectory for a drying droplet we have to consider the relative motion of solute and solvent species inside the droplet, the relative motion of various species in the surrounding vapour phase, as well as the evaporation of solvent across the phase boundary.
 Our approximations will reduce this to a moving boundary problem with solely diffusional mixing.
 
 Prior to crystallisation a drying droplet will be approximately spherical, so we consider a phase boundary at radius $R(t)$ evolving in time $t$.
@@ -128,11 +128,17 @@ A useful auxillary variable is the mass fraction of each component, i.e.\
 \end{equation}
 %with $j$ running over the components of the relevant phase.
 %Clearly $Y^{(f)} = 1 - Y^{(s)}$
-As both phases are binary mixtures we only need to solve for one component; in the droplet we choose to solve for the solute mass fraction $Y^{(s)}$.
+As both phases are binary mixtures%
+\marginfootnote{This is not strictly true.
+  The liquid phase is certainly a binary mixture of solvent and solute, however the vapour is composed of the evaporated solvent and a multicomponent ambient gas phase.
+  However, we can treat the ambient gas as an effectively single-component system to a very good approximation.}
+so we only need to solve for one component; we choose to solve for the solute mass fraction $Y^{(s)}$ in the droplet and the solvent mass fraction $Y^{(f)}$ in the surrounding vapour.
 
 The thermal conductivity of liquids is generally much larger than the mass diffusivity, so to leading order we can treat temperature $T$ as homogeneous throughout the droplet.
 This approximation neglects potential conduction forces driven by temperature gradients.
-The droplet temperature will be smaller than the ambient temperature $T_\infty$ because vaporisation carries a latent heat.
+The droplet temperature will be smaller than the ambient temperature $T_\infty$ because vaporisation carries a latent heat
+We will determine $T$ through the rate of vaporisation which will be moderate the vaporisation rate and enter into the nucleation calculations.
+However, as a simplification we do not incorporate this temperature into the dynamics themselves through modified diffusion coefficients.
 
 \subsection{Evolution of the concentration profile}
 
@@ -208,7 +214,7 @@ This simplifies the advective term in the continuity equation \eqref{eq:species-
   (1 + \Lambda \rho^{(s)}) \, \vec{j}^{(s)}
   \right) = 0.
 \end{equation}
-For the relative mass flux we assume the usual Fick's law for diffusion
+For the relative mass flux we assume Fick's law for diffusion
 \begin{equation}\label{eq:ficks-law}
   \vec{j}^{(i)} = -D_\mathrm{eff} \rho \vec{\nabla} Y^{(i)},
 \end{equation}
@@ -246,7 +252,7 @@ Finally, this gives the standard diffusion equation
   \right)
 \end{equation}
 where the advective forces have vanished providing a convenient form for numerical implementation.
-By comparison, the mass fraction is widely used in the literature which leads to separate advection and diffusion terms i.e.\
+By comparison, the mass fraction is widely used in the literature (e.g.\ Ref.\ \cite{HandscombCES2009}) which leads to separate advection and diffusion terms i.e.\
 \begin{equation*}
   \rho \left(
   \frac{\partial Y^{(s)}}{\partial t} +
@@ -265,7 +271,7 @@ Bulk viscosity measurements are unavailable at high densities because of the pro
   + \alpha \rho^{(s)}
 \end{equation}
 where $\alpha$ is a fitting parameter.
-The fits are shown in Fig.\ \ref{fig:diffusion-fit} (top panel).
+The fits are shown in Fig.\ \ref{fig:diffusion-fit}a.
 We model the diffusion constant by assuming the Stokes-Einstein form
 \begin{equation}\label{eq:stokes-einstein}
   D_\mathrm{eff} = \frac{k_B T}{6 \pi \eta a},
@@ -273,14 +279,14 @@ We model the diffusion constant by assuming the Stokes-Einstein form
 where $a$ is the Stokes radius and $\eta$ is the dynamic viscosity.
 To determine $a$ we calibrated direct measurements of diffusion from molecular dynamics simulations for \ce{NaCl}\cite{LyubartsevJPC1996} and experiments for \ce{NaNO3}\cite{YehJCED1970} against the viscosity fits.
 We obtain $a=\SI{0.169}{\nano\metre}$ for \ce{NaCl} and $a=\SI{0.167}{\nano\metre}$ for \ce{NaNO3}.
-The resulting diffusion coefficients entering the droplet evolution equation are shown in Fig.\ \ref{fig:diffusion-fit} (bottom panel).
+The resulting diffusion coefficients entering the droplet evolution equation are shown in Fig.\ \ref{fig:diffusion-fit}b.
 
 \begin{SCfigure}
   \includegraphics[width=0.9\linewidth,outer]{aerosol-diffusion-fit}
   \caption[Viscosity and diffusion coefficients of aqueous ionic solutions]{
     Numerical fits of binary diffusion coefficients for aqueous ionic solutions.
-    Top panel: fits of viscosity to an Arrhenius-like form \eqref{eq:vft-fit} to experimental values \cite{?,PowerCS2013}.
-    Bottom panel: diffusion coefficient from the viscosity fits assuming a Stokes-Einstein form \eqref{eq:stokes-einstein}, where the Stokes radius is obtained by calibration with direct measurements of diffusion at \SI{300}{\kelvin} for \ce{NaCl} \cite{LyubartsevJPC1996} and \SI{25}{\celsius} for \ce{NaNO3} \cite{YehJCED1970}.
+    a) fits of viscosity to an Arrhenius-like form \eqref{eq:vft-fit} to experimental values \cite{?,PowerCS2013}.
+    b) diffusion coefficient from the viscosity fits assuming a Stokes-Einstein form \eqref{eq:stokes-einstein}, where the Stokes radius is obtained by calibration with direct measurements of diffusion at \SI{300}{\kelvin} for \ce{NaCl} \cite{LyubartsevJPC1996} and \SI{25}{\celsius} for \ce{NaNO3} \cite{YehJCED1970}.
     The dashed-purple horizontal line shows the diffusion constant of pure \ce{H2O} for reference, to be distinguished from the binary diffusion constants in the limit $Y^{(s)} \to 0$.}
   \label{fig:diffusion-fit}
 \end{SCfigure}
@@ -291,13 +297,11 @@ First, our volume additivity assumption \eqref{eq:volume-additivity} makes the d
 Secondly, we approximate $T \sim T_\infty$ in the Stokes-Einstein relation \eqref{eq:stokes-einstein}
 This approximation neglects evaporative cooling which would slow diffusion, so overestimates the diffusion constant and will result in more heterogeneous droplets.
 It is unclear \emph{a priori} which of these opposing effects dominates.
-Note: later we model the droplet temperature $T$ explicitly for treating solvent evaporation and nucleation rates, but we have not incorporated this temperature into the diffusion constant.
-
 
 \subsection{Droplet boundary conditions}
 
 Initially the droplets are prepared in equilibrium, so they are well-mixed solutions and we can assume a uniform initial concentration profile.
-At $t=0$ the humidity is dropped leading to evaporation of the solvent.
+At $t=0$ the humidity is reduced leading to evaporation of the solvent.
 The evaporation rate determines the boundary conditions for the diffusion equation \eqref{eq:final-diffusion}.
 
 Integrating the species continuity equation \eqref{eq:species-continuity} gives the total mass flow into the droplet (of each species) as
@@ -398,7 +402,7 @@ with
   \int_r^\infty  \frac{1}{\rho D_v (r')^2} \, dr'.
 \end{equation}
 Upon integration%
-\marginfootnote{One way to evaluate this integral involves multiplying through by the integrating factor $e^{-Q(r)}$.}
+\marginfootnote{One way of doing this is to multiply through by the integrating factor $e^{-Q(r)}$.}
 we find
 \begin{equation*}
   (Y^{(f)}(r) - 1) e^{-Q(r)}
@@ -491,15 +495,15 @@ Fitting the early part of the experimental trajectory gives the initial $\tfrac{
   \includegraphics[width=0.9\linewidth,outer]{nano3-trajectory}
   \caption[Evolution of drying droplet radii]{
     Evolution of \ce{NaNO3} aerosol droplet radii from simulations (dashed lines) and experiments shown by points with 1\% transparency, showing reasonable agreement at short times until longer times when the evaporation rate is underestimated.
-    Top panel: varying relative humidity while ambient temperature is kept fixed, for an initial solute mass fraction of $Y^{(s)} = 0.125$.
-    Bottom panel: varying ambient temperature while relative humidity is kept fixed, for an initial solute mass fraction of $Y^{(s)} = 0.2$.}
+    a) varying relative humidity while ambient temperature is kept fixed, for an initial solute mass fraction of $Y^{(s)} = 0.125$.
+    b) varying ambient temperature while relative humidity is kept fixed, for an initial solute mass fraction of $Y^{(s)} = 0.2$.}
   \label{fig:nano3-trajectory}
 \end{SCfigure}
 
-We discretise the solute concentration profile $\rho^{(s)}(r)$ onto the uniformly spaced grid over $r \in [0, R(t)]$.
+We discretise the solute concentration profile $\rho^{(s)}(r)$ onto a uniformly spaced grid over $r \in [0, R(t)]$.
 To handle the moving boundary it is convenient to work in the rescaled coordinate $\tilde{r} = \frac{r}{R(t)} \in [0, 1]$.
 For the discretisation we define the vector $\vec{\rho} := \{\rho_0, \rho_1, \cdots, \rho_N\}$ where $\rho_i := \rho^{(s)}\left(\tilde{r} = \frac{i}{N}\right)$.
-The complete history of the droplet's evolution then involves both $\vec{\rho}$ and $R$ variables.
+The complete history of the evolution of the droplet then involves both $\vec{\rho}$ and $R$ variables.
 In addition, it is convenient to introduce $\dot{R}$ as its own variable so that the final Jacobian for the diffusion equation \eqref{eq:final-diffusion} has tridiagonal form.
 This gives us the evolving droplet state variable $\vec{x} = (\vec{\rho}, R, \dot{R})$.
 
@@ -536,7 +540,7 @@ The main advantage of this scheme over more simple schemes (e.g. forward Euler m
 We integrated initially homogeneous droplets of \ce{NaCl} and \ce{NaNO3} for various ambient conditions.
 The resulting radius , illustrated for \ce{NaNO3} in Fig.\ \ref{fig:nano3-trajectory}; we see that at short times there is excellent agreement, but the evaporation rate is underestimated at longer times.
 This is likely do to limitations of the simplified evaporation model \eqref{eq:sherwood-correction} or because the neglect of conductive forces causes the evaporation to become diffusion-limited at long-times when the surface is highly enriched.
-We achieve good agreement with experiments for \ce{NaCl} across their entire trajectory (bottom panel of Fig.\ \ref{fig:nacl-trajectory}) because these droplets crystallise before the slowdown of the evaporation rate.
+We achieve good agreement with experiments for \ce{NaCl} across their entire time-evolution (Fig.\ \ref{fig:nacl-trajectory}b) because these droplets crystallise before the slowdown of the evaporation rate.
 
 \section{Nucleation model}
 \label{sec:nucleation}
@@ -590,7 +594,7 @@ Taking the infinitesimal limit and using the fact that droplets are prepared in 
   =
   \exp{\left( -\int_0^t W \, dt \right)}.
 \end{equation}
-As we have already determined the droplet's radius and concentration profile from the evolution equations described in section\ \ref{sec:evolution}, we are left missing a model for the nucleation rate per unit volume $J$ before we can determine $p_\mathrm{liq}$.
+As we have already determined the droplet's radius and concentration profile from the evolution equations described in section\ \ref{sec:evolution}, we are left needing a model for the nucleation rate per unit volume $J$ before we can determine $p_\mathrm{liq}$.
 
 \subsection{Nucleation models}
 
@@ -647,8 +651,9 @@ By contrast, the experiments show that the final survival probability for \ce{Na
   \includegraphics[width=0.9\linewidth,outer]{nacl-trajectory}
   \caption[Evolution of \ce{NaCl} droplets: theory and experiments]{
     Evolution of \ce{NaCl} droplets in dry air $\mathrm{RH}=0\%$ from experiments (points) and simulations (lines) for different ambient temperatures and initial solute mass fractions.
-    Bottom panel: evolution of droplet radius showing good treatment of solvent evaporation rates.
-    Top panel: probaility that a droplet survives without nucleating, assuming the liquid-crystal surface tension $\gamma = \SI{0.08}{\newton\per\metre}$ \cite{DesarnaudJPCL2014} for the simulations.}
+    a) the probability that a droplet survives without nucleating, assuming the liquid-crystal surface tension $\gamma = \SI{0.08}{\newton\per\metre}$ \cite{DesarnaudJPCL2014} for the simulations
+    b) the evolution of droplet radius showing good treatment of solvent evaporation rates.
+  }
   \label{fig:nacl-trajectory}
 \end{SCfigure}
 
@@ -689,22 +694,22 @@ where $t_s$ is the time at which saturation is reached $\rho^{(s)}(R) = \rho^{(s
     - \infty & \; t < 0
   \end{cases}
 \end{equation*}
-subject to the constraint that the fitting parameters $a, b, c \in [0, \infty]$ ensuring that $p_\mathrm{liq}$ monotonically decreases from $p_\mathrm{liq}(t=0)=1$.
+subject to the constraint that the fitting parameters $a, b, c \in [0, \infty]$ to ensure that $p_\mathrm{liq}$ decreases monotonically from $p_\mathrm{liq}(t=0)=1$.
 
-We perform this inversion procedure for the \ce{NaNO3} droplets in Fig.\ \ref{fig:state-points} (bottom panel).
+We perform this inversion procedure for the \ce{NaNO3} droplets in Fig.\ \ref{fig:state-points}b.
 The resulting nucleation rates show non-mononic behaviour, increasing to a maximum before decreasing to essentially zero over the duration of the experiment.
 This results in a finite final survival probability $p_\mathrm{liq} > 0$, and starkly contrasts with the picture predicted by CNT where $p_\mathrm{liq}$ would remain close to unity for most of the experiment before sharply dropping to zero as all droplets reproducibly crystallise.
 
 \begin{SCfigure}
   \includegraphics[width=0.9\linewidth,outer]{nano3-nucleation-rates}
   \caption[Experimentally observed nucleation rates in \ce{NaNO3} droplets]{
-    State points explored by experiments with drying \ce{NaNO3}--\ce{H2O} aerosol droplets as determined from simulation for 9 datasets for different initial conditions.
-    Top panel: the survival probability in the experiments (i.e.\ the probability that a droplet has not crystallised), with state-point inferred from the simulations.
-    Bottom panel: corresponding nucleation rates assuming boundary-dominated nucleation \eqref{eq:boundary-nucleation-rate} showing non-monotonic behaviour in increased concentration and temperature in contrast with the predictions of classical nucleation theory in Fig.\ \ref{fig:cnt}.}
+    State points explored by experiments with drying \ce{NaNO3}--\ce{H2O} aerosol droplets as determined from our numerical model for 9 datasets for different initial conditions.
+    a) the survival probability in the experiments (i.e.\ the probability that a droplet has not crystallised), with state-point inferred from the model.
+    b) the corresponding nucleation rates assuming boundary-dominated nucleation \eqref{eq:boundary-nucleation-rate} showing non-monotonic behaviour in increased concentration and temperature in contrast with the predictions of classical nucleation theory in Fig.\ \ref{fig:cnt}.}
   \label{fig:state-points}
 \end{SCfigure}
 
-\section{Discussion}
+\section{Conclusions}
 
 We found that CNT works well for predicting crystal nucleation in \ce{NaCl} but not \ce{NaNO3} aerosols.
 In both cases CNT predicts nucleation essentially after a threshold surface saturation is reached, whereas experiments show nucleation in \ce{NaNO3} has stochastic behaviour.
@@ -714,7 +719,6 @@ In particular, the change in nucleation rate from increased concentration is so 
 CNT is a model for homogeneous nucleation, so it is possible that it fails because crystallisation occurs for \ce{NaNO3} through heterogeneous nucleation.
 The same stochastic phenomena are observed when repeating the experiments with the same droplet on a cycle of decreasing and increasing the RH to dry and melt the droplet; this rules out heterogeneous nucleation through impurities, as the chemical makeup is the same in each cycle yet the phenomenon persists.
 This leaves the gas-liquid phase boundary itself as a site for hetereogeneous nucleation.
-\hl{(Paddy said he had some things to mumble about CNT?)}
 
 It is highly likely that the model overestimates the surface enrichment because at long times the simulated evaporation rates become limited by solute diffusion at the boundary.
 The diffusion limit would persist even if more sophisticated transport phenomena were introduced to the evaporation model.
