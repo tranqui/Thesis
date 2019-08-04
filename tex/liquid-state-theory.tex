@@ -34,6 +34,7 @@
 %% Morphological
 
 \subsection{Statistical mechanics}
+\label{sec:stat-mech}
 
 In this section we \emph{briefly} introduce the statistical ensembles used throughout the rest of the thesis.
 These emerge by considering typical fluctuations of thermodynamic quantities for a subsystem within a macroscopic system called the \emph{ensemble}; the properties of this larger system define average quanties of the subsystem \cite{Landau2008}.
@@ -660,13 +661,23 @@ The degree of self-consistency between different routes can act as a proxy for t
   The pair distribution function $g^{(2)}$ appeared in the virial route because the specified system interacts via a pair potential; we could reasonably expect the generalisation to an $n$-body interaction potential to give the equation of state in terms of the $n$-body distribution function $g^{(n)}$.
 \end{tcolorbox}
 
-\hl{Derivatives of free energy reduce} to $g^{(2)}$,\hl{ emblematic of the conventional routes.
-Absolute free energies require higher order correlation functions to appear.}
-\todo{Talk about this. Also: entropy route.}
-
 \subsection{Mixtures: truncatability of the free energy}
 
 \todo{Port in stuff from results chapters and discuss.}
+Thermodynamic consistency of the (osmotic) pressure:
+\begin{equation}
+  \begin{split}
+    \beta p
+    &=
+    \rho - \frac{\beta F^\mathrm{ex}}{V}
+    + \rho \frac{\partial}{\partial \rho}
+    \left( \frac{\beta F^\mathrm{ex}}{V} \right)_{V,T}
+    \\ &=
+    \rho - \beta f^\mathrm{ex}
+    + \rho \left( \frac{\partial \beta f^\mathrm{ex}}{\partial \rho} \right)_{V,T}
+  \end{split}
+\end{equation}
+where $f^\mathrm{ex} = F^\mathrm{ex}/V$ is the (excess) free energy density.
 
 \subsection{Virial series}
 \label{sec:virial-series}
@@ -722,9 +733,10 @@ Expanding out terms in the $n$-particle configurational integral leads to expres
   \end{split}
 \end{equation*}
 which is the term for $n=3$.
-In the above expression we used the $\{\cdot\}$ notation which we introduced to indicate different permutations in the various standard correlation functions e.g.\ \eqref{eq:cluster-correlation-functions}; this does not come as a surprise because the integrand above is really another correlation function.
-\todo{Fix clumsy wording.}
-Expressions involving Mayer functions can become unwieldly so it is usual practice to express them as diagrams, graphs with $n$ vertices connected by edges representing each $f_{ij}$.
+In the above expression we used the $\{\cdot\}$ notation which we introduced to indicate different permutations in the various standard correlation functions%
+\marginfootnote{The notational similarity is not merely superficial: the integrand, the Boltzmann weight, is really another correlation function.}
+e.g.\ \eqref{eq:cluster-correlation-functions}.
+Expressions involving Mayer functions can become unwieldly so it is usual practice to express them as diagrams: graphs with $n$ vertices connected by edges representing each $f_{ij}$.
 For example, the integrand in the above expression would be written
 \begin{align}
   %\begin{split}
@@ -829,6 +841,7 @@ The volume factor is pulled in front of the definition of $b_n$ because one obta
   We obtain the first few virial coefficients as
   \begin{subequations}
     \begin{align}
+      \label{eq:virial-B2}
       B_2
       &=
       - \frac{1}{2} \mayerdiagram[|][o.]{2}

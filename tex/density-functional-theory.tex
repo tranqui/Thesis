@@ -1,60 +1,21 @@
 \section{Classical density functional theory}
 \label{sec:dft}
 
-\subsection{Variational principle}
+Classical density functional theory is a general framework for describing inhomogeneous systems.
+Although our primary focus will be the homogeneous liquid, many useful results can be obtained from an inhomogeneous description.
+We will work primarily from the classic texts Refs.\ \cite{EvansAP1979,Evans1989,EvansFoIF1992}, although we found Refs.\ \cite{Ashcroft1996,Hansen2013} helpful supplementary texts.
 
-\todo{Finish this section}
+Our stated goal in this section is to provide more exposition on the various correlation functions important for liquid state physics, as well as the complete historical context of the \emph{morphometric approach} which will be the focus of chapters \ref{chapter:morphometric-framework}, \ref{chapter:morphometric-applications} and \ref{chapter:resummation}.
+For the latter goal we will introduce fundamental measure theory in section \ref{sec:fmt} which is its historical antecedent.
+The morphometric approach will be properly described in the results chapters, this is merely to provide additional context.
 
-Hitherto we have defined all of the functionals for their equilibrium.
-We can imagine a generalisation to non-equilibrium density profiles.
-\begin{align*}
-  \Omega &\to \Omega[\rho]
-  \\
-  \mathcal{F}^\mathrm{id} &\to \mathcal{F}^\mathrm{id}[\rho]
-  \\
-  \mathcal{F}^\mathrm{ex} &\to \mathcal{F}^\mathrm{ex}[\rho]
-\end{align*}
-This generalised functional is not strictly the same as the thermodynamic grand potential, which concerns equilibrium properties, but the two potentials share an important correspondence due to the following two properties:
-\begin{enumerate}
-  \item It is bounded from below by the grand potential
-    \begin{equation}
-      \Omega[\rho] \ge \Omega[\rho^{(1)}]
-    \end{equation}
-  \item with equality only in the case of the equilibrium density profile, i.e.\
-    \begin{equation}
-      \Omega[\rho^{(1)}] = \Omega
-    \end{equation}
-\end{enumerate}
-\todo{Mermin-Evans argument, or simplified argument (Schmidt).}
-These two properties can be elegantly summarised by the following \emph{variational principle}:
-\begin{equation}\label{eq:dft-equilibrium}
-  \left.
-  \frac{
-    \delta \Omega[\rho(\vec{r})]
-  }{
-    \delta \rho
-  }
-  \right|_{\rho(\vec{r})=\rho^{(1)}(\vec{r})}
-  =
-  0
-\end{equation}
-This variational principle provides a route to numerical applications of DFT: minimising the grand potential provides an equilibrium density profile and free energy.
+\todo{Edit this section}
 
-Henceforth we will only deduce
+\subsection{Inhomogeneous generalisations of the thermodynamic potentials}
 
-Which gives the equilibrium density as
-\begin{equation}
-  \rho^{(1)}(\vec{r})
-  =
-  \frac{
-    \exp{\left(\beta\psi(\vec{r}) + c^{(1)}(\vec{r})\right)}
-  }{ \Lambda^d }
-\end{equation}
-\todo{Move this until later}
-
-\subsection{Thermodynamic potentials in functional form}
-
-\todo{Insert references to classic texts i.e.\ \cite{EvansAP1979,Evans1989,EvansFoIF1992}}
+Here we introduce the inhomogeneous generalisations of the thermodynamic potentials introduced in section \ref{sec:stat-mech}.
+The generalisations will suggest a route to an inhomogeneous theory of fluids.
+\todo{Review/edit this opener.}
 
 For inhomogeneous systems the Legendre transform of $\Omega$ \eqref{eq:grand-potential-legendre-transform} generalises to
 \begin{equation}
@@ -157,7 +118,68 @@ Equating these two forms and rearranging we find the ideal part of the Helmholtz
 using the ideal density \eqref{eq:ideal-density} in the final step.
 The inhomogeneous ideal gas free energy density is thus identical to the homogeneous case \eqref{eq:ideal-free-energy-density} after replacing the global density with a local one.
 
+With functional generalisations we can now...
+\todo{Write closer}
+
+\subsection{Variational principle}
+
+\todo{Finish this section}
+
+Hitherto we have defined all of the functionals for their equilibrium.
+We can imagine a generalisation to non-equilibrium density profiles.
+\begin{align*}
+  \Omega &\to \Omega[\rho]
+  \\
+  \mathcal{F}^\mathrm{id} &\to \mathcal{F}^\mathrm{id}[\rho]
+  \\
+  \mathcal{F}^\mathrm{ex} &\to \mathcal{F}^\mathrm{ex}[\rho]
+\end{align*}
+This generalised functional is not strictly the same as the thermodynamic grand potential, which concerns equilibrium properties, but the two potentials share an important correspondence due to the following two properties:
+\begin{enumerate}
+  \item It is bounded from below by the grand potential
+    \begin{equation}
+      \Omega[\rho] \ge \Omega[\rho^{(1)}]
+    \end{equation}
+  \item with equality only in the case of the equilibrium density profile, i.e.\
+    \begin{equation}
+      \Omega[\rho^{(1)}] = \Omega
+    \end{equation}
+\end{enumerate}
+\todo{Mermin-Evans argument, or simplified argument (Schmidt).}
+These two properties can be elegantly summarised by the following \emph{variational principle}:
+\begin{equation}\label{eq:dft-equilibrium}
+  \left.
+  \frac{
+    \delta \Omega[\rho(\vec{r})]
+  }{
+    \delta \rho
+  }
+  \right|_{\rho(\vec{r})=\rho^{(1)}(\vec{r})}
+  =
+  0
+\end{equation}
+This variational principle provides a route to numerical applications of DFT: minimising the grand potential provides an equilibrium density profile and free energy.
+
+Henceforth we will only deduce
+
+Which gives the equilibrium density as
+\begin{equation}
+  \rho^{(1)}(\vec{r})
+  =
+  \frac{
+    \exp{\left(\beta\psi(\vec{r}) + c^{(1)}(\vec{r})\right)}
+  }{ \Lambda^d }
+\end{equation}
+\todo{Move this until later}
+
+\todo{Add closing paragraph}
+
 \subsection{Thermodynamic potentials as generating functionals}
+
+We now connect the formalism of DFT with the various correlation functions in the liquid.
+In sections \ref{sec:liquid-structure} and \ref{sec:virial-series} we saw how the homogeneous correlation functions could obtained from various generating functions.
+In the inhomogeneous liquid correlation functions are obtained in a similar way from \emph{generating functionals}.
+\todo{Edit this.}
 
 The fundamental thermodynamic relation describing an infinitesimal change in the Helmholtz free energy, i.e.\
 \begin{equation*}
@@ -413,7 +435,7 @@ If the pair direct correlation function is known it is thus straightforward to o
   1 - \frac{1}{\rho} \int_0^\rho \tilde{c}^{(2)}(0) \rho' d\rho'.
 \end{equation*}
 
-The main task of integral equation approaches is to find approximate closures for $c^{(2)}$ and then solve the Ornstein-Zernike equation.
+The main task in an integral equation approach is to find an approximate closure for $c^{(2)}$ in order to solve the Ornstein-Zernike equation.
 The process of determining the direct correlation functions is equivalent (at least formally) to finding its generating functional $\mathcal{F}^\mathrm{ex}$.
 
 %% \subsection{Generalised Ornstein-Zernike equations}
@@ -549,26 +571,83 @@ The process of determining the direct correlation functions is equivalent (at le
 \subsection{Fundamental measure theory}
 \label{sec:fmt}
 
-\todo{Finish this section}
-FMT: a recent review \cite{RothJPCM2010}.
-Also mention \cite{LutskoAiCP2010} for more of a focus on crystallisation.
-This exposition follows \cite{RothJPCM2010} mainly.
+DFT provides an elegant framework for treating the inhomogeneous liquid, however as we have shown any application is limited by the accuracy of the (excess) intrinsic free energy.
+%Hitherto we have not given any indication over how one might approximate this quantity, which is a hard problem in general.
+It is a hard problem in general to derive accurate approximations to $\mathcal{F}^\mathrm{ex}$; however, for hard spheres it is possible to exploit ideas from integral geometry (section \ref{sec:integral-geometry}) and derive a highly accurate class of free energy functionals.
+In this section we describe fundamental measure theory (FMT), which provides the most successful theory for inhomogeneous hard sphere systems.
+We mainly follow Refs.\ \cite{RothJPCM2010,SantosPRE2012}, but we mention also the review \cite{LutskoAiCP2010} which has more of a focus on crystallisation.
+\todo{Insert reference (foreshadowing) to this section in the earlier integral geometry section.}
 
-%\subsection{Many-body correlations from fundamental measure theory}
+Correspondence with the virial series comes by we note that
+\begin{equation*}
+  \beta \mathcal{F}^\mathrm{ex} = \int_V \beta f^\mathrm{ex} \, d\vec{r}
+\end{equation*}
+To introduce the topic we will first consider the free energy density of the homogeneous system, and then generalise to the inhomogeneous one.
+From the virial series for an $m$-component mixture \eqref{eq:virial-coefficients-mixtures}, the dilute limit free energy density in the low density limit becomes
+\begin{equation*}
+  \beta f^\mathrm{ex}
+  =
+  - \frac{\rho^2}{2}
+  \sum_{i = 1}^m \sum_{j = 1}^m x_i x_j \int_V
+  f_{ij}(\vec{r})
+  \, d\vec{r}
+  + \mathcal{O}(\rho^3),
+\end{equation*}
+where $\rho_i$ and $R_i$ are the (number) density and radius of species $i$.
+The Mayer function for the hard sphere interaction is purely geometric in nature, i.e.\
+\begin{equation*}
+  -f_{ij}(\vec{r})
+  =
+  \Theta(R_i + R_j - |\vec{r}|)
+\end{equation*}
+where $\Theta(\cdot)$ is the Heaviside theta function.
+This can be recast in the revealing form
+\begin{equation*}\label{eq:hard-mayer-f}
+  \begin{split}
+    -f_{ij}
+    &=
+    \begin{cases}
+      0 & \textrm{ if } B_i \cap B_j = \emptyset \\
+      1 & \textrm{ if } B_i \cap B_j \ne \emptyset
+    \end{cases}
+    \\ &=
+    \chi(B_i \cap B_j)
+  \end{split}
+\end{equation*}
+i.e.\ the Euler characteristic of their intersection.
+This allows us to write the free energy density in the dilute limit for a homogeneous system as
+\begin{equation*}
+  \beta f^\mathrm{ex}
+  =
+  \frac{\rho^2}{2}
+  \sum_{i=1}^m \sum_{j=1}^m
+  x_i x_j
+  \int_{G_d} \chi(B_i \cap g B_j) dg
+  + \mathcal{O}(\rho^3)
+\end{equation*}
+which can be evaluated using the principal kinematic formula \eqref{eq:binomial-kinematic-formula}.
+Each integral results in $d+1$ terms featuring the intrinsic volumes of the respective particles; we can expect a similar decomposition in the inhomogeneous case.
 
-\begin{itemize}
-\item $d+1$ weight functions
-\end{itemize}
-
-%Rosenfeld started from the observation that
-The purely geometric character of the hard sphere interaction leads to the \emph{exact} decomposition of Mayer-$f$ bond in terms of intrinsic volumes%
+It is straightforward to generalise the virial series to inhomogeneous systems, by bringing the density terms inside the cluster integrals with their local equivalent i.e.\ $\rho^n \to \rho(\vec{r}_1) \cdots \rho(\vec{r}_n)$ \cite{StillingerJCP1962}.
+\todo{There should be another reference for the virial series}
+It then follows that
+\begin{equation}\label{eq:low-density-inhomogeneous-free-energy}
+  \beta \mathcal{F}^\mathrm{ex}[\{\rho_i\}]
+  =
+  - \frac{1}{2}
+  \sum_{i = 1}^m \sum_{j = 1}^m \int_{V^2}
+  \rho_i(\vec{r}) \rho_j(\vec{r}')
+  f_{ij}(\vec{r} - \vec{r}')
+  \, d\vec{r} d\vec{r}'
+  + \mathcal{O}(\rho^3).
+\end{equation}
+Inspired by the intrinsic volumes and the principal kinematic formula, Rosenfeld observed that Mayer function in $d=3$ could be \emph{exactly} decomposed into variants of the intrinsic volumes%
 \marginfootnote{Rosenfeld called these \emph{fundamental measures} giving the theory its name.}
+\cite{RosenfeldPRL1989}
 \begin{equation*}
   \begin{split}
     -f_{ij}(\vec{r})
-    =&
-    \Theta(R_i + R_j - |\vec{r}|)
-    \\ =& \quad\,
+    =& \quad\,
     \omega_i^{(0)} \otimes \omega_j^{(3)}
     + \omega_i^{(1)} \otimes \omega_j^{(2)}
     + \omega_i^{(2)} \otimes \omega_j^{(1)}
@@ -603,76 +682,55 @@ introducing the weight functions
     \frac{\vec{\omega}_1^i(\vec{r})}{4\pi R_i}.
   \end{align}
 \end{subequations}
-The appearance of the weight functions inside the free energy \eqref{?} through the Mayer-$f$ function naturally leads to convolutions with the density.
-This gives rise to a set of \emph{weighted densities} $\{n_\alpha(\vec{r})\}$ defined as \cite{RosenfeldPRL1989,PercusJSP1988}
+The appearance of the weight functions inside the free energy \eqref{eq:low-density-inhomogeneous-free-energy} through the Mayer function naturally leads to convolutions with the density.
+This gives rise to a set of \emph{weighted densities} defined as \cite{RosenfeldPRL1989,PercusJSP1988}
 \begin{equation}
   n_\alpha(\vec{r})
   =
-  \sum_{i=1}^m \int
+  \sum_{i=1}^m \int_V
   \rho_i(\vec{r}') \omega_\alpha^i(\vec{r} - \vec{r'})
   \, d\vec{r}'
 \end{equation}
 where we use the shorthand where $\alpha$ indexes both the scalar and vector weight functions.
 The low density excess free energy becomes a local function of the (nonlocal) weighted densities, as in
 \begin{equation*}
-  \begin{split}
-    \beta \mathcal{F}^\mathrm{ex}[\{\rho_i\}]
-    &=
-    - \frac{1}{2} \sum_{i,j} \int \int
-    \rho_i(\vec{r}) \rho_j(\vec{r}') f_{ij}(\vec{r} - \vec{r}')
-    \, d\vec{r} d\vec{r}'
-    + \mathcal{O}(\rho^2),
-    \\ &=
-    \int \Big(
-    n_0(\vec{r}) n_3(\vec{r})
-    + n_1(\vec{r}) n_2(\vec{r})
-    - \vec{n}_1(\vec{r}) \vec{n}_2(\vec{r})
-    \Big) d\vec{r}
-    + \mathcal{O}(\rho^2).
-  \end{split}
+  \beta \mathcal{F}^\mathrm{ex}[\{\rho_i\}]
+  =
+  \int_V \Big(
+  n_0(\vec{r}) n_3(\vec{r})
+  + n_1(\vec{r}) n_2(\vec{r})
+  - \vec{n}_1(\vec{r}) \cdot \vec{n}_2(\vec{r})
+  \Big) d\vec{r}
+  + \mathcal{O}(\rho^2).
 \end{equation*}
-A second advantage is that all of the molarity information is absorbed into the definition of the weighted densities so the final form contains no explicit mixture dependence.
-The central simplifying assumption of fundamental measure theory (FMT) is to assume that the excess free energy remains a function only of $\{n_\alpha\}$
+Fortuitously, all of the molarity information has been absorbed into the definition of the weighted densities, so the final form contains no explicit mixture dependence.
 
-\todo{Truncatable free energies.}
-Thermodynamic consistency of the (osmotic) pressure:
-\begin{equation}
-  \begin{split}
-    \beta p
-    &=
-    \rho - \frac{\beta F^\mathrm{ex}}{V}
-    + \rho \frac{\partial}{\partial \rho}
-    \left( \frac{\beta F^\mathrm{ex}}{V} \right)_{V,T}
-    \\ &=
-    \rho - \beta \Phi^\mathrm{ex}
-    + \rho \left( \frac{\partial \beta \Phi^\mathrm{ex}}{\partial \rho} \right)_{V,T}
-  \end{split}
-\end{equation}
-where $\Phi^\mathrm{ex} = F^\mathrm{ex}/V$ is the (excess) free energy density.
+To generalise the exact dilute limit result to arbitrary densities, we postulate that the free energy remains a functional of density \emph{only} through the weighted densities $\{n_\alpha\}$; this is the central assumption of FMT.
 
-Chemical potential of species $i$
-\begin{equation}
+We start by writing the chemical potential of species $i$ as
+\begin{equation}\label{eq:fmt-chemical-potential}
   \beta \mu_i^\mathrm{ex}
   =
-  \frac{\partial}{\partial \rho_i}
-  \left( \frac{ \beta F^\mathrm{ex} }{V} \right)_{V,T}
+  \left(
+  \frac{\partial \beta f^\mathrm{ex}}{\partial \rho_i}
+  \right)_{V,T}.
 \end{equation}
 In the large particle limit the chemical potential is simply the work required to create a cavity large enough to contain the particle%
 \marginfootnote{We will formally derive this property in the context of many-body correlations in section \ref{sec:many-body-correlations}.},
 i.e.\ \cite{RothJPCM2002,ReissJCP1960}
-\begin{equation}
+\begin{equation}\label{eq:fmt-chemical-potential-pressure}
   \lim_{V_i \to \infty} \frac{\beta \mu_i^\mathrm{ex}}{V_i} = \beta p.
 \end{equation}
-For concentration dependence entering through a finite set of weight functions we have
+For concentration dependence which enters only through a finite set of weight functions we have
 \begin{equation*}
   \frac{\partial}{\partial \rho_i}
   =
   \sum_\alpha
   \frac{\partial n_\alpha}{\partial \rho_i}
-  \frac{\partial}{\partial n_\alpha}
+  \frac{\partial}{\partial n_\alpha},
 \end{equation*}
-The explicit differentials give
-\begin{subequations}
+of which the explicit differentials give
+\begin{subequations}\label{eq:fmt-n-derivatives}
   \begin{align}
     \frac{\partial n_3}{\partial \rho_i}
     &=
@@ -688,7 +746,7 @@ The explicit differentials give
     \\
     \frac{\partial n_0}{\partial \rho_i}
     &=
-    1
+    1,
   \end{align}
 \end{subequations}
 and similar expressions for the vectorial terms.
@@ -699,13 +757,12 @@ In the large volume limit the $n_3$ term dominates leading to
   =
   V_i \frac{\partial}{\partial n_3}
 \end{equation*}
-so it follows that
+so it follows from \eqref{eq:fmt-chemical-potential} and \eqref{eq:fmt-chemical-potential-pressure} that
 \begin{equation}\label{eq:fmt-pressure}
   \beta p
   =
-  \frac{\partial \beta \Phi{ex} }{\partial n_3}.
+  \frac{\partial \beta f^\mathrm{ex} }{\partial n_3}.
 \end{equation}
-\todo{This part is a bit bare: let's flesh it out a little more.}
 Secondly, we find the derivative with respect to density reduces to
 \begin{equation*}
   \frac{\partial}{\partial \rho}
@@ -717,46 +774,46 @@ Secondly, we find the derivative with respect to density reduces to
   \frac{1}{\rho}
   \sum_\alpha
   n_\alpha
-  \frac{\partial}{\partial n_\alpha}
+  \frac{\partial}{\partial n_\alpha}.
 \end{equation*}
-Leads to the scaled particle%
+Combining these two expressions leads to the scaled particle%
 \marginfootnote{We will leave discussion of scaled particle theory until Chapter  \ref{chapter:morphometric-framework} where we describe it in detail.}
-differential equation
+differential equation \cite{RosenfeldPRL1989}
 \begin{equation}\label{eq:fmt-spt-pde}
-  (1 - n_3) \frac{\partial \Phi^\mathrm{ex}}{\partial n_3}
+  (1 - n_3) \frac{\partial f^\mathrm{ex}}{\partial n_3}
   =
-  n_0 - \Phi
+  n_0 - f^\mathrm{ex}
   + \sum_{\alpha = 0}^2
-  n_\alpha \frac{\partial \Phi^\mathrm{ex}}{\partial n_\alpha}
+  n_\alpha \frac{\partial f^\mathrm{ex}}{\partial n_\alpha}
 \end{equation}
 In Refs.\ \cite{SantosJCP2012,SantosPRE2012} it was shown that the solution to \eqref{eq:fmt-spt-pde} which correctly recovers the low density behaviour and maximises self-consistency for mixtures must have the generic form
-\begin{equation}
-  \beta \Phi^\mathrm{ex}(\Psi)
+\begin{equation}\label{eq:santos-fmt}
+  \beta f^\mathrm{ex}(\Psi)
   =
-  \beta \Phi^\mathrm{ex}_1 + \beta \Phi^\mathrm{ex}_2 + \beta \Phi^\mathrm{ex}_3
-  + \beta \Phi^\mathrm{ex}_2 \Psi\left(\frac{2 \Phi^\mathrm{ex}_3}{\Phi^\mathrm{ex}_2}\right),
+  \beta f^\mathrm{ex}_1 + \beta f^\mathrm{ex}_2 + \beta f^\mathrm{ex}_3
+  + \beta f^\mathrm{ex}_2 \Psi\left(\frac{2 f^\mathrm{ex}_3}{f^\mathrm{ex}_2}\right),
 \end{equation}
 with
 \begin{subequations}
   \begin{align}
-    \beta \Phi^\mathrm{ex}_1
+    \beta f^\mathrm{ex}_1
     &=
     - n_0 \ln{(1 - n_3)}
     \\
-    \beta \Phi^\mathrm{ex}_2
+    \beta f^\mathrm{ex}_2
     &=
     \frac{n_1 n_2 - \vec{n}_1 \cdot \vec{n}_2}{1 - n_3}
     \\
-    \beta \Phi^\mathrm{ex}_3
+    \beta f^\mathrm{ex}_3
     &=
     \frac{n_2^3 - 3 n_2 \, \vec{n}_2 \cdot \vec{n}_2}{24 \pi (1 - n_3)^2}
   \end{align}
 \end{subequations}
 This defines a whole class of self-consistent free energy functionals which differ only by the choice of the function $\Psi$ which corresponds to fixing the free energy density of the bulk liquid.
-The simplest functional in this class is the Rosenfeld (RF) functional which takes $\Psi(\cdot) = 0$.
+The simplest functional in this class is the Rosenfeld (RF) functional which takes $\Psi_\mathrm{RF}(\cdot) = 0$.
 Written explicitly the resulting free energy density is then \cite{RosenfeldPRL1989}
 \begin{equation}\label{eq:rosenfeld-functional}
-  \beta \Phi_\mathrm{RF}^\mathrm{ex}
+  \beta f_\mathrm{RF}^\mathrm{ex}
   =
   - n_0 \ln{(1 - n_3)}
   + \frac{n_1 n_2 - \vec{n}_1 \cdot \vec{n}_2}{1 - n_3}
@@ -765,40 +822,65 @@ Written explicitly the resulting free energy density is then \cite{RosenfeldPRL1
 
 From their definition as functional derivatives of the excess free energy \eqref{eq:direct-correlations}, we find that direct correlation functions for FMT functionals must generically adopt the form of \cite{RosenfeldPRL1989}
 \begin{equation}\label{eq:fmt-direct-correlations}
-  c^{(n)}(\vec{r}^n; \Phi^\mathrm{ex})
+  c^{(n)}(\vec{r}^n; f^\mathrm{ex})
   =
   - \sum_{\alpha_1, \cdots, \alpha_n}
   \int d\vec{r}'
   \prod_{i=1}^n \Big( \omega_{\alpha_i}(\vec{r}' - \vec{r}_i) \Big)
-  \partial^n_{\alpha_1, \cdots, \alpha_n} \beta \Phi^\mathrm{ex}(\vec{r}')
+  \partial^n_{\alpha_1, \cdots, \alpha_n} \beta f^\mathrm{ex}(\vec{r}')
 \end{equation}
 where we use the shorthand 
 \begin{equation*}
-  \partial^n_{\alpha_1, \cdots, \alpha_n} \beta \Phi^\mathrm{ex}(\vec{r}) =
+  \partial^n_{\alpha_1, \cdots, \alpha_n} \beta f^\mathrm{ex}(\vec{r}) =
   \left.
-  \frac{\partial^n \beta \Phi^\mathrm{ex}}{\partial n_{\alpha_1} \cdots \partial n_{\alpha_n}}
+  \frac{\partial^n \beta f^\mathrm{ex}}{\partial n_{\alpha_1} \cdots \partial n_{\alpha_n}}
   \right|_{\{n_\alpha\} = \{n_\alpha(\vec{r})\}}.
 \end{equation*}
-At uniform density $\partial^n_{\alpha_1, \cdots, \alpha_n} \beta \Phi^\mathrm{ex}$ is position independent, so we define
+At uniform density $\partial^n_{\alpha_1, \cdots, \alpha_n} \beta f^\mathrm{ex}$ is position independent.
+We define
 \begin{equation}
-  \chi_{\alpha_1, \cdots, \alpha_n}(\Phi^\mathrm{ex})
+  \chi_{\alpha_1, \cdots, \alpha_n}(f^\mathrm{ex})
   =
   \left.
-  \frac{\partial^n \beta \Phi^\mathrm{ex}}{\partial n_{\alpha_1} \cdots \partial n_{\alpha_n}}
+  \frac{\partial^n \beta f^\mathrm{ex}}{\partial n_{\alpha_1} \cdots \partial n_{\alpha_n}}
   \right|_{\{n_\alpha(\vec{r})\} = \{\xi_\alpha\}}
 \end{equation}
-and then the direct correlation functions \eqref{eq:fmt-direct-correlations} for the uniform liquid become \cite{RosenfeldJCP1990}
+where their values in the bulk, the so-called the \emph{scaled particle variables}, can be obtained from \eqref{eq:fmt-n-derivatives} as
+\begin{subequations}\label{eq:spt-variables}
+  \begin{align}
+    \xi_3
+    &=
+    \rho \sum_{i=1}^m x_i \,
+    \frac{4 \pi R_i^3}{3}
+    \\
+    \xi_2
+    &=
+    \rho \sum_{i=1}^m x_i \,
+    4 \pi R_i^2
+    \\
+    \xi_1
+    &=
+    \rho \sum_{i=1}^m x_i \,
+    R_i
+    \\
+    \xi_0
+    &=
+    \rho.
+  \end{align}
+\end{subequations}
+\todo{Connect to truncatable free energies.}
+The direct correlation functions \eqref{eq:fmt-direct-correlations} in the uniform liquid become \cite{RosenfeldJCP1990}
 \begin{equation}\label{eq:fmt-direct-correlations-uniform-density}
   \begin{split}
-    c^{(n)}(\vec{r}^n; \Phi^\mathrm{ex})
+    c^{(n)}(\vec{r}^n; f^\mathrm{ex})
     &=
     - \sum_{\alpha_1, \cdots, \alpha_n}
-    \chi_{\alpha_1, \cdots, \alpha_n}(\Phi^\mathrm{ex})
+    \chi_{\alpha_1, \cdots, \alpha_n}(f^\mathrm{ex})
     \int d\vec{r}'
     \prod_{i=1}^n \Big( \omega_{\alpha_i}(\vec{r}' - \vec{r}_i) \Big)
     \\ &=
     - \sum_{\alpha_1, \cdots, \alpha_n}
-    \chi_{\alpha_1, \cdots, \alpha_n}(\Phi^\mathrm{ex}) \;
+    \chi_{\alpha_1, \cdots, \alpha_n}(f^\mathrm{ex}) \;
     (\omega_{\alpha_1} \otimes \cdots \otimes \omega_{\alpha_n})
     (\vec{r}^n)
   \end{split}
@@ -809,13 +891,13 @@ and then the direct correlation functions \eqref{eq:fmt-direct-correlations} for
   \begin{align}
     c^{(2)}_\mathrm{PY}(r)
     =
-    - \frac{\delta^2 \Phi_\mathrm{RF}^\mathrm{ex}}{\delta \rho(\vec{r}) \delta \rho(\vec{r}')}
+    - \frac{\delta^2 f_\mathrm{RF}^\mathrm{ex}}{\delta \rho(\vec{r}) \delta \rho(\vec{r}')}
     =&
-    - \chi_{3,3}(\Phi_\mathrm{RF}^\mathrm{ex}) \Delta V(r)
-    - \chi_{3,2}(\Phi_\mathrm{RF}^\mathrm{ex}) \Delta A(r)
+    - \chi_{3,3}(f_\mathrm{RF}^\mathrm{ex}) \Delta V(r)
+    - \chi_{3,2}(f_\mathrm{RF}^\mathrm{ex}) \Delta A(r)
     \nonumber \\ &
-    - \chi_{3,1}(\Phi_\mathrm{RF}^\mathrm{ex}) \Delta L(r)
-    %- \chi_{3,0}(\Phi_\mathrm{RF}^\mathrm{ex}) \Theta((R_i - R_j) - r)
+    - \chi_{3,1}(f_\mathrm{RF}^\mathrm{ex}) \Delta L(r)
+    %- \chi_{3,0}(f_\mathrm{RF}^\mathrm{ex}) \Theta((R_i - R_j) - r)
   \end{align}
   where $\Delta V, \Delta A, \Delta L$ are the intrinsic volumes for the region where the two spheres overlap.
   With an exact form of the direct correlation function it is straightforward to determine the pair distribution function $g^{(2)}(r)$ from solving the Ornstein-Zernike equation \eqref{eq:ornstein-zernike-spherical}.
@@ -849,39 +931,40 @@ and then the direct correlation functions \eqref{eq:fmt-direct-correlations} for
   We will assume this equation of state to construct an accurate theory for correlations in the hard sphere liquid in chapter \ref{chapter:morphometric-framework}.
 \end{tcolorbox}
 
-Taking the Carnahan-Starling White bear II:
-\begin{equation}
-  c^{(2)}(r)
-\end{equation}
-\todo{Check mixture version of CS from Santos, and compare with Berthier. Cite Berthier for accuracy. ``is accurate deep within the supercooled regime \cite{BerthierPRL2016} although it will fail at very large densities nearing random close packing.''}
-
-\subsection{Bulk limits of fundamental measure theory}
-
-Applying the convolution theorem allows the Fourier transform of \eqref{eq:fmt-direct-correlations-uniform-density} to be written rather succinctly as
-\begin{equation}
-  \tilde{c}^{(n)}(\vec{k}^n)
+Crucially, in addition to describing the equilibrium liquid well, the CS equation has been demonstrated to be accurate at very high densities in the supercooled regime \cite{BerthierPRL2016}.
+The liquid is metastable above the melting transition, so high density simulations require the introduction of polydispersity to prevent crystallisation; to determine its accuracy the CS equation has to be extended to mixtures.
+Entering the single-component equation of state \eqref{eq:cs-pressure} as an input into the generic FMT solution \eqref{eq:santos-fmt} yields a more accurate free energy functional with \cite{SantosPRE2012}
+\begin{equation}\label{eq:cs-fmt}
+  \Psi_\mathrm{CS}(y)
   =
-  - \sum_{\alpha_1, \alpha_2, \cdots, \alpha_n}
-  \partial^n_{\alpha_1, \alpha_2, \cdots, \alpha_n} \beta\Phi^\mathrm{ex} \;
-  \left( \prod_{i=1}^n \widetilde{\omega}_{\alpha_i}(\vec{k}_i) \right)
-  \delta(\vec{k}_1 + \vec{k}_2 + \cdots + \vec{k}_n).
+  \frac{4}{3} + \frac{y}{3} - \frac{\ln{(1 + y)}}{3y}.
 \end{equation}
-The delta function enforces the `ring' condition $\sum_{i=1}^n \vec{k}_i = 0$ which emerges from translational symmetry of the weight functions, reducing the dimensionality of the domain by $d$.
-A further $d(d-1)/2$ degrees of freedom%
-\marginfootnote{This many degrees of freedom can be removed for general $n \ge d$, but we expect fewer for $n < d$.
-  For example, $n=2$ arrangements (a dimer) are isomorphic to a line so they possess $d-1$ rotational degrees of freedom.}
-can be removed by exploiting rotational symmetry.
+The resulting free energy functional $f^\mathrm{ex}_\mathrm{CS}$ then predicts the following pressure for mixtures: \cite{SantosPRE2012}
+\begin{equation}\label{eq:cs-mixtures}
+  \beta p^\mathrm{CS}
+  =
+  \frac{\xi_0}{1 - \xi_3}
+  + \frac{4 \xi_1 \xi_2}{3 (1 - \xi_3)^2}
+  + \frac{\xi_2^3}{18 \pi (1 - \xi_3)^3}
+  - \frac{4 \pi \xi_1^2 \xi_2}{(\xi_2^2 + 12\pi \xi_1 (1 - \xi_3)) (1 - \xi_3)}.
+\end{equation}
+Other extensions of the CS equation of state to mixtures exist%
+\marginfootnote{The most popular of which is the Boublik-Mansoori-Carnahan-Starling-Leland equation of state \cite{BoublikJCP1970, MansooriJCP1971}, which corresponds to a different FMT functional \cite{RothJPCM2002, YuJCP2002}.},
+however the above equation represents the state of the art \cite{SantosPRE2012}.
+The pressures predicted by \eqref{eq:cs-mixtures} compare favourably against novel Monte-Carlo simulations at very high densities (Fig.\ \ref{fig:swap-eos}).
+%although it will fail at very large densities nearing random close packing.
 
-%% \begin{SCfigure}[H]
-%%   \missingfigure[figwidth=\linewidth]{}
-%%   \caption{Static structure factor for convolution, Rosenfeld and White Bear closures.}
-%% \end{SCfigure}
+\begin{SCfigure}
+  \includegraphics[width=\linewidth,outer]{swap-cs-santos}
+  \caption[Accuracy of Carnahan-Starling equation at high densities]{
+    Accuracy of empirical Carnahan-Starling (CS) equation of state \eqref{eq:cs-mixtures} in the supercooled regime from comparison with swap Monte-Carlo simulations for a system with 23\% polydispersity.
+    Simulation data reproduced from Ref.\ \cite{BerthierPRL2016}.
+  }
+  \label{fig:swap-eos}
+\end{SCfigure}
 
-%% \begin{SCfigure}[H]
-%%   \missingfigure[figwidth=\linewidth]{}
-%%   \caption{Triplet static structure factors for convolution, Rosenfeld and White Bear closures.}
-%% \end{SCfigure}
-
+Take the binary mixture route:
+\todo{Spell this out}
 \begin{subequations}\label{eq:cs-spt-coefficients-parallel}
   \begin{align}
     \beta a_0'
@@ -909,6 +992,9 @@ can be removed by exploiting rotational symmetry.
     \frac{1 + \eta + \eta^2 - \eta^3}{(1-\eta)^3},
   \end{align}
 \end{subequations}
+These coefficients can also be obtained in the same way from the White Bear II free energy functional \cite{Hansen-GoosJCP2006, Hansen-GoosJPCM2006} which is very similar in form and construction, although it is marginally less self-consistent than the functional described above \eqref{eq:santos-fmt} with \eqref{eq:cs-fmt}.
+
+\todo{Generalisations to non-spherical systems.}
 
 \subsection{Superposition and convolution approximations}
 
