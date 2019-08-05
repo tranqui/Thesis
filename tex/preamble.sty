@@ -16,7 +16,8 @@
 \usepackage{todonotes}
 \usepackage{epigraph}
 
-\usepackage[style=phys]{biblatex}
+\usepackage[style=phys,biblabel=brackets,pageranges=false,biblabel=brackets]{biblatex}
+\DeclareFieldFormat{titlecase}{\MakeSentenceCase*{#1}}
 \bibliography{bibliography,unpublished}
 
 \usepackage[toc,page]{appendix}

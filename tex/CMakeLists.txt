@@ -38,7 +38,7 @@ add_custom_target(chapters)
 add_dependencies(chapters introduction background morph1 morph2 resummation aerosols conclusion appendix-spt-singularities appendix-two-spheres appendix-full-geometry)
 
 add_latex_document(thesis.tex
-                   INPUTS abstract.tex dedication.tex declaration.tex acknowledgements.tex word-count.tex opening-quote.tex introduction.tex background.tex integral-geometry.tex liquid-state-theory.tex density-functional-theory.tex supercooled-liquids.tex morphometric-framework.tex morphometric-applications.tex resummation.tex aerosols.tex conclusion.tex appendix-spt-singularities.tex appendix-two-spheres.tex appendix-full-geometry.tex
+                   INPUTS preamble.sty abstract.tex dedication.tex declaration.tex acknowledgements.tex word-count.tex opening-quote.tex introduction.tex background.tex integral-geometry.tex liquid-state-theory.tex density-functional-theory.tex supercooled-liquids.tex morphometric-framework.tex morphometric-applications.tex resummation.tex aerosols.tex conclusion.tex appendix-spt-singularities.tex appendix-two-spheres.tex appendix-full-geometry.tex
                    BIBFILES bibliography.bib unpublished.bib
                    USE_BIBLATEX
                    TARGET_NAME thesis
