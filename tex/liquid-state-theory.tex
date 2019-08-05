@@ -138,8 +138,9 @@ we obtain the free energy density of an ideal gas as
 \end{equation}
 Finally, for interacting systems the chemical potential and free energy are typically separated into \emph{ideal} and \emph{excess} parts, as in
 \begin{align*}
-  \beta \mu &= \beta \mu^\mathrm{id} + \beta \mu^\mathrm{ex} \\
-  \beta F &= \beta F^\mathrm{id} + \beta F^\mathrm{ex}
+  \beta \mu &= \beta \mu^\mathrm{id} + \beta \mu^\mathrm{ex},
+  \\
+  \beta F &= \beta F^\mathrm{id} + \beta F^\mathrm{ex},
 \end{align*}
 with the ideal contributions as expressed above.
 
@@ -256,20 +257,20 @@ where $\delta(\cdot)$ is the Dirac delta function, then the various \emph{densit
   \begin{align}
     \langle \hat\rho(\vec{r}) \rangle
     =& \,
-    \rho^{(1)}(\vec{r})
+    \rho^{(1)}(\vec{r}),
     \label{eq:single-particle-density}
     \\
     \big\langle \hat\rho(\vec{r}_1) \hat\rho(\vec{r}_2) \big\rangle
     =& \,
     \rho^{(2)}(\vec{r}_1, \vec{r}_2) +
-    \rho^{(1)}(\vec{r}_1) \delta(\vec{r}_1 - \vec{r}_2)
+    \rho^{(1)}(\vec{r}_1) \delta(\vec{r}_1 - \vec{r}_2),
     \\
     \big\langle \hat\rho(\vec{r}_1) \hat\rho(\vec{r}_2) \hat\rho(\vec{r}_3) \big\rangle
     =& \,
     \rho^{(3)}(\vec{r}_1, \vec{r}_2, \vec{r}_3) +
     \{3\} \rho^{(2)}(\vec{r}_1, \vec{r}_2) \delta(\vec{r}_1 - \vec{r}_3)
     \nonumber \\ & \,
-    + \rho^{(1)}(\vec{r}_1) \delta(\vec{r}_1 - \vec{r}_2) \delta(\vec{r}_1 - \vec{r}_3)
+    + \rho^{(1)}(\vec{r}_1) \delta(\vec{r}_1 - \vec{r}_2) \delta(\vec{r}_1 - \vec{r}_3).
   \end{align}
 \end{subequations}
 Importantly, \eqref{eq:single-particle-density} shows that the single-particle density is simply the equilibrium density profile.
@@ -336,11 +337,11 @@ or explicitly for the first few functions
   \begin{align}
     \int_V H^{(1)}(\vec{r}) \, d\vec{r}
     &=
-    \langle N \rangle
+    \langle N \rangle,
     \\
     \int_{V^2} H^{(2)}(\vec{r}_1, \vec{r}_2) \, d\vec{r}_1 d\vec{r}_2
     &=
-    \langle N^2 \rangle - \langle N \rangle^2
+    \langle N^2 \rangle - \langle N \rangle^2,
     \label{eq:pair-density-density-norm}
     \\
     \int_{V^3} H^{(3)}(\vec{r}_1, \vec{r}_2, \vec{r}_3) \, d\vec{r}_1 d\vec{r}_2 d\vec{r}_3
@@ -796,11 +797,11 @@ The transformation to cluster functions eliminates all disconnected diagrams, e.
   \begin{align}
     W^{(1)}(\vec{r})
     &=
-    1
+    1,
     \\
     W^{(2)}(\vec{r}_1, \vec{r}_2)
     &=
-    \mayerdiagram[|][oo]{2}
+    \mayerdiagram[|][oo]{2},
     \\
     W^{(3)}(\vec{r}_1, \vec{r}_2, \vec{r}_3)
     &=
@@ -837,11 +838,11 @@ or using the cluster expansion for $\ln{\Xi}$ stated above we obtain
 This expression, connecting density and fugacity, can be used to transform the expansion in fugacity to one in density, giving the first few virial coefficients
 \begin{subequations}
   \begin{align*}
-    B_2 &= -b_2
+    B_2 &= -b_2,
     \\
     B_3
     &=
-    4 b_2^2 - 2 b_3
+    4 b_2^2 - 2 b_3,
     \\
     B_4
     &=
@@ -861,11 +862,11 @@ This expression, connecting density and fugacity, can be used to transform the e
       \label{eq:virial-B2}
       B_2
       &=
-      - \frac{1}{2} \mayerdiagram[|][o.]{2}
+      - \frac{1}{2} \mayerdiagram[|][o.]{2},
       \\
       B_3
       &=
-      - \frac{2}{3!} \mayerdiagram[|||][o..]{3}
+      - \frac{2}{3!} \mayerdiagram[|||][o..]{3},
       \\
       B_4
       &=

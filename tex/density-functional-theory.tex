@@ -5,11 +5,9 @@ Classical density functional theory is a general framework for describing inhomo
 Although our primary focus will be the homogeneous liquid, many useful results can be obtained from an inhomogeneous description.
 We will work primarily from the classic texts Refs.\ \cite{EvansAP1979,Evans1989,EvansFoIF1992}, although we found Refs.\ \cite{AshcroftAJP1996,Hansen2013} to be helpful supplementary texts.
 
-Our stated goal in this section is to provide more exposition on the various correlation functions important for liquid state physics, as well as the complete historical context of the \emph{morphometric approach} which will be the focus of chapters \ref{chapter:morphometric-framework}, \ref{chapter:morphometric-applications} and \ref{chapter:resummation}.
-For the latter goal we will introduce fundamental measure theory in section \ref{sec:fmt} which is its historical antecedent.
-The morphometric approach will be properly described in the results chapters, this is merely to provide additional context.
-
-\todo{Edit this section}
+Our intention in this section is to provide more exposition on the various correlation functions which are important for liquid state physics, as well as historical context for the \emph{morphometric approach} which will be the focus of chapters \ref{chapter:morphometric-framework}, \ref{chapter:morphometric-applications} and \ref{chapter:resummation}.
+For the latter goal we will introduce its historical antecedent, fundamental measure theory, in section \ref{sec:fmt}.
+The morphometric approach will be fully described in subsequent chapters, so we will introduce it here only to provide further context.
 
 \subsection{Inhomogeneous generalisations of the thermodynamic potentials}
 
@@ -96,7 +94,7 @@ or in its dual form as a functional of density \eqref{eq:dft-grand-potential} as
   - \int \rho^{(1)}(\vec{r}) \beta \psi(\vec{r}) \, d\vec{r}.
 \end{equation*}
 Equating these two forms and rearranging we find the ideal part of the Helmholtz free energy as
-\begin{align}\
+\begin{align}
   \beta \mathcal{F}^\mathrm{id}
   &=
   \int
@@ -124,9 +122,9 @@ Armed with functional generalisations of the thermodynamic potentials we can des
 In the previous section we defined the thermodynamic potentials for an inhomogeneous system in equilibrium with density profile $\rho(\vec{r}) = \rho^{(1)}(\vec{r})$.
 However, we can imagine the generalisation where the equilibrium profile $\rho^{(1)}(\vec{r})$ is replaced by an arbitrary $\rho(\vec{r})$ so
 \begin{align*}
-  \Omega &\to \Omega[\rho(\vec{r})]
+  \Omega &\to \Omega[\rho(\vec{r})],
   \\
-  \mathcal{F}^\mathrm{id} &\to \mathcal{F}^\mathrm{id}[\rho(\vec{r})]
+  \mathcal{F}^\mathrm{id} &\to \mathcal{F}^\mathrm{id}[\rho(\vec{r})],
   \\
   \mathcal{F}^\mathrm{ex} &\to \mathcal{F}^\mathrm{ex}[\rho(\vec{r})].
 \end{align*}
@@ -206,12 +204,12 @@ Hence, from functional differentiation of \eqref{eq:infinitesimal-free-energy} a
   \label{eq:psi-generator}
   \frac{\delta \mathcal{F}}{\delta \rho^{(1)}(\vec{r})}
   &=
-  \psi(\vec{r})
+  \psi(\vec{r}),
   \\
   \label{eq:rho-generator}
   \frac{\delta \Omega}{\delta \psi(\vec{r})}
   &=
-  - \rho^{(1)}(\vec{r})
+  - \rho^{(1)}(\vec{r}),
 \end{align}
 i.e.\ the intrinsic free energy and grand potentials act as \emph{generating functionals} for the intrinsic chemical potential and density respectively.
 
@@ -670,13 +668,16 @@ introducing the weight functions
   \begin{align}
     \omega_3^i(\vec{r})
     &=
-    \Theta(R_i - r), \\
+    \Theta(R_i - r),
+    \\
     \omega_2^i(\vec{r})
     &=
-    \delta(R_i - r), \\
+    \delta(R_i - r),
+    \\
     \omega_1^i(\vec{r})
     &=
-    \frac{\omega_2^i(\vec{r})}{4\pi R_i}, \\
+    \frac{\omega_2^i(\vec{r})}{4\pi R_i},
+    \\
     \omega_0^i(\vec{r})
     &=
     \frac{\omega_2^i(\vec{r})}{4\pi R_i^2},
@@ -742,15 +743,15 @@ of which the explicit differentials give
   \begin{align}
     \frac{\partial n_3}{\partial \rho_i}
     &=
-    \frac{4 \pi R_i^3}{3}
+    \frac{4 \pi R_i^3}{3},
     \\
     \frac{\partial n_2}{\partial \rho_i}
     &=
-    4 \pi R_i^2
+    4 \pi R_i^2,
     \\
     \frac{\partial n_1}{\partial \rho_i}
     &=
-    R_i
+    R_i,
     \\
     \frac{\partial n_0}{\partial \rho_i}
     &=
@@ -806,15 +807,15 @@ with
   \begin{align}
     \beta f^\mathrm{ex}_1
     &=
-    - n_0 \ln{(1 - n_3)}
+    - n_0 \ln{(1 - n_3)},
     \\
     \beta f^\mathrm{ex}_2
     &=
-    \frac{n_1 n_2 - \vec{n}_1 \cdot \vec{n}_2}{1 - n_3}
+    \frac{n_1 n_2 - \vec{n}_1 \cdot \vec{n}_2}{1 - n_3},
     \\
     \beta f^\mathrm{ex}_3
     &=
-    \frac{n_2^3 - 3 n_2 \, \vec{n}_2 \cdot \vec{n}_2}{24 \pi (1 - n_3)^2}
+    \frac{n_2^3 - 3 n_2 \, \vec{n}_2 \cdot \vec{n}_2}{24 \pi (1 - n_3)^2}.
   \end{align}
 \end{subequations}
 This defines a whole class of self-consistent free energy functionals which differ only by the choice of the function $\Psi$ which corresponds to fixing the free energy density of the bulk liquid.
@@ -861,17 +862,17 @@ can be obtained from \eqref{eq:fmt-n-derivatives} as
     \xi_3
     &=
     \rho \sum_{i=1}^m x_i \,
-    \frac{4 \pi R_i^3}{3}
+    \frac{4 \pi R_i^3}{3},
     \\
     \xi_2
     &=
     \rho \sum_{i=1}^m x_i \,
-    4 \pi R_i^2
+    4 \pi R_i^2,
     \\
     \xi_1
     &=
     \rho \sum_{i=1}^m x_i \,
-    R_i
+    R_i,
     \\
     \xi_0
     &=
@@ -892,7 +893,7 @@ The direct correlation functions \eqref{eq:fmt-direct-correlations} in the unifo
     - \sum_{\alpha_1, \cdots, \alpha_n}
     \chi_{\alpha_1, \cdots, \alpha_n}(f^\mathrm{ex}) \;
     (\omega_{\alpha_1} \otimes \cdots \otimes \omega_{\alpha_n})
-    (\vec{r}^n)
+    (\vec{r}^n).
   \end{split}
 \end{equation}
 
