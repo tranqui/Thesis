@@ -10,6 +10,7 @@ For the latter goal we will introduce its historical antecedent, fundamental mea
 The morphometric approach will be fully described in subsequent chapters, so we will introduce it here only to provide further context.
 
 \subsection{Inhomogeneous generalisations of the thermodynamic potentials}
+\label{sec:inhomogeneous-potentials}
 
 In this section we introduce the inhomogeneous generalisations of the thermodynamic potentials introduced in section \ref{sec:stat-mech}.
 These generalisations will provide a route to a fully inhomogeneous theory of fluids, with many useful applications to correlations within the homogeneous fluid.
@@ -115,53 +116,12 @@ Equating these two forms and rearranging we find the ideal part of the Helmholtz
 using the ideal density \eqref{eq:ideal-density} in the final step.
 The inhomogeneous ideal gas free energy density is thus identical to the homogeneous case \eqref{eq:ideal-free-energy-density} after replacing the global density with a local one.
 
-Armed with functional generalisations of the thermodynamic potentials we can describe the inhomogeneous liquid; in the next section we will introduce the main principle underlying DFT.
-
-\subsection{Variational principle}
-
-In the previous section we defined the thermodynamic potentials for an inhomogeneous system in equilibrium with density profile $\rho(\vec{r}) = \rho^{(1)}(\vec{r})$.
-However, we can imagine the generalisation where the equilibrium profile $\rho^{(1)}(\vec{r})$ is replaced by an arbitrary $\rho(\vec{r})$ so
-\begin{align*}
-  \Omega &\to \Omega[\rho(\vec{r})],
-  \\
-  \mathcal{F}^\mathrm{id} &\to \mathcal{F}^\mathrm{id}[\rho(\vec{r})],
-  \\
-  \mathcal{F}^\mathrm{ex} &\to \mathcal{F}^\mathrm{ex}[\rho(\vec{r})].
-\end{align*}
-These generalised functionals are not strictly the same as the thermodynamic potentials, which only concern equilibrium properties, but there is an important correspondence between them.
-Focusing on the grand potential, the following two properties are provable%
-\marginfootnote{A full account of the classical arguments can be found in Refs.\ \cite{MerminPR1965,EvansAP1979}, and a more compact argument has recently been formulated in Ref.\ \cite{DwandaruPRE2011}.}:
-\begin{enumerate}
-  \item It is bounded from below by the grand potential, i.e.\
-    \begin{equation*}
-      \Omega[\rho(\vec{r})] \ge \Omega[\rho^{(1)}(\vec{r})].
-    \end{equation*}
-  \item Equality with the grand potential occurs \emph{only} in the case of the equilibrium density profile, i.e.\
-    \begin{equation*}
-      \Omega[\rho^{(1)}(\vec{r})] = \Omega.
-    \end{equation*}
-\end{enumerate}
-These two properties can be elegantly summarised by the \emph{variational principle}
-\begin{equation}\label{eq:dft-equilibrium}
-  \left.
-  \frac{
-    \delta \Omega[\rho(\vec{r})]
-  }{
-    \delta \rho
-  }
-  \right|_{\rho(\vec{r})=\rho^{(1)}(\vec{r})}
-  =
-  0.
-\end{equation}
-This variational principle provides a route to numerical applications of DFT: the functional form of the grand potential can be minimised to obtain the equilibrium density profile and its corresponding free energy.
-Importantly, this procedure can be applied for arbitrary external potentials which could represent e.g.\ a test-particle inserted into the liquid.
-This example provides a potential way of using an inhomogeneous framework to approach the homogeneous liquid, illustrating the usefulness of the DFT formalism.
-
-Our focus will be on correlation within the equilibrium liquid, so in the next section we will directly connect the thermodynamic functionals to the correlations functions.
+Armed with functional generalisations of the thermodynamic potentials we can begin to describe the inhomogeneous liquid.
+Our focus will be on correlations within the equilibrium liquid, so in the next section we will directly connect the thermodynamic functionals to the correlations functions.
 
 \subsection{Thermodynamic potentials as generating functionals}
 
-We now connect the formalism of DFT with the various correlation functions in the liquid.
+Having defined thermodynamic potentials for an inhomogeneous system as functionals, we can make a connection to liquid structure through the various correlation functions.
 In sections \ref{sec:liquid-structure} and \ref{sec:virial-series} we saw how the homogeneous correlation functions could obtained from various generating functions.
 In the inhomogeneous liquid correlation functions are obtained in a similar way from \emph{generating functionals}.
 
@@ -244,23 +204,112 @@ We thus define the \emph{direct correlation functions} as the hierarchy generate
 \end{equation}
 These correlation functions form the basis of integral equation theories which we will outline in the next section.
 
-\subsection{Integral equation theories}
+\subsection{Equilibrium conditions}
 \label{sec:oz-equation}
 
-Henceforth we will only deduce
-Which gives the equilibrium density as
-\begin{equation}
+In the preceding sections we defined the thermodynamic potentials for an inhomogeneous system in equilibrium with density profile $\rho(\vec{r}) = \rho^{(1)}(\vec{r})$.
+However, we can imagine the generalisation where the equilibrium profile $\rho^{(1)}(\vec{r})$ is replaced by an arbitrary $\rho(\vec{r})$ so
+\begin{align*}
+  \Omega &\to \Omega[\rho(\vec{r})],
+  \\
+  \mathcal{F}^\mathrm{id} &\to \mathcal{F}^\mathrm{id}[\rho(\vec{r})],
+  \\
+  \mathcal{F}^\mathrm{ex} &\to \mathcal{F}^\mathrm{ex}[\rho(\vec{r})].
+\end{align*}
+These generalised functionals are not strictly the same as the thermodynamic potentials, which only concern equilibrium properties, but there is an important correspondence between them.
+Focusing on the grand potential, the following two properties are provable%
+\marginfootnote{Full accounts of the classical arguments can be found in Refs.\ \cite{MerminPR1965,EvansAP1979}, and a more compact argument has recently been formulated in Ref.\ \cite{DwandaruPRE2011}.}:
+\begin{enumerate}
+  \item It is bounded from below by the grand potential, i.e.\
+    \begin{equation*}
+      \Omega[\rho(\vec{r})] \ge \Omega.
+    \end{equation*}
+  \item Equality with the grand potential occurs \emph{only} in the case of the equilibrium density profile, i.e.\
+    \begin{equation*}
+      \Omega[\rho^{(1)}(\vec{r})] = \Omega.
+    \end{equation*}
+\end{enumerate}
+These two properties can be elegantly summarised by the \emph{variational principle}
+\begin{equation}\label{eq:dft-equilibrium}
+  \left.
+  \frac{\delta \Omega}{\delta \rho^{(1)}(\vec{r})}
+  \right|_{\rho(\vec{r}) = \rho^{(1)}(\vec{r})}
+  =
+  0,
+\end{equation}
+which provides the route to numerical applications of DFT; minimisation of the grand potential with respect to density is sufficient to determine the equilibrium density profile and its corresponding free energy.
+
+To bring the variational principle to more practical use we can inserting the functional form of the grand potential deduced in section \ref{sec:inhomogeneous-potentials} into \eqref{eq:dft-equilibrium} giving
+\begin{equation*}
+  %\frac{\delta \Omega}{\delta \rho^{(1)}(\vec{r})}
+  %= 0
+  %% &=
+  %% \frac{\delta \mathcal{F}}{\delta \rho^{(1)}(\vec{r})}
+  %% - \frac{\delta}{\delta \rho(\vec{r}')}
+  %% \left(
+  %% \int \rho(\vec{r}) \psi(\vec{r})
+  %% \, d\vec{r}
+  %% \right)
+  %\\ &=
+  %  =
+  \frac{\delta \mathcal{F}}{\delta \rho^{(1)}(\vec{r})}
+  - \psi(\vec{r})
+  =
+  \int
+  \rho^{(1)}(\vec{r}') \frac{\delta \psi(\vec{r})'}{\delta \rho^{(1)}(\vec{r})}
+  \, d\vec{r}'.
+\end{equation*}
+The separate condition \eqref{eq:psi-generator} causes the first two terms to cancel, leading to the two equilibrium conditions
+\begin{subequations}
+  \begin{align}
+    \label{eq:fmt-psi-equilibrium}
+    \frac{\delta \mathcal{F}^\mathrm{id}[\rho(\vec{r})]}{\delta \rho(\vec{r}')}
+    + \frac{\delta \mathcal{F}^\mathrm{ex}[\rho(\vec{r})]}{\delta \rho(\vec{r}')}
+    &=
+    \psi(\vec{r}),
+    \\
+    \int
+    \rho^{(1)}(\vec{r}) \frac{\delta \psi(\vec{r})}{\delta \rho^{(1)}(\vec{r}')}
+    \, d\vec{r}
+    &=
+    0,
+  \end{align}
+\end{subequations}
+of which the first is most useful.
+The first functional derivative of the ideal intrinsic free energy \eqref{eq:ideal-free-energy-functional} yields
+\begin{equation*}
+  \frac{
+    \delta \beta \mathcal{F}^\mathrm{id}
+  }{
+    \delta \rho^{(1)}(\vec{r})
+  }
+  =
+  \ln{(\Lambda^d \rho^{(1)}(\vec{r}))},
+\end{equation*}
+and with the excess term is the generating functional of $c^{(n)}$ \eqref{eq:direct-correlations} we obtain
+\begin{equation*}
+  \ln{(\Lambda^d \rho^{(1)}(\vec{r}))}
+  - c^{(1)}(\vec{r})
+  =
+  \psi(\vec{r})
+\end{equation*}
+or rearranged for the density
+\begin{equation}\label{eq:equilibrium-density}
   \rho^{(1)}(\vec{r})
   =
   \frac{
     \exp{\left(\beta\psi(\vec{r}) + c^{(1)}(\vec{r})\right)}
-  }{ \Lambda^d }
+  }{ \Lambda^d }.
 \end{equation}
-\todo{Rework this into the section.}
+This equation provides the basis for iterative schemes to solve \eqref{eq:dft-equilibrium} (see e.g.\ \cite{RothJPCM2010}).
+\todo{Edit this section.}
+Importantly, this process incorporates an arbitrary external potential inside $\psi(\vec{r})$ which could represent e.g.\ a test-particle inserted into the liquid.
+This example provides a potential way of using an inhomogeneous framework to approach the homogeneous liquid, illustrating the usefulness of the DFT formalism.
 
-In this section we derive the Ornstein-Zernike equation which forms the basis of many theories of the liquid state%
+Further functional derivatives of the equilibrium condition provides a whole hierarchy of equivalent equilibrium criteria.
+Of particular note is the next equation in the hierarchy, the Ornstein-Zernike equation, which forms the basis of integral theories of the liquid state%
 \marginfootnote{Conventionally this class of theories is presented in its own right rather than as a special case of density functional theory; we opted for this more modern presentation to be marginally more economical with chapter length.}.
-This is an integral equation which connects the density-density and direct correlation functions through the chain rule of functional calculus, i.e.\
+This connects the density-density and direct correlation functions through the chain rule of functional calculus, i.e.\
 \begin{equation}\label{eq:oz-chain-rule}
   \delta(\vec{r}_1 - \vec{r}_2) =
   \int
@@ -271,17 +320,8 @@ This is an integral equation which connects the density-density and direct corre
 The first term appearing in the integrand is simply the pair density-density correlation function $H^{(2)}$ via \eqref{eq:density-density-generator},
 so we will require an explicit expression for the second term to proceed.
 
-The first functional derivative of the ideal intrinsic free energy \eqref{eq:ideal-free-energy-functional} yields
-\begin{equation*}
-  \frac{
-    \delta \beta \mathcal{F}^\mathrm{id}
-  }{
-    \delta \rho^{(1)}(\vec{r})
-  }
-  =
-  \ln{(\Lambda^d \rho^{(1)}(\vec{r}))}.
-\end{equation*}
-To obtain the higher order functional derivatives it is helpful to write this as an integral with a delta function
+We require the functional derivative of $\psi(\vec{r})$ corresponding to the second functional derivatives of the intrinsic free energy through \eqref{eq:fmt-psi-equilibrium}.
+To obtain the higher order functional derivatives of the ideal term, it is helpful to write it as an integral with a delta function
 \begin{equation*}
   \frac{
     \delta \beta \mathcal{F}^\mathrm{id}
@@ -324,28 +364,14 @@ so we can obtain the second derivative as
 %%   \end{split}
 %% \end{equation}
 %% where the last line is valid for all $n \ge 2$.
-From the free energy as a generating functional \eqref{eq:psi-generator} and the decomposition of the free energy into ideal and excess parts \eqref{eq:F-decomposition} it follows that
-\begin{equation*}
-  \begin{split}
-    \beta \psi(\vec{r})
-    =
-    \frac{\delta \beta \mathcal{F}}{\delta \rho^{(1)}(\vec{r})}
-    &=
-    \frac{\delta \beta \mathcal{F}^\mathrm{id}}{\delta \rho^{(1)}(\vec{r})}
-    + \frac{\delta \beta \mathcal{F}^\mathrm{ex}}{\delta \rho^{(1)}(\vec{r})}
-    \\
-    &=
-    \ln{(\Lambda^d \rho^{(1)}(\vec{r}))} - c^{(1)}(\vec{r}),
-  \end{split}
-\end{equation*}
-using the definition of the direct correlation function \eqref{eq:direct-correlations} in the latter step.
-Further functional differentiation yields
+Functional differentiation of \eqref{eq:fmt-psi-equilibrium} then yields
 \begin{equation*}\label{eq:intrinsic-chemical-potential-inverse-derivative}
   \frac{\delta \beta \psi(\vec{r})}{\delta \rho^{(1)}(\vec{r}')}
   =
   \frac{\delta(\vec{r} - \vec{r}')}{\rho^{(1)}(\vec{r}')}
   - c^{(2)}(\vec{r}, \vec{r}').
 \end{equation*}
+using the definition of the direct correlation function \eqref{eq:direct-correlations} in the latter step.
 Inserting this expression into \eqref{eq:oz-chain-rule} gives
 \begin{equation*}
   \begin{split}
@@ -374,7 +400,7 @@ Inserting this expression into \eqref{eq:oz-chain-rule} gives
     %% \, d\vec{r}'
   \end{split}
 \end{equation*}
-which rearranges to give the Ornstein-Zernike equation
+which upon inserting the definition of $H^{(2)}$ from \eqref{eq:pair-density-density-correlation} rearranges to give the Ornstein-Zernike equation
 \begin{equation}\label{eq:ornstein-zernike-generic}
   h^{(2)}(\vec{r}_1, \vec{r}_2) =
   c^{(2)}(\vec{r}_1, \vec{r}_2) +
@@ -386,6 +412,7 @@ which rearranges to give the Ornstein-Zernike equation
 \end{equation}
 which is a classic result of liquid state theory (cf.\ Refs.\ \cite{OrnsteinPAS1914,Hansen2013,EvansAP1979}).
 
+\begin{tcolorbox}[title=Ornstein-Zernike equation for a uniform simple liquid]
 For a uniform liquid interacting through a spherically symmetric pair potential the Ornstein-Zernike equation becomes
 \begin{equation}\label{eq:ornstein-zernike-spherical}
   \begin{split}
@@ -423,13 +450,14 @@ which gives the static structure factor \eqref{eq:static-structure-factor} as
   \rho \delta(\vec{k}) +
   \frac{1}{1 - \rho \tilde{c}^{(2)}(\vec{k})}.
 \end{equation*}
+\end{tcolorbox}
+
 If the pair direct correlation function is known it is thus straightforward to obtain the equation of state through the compressibility route \eqref{eq:compressibility-route-pressure}
 \begin{equation*}
   \frac{\beta p}{\rho}
   =
   1 - \frac{1}{\rho} \int_0^\rho \tilde{c}^{(2)}(0) \rho' d\rho'.
 \end{equation*}
-
 The main task in an integral equation approach is to find an approximate closure for $c^{(2)}$ in order to solve the Ornstein-Zernike equation.
 The process of determining the direct correlation functions is equivalent (at least formally) to finding its generating functional $\mathcal{F}^\mathrm{ex}$.
 
