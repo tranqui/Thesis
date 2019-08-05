@@ -662,6 +662,7 @@ The degree of self-consistency between different routes can act as a proxy for t
 \end{tcolorbox}
 
 \subsection{Mixtures: truncatability of the free energy}
+\label{sec:truncatable-free-energy}
 
 \todo{Port in stuff from results chapters and discuss.}
 Thermodynamic consistency of the (osmotic) pressure:
@@ -678,11 +679,21 @@ Thermodynamic consistency of the (osmotic) pressure:
   \end{split}
 \end{equation}
 where $f^\mathrm{ex} = F^\mathrm{ex}/V$ is the (excess) free energy density.
+Inversion of this relation yields the useful form
+\begin{equation}\label{eq:free-energy-density}
+  \beta f^\mathrm{ex}
+  =
+  \frac{\beta F^{ex}}{V}
+  =
+  \rho \int_0^\rho \left( \frac{\beta p}{\rho'} - 1 \right)
+  \frac{d\rho'}{\rho'}.
+\end{equation}
+
 
 \subsection{Virial series}
 \label{sec:virial-series}
 
-The virial series is the only properly rigorous approach to evaluating the partition function, and thus the free energy, from first principles.
+The virial series provides the only properly rigorous approach to evaluating the partition function, and thus the free energy, from first principles.
 We introduce it here as it will be used in chapter \ref{chapter:resummation} to place the fundamental approximation, the morphometric approach, underlying chapters \ref{chapter:morphometric-framework} and \ref{chapter:morphometric-applications} on firmer ground.
 This approach can be used to derive free energy functionals for application to (classical) density functional theory (section \ref{sec:dft}): cf.\ Refs.\ \cite{LeithallPRE2011,KordenPRE2012,MarechalPRE2014}.
 The series derived below is only valid for systems interacting via a pair potential $u(\vec{r})$.
@@ -697,16 +708,18 @@ Traditionally, the virial series for the equation of the state is written
 \end{equation}
 where $\{B_n\}$ are the \emph{virial coefficients} to be determined.
 As a self-consistency check, observe that the ideal gas law is recovered in the low density limit $\rho \to 0$.
-Alternatively, the virial series can be expressed for the (excess) free energy density as
+Alternatively, the virial series can be expressed for the (excess) free energy density using \eqref{eq:free-energy-density} as
 \begin{equation}\label{eq:virial-series-excess-free-energy}
-  \frac{\beta F^\mathrm{ex}}{V} =
+  \beta f^\mathrm{ex}
+  =
+  \frac{\beta F^\mathrm{ex}}{V}
+  =
   \sum_{n=2}^\infty
   \frac{1}{n-1}
   B_n
   \rho^n
 \end{equation}
-which is more useful for connecting with density functional theory (section \ref{sec:dft}).
-\todo{Specify which thermodynamic relation.}
+which is more useful for connecting with density functional theory approaches (section \ref{sec:dft}).
 
 To determine the coefficients in the virial series, we start by writing the Boltzmann factor for a pairwise interacting system as the product
 \begin{equation}
@@ -761,9 +774,9 @@ Integrations over the positions of each particle are represented by blackening t
   + \{3\} \mayerdiagram[.||]{3}
   + \mayerdiagram[|||]{3}.
 \end{align*}
+To make calculations more tractable we have to reduce the total number of diagrams.
 
-First step is to reduce the number of diagrams.
-We use the same trick as before: we treat the grand canonical partition function as a moment generating function, with fugacity as the control parameter, and consider its the dual cumulant generating function $\ln{\Xi} = -\beta\Omega$.
+Firstly, we will use the same trick as we used to construct dual correlation functions (cf.\ discussion around \eqref{eq:cluster-correlation-functions}): we treat the grand canonical partition function as a moment generating function, with fugacity as the control parameter, and consider its the dual cumulant generating function $\ln{\Xi} = -\beta\Omega$.
 It follows that
 \begin{equation*}
   1 + \sum_{n=1} \frac{z^n}{n!} Z_n
@@ -776,7 +789,7 @@ It follows that
   },
 \end{equation*}
 which defines a new hierarchy of \emph{cluster functions}%
-\marginfootnote{These are also sometimes called \emph{Ursell functions}.}
+\marginfootnote{These are sometimes called \emph{Ursell functions}.}
 $W^{(n)}$.
 The transformation to cluster functions eliminates all disconnected diagrams, e.g.\ the first few are defined as \cite{Santos2016}
 \begin{subequations}
@@ -806,37 +819,41 @@ so that
 \begin{equation*}
   \ln{\Xi} = V \sum_{n=1}^\infty b_n z^n.
 \end{equation*}
-The volume factor is pulled in front of the definition of $b_n$ because one obtains a volume factor from translation invariance.
+We pulled out a volume factor in front of the definition of $b_n$ so that the cluster integral is an intensive quantity; translation invariance in a homogeneous liquid means that only the relative distances matter in $W^{(n)}$, so we obtain a volume term from integration of the first particle.
 
-\todo{Check density expression is consistent with DFT section.}
+Secondly, we transform from an expansion in fugacity to one in density, obtaining the virial coefficients $B_n$ as seen in the pressure \eqref{eq:virial-series-pressure} and free energy \eqref{eq:virial-series-excess-free-energy} expansions.
+From the explicit form of the partition function \eqref{eq:grand-canonical-partition} we can write the density as
+\begin{equation*}
+  \rho
+  =
+  \frac{z}{V} \frac{\partial (\ln \Xi)}{\partial z},
+\end{equation*}
+or using the cluster expansion for $\ln{\Xi}$ stated above we obtain
+\begin{equation*}
+  \rho
+  =
+  \sum_{n=1}^\infty n b_n z^n.
+\end{equation*}
+This expression, connecting density and fugacity, can be used to transform the expansion in fugacity to one in density, giving the first few virial coefficients
+\begin{subequations}
+  \begin{align*}
+    B_2 &= -b_2
+    \\
+    B_3
+    &=
+    4 b_2^2 - 2 b_3
+    \\
+    B_4
+    &=
+    -20 b_2^3 + 18 b_2 b_3 - 3 b_4.
+  \end{align*}
+\end{subequations}
+
 \begin{tcolorbox}[title=The virial coefficients]
-  Lastly, we transform to an expansion in density.
-  We then convert to pressure to get the irreducible cluster integrals (sometimes called stars, not to be confused with star diagrams of graph theory, 2-connected).
-  We can write the density as
-  \begin{equation*}
-    \rho
-    =
-    \frac{z}{V} \frac{\partial (\ln \Xi)}{\partial z}
-    =
-    \sum_{n=1}^\infty n b_n z^n
-  \end{equation*}
-  This expression, connecting density and fugacity, can be used to transform the expansion in fugacity to one in density i.e.\ \eqref{eq:virial-series-pressure}.
-  This gives the first few virial coefficients
-  \begin{subequations}
-    \begin{align*}
-      B_2 &= -b_2
-      \\
-      B_3
-      &=
-      4 b_2^2 - 2 b_3
-      \\
-      B_4
-      &=
-      -20 b_2^3 + 18 b_2 b_3 - 3 b_4.
-    \end{align*}
-  \end{subequations}
-  Further cancellations occur after inserting the explicit expressions for the cluster integrals \eqref{eq:cluster-integral} leaving only the \emph{stars}%
-  \marginfootnote{These are also called the \emph{irreducible diagrams} because they cannot be expressed as products of other diagrams.},
+  Further cancellations occur after inserting the explicit expressions for the cluster integrals \eqref{eq:cluster-integral} into the previous coefficients.
+  This remaining terms consist only of the \emph{stars}%
+  \marginfootnote{These are also called the \emph{irreducible diagrams} because they cannot be expressed as products of other diagrams.
+  In graph theoretic terms, these diagrams would be called \emph{2-vertex connected}.}:
   those diagrams which cannot be disconnected by deleting a single vertex.
   We obtain the first few virial coefficients as
   \begin{subequations}
@@ -879,3 +896,6 @@ The virial coefficients generalise to \cite{Santos2016}
 \end{equation}
 where $x_i$ is the mole fraction of species $i$ such that $x_i > 0$ and $\sum_{i=1}^m x_i = 1$.
 $B_{s_1, \cdots, s_n}$ are the composition independent virial coefficients describing the contribution from interactions between $n$ particles of species $\{s_1, \cdots, s_n\}$.
+
+This concludes our summary of liquid state theory for homogeneous systems.
+We will now review its extensions to inhomogeneous systems in the following sections.
