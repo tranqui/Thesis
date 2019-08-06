@@ -10,6 +10,8 @@
 %% \subsubsection{Frustration-limited domain theory}
 %% \subsubsection{Dynamical theories}
 
+\subsection{Old intro stuff}
+
 It is widely reported that glass is actually liquid, and as evidence of this the thickness of old windows at the bottom is pointed to.
 This is actually a matter of some dispute, but contains a grain of truth.
 Pre-modern methods of creating window glass involved spinning molten glass on magma to flatten it out.
@@ -56,6 +58,35 @@ So the central question of glass is what happens in $d=3$, is there a vanishing 
 In mean-field, formally in the limit of infinite spatial dimensions $d \to \infty$, the hard sphere system has been shown to have a true transition, however the critical dimensions are unknown so it is unclear what happens in $d=3$ \cite{Parisi,Zamboni,Charbonneau,Kurchan,?,?}.
 
 \todo{Jamming: how does it relate to glass}
+
+\subsection{Dynamical phenomenology}
+
+We discussed the static correlation functions at length, which is fine for liquids where equilibrium occurs on 10ps timescale.
+Dynamical effects are highly nontrivial at high densities.
+
+To look at dynamics we could equivalently consider viscosity or relaxation time.
+We will discuss nucleation theory in \ref{chapter:aerosols}, but briefly we expect:
+\begin{equation*}
+  \tau_x \sim \exp{ \beta \Delta}
+\end{equation*}
+
+\begin{SCfigure}
+  \includegraphics[width=\linewidth,outer]{angell}
+  \caption[Angell plot]{
+    The \emph{Angell} plot for molecular and model glassformers showing the temperature/pressure dependence of viscosity $\eta$ (or equivalently relaxation time $\tau_\alpha$).
+    The molecular systems \ce{SiO2} and orthoterphenyl (OTP) respectively display the \emph{strong} and \emph{fragile} behaviours described in text.
+    Kob-Anderson (KA) and Wahnstrom (Wahn) are mixtures of model Lennard-Jones atoms designed to exhibit fragility.
+    The reduced pressure $Z$ defined by \eqref{eq:reduced-P} is the most appropriate state variable for hard spheres (HS) (argument in text).
+    Reproduced from Ref.\ \cite{RoyallPR2015}.
+  }
+\end{SCfigure}
+
+We will talk about this metastable branch as if it were in equilibrium.
+\todo{create link when mention high density swap data}
+
+Some modification is required for hard particle systems: instead of 2d phase diagram (density-temperature) we have 1d (density).
+Hard spheres highly fragile: more collective effects.
+Easier to see that collective effects: activation barriers must be strictly entropic, which is perhaps easier to argue for collective effects.
 
 \subsection{Phenomenology: notes from Tarjus}
 
@@ -158,10 +189,6 @@ Collective behaviour: many-body effects requires many-body correlations.
 Some systems are Arrhenius: particularly in hard matter systems where interactions are stronger.
 E.g.\ Silicate: covalent bonds, so barrier is that required to break a bond.
 
-Some modification is required for hard particle systems: instead of 2d phase diagram (density-temperature) we have 1d (density).
-Hard spheres highly fragile: more collective effects.
-Easier to see that collective effects: activation barriers must be strictly entropic, which is perhaps easier to argue for collective effects.
-
 Phenomenological formula...
 
 Relationship with viscosity.
@@ -220,12 +247,14 @@ Hard sphere phenomenology is thus relevant for understanding a wide-range of sim
 However, \eqref{eq:hs-pair} does not set an energy scale, so hard spheres are \emph{athermal} and thus pressure is more meaningful than temperature as a state variable~\cite{Berthier2009}.
 Relaxation barriers in hard spheres are \emph{entropic} in nature, and display the same phenomenology as temperature driven fragile glassformers as seen in Figure~\ref{fig:angell} where a reduced pressure has been defined as
 \begin{equation}\label{eq:reduced-P}
-  Z = \frac{P}{\rho k_B T}
+  Z = \frac{p}{\rho k_B T}
 \end{equation}
 where $\rho$ is the density of the fluid. This variable plays the role of $1/T$ for athermal systems, although this analogy is only approximate.
 
+\subsection{Mean field theory of glass}
 
-\subsection{Thermodynamic}
+Connection between thermodynamics and dynamics.
+Configurational entropy.
 
 \begin{SCfigure}
   \includegraphics[width=\linewidth,outer]{swap-Sconf}
