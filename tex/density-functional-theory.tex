@@ -596,7 +596,11 @@ The process of determining the direct correlation functions is equivalent (at le
 
 DFT provides an elegant framework for treating the inhomogeneous liquid, however as we have shown any application is limited by the accuracy of the (excess) intrinsic free energy.
 %Hitherto we have not given any indication over how one might approximate this quantity, which is a hard problem in general.
-It is a hard problem in general to derive accurate approximations to $\mathcal{F}^\mathrm{ex}$; however, for hard spheres it is possible to exploit ideas from integral geometry (section \ref{sec:integral-geometry}) and derive a highly accurate class of free energy functionals.
+It is a hard problem in general to derive accurate approximations to $\mathcal{F}^\mathrm{ex}$; however, for hard spheres%
+\marginfootnote{We concentrate on hard spheres here, however we note that generalisations exist for hard particle systems of more general shapes \cite{RosenfeldPRE1994,RosenfeldMP1995,Hansen-GoosPRL2009, Hansen-GoosJPCM2010}.
+  The more recent works are accurate enough to capture isotropic--nematic transitions in the fluid.
+}
+it is possible to exploit ideas from integral geometry (section \ref{sec:integral-geometry}) and derive a highly accurate class of free energy functionals.
 In this section we describe fundamental measure theory (FMT), which provides the most successful theory for inhomogeneous hard sphere systems.
 We mainly follow Refs.\ \cite{RothJPCM2010,SantosPRE2012}, but we mention also the review \cite{LutskoAiCP2010} which has more of a focus on crystallisation.
 \todo{Insert reference (foreshadowing) to this section in the earlier integral geometry section.}
@@ -663,8 +667,8 @@ or in the notation introduced in section \ref{sec:integral-geometry}
 which can be evaluated using the principal kinematic formula \eqref{eq:binomial-kinematic-formula}.
 Each integral results in $d+1$ terms featuring the intrinsic volumes of the respective particles; we can expect a similar decomposition in the inhomogeneous case.
 
-It is straightforward to generalise the virial series to inhomogeneous systems, by bringing the density terms inside the cluster integrals and replacing them with their local equivalent i.e.\ $\rho^n \to \rho(\vec{r}_1) \cdots \rho(\vec{r}_n)$ \cite{StillingerJCP1962,RowlinsonPRSA1985}.
-It then follows that
+It is straightforward to generalise the virial series to inhomogeneous systems by localising the the density terms, i.e.\ making the replacement $\rho^n \to \rho(\vec{r}_1) \cdots \rho(\vec{r}_n)$, and bringing them inside the cluster integrals \cite{StillingerJCP1962,RowlinsonPRSA1985}.
+The low density free energy then adopts the form
 \begin{equation}\label{eq:low-density-inhomogeneous-free-energy}
   \beta \mathcal{F}^\mathrm{ex}[\{\rho_i\}]
   =
@@ -938,7 +942,7 @@ The direct correlation functions \eqref{eq:fmt-direct-correlations} in the unifo
     - \chi_{3,1}(f_\mathrm{RF}^\mathrm{ex}) \Delta L(r)
     %- \chi_{3,0}(f_\mathrm{RF}^\mathrm{ex}) \Theta((R_i - R_j) - r)
   \end{align}
-  where $\Delta V, \Delta A, \Delta L$ are the intrinsic volumes for the region where the two spheres overlap.
+  where $r = |\vec{r} - \vec{r}'|$ and $\Delta V, \Delta A, \Delta L$ are the intrinsic volumes for the region where the two spheres overlap.
   With an exact form of the direct correlation function it is straightforward to determine the pair distribution function $g^{(2)}(r)$ from solving the Ornstein-Zernike equation \eqref{eq:ornstein-zernike-spherical}.
   The equation of state can then be determined through the virial route \eqref{eq:virial-route-pressure} giving
   \begin{equation}
@@ -973,6 +977,7 @@ We will assume this equation of state to construct an accurate theory for correl
 Crucially, in addition to describing the equilibrium liquid well, the CS equation has been demonstrated to be accurate at very high densities in the supercooled regime \cite{BerthierPRL2016}.
 The liquid is metastable above the melting transition, so high density simulations require the introduction of polydispersity%
 \marginfootnote{By polydisperse we mean a mixture which is continuous in its size distribution: cf.\ section \ref{sec:truncatable-free-energy}.}
+\todo{may need to move this footnote after doing truncation section}
 to prevent crystallisation; to determine its accuracy the CS equation has to be extended to mixtures.
 Entering the single-component equation of state \eqref{eq:cs-pressure} as an input into the generic FMT solution \eqref{eq:santos-fmt} yields a more accurate free energy functional with \cite{SantosPRE2012}
 \begin{equation}\label{eq:cs-fmt}
@@ -980,15 +985,16 @@ Entering the single-component equation of state \eqref{eq:cs-pressure} as an inp
   =
   \frac{4}{3} + \frac{y}{3} - \frac{\ln{(1 + y)}}{3y}.
 \end{equation}
-The resulting free energy functional $f^\mathrm{ex}_\mathrm{CS}$ then predicts the following pressure for mixtures: \cite{SantosPRE2012}
+The resulting free energy functional $f^\mathrm{ex}_\mathrm{CS}$ then predicts the equation of state for hard sphere mixtures \cite{SantosPRE2012}
 \begin{equation}\label{eq:cs-mixtures}
   \beta p^\mathrm{CS}
   =
   \frac{\xi_0}{1 - \xi_3}
   + \frac{4 \xi_1 \xi_2}{3 (1 - \xi_3)^2}
   + \frac{\xi_2^3}{18 \pi (1 - \xi_3)^3}
-  - \frac{4 \pi \xi_1^2 \xi_2}{(\xi_2^2 + 12\pi \xi_1 (1 - \xi_3)) (1 - \xi_3)}.
+  - \frac{4 \pi \xi_1^2 \xi_2}{(\xi_2^2 + 12\pi \xi_1 (1 - \xi_3)) (1 - \xi_3)},
 \end{equation}
+with scaled particle variables $\{\xi_i\}$ defined in \eqref{eq:spt-variables}.
 Other extensions of the CS equation of state to mixtures exist%
 \marginfootnote{The most popular of which is the Boublik-Mansoori-Carnahan-Starling-Leland equation of state \cite{BoublikJCP1970, MansooriJCP1971}, which corresponds to a different FMT functional \cite{RothJPCM2002, YuJCP2002}.},
 however the above equation represents the state of the art \cite{SantosPRE2012}.
@@ -1004,38 +1010,85 @@ The pressures predicted by \eqref{eq:cs-mixtures} compare favourably against nov
   \label{fig:swap-eos}
 \end{SCfigure}
 
-Take the binary mixture route:
-\todo{Spell this out}
-\begin{subequations}\label{eq:cs-spt-coefficients-parallel}
+Finally, we introduce the central approximation of chapters \ref{chapter:morphometric-framework}, \ref{chapter:morphometric-applications} and \ref{chapter:resummation} as a limit case of FMT.
+The chemical potential of a new sphere $s$ can be determined as the free energy of a mixture where the limit where the new species is infinitely dilute, as in
+\begin{equation}\label{eq:fmt-morphometric}
+  \begin{split}
+    \mu_s
+    &=
+    \lim_{\rho_s \to 0} \frac{\partial f^\mathrm{ex}}{\partial \rho_s}
+    =
+    \lim_{\rho_s \to 0}
+    \sum_\alpha
+    \frac{\partial n_\alpha}{\partial \rho_s}
+    \frac{\partial f^\mathrm{ex}}{\partial n_\alpha},
+    \\ &=
+    \frac{\partial f^\mathrm{ex}}{\partial \xi_3} \frac{4 \pi R_s^3}{3}
+    + \frac{\partial f^\mathrm{ex}}{\partial \xi_2} 4 \pi R_s^2
+    + \frac{\partial f^\mathrm{ex}}{\partial \xi_1} R_s
+    + \frac{\partial f^\mathrm{ex}}{\partial \xi_0}
+  \end{split}
+\end{equation}
+using the explicit derivatives \eqref{eq:fmt-n-derivatives} in the second line.
+Noting that the partial derivatives of $f^\mathrm{ex}$ are constants of the bulk liquid and the other contributions are normalisations of the intrinsic volumes (cf.\ table \ref{table:geometric-quantities}), the central conjecture of the morphometric approach is that this generalises to arbitrary shapes; that is, the chemical potential can be written \cite{KonigPRL2004,RothPRL2006}
+\begin{equation}\label{eq:fmt-morphometric-2}
+  \mu_s = p V_s + a_2 A_s + a_1 R_s + a_0
+\end{equation}
+with thermodynamic coefficients $\{p, a_2, a_1, a_0\}$ independent of the geometry.
+We leave detailed discussion of this approximation until chapter \ref{chapter:morphometric-framework}, but for reference we will give the explicit coefficients for the already introduced FMT functionals below.
+
+The thermodynamic coefficients in \eqref{eq:fmt-morphometric-2} can be determined for an FMT functional using the special case of spherical solutes \eqref{eq:fmt-morphometric}.
+For the Rosenfeld functional \eqref{eq:rosenfeld-functional} we obtain the thermodynamic coefficients for the single-component hard sphere liquid
+\begin{subequations}\label{eq:rosenfeld-coefficients}
   \begin{align}
-    \beta a_0'
+    \beta a_0^\mathrm{RF}
     &=
-    - \frac{\eta(4 - 11\eta + 13\eta^2 - 4\eta^3)}{3(1-\eta)^3}
-    - 4 \ln{(1-\eta)},
+    -\ln{(1- \eta)},
     \\
-    \beta a_1'
+    \beta a_1^\mathrm{RF}
     &=
-    \frac{1}{2\sigma} \left(
-    \frac{\eta(4 - 10\eta + 20\eta^2 - 8\eta^3)}{(1-\eta)^3}
-    + 4 \ln{(1-\eta)}
+    \frac{6\eta}{\sigma (1 - \eta)},
+    \\
+    \beta a_2^\mathrm{RF}
+    &=
+    \frac{6\eta + 3\eta^2}{2\pi \sigma^2 (1 - \eta)^2},
+    \\
+    \frac{\beta p^\mathrm{RF}}{\rho}
+    &=
+    \frac{1 + \eta + \eta^2}{(1 - \eta)^3}.
+    \label{eq:py-pressure}
+ \end{align}
+\end{subequations}
+and for the CS functional \eqref{eq:santos-fmt} with \eqref{eq:cs-fmt} we find
+\begin{subequations}\label{eq:cs-spt-coefficients}
+  \begin{align}
+    \beta a_0^\mathrm{WBII}
+    &=
+    - \ln{(1 - \eta)},
+    \\
+    \beta a_1^\mathrm{WBII}
+    &=
+    \frac{2}{\sigma} \left(
+    \frac{5\eta + \eta^2}{1 - \eta}
+    + 2 \ln{(1 - \eta)}
     \right),
     \\
-    \beta a_2'
+    \beta a_2^\mathrm{WBII}
     &=
-    - \frac{2}{\pi \sigma^2}
-    \left(
-    \frac{\eta(1 + 2\eta + 8\eta^2 - 5\eta^3)}{(1-\eta)^3}
-    + \ln{(1-\eta)}
+    \frac{1}{\pi \sigma^2} \left(
+    \frac{\eta (2 + 3\eta - 2\eta^2)}{(1 - \eta)^2}
+    - \ln{(1 - \eta)}
     \right),
     \\
-    \frac{\beta p}{\rho}
+    \frac{\beta p^\mathrm{WBII}}{\rho}
     &=
     \frac{1 + \eta + \eta^2 - \eta^3}{(1-\eta)^3},
-  \end{align}
+ \end{align}
 \end{subequations}
-These coefficients can also be obtained in the same way from the White Bear II free energy functional \cite{Hansen-GoosJCP2006, Hansen-GoosJPCM2006} which is very similar in form and construction, although it is marginally less self-consistent than the functional described above \eqref{eq:santos-fmt} with \eqref{eq:cs-fmt}.
-
-\todo{Generalisations to non-spherical systems.}
+We label these as the White Bear II (WBII) coefficients because they were first derived from the WBII free energy functional%
+\marginfootnote{These are not exactly as stated in Ref.\ \cite{Hansen-GoosJPCM2006} because we use a different definition of surface.
+  The conversions between the different surfaces are stated in chapter \ref{chapter:morphometric-framework}: see the discussions around \eqref{eq:exclusion-transform}.}
+\cite{Hansen-GoosJCP2006, Hansen-GoosJPCM2006} which is similar in form and construction to the CS functional described, although it is marginally less self-consistent.
 
 \subsection{Superposition and convolution approximations}
 

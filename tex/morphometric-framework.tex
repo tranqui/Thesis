@@ -8,27 +8,27 @@
 \def\includebibliography{}
 
 \externaldocument{background}
+\externaldocument{resummation}
 
 \begin{document}
 \chapter{Many-body correlations from integral geometry}
 \epigraph{Ninety percent of everything is crap.}{Theodore Sturgeon, \emph{Galaxy} (1956).}
 \label{chapter:morphometric-framework}
 
-This chapter will focus on the morphological framework for the treatment of many-body correlations.
-This will cover two related topics:
-\begin{enumerate}
-\item \emph{Fundamental measure theory} which is ideally suited for correlations in Fourier space i.e.\ structure factors, and
-\item The \emph{morphometric approach}, which presents a highly accurate alternative for real space calculations, albeit with many caveats.
-\end{enumerate}
-These two approaches are related in that they both depend on integral geometry, which we introduced in section \ref{sec:integral-geometry}.
-In fact, we will see that the latter approach can be seen as a limiting case of the former.
-We will focus on the theoretical developments in this chapter, and leave the main body of numerical work to the following chapter where we will apply this to local structure in the hard sphere liquid.
+%% This chapter will focus on the morphological framework for the treatment of many-body correlations.
+%% This will cover two related topics:
+%% \begin{enumerate}
+%% \item \emph{Fundamental measure theory} which is ideally suited for correlations in Fourier space i.e.\ structure factors, and
+%% \item The \emph{morphometric approach}, which presents a highly accurate alternative for real space calculations, albeit with many caveats.
+%% \end{enumerate}
+%% These two approaches are related in that they both depend on integral geometry, which we introduced in section \ref{sec:integral-geometry}.
+%% In fact, we will see that the latter approach can be seen as a limiting case of the former.
+%% We will focus on the theoretical developments in this chapter, and leave the main body of numerical work to the following chapter where we will apply this to local structure in the hard sphere liquid.
 
-I have tried to make this chapter a relatively self-contained account of the treatment of many-body correlations in hard spheres.
-As such there will be a mixture of original results, pure literature review and some original \emph{presentation} of established results.
-I will indicate where each of these is the case, though loosely speaking it will start off unoriginal and get progressively more original.
-The final sections are entirely original: we use integral geometry to calculate distribution functions in hard spheres, which is work now published as Ref.\ \cite{RobinsonPRL2019}.
-The results of this chapter only entered the supplementary material of Ref.\ \cite{RobinsonPRL2019}, whereas the results of the next chapter were described in the main text.
+This chapter covers the theory for using morphological thermodynamics to calculate many-body correlations inside the hard sphere liquid.
+We leave applications of this framework to the next chapter.
+
+Part of the work in this chapter is published in Ref.\ \cite{RobinsonPRL2019}, and the remaining parts will appear in a forthcoming paper \cite{RobinsonJSTAT2019}.
 
 \section{Introduction}
 
@@ -238,33 +238,20 @@ Recognising that terms scaling faster than $R^3$ must be zero for it to remain w
   p \, \frac{4\pi R^3}{3} + a_2 \, 4 \pi R^2 + a_1 \, 4 \pi R + a_0 \, 4 \pi,
 \end{equation}
 where we identified the largest power with the work term $pV$ from comparison with \eqref{eq:surface-tension}, and $\{a_0, a_1, a_2\}$ are thermodynamic coefficients describing the subleading corrections.
-We have chosen to introduce factors of $4\pi$ in front of subleading terms to suggest how we will generalise beyond spherical geometries.
-For a general solute $K \subset \mathbb{R}^3$ we write the morphometric insertion cost as
+We have chosen to introduce factors of $4\pi$ in front of subleading terms to suggest how we will generalise beyond spherical geometries; these are normalisations of the intrinsic volumes, as can be seen by comparison with table \ref{table:geometric-quantities}.
+Specifically, these terms can be identified with the volume, surface area, and integrated mean and Gaussian curvatures.
+For a general solute $K \subset \mathbb{R}^3$ we then write the morphometric insertion cost as%
+\marginfootnote{This \emph{ansatz} is identical to the result we obtained as a limit of FMT in \eqref{eq:fmt-morphometric-2}, up to different normalisations of the intrinsic volumes.
+  We will not emphasise this point, as our intent is to develop the ideas independent of FMT with the goal of arriving at a more flexible theory which can be specialised to the correlation functions.}
 \begin{equation}\label{eq:morph-ansatz}
   \Delta\Omega[K] =
   p V[K]
   + a_2 A[K]
   + a_1 C[K]
-  + a_0 X[K],
+  + a_0 X[K].
 \end{equation}
-where $C$ and $X$ are the integrated mean and Gaussian curvatures.
-All of these functionals act on $K$ but the latter three can also be \emph{expressed} as surface integrals, as in
-\begin{subequations}
-  \begin{align}
-    A[K]
-    &=
-    \int_{\partial K} \, dA
-    \\
-    C[K]
-    &=
-    \frac{1}{2} \int_{\partial K} \Tr{\kappa} \, dA
-    \\
-    X[K]
-    &=
-    \int_{\partial K} \det{\kappa} \, dA
-  \end{align}
-\end{subequations}
-where $\kappa$ is the curvature tensor for the surface $\partial K$.
+%where $C$ and $X$ are the integrated mean and Gaussian curvatures.
+All of these functionals act on $K$ but the latter three can also be \emph{expressed} as surface integrals, as given by \eqref{eq:intrinsic-volumes-surface-integrals}.
 For a spherical solute these reduce to the values given in \eqref{eq:spt-ansatz}, so this represents a proper generalisation of SPT for more general geometries.
 
 We now give a brief justification of the above \emph{ansatzes}, in particular why there are only four terms in the expansion.
@@ -273,6 +260,7 @@ Nevertheless, there are compelling arguments from integral geometry \cite{KonigP
 
 The basis of the morphometric approach is that the functionals $\{V,A,C,X\}$ are normalisations of the so-called \emph{intrinsic volumes}.
 These play a central role in integral geometry as the \emph{only} physically meaningful size measures in the sense that they:
+\todo{Link in with background section on geometry}
 \begin{enumerate}
 \item Are invariant with respect to translations and rotations.
 \item Increase additively, i.e.\ they transform under combination of subsystems via the inclusion/exclusion relation e.g.\
@@ -381,14 +369,14 @@ It is straightforward to transform between these two conventions via \cite{Hanse
 \end{subequations}
 The resulting $\Delta \Omega$ will be identical whichever surface is chosen, except when there is a topological change in the molecular surface marking the breakdown of the theory; this is discussed in detail in Ref.\ \cite{OettelEL2009}.
 
-A crucial component of scaled particle approaches is thermodynamic consistency of the (osmotic) pressure via
+A crucial component of scaled particle approaches is thermodynamic consistency of the (osmotic) pressure \eqref{eq:consistent-osmotic-pressure} which we restate here as%
+\marginfootnote{We remind the reader that $f^\mathrm{ex} = F^\mathrm{ex}/V$ is the (excess) free energy density.}
 \begin{equation}\label{eq:osmotic-consistency-1}
   \beta p
   =
   \rho - \beta f^\mathrm{ex}
-  + \rho \left( \frac{\partial \beta f^\mathrm{ex}}{\partial \rho} \right)_{V,T}
+  + \rho \left( \frac{\partial \beta f^\mathrm{ex}}{\partial \rho} \right)_{V,T}.
 \end{equation}
-where $f^\mathrm{ex} = F^\mathrm{ex}/V$ is the (excess) free energy density.
 The form most useful for a single-component system comes from taking the derivative with respect to density, and noting the definition of the excess chemical potential
 \begin{equation*}
   \beta \mu^\mathrm{ex}
@@ -407,9 +395,8 @@ giving
     1 + \rho \left( \frac{\partial \beta \mu^\mathrm{ex}}{\partial \rho} \right)_{V,T}.
   %\end{split}
 \end{equation}
-\todo{A lot of this can be removed because we discuss it in the background chapter.}
-Note that the consistency relation \eqref{eq:osmotic-consistency-1} provides the route to generalising all of the arguments to arbitrary mixtures \cite{RosenfeldPRL1989,SollichAiCP2001,SantosPRE2012}.
-The free energy remains well-defined, even for polydisperse mixtures, if the composition dependence enters only through a set of weighted moments of the density $\{\xi_k\}$.
+Note that the consistency relation \eqref{eq:osmotic-consistency-1} provides the route to generalising all of our arguments to arbitrary mixtures \cite{RosenfeldPRL1989,SollichAiCP2001,SantosPRE2012}.
+As we discussed in \ref{sec:truncatable-free-energy}, the free energy remains well-defined for polydisperse mixtures if the composition dependence enters only through a set of weighted moments of the density $\{\xi_k\}$.
 Then \eqref{eq:osmotic-consistency-1} becomes
 \begin{equation}\label{eq:osmotic-consistency-3}
   \beta p
@@ -500,14 +487,15 @@ Combining this expression with the thermodynamic relation \eqref{eq:osmotic-cons
   \begin{align}
     \beta a_0^\mathrm{SPT/PY}
     &=
-    -\frac{\ln{(1- \eta)}}{4\pi}, \\
+    -\frac{\ln{(1- \eta)}}{4\pi},
+    \\
     \beta a_1^\mathrm{SPT/PY}
     &=
-    \frac{3\eta}{2\pi \sigma (1- \eta)},
+    \frac{3\eta}{2\pi \sigma (1 - \eta)},
     \\
     \beta a_2^\mathrm{SPT/PY}
     &=
-    \frac{6\eta + 3\eta^2}{2\pi \sigma^2 (1- \eta)^2},
+    \frac{6\eta + 3\eta^2}{2\pi \sigma^2 (1 - \eta)^2},
     \\
     \frac{\beta p^\mathrm{SPT/PY}}{\rho}
     &=
@@ -515,7 +503,9 @@ Combining this expression with the thermodynamic relation \eqref{eq:osmotic-cons
     \label{eq:py-pressure}
  \end{align}
 \end{subequations}
-The equation of state \eqref{eq:py-pressure} is equivalent to the one obtained through the solution of the Percus-Yevick (PY) integral equation (cf.\ section \ref{sec:fmt} and Ref.\ \cite{WertheimPRL1963}); these two routes have been unified within FMT \cite{RosenfeldPRL1989}.
+The equation of state \eqref{eq:py-pressure} is equivalent to the one obtained through the solution of the Percus-Yevick (PY) integral equation%
+\marginfootnote{See section \ref{sec:fmt} and Ref.\ \cite{WertheimPRL1963}.};
+these two routes have been unified within FMT as the Rosenfeld functional \eqref{eq:rosenfeld-functional} \cite{RosenfeldPRL1989} which we have already seen produces \emph{identical} coefficients in the bulk limit \eqref{eq:rosenfeld-coefficients}.
 
 Before we move on to generalisations of SPT, we will review one more thermodynamic relation which is satisfied by the classical solution \eqref{eq:py-coefficients}.
 This emphasises the remarkable degree of self-consistency of SPT, and the additional relation will be used to construct new theories in subsequent sections.
@@ -564,7 +554,7 @@ Inserting this expression into \eqref{eq:spt-derivative} and using the fact that
   \rho^{(1)}\left( R + \frac{\sigma}{2} \right)
 \end{equation*}
 and the contact density in this inhomogeneous system is $\rho^{(1)}(\sigma; \phi_\mathrm{ext}) := \rho^{(2)}(\sigma)/\rho = \rho \, g^{(2)}(\sigma)$ recalling the definition of $\rho^{(n)}$ for the homogeneous system%
-\marginfootnote{This is argument, due to Percus \cite{PercusPRL1962}, is ordinarily used to construct integral equation theories (cf.\ Ch.\ 4 of Ref.\ \cite{Hansen2013}).}
+\marginfootnote{This is argument, due to Percus \cite{PercusPRL1962}, is ordinarily used to construct integral equation theories based around the Ornstein-Zernike equation \eqref{eq:ornstein-zernike-spherical} (cf.\ Ch.\ 4 of Ref.\ \cite{Hansen2013}).}
 \eqref{eq:n-particle-density-pdf}, so we have
 \begin{equation*}\label{eq:spt-contact-density}
   \begin{split}
@@ -585,7 +575,7 @@ So inserting the SPT \emph{ansatz} \eqref{eq:spt-ansatz} gives
   =
   \frac{4\pi \sigma^2 \rho}{\beta} \, g^{(2)}(\sigma).
 \end{equation}
-The \emph{virial theorem} gives the value of $g^{(2)}(r)$ at contact as \cite{Hansen2013}
+The \emph{virial theorem} \eqref{eq:contact-theorem} in $d=3$ gives the value of $g^{(2)}(r)$ at contact as
 \begin{equation}\label{eq:contact-g}
   g^{(2)}(\sigma) =
   \frac{3}{2\pi \sigma^3 \rho} \left( \frac{\beta p}{\rho} - 1 \right),
@@ -616,7 +606,7 @@ Nonetheless, this self-consistency is a testament to the effectiveness of SPT an
 In the classical SPT approach described in the previous section, the SPT/PY equation of state emerges as an \emph{output} of the theory.
 Taking inspiration from the White Bear free energy functional \cite{RothJPCM2002}, we reformulate the SPT argument so that the equation of state is an \emph{input} to the theory.
 In so doing we aim to construct a theory from a more accurate equation of state, with the trade-off being that we must sacrifice some self-consistency.
-The main equation of state we will impose is the empirical Carnahan-Starling (CS) relation \eqref{eq:cs-pressure} known to be accurate across the whole stable liquid regime \cite{CarnahanJCP1969}, and even at the high density limits accessible to simulation in the supercooled regime \cite{BerthierPRL2016}.
+The main equation of state we will impose is the empirical Carnahan-Starling (CS) relation \eqref{eq:cs-pressure} known to be accurate across the whole stable liquid regime \cite{CarnahanJCP1969}, and even at the high density limits accessible to simulation in the supercooled regime \cite{BerthierPRL2016} (Fig.\ \ref{fig:swap-eos}).
 %The price we pay for a more accurate equation of state will be the loss of self consistency; we will no longer be able to satisfy all five of the previous equations \eqref{eq:spt-origin-continuity}, \eqref{eq:spt-mu-density-derivative} and \eqref{eq:spt-virial} simultaneously.
 %Instead we must make some choice over which ones to retain.
 Since the pressure is now a known input, the excess chemical potential can be determined by integrating \eqref{eq:osmotic-consistency-2} i.e.\
@@ -625,7 +615,6 @@ Since the pressure is now a known input, the excess chemical potential can be de
   = \left( \frac{\beta p}{\rho} - 1 \right)
   + \int_0^\eta \left( \frac{\beta p}{\rho} - 1 \right) \, \frac{d\eta'}{\eta'}.
 \end{equation}
-\todo{Can we reference the background section for this equation?}
 To keep the expressions simple we will not evaluate the chemical potential until the very end, but it should be recognised as a known variable wherever it appears.
 %% In particular, for the CS equation of state \eqref{eq:cs-pressure} this yields
 %% \begin{equation}\label{eq:cs-mu}
@@ -655,7 +644,7 @@ Solving these three equations gives the generalised SPT coefficients
     \frac{1}{2\pi\sigma} \left(
     (\eta - 3) \frac{\beta p}{\rho}
     + 2 \beta \mu^\mathrm{ex}[p]
-    + \ln{(1 - \eta)}
+    + 2 \ln{(1 - \eta)}
     + 3
     \right),
     \\
@@ -680,7 +669,7 @@ For the CS equation of state we obtain
     \beta a_1^\mathrm{SPT/CS}
     &=
     \frac{1}{2\pi\sigma} \left(
-    \frac{5 + \eta}{1 - \eta}
+    \frac{5\eta + \eta^2}{1 - \eta}
     + 2 \ln{(1 - \eta)}
     \right),
     \\
@@ -696,7 +685,9 @@ For the CS equation of state we obtain
     \frac{1 + \eta + \eta^2 - \eta^3}{(1-\eta)^3},
  \end{align}
 \end{subequations}
-which are \emph{identical} to the coefficients derived from the WBII free energy functional in Ref.\ \cite{Hansen-GoosJPCM2006}, although this is only clear after transforming to the excluded geometry through the canonical relations \eqref{eq:exclusion-transform}.
+which are \emph{identical} to the coefficients derived from the WBII free energy functional%
+\marginfootnote{We use a different normalisation of the intrinsic volumes in this chapter, so $a_1$ and $a_0$ must be multiplied through by $4\pi$ to recover \eqref{eq:cs-spt-coefficients}.}.
+The exact form of these coefficients differs from that stated in Ref.\ \cite{Hansen-GoosJPCM2006} due to a different definition of the surface, so the equivalence only becomes clear after transforming to the excluded geometry through the canonical relations \eqref{eq:exclusion-transform}.
 Remarkably, we have obtained these coefficients through a route completely different from their original derivation.
 
 In Ref.\ \cite{Hansen-GoosJPCM2006} the coefficients were determined within FMT by taking the limit of a binary mixture where one component is infinitely dilute.
@@ -923,7 +914,9 @@ For this reason, SPT/CS coefficients may give more accurate grand potentials (an
 
 We have presented the morphometric approach as a generalisation of SPT, thus placing the scaled particle \emph{ansatz} on more precise and physically motivated assumptions i.e.\ those underlying the theorems of integral geometry.
 Using the scaled particle approach we have systematically derived several theories for the hard sphere liquid.
-This included the classical SPT solution and the morphometric theory obtained in the bulk limit of the White Bear II density functional, although our method of deriving the latter functional is new.
+This included the classical SPT solution and the morphometric theory obtained in the bulk limit of free energy functionals based on the CS equation of state%
+\marginfootnote{See the discussion around \eqref{eq:wbii-coefficients} in section \ref{sec:fmt} for details of the original derivation.},
+although our method of deriving the latter theory is new.
 The third theory we derived is particularly suited for treating many-body correlations, which we used to accurately treat local structures in the hard sphere liquid in Ref.\ \cite{RobinsonPRL2019}.
 
 By making the underlying assumptions explicit we can better understand the limits of the theory: any deviation from the morphometric/SPT \emph{ansatz} must be due to a violation of translation/rotation invariance, additivity or continuity.
@@ -935,7 +928,8 @@ The morphometric \emph{ansatz} must break down approaching a critical point, so 
 
 Finally, we remark that while it is tempting to call the treatment of bulk degrees of freedom with the morphometric approach mean-field, this is not a completely accurate characterisation.
 Mean-field theories typically become formally exact in the limit of infinite spatial dimensions, where the thermodynamic role of fluctuations disappears.
-By contrast, the morphometric approach (and related theories like SPT and FMT) become formally exact in the one-dimensional limit of hard rods.
+By contrast, the morphometric approach (and related theories like SPT and FMT) become formally exact in the one-dimensional limit of hard rods%
+\marginfootnote{We will discuss this limit in more detail in chapter \ref{chapter:resummation}.}.
 Though this theory does not explicitly describe fluctuations, they are built into the choice of thermodynamic coefficients entering the theory.
 In this sense it is more accurate to describe the morphometric approach (and related theories) as an \emph{excluded volume} theory, or as a \emph{free volume} theory because the thermodynamics only shows divergent behaviour as $\eta \to 1$.
 
