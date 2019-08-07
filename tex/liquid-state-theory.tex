@@ -52,11 +52,11 @@ The classical Hamiltonian can be decomposed into kinetic and potential terms as 
 in the absence of an external field.
 Further, we constrain the coordinates inside the volume $V$%
 \marginfootnote{We use the usual physicist abuse of notation where $V$ refers to both a region in space $V \subset \mathbb{R}^d$, and also the volume of this space $V = V_d(V)$.}.
-The \emph{canonical} ensemble describes an equilibrium system at constant temperature $T$ with probability measure
+The \emph{canonical} ensemble describes an equilibrium system at constant temperature $T$ with probability measure%
+\marginfootnote{As a reminder for the reader, in the previous chapter we introduced $\beta = (k_B T)^{-1}$, with Boltzmann constant $k_B$ and temperature $T$.}[2cm]
 \begin{equation}
-  f^{(N)}(\vec{r}^N, \vec{p}^N) \propto e^{-\beta \mathcal{H}_N}
+  f^{(N)}(\vec{r}^N, \vec{p}^N) \propto e^{-\beta \mathcal{H}_N}.
 \end{equation}
-where $\beta = (k_B T)^{-1}$ with Boltzmann constant $k_B$ and temperature $T$.
 The proportionality constant ensures the probability distribution is properly normalised, leading to the canonical partition function
 \begin{equation}
   Q_N
@@ -629,7 +629,7 @@ The degree of self-consistency between different routes can act as a proxy for t
     r g^{(2)}(r) \frac{d \beta u}{d r} \, d\vec{r},
   \end{equation}
   using the definition of the 2-particle distribution function \eqref{eq:n-particle-distribution} as the average over the remaining degrees of freedom.
-  In the case of hard spheres $u'(r)$ is not well-defined because the pair potential is singular, however the cavity function
+  In the case of hard spheres $u'(r)$ is not well-defined because the pair potential \eqref{eq:hs-interaction} is singular, however the cavity function
   \begin{equation*}\label{eq:cavity-function}
     y^{(2)}(r) = g^{(2)}(r) e^{\beta u(r)}
   \end{equation*}
@@ -854,7 +854,7 @@ This expression, connecting density and fugacity, can be used to transform the e
   Further cancellations occur after inserting the explicit expressions for the cluster integrals \eqref{eq:cluster-integral} into the previous coefficients.
   This remaining terms consist only of the \emph{stars}%
   \marginfootnote{These are also called the \emph{irreducible diagrams} because they cannot be expressed as products of other diagrams.
-  In graph theoretic terms, these diagrams would be called \emph{2-vertex connected}.}:
+  In graph theoretic terms, these diagrams would be described as \emph{2-vertex connected}.}:
   those diagrams which cannot be disconnected by deleting a single vertex.
   We obtain the first few virial coefficients as
   \begin{subequations}
@@ -899,4 +899,4 @@ where $x_i$ is the mole fraction of species $i$ such that $x_i > 0$ and $\sum_{i
 $B_{s_1, \cdots, s_n}$ are the composition independent virial coefficients describing the contribution from interactions between $n$ particles of species $\{s_1, \cdots, s_n\}$.
 
 This concludes our summary of liquid state theory for homogeneous systems.
-We will now review its extensions to inhomogeneous systems in the following sections.
+In subsqeuent sections we will review its extensions to inhomogeneous systems, with the purpose of introducing the main framework we will use for our treatment of correlations inside the homogeneous liquid in chapters \ref{chapter:morphometric-framework}, \ref{chapter:morphometric-applications} and \ref{chapter:resummation}.
