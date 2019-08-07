@@ -43,7 +43,7 @@ The deepest and most universal questions then reside at the level of the most ba
 Unsurprisingly, liquids have been thoroughly explored in their long history of study, though fundamental open questions remain concerning their dynamical behaviour at high densities.
 To initiate this discussion we will introduce \emph{the} archetypal model for simple liquids: hard spheres.
 
-The hard sphere interaction energy is simply defined by a no-overlap condition%
+The hard sphere interaction energy is simply defined by forbidding any configurations where spheres mutually overlap%
 \marginfootnote{I like to imagine them as ideal billiard balls, without any dissipative forces so they continue to bounce off one another forever.},
 that is
 \begin{equation}\label{eq:hs-interaction}
@@ -97,12 +97,11 @@ where $\beta = (k_B T)^{-1}$, and we recognised that $a = 0$ because hard sphere
   \label{fig:fcc}
 \end{SCfigure}
 
-This normalisation ensures the bound $\eta < 1$, although in practice tighter upper bounds can be set by the constraints of spherical packings.
+This normalisation of volume fraction \eqref{eq:hs-volume-fraction} ensures the bound $\eta < 1$, although in practice tighter upper bounds can be set by the constraints of spherical packings.
 Optimal packing problems are simple in statement.
 \cite{Cohn2016,Conway1999}
-The maximum packing in $d = 3$ is the face centred cubic (FCC) (Fig.\ \cite{fig:fcc}), occuring at \emph{close packing} $\eta_\mathrm{CP} = \pi / (3\sqrt{2}) \sim 0.74$.
-Johannes Kepler postulated the FCC packing was optimal in 1611 
-250 years to solve, in a \emph{tour de force} of combined mathematical and computational arguments \cite{HalesAM2005}.
+The maximum packing in $d = 3$ is the face centred cubic (FCC) (Fig.\ \ref{fig:fcc}), occuring at \emph{close packing} $\eta_\mathrm{CP} = \pi / (3\sqrt{2}) \sim 0.74$.
+Johannes Kepler postulated the FCC packing was optimal in 1611, but it took 250 years to solve, in a \emph{tour de force} of combined mathematical and computational arguments \cite{HalesAM2005}.
 
 Not very accurate: notably it predicts no phase transition.
 Comparison to the actual phase diagram Fig.\ \ref{fig:hs-phase-diagram} shows that the hard sphere liquid%
@@ -118,8 +117,6 @@ Including both these contributions leads to the phase diagram that we know today
 
 If crystallisation can (somehow) be circumvented, what happens to the metastable liquid branch.
 For the single-component hard sphere liquid this question is of minimal practical interest, because it is nigh impossible to prevent crytallisation so this is an academic/fundamental question.
-
-Talk about liquids and crystals
 
 \begin{SCfigure}
   \includegraphics[width=0.75\linewidth,outer]{shade-balls}
