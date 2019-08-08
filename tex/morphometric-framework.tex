@@ -9,6 +9,7 @@
 
 \externaldocument{background}
 \externaldocument{resummation}
+\externaldocument{appendix-spt-singularities}
 
 \begin{document}
 \chapter{Many-body correlations from integral geometry}
@@ -25,7 +26,10 @@
 %% In fact, we will see that the latter approach can be seen as a limiting case of the former.
 %% We will focus on the theoretical developments in this chapter, and leave the main body of numerical work to the following chapter where we will apply this to local structure in the hard sphere liquid.
 
-This chapter covers the theory for using morphological thermodynamics to calculate many-body correlations inside the hard sphere liquid.
+This chapter covers the theory for using morphological thermodynamics to treat many-body correlations inside the hard sphere liquid.
+We introduced the morphometric approach in section \ref{sec:fmt} as a special case of fundamental measure theory, which is the traditional way it has been derived.
+In this chapter we present the morphometric approach in a new context as a generalisation of scaled particle theory, and derive several morphometric theories for hard spheres of fundamental and practical interest.
+Our central result will be a new theory which is particularly suited to the treatment of many-body correlation functions in the hard sphere liquid, which we demonstrate by numerical tests against simulation.
 We leave applications of this framework to the next chapter.
 
 Part of the work in this chapter is published in Ref.\ \cite{RobinsonPRL2019}, and the remaining parts will appear in a forthcoming paper \cite{RobinsonJSTAT2019}.
@@ -39,6 +43,7 @@ The dynamics of the system at high density in the metastable regime above the fr
 Proposed mechanisms for dynamical phenomena all loosely fall under the broad umbrella of many-body correlations; nucleation occurs via crystal seed formation \cite{SearJPCM2007}, and to explain dynamic arrest approaching the glass transition thermodynamic theories invoke cooperatively rearranging regions \cite{LubchenkoARPC2007} or elastic soft modes \cite{BritoJCP2009} while kinetic theories posit the existence of dynamical defects \cite{ChandlerARPC2010}.
 In a recent letter \cite{RobinsonPRL2019} we proposed a framework for treating many-body correlations, and developed an operational scheme for predicting the populations and dynamics of local structural motifs within a uniform liquid.
 Central to this is the use of the \emph{morphometric approach}.
+\todo{A lot of this is repeated: review after finishing lit review.}
 
 The morphometric approach provides an efficient means of treating the thermodynamics of a bulk liquid without fully determining its equilibrium density profile \cite{KonigPRL2004,RothPRL2006,Hansen-GoosPRL2007,RobinsonPRL2019}.
 Detailed investigations have shown that it is highly accurate in the hard sphere liquid regime \cite{OettelEL2009,AshtonPRE2011,LairdPRE2012,BlokhuisPRE2013,UrrutiaPRE2014,Hansen-GoosJCP2014}, so we can expect an accurate treatment where the bulk system provides background depletion interactions while its detailed microstates remain unimportant.
@@ -279,9 +284,13 @@ The central assertion of the morphometric approach is that the insertion cost $\
 A classic theorem of integral geometry due to Hadwiger \cite{Hadwiger1957} states that the intrinsic volumes are the \emph{only} class of functionals with the properties listed above; a corollary of this is that they form a linear vector space for any functional possessing these properties.
 The morphometric form \eqref{eq:morph-ansatz} then follows.
 In addition to providing a more general \emph{ansatz} than SPT, this approach lays out its underlying assumptions explicitly eschewing the ad-hoc way in which the original SPT \emph{ansatz} \eqref{eq:spt-ansatz} was obtained.
+Moreover, classical SPT assumes hard spheres from the outset while our generalisation based on integral geometry is more flexible, allowing for generalisations to mixtures, more realistic pair potentials and non-spherical particles without compromising its assumptions.
 
 The morphometric approach is certainly an approximation, as the insertion cost will not rigorously possess the three properties above in reality.
-Notably, in SPT $\Delta\Omega$ is known to contain singularities in its high order derivatives with solute radius \cite{ReissJCP1959}; these non-analytic terms result from violations of the additivity assumption.
+Notably, in SPT $\Delta\Omega$ is known to contain singularities in its high order derivatives with solute radius%
+\marginfootnote{We review the original argument for this from Ref.\ \cite{ReissJCP1959} in Appendix \ref{appendix:spt-singularities}.
+This argument is quite general, demonstrating that \emph{any} analytic form of $\Delta \Omega$ in terms of geometric quantities cannot be exact.};
+these non-analytic terms result from violations of the additivity assumption.
 Nevertheless, the approximation is accurate in hard spheres \cite{OettelEL2009,AshtonPRE2011,LairdPRE2012,BlokhuisPRE2013,UrrutiaPRE2014,Hansen-GoosJCP2014} so these violations should be small.
 
 %% The connection between intrinsic volumes and thermodynamics was made by K\"onig et al \cite{KonigPRL2004}.
@@ -685,14 +694,14 @@ For the CS equation of state we obtain
     \frac{1 + \eta + \eta^2 - \eta^3}{(1-\eta)^3},
  \end{align}
 \end{subequations}
-which are \emph{identical} to the coefficients derived from the WBII free energy functional%
+which are \emph{identical} to the coefficients derived from the White Bear II (WBII) free energy functional%
 \marginfootnote{We use a different normalisation of the intrinsic volumes in this chapter, so $a_1$ and $a_0$ must be multiplied through by $4\pi$ to recover \eqref{eq:cs-spt-coefficients}.}.
 The exact form of these coefficients differs from that stated in Ref.\ \cite{Hansen-GoosJPCM2006} due to a different definition of the surface, so the equivalence only becomes clear after transforming to the excluded geometry through the canonical relations \eqref{eq:exclusion-transform}.
 Remarkably, we have obtained these coefficients through a route completely different from their original derivation.
 
 In Ref.\ \cite{Hansen-GoosJPCM2006} the coefficients were determined within FMT by taking the limit of a binary mixture where one component is infinitely dilute.
 Here we completely avoided FMT, in favour of geometrical arguments similar to the classical SPT approach outlined in the previous section.
-This suggests that this generalised scaled particle argument is built into the structure of the FMT functional (WBII) of Ref.\ \cite{Hansen-GoosJPCM2006}; this is not an obvious fact as the derivation of the WBII functional did not explicitly involve these arguments.
+This suggests that this generalised scaled particle argument is built into the structure of the WBII functional of Ref.\ \cite{Hansen-GoosJPCM2006}; this is not an obvious fact as the derivation of this functional did not explicitly involve these arguments.
 Rather, the WBII functional was constructed based on a novel extension of the CS equation to mixtures by requiring self-consistency of the pressure in \eqref{eq:osmotic-consistency-3} \cite{Hansen-GoosJCP2006}.
 %The fact that these two routes lead to the same thermodynamic coefficients suggests there is an equivalence between the selected thermodynamic relations.
 We imposed this relation by setting the chemical potential in \eqref{eq:spt-mu} using the chemical potential obtained via \eqref{eq:osmotic-consistency-2}.
@@ -889,7 +898,7 @@ Comparison of this quantity against molecular dynamics simulations shows similar
 Notably, the Kirkwood approximation performs surprisingly well at the three-body level in both of these tests.
 
 Next we compare the theories' predicted surface tension against simulation data.
-The surface tension at an infinite planar wall is simply $a_2$ because it conjugates with the area.
+The surface tension at a planar wall is simply $a_2$ because it conjugates with the area.
 In Ref.\ \cite{DavidchackMP2015} a highly accurate $a_2$ was measured for hard spheres through extensive simulation, which was parameterised by the following expression
 \begin{equation}\label{eq:quasi-exact-surface-tension}
   %\begin{split}
