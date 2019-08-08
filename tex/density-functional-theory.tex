@@ -239,7 +239,7 @@ These two properties can be elegantly summarised by the \emph{variational princi
 \end{equation}
 which provides the route to numerical applications of DFT; minimisation of the grand potential with respect to density is sufficient to determine the equilibrium density profile and its corresponding free energy.
 
-To bring the variational principle to more practical use we can inserting the functional form of the grand potential deduced in section \ref{sec:inhomogeneous-potentials} into \eqref{eq:dft-equilibrium} giving
+To bring the variational principle to more practical use we can insert the functional form of the grand potential deduced in section \ref{sec:inhomogeneous-potentials} into \eqref{eq:dft-equilibrium} giving
 \begin{equation*}
   %\frac{\delta \Omega}{\delta \rho^{(1)}(\vec{r})}
   %= 0
@@ -302,8 +302,7 @@ or rearranged for the density
   }{ \Lambda^d }.
 \end{equation}
 This equation provides the basis for iterative schemes to solve \eqref{eq:dft-equilibrium} (see e.g.\ \cite{RothJPCM2010}).
-\todo{Edit this section.}
-Importantly, this process incorporates an arbitrary external potential inside $\psi(\vec{r})$ which could represent e.g.\ a test-particle inserted into the liquid.
+Importantly, this process incorporates an arbitrary external potential inside $\psi(\vec{r})$ which could represent e.g.\ a test-particle inserted into the liquid so that the grand potential represents a chemical potential.
 This example provides a potential way of using an inhomogeneous framework to approach the homogeneous liquid, illustrating the usefulness of the DFT formalism.
 
 Further functional derivatives of the equilibrium condition provides a whole hierarchy of equivalent equilibrium criteria.
@@ -1090,40 +1089,40 @@ We label these as the White Bear II (WBII) coefficients because they were first 
   The conversions between the different surfaces are stated in chapter \ref{chapter:morphometric-framework}: see the discussions around \eqref{eq:exclusion-transform}.}
 \cite{Hansen-GoosJCP2006, Hansen-GoosJPCM2006} which is similar in form and construction to the CS functional described, although it is marginally less self-consistent.
 
-\subsection{Superposition and convolution approximations}
+%% \subsection{Superposition and convolution approximations}
 
-\todo{Finish this section}
-In the Kirkwood superposition approximation \cite{KirkwoodJCP1935} many-body correlations are expressed as pairwise products of the two-body correlation function, i.e.
-\begin{equation}
-  g^{(n)}(\vec{r}^n) =
-  \prod_{i < j} g^{(2)}(\vec{r}_i, \vec{r}_j),
-\end{equation}
-which correctly satisfies the hard-core condition, but violates the sum rule
-\begin{equation}
-  \begin{aligned}
-    \rho^{(n)}(\vec{r}^n) &=
-    \frac{1}{\Xi} \sum_{N=n}^\infty \frac{z^N}{(N-n)!} \int e^{-\beta U_N} \, d\vec{r}^{(N-n)} \\
-    &=
-    \int d\vec{r}_n \left(
-    \frac{1}{\Xi} \sum_{N=n}^\infty \frac{z^N}{(N+1 - (n+1))!} \int e^{-\beta U_N} \, d\vec{r}^{(N-(n+1))}
-    \right) \\
-    &=
-    \int d\vec{r}_n \left(
-    \frac{1}{\Xi} \sum_{N=n}^\infty \frac{z^N}{(N - (n+1))!} \int e^{-\beta U_N} \, d\vec{r}^{(N-(n+1))}
-    \right) \\
-    &=
-    \frac{1}{N-n}
-    \int \rho^{(n+1)}(\{\vec{r}^n, \vec{r}_{n+1}\}) d\vec{r}_{n+1},
-  \end{aligned}
-\end{equation}\todo{This is wrong.}
-and the related convolution approximation \cite{JacksonRMP1962,IchimaruPRA1970,BarratMP1988}%
-\todo{Check this expression is correct - it almost certainly is not.}
-\begin{equation}
-  S^{(n)}(\vec{k}^n) =
-  (1 + \tilde{c}^{(n)}(\vec{k}^n))
-  \prod_{i < j} S^{(2)}(\vec{k}_i, \vec{k}_j)
-\end{equation}
-satisfies the sum rule but fails to satisfy the hard-core condition.
+%% \todo{Finish this section}
+%% In the Kirkwood superposition approximation \cite{KirkwoodJCP1935} many-body correlations are expressed as pairwise products of the two-body correlation function, i.e.
+%% \begin{equation}
+%%   g^{(n)}(\vec{r}^n) =
+%%   \prod_{i < j} g^{(2)}(\vec{r}_i, \vec{r}_j),
+%% \end{equation}
+%% which correctly satisfies the hard-core condition, but violates the sum rule
+%% \begin{equation}
+%%   \begin{aligned}
+%%     \rho^{(n)}(\vec{r}^n) &=
+%%     \frac{1}{\Xi} \sum_{N=n}^\infty \frac{z^N}{(N-n)!} \int e^{-\beta U_N} \, d\vec{r}^{(N-n)} \\
+%%     &=
+%%     \int d\vec{r}_n \left(
+%%     \frac{1}{\Xi} \sum_{N=n}^\infty \frac{z^N}{(N+1 - (n+1))!} \int e^{-\beta U_N} \, d\vec{r}^{(N-(n+1))}
+%%     \right) \\
+%%     &=
+%%     \int d\vec{r}_n \left(
+%%     \frac{1}{\Xi} \sum_{N=n}^\infty \frac{z^N}{(N - (n+1))!} \int e^{-\beta U_N} \, d\vec{r}^{(N-(n+1))}
+%%     \right) \\
+%%     &=
+%%     \frac{1}{N-n}
+%%     \int \rho^{(n+1)}(\{\vec{r}^n, \vec{r}_{n+1}\}) d\vec{r}_{n+1},
+%%   \end{aligned}
+%% \end{equation}\todo{This is wrong.}
+%% and the related convolution approximation \cite{JacksonRMP1962,IchimaruPRA1970,BarratMP1988}%
+%% \todo{Check this expression is correct - it almost certainly is not.}
+%% \begin{equation}
+%%   S^{(n)}(\vec{k}^n) =
+%%   (1 + \tilde{c}^{(n)}(\vec{k}^n))
+%%   \prod_{i < j} S^{(2)}(\vec{k}_i, \vec{k}_j)
+%% \end{equation}
+%% satisfies the sum rule but fails to satisfy the hard-core condition.
 
 %% In equilibrium
 %% \begin{equation}

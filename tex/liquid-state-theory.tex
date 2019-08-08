@@ -418,65 +418,65 @@ In terms of the structure factor \eqref{eq:compressibility-h2} is written succin
   \chi_T = \lim_{\vec{k} \to 0} S^{(2)}(\vec{k}).
 \end{equation}
 
-\todo{Kirkwood superposition and convolution approximations}
+%% \todo{Kirkwood superposition and convolution approximations}
 
-\subsection{?}
+%% \subsection{?}
 
-\todo{Finish this section}
+%% \todo{Finish this section}
 
-\begin{equation}
-  \chi_T \rho
-  \left( \frac{\partial \rho^{(n)}}{\partial \rho} \right)_{V,T}
-  =
-  (n - \rho V) \rho^{(n)}(\vec{r}^n)
-  + \int \rho^{(n+1)}(\vec{r}^{n+1}) \, d\vec{r}_{n+1}
-\end{equation}
-\begin{equation}
-  \left( \frac{\partial g^{(n)}(\vec{r}^n)}{\partial \rho} \right)_{V,T}
-  =
-  \frac{1}{\rho^n}
-  \left( \frac{\partial \rho^{(n)}(\vec{r}^n)}{\partial \rho} \right)_{V,T}
-  - \frac{n}{\rho} g^{(n)}(\vec{r}^n)
-\end{equation}
-\begin{equation}
-  \begin{split}
-    \frac{\chi_T}{\rho^n}
-    \left( \frac{\partial \rho^{(n)}}{\partial \rho} \right)_{V,T}
-    &=
-    \left(\frac{n}{\rho} - V\right) g^{(n)}(\vec{r}^n)
-    + \int g^{(n+1)}(\vec{r}^{n+1}) \, d\vec{r}_{n+1}
-    \\ &=
-    \chi_T \left( \frac{\partial g^{(n)}}{\partial \rho} \right)_{V,T}
-    + \chi_T \frac{n}{\rho} g^{(n)}
-  \end{split}
-\end{equation}
-\begin{equation}
-  \chi_T \left( \frac{\partial g^{(n)}}{\partial \rho} \right)_{V,T}
-  =
-  \left(
-  \frac{n (1 - \chi_T)}{\rho}
-  - V
-  \right) g^{(n)}(\vec{r}^n)
-  + \int g^{(n+1)}(\vec{r}^{n+1}) \, d\vec{r}_{n+1}
-\end{equation}
-\begin{equation}
-  \begin{split}
-    \chi_T \left( \frac{\partial g^{(2)}}{\partial \rho} \right)_{V,T}
-    &=
-    \left(
-    \frac{2 (1 - \chi_T)}{\rho}
-    - V
-    \right) g^{(2)}(\vec{r}^2)
-    + \int g^{(3)}(\vec{r}^3) \, d\vec{r}_3
-    \\
-    \left( \frac{\partial g^{(2)}}{\partial \rho} \right)_{V,T}
-    &=
-    \frac{2 (1 - \chi_T)}{\rho \chi_T}
-    g^{(2)}(\vec{r}^2)
-    +
-    \int g^{(3)}(\vec{r}^3) - \rho g^{(2)}(\vec{r}^2) \, d\vec{r}_3
-  \end{split}
-\end{equation}
+%% \begin{equation}
+%%   \chi_T \rho
+%%   \left( \frac{\partial \rho^{(n)}}{\partial \rho} \right)_{V,T}
+%%   =
+%%   (n - \rho V) \rho^{(n)}(\vec{r}^n)
+%%   + \int \rho^{(n+1)}(\vec{r}^{n+1}) \, d\vec{r}_{n+1}
+%% \end{equation}
+%% \begin{equation}
+%%   \left( \frac{\partial g^{(n)}(\vec{r}^n)}{\partial \rho} \right)_{V,T}
+%%   =
+%%   \frac{1}{\rho^n}
+%%   \left( \frac{\partial \rho^{(n)}(\vec{r}^n)}{\partial \rho} \right)_{V,T}
+%%   - \frac{n}{\rho} g^{(n)}(\vec{r}^n)
+%% \end{equation}
+%% \begin{equation}
+%%   \begin{split}
+%%     \frac{\chi_T}{\rho^n}
+%%     \left( \frac{\partial \rho^{(n)}}{\partial \rho} \right)_{V,T}
+%%     &=
+%%     \left(\frac{n}{\rho} - V\right) g^{(n)}(\vec{r}^n)
+%%     + \int g^{(n+1)}(\vec{r}^{n+1}) \, d\vec{r}_{n+1}
+%%     \\ &=
+%%     \chi_T \left( \frac{\partial g^{(n)}}{\partial \rho} \right)_{V,T}
+%%     + \chi_T \frac{n}{\rho} g^{(n)}
+%%   \end{split}
+%% \end{equation}
+%% \begin{equation}
+%%   \chi_T \left( \frac{\partial g^{(n)}}{\partial \rho} \right)_{V,T}
+%%   =
+%%   \left(
+%%   \frac{n (1 - \chi_T)}{\rho}
+%%   - V
+%%   \right) g^{(n)}(\vec{r}^n)
+%%   + \int g^{(n+1)}(\vec{r}^{n+1}) \, d\vec{r}_{n+1}
+%% \end{equation}
+%% \begin{equation}
+%%   \begin{split}
+%%     \chi_T \left( \frac{\partial g^{(2)}}{\partial \rho} \right)_{V,T}
+%%     &=
+%%     \left(
+%%     \frac{2 (1 - \chi_T)}{\rho}
+%%     - V
+%%     \right) g^{(2)}(\vec{r}^2)
+%%     + \int g^{(3)}(\vec{r}^3) \, d\vec{r}_3
+%%     \\
+%%     \left( \frac{\partial g^{(2)}}{\partial \rho} \right)_{V,T}
+%%     &=
+%%     \frac{2 (1 - \chi_T)}{\rho \chi_T}
+%%     g^{(2)}(\vec{r}^2)
+%%     +
+%%     \int g^{(3)}(\vec{r}^3) - \rho g^{(2)}(\vec{r}^2) \, d\vec{r}_3
+%%   \end{split}
+%% \end{equation}
 
 \subsection{Thermodynamic routes to the free energy}
 

@@ -3,33 +3,82 @@
 
 \subsection{Motivation}
 
-Want to describe how `big' an object is.
-First we define our objects: sets in Euclidean space.
-We will see that the only reasonable notion of size is a \emph{continuous} rigid-motion invariant valuation.
-Advantage of geometric approach is in the intuition gained.
-With that in mind the aim of this section is to provide a primer on useful geometric concepts and relations.
-Differential geometry is widely known, but here we introduce its lesser known cousin integral geometry.
-Particularly regarding integral geometry, which is generally unfamiliar to people from physics background.
-Emphasis here is on concepts and intuition rather than rigour.
+Geometry has been a recurring theme in physical theories, because of its deepness and intuitive nature.
+There are many ways that geometric ideas can be incorporated, but our focus will be on expansions of thermodynamic quantities in terms of \emph{sizes}.
+This is because extensivity is important to statistical mechanics; the thermodynamic limit requires it.
+So by focusing on quantities which are extensive we ensure a thermodynamically consistent treatment.
+We will use the familiar notion of \emph{extensivity} within statistical mechanics to guide this discussion.
+% illustrate the usefulness of a description in terms of general notions of sizes
+Defining an extensive quantity as one that scales proportionally to system size, the first meaning of size that comes to mind is probably the volume.
 
-Motivate sizes: free volume theories.
-Numerous examples of usefulness in statistical mechanics such as Asakura-Ozawa, depletion as excluded volume; free volume theories, write the free energy as a volume in space; surface tension, excess term in area; and the Young-Laplace equation, which determines the pressure decrease inside a droplet from the surface curvature.
-We introduce the field of \emph{integral geometry} which can generalise the underlying geometric principles of these theories into a unified framework for characterising size
+%The first notion of size that likely comes to mind is the volume, though we will generalise to all reasonable notions of size.
+%The simplest example we can give is from statistical mechanics: an \emph{extensive variable} is one that scales proportionally to the system volume.
+%For a finite system $K \subset \mathbb{R}^d$ %the volume is expressed
+%% \begin{equation}
+%%   V[K] = \int_K d\vec{r}.
+%% \end{equation}
+%Then,
+An extensive variable would be written
+\begin{equation*}
+  U = u V
+\end{equation*}
+where $u$ would be an energy density which is intensive, i.e.\ it does not change with system volume.
+Extensivity is a fundamental concept within statistical mechanics, so at the very least the volume is an important size measure.
+By generalising our notion of `size' beyond volume we hope to arrive at new ideas that prove useful in developing new theories.
+We will begin by listing some examples of other possible notions of size.
+
+Firstly, the surface area $A$ is another intuitive notion of size, because.
+Secondly, those familiar with differential geometry will have probably encountered the various curvature measures.
+In particular, we introduce the integrated mean and Gaussian curvatures $C$ and $X$.
+We can \emph{express} these new quantities as the surface integrals
+\begin{subequations}\label{eq:intrinsic-volumes-surface-integrals}
+  \begin{align}
+    A[K]
+    &=
+    \int_{\partial K} \, d\vec{r},
+    \\
+    C[K]
+    &=
+    \frac{1}{2} \int_{\partial K} \Tr{\kappa} \, d\vec{r},
+    \\
+    X[K]
+    &=
+    \int_{\partial K} \det{\kappa} \, d\vec{r},
+  \end{align}
+\end{subequations}
+where $\kappa$ is the curvature tensor for the surface $\partial K$.
+%All of these functionals act on $K$ but the latter three can also be \emph{expressed} as surface integrals, as in
+In addition, interfacial properties would be normally expressed in terms of these quantities with common examples including the surface tension conjugating with the area and the Young-Laplace equation, which expresses the pressure difference between two phases to the curvature of its boundary.
+Together, the volume, area and the curvature measures are Both of these are popular motifs in statistical mechanics, with the area being important for surface tension corrections to the energy, the interfacial energy involves the surface area; 
+%is a powerful tool for incorporating intuitive, flexible ideas into theories.
+%For this reason geometric approaches are common in statistical mechanics such as the Young-Laplace equation, which corrects Asakura-Ozawa
+
+Other examples of theories which incorporate notions of size include the Asakura-Ozawa, which describes depletion forces using exclusion volumes, and more generally any free volume theory which expresses an energy in terms of a volume in space.
+We introduce the field of \emph{integral geometry} which generalises the underlying geometric principles of these theories into a unified framework for characterising size.
 %% We could argue that fundamentally these theories are based on measuring physical sizes.
 %% Integral geometry offers a mathematically rigorous formalism for describing sizes, so presents a possible starting point for free volume theories.
-The mathematical formalism which provides elegant and unified description of sizes, underlying the morphological approach taken in the thesis.
-Ideas from this branch of mathematics were crucial to the development of fundamental measure theory (section \ref{sec:fmt}), so it makes sense to place this before the section on liquid state theory.
+This mathematical formalism provides elegant and unified description of sizes, and was crucial in the development of many theories of the liquid state.
+The morphological approach taken in the thesis.
+%Ideas from this branch of mathematics were crucial to the development of fundamental measure theory (section \ref{sec:fmt}), so it makes sense to place this before the section on liquid state theory.
+As integral geometry is generally unfamiliar to people with a background in physics, we will place emphasis on the concepts and intuition rather than rigour.
 
-The first notion of size that likely comes to mind is the volume, however we wish to generalise.
+\subsection{What do we even mean by size?}
+
+First we define our objects: sets in Euclidean space.
+We will see that the only reasonable notion of size is a \emph{continuous} rigid-motion invariant valuation.
+
 We could completely describe the size of simple objects by completely defining their geometry, e.g.\ the dimensions of a box.
+This is of course sufficient, however it is not very useful.
 However, this may not be straightforward for more complex objects, and by abstracting the problem somewhat we can obtain useful theorems etc.
+%% We now give a brief justification of the above \emph{ansatzes}, in particular why there are only four terms in the expansion.
+%% Radius is the only natural parameter for a sphere, however for more general geometries there might be arbitrarily many parameters so one may wonder if they should be included in a general geometric expansion.
 
 So we have to generalise what we mean by size, simultaneously we will have to carefully specify what objects we wish to measure.
 We might naively select all subsets of $\mathbb{R}^d$, however this leads to pathological problems; the Banach-Tarski paradox ensues.
-Asign a size to a geometric object.
 We need to be precise with what kind of geometries we consider: a definition too broad may not allow meaningful size measures, while a narrow definition may cease to be useful.
 
-We consider Polyconvex sets (convex ring).
+We consider polyconvex sets%
+\marginfootnote{The set of polyconvex objects is also sometimes called the \emph{convex ring}.}.
 Avoid pathological sets: Banach-Tarski paradox allows one to break a sphere apart and recompose it as two identical spheres.
 We want a well-defined volume, so need to avoid sets which allow this.
 \marginfootnote{Have to be formed by countable union of convex objects.
@@ -73,25 +122,22 @@ Euler characteristic describes the topology.
 
 For $d=3$ we have the important Gauss-Bonnet theorem.
 
-\begin{SCfigure}[H]
-  \missingfigure[figwidth=\linewidth]{boundary points in 1d (rod)}
-  \caption{Only convex object in 1d is a rod.}
-\end{SCfigure}
+The only convex object in 1d is a line segment.
 
-\begin{SCfigure}[H]
-  \missingfigure[figwidth=0.5\linewidth]{$\partial B$}%
-  \missingfigure[figwidth=0.5\linewidth]{$\partial B$}
-  \caption{Effect of holes: divide 2d circle in two (2 rods + 2 points).}
-\end{SCfigure}
+%% \begin{SCfigure}[H]
+%%   \missingfigure[figwidth=0.5\linewidth]{$\partial B$}%
+%%   \missingfigure[figwidth=0.5\linewidth]{$\partial B$}
+%%   \caption{Effect of holes: divide 2d circle in two (2 rods + 2 points).}
+%% \end{SCfigure}
 
-\begin{SCfigure}[H]
-  \missingfigure[figwidth=0.5\linewidth]{$\partial B$}%
-  \missingfigure[figwidth=0.5\linewidth]{$\partial B$}
-  \caption{Effect of cavities: divide 3d sphere in two (2 disks + circle).}
-\end{SCfigure}
+%% \begin{SCfigure}[H]
+%%   \missingfigure[figwidth=0.5\linewidth]{$\partial B$}%
+%%   \missingfigure[figwidth=0.5\linewidth]{$\partial B$}
+%%   \caption{Effect of cavities: divide 3d sphere in two (2 disks + circle).}
+%% \end{SCfigure}
 
 \begin{tcolorbox}[title=A note on nomenclature]
-  The terms `sphere' and `ball' are used interchangeably in physics (and colloquially), however in geometry these refer to different things; ball refers to the solid object whereas sphere refers to its boundary, i.e.\
+  The terms `sphere' and `ball' are used interchangeably in physics (and colloquially), however in geometry these refer to different things; `ball' refers to the solid object whereas `sphere' refers to its boundary, i.e.\
   \begin{equation*}
     S^{d-1} = \partial B^d,
   \end{equation*}
@@ -122,144 +168,8 @@ Euler characteristic is the simplest size measure: why is this a size measure?
   using the fact that the Euler characteristic of a compact body is unity.
 \end{theorem}
 
-Quantity familiar from differential geometry is the curvature tensor.
-A surface
-where $C$ and $X$ are the integrated mean and Gaussian curvatures.
-All of these functionals act on $K$ but the latter three can also be \emph{expressed} as surface integrals, as in
-\begin{subequations}\label{eq:intrinsic-volumes-surface-integrals}
-  \begin{align}
-    A[K]
-    &=
-    \int_{\partial K} \, dA
-    \\
-    C[K]
-    &=
-    \frac{1}{2} \int_{\partial K} \Tr{\kappa} \, dA
-    \\
-    X[K]
-    &=
-    \int_{\partial K} \det{\kappa} \, dA
-  \end{align}
-\end{subequations}
-where $\kappa$ is the curvature tensor for the surface $\partial K$.
+The main point of this theorem is that it establishes an equivalence between two seemingly distinct measures of size (? could be equivalence between surface measure and volume one): Gaussian curvature and Euler characteristic.
 For a spherical solute these reduce to the values given in \eqref{eq:spt-ansatz}, so this represents a proper generalisation of SPT for more general geometries.
-
-\subsection{Coefficient change for parallel surfaces}
-\hl{Assume}
-\begin{equation}\label{eq:dilated-volumes}
-  V_k(A \minkplus \epsilon B_d)
-  =
-  \sum_{i=0}^d b_k^i V_i(A)
-\end{equation}
-\hl{Considering parallel bodies the intrinsic volumes}
-\begin{equation*}
-  V_k (\epsilon K)
-  =
-  \epsilon^k V_k.
-\end{equation*}
-\hl{The coefficients are independent of the geometry of} $A$, \hl{so we can consider a simple spherical geometry.
-Therefore}
-\begin{equation*}
-  \begin{split}
-  %V_k (B_d \minkplus \epsilon B_d)
-  &=
-  V_k \left[ (1+\epsilon) B_d \right]
-  \\ &=
-  (1+\epsilon)^k V_k(B_d)
-  \\ &=
-  \sum_{i=0}^k {k \choose i} \epsilon^{k-i} V_k(B_d)
-  \\ &=
-  \sum_{i=0}^k {d-i \choose d-k}
-  \frac{\omega_{d-i}}{\omega_{d-k}}
-  \epsilon^{k-i} V_i(B_d)
-  \end{split}
-\end{equation*}
-using \eqref{eq:intrinsic-volume-ball} to reach the last line.
-Comparison with \eqref{eq:dilated-volumes} allows us to read off the coefficients
-\begin{equation}\label{eq:dilated-volume-coefficients}
-  b_k^i =
-  \begin{cases}
-    { d-i \choose d-k }
-    \frac{\omega_{d-i}}{\omega_{d-k}}
-    \epsilon^{k-i}
-    & \; i \le k \\
-    0 & \; i > k
-  \end{cases}
-\end{equation}
-giving the classical Steiner's formula for convex bodies in the case that $k=d$.
-Finally we have
-\begin{equation}
-  %V_k(A \minkplus \epsilon B_d) =
-  \sum_{i=0}^k { d-i \choose d-k }
-  \frac{\omega_{d-i}}{\omega_{d-k}}
-  \epsilon^{k-i} V_i(A)
-\end{equation}
-i.e.
-\begin{equation}
-  \begin{split}
-    \sum_{k=0}^d a_k V_k(A)
-    &=
-    %\sum_{k=0}^d a_k' V_k(A \minkplus \epsilon B_d)
-    \\ =
-    \sum_{k=0}^d a_k' \sum_{i=0}^k b_k^i V_i(A)
-    &=
-    \sum_{k=0}^d V_k(A) \sum_{i=k}^d a_i' b_i^k
-  \end{split}
-\end{equation}
-or
-\begin{equation}
-  a_k = \sum_{i=k}^d a_i' b_i^k,
-\end{equation}
-which can be inverted for $a_i'$.
-In $d=2$ this yields
-\begin{subequations}
-  \begin{align}
-    a_2' &= a_2 \\
-    a_1' &= a_1 - 2 \epsilon a_2 \\
-    a_0' &= a_0 - \pi \epsilon a_1 + \pi \epsilon^2 a_2,
-  \end{align}
-\end{subequations}
-or for $d=3$
-\begin{subequations}
-  \begin{align}
-    a_3' &= a_3 \\
-    a_2' &= a_2 - 2 \epsilon a_3 \\
-    a_1' &= a_1 - \pi \epsilon a_2 + \pi \epsilon^2 a_3 \\
-    a_0' &=
-    a_0 - 4 \epsilon a_1 +
-    2 \pi \epsilon^2 a_2 - \frac{4}{3} \pi \epsilon^3 a_3.
-  \end{align}
-\end{subequations}
-For example, transforming \eqref{eq:cs-spt-coefficients} to the parallel surface $\epsilon = \frac{\sigma}{2}$ gives
-\begin{subequations}\label{eq:cs-spt-coefficients-parallel}
-  \begin{align}
-    \beta a_0'
-    &=
-    - \frac{\eta(4 - 11\eta + 13\eta^2 - 4\eta^3)}{3(1-\eta)^3}
-    - 4 \ln{(1-\eta)},
-    \\
-    \beta a_1'
-    &=
-    \frac{1}{2\sigma} \left(
-    \frac{\eta(4 - 10\eta + 20\eta^2 - 8\eta^3)}{(1-\eta)^3}
-    + 4 \ln{(1-\eta)}
-    \right),
-    \\
-    \beta a_2'
-    &=
-    - \frac{2}{\pi \sigma^2}
-    \left(
-    \frac{\eta(1 + 2\eta + 8\eta^2 - 5\eta^3)}{(1-\eta)^3}
-    + \ln{(1-\eta)}
-    \right),
-    \\
-    \frac{\beta p}{\rho}
-    &=
-    \frac{1 + \eta + \eta^2 - \eta^3}{(1-\eta)^3},
-  \end{align}
-\end{subequations}
-which are identical to those in Ref.\ \cite{Hansen-GoosJPCM2006}, up to a different normalisation of the geometric parameters; we use the intrinsic volumes $\{V_0, V_1, V_2, V_3\}$ whereas in Ref.\ \cite{Hansen-GoosJPCM2006} $\{X, C, A, V\}$ are used.
-The transformations between these two sets of geometric properties are given in Table~\ref{table:geometric-quantities}.
 
 \subsection{Generalisation: intrinsic volumes}
 
@@ -280,7 +190,7 @@ To introduce the intuition behind these generalised volumes we start from the ob
 \end{enumerate}
 
 Generalising the above intuition to $d$-dimensions, we see that in general we can imagine $d+1$ projections and so expect $d+1$ corresponding volumes.
-We define the define the $k$th intrisic volume as the average size of the projections onto $k$-dimensional linear subspaces of $\mathbb{R}^d$, i.e.\
+We define the $k$th intrisic volume as the average size of the projections onto $k$-dimensional linear subspaces of $\mathbb{R}^d$, i.e.\
 %Denoting the space of all $k$ dimensional linear subspaces in $\mathbb{R}^d$ as $\mathrm{Graff}(d,k)$ (the affine Grassmanian), the intrinsic volume is obtained by
 \begin{equation}\label{eq:intrinsic-volumes}
   V_k(K)
@@ -317,18 +227,18 @@ Finally, with the intrinsic volumes the generalisation of the morphometric appar
 \begin{SCtable}
   \begin{minipage}[b]{\linewidth}
     \centering
-    \begin{tabular}{cccc}
+    \begin{tabular}{ccccc}
       \toprule
-      $k$ & $\omega_k$ & $V_k(B_2)$ & $V_k(B_3)$ \\
+      $k$ & $\omega_k$ & $V_k(B_1)$ & $V_k(B_2)$ & $V_k(B_3)$ \\
       \midrule
-      0 & 1 & $\pi$ & 1 \\
-      1 & 2 & $\pi$ & 4\\
-      2 & $\pi$ & $\pi$ & $2\pi$\\
-      3 & $\frac{4\pi}{3}$ && $\frac{4\pi}{3}$ \\
+      0 & 1 & 1 & 1 & 1 \\
+      1 & 2 & 2 & ? & 4 \\
+      2 & $\pi$ && $\pi$ & $2\pi$ \\
+      3 & $\frac{4\pi}{3}$ &&& $\frac{4\pi}{3}$ \\
       \bottomrule
     \end{tabular}
   \end{minipage}
-  \caption{Intrinsic volumes of the unit ball.}
+  \caption{Intrinsic volumes of the unit ball in physical dimensions $d \le 3$.}
 \end{SCtable}
 
 \begin{theorem}{Hadwiger's characterisation theorem}
@@ -339,10 +249,6 @@ I.e. a continuous rigid-motion invariant valuation can be written
 \end{equation}
 where $c_i$ are some coefficients independent of $A$.
 \end{theorem}
-
-We now give a brief justification of the above \emph{ansatzes}, in particular why there are only four terms in the expansion.
-Radius is the only natural parameter for a sphere, however for more general geometries there might be arbitrarily many parameters so one may wonder if they should be included in a general geometric expansion.
-Nevertheless, there are compelling arguments from integral geometry \cite{KonigPRL2004} to only retain the four terms listed which we will summarise below.
 
 The basis of the morphometric approach is that the functionals $\{V,A,C,X\}$ are normalisations of the so-called \emph{intrinsic volumes}.
 These play a central role in integral geometry as the \emph{only} physically meaningful size measures in the sense that they:

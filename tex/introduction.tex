@@ -171,22 +171,23 @@ This subtlety emerges because the floating balls are confined to the water surfa
   \label{fig:rcp}
 \end{SCfigure}
 
-Now that we have given an overview of the firmly established bulk phase behaviour of hard spheres, we can turn to address the unresolved questions remaining.
-So far, this has only concerned \emph{equilibrium} properties of hard sphere liquids.
-In equilibrium, a great deal is even known about the \emph{inhomogeneous} liquid, e.g.\ in confinement \cite{GonzalezJCP1998}, thanks to advances in density functional theory \cite{RosenfeldPRL1989,RothJPCM2010}.
-By contrast, there are still unresolved questions concerning the properties of the \emph{metastable} phase in hard spheres, especially concerning dynamical phenomena.
+Now that we have given an overview of the firmly established bulk phase behaviour of hard spheres, we can turn to address the questions which remain unresolved.
+So far we have only discussed the \emph{equilibrium} properties of hard spheres which are well-described by theory; In equilibrium, a great deal is even known about the \emph{inhomogeneous} liquid, e.g.\ in confinement \cite{GonzalezJCP1998}, thanks to advances in density functional theory \cite{RosenfeldPRL1989,RothJPCM2010}.
+By contrast, there are still much debate surrounding the nature of the \emph{metastable} phase in hard spheres, especially concerning its dynamical properties.
 %We now turn to the central questions still unresolved concerning the hard sphere system, which focus on their metastable properties at high densities.
 %As the most widely studied model interaction potential we know a lot about its equilibrium structure (phase diagram) in bulk and even inhomogeneous thanks to density functional theory \cite{?,?,?}.
 %However, its behaviour off-equilibrium at high densities is hotly debated.
 %The two biggest unresolved research topics for this subject:
-The metastable phase is the continuation of the phase liquid above the melting point, shown by a dashed line in Fig.\ \ref{fig:hs-phase-diagram}.
+The metastable phase is the continuation of the liquid phase above the melting point, shown by a dashed line in Fig.\ \ref{fig:hs-phase-diagram}.
 We refer to this branch as the \emph{supercooled liquid} in analogy to the metastable phase of real liquids which are formed by cooling below their freezing temperature; in this sense we think of increasing density as equivalent to lowering the temperature.
-The supercooled liquid is not strictly a phase in the sense of being the free energy minimum, as it must eventually crystallise, however it shares many of the same properties with equilibrium phases%
-\marginfootnote{Namely, that it is long lived, and its properties are time-invariant.
-  We will discuss this in more detail in section \ref{sec:glass}.}
-so we will find it useful to describe it with similar language.
 
-As we see it, the two central open questions in the metastable region are:
+The supercooled liquid is not strictly a phase in the sense of being the free energy minimum, as it must eventually crystallise, however it has many features in common with equilibrium phases.
+In particular, the supercooled liquid is long-lived and eventually reaches a steady state.
+That is, a liquid sample compressed above the freezing density will  passed all observables will decay to well-defined values; for all intents and purposes we say the sample has ``equilibrated'', although eventually the sample will crystallise through nucleation.
+We will postpone discussion of the specifics of supercooled liquids until section \ref{sec:glass}, as for now we only wish to introduce the key questions posed.
+%so we will find it useful to describe it with similar language.
+
+As we see it, the two central questions regarding the metastable liquid are:
 \begin{enumerate}
 \item \emph{Metastable liquid}: if crystallisation could (somehow) be circumvented, what is the ultimate fate of the supercooled branch as one keeps increasing the density?
   This is complicated by the fact that as density increases the dynamical timescales increase by $\gtrsim 14$ orders of magnitude, so no ordinary simulation or experiment can probe `equilibrium' properties.
@@ -206,13 +207,12 @@ In chapter \ref{chapter:background} we will present an overview of liquid state 
 Towards the end of this chapter we will discuss the supercooled liquid in more detail to provide proper context to the first question outlined above, which is our motivation.
 We save discussion of nucleation until chapter \ref{chapter:aerosols}.
 
-Our approach to treating the supercooled liquid is to coarse-grain the degrees of freedom...
+Our approach to treating the supercooled liquid is to coarse-grain the degrees of freedom.
 The problem that we solve is quite general: given an interaction potential, what kinds of structures form in the bulk liquid.
 To the best of our knowledge this has never been done in any system.
 Admittedly, this was enabled by the simplicity of the hard sphere interaction potential, but it is still a non-trivial problem that we solve.
 Were it to be generalised to more complex systems with more interesting interaction potentials we could imagine it being used to assist design of new chemical synthesis, tailoring self assembly of colloidal particles, or for predicting how proteins fold in aqueous solution.
 %One can imagine this method being useful in more complex systems such as protein folding in aqueous solution, predictive self-assembly of complex structures, predictive chemical reactions etc.
-
 The method is entertaining and somewhat counterintuitive: a scheme to predict things about a macroscopic system from fewer particles than a person (traditionally) has fingers.
 
 We mention some other open problems of hard spheres, that will not be directly addressed though many of the ideas and methods developed in this thesis could transfer.
