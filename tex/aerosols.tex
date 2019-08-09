@@ -113,7 +113,7 @@ Our approximations will reduce this to a moving boundary problem with solely dif
 
 Prior to crystallisation a drying droplet will be approximately spherical, so we consider a phase boundary at radius $R(t)$ evolving in time $t$.
 Writing the distance from the center of the droplet as $r$, the phase boundary separates the liquid phase inside $r \in [0, R(t))$ from the vapour phase outside $r \in (R(t), \infty]$.
-The droplet is sketched in Fig.\ \ref{fig:aerosol-droplet}
+The droplet is sketched in Fig.\ \ref{fig:aerosol-droplet}.
 %In the experiments are performed in ambient conditions so the surrounding gas is strictly speaking a mixture, but to a reasonable approximation we can treat it as a single component.
 
 We label the solute and (ambient) gas components as $s$ and $g$ respectively, and the evaporating solvent component as $f$ for \emph{fluid} as it exists in both the liquid and gas phases.
@@ -272,7 +272,7 @@ Bulk viscosity measurements are unavailable at high densities because of the pro
   + \alpha \rho^{(s)}
 \end{equation}
 where $\alpha$ is a fitting parameter.
-The fits are shown in Fig.\ \ref{fig:diffusion-fit}a.
+The fits are shown in Fig.\ \ref{fig:diffusion-fit}(a).
 We model the diffusion constant by assuming the Stokes-Einstein form
 \begin{equation}\label{eq:stokes-einstein}
   D_\mathrm{eff} = \frac{k_B T}{6 \pi \eta a},
@@ -280,7 +280,7 @@ We model the diffusion constant by assuming the Stokes-Einstein form
 where $a$ is the Stokes radius and $\eta$ is the dynamic viscosity.
 To determine $a$ we calibrated direct measurements of diffusion from molecular dynamics simulations for \ce{NaCl}\cite{LyubartsevJPC1996} and experiments for \ce{NaNO3}\cite{YehJCED1970} against the viscosity fits.
 We obtain $a=\SI{0.169}{\nano\metre}$ for \ce{NaCl} and $a=\SI{0.167}{\nano\metre}$ for \ce{NaNO3}.
-The resulting diffusion coefficients entering the droplet evolution equation are shown in Fig.\ \ref{fig:diffusion-fit}b.
+The resulting diffusion coefficients entering the droplet evolution equation are shown in Fig.\ \ref{fig:diffusion-fit}(b).
 
 \begin{SCfigure}
   \includegraphics[width=0.9\linewidth,outer]{aerosol-diffusion-fit}
@@ -541,7 +541,7 @@ The main advantage of this scheme over more simple schemes (e.g. forward Euler m
 We integrated initially homogeneous droplets of \ce{NaCl} and \ce{NaNO3} for various ambient conditions.
 The resulting radius , illustrated for \ce{NaNO3} in Fig.\ \ref{fig:nano3-trajectory}; we see that at short times there is excellent agreement, but the evaporation rate is underestimated at longer times.
 This is likely do to limitations of the simplified evaporation model \eqref{eq:sherwood-correction} or because the neglect of conductive forces causes the evaporation to become diffusion-limited at long-times when the surface is highly enriched.
-We achieve good agreement with experiments for \ce{NaCl} across their entire time-evolution (Fig.\ \ref{fig:nacl-trajectory}b) because these droplets crystallise before the slowdown of the evaporation rate.
+We achieve good agreement with experiments for \ce{NaCl} across their entire time-evolution (Fig.\ \ref{fig:nacl-trajectory}(b)) because these droplets crystallise before the slowdown of the evaporation rate.
 
 \section{Nucleation model}
 \label{sec:nucleation}
@@ -697,7 +697,7 @@ where $t_s$ is the time at which saturation is reached $\rho^{(s)}(R) = \rho^{(s
 \end{equation*}
 subject to the constraint that the fitting parameters $a, b, c \in [0, \infty]$ to ensure that $p_\mathrm{liq}$ decreases monotonically from $p_\mathrm{liq}(t=0)=1$.
 
-We perform this inversion procedure for the \ce{NaNO3} droplets in Fig.\ \ref{fig:state-points}b.
+We perform this inversion procedure for the \ce{NaNO3} droplets in Fig.\ \ref{fig:state-points}(b).
 The resulting nucleation rates show non-mononic behaviour, increasing to a maximum before decreasing to essentially zero over the duration of the experiment.
 This results in a finite final survival probability $p_\mathrm{liq} > 0$, and starkly contrasts with the picture predicted by CNT where $p_\mathrm{liq}$ would remain close to unity for most of the experiment before sharply dropping to zero as all droplets reproducibly crystallise.
 
