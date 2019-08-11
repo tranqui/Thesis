@@ -152,8 +152,9 @@ The most natural description of structure starts from the \emph{$n$-particle den
 \begin{equation}\label{eq:n-particle-density-pdf}
   \mathrm{Prob}\left[ \textit{any } n \textrm{ particles in volume } d\vec{r}^n \right]
   :=
-  \rho^{(n)}(\vec{r}^n) \, d\vec{r}^n.
+  \rho^{(n)}(\vec{r}^n) \, d\vec{r}^n,
 \end{equation}
+where $\vec{r}^n := \{\vec{r}_1, \cdots, \vec{r}_n\}$ are the particle positions.
 This is formally obtained by integrating the full (configurational) probability distribution over the remaining degrees of freedom.
 For the single-component system this yields~\cite{Hansen2013}
 \begin{equation}\label{eq:n-particle-density}
@@ -169,7 +170,7 @@ The $n$-particle density is an intuitive descriptor for liquid structure because
   :=
   \frac{e^{-\beta U_N}}{Z_N} \, d\vec{r}^N,
 \end{equation*}
-to a subset of particles in an open system.
+to a subset of particles within an open system.
 $\rho^{(n)}$ thus provides the correct procedure for coarse-graining onto selected degrees of freedom within a bulk system.
 The analogy with canonical ensemble fails in that $\rho^{(n)}$ is unnormalised so it is not strictly a probability density function; integrating \eqref{eq:n-particle-density} over the remaining degrees of freedom yields%
 \marginfootnote{In keeping with the analogy to canonical ensemble we treat this integral as a partition function, and so account for indistinguishability of the $n$ particles by dividing through by $n!$.}
@@ -404,7 +405,11 @@ We define this from the Fourier transform of the pair distribution function in t
   \begin{split}
     S^{(2)}(\vec{k})
     :=&
-    \big\langle \tilde{\rho}(\vec{k}) \tilde{\rho}(-\vec{k}) \big\rangle
+    \frac{
+      \big\langle \tilde{\rho}(\vec{k}) \tilde{\rho}(-\vec{k}) \big\rangle
+    }{
+      \langle N \rangle
+    }
     =
     1 + \rho \tilde{g}^{(2)}(\vec{k})
     \\ =&
@@ -482,7 +487,7 @@ In terms of the structure factor \eqref{eq:compressibility-h2} is written succin
 
 Often the main objective of a statistical physicist is to determine the phase diagram of a system, which can be deduced from the free energy if known.
 Liquid state theory contains several routes to calculate the free energy, of which we will describe two below.
-Ordinarily the end result of these approaches is an equation of state for the pressure $p = p(\rho)$, which gives the free energy implicitly through the thermodynamic relation
+Ordinarily, the end result of these approaches is an equation of state for the pressure $p = p(\rho)$, giving the free energy implicitly through the thermodynamic relation
 \begin{equation}\label{eq:pressure-relation-1}
   p
   =

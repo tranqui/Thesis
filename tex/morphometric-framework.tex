@@ -32,7 +32,7 @@ In this chapter we present the morphometric approach in a new context as a gener
 Our central result will be a new theory which is particularly suited to the treatment of many-body correlation functions in the hard sphere liquid, which we demonstrate by numerical tests against simulation.
 We leave applications of this framework to the next chapter.
 
-Part of the work in this chapter is published in Ref.\ \cite{RobinsonPRL2019}, and the remaining parts will appear in a forthcoming paper \cite{RobinsonJSTAT2019}.
+Part of the work in this chapter is published in Ref.\ \cite{RobinsonPRL2019}, and the remaining parts will appear in a forthcoming paper \cite{RobinsonPRE2019}.
 
 \section{Introduction}
 
@@ -200,6 +200,7 @@ This completes our proof that the correlations can be transformed to a potential
 %% \end{itemize}
 
 \subsection{Representing the insertion cost as a solvation problem}
+\label{sec:insertion-as-solvation}
 
 For systems with excluded volume interactions, we can divide the space into a local component $\mathcal{L} \subset \mathbb{R}^d$ of volume $V_\mathcal{L}$ inaccessible to solvent degrees of freedom and the remaining space $\mathcal{R} = \mathbb{R}^d \setminus \mathcal{L}$ of volume $V_\mathcal{R}$ filled by the rest of the liquid (Fig. \ref{fig:system}).
 The total volume is $V = V_\mathcal{L} + V_\mathcal{R}$ so the homogeneous grand potential is
@@ -427,7 +428,7 @@ For weighted densities consistent with an SPT (or FMT) approach, it has been sho
   \includegraphics[width=\linewidth,outer]{g2-contact}
   \caption[Contact values of pair distribution function $g^{(2)}(r)$]{
     Contact values of the radial distribution function against volume fraction $\eta$ and reduced pressure for the hard sphere liquid using \eqref{eq:contact-g} with \eqref{eq:distribution-solvation} and \eqref{eq:morph-ansatz} for the explicit form of $g^{(2)}$, assuming the Carnahan-Starling (CS) equation of state.
-    Contact values are determined with two sets of morphometric coefficients: SPT/CS (section \ref{sec:cs-spt}, specifically \eqref{eq:cs-spt-coefficients}, or equivalently the White Bear II bulk coefficients of Ref.\ \cite{Hansen-GoosJPCM2006}) which performs poorly in the supercooled regime (shaded area), and coefficients derived in this chapter (section \ref{sec:virial-spt}) using the virial theorem which is exact by construction.
+    Contact values are determined with two sets of morphometric coefficients: SPT/CS (section \ref{sec:cs-spt}, specifically \eqref{eq:cs-spt-coefficients}, or equivalently the White Bear II bulk coefficients \eqref{eq:wbii-coefficients} of Ref.\ \cite{Hansen-GoosJPCM2006}) which performs poorly in the supercooled regime (shaded area), and coefficients derived in this chapter (section \ref{sec:virial-spt}) using the virial theorem which is exact by construction.
     The hard sphere freezing and melting volume fractions are indicated by purple dashed lines to show the onset of the supercooled regime.
   }
   \label{fig:contact-g}
@@ -695,7 +696,7 @@ For the CS equation of state we obtain
  \end{align}
 \end{subequations}
 which are \emph{identical} to the coefficients derived from the White Bear II (WBII) free energy functional%
-\marginfootnote{We use a different normalisation of the intrinsic volumes in this chapter, so $a_1$ and $a_0$ must be multiplied through by $4\pi$ to recover \eqref{eq:cs-spt-coefficients}.}.
+\marginfootnote{We use a different normalisation of the intrinsic volumes in this chapter, so $a_1$ and $a_0$ must be multiplied through by $4\pi$ to recover \eqref{eq:wbii-coefficients}.}.
 The exact form of these coefficients differs from that stated in Ref.\ \cite{Hansen-GoosJPCM2006} due to a different definition of the surface, so the equivalence only becomes clear after transforming to the excluded geometry through the canonical relations \eqref{eq:exclusion-transform}.
 Remarkably, we have obtained these coefficients through a route completely different from their original derivation.
 

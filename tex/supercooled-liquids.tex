@@ -45,6 +45,9 @@
 %% However, if one corrects this with more modern techniques to measure just the entropy corresponding to non-trivial motion we see that there is a point where the configurational (i.e.\ not purely vibrational) entropy vanishes: this would imply the system is frozen in a single configuration.
 %% Such a point would define a transition to a genuine thermodynamic phase, an ideal glass.
 
+%% Hard glasses: high elastic constants.
+%% Colloidal suspensions: soft matter version, small elastic constants.
+%% Same phenomenology though.
 %% What is a glass?
 %% Frozen in a (apparently) disordered state.
 %% All sorts of glasses, structural, spin, orientational, electron, vortex.
@@ -57,6 +60,8 @@ In the introduction we established the supercooled liquid in hard spheres as the
 To provide proper context we will discuss supercooled liquids more generally here, including thermal systems where temperature is the more natural control parameter.
 As such, we will be considering the effect of decreasing temperature on the supercooled liquid.
 
+%First, we describe the phenomenology of supercooled liquids before delving into the specific theories to explain them.
+
 \subsection{Properties of the supercooled liquid}
 
 We will start by exploring the ways in which supercooled liquids are the \emph{same} as regular liquids, expanding in more detail on ideas discussed in the introduction.
@@ -64,7 +69,9 @@ Then we will move onto the ways in which they \emph{differ} from ordinary liquid
 
 \begin{SCfigure}
   \missingfigure[figwidth=\linewidth]{$g^{(2)}$}%
-  \caption{Minimum change in pairwise structure with increasing density above the melting point, as measured by the pair distribution function \eqref{eq:n-particle-distribution}.}
+  \caption[Structural change in the supercooled liquid (at the pair level)]{
+    Minimal change in pairwise structure with increasing density above the melting point, as measured by the pair distribution function \eqref{eq:n-particle-distribution}.
+  }
   \label{fig:g2-changes}
 \end{SCfigure}
 
@@ -77,19 +84,21 @@ Formally speaking, the system is sometimes said to be in \emph{local equilibrium
 As a consequence, the liquid loses any memory of its preparation and all observables become time independent.
 That is, for some observable $A$ we can write
 \begin{equation*}
-  \langle A(t) \rangle = \langle A \rangle
+  \langle A(t) \rangle = \langle A \rangle.
 \end{equation*}
-As an example, the pair distribution function $g^{(2)}(r)$ is seen to change very little in hard spheres as the density is increased (Fig.\ \ref{fig:g2-changes}).
-As pair correlations are the main measure of structure in simple liquids, this suggests minimal structural change undergone by the high density liquid.
-Second, time correlation functions become independent e.g.\
+This includes the static correlation functions, introduced in section \ref{sec:liquid-structure}, which remain well-defined in the supercooled regime.
+Furthermore, the pair distribution function $g^{(2)}(r)$ is seen to change very little as the density (or temperature) is increased (decreased) from the normal liquid; as an example, we show this for hard spheres in Fig.\ \ref{fig:g2-changes}.
+As pair correlations are the main measure of structure in simple liquids, this suggests minimal structural change occurs in the high density liquid.
+As a corollary, time correlation functions become \emph{time-translation invariant} meaning they depend only on time differences i.e.\
 \begin{equation*}
-  \langle A(t) A(t') \rangle = \langle A(0) A(t - t') \rangle
+  \langle A(t) A(t') \rangle = \langle A(0) A(t - t') \rangle.
 \end{equation*}
 
-A more sophisticated examination of the equilibrium involves the response functions.
+A more sophisticated way in which supercooled liquids can be thought of as equilibrium systems involves the response functions.
 In an equilibrium system, the response of a system to a small perturbation is directly related to the microscopic source of fluctuations%
 \marginfootnote{Temperature, in the case of liquids.}.
-The fluctuation-dissipation relation for an observable $A$ expresses the system's susceptibility to perturbation as
+The \emph{fluctuation-dissipation relation} for an observable $A$ expresses the system's susceptibility to perturbation as
+\todo{Check this equation is correct against a textbook, get a citation.}
 \begin{equation*}
   \chi_A (t, t')
   =
@@ -103,179 +112,182 @@ The fluctuation-dissipation relation for an observable $A$ expresses the system'
   \right)
 \end{equation*}
 where the Heaviside theta function imposes causality.
-\todo{Check this against textbook}
+These relations are obeyed in supercooled liquids, even though they are not a proper equilibrium state.
 
-Both of these conditions are violated in the glass, as this is a truly non-equilibrium state.
-That is, we see ageing, and hysteresis in response to perturbations.
+Now we turn to discussing the ways in which supercooled liquids are markedly different from normal liquids: in their \emph{dynamics}.
+Typically this is discussed in the context of two (related) quantities: the \emph{viscosity} and the \emph{relaxation time}.
+Viscosity measures how resistant the system is to flow, while relaxation time measures the typical microscopic time for the density profile to relax i.e.\ for liquid-like behaviour caused by particle diffusion.
+A defining feature of supercooled liquids is that these numbers become so large that the precise details of the measurement used does not matter.
+We will discuss this dynamical slowdown further on, but for now we introduce a specific time correlation function in order to frame the discussion.
+A popular measurement is the (self) intermediate scattering function (ISF), defined by \cite{JanssenFP2018}
+\begin{equation}\label{eq:isf}
+  F(k, t)
+  =
+  \frac{
+    \big\langle \tilde{\rho}(\vec{k}, t) \tilde{\rho}(-\vec{k}, 0) \big\rangle
+  }{
+    \langle N \rangle
+  }
+\end{equation}
+which reduces to the static structure factor \eqref{eq:static-structure-factor} at zero elapsed time $F(k, t=0) = S^{(2)}(k)$.
+An example ISF is shown in Fig.\ \ref{fig:isf}, displaying many features emblematic of the supercooled liquid which distinguishes it from the regular liquid.
+\hl{describe the features, introduce alpha relaxation time}
 
 \begin{SCfigure}
-  \includegraphics[width=0.7\linewidth,center]{transition-state}
-  \caption[Transition state theory]{
-    A double well potential with a barrier of $\Delta\Phi$, representing the minimum energy required for the system to pass between the two wells.
+  \includegraphics[width=0.9\linewidth,center]{isf}
+  \caption[Intermediate scattering function in a supercooled liquid]{
+    Typical intermediate scattering function in a supercooled liquid.
+    The power law predictions are from mode-coupling theory.
+    Reproduced from Ref.\ \cite{JanssenFP2018}.
   }
+  \label{fig:isf}
 \end{SCfigure}
 
-Now we turn to discussing the ways in which supercooled liquids are markedly different from their ordinary counterparts: in their \emph{dynamics}.
-\todo{Repetition of `ordinary counterparts'}
 A helpful framework to guide discussion of dynamical processes is \emph{transition state theory}.
-In this approach a dynamical process, e.g.\ a chemical reaction, is imagined to occur through a dynamical bottleneck (Fig.\ \ref{?}).
+In this approach a dynamical process, e.g.\ a chemical reaction, is imagined to occur through a dynamical bottleneck (Fig.\ \ref{fig:transition-state}).
 We imagine evaluating a thermodynamic potential%
 \marginfootnote{Which thermodynamic potential this corresponds to will depend on the ensemble.}
 $\Phi$ at every point along the reaction path.
 The process will then be limited by the rate of thermal fluctuations of size $\Delta \Phi$, i.e.\ those able to reach the transition state.
 In equilibrium, the timescale for the process will then scale by the Boltzmann weight
-\begin{equation}
+\begin{equation}\label{eq:reaction-time}
   \tau \sim e^{\beta \Delta \Phi}.
 \end{equation}
-This approach can be given more rigorous justification through e.g.\ an \emph{instanton} approach \cite{LangerAP1969}.
-The main limitation of this approach is the assumption that the dynamical process occurs through an effectively one-dimensional reaction path; later, we will introduce a more sophisticated form of this framework which considers the high dimensional \emph{energy landscape}.
+There will be additional kinetic prefactors out in front, however for large barriers we expect the thermodynamic contribution to dominate because of its exponential weighting.
+This framework can be more rigorously justified through e.g.\ an \emph{instanton} approach \cite{LangerAP1969}.
+The main limitation of transition state theory is the assumption that dynamical processes occur through effectively one-dimensional reaction paths; later, we will introduce a more sophisticated form of this framework which considers the high dimensional \emph{energy landscape}.
 
-We discussed the static correlation functions at length, which is fine for liquids where equilibrium occurs on a \SI{100}{\pico\second} timescale.
-Dynamical effects are highly nontrivial at high densities.
-
-To look at dynamics we could equivalently consider viscosity or relaxation time.
-We will discuss nucleation theory in chapter \ref{chapter:aerosols}, but briefly we expect:
+As an example of how useful transition state theory can be, we very briefly consider \emph{classical nucleation theory} which we will return to in more detail in chapter \ref{chapter:aerosols}.
+Imagining crystallisation to occur by the spontaneous formation of the new phase inside of the liquid, then the timescale for this process will scale as
 \begin{equation*}
-  \tau_x \sim \exp{ \beta \Delta}
+  \tau_\mathrm{crys} \sim e^{ \beta \Delta \Phi_\mathrm{crys}}.
 \end{equation*}
+Then, assuming a temperature-independent barrier $\Delta \Phi_\mathrm{crys}$, the timescale for nucleation will increase exponentially as temperature is lowered allowing for the supercooled liquid to become long-lived.
+This is essentially the reason it is possible for supercooled liquids to exist at all, and reach an effectively time-translation invariant state without decaying to the crystal \cite{CavagnaPR2009}.
+This argument is highly system dependent, as systems with small barriers to nucleating a crystal will have too large a propensity for crystallisation that a metastable supercooled phase cannot be observed.
+Single-component hard spheres are particularly prone to crystallise at very high densities, so polydispersity is typically introduced to frustrate the crystal structure making the supercooled liquid longer lived.
+This is an imperfect process however, as even highly polydisperse systems have been found to crystallise \cite{BommineniPRL2019,BerthierPRL2016}.
+
+\begin{SCfigure}
+  \includegraphics[width=0.7\linewidth,center]{transition-state}
+  \caption[Transition state theory]{
+    A double-well potential featuring a barrier $\Delta\Phi$, representing the minimum energy required for the system to pass between the two \emph{basins}.
+    The $x$-axis is the \emph{reaction coordinate}, representing a one-dimensional projection of the complete degrees of freedom.
+  }
+  \label{fig:transition-state}
+\end{SCfigure}
+
+Applying transition-state theory \eqref{eq:reaction-time} to relaxation time in the liquid, we may expect the alpha relaxation time to scale as
+\begin{equation}\label{eq:tau-barrier}
+  \tau_\alpha \sim e^{\beta \Delta \Phi_\alpha}
+\end{equation}
+where $\Delta \Phi_\alpha$ is the barrier to relaxation.
+Naively, we might expect the barrier to remain constant with temperature, corresponding to e.g.\ the cost of breaking a chemical bond, then we arrive at the Arrhenius law
+\begin{equation}\label{eq:arrhenius-law}
+  \ln{\tau_\alpha} \propto \frac{1}{T}.
+\end{equation}
+This argument captures the high temperature behaviour very well and, outside of soft matter, it applies reasonably well to molecular glassformers e.g.\ silica-based materials%
+\marginfootnote{That is, the material which the average person would mean when they say ``glass''.},
+where relaxation essentially depends on the timescale to break a covalent bond.
+Experimental data \hl{(citation)} for \ce{SiO2} confirms that $\ln{\tau_\alpha}$ scales linearly with $\beta$ (Fig.\ \ref{fig:angell}).
+By convention, systems which scale in an Arrhenius fashion are called \emph{strong}%
+\marginfootnote{This baffling naming convention has nothing to do with the mechanical properties.}
+glassformers.
+
+Our focus is on soft matter, with hard spheres as the prototypical model, where the  chemical bonds (typically van der Waals attractions) are much weaker than in molecular systems.
+Consequently, there is less of a case for an Arrhenius relationship \eqref{eq:arrhenius-law}, and empirically we find striking deviations from it.
+Many systems show \emph{super-Arrhenius} scaling with temperature (Fig.\ \ref{fig:angell}), including mixtures of Lennard-Jones atoms and molecular orthoterphenyl.
+Correspondingly, systems scaling faster than exponentially are labelled as \emph{fragile}.
+
+Some modification is required for hard particle systems, where temperature is not a natural control parameter.
+As we argued in the introduction, pressure is the only meaningful state variable.
+The authors of Ref.\ \cite{BerthierPRE2009} argue that pressure plays a role equivalent to inverse temperature in athermal systems, because of similarities in their limit behaviour.
+Alternatively, we could make a free volume argument, where we expect a relaxation event to involve fluctuations of volume $\Delta V$.
+In equilibrium, volume fluctuations are created by reversible work $p \Delta V$ so to leading order%
+\marginfootnote{The leading order behaviour can be given more justification by invoking the morphometric approach \eqref{eq:fmt-morphometric-2}, or from more general arguments which we will introduce in section \ref{sec:insertion-as-solvation}.}
+we then expect
+\begin{equation*}
+  \tau_\alpha \sim e^{\beta p \Delta V}.
+\end{equation*}
+Taking $\Delta V$ as the equivalent of an energy barrier, we find the conjugate variable $\beta p$ does indeed play the role of inverse temperature.
+It is usual to work with the dimensionless \emph{compressibility factor}, defined by
+\begin{equation}
+  Z = \frac{\beta p}{\rho},
+\end{equation}
+in terms of which hard spheres show the same phenomenology as thermal systems in Fig.\ \ref{fig:angell}.
+We find hard spheres are comparable in fragility to various binary Lennard-Jones mixtures.
+
+Things I have not yet mentioned:
+\begin{itemize}
+\item glass transition: 100s
+\item operationally, what it looks like in thermodynamic potentials as the system falls out of equilibrium.
+\item dynamical heterogeneities
+\item Stokes-Einstein breakdown
+\end{itemize}
+
+%% We discussed the static correlation functions at length, which is fine for liquids where equilibrium occurs on a \SI{100}{\pico\second} timescale.
+%% Dynamical effects are highly nontrivial at high densities.
+%% As a practical definition, a glass is defined in the lab as any material for which the relaxation time exceeds \SI{100}{\second}: this point is called the experimental glass transition.
+%% This is somewhat arbitrary, although the location of the glass transition point is not particularly sensitive to where you set the threshold because of how rapidly the viscosity/times are increasing around there.
+%% So what do we mean by dynamical arrest.
+
+%% Cooling a liquid.
+%% Take thermodynamic quantity (e.g.\ volume, entropy, enthalpy): usually crystallise.
+%% (Picture)
+%% First-order transition bypassed by quick cooling.
+%% Enter supercooled liquid phase.
+
+%% Both of these conditions are violated in the glass, as this is a truly non-equilibrium state.
+%% That is, we see ageing, and hysteresis in response to perturbations.
+%% No longer equilibrates/relax/flows, call it a glass: occurs at glass transition.
+%% Glass is a solid for all practical purposes.
+%% Distinguished from glass which has dependence on preparation history, hysteresis/memory effect of heating the system (will not follow exactly the same curve until - back to the equilibrium supercooled structure), aging: averages (including correlations) evolve in time.
+
+%% The glass transition itself is not a ``transition'' in the thermodynamic sense; there is no.
+%% It's really a kind of impatience transition; the glass transition for a human would be different to the glass transition for a demigod/ent.
+%% It's still a relatively robust measurement, because of the superarrhenius scaling (sc-l for pedestrians).
+
+%% A plethora of questions related to the out-of-equilibrium properties.
+%% \begin{enumerate}
+%% \item Properties of out of equilibrium glass phase: very important questions for material science. Low temperature anomalies, aging behaviour, nonlinear rheology  plasticity.
+%% \item Relation between glass and jamming. Jamming=zero temperature, out of equilibrium, infinite pressure.
+%% \item How to avoid crystallisation.
+%% \end{enumerate}
+
+A super-Arrhenius scaling of $\tau_\alpha$ implies that the thermodynamic barrier itself $\Delta \Phi_\alpha$ increases with supercooling.
+This means that the dynamics fundamentally changes at high densities (or low temperatures), which must be caused by the onset of \emph{collective} effects%
+\marginfootnote{Also referred to as \emph{cooperative} effects.};
+given the weakness of bonds in soft matter, we can conclude that many particles must contribute to create a large barrier.
+We will discuss this more in the next section.
+Relaxation barriers in hard spheres are entropic in nature, so perhaps it is easier to see the need for collective effects.
+Moreover, the geometrical interpretation in terms of volume fluctuations $\Delta V$ provides a picture for collective motion: at high densities more particles will have to move out of the way to create the space for motion.
 
 \begin{SCfigure}
   \includegraphics[width=0.9\linewidth,outer]{angell}
   \caption[Angell plot]{
     The \emph{Angell} plot for molecular and model glassformers showing the temperature/pressure dependence of viscosity $\eta$ (or equivalently relaxation time $\tau_\alpha$).
     The molecular systems \ce{SiO2} and orthoterphenyl (OTP) respectively display the \emph{strong} and \emph{fragile} behaviours described in text.
-    Kob-Anderson (KA) and Wahnstrom (Wahn) are mixtures of model Lennard-Jones atoms designed to exhibit fragility.
+    Kob-Anderson (KA) and Wahnstrom (Wahn) are binary mixtures of Lennard-Jones atoms designed to exhibit fragility.
     The compressibility $Z = \beta p / \rho$ is argued to be equivalent to inverse temperature for hard spheres (HS) \cite{BerthierPRE2009}.
     Reproduced from Ref.\ \cite{RoyallPR2015}.
   }
+  \label{fig:angell}
 \end{SCfigure}
 
-We will talk about this metastable branch as if it were in equilibrium.
-\todo{create link when mention high density swap data}
+%% We will talk about this metastable branch as if it were in equilibrium.
+%% \todo{create link when mention high density swap data}
 
-Overview of the glass transition.
-Salient features: why hard, interesting, unique.
-
-Hard glasses: high elastic constants.
-Colloidal suspensions: soft matter version, small elastic constants.
-Same phenomenology though.
-
-Cooling a liquid.
-Take thermodynamic quantity (e.g.\ volume, entropy, enthalpy): usually crystallise.
-(Picture)
-First-order transition bypassed by quick cooling.
-Enter supercooled liquid phase.
-No longer equilibrates/relax/flows, call it a glass: occurs at glass transition.
-Glass is a solid for all practical purposes.
-
-Distinguished from glass which has dependence on preparation history, hysteresis/memory effect of heating the system (will not follow exactly the same curve until - back to the equilibrium supercooled structure), aging: averages (including correlations) evolve in time.
-
-The glass transition itself is not a ``transition'' in the thermodynamic sense; there is no.
-It's really a kind of impatience transition; the glass transition for a human would be different to the glass transition for a demigod/ent.
-It's still a relatively robust measurement, because of the superarrhenius scaling (sc-l for pedestrians).
-
-No glass from noble gases; too high propensity for first order transition.
-
-Below melting, the crystal is the state lowest in free energy so strictly metastable.
-Though not strictly an equilibrium state, we can think about it as such.
-Hard spheres have particular propensity to crystallise at very high densities, so typically polydispersity is introduced to frustrate crystals favouring amorphous structures.
-
-A plethora of questions related to the out-of-equilibrium properties.
-\begin{enumerate}
-\item Properties of out of equilibrium glass phase: very important questions for material science. Low temperature anomalies, aging behaviour, nonlinear rheology  plasticity.
-\item Relation between glass and jamming. Jamming=zero temperature, out of equilibrium, infinite pressure.
-\item How to avoid crystallisation.
-\end{enumerate}
-
-Understand prpoerties of the supercooled liquid, that distinguish it from ordinary liquids (dynamically).
-What properties distinguish the supercooled liquid from the regular liquid:
-\begin{enumerate}
-\item Stokes-Einstein breakdown
-\item Dynamical heterogeneities
-\end{enumerate}
-
-So what do we mean by dynamical arrest.
-Typically we can look at one of two (related) quantities: viscosity or relaxation time.
-Viscosity measures how resistant the thing is to flow, while relaxation time measures the typical microscopic time for things to move around i.e.\ liquid like behaviour.
-As a practical definition, a glass is defined in the lab as any material for which the relaxation time exceeds 100\ce{s}: this point is called the experimental glass transition.
-This is somewhat arbitrary, although the location of the glass transition point is not particularly sensitive to where you set the threshold because of how rapidly the viscosity/times are increasing around there.
-
-Remarkable dynamic range: observed change over 16 orders of magnitude.
-Arrhenius plot.
-Experiments: dynamic light scattering.
-\begin{equation}
-  \langle \delta A(0) \delta A(t) \rangle
-  \to \tau_{relax}
-\end{equation}
-Decay of function gives timescale.
-Angell plot (1984?): rescale by Tg and classify different systems.
-Strong: Arrhenius, fragile: super-arrhenius (this naming system is odd: it has nothing to do with their mechanical properties)
-
-Assume single fundamental process in relaxation: e.g.\ breaking a chemical bond.
-Then barrier constant leads to Arrhenius law.
-\begin{equation}
-  \tau \sim \tau_0 e^{\frac{\Delta U}{T}}
-\end{equation}
-(could be free energy)
-Interactions in soft matter are typically van der Waals, very weak, so to build large activation energy lots of particles must be contributing.
-Super Arrhenius behaviour must arise from collective behaviour.
-Collective behaviour: many-body effects requires many-body correlations.
-
-Some systems are Arrhenius: particularly in hard matter systems where interactions are stronger.
-E.g.\ Silicate: covalent bonds, so barrier is that required to break a bond.
-
-Phenomenological formula...
-
-Relationship with viscosity.
-Flowing/not flowing is captured by viscosity: viscous slowdown same as relaxation slowdown.
-Slightly different notion.
-Short times $t \ll \tau$: elastic system, long times $t \gg \tau$: viscosity.
-Time barrier is relaxation time.
-Elasticity, viscosity in Newtonian fluids: viscoelastic behaviour (Maxwell)
-\begin{equation}
-  \eta = G_\infty \tau_\mathrm{relax}
-\end{equation}
-high frequency shear modulus is elastic property.
-Shear modulus increases by factor 2-5 times, is dwarfed by change in relaxation time.
-
-No crystal: eutectic polymers
-
-In conventional condensed matter physics dynamics is determined by structure.
-For example, crystalline solids are fixed on a lattice so do not flow, whereas liquids are disordered and are thus able to flow.
-Soft matter systems (e.g.\ gels, foams, glasses) do not neatly fall into this paradigm: their dynamics are often arrested whilst their structure remains highly disordered.
-
-To illustrate the disentanglement between structure and dynamics we will take glasses as an example, because this will be the focus of our work.
-A glass is obtained by supercooling a liquid causing its viscosity to increase dramatically.
-Viscosity is equivalently measured by a timescale $\tau_\alpha$ for spatial correlations to decay.
-This relaxation event should occur against some energy barrier $\Delta$, leading to the scaling relation
-\begin{equation}\label{eq:angell}
-  \tau_\alpha = \tau_0 \exp{\left(\frac{\Delta}{k_B T}\right)}
-\end{equation}
-for Boltzmann factor $k_B$, temperature $T$ and where $\tau_0$ is the timescale of vibrations (typically $\tau_0 \sim \mathcal{O}(1)$ps for atomic systems).
-When $\tau_\alpha$ exceeds an experimentalist's patience (defined as 100s at temperature $T_g$ in the literature), it becomes impossible to properly equilibrate the liquid and we call it a glass.
-On accessible timescales the glass will appear (macroscopically) solid, developing a bulk shear modulus etc, yet microscopically it remains disordered like a liquid. 
-
-Naively we might expect $\Delta$ in \eqref{eq:angell} to be temperature independent, suggesting the \emph{Arrhenius} law:
-\begin{equation}\label{eq:arrhenius}
-  \log{\tau_\alpha} \propto 1/T.
-\end{equation}
-This works well for high temperature liquids but \emph{can} break down at low temperatures suggesting qualitatively new physics for supercooled liquids.
-This is shown in Figure~\ref{fig:angell} where $\log{\tau_\alpha}$ is plotted against $1/T$ for selected molecular and model glassformers.
-Silica is seen to increase according to \eqref{eq:arrhenius} even at low temperature; this is an example of a \emph{strong} glass which we are not interested in because the underlying physics is essentially that of a slow liquid.
-We are instead interested in the deviations from \eqref{eq:arrhenius} displayed by the other systems shown in Figure~\ref{fig:angell}.
-These so-called \emph{fragile} glassformers feature more dramatic increase in relaxation times than predicted by \eqref{eq:arrhenius}, meaning $\Delta$ itself increases with supercooling.
-This work involves detailed microscopic calculation of energy landscapes in model glassformers, with the intent of determining the cause of increasing relaxation barriers in supercooled liquids.
-
-Some modification is required for hard particle systems.
-As we argued in the introduction, pressure is the only meaningful state variable so it is typically used as the equivalent of temperature.
-In Ref.\ \cite{BerthierPRE2009} it was argued by analogy to play the role of inverse teperature.
-Relaxation barriers in hard spheres are \emph{entropic} in nature, and display the same phenomenology as temperature driven fragile glassformers as seen in Figure~\ref{fig:angell} where a compressibility factor is defined as
-\begin{equation*}
-  Z = \frac{\beta p}{\rho}
-\end{equation*}
-where $\rho$ is the density of the fluid. This variable plays the role of $1/T$ for athermal systems, although this analogy is only approximate.
-Hard spheres highly fragile: more collective effects.
-Easier to see that collective effects: activation barriers must be strictly entropic, which is perhaps easier to argue for collective effects.
+%% Relationship with viscosity.
+%% Flowing/not flowing is captured by viscosity: viscous slowdown same as relaxation slowdown.
+%% Slightly different notion.
+%% Short times $t \ll \tau$: elastic system, long times $t \gg \tau$: viscosity.
+%% Time barrier is relaxation time.
+%% Elasticity, viscosity in Newtonian fluids: viscoelastic behaviour (Maxwell)
+%% \begin{equation}
+%%   \eta = G_\infty \tau_\mathrm{relax}
+%% \end{equation}
+%% high frequency shear modulus is elastic property.
+%% Shear modulus increases by factor 2-5 times, is dwarfed by change in relaxation time.
 
 \subsection{Mode-coupling theory}
 
@@ -283,9 +295,9 @@ We start with an explicitly dynamical theory.
 
 To motivate mode-coupling theory we start from the classical Langevin equation of motion, which expresses the equations of motion of a subset of the degrees of freedom.
 Newton's equation becomes
-\begin{equation}
+\begin{equation*}
   m \ddot{\vec{r}} = - \lambda \dot{\vec{r}} + \vec{F}(t)
-\end{equation}
+\end{equation*}
 where $\vec{F}$ is a Gaussian random field
 \begin{equation*}
   \langle F_i(t) F_j(t') \rangle = 2 D \delta_{i,j} \delta(t - t').
@@ -300,7 +312,7 @@ In mode-coupling theory, an \emph{exact} generalised Langevin equation is derive
   - \int_0^t \vec{K} \cdot \vec{x}(t - t') \, dt'
   + \vec{f}(t)
 \end{equation}
-where $\vec{Omega}$ is , $\vec{K}$ is a time-dependent \emph{memory function}, and $\vec{f}$ is the fast fluctuating force.
+where $\vec{\Omega}$ is frequency matrix, $\vec{K}$ is a time-dependent \emph{memory function}, and $\vec{f}$ is the fast fluctuating force.
 
 \cite{ReichmanJSM2005, JanssenFP2018}
 
@@ -332,7 +344,7 @@ The point of this section is to indicate that pair correlation functions are not
 A growing consensus is forming around this explanation.
 
 This must trivially occur at the very least $T=0\si{K}$ where relaxation timescales diverges, however much like the lack of a phase transition in the Ising model in $d=1$ this is not a true thermodynamic phase transition because it cannot be crossed.
-Recent numerical evidence suggests that a model glassformer in $d=2$ does not show a transition, also vanishing at $T=0\si{K}$ \cite{Berthier?}.
+Recent numerical evidence suggests that a model glassformer in $d=2$ does not show a transition, also vanishing at $T=0\si{K}$ \cite{BerthierNC2019}.
 So the central question of glass is what happens in $d=3$, is there a vanishing configurational entropy at a finite $T > 0$ with an accompanying thermodynamic glass transition?
 In mean-field, formally in the limit of infinite spatial dimensions $d \to \infty$, the hard sphere system has been shown to have a true transition, however the critical dimensions are unknown so it is unclear what happens in $d=3$. \cite{KurchanJSM2012,KurchanJPCB2013,CharbonneauNC2014,CharbonneauJSM2014}.
 
@@ -363,9 +375,22 @@ Structural in the sense of the energy landscape, not necessarily in real space/l
   }
 \end{SCfigure}
 
-\subsection{Other pictures}
+\subsection{Local structure picture}
+
+\cite{RoyallPR2015}
+
+In conventional condensed matter physics dynamics is determined by structure.
+For example, crystalline solids are fixed on a lattice so do not flow, whereas liquids are disordered and are thus able to flow.
+Soft matter systems (e.g.\ gels, foams, glasses) do not neatly fall into this paradigm: their dynamics are often arrested whilst their structure remains highly disordered.
 
 Frustration-limited domain theory.
+
+Previous viewpoints, MCT and mean-field, are structural in the sense of being thermodynamic; however they do not explicitly invoke local structure.
+That being said, they are broadly compatible viewpoints.
+After all, emergence of a structural motif would be sufficient to reduce the configurational entropy (or a manifestation of this, depend on one's viewpoint).
+
+\subsection{Other viewpoints: jamming and facilitation}
+
 Theories concentrating on the high density glass: elastic theories.
 Dynamic facilitation.
 
@@ -382,7 +407,7 @@ In section ? we saw the compressibility and virial routes lead to the expression
 In this sense one may think that all of the information is contained in the two body correlation function.
 The pair correlation is used to obtain thermodynamic quantities which are derivatives of the free energy at an instantaneous state point, so to infer the free energy we must sample multiple state points.
 Equivalently, we could consider the derivatives of the pair correlation function.
-It can be shown in general that \cite{Santos2016}
+It is straightforward to show that \cite{Santos2016}
 \begin{equation}
   \chi_T \rho
   \left( \frac{\partial \rho^{(n)}}{\partial \rho} \right)_{V,T}
@@ -390,7 +415,7 @@ It can be shown in general that \cite{Santos2016}
   (n - \rho V) \rho^{(n)}(\vec{r}^n)
   + \int \rho^{(n+1)}(\vec{r}^{n+1}) \, d\vec{r}_{n+1}.
 \end{equation}
-The important feature to take away from this is the presence of $\rho^{(n+1)}$ in the expression; higher order correlations emerge in the derivatives.
+The important feature to take away from this expression is the presence of $\rho^{(n+1)}$; we see that higher-order correlations emerge in the derivatives.
 This means we could in principle measure the free energy at a single state point by introducing highly accurate measurements of the many-body correlation functions.
 This is essentially the spirit of the \emph{entropy route}, which writes \cite{WallaceJCP1987}
 \begin{equation}
@@ -422,7 +447,7 @@ We will be focusing on many-body correlations in real space, in line with the th
 It is possible for many-body correlation functions to be useful in MCT where it has already found traction \cite{JanssenPRL2015,JanssenFP2018}.
 Although there correlation functions in Fourier space are more useful.
 
-FMT already provides an easy route to obtaining correlation functions in Fourier space, as was demonstrated in the original papers \cite{RosenfeldPRL1989,RosenfeldJCP1990} and we will summarise below.
+FMT already provides an easy route to obtaining correlation functions in Fourier space, as was demonstrated in its original papers \cite{RosenfeldPRL1989,RosenfeldJCP1990} and we will summarise below.
 Applying the convolution theorem to the Fourier transform of the direct correlation function in the uniform liquid \eqref{eq:fmt-direct-correlations-uniform-density} to be written rather succinctly as
 \begin{equation}
   \tilde{c}^{(n)}(\vec{k}^n)
@@ -437,3 +462,4 @@ A further $d(d-1)/2$ degrees of freedom%
 \marginfootnote{This many degrees of freedom can be removed for general $n \ge d$, but we expect fewer for $n < d$.
   For example, $n=2$ arrangements (a dimer) are isomorphic to a line so they possess $d-1$ rotational degrees of freedom.}
 can be removed by exploiting rotational symmetry.
+Many-particle generalisations of the static structure factor can be obtained from $\tilde{c}^{(n)}(\vec{k}^n)$ by functionally differentiating the Ornstein-Zernike equation \eqref{eq:ornstein-zernike-generic} with respect to density \cite{BarratMP1988}.
