@@ -22,12 +22,12 @@ As an example, extensive quantities includes the \emph{entropy} of a large syste
   S = s V
 \end{equation*}
 where $s$ would be an entropy density which is \emph{intensive}, meaning it does not change with system volume.
-Another example is the surface energy of a macroscopic surface, which can be written
+Another example is the surface energy
 \begin{equation*}
   E = \gamma A
 \end{equation*}
 where $\gamma$ is the surface tension and $A$ is the surface area.
-More refined definitions specify that a variable is extensive if it is a \emph{first-order homogeneous function} of a linearly independent set of (different) extensive variables characterising the system size \cite{Chandler1987}.
+More refined notions define a variable as extensive if it is a \emph{first-order homogeneous function} of any linearly independent set of (different) extensive variables characterising the system size \cite{Chandler1987}.
 That is, a variable $\phi$ is extensive if
 \begin{equation}\label{eq:extensive-homogeneity}
   \phi(\lambda Y_1, \cdots, \lambda Y_n)
@@ -232,11 +232,11 @@ so it is convenient to introduce generalisations of the geometric parameters $\{
 %\hl{Connect with the curvature measures of differential geometry.}
 To introduce the intuition behind these generalised volumes we start from the observation that the quantities $\{V,A,C,X\}$ can be imagined as the size of projections onto $k$-dimensional subspaces in $\mathbb{R}^3$; for a compact body $K \in \mathcal{K}^3$ we have:
 \begin{enumerate}
-\item $V(K)$ is trivially the volume of the intersection of $K$ with the 3-dimensional subspace i.e.\ all of Euclidean space.
-\item $A(K)$ can be thought of as the typical size of two-dimensional images formed by projections onto planes.
-\item $C(K)$ is related to the projections onto one-dimensional subspaces i.e.\ lines.
-  This curvature measure is normally thought of as a surface property, but this definition suggests an equivalence (up to a different normalisation) with the \emph{mean width} $L(K)$ of the body.
-\item $X(K)$ is obtained from projections onto a single point, corroborating the equivalence with the Euler characteristic $\chi(K)$ articulated by the Gauss-Bonnet theorem \eqref{eq:gauss-bonnet}.
+\item $V[K]$ is trivially the volume of the intersection of $K$ with the 3-dimensional subspace i.e.\ all of Euclidean space.
+\item $A[K]$ can be thought of as the typical size of two-dimensional images formed by projections onto planes.
+\item $C[K]$ is related to the projections onto one-dimensional subspaces i.e.\ lines.
+  This curvature measure is normally thought of as a surface property, but this definition suggests an equivalence (up to a different normalisation) with the \emph{mean width} $L[K]$ of the body.
+\item $X[K]$ is obtained from projections onto a single point, corroborating the equivalence with the Euler characteristic $\chi[K]$ articulated by the Gauss-Bonnet theorem \eqref{eq:gauss-bonnet}.
 \end{enumerate}
 
 \begin{SCtable}
@@ -263,7 +263,7 @@ We define the $k$th intrisic volume as the average size of the projections onto 
   V_k(K)
   =
   C_{k,d-k}
-  \int \chi(K \cap E_{d-k}) \, dE_{d-k}
+  \int \chi[K \cap E_{d-k}] \, dE_{d-k}
 \end{equation}
 \todo{Check subscripts of $E$.}
 where the integral is taken over all affine transformations of the plane $E_k$ in $\mathbb{R}^d$, and flag coefficient
@@ -274,30 +274,30 @@ where the integral is taken over all affine transformations of the plane $E_k$ i
 \end{equation}
 where the volume of the $d$-dimensional ball with unit radius $B_d$ is
 \begin{equation}
-  \omega_d := V_d(B_d) = \frac{\pi^{d/2}}{\Gamma(\frac{d}{2} + 1)}.
+  \omega_d := V_d[B_d] = \frac{\pi^{d/2}}{\Gamma(\frac{d}{2} + 1)}.
 \end{equation}
 The flag coefficients $C_{k,d-k}$ have a similar structure to binomial coefficients, and play a similar \emph{combinatorial} role for combining subspaces (section \ref{sec:kinematic-formula}).
 By convention, the normalisation of the measure $dE_{d-k}$ in \eqref{eq:intrinsic-volumes} is chosen to give the intrinsic volumes for the unit ball as
 \begin{equation}\label{eq:intrinsic-volume-ball}
-  V_k (B_d)
+  V_k [B_d]
   =
   {d \choose k} \frac{\omega_d}{\omega_{d-k}}.
 \end{equation}
 %The intrinsic volumes thus only depend on the dimensionality of the body, not the embedding space.
 A set of common geometrical quantities and their reduction to the intrinsic volumes in physical dimensions $d \le 3$ is given in Table~\ref{table:geometric-quantities}.
 
-\begin{tcolorbox}[title=Aside: nomenclature of spheres vs balls]
-  The terms `sphere' and `ball' are used interchangeably in physics (and colloquially), however in geometry these refer to different things; `ball' refers to the solid object whereas `sphere' refers to its boundary, i.e.\
-  \begin{equation*}
-    S_{d-1} = \partial B_d,
-  \end{equation*}
-  As a surface manifold, the $(d-1)$-dimensionality of the sphere is reduced by one from its original space.
-  So strictly speaking, when we speak of hard spheres in physics we really mean hard balls.
-  %% \marginfootnote{Strictly speaking the interactions between hollow spheres and solid balls would be identical, so it is possible to still speak of hard spheres.
-  %%   However, typically we always exclude geometries where spheres contain each another so hard balls better capture the interactions of interest.
-  %%   Moreover, colloidal hard spheres are solid.}
-  %in the geometric sense.
-\end{tcolorbox}
+%% \begin{tcolorbox}[title=Aside: nomenclature of spheres vs balls]
+%%   The terms `sphere' and `ball' are used interchangeably in physics (and colloquially), however in geometry these refer to different things; `ball' refers to the solid object whereas `sphere' refers to its boundary, i.e.\
+%%   \begin{equation*}
+%%     S_{d-1} = \partial B_d,
+%%   \end{equation*}
+%%   As a surface manifold, the $(d-1)$-dimensionality of the sphere is reduced by one from its original space.
+%%   So strictly speaking, when we speak of hard spheres in physics we really mean hard balls.
+%%   %% \marginfootnote{Strictly speaking the interactions between hollow spheres and solid balls would be identical, so it is possible to still speak of hard spheres.
+%%   %%   However, typically we always exclude geometries where spheres contain each another so hard balls better capture the interactions of interest.
+%%   %%   Moreover, colloidal hard spheres are solid.}
+%%   %in the geometric sense.
+%% \end{tcolorbox}
 
 We will see the intrinsic volumes used in the construction of a theory for the hard sphere liquid in section \ref{sec:fmt}.
 
@@ -305,7 +305,7 @@ We will see the intrinsic volumes used in the construction of a theory for the h
   Together the functionals $\{V_k\}_{k=0}^d$ form a basis for the vector space of all continuous rigid-motion invariant valuations on polyconvex sets in $\mathbb{R}^d$.
   I.e. a continuous rigid-motion invariant valuation can be written
   \begin{equation}
-    V(A) = \sum_{i=0}^d c_i V_i(A)
+    V(A) = \sum_{i=0}^d c_i V_i[A]
   \end{equation}
   where $c_i$ are some coefficients independent of $A$.
   Finally, with the intrinsic volumes the $d$-dimensional generalisation of an extensive variable \eqref{eq:extensive-integral-geometry} reads
@@ -400,8 +400,8 @@ Distances between sets: the Hausdorff metric.
 \begin{tcolorbox}[title=Steiner's formula for parallel volumes]
   For a compact, convex body $K \in \mathcal{K}^d$ the parallel volume is expressable as:
   \begin{equation}
-    V_d(K + \epsilon B_d) =
-    \sum_{i=0}^d V_i(K) \omega_{d-i} \epsilon^{d-i}
+    V_d[K + \epsilon B_d] =
+    \sum_{i=0}^d V_i[K] \omega_{d-i} \epsilon^{d-i}
   \end{equation}
 \end{tcolorbox}
 
@@ -435,9 +435,9 @@ We can take standard results for simple liquids interacting via spherically symm
   A central result of this field is the principal kinematic formula of Blaschke and Santal\'o \cite{BlaschkeMZ1936,Blaschke1937,SantaloASI1936} which gives the explicit form of integrals of this type as \cite{Santalo2004,Klain1997}
   %\cite{Santalo2004,SchneiderACIG1984,Schneider2008,Klain1997}
   \begin{equation}\label{eq:binomial-kinematic-formula}
-    \int_{G_d} \chi(A \cap gB) \, dg
+    \int_{G_d} \chi[A \cap gB] \, dg
     =
-    \sum_{k=0}^d (C_{k,d-k})^{-1} V_k(A) V_{d-k}(B)
+    \sum_{k=0}^d (C_{k,d-k})^{-1} V_k[A] V_{d-k}[B]
   \end{equation}
   We see the flag coefficients \eqref{eq:flag-coefficients} play an analogous role in conjugating the intrinsic volumes above as binomial coefficients do in algebraic expansions%
   \marginfootnote{For this reason Klain and Rota argue that integral geometry should be called \emph{continuous combinatorics} \cite{Klain1997}, because it generalises combinatorial results to continuous spaces}.
