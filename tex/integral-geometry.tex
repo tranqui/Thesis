@@ -113,28 +113,46 @@ As integral geometry is generally unfamiliar to people with a background in phys
 
 \subsection{What do we even mean by size?}
 
-We will now make our notion of `size' more precise.
-At the same time, we must precisely specify which objects this definition applies to.
+In order to proceed we must define `size', and specify precisely which objects this definition applies to.
+We put forward the following qualities of the measures $V, A, C$ and $X$ which make them intuitive notions of size:
+\begin{enumerate}
+\item They are invariant with respect to translations and rotations, so that an object's size is independent of the observer.
+\item They increase additively, i.e.\ they transform under combination of subsystems via the inclusion/exclusion relation e.g.\ for two objects $K_1$ and $K_2$
+  \begin{equation}\label{eq:additivity}
+    V[K_1 \cup K_2] = V[K_1] + V[K_2] - V[K_1 \cap K_2],
+  \end{equation}
+  and similar expressions for $A$, $C$, and $X$.
+  As corollaries, this property contains the expectation that the size of nothing is zero, e.g.\ $V[\emptyset] = 0$, and the leads to the homogeneity property of extensive variables \eqref{eq:extensive-homogeneity} through \eqref{eq:extensive-integral-geometry}.
+\item They are continuous%
+  \marginfootnote{Specifically, in integral geometry this continuity property is with respect to the \emph{Hausdorff metric}.
+    Details on this can be found in standard texts, e.g.\ Refs.\ \cite{Santalo2004,Klain1997}.}.
+  Loosely speaking, this means that the size measures converge as the object is approximated by increasingly finely meshed polyhedra excluding e.g.\ fractal geometries.
+  As a simple intuitive example, the measurement of a length will converge continuously to some number as one uses rulers with progressively finer distance markings.
+\end{enumerate}
+The final property specifically excludes geometries for which we do not expect there to be any reasonable measurement of size.
+These properties are the defining characteristics of more general size measures in integral geometry \cite{Santalo2004, Klain1997}.
 
-First we define our objects: sets in Euclidean space.
-We will see that the only reasonable notion of size is a \emph{continuous} rigid-motion invariant valuation.
+%% First we define our objects: sets in Euclidean space.
 
-We could completely describe the size of simple objects by completely defining their geometry, e.g.\ the dimensions of a box.
-This is of course sufficient, however it is not very useful.
-However, this may not be straightforward for more complex objects, and by abstracting the problem somewhat we can obtain useful theorems etc.
+%% We could completely describe the size of simple objects by completely defining their geometry, e.g.\ the dimensions of a box.
+%% This is of course sufficient, however it is not very useful.
+%% However, this may not be straightforward for more complex objects, and by abstracting the problem somewhat we can obtain useful theorems etc.
 %% We now give a brief justification of the above \emph{ansatzes}, in particular why there are only four terms in the expansion.
 %% Radius is the only natural parameter for a sphere, however for more general geometries there might be arbitrarily many parameters so one may wonder if they should be included in a general geometric expansion.
 
-So we have to generalise what we mean by size, simultaneously we will have to carefully specify what objects we wish to measure.
-We might naively select all subsets of $\mathbb{R}^d$, however this leads to pathological problems; the Banach-Tarski paradox ensues.
-We need to be precise with what kind of geometries we consider: a definition too broad may not allow meaningful size measures, while a narrow definition may cease to be useful.
-
-We consider polyconvex sets%
-\marginfootnote{The set of polyconvex objects is also sometimes called the \emph{convex ring}.}.
-Avoid pathological sets: Banach-Tarski paradox allows one to break a sphere apart and recompose it as two identical spheres.
-We want a well-defined volume, so need to avoid sets which allow this.
-\marginfootnote{Have to be formed by countable union of convex objects.
-Covers most physically realistic geometries.}
+Naively, we might attempt to evaluate the size measures on all subsets $V \subset \mathbb{R}^3$, however this turns out to be too broad a definition.
+In particular, this leads to the Banach-Tarski paradox in which an object can be broken into two, then recomposed through rigid transformations into two objects identical to the original one  \cite{BanachFM1924}; a paradox ensures where the original volume is equal to twice itself.
+A better definition is the restriction to \emph{polyconvex sets}%
+\marginfootnote{The set of polyconvex objects is also sometimes called the \emph{convex ring}.}: objects formed by countable union of \emph{compact} objects.
+By compact, we mean objects which are
+\begin{enumerate}
+\item \emph{Bounded}: they must be finite in scope, as no meaningful size can be defined for a body spanning an infinite region of space.
+\item \emph{Closed}: they contain their boundary.
+  %This is an important property which we will see by example in discussing the Gauss-Bonnet theorem below.
+\end{enumerate}
+This class of objects covers most physically relevant geometries, excluding fractal geometries where size measures may be pathological.
+%The empty set $\emptyset$ is a compact body, albeit a special case with zero size.
+%Compact convex set $K \in \mathcal{K}$ notation.
 
 %% The first intuitive notion for a size: the size of nothing is zero, i.e.:
 %% where $\emptyset$ is the empty set.
@@ -145,32 +163,6 @@ Covers most physically realistic geometries.}
 %% \end{equation}
 %% Connection with entropy, leads to homogeneity in arguments which is the building block for extensivity of a thermodynamic potential.
 %% This provides a geometrically precise foundation for thermodynamic potentials.
-
-We put forward the following qualities of the measures $V, A, C$ and $X$ which make them intuitive notions of size:
-\begin{enumerate}
-\item They are invariant with respect to translations and rotations, so that an object's size is independent of the observer.
-\item They increase additively, i.e.\ they transform under combination of subsystems via the inclusion/exclusion relation e.g.\ for two objects $K_1$ and $K_2$
-  \begin{equation}\label{eq:additivity}
-    V[K_1 \cup K_2] = V[K_1] + V[K_2] - V[K_1 \cap K_2],
-  \end{equation}
-  and similar expressions for $A$, $C$, and $X$.
-  As corollaries, this property contains the expectation that the size of nothing is zero, e.g.\ $V[\emptyset] = 0$ and the homogeneity property of extensive variables \eqref{eq:extensive-homogeneity}.
-\item They are continuous%
-  \marginfootnote{Specifically, in integral geometry this continuity property is with respect to the \emph{Hausdorff metric}.
-    Details on this can be found in standard texts, e.g.\ Refs.\ \cite{Santalo2004,Klain1997}.}.
-  Loosely speaking, this means that the size measures converge as the object is approximated by increasingly finely meshed polyhedra excluding e.g.\ fractal geometries.
-  As a simple intuitive example, the measurement of a length will converge continuously to some number as one uses rulers with progressively finer distance markings.
-\end{enumerate}
-The final property specifically excludes geometries for which we do not expect there to be any reasonable measurement of size.
-
-Compactness:
-\begin{itemize}
-\item \emph{Bounded}: the body must be finite in scope, as no meaningful size can be defined for a body spanning an infinite region of space.
-\item \emph{Closed}: the body contains its boundary.
-  This is an important property which we will see by example in discussing the Gauss-Bonnet theorem below.
-\end{itemize}
-The empty set $\emptyset$ is a compact body, albeit a special case with zero size.
-Compact convex set $K \in \mathcal{K}$ notation.
 
 \subsection{Aside: the Euler characteristic}
 
@@ -202,17 +194,17 @@ The only convex object in 1d is a line segment.
 %%   \caption{Effect of cavities: divide 3d sphere in two (2 discs + circle).}
 %% \end{SCfigure}
 
-\begin{tcolorbox}[title=A note on nomenclature]
+\begin{tcolorbox}[title=Aside: nomenclature of spheres vs balls]
   The terms `sphere' and `ball' are used interchangeably in physics (and colloquially), however in geometry these refer to different things; `ball' refers to the solid object whereas `sphere' refers to its boundary, i.e.\
   \begin{equation*}
     S^{d-1} = \partial B^d,
   \end{equation*}
   As a surface manifold, the $(d-1)$-dimensionality of the sphere is reduced by one from its original space.
-  So strictly speaking, when we speak of hard spheres in physics we really mean hard balls%
-  \marginfootnote{Strictly speaking the interactions between hollow spheres and solid balls would be identical, so it is possible to still speak of hard spheres.
-    However, typically we always exclude geometries where spheres contain each another so hard balls better capture the interactions of interest.
-    Moreover, colloidal hard spheres are solid.}
-  in the geometric sense.
+  So strictly speaking, when we speak of hard spheres in physics we really mean hard balls.
+  %% \marginfootnote{Strictly speaking the interactions between hollow spheres and solid balls would be identical, so it is possible to still speak of hard spheres.
+  %%   However, typically we always exclude geometries where spheres contain each another so hard balls better capture the interactions of interest.
+  %%   Moreover, colloidal hard spheres are solid.}
+  %in the geometric sense.
 \end{tcolorbox}
 
 Should explain intrinsic volumes earlier perhaps.
@@ -284,11 +276,9 @@ By convention, the normalisation of the measure $d\mu(E_{d-k})$ in \eqref{eq:int
 \end{equation}
 %The intrinsic volumes thus only depend on the dimensionality of the body, not the embedding space.
 A set of common geometrical quantities and their reduction to the intrinsic volumes in physical dimensions $d \le 3$ is given in Table~\ref{table:geometric-quantities}.
-Finally, with the intrinsic volumes the generalisation of the morphometric apparoach \eqref{eq:morphometric-approach} for a solute $K$ in $d$-dimensions reads
-\begin{equation}\label{eq:morphometric-approach-d}
-  \Delta \Omega(K)
-  =
-  \sum_{k=0}^d a_k V_k(K).
+Finally, with the intrinsic volumes the $d$-dimensional generalisation of an extensive variable \eqref{eq:extensive-integral-geometry} reads
+\begin{equation}\label{eq:extensive-integral-geometry-d}
+  \phi = \sum_{k=0}^d a_k V_k
 \end{equation}
 
 \begin{SCtable}
