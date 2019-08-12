@@ -5,11 +5,10 @@
 
 Geometry has been a recurring theme in physical theories, appealing because of its intuitive nature.
 There are many ways that geometric ideas can be incorporated, but our focus will be on expansions of thermodynamic quantities in terms of \emph{sizes}.
-The usefulness of this particular focus is directly connected to the concept of \emph{extensivity} in statistical mechanics, which we will use to guide the following discussion.
-We will use the familiar notion of \emph{extensivity} within statistical mechanics to guide this discussion.
+The usefulness of this particular focus is directly connected to the familiar concept of \emph{extensivity} in statistical mechanics, which we will use to guide the following discussion.
 Thermodynamic potentials must be extensive to remain well-defined in the thermodynamic limit.
 %Defining an extensive quantity as one that scales proportionally to system size, the first meaning of size that comes to mind is probably the volume.
-So by focusing on quantities which are extensive we ensure a thermodynamically consistent treatment.
+So by focusing on quantities which are extensive we ensure a thermodynamic description which is consistent in this limit.
 
 %The first notion of size that likely comes to mind is the volume, though we will generalise to all reasonable notions of size.
 %The simplest example we can give is from statistical mechanics: an \emph{extensive variable} is one that scales proportionally to the system volume.
@@ -18,58 +17,90 @@ So by focusing on quantities which are extensive we ensure a thermodynamically c
 %%   V[K] = \int_K d\vec{r}.
 %% \end{equation}
 %Then,
-We will call these quantities \emph{volume-extensive}.
-As an example of a volume-extensive quantity, the \emph{entropy} can be written
+As an example, extensive quantities includes the \emph{entropy} of a large system which can be expressed in terms of system volume as
 \begin{equation*}
   S = s V
 \end{equation*}
-where $s$ would be an entropy density which is intensive, i.e.\ it does not change with system volume.
-Extensivity is a fundamental concept within statistical mechanics, so at the very least the volume is an important size measure.
-By generalising our notion of `size' beyond volume we hope to arrive at new ideas that prove useful in developing new theories.
+where $s$ would be an entropy density which is \emph{intensive}, meaning it does not change with system volume.
+Another example is the surface energy of a macroscopic surface, which can be written
+\begin{equation*}
+  E = \gamma A
+\end{equation*}
+where $\gamma$ is the surface tension and $A$ is the surface area.
+More refined notions of extensivity invoke homogeneity of arguments \cite{Chandler1987}
+\begin{equation}\label{eq:extensive-homogeneity}
+  \phi(\cdot).
+\end{equation}
+We will explore what other reasonable notions of `size' there may be, in the hope that we arrive at ideas that prove useful in developing new theories.
 We will begin by listing some examples of other possible notions of size.
 
-As an example of curvature in statistical mechanics, an early example is the Young-Laplace equation for the pressure change between two fluids
+\hl{We now introduce curvature, ideas from differential geometry.}
+A surface is a two-dimensional manifold so its local shape is described by two basis vectors.
+Supposing the surface is parameterised by coordinates $(x_1, x_2)$, then the basis vectors at a point on the surface $\vec{r}$ are
 \begin{equation}
-  \Delta p = \gamma \Tr{\kappa}
+  \vec{e}_\alpha := \frac{\partial \vec{r}}{\partial x_\alpha}
+  \qquad \alpha \in \{1, 2\}.
 \end{equation}
-where $\kappa$ is the curvature tensor describing the shape of the phase boundary.
-
-Firstly, the surface area $A$ is another intuitive notion of size, because.
-Secondly, those familiar with differential geometry will have probably encountered the various curvature measures.
-In particular, we introduce the integrated mean and Gaussian curvatures $C$ and $X$.
-We can \emph{express} these new quantities as the surface integrals
-\begin{subequations}\label{eq:intrinsic-volumes-surface-integrals}
+Then, the shape of the surface is characterised by changes in the basis vectors leading to the curvature tensor
+\begin{equation}
+  \kappa_{\alpha \beta} := \frac{\partial \vec{e}_\beta}{\partial x_\alpha}
+  \qquad \alpha, \beta \in \{1, 2\}.
+\end{equation}
+The values of the curvature tensor will depend on the choice of coordinate system $(x_1, x_2)$, so it is usual to consider the \emph{curvature invariants}, i.e.\ the trace and determinant%
+\marginfootnote{This argument is readily generalised to $(d-1)$-dimensional surfaces in $\mathbb{R}^d$, where we would find $d-1$ invariants of the curvature tensor.},
+leading to the the \emph{mean} and \emph{Gaussian curvatures}
+\begin{subequations}
   \begin{align}
-    A[K]
-    &=
-    \int_{\partial K} \, d\vec{r},
-    \\
-    C[K]
-    &=
-    \frac{1}{2} \int_{\partial K} \Tr{\kappa} \, d\vec{r},
-    \\
-    X[K]
-    &=
-    \int_{\partial K} \det{\kappa} \, d\vec{r},
+    H &:= \frac{\Tr{\kappa}}{2}, \\
+    G &:= \det{\kappa}.
   \end{align}
 \end{subequations}
-where $\kappa$ is the curvature tensor for the surface $\partial K$.
-%All of these functionals act on $K$ but the latter three can also be \emph{expressed} as surface integrals, as in
-In addition, interfacial properties would be normally expressed in terms of these quantities with common examples including the surface tension conjugating with the area and the Young-Laplace equation, which expresses the pressure difference between two phases to the curvature of its boundary.
-Together, the volume, area and the curvature measures are Both of these are popular motifs in statistical mechanics, with the area being important for surface tension corrections to the energy, the interfacial energy involves the surface area; 
+As an example of how curvature can be a useful concept in statistical mechanics, we put forward the Young-Laplace equation which writes the pressure difference between two fluids as
+\begin{equation*}
+  \Delta p = 2 \gamma H,
+\end{equation*}
+with applications to e.g.\ phase coexistence \cite{YoungPTRSL1805,Laplace1805} or frost damage to porous solids \cite{EverettTFS1961}.
+Extensive curvature measures are obtained by integrating the curvature invariants over the surface, leading to the integrated mean and Gaussian curvatures $C$ and $X$.
+
+Together, the extensive geometric measures we have introduced so far can be written as%
+\marginfootnote{We use the usual physicist abuse of notation where $V$ refers to both a region in space $V \subset \mathbb{R}^d$, and also the physical volume of this space.}
+\begin{subequations}\label{eq:intrinsic-volumes-surface-integrals}
+  \begin{align}
+    V
+    &=
+    \int_V \, d\vec{r},
+    \\
+    A
+    &=
+    \int_{\partial V} \, d\vec{r},
+    \\
+    C
+    &=
+    \int_{\partial V} H(\vec{r}) \, d\vec{r},
+    \\
+    X
+    &=
+    \int_{\partial V} G(\vec{r}) \, d\vec{r}.
+  \end{align}
+\end{subequations}
+The latter three quantities are \emph{expressed} here as the surface integrals, but we shall see that they are really size measures on the volume $V$.
+It turns out that these are the \emph{only} reasonable notions of size in three-dimensions, a central finding in the field of \emph{integral geometry}.
 %is a powerful tool for incorporating intuitive, flexible ideas into theories.
 %For this reason geometric approaches are common in statistical mechanics such as the Young-Laplace equation, which corrects Asakura-Ozawa
 
 Other examples of theories which incorporate notions of size include the Asakura-Ozawa, which describes depletion forces using exclusion volumes, and more generally any free volume theory which expresses an energy in terms of a volume in space.
 We introduce the field of \emph{integral geometry} which generalises the underlying geometric principles of these theories into a unified framework for characterising size.
+\todo{Repetition}
 %% We could argue that fundamentally these theories are based on measuring physical sizes.
 %% Integral geometry offers a mathematically rigorous formalism for describing sizes, so presents a possible starting point for free volume theories.
-This mathematical formalism provides elegant and unified description of sizes, and was crucial in the development of many theories of the liquid state.
-The morphological approach taken in the thesis.
+This mathematical formalism provides elegant and unified description of sizes, and was crucial in the development of modern theories of hard spheres including the main ideas underlying chapters \ref{chapter:morphometric-framework}, \ref{chapter:morphometric-applications} and \ref{chapter:resummation}.
 %Ideas from this branch of mathematics were crucial to the development of fundamental measure theory (section \ref{sec:fmt}), so it makes sense to place this before the section on liquid state theory.
 As integral geometry is generally unfamiliar to people with a background in physics, we will place emphasis on the concepts and intuition rather than rigour.
 
 \subsection{What do we even mean by size?}
+
+We will now make our notion of `size' more precise.
+At the same time, we must precisely specify which objects this definition applies to.
 
 First we define our objects: sets in Euclidean space.
 We will see that the only reasonable notion of size is a \emph{continuous} rigid-motion invariant valuation.
@@ -91,18 +122,32 @@ We want a well-defined volume, so need to avoid sets which allow this.
 \marginfootnote{Have to be formed by countable union of convex objects.
 Covers most physically realistic geometries.}
 
-The first intuitive notion for a size: the size of nothing is zero, i.e.:
-\begin{equation}
-  \phi(\emptyset) = 0
-\end{equation}
-where $\emptyset$ is the empty set.
-A box: take the largest length, but then the `size' is not increased by modifying its smallest dimensions.
-Ideally, we want a size measure that increases monotonically as we add additional material. This leads to additivity:
-\begin{equation}
-  \phi(A \cup B) = \phi(A) + \phi(B) - \phi(A \cap B)
-\end{equation}
-Connection with entropy, leads to homogeneity in arguments which is the building block for extensivity of a thermodynamic potential.
-This provides a geometrically precise foundation for thermodynamic potentials.
+%% The first intuitive notion for a size: the size of nothing is zero, i.e.:
+%% where $\emptyset$ is the empty set.
+%% A box: take the largest length, but then the `size' is not increased by modifying its smallest dimensions.
+%% Ideally, we want a size measure that increases monotonically as we add additional material. This leads to additivity:
+%% \begin{equation}
+%%   \phi(A \cup B) = \phi(A) + \phi(B) - \phi(A \cap B)
+%% \end{equation}
+%% Connection with entropy, leads to homogeneity in arguments which is the building block for extensivity of a thermodynamic potential.
+%% This provides a geometrically precise foundation for thermodynamic potentials.
+
+We put forward the following qualities of the measures $V, A, C$ and $X$ which make them intuitive notions of size:
+\begin{enumerate}
+\item They are invariant with respect to translations and rotations, so that an object's size is independent of the observer.
+\item They increase additively, i.e.\ they transform under combination of subsystems via the inclusion/exclusion relation e.g.\ for two objects $K_1$ and $K_2$
+  \begin{equation}\label{eq:additivity}
+    V[K_1 \cup K_2] = V[K_1] + V[K_2] - V[K_1 \cap K_2],
+  \end{equation}
+  and similar expressions for $A$, $C$, and $X$.
+  As corollaries, this property contains the expectation that the size of nothing is zero, i.e.\ $V[\emptyset] = 0$ and the homogeneity property of extensive variables \eqref{eq:extensive-homogeneity}.
+\item They are continuous%
+  \marginfootnote{Specifically, in integral geometry this continuity property is with respect to the \emph{Hausdorff metric}.
+    Details on this can be found in standard texts, e.g.\ Refs.\ \cite{Santalo2004,Klain1997}.}.
+  Loosely speaking, this means that the size measures converge as the object is approximated by increasingly finely meshed polyhedra excluding e.g.\ fractal geometries.
+  As a simple intuitive example, the measurement of a length will converge continuously to some number as one uses rulers with progressively finer distance markings.
+\end{enumerate}
+The final property specifically excludes geometries for which we do not expect there to be any reasonable measurement of size.
 
 Compactness:
 \begin{itemize}
@@ -113,7 +158,7 @@ Compactness:
 The empty set $\emptyset$ is a compact body, albeit a special case with zero size.
 Compact convex set $K \in \mathcal{K}$ notation.
 
-\subsection{Euler characteristic}
+\subsection{Aside: the Euler characteristic}
 
 Aim of this section is to provide intuition over Euler characteristic.
 
@@ -159,8 +204,8 @@ The only convex object in 1d is a line segment.
 Should explain intrinsic volumes earlier perhaps.
 Euler characteristic of a boundary depends on dimension:
 \begin{align}
-  \mu_0(K^d) &= 1 \\
-  \mu_0(\partial K^d) &= 1 + (-1)^d
+  \chi(K^d) &= 1 \\
+  \chi(\partial K^d) &= 1 + (-1)^d
 \end{align}
 Disjoint union: sum them (by inclusion-exclusion principle).
 
@@ -332,16 +377,6 @@ Scalar multiplication or \emph{dilate}:
 \begin{equation}
   A + B := \{ a + b : a \in A \textrm{ and } b \in B \}
 \end{equation}
-\begin{SCfigure}[H]
-  \missingfigure[figwidth=0.333\linewidth]{}%
-  \missingfigure[figwidth=0.333\linewidth]{}%
-  \missingfigure[figwidth=0.333\linewidth]{}
-  \caption{Examples of Minkowski addition with ball:
-    ball $\to$ ball,
-    line $\to$ capsule/spherocylinder (common in nature: bacterium?),
-    circle $\to$ torus.
-  }
-\end{SCfigure}
 \emph{Minkowski difference}:
 \begin{equation}
   A - B := \{ c : c + B \subseteq A \}
@@ -355,10 +390,22 @@ Instead, set addition and subtraction operations are related through
   A - B = (A^C + (-B))^C.
 \end{equation*}
 
-\begin{SCfigure}[H]
-  \missingfigure[figwidth=0.5\linewidth]{$A + B$ growth}%
-  \missingfigure[figwidth=0.5\linewidth]{$A + B - B$ erosion}
-  \caption{Minkowski addition and difference not the inverse of each other.}
+%% \begin{SCfigure}[H]
+%%   \missingfigure[figwidth=0.333\linewidth]{}%
+%%   \missingfigure[figwidth=0.333\linewidth]{}%
+%%   \missingfigure[figwidth=0.333\linewidth]{}
+%%   \caption{Examples of Minkowski addition with ball:
+%%     ball $\to$ ball,
+%%     line $\to$ capsule/spherocylinder (common in nature: bacterium?),
+%%     circle $\to$ torus.
+%%   }
+%% \end{SCfigure}
+
+\begin{SCfigure}
+  \includegraphics[width=0.9\linewidth,center]{minkowski-addition}
+  \caption[Minkowski addition and difference]{
+    Minkowski addition and difference.
+    Note how these are not inverse operations.}
 \end{SCfigure}
 
 Distances between sets: the Hausdorff metric.
