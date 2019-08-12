@@ -1,7 +1,7 @@
 \section[Integral geometry. Or ``How long is a piece of string?'']{Integral geometry\\ {\large Or ``How long is a piece of string?''}}
 \label{sec:integral-geometry}
 
-\subsection{Motivation}
+\subsection{Towards a geometric interpretation of extensivity}
 
 Geometry has been a recurring theme in physical theories, appealing because of its intuitive nature.
 There are many ways that geometric ideas can be incorporated, but our focus will be on expansions of thermodynamic quantities in terms of \emph{sizes}.
@@ -27,14 +27,18 @@ Another example is the surface energy of a macroscopic surface, which can be wri
   E = \gamma A
 \end{equation*}
 where $\gamma$ is the surface tension and $A$ is the surface area.
-More refined notions of extensivity invoke homogeneity of arguments \cite{Chandler1987}
+More refined definitions specify that a variable is extensive if it is a \emph{first-order homogeneous function} of a linearly independent set of (different) extensive variables characterising the system size \cite{Chandler1987}.
+That is, a variable $\phi$ is extensive if
 \begin{equation}\label{eq:extensive-homogeneity}
-  \phi(\cdot).
+  \phi(\lambda Y_1, \cdots, \lambda Y_n)
+  =
+  \lambda \phi(Y_1, \cdots, Y_n)
 \end{equation}
-We will explore what other reasonable notions of `size' there may be, in the hope that we arrive at ideas that prove useful in developing new theories.
-We will begin by listing some examples of other possible notions of size.
+where $\{Y_i\}$ are a complete (linearly independent) set of extensive variables describing the system size.
+We will explore what other reasonable notions of `size' there may be, in effect finding a complete set of extensive variables, in the hope that we arrive at ideas that prove useful in developing new theories.
 
-\hl{We now introduce curvature, ideas from differential geometry.}
+We introduced the area above as a size descriptor for a surface.
+Borrowing ideas from differential geometry, we can also characterise the surface's shape through \emph{curvature}.
 A surface is a two-dimensional manifold so its local shape is described by two basis vectors.
 Supposing the surface is parameterised by coordinates $(x_1, x_2)$, then the basis vectors at a point on the surface $\vec{r}$ are
 \begin{equation}
@@ -62,10 +66,11 @@ As an example of how curvature can be a useful concept in statistical mechanics,
 with applications to e.g.\ phase coexistence \cite{YoungPTRSL1805,Laplace1805} or frost damage to porous solids \cite{EverettTFS1961}.
 Extensive curvature measures are obtained by integrating the curvature invariants over the surface, leading to the integrated mean and Gaussian curvatures $C$ and $X$.
 
-Together, the extensive geometric measures we have introduced so far can be written as%
-\marginfootnote{We use the usual physicist abuse of notation where $V$ refers to both a region in space $V \subset \mathbb{R}^d$, and also the physical volume of this space.}
+Together, the extensive geometric variables we have introduced so far can be written as%
+\marginfootnote{We use the usual physicist abuse of notation where $V$ refers to both a region in space $V \subset \mathbb{R}^3$, and also the physical volume of this space.}
 \begin{subequations}\label{eq:intrinsic-volumes-surface-integrals}
   \begin{align}
+    \label{eq:volume-measure}
     V
     &=
     \int_V \, d\vec{r},
@@ -84,18 +89,27 @@ Together, the extensive geometric measures we have introduced so far can be writ
   \end{align}
 \end{subequations}
 The latter three quantities are \emph{expressed} here as the surface integrals, but we shall see that they are really size measures on the volume $V$.
-It turns out that these are the \emph{only} reasonable notions of size in three-dimensions, a central finding in the field of \emph{integral geometry}.
+These clearly form a linearly independent set%
+\marginfootnote{This can be quickly determined by considering their units, i.e.\ $V: [\si{\metre^3}]$, $A: [\si{\metre^2}]$, $C: [\si{\metre^1}]$, $X: [\si{\metre^0}]$.},
+but less obviously it turns out that these are the \emph{only} reasonable notions of size in three-dimensions.
+This is a central finding of \emph{integral geometry}, which we will expand on in subsequent sections.
 %is a powerful tool for incorporating intuitive, flexible ideas into theories.
 %For this reason geometric approaches are common in statistical mechanics such as the Young-Laplace equation, which corrects Asakura-Ozawa
+A consequence of this is that together $\{V, A, C, X\}$ form a complete basis for system size in three dimensions, so we could redefine an extensive quantity as one which can be written
+\begin{equation}\label{eq:extensive-integral-geometry}
+  \phi = a_3 V + a_2 A + a_1 C + a_0 X,
+\end{equation}
+which, as a linear relation, clearly obeys \eqref{eq:extensive-homogeneity} during the transformation%
+\marginfootnote{Note: the rescaling of $\lambda V$ here refers to rescaling the volume measure \eqref{eq:volume-measure}, \emph{not} the object $V \subset \mathbb{R}^3$; in the latter case we would obtain the (non-extensive) transformation $\{V, A, C, X\} \to \{\lambda V, \lambda^{2/3} A, \lambda^{1/3} C, X\}$.}
+$\{V, A, C, X\} \to \{\lambda V, \lambda A, \lambda C, \lambda X\}$.
 
-Other examples of theories which incorporate notions of size include the Asakura-Ozawa, which describes depletion forces using exclusion volumes, and more generally any free volume theory which expresses an energy in terms of a volume in space.
-We introduce the field of \emph{integral geometry} which generalises the underlying geometric principles of these theories into a unified framework for characterising size.
-\todo{Repetition}
+Integral geometry provides elegant and unified description of sizes, and was crucial in the development of modern theories of hard spheres including the main ideas underlying chapters \ref{chapter:morphometric-framework}, \ref{chapter:morphometric-applications} and \ref{chapter:resummation}.
+This framework thus provides the route to generalising geometrical theories such as the Asakura-Oosawa model for depletion forces \cite{AsakuraJCP1954,AsakuraJPS1958}, and more generally any free volume theory which expresses an energy in terms of a volume in space.
+%Integral geometry generalises the underlying geometric principles of these theories into a unified framework for characterising size.
 %% We could argue that fundamentally these theories are based on measuring physical sizes.
 %% Integral geometry offers a mathematically rigorous formalism for describing sizes, so presents a possible starting point for free volume theories.
-This mathematical formalism provides elegant and unified description of sizes, and was crucial in the development of modern theories of hard spheres including the main ideas underlying chapters \ref{chapter:morphometric-framework}, \ref{chapter:morphometric-applications} and \ref{chapter:resummation}.
 %Ideas from this branch of mathematics were crucial to the development of fundamental measure theory (section \ref{sec:fmt}), so it makes sense to place this before the section on liquid state theory.
-As integral geometry is generally unfamiliar to people with a background in physics, we will place emphasis on the concepts and intuition rather than rigour.
+As integral geometry is generally unfamiliar to people with a background in physics, we will place emphasis on the concepts and intuition rather than rigour and proofs.
 
 \subsection{What do we even mean by size?}
 
@@ -140,7 +154,7 @@ We put forward the following qualities of the measures $V, A, C$ and $X$ which m
     V[K_1 \cup K_2] = V[K_1] + V[K_2] - V[K_1 \cap K_2],
   \end{equation}
   and similar expressions for $A$, $C$, and $X$.
-  As corollaries, this property contains the expectation that the size of nothing is zero, i.e.\ $V[\emptyset] = 0$ and the homogeneity property of extensive variables \eqref{eq:extensive-homogeneity}.
+  As corollaries, this property contains the expectation that the size of nothing is zero, e.g.\ $V[\emptyset] = 0$ and the homogeneity property of extensive variables \eqref{eq:extensive-homogeneity}.
 \item They are continuous%
   \marginfootnote{Specifically, in integral geometry this continuity property is with respect to the \emph{Hausdorff metric}.
     Details on this can be found in standard texts, e.g.\ Refs.\ \cite{Santalo2004,Klain1997}.}.
@@ -226,6 +240,7 @@ For a spherical solute these reduce to the values given in \eqref{eq:spt-ansatz}
 \subsection{Generalisation: intrinsic volumes}
 
 To obtain results for all physical dimensions $d \le 3$ it is convenient to generalise the morphometric \emph{ansatz} \eqref{eq:morphometric-approach} to arbitrary $d$ and substitute $d \in \{1, 2, 3\}$ at the end of our derivation.
+\hl{Connect with the curvature measures of differential geometry.}
 To that end it is convenient to introduce generalisations of the geometric parameters $\{V,A,C,X\}$: the \emph{intrinsic volumes} $\{V_d, V_{d-1}, \cdots, V_0\}$.
 To introduce the intuition behind these generalised volumes we start from the observation that the quantities $\{V,A,C,X\}$ can be imagined as size descriptors for projections onto $k$-dimensional subspaces in $\mathbb{R}^3$; for a compact body $K \subset \mathbb{R}^3$ we have:
 \begin{enumerate}
@@ -284,7 +299,7 @@ Finally, with the intrinsic volumes the generalisation of the morphometric appar
       $k$ & $\omega_k$ & $V_k(B_1)$ & $V_k(B_2)$ & $V_k(B_3)$ \\
       \midrule
       0 & 1 & 1 & 1 & 1 \\
-      1 & 2 & 2 & ? & 4 \\
+      1 & 2 & 2 & $\pi$ & 4 \\
       2 & $\pi$ && $\pi$ & $2\pi$ \\
       3 & $\frac{4\pi}{3}$ &&& $\frac{4\pi}{3}$ \\
       \bottomrule
@@ -294,38 +309,13 @@ Finally, with the intrinsic volumes the generalisation of the morphometric appar
 \end{SCtable}
 
 \begin{theorem}{Hadwiger's characterisation theorem}
-  Together the functionals $\{\mu_k\}_{k=0}^d$ form a basis for the vector space of all continuous rigid-motion invariant valuations on polyconvex sets in $\mathbb{R}^d$.
+  Together the functionals $\{V_k\}_{k=0}^d$ form a basis for the vector space of all continuous rigid-motion invariant valuations on polyconvex sets in $\mathbb{R}^d$.
 I.e. a continuous rigid-motion invariant valuation can be written
 \begin{equation}
-  \mu(A) = \sum_{i=0}^d c_i \mu_i(A)
+  V(A) = \sum_{i=0}^d c_i V_i(A)
 \end{equation}
 where $c_i$ are some coefficients independent of $A$.
 \end{theorem}
-
-The basis of the morphometric approach is that the functionals $\{V,A,C,X\}$ are normalisations of the so-called \emph{intrinsic volumes}.
-These play a central role in integral geometry as the \emph{only} physically meaningful size measures in the sense that they:
-\begin{enumerate}
-\item Are invariant with respect to translations and rotations.
-\item Increase additively, i.e.\ they transform under combination of subsystems via the inclusion/exclusion relation e.g.\
-  \begin{equation*}\label{eq:additivity}
-    V[A \cup B] = V[A] + V[B] - V[A \cap B],
-  \end{equation*}
-  and similar expressions for $A$, $C$, and $X$.
-\item Are continuous (specifically with respect to the Hausdorff metric).
-  Loosely speaking, this means that the size measures converge as the object is approximated by increasingly finely meshed polyhedra excluding e.g.\ fractal geometries.
-  As a simple intuitive example, the measurement of a length will converge continuously to some number as one uses rulers with progressively finer distance markings.
-\end{enumerate}
-More details on properties of intrinsic volumes can be found in standard texts, e.g.\ Refs.\ \cite{Santalo2004,Klain1997}.
-%\cite{Santalo2004,SchneiderACIG1984,Schneider2008,Klain1997}.
-
-The central assertion of the morphometric approach is that the insertion cost $\Delta \Omega$ \emph{exactly} possesses the properties above, providing the connection between geometry and thermodynamics \cite{KonigPRL2004}.
-A classic theorem of integral geometry due to Hadwiger \cite{Hadwiger1957} states that the intrinsic volumes are the \emph{only} class of functionals with the properties listed above; a corollary of this is that they form a linear vector space for any functional possessing these properties.
-The morphometric form \eqref{eq:morph-ansatz} then follows.
-In addition to providing a more general \emph{ansatz} than SPT, this approach lays out its underlying assumptions explicitly eschewing the ad-hoc way in which the original SPT \emph{ansatz} \eqref{eq:spt-ansatz} was obtained.
-
-The morphometric approach is certainly an approximation, as the insertion cost will not rigorously possess the three properties above in reality.
-Notably, in SPT $\Delta\Omega$ is known to contain singularities in its high order derivatives with solute radius \cite{ReissJCP1959}; these non-analytic terms result from violations of the additivity assumption.
-Nevertheless, the approximation is accurate in hard spheres \cite{OettelEL2009,AshtonPRE2011,LairdPRE2012,BlokhuisPRE2013,UrrutiaPRE2014,Hansen-GoosJCP2014} so these violations should be small.
 
 \begin{SCtable}
   \begin{minipage}[b]{\linewidth}
@@ -413,8 +403,8 @@ Distances between sets: the Hausdorff metric.
 \begin{theorem}{Steiner's formula for parallel volumes}
   For a compact, convex body $K \in \mathcal{K}$ the parallel volume is expressable as:
   \begin{equation}
-    \mu_d(K + \epsilon B_d) =
-    \sum_{i=0}^d \mu_i(K) \omega_{d-i} \epsilon^{d-i}
+    V_d(K + \epsilon B_d) =
+    \sum_{i=0}^d V_i(K) \omega_{d-i} \epsilon^{d-i}
   \end{equation}
 \end{theorem}
 
