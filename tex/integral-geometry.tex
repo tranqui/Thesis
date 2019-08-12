@@ -3,13 +3,13 @@
 
 \subsection{Motivation}
 
-Geometry has been a recurring theme in physical theories, because of its deepness and intuitive nature.
+Geometry has been a recurring theme in physical theories, appealing because of its intuitive nature.
 There are many ways that geometric ideas can be incorporated, but our focus will be on expansions of thermodynamic quantities in terms of \emph{sizes}.
-This is because extensivity is important to statistical mechanics; the thermodynamic limit requires it.
-So by focusing on quantities which are extensive we ensure a thermodynamically consistent treatment.
+The usefulness of this particular focus is directly connected to the concept of \emph{extensivity} in statistical mechanics, which we will use to guide the following discussion.
 We will use the familiar notion of \emph{extensivity} within statistical mechanics to guide this discussion.
-% illustrate the usefulness of a description in terms of general notions of sizes
-Defining an extensive quantity as one that scales proportionally to system size, the first meaning of size that comes to mind is probably the volume.
+Thermodynamic potentials must be extensive to remain well-defined in the thermodynamic limit.
+%Defining an extensive quantity as one that scales proportionally to system size, the first meaning of size that comes to mind is probably the volume.
+So by focusing on quantities which are extensive we ensure a thermodynamically consistent treatment.
 
 %The first notion of size that likely comes to mind is the volume, though we will generalise to all reasonable notions of size.
 %The simplest example we can give is from statistical mechanics: an \emph{extensive variable} is one that scales proportionally to the system volume.
@@ -18,14 +18,21 @@ Defining an extensive quantity as one that scales proportionally to system size,
 %%   V[K] = \int_K d\vec{r}.
 %% \end{equation}
 %Then,
-An extensive variable would be written
+We will call these quantities \emph{volume-extensive}.
+As an example of a volume-extensive quantity, the \emph{entropy} can be written
 \begin{equation*}
-  U = u V
+  S = s V
 \end{equation*}
-where $u$ would be an energy density which is intensive, i.e.\ it does not change with system volume.
+where $s$ would be an entropy density which is intensive, i.e.\ it does not change with system volume.
 Extensivity is a fundamental concept within statistical mechanics, so at the very least the volume is an important size measure.
 By generalising our notion of `size' beyond volume we hope to arrive at new ideas that prove useful in developing new theories.
 We will begin by listing some examples of other possible notions of size.
+
+As an example of curvature in statistical mechanics, an early example is the Young-Laplace equation for the pressure change between two fluids
+\begin{equation}
+  \Delta p = \gamma \Tr{\kappa}
+\end{equation}
+where $\kappa$ is the curvature tensor describing the shape of the phase boundary.
 
 Firstly, the surface area $A$ is another intuitive notion of size, because.
 Secondly, those familiar with differential geometry will have probably encountered the various curvature measures.
