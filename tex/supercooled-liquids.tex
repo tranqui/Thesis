@@ -354,8 +354,7 @@ Configurational entropy.
 Inspired by the solutions of mean-field spin glasses, the great breakthrough of the original papers was that these systems were identical in the structure of the energy landscape.
 
 The relevance of mean-field theory in physical dimensions comes from an interpretation \cite{KirkpatrickPRB1987, KirkpatrickPRA1989}, and antecedent ideas found in \cite{AdamJCP1965}.
-
-Patter of Ref.\ \cite{BouchaudJCP2004}.
+RFOT: argument of Ref.\ \cite{BouchaudJCP2004}, introduces point-to-set length.
 
 Point-to-set length is the minimum size of a subsystem for there to be relaxation: the space of states transitions from being a single state (point) to a multitude of states (set).
 It can be rigorously proven that a diverging timescale necessarily must coincide with a diverging point-to-set length: Montanari \cite{MontanariJSP2006}.
@@ -377,13 +376,13 @@ Structural in the sense of the energy landscape, not necessarily in real space/l
 
 \subsection{Local structure picture}
 
-Paddy's review is definitive reference for this \cite{RoyallPR2015}.
+Stripmine Paddy's review for this section \cite{RoyallPR2015}.
 
 In conventional condensed matter physics dynamics is determined by structure.
 For example, crystalline solids are fixed on a lattice so do not flow, whereas liquids are disordered and are thus able to flow.
 Soft matter systems (e.g.\ gels, foams, glasses) do not neatly fall into this paradigm: their dynamics are often arrested whilst their structure remains highly disordered.
 
-Frustration-limited domain theory.
+Frustration-limited domain theory \cite{TarjusJPCM2005}.
 
 Previous viewpoints, MCT and mean-field, are structural in the sense of being thermodynamic; however they do not explicitly invoke local structure.
 That being said, they are broadly compatible viewpoints.
@@ -402,15 +401,14 @@ Local mechanisms in the various theories.
 
 \hl{Derivatives of free energy reduce} to $g^{(2)}$,\hl{ emblematic of the conventional routes.
 Absolute free energies require higher order correlation functions to appear.}
-\todo{Talk about this. Also: entropy route.}
 
 To motivate the use of many-body correlations we employ an argument due to Evans \cite{EvansPrivate2019}.
-In section ? we saw the compressibility and virial routes lead to the expression of the free energy in terms of the pair correlation function.
-In this sense one may think that all of the information is contained in the two body correlation function.
-The pair correlation is used to obtain thermodynamic quantities which are derivatives of the free energy at an instantaneous state point, so to infer the free energy we must sample multiple state points.
+In section \ref{sec:thermodynamic-routes} we saw how the compressibility and virial routes lead to expressions of the free energy in terms of pair correlations.
+This is emblematic of conventional routes to the free energy, so in some sense all of the thermodynamically relevant information is contained in the two body correlation functions.
+However, the pair correlation yields thermodynamic quantities which are \emph{derivatives} of the free energy at an instantaneous state point, so to infer the free energy we must sample multiple state points.
 Equivalently, we could consider the derivatives of the pair correlation function.
 It is straightforward to show that \cite{Santos2016}
-\begin{equation}
+\begin{equation}\label{eq:correlation-derivatives}
   \chi_T \rho
   \left( \frac{\partial \rho^{(n)}}{\partial \rho} \right)_{V,T}
   =
@@ -437,12 +435,11 @@ The first few terms are given by
     &=
   \end{align}
 \end{subequations}
+\todo{Write these out explicitly.}
 
 Second, while it is true that thermodynamic quantities like the pressure can certainly be inferred from the pair correlations, there is no such simple relationship for dynamic quantities.
-In the absence of a thermodynamic phase transition we would not expect the pair correlation to reveal much about the nature of dynamical arrest (beyond the lack of transition).
-And supposing the required precision to detect a signal $g(r)$ may be arbitrarily complicated.
-However, the signature of the phase transtion could be weak; we could amplify the signals by looking at the higher order functions.
-And any precursors to a transition may become more apparent.
+In the absence of a thermodynamic phase transition, we would not expect the pair correlation to reveal much about the nature of dynamical arrest, beyond the lack of a transition.
+And even supposing the existence of a transition, the precision required to detect such a signal $g(r)$ may be arbitrarily subtle; however, any the changes approaching a transition \emph{must} be magnified in the higher order correlation functions because of \eqref{eq:correlation-derivatives}.
 
 Fourier space vs real space.
 We will be focusing on many-body correlations in real space, in line with the theories of the glass transition mentioned above.

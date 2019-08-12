@@ -117,12 +117,13 @@ In order to proceed we must define `size', and specify precisely which objects t
 We put forward the following qualities of the measures $V, A, C$ and $X$ which make them intuitive notions of size:
 \begin{enumerate}
 \item They are invariant with respect to translations and rotations, so that an object's size is independent of the observer.
-\item They increase additively, i.e.\ they transform under combination of subsystems via the inclusion/exclusion relation e.g.\ for two objects $K_1$ and $K_2$
+\item They increase additively, i.e.\ they transform under combination of subsystems via the inclusion/exclusion relation e.g.\ for two objects $K_1$ and $K_2$%
+  \marginfootnote{We use the square brace notation $V[\cdot]$ to indicate that the size measures are generalised functions, or \emph{functionals}, of their arguments.}
   \begin{equation}\label{eq:additivity}
     V[K_1 \cup K_2] = V[K_1] + V[K_2] - V[K_1 \cap K_2],
   \end{equation}
   and similar expressions for $A$, $C$, and $X$.
-  As corollaries, this property contains the expectation that the size of nothing is zero, e.g.\ $V[\emptyset] = 0$, and the leads to the homogeneity property of extensive variables \eqref{eq:extensive-homogeneity} through \eqref{eq:extensive-integral-geometry}.
+  As corollaries, this property contains the idea that the size of nothing is zero, e.g.\ $V[\emptyset] = 0$, and leads to the homogeneity property of extensive variables \eqref{eq:extensive-homogeneity} through \eqref{eq:extensive-integral-geometry}.
 \item They are continuous%
   \marginfootnote{Specifically, in integral geometry this continuity property is with respect to the \emph{Hausdorff metric}.
     Details on this can be found in standard texts, e.g.\ Refs.\ \cite{Santalo2004,Klain1997}.}.
@@ -141,9 +142,9 @@ These properties are the defining characteristics of more general size measures 
 %% Radius is the only natural parameter for a sphere, however for more general geometries there might be arbitrarily many parameters so one may wonder if they should be included in a general geometric expansion.
 
 Naively, we might attempt to evaluate the size measures on all subsets $V \subset \mathbb{R}^3$, however this turns out to be too broad a definition.
-In particular, this leads to the Banach-Tarski paradox in which an object can be broken into two, then recomposed through rigid transformations into two objects identical to the original one  \cite{BanachFM1924}; a paradox ensures where the original volume is equal to twice itself.
+In particular, this leads to the Banach-Tarski paradox in which an object can be broken into two, then recomposed through rigid transformations into two objects identical to the original one  \cite{BanachFM1924}; by \eqref{eq:additivity}, a paradox ensues where the original volume is equal to twice itself.
 A better definition is the restriction to \emph{polyconvex sets}%
-\marginfootnote{The set of polyconvex objects is also sometimes called the \emph{convex ring}.}: objects formed by countable union of \emph{compact} objects.
+\marginfootnote{The set of polyconvex objects is also sometimes called the \emph{convex ring}.}: objects formed by countable union of \emph{compact} and \emph{convex} objects.
 By compact, we mean objects which are
 \begin{enumerate}
 \item \emph{bounded}, so they must be finite in scope, as no meaningful size can be defined for a body spanning an infinite region of space, and
@@ -151,6 +152,7 @@ By compact, we mean objects which are
   %, so the surface exists on which measures $\{A,C,X\}$ are defined.
   %This is an important property which we will see by example in discussing the Gauss-Bonnet theorem below.
 \end{enumerate}
+We write the collection of objects in $d$-dimensions which are compact and convex as $\mathcal{K}^d$.
 This class of objects covers most physically relevant geometries, excluding fractals where size measures may be pathological.
 %The empty set $\emptyset$ is a compact body, albeit a special case with zero size.
 %Compact convex set $K \in \mathcal{K}$ notation.
@@ -165,27 +167,47 @@ This class of objects covers most physically relevant geometries, excluding frac
 %% Connection with entropy, leads to homogeneity in arguments which is the building block for extensivity of a thermodynamic potential.
 %% This provides a geometrically precise foundation for thermodynamic potentials.
 
-As way of justifying the above claims, we...
-The simplest size measure we could imagine is to simply count the number of objects there are.
-Certainly invariant and continuous, but is it additive?
+As way of justifying the above claims, and a segue into other topics, we introduce a (seemingly) new measure: the \emph{Euler characteristic} $\chi$ which simply counts the number of disjoint objects in a set%
+\marginfootnote{As an intuitive illustration of why this is a size measure, I like to imagine that the \emph{size} of a pirate's treasure is the \emph{number} of gold coins in their possession, which is the Euler characteristic of their hoard.}.
+More precisely, for a compact and convex object $K \in \mathcal{K}^d$ we define the measure such that
+\begin{equation*}
+  \chi[K] := 1
+\end{equation*}
+then for it to behave additively for a disjoint collection of objects $K_1, \cdots, K_N \in \mathcal{K}^d$ with $K_i \cap K_j = \emptyset$ for $i \ne j$ we find
+\begin{equation*}
+  \chi[K_1 \cup \cdots \cup K_N] = N.
+\end{equation*}
+Some modification of its definition as a counting measure is needed in case of overlaps, however for now we focus on the fact that this measure is rigid-motion invariant, additive and continuous; as such, it would seem to be an independent measure.
+However, the Gauss-Bonnet theorem from differential geometry equates it with the Gaussian curvature through
+\begin{equation}\label{eq:gauss-bonnet}
+  X[K] = 2\pi \chi[\partial K],
+\end{equation}
+so it is really a manifestation of a size measure we have already seen.
+It is worth emphasising the Euler characteristic in its own right however, as it is a very important \emph{topological invariant}, meaning it does not change with continuous geometric deformations.
+We give some properties of the Euler characteristic below.
 
-\subsection{Aside: the Euler characteristic}
+Compact objects include their boundary, so using the additivity property we can decompose the Euler characteristic on $K \in \mathcal{K}^d$ into surface and interior terms
+\begin{equation*}
+  \chi[K] = \chi[ \partial K ] + \chi[ \interior(K) ] = 1.
+\end{equation*}
+Arguing by induction, we find%
+\marginfootnote{Briefly, the only compact object in $d=1$ is a line segment, with $\partial K$ as two disjoint points giving $\chi[\partial K] = 2$.
+  Then, in arbitrary dimensions one considers cutting the object in two, leading to an iteration formula which gives the stated result.
+  Full details can be found in Ref.\ \cite{Klain1997}.}
+\begin{subequations}
+  \begin{align}
+    \chi[ \partial K ] &= 1 + (-1)^d
+    \\
+    \chi[ \interior(K) ] &= (-1)^{d+1}
+  \end{align}
+\end{subequations}
+Thus the Gauss-Bonnet theorem \eqref{eq:gauss-bonnet}, valid in $d=3$, gives $X = 4\pi$ for convex objects i.e.\ a constant.
+By similar arguments, it can be shown that the Euler characteristic is increased by the number of \emph{cavities} in $K$, and decreased by the number of \emph{holes} in $K$ \cite{Klain1997}.
+More generally, the Euler characteristic is modified by $(-1)^{\nu+1}$ times the number of $\nu$-dimensional \emph{voids}.
 
-Aim of this section is to provide intuition over Euler characteristic.
-
-Repeat arguments in figures and you obtain the general rule that dividing an $n$-sphere gives two $n-1$-dimensional convex objects and a $n-1$ sphere dividor.
-This gives us the rule for the Euler characteristic.
-Euler characteristic describes the topology.
-
-\begin{itemize}
-\item Multiple disjoint convex objects: increase
-\item Holes lower Euler characteristic
-\item Cavities increase
-\end{itemize}
-
-For $d=3$ we have the important Gauss-Bonnet theorem.
-
-The only convex object in 1d is a line segment.
+%% Repeat arguments in figures and you obtain the general rule that dividing an $n$-sphere gives two $n-1$-dimensional convex objects and a $n-1$ sphere dividor.
+%% This gives us the rule for the Euler characteristic.
+%% Euler characteristic describes the topology.
 
 %% \begin{SCfigure}[H]
 %%   \missingfigure[figwidth=0.5\linewidth]{$\partial B$}%
@@ -199,92 +221,23 @@ The only convex object in 1d is a line segment.
 %%   \caption{Effect of cavities: divide 3d sphere in two (2 discs + circle).}
 %% \end{SCfigure}
 
-\begin{tcolorbox}[title=Aside: nomenclature of spheres vs balls]
-  The terms `sphere' and `ball' are used interchangeably in physics (and colloquially), however in geometry these refer to different things; `ball' refers to the solid object whereas `sphere' refers to its boundary, i.e.\
-  \begin{equation*}
-    S^{d-1} = \partial B^d,
-  \end{equation*}
-  As a surface manifold, the $(d-1)$-dimensionality of the sphere is reduced by one from its original space.
-  So strictly speaking, when we speak of hard spheres in physics we really mean hard balls.
-  %% \marginfootnote{Strictly speaking the interactions between hollow spheres and solid balls would be identical, so it is possible to still speak of hard spheres.
-  %%   However, typically we always exclude geometries where spheres contain each another so hard balls better capture the interactions of interest.
-  %%   Moreover, colloidal hard spheres are solid.}
-  %in the geometric sense.
-\end{tcolorbox}
-
-Should explain intrinsic volumes earlier perhaps.
-Euler characteristic of a boundary depends on dimension:
-\begin{align}
-  \chi(K^d) &= 1 \\
-  \chi(\partial K^d) &= 1 + (-1)^d
-\end{align}
-Disjoint union: sum them (by inclusion-exclusion principle).
-
-Euler characteristic is the simplest size measure: why is this a size measure?
-\marginfootnote{As an illustration of why this is a size measure, I like to imagine that the \emph{size} of a pirate's treasure is the \emph{number} of gold coins in their possession, which is the Euler characteristic of their hoard.}
-
-\begin{theorem}{Gauss-Bonnet theorem}
-  Using the additivity property we can decompose the Euler characteristic into a surface and interior term
-  \begin{equation*}
-    \chi(\partial K) + \chi( \interior(K) ) = \chi(K) = 1
-  \end{equation*}
-  using the fact that the Euler characteristic of a compact body is unity.
-\end{theorem}
-
-The main point of this theorem is that it establishes an equivalence between two seemingly distinct measures of size (? could be equivalence between surface measure and volume one): Gaussian curvature and Euler characteristic.
-For a spherical solute these reduce to the values given in \eqref{eq:spt-ansatz}, so this represents a proper generalisation of SPT for more general geometries.
+\hl{Finishing paragraph connecting to next section...}
 
 \subsection{Generalisation: intrinsic volumes}
 
-To obtain results for all physical dimensions $d \le 3$ it is convenient to generalise the morphometric \emph{ansatz} \eqref{eq:morphometric-approach} to arbitrary $d$ and substitute $d \in \{1, 2, 3\}$ at the end of our derivation.
-\hl{Connect with the curvature measures of differential geometry.}
-To that end it is convenient to introduce generalisations of the geometric parameters $\{V,A,C,X\}$: the \emph{intrinsic volumes} $\{V_d, V_{d-1}, \cdots, V_0\}$.
-To introduce the intuition behind these generalised volumes we start from the observation that the quantities $\{V,A,C,X\}$ can be imagined as the size of projections onto $k$-dimensional subspaces in $\mathbb{R}^3$; for a compact body $K \subset \mathbb{R}^3$ we have:
+It will sometimes be helpful to use a dimension independent formalism%
+\marginfootnote{Specifically, in chapter \ref{chapter:resummation} we will derive a theory for the liquid state.
+  In order to obtain results for all physical dimensions $d \le 3$, we will work in arbitrary $d$ and substitute $d \in \{1, 2, 3\}$ at the end of our derivation.},
+so it is convenient to introduce generalisations of the geometric parameters $\{V,A,C,X\}$: the \emph{intrinsic volumes} $\{V_d, V_{d-1}, \cdots, V_0\}$.
+%\hl{Connect with the curvature measures of differential geometry.}
+To introduce the intuition behind these generalised volumes we start from the observation that the quantities $\{V,A,C,X\}$ can be imagined as the size of projections onto $k$-dimensional subspaces in $\mathbb{R}^3$; for a compact body $K \in \mathcal{K}^3$ we have:
 \begin{enumerate}
 \item $V(K)$ is trivially the volume of the intersection of $K$ with the 3-dimensional subspace i.e.\ all of Euclidean space.
 \item $A(K)$ can be thought of as the typical size of two-dimensional images formed by projections onto planes.
 \item $C(K)$ is related to the projections onto one-dimensional subspaces i.e.\ lines.
   This curvature measure is normally thought of as a surface property, but this definition suggests an equivalence (up to a different normalisation) with the \emph{mean width} $L(K)$ of the body.
-\item $X(K)$ is obtained from projections onto a single point; this surface measure is thus equivalent to the Euler characteristic $\chi(K)$.
-  This connection results in the celebrated Gauss-Bonnet theorem of differential geometry, which we would write
-  \begin{equation*}
-    X(K) = 2\pi \chi(K)
-  \end{equation*}
-  in our notation.
+\item $X(K)$ is obtained from projections onto a single point, corroborating the equivalence with the Euler characteristic $\chi(K)$ articulated by the Gauss-Bonnet theorem \eqref{eq:gauss-bonnet}.
 \end{enumerate}
-
-Generalising the above intuition to $d$-dimensions, we see that in general we can imagine $d+1$ projections and so expect $d+1$ corresponding volumes.
-We define the $k$th intrisic volume as the average size of the projections onto $k$-dimensional linear subspaces of $\mathbb{R}^d$, i.e.\
-%Denoting the space of all $k$ dimensional linear subspaces in $\mathbb{R}^d$ as $\mathrm{Graff}(d,k)$ (the affine Grassmanian), the intrinsic volume is obtained by
-\begin{equation}\label{eq:intrinsic-volumes}
-  V_k(K)
-  =
-  C_{k,d-k}
-  \int \chi(K \cap E_{d-k}) \, d\mu(E_{d-k})
-\end{equation}
-where the integral is taken over all affine transformations of the plane $E_k$ in $\mathbb{R}^d$ and the flag coefficient is
-\begin{equation}\label{eq:flag-coefficients}
-  C_{k,d-k}
-  :=
-  \frac{d!}{k! (d-k)!} \frac{\omega_d}{\omega_k \omega_{d-k}},
-\end{equation}
-where the volume of the $d$-dimensional unit ball is
-\begin{equation}
-  \omega_d := V_d(B^d) = \frac{\pi^{d/2}}{\Gamma(\frac{d}{2} + 1)}.
-\end{equation}
-The flag coefficients $C_{k,d-k}$ have a similar structure to binomial coefficients, and play a similar \emph{combinatorial} role for combining subspaces (section \ref{sec:kinematic-formula}).
-By convention, the normalisation of the measure $d\mu(E_{d-k})$ in \eqref{eq:intrinsic-volumes} is chosen to give the intrinsic volumes for the $d$-dimensional unit ball $B^d$ as
-\begin{equation}\label{eq:intrinsic-volume-ball}
-  V_k (B^d)
-  =
-  {d \choose k} \frac{\omega_d}{\omega_{d-k}}.
-\end{equation}
-%The intrinsic volumes thus only depend on the dimensionality of the body, not the embedding space.
-A set of common geometrical quantities and their reduction to the intrinsic volumes in physical dimensions $d \le 3$ is given in Table~\ref{table:geometric-quantities}.
-Finally, with the intrinsic volumes the $d$-dimensional generalisation of an extensive variable \eqref{eq:extensive-integral-geometry} reads
-\begin{equation}\label{eq:extensive-integral-geometry-d}
-  \phi = \sum_{k=0}^d a_k V_k
-\end{equation}
 
 \begin{SCtable}
   \begin{minipage}[b]{\linewidth}
@@ -303,14 +256,63 @@ Finally, with the intrinsic volumes the $d$-dimensional generalisation of an ext
   \caption{Intrinsic volumes of the unit ball in physical dimensions $d \le 3$.}
 \end{SCtable}
 
-\begin{theorem}{Hadwiger's characterisation theorem}
-  Together the functionals $\{V_k\}_{k=0}^d$ form a basis for the vector space of all continuous rigid-motion invariant valuations on polyconvex sets in $\mathbb{R}^d$.
-I.e. a continuous rigid-motion invariant valuation can be written
-\begin{equation}
-  V(A) = \sum_{i=0}^d c_i V_i(A)
+Generalising the above intuition to $d$-dimensions, we see that in general we can imagine $d+1$ projections and so expect $d+1$ corresponding volumes.
+We define the $k$th intrisic volume as the average size of the projections onto $k$-dimensional linear subspaces of $\mathbb{R}^d$, i.e.\ \cite{Santalo}
+%Denoting the space of all $k$ dimensional linear subspaces in $\mathbb{R}^d$ as $\mathrm{Graff}(d,k)$ (the affine Grassmanian), the intrinsic volume is obtained by
+\begin{equation}\label{eq:intrinsic-volumes}
+  V_k(K)
+  =
+  C_{k,d-k}
+  \int \chi(K \cap E_{d-k}) \, dE_{d-k}
 \end{equation}
-where $c_i$ are some coefficients independent of $A$.
-\end{theorem}
+\todo{Check subscripts of $E$.}
+where the integral is taken over all affine transformations of the plane $E_k$ in $\mathbb{R}^d$, and flag coefficient
+\begin{equation}\label{eq:flag-coefficients}
+  C_{k,d-k}
+  :=
+  \frac{d!}{k! (d-k)!} \frac{\omega_d}{\omega_k \omega_{d-k}},
+\end{equation}
+where the volume of the $d$-dimensional ball with unit radius $B_d$ is
+\begin{equation}
+  \omega_d := V_d(B_d) = \frac{\pi^{d/2}}{\Gamma(\frac{d}{2} + 1)}.
+\end{equation}
+The flag coefficients $C_{k,d-k}$ have a similar structure to binomial coefficients, and play a similar \emph{combinatorial} role for combining subspaces (section \ref{sec:kinematic-formula}).
+By convention, the normalisation of the measure $dE_{d-k}$ in \eqref{eq:intrinsic-volumes} is chosen to give the intrinsic volumes for the unit ball as
+\begin{equation}\label{eq:intrinsic-volume-ball}
+  V_k (B_d)
+  =
+  {d \choose k} \frac{\omega_d}{\omega_{d-k}}.
+\end{equation}
+%The intrinsic volumes thus only depend on the dimensionality of the body, not the embedding space.
+A set of common geometrical quantities and their reduction to the intrinsic volumes in physical dimensions $d \le 3$ is given in Table~\ref{table:geometric-quantities}.
+
+\begin{tcolorbox}[title=Aside: nomenclature of spheres vs balls]
+  The terms `sphere' and `ball' are used interchangeably in physics (and colloquially), however in geometry these refer to different things; `ball' refers to the solid object whereas `sphere' refers to its boundary, i.e.\
+  \begin{equation*}
+    S_{d-1} = \partial B_d,
+  \end{equation*}
+  As a surface manifold, the $(d-1)$-dimensionality of the sphere is reduced by one from its original space.
+  So strictly speaking, when we speak of hard spheres in physics we really mean hard balls.
+  %% \marginfootnote{Strictly speaking the interactions between hollow spheres and solid balls would be identical, so it is possible to still speak of hard spheres.
+  %%   However, typically we always exclude geometries where spheres contain each another so hard balls better capture the interactions of interest.
+  %%   Moreover, colloidal hard spheres are solid.}
+  %in the geometric sense.
+\end{tcolorbox}
+
+We will see the intrinsic volumes used in the construction of a theory for the hard sphere liquid in section \ref{sec:fmt}.
+
+\begin{tcolorbox}[title=Hadwiger's characterisation theorem]
+  Together the functionals $\{V_k\}_{k=0}^d$ form a basis for the vector space of all continuous rigid-motion invariant valuations on polyconvex sets in $\mathbb{R}^d$.
+  I.e. a continuous rigid-motion invariant valuation can be written
+  \begin{equation}
+    V(A) = \sum_{i=0}^d c_i V_i(A)
+  \end{equation}
+  where $c_i$ are some coefficients independent of $A$.
+  Finally, with the intrinsic volumes the $d$-dimensional generalisation of an extensive variable \eqref{eq:extensive-integral-geometry} reads
+  \begin{equation}\label{eq:extensive-integral-geometry-d}
+    \phi = \sum_{k=0}^d a_k V_k
+  \end{equation}
+\end{tcolorbox}
 
 \begin{SCtable}
   \begin{minipage}[b]{\linewidth}
@@ -395,15 +397,16 @@ Instead, set addition and subtraction operations are related through
 
 Distances between sets: the Hausdorff metric.
 
-\begin{theorem}{Steiner's formula for parallel volumes}
-  For a compact, convex body $K \in \mathcal{K}$ the parallel volume is expressable as:
+\begin{tcolorbox}[title=Steiner's formula for parallel volumes]
+  For a compact, convex body $K \in \mathcal{K}^d$ the parallel volume is expressable as:
   \begin{equation}
     V_d(K + \epsilon B_d) =
     \sum_{i=0}^d V_i(K) \omega_{d-i} \epsilon^{d-i}
   \end{equation}
-\end{theorem}
+\end{tcolorbox}
 
-\subsection{Kinematic formulae}
+\subsection{Kinematic formula}
+\label{sec:kinematic-formula}
 
 Motivate: usefulness in evaluating partition functions.
 Probability of particles `hitting' one another.
@@ -427,7 +430,7 @@ with the normalisation in the angular measure such that $\int d\vec{\theta} = 1$
 a member of the rigid motion group $g \in G_d := \mathbb{R}^d \times SO(d)$, and where $\mathcal{R} \in SO(d)$ is the rotation matrix parameterised by $\vec{\theta}$.
 We can take standard results for simple liquids interacting via spherically symmetric pair potentials, and make the above replacement to obtain the correct generalisation for arbitrary shapes.
 
-\begin{theorem}{Principal kinematic formula}
+\begin{tcolorbox}[title=Principal kinematic formula]
   Noting that $\chi = V_0$ is the lowest order intrinsic volume, the latter line of \eqref{eq:low-density-insertion} is ideally suited to a treatment within integral geometry.
   A central result of this field is the principal kinematic formula of Blaschke and Santal\'o \cite{BlaschkeMZ1936,Blaschke1937,SantaloASI1936} which gives the explicit form of integrals of this type as \cite{Santalo2004,Klain1997}
   %\cite{Santalo2004,SchneiderACIG1984,Schneider2008,Klain1997}
@@ -439,7 +442,7 @@ We can take standard results for simple liquids interacting via spherically symm
   We see the flag coefficients \eqref{eq:flag-coefficients} play an analogous role in conjugating the intrinsic volumes above as binomial coefficients do in algebraic expansions%
   \marginfootnote{For this reason Klain and Rota argue that integral geometry should be called \emph{continuous combinatorics} \cite{Klain1997}, because it generalises combinatorial results to continuous spaces}.
   More general formulas exist for integrals over other intersection intrinsic volumes \cite{Klain1997}, however these do not have an interpretation in terms of evaluating partition functions so we will not use them.
-\end{theorem}
+\end{tcolorbox}
 
 The principal kinematic formula \eqref{eq:binomial-kinematic-formula} can be iterated for the intersections of many bodies $\{K_i\}$ giving \cite{Santalo2004,MarechalPRE2014}
 \begin{subequations}\label{eq:multinomial-kinematic-formula}
@@ -505,7 +508,7 @@ We will use this iterated formula in chapter \ref{chapter:resummation} to resum 
 %% \end{tabular}
 %% \end{center}
 
-%% \begin{theorem}{General kinematic formula}
+%% \begin{tcolorbox}[title=General kinematic formula]
 %%   For $0 \le k \le d$:
 %%   \begin{equation}
 %%     \int_{\mathbb{E}_d} \mu_k (A \cap g B) \, dg =
@@ -528,7 +531,7 @@ We will use this iterated formula in chapter \ref{chapter:resummation} to resum 
 %%     \frac{\omega_{i+k} \omega_{d-i}}{\omega_k \omega_d}
 %%     \mu_{i+k}(A) \mu_{d-i}(B)
 %%   \end{equation*}
-%% \end{theorem}
+%% \end{tcolorbox}
 
 %% \begin{equation*}
 %%   {n \choose k} {k \choose p}
