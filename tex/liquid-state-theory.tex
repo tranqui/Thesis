@@ -666,35 +666,6 @@ The degree of self-consistency between different routes can act as a proxy for t
   The pair distribution function $g^{(2)}$ appeared in the virial route because the specified system interacts via a pair potential; we could reasonably expect the generalisation to an $n$-body interaction potential to give the equation of state in terms of the $n$-body distribution function $g^{(n)}$.
 \end{tcolorbox}
 
-\subsection{Truncatability of the free energy: a requirement for self-consistency}
-\label{sec:truncatable-free-energy}
-
-\todo{Port in stuff from results chapters and discuss.}
-Thermodynamic consistency of the (osmotic) pressure:
-\begin{equation}\label{eq:consistent-osmotic-pressure}
-  \begin{split}
-    \beta p
-    &=
-    \rho - \frac{\beta F^\mathrm{ex}}{V}
-    + \rho \frac{\partial}{\partial \rho}
-    \left( \frac{\beta F^\mathrm{ex}}{V} \right)_{V,T}
-    \\ &=
-    \rho - \beta f^\mathrm{ex}
-    + \rho \left( \frac{\partial \beta f^\mathrm{ex}}{\partial \rho} \right)_{V,T}
-  \end{split}
-\end{equation}
-where $f^\mathrm{ex} = F^\mathrm{ex}/V$ is the (excess) free energy density.
-Inversion of this relation yields the useful form
-\begin{equation}\label{eq:free-energy-density}
-  \beta f^\mathrm{ex}
-  =
-  \frac{\beta F^{ex}}{V}
-  =
-  \rho \int_0^\rho \left( \frac{\beta p}{\rho'} - 1 \right)
-  \frac{d\rho'}{\rho'}.
-\end{equation}
-\todo{Missing stuff on how this relates to polydisperse mixtures.}
-
 \subsection{Virial series}
 \label{sec:virial-series}
 
@@ -713,11 +684,18 @@ Traditionally, the virial series for the equation of the state is written
 \end{equation}
 where $\{B_n\}$ are the \emph{virial coefficients} to be determined.
 As a self-consistency check, observe that the ideal gas law is recovered in the low density limit $\rho \to 0$.
-Alternatively, the virial series can be expressed for the (excess) free energy density using \eqref{eq:free-energy-density} as
+Alternatively, the virial series can be expressed for the (excess) free energy density, defined through
+\begin{equation}\label{eq:free-energy-density}
+  \beta f^\mathrm{ex}
+  :=
+  \frac{\beta F^{ex}}{V}
+  =
+  \rho \int_0^\rho \left( \frac{\beta p}{\rho'} - 1 \right)
+  \frac{d\rho'}{\rho'}.
+\end{equation}
+Inserting the virial expression \eqref{eq:virial-series-pressure} gives
 \begin{equation}\label{eq:virial-series-excess-free-energy}
   \beta f^\mathrm{ex}
-  =
-  \frac{\beta F^\mathrm{ex}}{V}
   =
   \sum_{n=2}^\infty
   \frac{1}{n-1}
@@ -901,6 +879,54 @@ The virial coefficients generalise to \cite{Santos2016}
 \end{equation}
 where $x_i$ is the mole fraction of species $i$ such that $x_i > 0$ and $\sum_{i=1}^m x_i = 1$.
 $B_{s_1, \cdots, s_n}$ are the composition independent virial coefficients describing the contribution from interactions between $n$ particles of species $\{s_1, \cdots, s_n\}$.
+In the next section we will discuss important restrictions obtained by requiring self-consistency in the limit of continuous mixtures $m \to \infty$.
+
+\subsection{Truncatability of the free energy: a requirement for self-consistency}
+\label{sec:truncatable-free-energy}
+
+Thermodynamic consistency of the (osmotic) pressure requires
+\begin{subequations}
+  \begin{align}
+    \label{eq:consistent-osmotic-pressure}
+    \beta p
+    &=
+    \rho - \beta f^\mathrm{ex}
+    + \rho \left( \frac{\partial \beta f^\mathrm{ex}}{\partial \rho} \right)_{V,T},
+    \\
+    \label{eq:consistent-osmotic-pressure-mixtures}
+    &=
+    \rho - \beta f^\mathrm{ex}
+    + \rho \sum_{i=1}^m
+    x_i \left( \frac{\partial \beta f^\mathrm{ex}}{\partial x_i} \right)_{V,T}.
+  \end{align}
+\end{subequations}
+The latter line, valid in the case of discrete mixtures, becomes poorly defined in the \emph{polydisperse} limit $m \to \infty$ with $x_i \to 0$.
+A general requirement to remain well-defined in this limit is thus that composition dependence should enter only through a (finite) set of \emph{weighted densities} \cite{GualtieriJCP1982, WarrenPRL1998, SollichPRL1998, SollichAiCP2001}, e.g.\ a set $\{\xi_1, \cdots, \xi_M\}$ so that
+\begin{equation}\label{eq:consistent-osmotic-pressure-weighted-densities}
+  \beta p
+  =
+  \rho - \beta f^\mathrm{ex}
+  + \rho \sum_{k=1}^M
+  \xi_k \left( \frac{\partial \beta f^\mathrm{ex}}{\partial \xi_k} \right)_{V,T},
+\end{equation}
+with weighted densities adopting the form
+\begin{equation*}
+  \xi_k
+  =
+  \rho \sum_i x_i f_k(\sigma_i),
+  %\rho \int d\mu(s),
+\end{equation*}
+where $f_k(\cdot)$ is the probability measure describing the size distribution.
+In the limit of continuous distributions the weighted densities become integrals
+\begin{equation*}
+  \xi_k
+  =
+  \rho \int f_k(\sigma) d\mu(\sigma)
+  %\rho \int d\mu(s),
+\end{equation*}
+introducing the probability measure $\mu(\sigma)$ for the molarities of particle species such that $\int d\mu(\sigma) = 1$.
+%This reduces to the previous form for discrete mixtures if we set $\mu(s)$ to the counting measure, however in integral form we are free to extend the calculation to continuous mixtures.
+With finite $M$ \eqref{eq:consistent-osmotic-pressure-weighted-densities} remains well-defined in this limit.
 
 This concludes our summary of liquid state theory for homogeneous systems.
 In subsqeuent sections we will review its extensions to inhomogeneous systems, with the purpose of introducing the main framework we will use for our treatment of correlations inside the homogeneous liquid in chapters \ref{chapter:morphometric-framework}, \ref{chapter:morphometric-applications} and \ref{chapter:resummation}.

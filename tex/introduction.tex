@@ -109,7 +109,7 @@ This happens to coincide with a crystal structure observed in real systems, so b
 
 Written in terms of volume fraction, the van der Waals equation \eqref{eq:van-der-waals} for $d$-dimensional hard spheres adopts the simpler form%
 \marginfootnote{The coefficient of $2^{d-1}$ in this form can be obtained by recognising that leading-order corrections to the ideal gas law involves the \emph{excluded volume}, i.e.\ that excluded to the centre of a test particles which modifies the occupied volume by $2^d$ by doubling the radius.
-  This has to be divided by two to avoid double counting the particle interactions, giving the final result.}
+  This has to be divided by two to avoid double counting the particle interactions, giving the final result.}[-2cm]
 \begin{equation}\label{eq:van-der-waals-hs}
   \frac{\beta p}{\rho} = \frac{1}{1 - 2^{d-1} \eta}
 \end{equation}
@@ -118,7 +118,7 @@ This theory features no singularities until $\eta = 2^{1-d}$ where the pressure 
 By contrast, the actual phase diagram (Fig.\ \ref{fig:hs-phase-diagram}), determined from simulations \cite{AlderJCP1957,WoodJCP1957,HooverJCP1968} and colloidal experiments \cite{PuseyN1986}, shows that the hard sphere system remains a liquid%
 \marginfootnote{Strictly speaking there is no distinction between a liquid and a gas phase in hard spheres because the phase diagram does not have a critical point.
   As such, to be precise we should refer to the isotropic phase as a \emph{fluid}.
-  However, we will always be focusing on the high density fluid, which serves as the starting point for descriptions of real liquids, so we can justify using `liquid' and `fluid' interchangeably.}
+  However, we will always be focusing on the high density fluid, which serves as the starting point for descriptions of real liquids, so we can justify using `liquid' and `fluid' interchangeably.}[-2cm]
 up to $\eta_f \sim 0.494$ whereupon it undergoes a freezing transition to an ordered phase with an accompanying melting transition at $\eta_m \sim 0.545$ \cite{HooverJCP1968}.
 %Controversial, .
 Despite the early simulation studies being definitive, this result was not immediately accepted by the community.
@@ -200,6 +200,7 @@ Each question is complicated by a remarkable change in the timescales involved, 
 Regarding nucleation, the rates predicted by theory and experiments differ by some $\sim$12 orders of magnitude, which is claimed to be the second biggest disagreement%
 \marginfootnote{\hl{The first being the vacuum catastrophe of funadmental physics.}}
 between theory and experiment in all of science \hl{(citation?)}.
+\todo{Maybe get rid of this bit}
 
 In the supercooled liquid the time to reach the steady state, or `equilibrium', dramatically increases with density until it becomes effectively infinite above a glass transition%
 \marginfootnote{This is typically taken to occur around $\eta_g \in [0.58, 0.60]$, although the exact point where the system falls out of equilibrium will depend on many factors including the size of the particles in case of colloidal experiments, the specific dynamical rules of a simulation algorithm, and the patience of the observer.} where it forms a glass.

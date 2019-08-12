@@ -146,11 +146,12 @@ A better definition is the restriction to \emph{polyconvex sets}%
 \marginfootnote{The set of polyconvex objects is also sometimes called the \emph{convex ring}.}: objects formed by countable union of \emph{compact} objects.
 By compact, we mean objects which are
 \begin{enumerate}
-\item \emph{Bounded}: they must be finite in scope, as no meaningful size can be defined for a body spanning an infinite region of space.
-\item \emph{Closed}: they contain their boundary.
+\item \emph{bounded}, so they must be finite in scope, as no meaningful size can be defined for a body spanning an infinite region of space, and
+\item \emph{closed}, so they contain their boundary.
+  %, so the surface exists on which measures $\{A,C,X\}$ are defined.
   %This is an important property which we will see by example in discussing the Gauss-Bonnet theorem below.
 \end{enumerate}
-This class of objects covers most physically relevant geometries, excluding fractal geometries where size measures may be pathological.
+This class of objects covers most physically relevant geometries, excluding fractals where size measures may be pathological.
 %The empty set $\emptyset$ is a compact body, albeit a special case with zero size.
 %Compact convex set $K \in \mathcal{K}$ notation.
 
@@ -163,6 +164,10 @@ This class of objects covers most physically relevant geometries, excluding frac
 %% \end{equation}
 %% Connection with entropy, leads to homogeneity in arguments which is the building block for extensivity of a thermodynamic potential.
 %% This provides a geometrically precise foundation for thermodynamic potentials.
+
+As way of justifying the above claims, we...
+The simplest size measure we could imagine is to simply count the number of objects there are.
+Certainly invariant and continuous, but is it additive?
 
 \subsection{Aside: the Euler characteristic}
 
@@ -234,7 +239,7 @@ For a spherical solute these reduce to the values given in \eqref{eq:spt-ansatz}
 To obtain results for all physical dimensions $d \le 3$ it is convenient to generalise the morphometric \emph{ansatz} \eqref{eq:morphometric-approach} to arbitrary $d$ and substitute $d \in \{1, 2, 3\}$ at the end of our derivation.
 \hl{Connect with the curvature measures of differential geometry.}
 To that end it is convenient to introduce generalisations of the geometric parameters $\{V,A,C,X\}$: the \emph{intrinsic volumes} $\{V_d, V_{d-1}, \cdots, V_0\}$.
-To introduce the intuition behind these generalised volumes we start from the observation that the quantities $\{V,A,C,X\}$ can be imagined as size descriptors for projections onto $k$-dimensional subspaces in $\mathbb{R}^3$; for a compact body $K \subset \mathbb{R}^3$ we have:
+To introduce the intuition behind these generalised volumes we start from the observation that the quantities $\{V,A,C,X\}$ can be imagined as the size of projections onto $k$-dimensional subspaces in $\mathbb{R}^3$; for a compact body $K \subset \mathbb{R}^3$ we have:
 \begin{enumerate}
 \item $V(K)$ is trivially the volume of the intersection of $K$ with the 3-dimensional subspace i.e.\ all of Euclidean space.
 \item $A(K)$ can be thought of as the typical size of two-dimensional images formed by projections onto planes.
