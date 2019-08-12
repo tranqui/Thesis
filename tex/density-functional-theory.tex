@@ -610,7 +610,8 @@ Noting that the free energy is determined from the free energy density through
   \beta \mathcal{F}^\mathrm{ex} = \int_V \beta f^\mathrm{ex} \, d\vec{r},
 \end{equation*}
 we can make a correspondence with the virial series expression for the free energy density \eqref{eq:virial-series-excess-free-energy}.
-Using the virial coefficients for an $m$-component mixture \eqref{eq:virial-coefficients-mixtures}, the free energy density in the dilute limit becomes
+Using the virial coefficients for an $m$-component mixture \eqref{eq:virial-coefficients-mixtures}, the free energy density in the dilute limit becomes%
+\marginfootnote{In this step we are implicitly focusing on systems interacting through pair potentials, where the virial coefficients introduced in section \ref{sec:virial-series} are valid.}
 \begin{equation*}
   \beta f^\mathrm{ex}
   =
@@ -1001,9 +1002,9 @@ The pressures predicted by \eqref{eq:cs-mixtures} compare favourably against nov
 %although it will fail at very large densities nearing random close packing.
 
 \begin{SCfigure}
-  \includegraphics[width=\linewidth,outer]{swap-cs-santos}
+  \includegraphics[width=0.9\linewidth,outer]{swap-cs-santos}
   \caption[Accuracy of Carnahan-Starling equation at high densities]{
-    Accuracy of empirical Carnahan-Starling (CS) equation of state \eqref{eq:cs-mixtures} in the supercooled regime from comparison with swap Monte-Carlo simulations for a system with 23\% polydispersity.
+    Accuracy of empirical Carnahan-Starling (CS) equation of state \eqref{eq:cs-mixtures} in the supercooled regime from comparison with novel Monte-Carlo (MC) simulations for a system with 23\% polydispersity.
     Simulation data reproduced from Ref.\ \cite{BerthierPRL2016}.
   }
   \label{fig:swap-eos}
@@ -1059,7 +1060,7 @@ For the Rosenfeld functional \eqref{eq:rosenfeld-functional} we obtain the therm
  \end{align}
 \end{subequations}
 and for the CS functional \eqref{eq:santos-fmt} with \eqref{eq:cs-fmt} we find
-\begin{subequations}\label{eq:cs-spt-coefficients}
+\begin{subequations}\label{eq:wbii-coefficients}
   \begin{align}
     \beta a_0^\mathrm{WBII}
     &=
@@ -1087,7 +1088,7 @@ and for the CS functional \eqref{eq:santos-fmt} with \eqref{eq:cs-fmt} we find
 We label these as the White Bear II (WBII) coefficients because they were first derived from the WBII free energy functional%
 \marginfootnote{These are not exactly as stated in Ref.\ \cite{Hansen-GoosJPCM2006} because we use a different definition of surface.
   The conversions between the different surfaces are stated in chapter \ref{chapter:morphometric-framework}: see the discussions around \eqref{eq:exclusion-transform}.}
-\cite{Hansen-GoosJCP2006, Hansen-GoosJPCM2006} which is similar in form and construction to the CS functional described, although it is marginally less self-consistent.
+\cite{Hansen-GoosJCP2006, Hansen-GoosJPCM2006} which is similar in form and construction to the CS functional described, although it is (marginally) less self-consistent.
 
 %% \subsection{Superposition and convolution approximations}
 

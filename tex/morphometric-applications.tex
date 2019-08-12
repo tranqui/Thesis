@@ -310,7 +310,7 @@ where $\nu$ is the symmetry number (discussed below) and
   \sqrt{n^3 \det{\overline{G_{ij}}(\vec{x})}}.
 \end{equation}
 The symmetry number emerges as the choice of internal coordinates typically fixes the particle labels breaking permutation symmetry; we have to multiply by the $n!$ possible labellings, which introduces double counting if the structure possesses rotational symmetry so we have to divide by the correcting factor $\nu$.
-This is explained in detail in Ref.\ \cite{Cates2015}.
+This is explained in detail in Ref.\ \cite{CatesSM2015}.
 Thus \eqref{eq:structure-population} reduces to
 \begin{equation}\label{eq:structural-partition-function-detailed}
   \frac{\mathcal{N}}{\rho^n V}
@@ -334,7 +334,7 @@ We use two methods for evaluating these integrands:
 \subsection{Bond-distance space}
 To evaluate the integrand in Eq.\ \eqref{eq:structural-partition-function-detailed} analytically we need to choose a representation for $\vec{x}$ which is diffeomorphic to $\vec{r}^n$.
 For \emph{minimally constrained geometries}, i.e.\ structures with exactly $3n-6$ contacts, a convenient representation exists: bond distance space.
-Following Ref.\ \cite{Holmes-Cerfon2013} and its accompanying Supplementary Information we choose each element of $\vec{x}$ to represent the distances between particles in contact, where contact occurs at $\vec{x} = (\sigma, \dots, \sigma)$.
+Following Ref.\ \cite{Holmes-CerfonPNAS2013} and its accompanying Supplementary Information we choose each element of $\vec{x}$ to represent the distances between particles in contact, where contact occurs at $\vec{x} = (\sigma, \dots, \sigma)$.
 Thus increasing elements of $\vec{x}$ corresponds to thermal fluctuations away from contact.
 This representation naturally expresses the limits of integration given in the main text as $\sigma \le x_i \le \sigma_{cut}$.
 
@@ -609,33 +609,7 @@ We must evaluate the full integral over a finite volume.
 To make this tractable we will abandon the rigorous definition of structures in terms of basins employed for soft potentials, in favour of a simple one based on intuitive geometrical ideas.
 We will later explore the limitations/successes of this definition in order to retroactively justify this approach.
 
-\section{Model for depletion interactions}
-
-\subsection{Morphological liquid state theory}
-
-We write the $n$-particle distribution function $g^{(n)}$ as \cite{Hansen2013} \begin{equation}\label{eq:n-density-pdf}
-  \textrm{Prob}\left[ \textit{any } n \textrm{ particles in volume } d\vec{r}^n \right]
-  \equiv
-  \rho^n g^{(n)}(\vec{r}^n) \, d\vec{r}^n.
-\end{equation}
-Expressed in terms of a potential we can write the distribution function as
-\begin{equation}
-  g^{(n)}(\vec{r}^n)
-  =
-  \exp{\left(-\beta U_n(\vec{r}^n) - \beta(\Delta\Omega - n\mu^{ex}) \right)}
-\end{equation}
-where $U_n$ is the interaction potential, $\Delta\Omega$ is the cost of insertion into the bulk liquid and $mu^{ex}$ is the excess chemical potential.
-Our central approximation involves approximate the insertion cost in terms of the morphological parameters of the boundary separating the local and bulk liquid components
-\begin{equation}
-  \Delta\Omega = pV + \gamma A + \kappa C + \overline{\kappa} X
-\end{equation}
-where $p,\gamma,\kappa,\overline{\kappa}$ are thermodynamic parameters (pressure, surface tension at a planar wall, and bending energies respectively), and $V,A,C,X$ are the morphological parameters (volume, surface area, integrated mean curvature and integrated Gaussian curvature respectively).
-This approximation can be justified from various thermodynamic arguments \cite{Konig2004,Robinson?,Robinson?,?} and is found to be numerically very accurate for hard spheres \cite{Hansen-Goos?,Roth2006,?,?}.
-The coefficients enetring \eqref{eq:morphometric-ansatz} must be set by some closure relation.
-We will always use the using the coefficients obtained from the Virial-Carnahan-Starling closure of Ref.\ \cite{Robinson?}.
-
-\todo{Present morphometric approach as an alternative ensemble to canonical.
-Due to the analogies between the population/concentration integral and the usual partition function, we will refer to this integral simply as a partition function.}
+Due to the analogies between the population/concentration integral and the usual partition function, we will refer to this integral simply as a partition function.
 
 \subsection{Molecular partition function}
 
@@ -1045,13 +1019,13 @@ Consider the free energy difference between the true and approximate distributio
   \ln{\left( \frac{q(\vec{x})}{p(\vec{x})} \right)} \, d\vec{x}.
 \end{equation}
 This would be the Kullback-Leibler divergence in information theory, a measure of information loss from using an approximate distribution.
-It is identical to a free energy difference in the physics literature, and it is straightforward to prove that it is only zero when $p = q$ \cite{Mermin,Evans,BayesianInferencecitation?}.
+It is identical to a free energy difference in the physics literature, and it is straightforward to prove that it is only zero when $p = q$ \cite{MerminPR1965, EvansAP1979}.
 It is schematically identical to the proof of the uniqueness of the equilibrium free energy.
 
 $\Delta F = 0$ is impossible unless $p$ is also Gaussian, however by minimising $\Delta F$ we can optimise the $q$ distribution to minimise the approximation error.
-It is straightforward to show that for distributions in the exponential family this corresponds to matching the moments of $q$ and $p$ \cite{Minka2001a,Minka2001b,Rasmussen2006,Cunningham2011}.
+It is straightforward to show that for distributions in the exponential family this corresponds to matching the moments of $q$ and $p$ \cite{Minka2001,MinkaUAI2001,Rasmussen2006,Cunningham2011}.
 This is still intractable however, matching moments is identical to setting the distributions to one another.
-However, an approximate technique expectation propagation matches the moments of marginal distributions has been shown to approximate this well \cite{minka2001a,Minka2001b,Minka2004,Rasmussen2006,Cunningham2011}.
+However, an approximate technique expectation propagation matches the moments of marginal distributions has been shown to approximate this well \cite{Minka2001,MinkaUAI2001,Rasmussen2006,Cunningham2011}.
 This approximation was inspired by the cavity method of spin glasses (unrelated to the cavity distribution), for application to approximate Bayesian inference problems.
 
 Our exposition of the EP method closely follows \cite{Cunningham2011}.
@@ -1354,7 +1328,7 @@ We see that the effective Gaussian is skewed by the additional constraint, stret
 
 \section{Results}
 
-We take the minimal energy structures as the stable packings determined by Holmes-Cerfon and coworkers \cite{Arkus?,Holmes-Cerfon?}.
+We take the minimal energy structures as the stable packings determined in Refs.\ \cite{ArkusPRL2009,Holmes-CerfonSR2016}.
 For each landscape with $n \le 5$ there is only a single stable packing, i.e.\
 \begin{itemize}
 \item Dimer $n=2$

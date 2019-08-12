@@ -1,0 +1,116 @@
+\subsection{Coefficient change for parallel surfaces}
+\hl{Assume}
+\begin{equation}\label{eq:dilated-volumes}
+  V_k(A \minkplus \epsilon B_d)
+  =
+  \sum_{i=0}^d b_k^i V_i(A)
+\end{equation}
+\hl{Considering parallel bodies the intrinsic volumes}
+\begin{equation*}
+  V_k (\epsilon K)
+  =
+  \epsilon^k V_k.
+\end{equation*}
+\hl{The coefficients are independent of the geometry of} $A$, \hl{so we can consider a simple spherical geometry.
+Therefore}
+\begin{equation*}
+  \begin{split}
+  %V_k (B_d \minkplus \epsilon B_d)
+  &=
+  V_k \left[ (1+\epsilon) B_d \right]
+  \\ &=
+  (1+\epsilon)^k V_k(B_d)
+  \\ &=
+  \sum_{i=0}^k {k \choose i} \epsilon^{k-i} V_k(B_d)
+  \\ &=
+  \sum_{i=0}^k {d-i \choose d-k}
+  \frac{\omega_{d-i}}{\omega_{d-k}}
+  \epsilon^{k-i} V_i(B_d)
+  \end{split}
+\end{equation*}
+using \eqref{eq:intrinsic-volume-ball} to reach the last line.
+Comparison with \eqref{eq:dilated-volumes} allows us to read off the coefficients
+\begin{equation}\label{eq:dilated-volume-coefficients}
+  b_k^i =
+  \begin{cases}
+    { d-i \choose d-k }
+    \frac{\omega_{d-i}}{\omega_{d-k}}
+    \epsilon^{k-i}
+    & \; i \le k \\
+    0 & \; i > k
+  \end{cases}
+\end{equation}
+giving the classical Steiner's formula for convex bodies in the case that $k=d$.
+Finally we have
+\begin{equation}
+  %V_k(A \minkplus \epsilon B_d) =
+  \sum_{i=0}^k { d-i \choose d-k }
+  \frac{\omega_{d-i}}{\omega_{d-k}}
+  \epsilon^{k-i} V_i(A)
+\end{equation}
+i.e.
+\begin{equation}
+  \begin{split}
+    \sum_{k=0}^d a_k V_k(A)
+    &=
+    %\sum_{k=0}^d a_k' V_k(A \minkplus \epsilon B_d)
+    \\ =
+    \sum_{k=0}^d a_k' \sum_{i=0}^k b_k^i V_i(A)
+    &=
+    \sum_{k=0}^d V_k(A) \sum_{i=k}^d a_i' b_i^k
+  \end{split}
+\end{equation}
+or
+\begin{equation}
+  a_k = \sum_{i=k}^d a_i' b_i^k,
+\end{equation}
+which can be inverted for $a_i'$.
+In $d=2$ this yields
+\begin{subequations}
+  \begin{align}
+    a_2' &= a_2 \\
+    a_1' &= a_1 - 2 \epsilon a_2 \\
+    a_0' &= a_0 - \pi \epsilon a_1 + \pi \epsilon^2 a_2,
+  \end{align}
+\end{subequations}
+or for $d=3$
+\begin{subequations}
+  \begin{align}
+    a_3' &= a_3 \\
+    a_2' &= a_2 - 2 \epsilon a_3 \\
+    a_1' &= a_1 - \pi \epsilon a_2 + \pi \epsilon^2 a_3 \\
+    a_0' &=
+    a_0 - 4 \epsilon a_1 +
+    2 \pi \epsilon^2 a_2 - \frac{4}{3} \pi \epsilon^3 a_3.
+  \end{align}
+\end{subequations}
+For example, transforming \eqref{eq:cs-spt-coefficients} to the parallel surface $\epsilon = \frac{\sigma}{2}$ gives
+\begin{subequations}\label{eq:cs-spt-coefficients-parallel}
+  \begin{align}
+    \beta a_0'
+    &=
+    - \frac{\eta(4 - 11\eta + 13\eta^2 - 4\eta^3)}{3(1-\eta)^3}
+    - 4 \ln{(1-\eta)},
+    \\
+    \beta a_1'
+    &=
+    \frac{1}{2\sigma} \left(
+    \frac{\eta(4 - 10\eta + 20\eta^2 - 8\eta^3)}{(1-\eta)^3}
+    + 4 \ln{(1-\eta)}
+    \right),
+    \\
+    \beta a_2'
+    &=
+    - \frac{2}{\pi \sigma^2}
+    \left(
+    \frac{\eta(1 + 2\eta + 8\eta^2 - 5\eta^3)}{(1-\eta)^3}
+    + \ln{(1-\eta)}
+    \right),
+    \\
+    \frac{\beta p}{\rho}
+    &=
+    \frac{1 + \eta + \eta^2 - \eta^3}{(1-\eta)^3},
+  \end{align}
+\end{subequations}
+which are identical to those in Ref.\ \cite{Hansen-GoosJPCM2006}, up to a different normalisation of the geometric parameters; we use the intrinsic volumes $\{V_0, V_1, V_2, V_3\}$ whereas in Ref.\ \cite{Hansen-GoosJPCM2006} $\{X, C, A, V\}$ are used.
+The transformations between these two sets of geometric properties are given in Table~\ref{table:geometric-quantities}.

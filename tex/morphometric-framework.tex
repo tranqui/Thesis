@@ -32,7 +32,7 @@ In this chapter we present the morphometric approach in a new context as a gener
 Our central result will be a new theory which is particularly suited to the treatment of many-body correlation functions in the hard sphere liquid, which we demonstrate by numerical tests against simulation.
 We leave applications of this framework to the next chapter.
 
-Part of the work in this chapter is published in Ref.\ \cite{RobinsonPRL2019}, and the remaining parts will appear in a forthcoming paper \cite{RobinsonJSTAT2019}.
+Part of the work in this chapter is published in Ref.\ \cite{RobinsonPRL2019}, and the remaining parts will appear in a forthcoming paper \cite{RobinsonPRE2019}.
 
 \section{Introduction}
 
@@ -54,7 +54,7 @@ Here we derive such a theory using scaled particle theory (SPT).
 SPT determines bulk properties from consideration of a spherical solute of varying radius.
 It remains one of most enduring theories of simple liquids; though 60 years old as of this year \cite{ReissJCP1959}, aspects of this approach remain in modern theories.
 This is particularly true for hard spheres where SPT has been unified with the Percus-Yevick integral equation solution \cite{WertheimPRL1963}, another old theory, in the form of fundamental measure theory (FMT) \cite{RosenfeldPRL1989}.
-Though originally a theory of single-component hard spheres \cite{ReissJCP1959}, SPT has been extended to other potentials \cite{ReissJCP1960,HelfandJCP1960,ReissJCP1961} and shapes \cite{GibbonsMP1969,GibbonsMP1970}, mixtures \cite{LebowitzJCP1965}, dimers \cite{StillingerJCP2006,ChatterjeeJCP2006} and disks \cite{HelfandJCP1961,MartinJCP2018,Hansen-GoosJCP2019}.
+Though originally a theory of single-component hard spheres \cite{ReissJCP1959}, SPT has been extended to other potentials \cite{ReissJCP1960,HelfandJCP1960,ReissJCP1961} and shapes \cite{GibbonsMP1969,GibbonsMP1970}, mixtures \cite{LebowitzJCP1965}, dimers \cite{StillingerJCP2006,ChatterjeeJCP2006} and discs \cite{HelfandJCP1961,MartinJCP2018,Hansen-GoosJCP2019}.
 Morphological thermodynamics can be seen as a modern generalisation of SPT for a wide class of physically relevant geometries.
 Its basis in integral geometry replaces the semi-empirical approach of classical SPT with clearly defined postulates.
 In this chapter we present the morphometric approach in the context of SPT and derive three theories for the single-component hard sphere liquid: the classical SPT coefficients, the White Bear II morphometric coefficients and a new theory suitable for high densities above freezing.
@@ -66,7 +66,7 @@ In this chapter we present the morphometric approach in the context of SPT and d
 %% SPT and the morphometric approach are obtained from the \emph{same} limit of FMT, so we can see the morphometric approach as a generalisation of SPT.
 %% Furthermore, as limits of FMT it is tempting to analyse them within this more general framework.
 %% However, we will find it instructive to study SPT/morphometry outside the context of FMT to incorporate more geometric intuition.
-%% In addition, SPT is more flexible than FMT\todo{Rewrite this}: it has recently found use in hard disks where FMT fails \cite{MartinJCP2018,Hansen-GoosJCP2019}.
+%% In addition, SPT is more flexible than FMT\todo{Rewrite this}: it has recently found use in hard discs where FMT fails \cite{MartinJCP2018,Hansen-GoosJCP2019}.
 
 %% The seemingly unrelated Percus-Yevick correlation scaled particle and the theories approximation to the direct correlation for \emph{homogeneous} hard spheres were unified by Rosenfeld into a theory for \emph{inhomogeneous} fluids creating FMT \cite{RosenfeldPRL1989}.
 
@@ -76,7 +76,7 @@ In this chapter we present the morphometric approach in the context of SPT and d
 %% \begin{itemize}
 %% \item Original for hard spheres: \cite{ReissJCP1959}
 %% \item Extension to real fluids \cite{ReissJCP1960,HelfandJCP1960,ReissJCP1961}
-%% \item Hard disks \cite{HelfandJCP1961}, \cite{MartinJCP2018,Hansen-GoosJCP2019}.
+%% \item Hard discs \cite{HelfandJCP1961}, \cite{MartinJCP2018,Hansen-GoosJCP2019}.
 %% \item Inclusion of non-morphological terms by expanding in a Laurent series \cite{MandellJSP1976}, scaling with a fractional power: \cite{Hansen-GoosJCP2019}
 %% \item Simplified treatment including mixtures \cite{LebowitzJCP1965}
 %% \item Nonspherical convex particles \cite{GibbonsMP1969}.
@@ -200,6 +200,7 @@ This completes our proof that the correlations can be transformed to a potential
 %% \end{itemize}
 
 \subsection{Representing the insertion cost as a solvation problem}
+\label{sec:insertion-as-solvation}
 
 For systems with excluded volume interactions, we can divide the space into a local component $\mathcal{L} \subset \mathbb{R}^d$ of volume $V_\mathcal{L}$ inaccessible to solvent degrees of freedom and the remaining space $\mathcal{R} = \mathbb{R}^d \setminus \mathcal{L}$ of volume $V_\mathcal{R}$ filled by the rest of the liquid (Fig. \ref{fig:system}).
 The total volume is $V = V_\mathcal{L} + V_\mathcal{R}$ so the homogeneous grand potential is
@@ -427,7 +428,7 @@ For weighted densities consistent with an SPT (or FMT) approach, it has been sho
   \includegraphics[width=\linewidth,outer]{g2-contact}
   \caption[Contact values of pair distribution function $g^{(2)}(r)$]{
     Contact values of the radial distribution function against volume fraction $\eta$ and reduced pressure for the hard sphere liquid using \eqref{eq:contact-g} with \eqref{eq:distribution-solvation} and \eqref{eq:morph-ansatz} for the explicit form of $g^{(2)}$, assuming the Carnahan-Starling (CS) equation of state.
-    Contact values are determined with two sets of morphometric coefficients: SPT/CS (section \ref{sec:cs-spt}, specifically \eqref{eq:cs-spt-coefficients}, or equivalently the White Bear II bulk coefficients of Ref.\ \cite{Hansen-GoosJPCM2006}) which performs poorly in the supercooled regime (shaded area), and coefficients derived in this chapter (section \ref{sec:virial-spt}) using the virial theorem which is exact by construction.
+    Contact values are determined with two sets of morphometric coefficients: SPT/CS (section \ref{sec:cs-spt}, specifically \eqref{eq:cs-spt-coefficients}, or equivalently the White Bear II bulk coefficients \eqref{eq:wbii-coefficients} of Ref.\ \cite{Hansen-GoosJPCM2006}) which performs poorly in the supercooled regime (shaded area), and coefficients derived in this chapter (section \ref{sec:virial-spt}) using the virial theorem which is exact by construction.
     The hard sphere freezing and melting volume fractions are indicated by purple dashed lines to show the onset of the supercooled regime.
   }
   \label{fig:contact-g}
@@ -695,7 +696,7 @@ For the CS equation of state we obtain
  \end{align}
 \end{subequations}
 which are \emph{identical} to the coefficients derived from the White Bear II (WBII) free energy functional%
-\marginfootnote{We use a different normalisation of the intrinsic volumes in this chapter, so $a_1$ and $a_0$ must be multiplied through by $4\pi$ to recover \eqref{eq:cs-spt-coefficients}.}.
+\marginfootnote{We use a different normalisation of the intrinsic volumes in this chapter, so $a_1$ and $a_0$ must be multiplied through by $4\pi$ to recover \eqref{eq:wbii-coefficients}.}.
 The exact form of these coefficients differs from that stated in Ref.\ \cite{Hansen-GoosJPCM2006} due to a different definition of the surface, so the equivalence only becomes clear after transforming to the excluded geometry through the canonical relations \eqref{eq:exclusion-transform}.
 Remarkably, we have obtained these coefficients through a route completely different from their original derivation.
 

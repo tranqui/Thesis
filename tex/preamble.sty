@@ -35,6 +35,9 @@
   fonttitle=\bfseries,%
   title=Theorem~\thetcbcounter: #2,#1}
 
+\usepackage[symbol]{footmisc}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
 \usepackage{caption}
 \captionsetup[SCfigure]{width=5cm,font=footnotesize,labelfont=bf,justification=centerlast}
 \captionsetup[SCtable]{width=5cm,font=footnotesize,labelfont=bf,justification=centerlast}

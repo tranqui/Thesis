@@ -15,7 +15,8 @@
 
 \begin{document}
 \chapter{Introduction}
-\epigraph{Everything starts somewhere, though many physicists disagree.}{Terry Pratchett, \emph{Hogfather}, (1996).}
+%\epigraph{Everything starts somewhere, though many physicists disagree.}{Terry Pratchett, \emph{Hogfather}, (1996).}
+\epigraph{I'm being quoted to introduce something, but I have no idea what it is and ceertainly don't endorse it.}{Randall Munroe, \emph{XKCD}, (2018).}
 
 It is a matter of some debate over what is precisely meant by ``soft matter'', and how to demarcate the various systems studied.
 %I normally introduce this field by taking a deep breath, and then listing the vast range of ...
@@ -57,14 +58,15 @@ where $\sigma$ is the diameter of the each sphere.
 No chemical bonds are possible in the absence of any attractions so this represents a kind of \emph{zeroth-order} approximation for real fluids; nonetheless, atoms and molecules do feature sharp short-ranged repulsions so this is a reasonable starting point.
 Furthermore, this oversimplified model has historically, and counterintuitively, represented the frontiers in our understanding of real liquids.
 To illustrate this we consider the van der Waals equation of state for real gases.
-This \emph{mean field theory} characterises a system of $N$ particles contained in a volume $V$ as
+This \emph{mean-field theory} characterises a system of $N$ particles contained in a volume $V$ as
 \begin{equation}\label{eq:van-der-waals}
   \frac{p - a N}{k_B T} = \frac{N}{V - b N}
 \end{equation}
 where $p$ is the pressure, $k_B$ is the boltzmann constant, $T$ as temperature, and with $a,b$ as perturbations from the ideal gas law due to the interactions.
 We have written this equation such that the left-hand side contains \emph{liquid-like} modifications to the pressure due to the attractions, whereas the right-hand side contains \emph{gas-like} perturbations solely due to geometric constraints from the short-range repulsions.
 It was widely believed that improvements to this theory would require sophisticated treatments of the \emph{attractions}, however history has shown that it was the treatment of the \emph{repulsions} which were lacking \cite{Santos2016}.
-Simple liquids can to a large extent be considered as weak perturbations to the hard sphere model, so the left-hand side of \eqref{eq:van-der-waals} is accurate but the right-hand side must be refined to account for the non-trivial effects of exclusion \cite{Hansen2013}.
+\todo{expand this}
+Simple liquids can to a large extent be considered as weak perturbations to the hard sphere model; as such, the left-hand side of \eqref{eq:van-der-waals} is reasonably accurate, but the right-hand side must be refined to account for the non-trivial effects of exclusion \cite{Hansen2013}.
 
 %They thus serve as a foundational toy model for fluids in a similar way the Ising model is \emph{the} system for ferromagnetism and critical phenomena.
 
@@ -106,7 +108,7 @@ This happens to coincide with a crystal structure observed in real systems, so b
 \end{SCfigure}
 
 Written in terms of volume fraction, the van der Waals equation \eqref{eq:van-der-waals} for $d$-dimensional hard spheres adopts the simpler form%
-\marginfootnote{The coefficient of $2^{d-1}$ in this form can be obtained by recognising that leading-order corrections to the ideal gas law involves the \emph{excluded volume}, i.e.\ that formed by \emph{two} particles which modifies the occupied volume by $2^d$ from doubling the radius.
+\marginfootnote{The coefficient of $2^{d-1}$ in this form can be obtained by recognising that leading-order corrections to the ideal gas law involves the \emph{excluded volume}, i.e.\ that excluded to the centre of a test particles which modifies the occupied volume by $2^d$ by doubling the radius.
   This has to be divided by two to avoid double counting the particle interactions, giving the final result.}
 \begin{equation}\label{eq:van-der-waals-hs}
   \frac{\beta p}{\rho} = \frac{1}{1 - 2^{d-1} \eta}
@@ -125,8 +127,8 @@ Despite the early simulation studies being definitive, this result was not immed
 In everyday scenarios crystallisation typically occurs as one lowers temperature, and the classroom explanation posits that the crystal is favoured due to \emph{attractions} between molecules.
 Absent any attractions in hard spheres, we find that \emph{entropy} must drive crystallisation.
 Part of the reason people could not believe that the crystal is entropically favoured, is because we often (mistakenly) identify entropy as a measure of disorder making it counterintuitive for an ordered phase to be favoured.
-In reality entropy is more subtle: the crystal may be more ordered than the liquid, with a lower \emph{configurational} entropy, however entropy includes contributions from \emph{all} microstates not just coarse-grained ones accounting for long-range order.
-At high densities, the penalty the crystal pays for being locked into a single configurational state is compensated by the additional space surrounding each particle for movement yielding a larger \emph{vibrational} entropy.
+In reality entropy is more subtle: the crystal may be more ordered than the liquid, with a lower \emph{configurational} entropy, however entropy includes other contributions.
+At high densities, the penalty paid for being locked into the crystal is offset by a \emph{vibrational} entropy, because each particle has more available space for motion.
 %\marginfootnote{This is a free volume argument which accounts for most of the driving force behind crystallisation in hard spherse, although subleading collective effects will also be present.}.
 The net entropic effect leads to the crystal being favoured over the liquid at high densities, giving the phase diagram that we know today (Fig.\ \ref{fig:hs-phase-diagram}).
 
@@ -172,7 +174,8 @@ This subtlety emerges because the floating balls are confined to the water surfa
 \end{SCfigure}
 
 Now that we have given an overview of the firmly established bulk phase behaviour of hard spheres, we can turn to address the questions which remain unresolved.
-So far we have only discussed the \emph{equilibrium} properties of hard spheres which are well-described by theory; In equilibrium, a great deal is even known about the \emph{inhomogeneous} liquid, e.g.\ in confinement \cite{GonzalezJCP1998}, thanks to advances in density functional theory \cite{RosenfeldPRL1989,RothJPCM2010}.
+So far we have only discussed the \emph{equilibrium} properties of hard spheres which are well-described by theory.
+In equilibrium, a great deal is even known about the \emph{inhomogeneous} liquid, e.g.\ in confinement \cite{GonzalezJCP1998}, thanks to advances in density functional theory \cite{RosenfeldPRL1989,RothJPCM2010}.
 By contrast, there are still much debate surrounding the nature of the \emph{metastable} phase in hard spheres, especially concerning its dynamical properties.
 %We now turn to the central questions still unresolved concerning the hard sphere system, which focus on their metastable properties at high densities.
 %As the most widely studied model interaction potential we know a lot about its equilibrium structure (phase diagram) in bulk and even inhomogeneous thanks to density functional theory \cite{?,?,?}.
@@ -181,8 +184,8 @@ By contrast, there are still much debate surrounding the nature of the \emph{met
 The metastable phase is the continuation of the liquid phase above the melting point, shown by a dashed line in Fig.\ \ref{fig:hs-phase-diagram}.
 We refer to this branch as the \emph{supercooled liquid} in analogy to the metastable phase of real liquids which are formed by cooling below their freezing temperature; in this sense we think of increasing density as equivalent to lowering the temperature.
 
-The supercooled liquid is not strictly a phase in the sense of being the free energy minimum, as it must eventually crystallise, however it has many features in common with equilibrium phases.
-In particular, the supercooled liquid is sufficiently long-lived that it can be observed and it eventually reaches a steady state with well-defined thermodynamic observables.
+The supercooled liquid is not strictly a phase in the sense of being the free energy minimum, as it will eventually crystallise, however it has many features in common with equilibrium phases.
+In particular, the supercooled liquid is long-lived and it eventually reaches a steady state with well-defined thermodynamic observables.
 In simple terms, supercooled liquids are indistinguishable from that of an equilibrium phase \emph{until} they spontaneously crystallise.
 We will postpone discussion of the specific properties of supercooled liquids until section \ref{sec:glass}, as for now we only wish to briefly introduce the key questions posed.
 %so we will find it useful to describe it with similar language.
@@ -194,15 +197,16 @@ As we see it, the two central topics regarding the metastable liquid are:
 \item \emph{Nucleation}: given that the crystal is the ground state above the freezing density, can we describe the kinetic pathway by which the liquid orders into the crystal?
 \end{enumerate}
 Each question is complicated by a remarkable change in the timescales involved, requiring new ideas to approach them.
-Concerning nucleation, the rates predicted by theory and experiments differ by some $\sim$12 orders of magnitude, which is purported to be the second biggest disagreement between theory and experiment in all of science \hl{(citation?)}.
-We discuss the supercooled liquid more below.
+Regarding nucleation, the rates predicted by theory and experiments differ by some $\sim$12 orders of magnitude, which is claimed to be the second biggest disagreement%
+\marginfootnote{\hl{The first being the vacuum catastrophe of funadmental physics.}}
+between theory and experiment in all of science \hl{(citation?)}.
 
 In the supercooled liquid the time to reach the steady state, or `equilibrium', dramatically increases with density until it becomes effectively infinite above a glass transition%
-\marginfootnote{This is typically taken to occur around $\eta_g \in [0.58, 0.60]$, although the exact point where the system falls out of equilibrium will depend on many factors including the size of the particles in case of colloidal experiments, the specific dynamical rules of a simulation algorithm, and the subjective patience of the observer.}.
-If the hard sphere system is continually compressed above its glass transition it will eventually \emph{jam}.
+\marginfootnote{This is typically taken to occur around $\eta_g \in [0.58, 0.60]$, although the exact point where the system falls out of equilibrium will depend on many factors including the size of the particles in case of colloidal experiments, the specific dynamical rules of a simulation algorithm, and the patience of the observer.} where it forms a glass.
+If the hard sphere glass is continually compressed to higher densities it will eventually \emph{jam}.
 Empirically this occurs at \emph{random close packing} (Fig.\ \ref{fig:rcp}) around $\eta_\mathrm{RCP} \sim 0.64$, but as an out-of-equilibrium state jamming is highly protocol dependent so this density may not be well-defined \cite{TorquatoRMP2010}.
 %This is complicated by the fact that as density increases the dynamical timescales increase by $\gtrsim 14$ orders of magnitude, so no ordinary simulation or experiment can probe `equilibrium' properties.
-Our focus will be on the `equilibrium' supercooled liquid, although the nature of the glass and jammed states provide important context for our programme that we will return to in chapter \ref{chapter:background}.
+Our focus will be on the `equilibrium' supercooled liquid, although the nature of the glass and jammed states provide important context for our programme, which we will return to in chapter \ref{chapter:background}.
 The central question of this field asks if the relaxation timescale, or viscosity, truly diverges before it reaches a jammed state; an equivalent question asks whether there is a thermodynamic transition to an \emph{ideal glass} phase which drives the dynamical slowdown.
 
 The goal of this thesis is to advance the methods of treating liquids at high densities, so we aim make a small contribution to addressing both topics above; in chapters \ref{chapter:morphometric-framework}, \ref{chapter:morphometric-applications} and \ref{chapter:resummation} we will develop methods to assess changes in the supercooled hard sphere liquid, while in chapter \ref{chapter:aerosols} we will model nucleation kinetics in drying aerosols.
@@ -215,23 +219,22 @@ The goal of this thesis is to advance the methods of treating liquids at high de
 
 In chapter \ref{chapter:background} we will present an overview of liquid state theory, with a special emphasis on correlation functions and geometric methods as these will play a central role in later chapters.
 Towards the end of this chapter we will discuss the supercooled liquid in more detail to provide proper context to the first topic outlined above, which is our central motivation.
-We save discussion of nucleation until chapter \ref{chapter:aerosols}.
 
-In chapters \ref{chapter:morphometric-framework} and \ref{chapter:morphometric-applications} we develop our approach to the supercooled liquid: we use the framework of many-body correlation functions to predict the concentrations of local structure in the bulk liquid.
-A bulk system with $10^{23}$ particles has too many degrees of freedom to treat effectively, so our approach is to coarse-grain them onto a subset which remain dynamically relevant.
-We will justify this coarse-graining procedure from mechanisms within existing theories of the supercooled liquid discussed in chapter \ref{chapter:background}.
-We find that many-body correlations provide the natural framework for this procedure, and we develop specific theories for treating correlations in the hard sphere liquid in chapter \ref{chapter:morphometric-framework}.
+In chapters \ref{chapter:morphometric-framework} and \ref{chapter:morphometric-applications} we develop our approach to the supercooled liquid: we use the framework of many-body correlation functions to predict the concentrations of local structures in the bulk liquid.
+A bulk system with $10^{23}$ particles has too many degrees of freedom to treat effectively, so our approach is to select a subset which remain dynamically relevant.
+We will justify this procedure using existing theories of the supercooled liquid discussed in chapter \ref{chapter:background}.
+We find that many-body correlations provide the natural framework for this task, and we develop specific theories for treating correlations in the hard sphere liquid in chapter \ref{chapter:morphometric-framework}.
 Then in chapter \ref{chapter:morphometric-applications} we develop this into a predictive framework for concentrations of local structural motifs, and dynamical barriers, within the bulk liquid.
 Central to these chapters is the \emph{morphometric approach}, an approximation scheme emerging as a synthesis of liquid state theory and geometry, which we will introduce gradually over the course of chapters \ref{chapter:background} and \ref{chapter:morphometric-framework}.
-As the final stage in this sequence of connected results, we rederive the morphometric approach in chapter \ref{chapter:resummation} from first principles within liquid state theory to further justification of the approach and provide insight into how the approximation may be improved.
-It is not yet known how useful this approach will be in addressing the questions posed above, however the idea of extracting information about a macroscopic system from studying 6--13 particles should, at the very least, be entertaining.
+As the final stage in this sequence of connected results, we rederive the morphometric approach in chapter \ref{chapter:resummation} from first principles within liquid state theory to further justify the approach and provide insight into how the approximation may be improved.
+%It is not yet known how useful this approach will be in addressing the questions posed above, however the idea of extracting information about a macroscopic system from studying 6--13 particles should, at the very least, be entertaining.
 
-The problem that we solve is actually quite general: given an interaction potential, what kinds of structures form in the bulk liquid.
+The problem that we solve is actually quite general: given an interaction potential, we want to know what kinds of structures will form in the bulk liquid.
 To the best of our knowledge, this has never been done for \emph{any} system.
-Admittedly, we repeatedly exploit the simplicity of the hard sphere interaction potential, limiting the applicability to real systems, but it is still a non-trivial problem.
-Were this to be generalised to more complex systems with more interesting interaction potentials, we could imagine it being used to facilitate design of new chemical synthesis, tailoring the self-assembly of colloidal particles, or for predicting how proteins fold in aqueous solution.
+Admittedly, we repeatedly exploit the simplicity of the hard sphere interaction potential to do this, limiting the applicability to real systems, but it is still a non-trivial problem.
+Were this to be generalised to more complex systems, we could imagine the methods being used to facilitate design of new chemical synthesis, tailoring the self-assembly of colloidal particles, or for predicting how proteins fold in aqueous solution.
 %One can imagine this method being useful in more complex systems such as protein folding in aqueous solution, predictive self-assembly of complex structures, predictive chemical reactions etc.
-Although hard spheres will be our focus, we will indicate possible routes to extending the results throughout, and we will do explicit extensions to arbitrary mixtures of hard convex particles in chapter \ref{chapter:resummation}.
+Although hard spheres will be our focus, we will indicate possible routes to extending the results throughout, and we will explicitly extend the approach to arbitrary mixtures of hard convex particles in chapter \ref{chapter:resummation}.
 %% Self-assembly is an active area of soft matter: it is technologically desirable to tailor the final structure by controlling the building blocks.
 %% Imagine assembling nanomachines or artificial cells by controlling the chemistry.
 %% It is found that varying the size and shape of hard particles can reproduce all the complexity of the periodic table \cite{Glotzer?,Dijkstra?}.
@@ -251,7 +254,7 @@ Our approach thus provides a connection between sphere packing problems and prop
 %% Packing problems are connected with encoding/encryption.
 %% Transmitting a signal requires a way to encode a message across a band(?): if packed too tightly on the band(?) then noise will destroy the signal to it is desirable to optimise the sites for bits \cite{Cohn,?,?}.
 %% Additionally, lattice based encryption techniques are one of the alternatives to prime factorisation: the coming development of quantum computers \cite{?,?} would render prime factorisation easy because of Shor's algorithm \cite{Shor?} rendering standard encryption techniques insecure.
-%% The techniques developed for the mean field hard sphere problem have been applied to the perceptron model \cite{?}, and deep-learning neural networks which are naturally high dimensional problems lending themselves to a mean field treatment \cite{?}.
+%% The techniques developed for the mean-field hard sphere problem have been applied to the perceptron model \cite{?}, and deep-learning neural networks which are naturally high dimensional problems lending themselves to a mean-field treatment \cite{?}.
 
 %% As a secondary goal, The liquids and glass community do not have a great deal of overlap.
 %% The glass community , in spite of recent advances in liquids
@@ -262,7 +265,7 @@ Our approach thus provides a connection between sphere packing problems and prop
 
 Finally, in chapter \ref{chapter:aerosols} we will change subject to address the nucleation kinetics in drying aerosols.
 This project emerged from an opportunity to collaborate with the Bristol Aerosol Research Centre, so it was driven by experimental conditions which are not adequately captured by a purely hard sphere model.
-The nucleation theory we employ is identical to that used to describe hard sphere crystallisation, so the questions posed are fundamental despite the applied context.
+The nucleation theory we employ is identical to that used to describe hard sphere crystallisation, so the questions posed in this applied context are fundamental.
 We intended to keep this chapter self-contained, so we save full discussion of nucleation until chapter \ref{chapter:aerosols}.
 
 \ifdefined\includebibliography
