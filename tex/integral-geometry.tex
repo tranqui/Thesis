@@ -112,6 +112,7 @@ This framework thus provides the route to generalising geometrical theories such
 As integral geometry is generally unfamiliar to people with a background in physics, we will place emphasis on the concepts and intuition rather than rigour and proofs.
 
 \subsection{What do we even mean by size?}
+\label{sec:what-is-size}
 
 In order to proceed we must define `size', and specify precisely which objects this definition applies to.
 We put forward the following qualities of the measures $V, A, C$ and $X$ which make them intuitive notions of size:
@@ -184,7 +185,7 @@ However, the Gauss-Bonnet theorem from differential geometry equates it with the
 \end{equation}
 so it is really a manifestation of a size measure we have already seen.
 It is worth emphasising the Euler characteristic in its own right however, as it is a very important \emph{topological invariant}, meaning it does not change with continuous geometric deformations.
-We give some properties of the Euler characteristic below.
+We state some important properties of the Euler characteristic below.
 
 Compact objects include their boundary, so using the additivity property we can decompose the Euler characteristic on $K \in \mathcal{K}^d$ into surface and interior terms
 \begin{equation*}
@@ -221,9 +222,11 @@ More generally, the Euler characteristic is modified by $(-1)^{\nu+1}$ times the
 %%   \caption{Effect of cavities: divide 3d sphere in two (2 discs + circle).}
 %% \end{SCfigure}
 
-\hl{Finishing paragraph connecting to next section...}
+Having defined what we mean by `size', we can start to introduce some useful results from integral geometry.
+This will start with generalisations of the size measures, and their completeness as a vector space for an extensive property \eqref{eq:extensive-homogeneity}.
+Then, we will introduce some formula which are useful in evaluating partition functions for hard particle systems.
 
-\subsection{Generalisation: intrinsic volumes}
+\subsection{Intrinsic volumes as generalised size measures}
 
 It will sometimes be helpful to use a dimension independent formalism%
 \marginfootnote{Specifically, in chapter \ref{chapter:resummation} we will derive a theory for the liquid state.
@@ -254,6 +257,7 @@ To introduce the intuition behind these generalised volumes we start from the ob
     \end{tabular}
   \end{minipage}
   \caption{Intrinsic volumes of the unit ball in physical dimensions $d \le 3$.}
+  \label{table:ball-intrinsic-volumes}
 \end{SCtable}
 
 Generalising the above intuition to $d$-dimensions, we see that in general we can imagine $d+1$ projections and so expect $d+1$ corresponding volumes.
@@ -276,15 +280,16 @@ where the volume of the $d$-dimensional ball with unit radius $B_d$ is
 \begin{equation}
   \omega_d := V_d[B_d] = \frac{\pi^{d/2}}{\Gamma(\frac{d}{2} + 1)}.
 \end{equation}
-The flag coefficients $C_{k,d-k}$ have a similar structure to binomial coefficients, and play a similar \emph{combinatorial} role for combining subspaces (section \ref{sec:kinematic-formula}).
+The flag coefficients $C_{k,d-k}$ have a similar structure to binomial coefficients, and play a similar \emph{combinatorial} role in the combination of geometric objects (section \ref{sec:kinematic-formula}).
 By convention, the normalisation of the measure $dE_{d-k}$ in \eqref{eq:intrinsic-volumes} is chosen to give the intrinsic volumes for the unit ball as
 \begin{equation}\label{eq:intrinsic-volume-ball}
   V_k [B_d]
   =
-  {d \choose k} \frac{\omega_d}{\omega_{d-k}}.
+  {d \choose k} \frac{\omega_d}{\omega_{d-k}},
 \end{equation}
+with values in physical dimensions $d \le 3$ given in Table~\ref{table:ball-intrinsic-volumes}.
 %The intrinsic volumes thus only depend on the dimensionality of the body, not the embedding space.
-A set of common geometrical quantities and their reduction to the intrinsic volumes in physical dimensions $d \le 3$ is given in Table~\ref{table:geometric-quantities}.
+A set of common geometrical quantities and their reduction to the intrinsic volumes in $d \le 3$ is given in Table~\ref{table:geometric-quantities}.
 
 %% \begin{tcolorbox}[title=Aside: nomenclature of spheres vs balls]
 %%   The terms `sphere' and `ball' are used interchangeably in physics (and colloquially), however in geometry these refer to different things; `ball' refers to the solid object whereas `sphere' refers to its boundary, i.e.\
@@ -299,20 +304,18 @@ A set of common geometrical quantities and their reduction to the intrinsic volu
 %%   %in the geometric sense.
 %% \end{tcolorbox}
 
-We will see the intrinsic volumes used in the construction of a theory for the hard sphere liquid in section \ref{sec:fmt}.
-
 \begin{tcolorbox}[title=Hadwiger's characterisation theorem]
-  Together the functionals $\{V_k\}_{k=0}^d$ form a basis for the vector space of all continuous rigid-motion invariant valuations on polyconvex sets in $\mathbb{R}^d$.
-  I.e. a continuous rigid-motion invariant valuation can be written
-  \begin{equation}
-    V(A) = \sum_{i=0}^d c_i V_i[A]
-  \end{equation}
-  where $c_i$ are some coefficients independent of $A$.
-  Finally, with the intrinsic volumes the $d$-dimensional generalisation of an extensive variable \eqref{eq:extensive-integral-geometry} reads
+  A classic theorem of integral geometry due to Hadwiger \cite{Hadwiger1957} states that the intrinsic volumes are the \emph{only} class of functionals with the size properties described in section \ref{sec:what-is-size}: rigid-motion invariance, additivity and continuity.
+  \vspace{1em}
+
+  A corollary of this theorem is that the intrinsic volumes must form a linear vector space for any functional which also possesses these properties, thus providing the $d$-dimensional generalisation of an extensive variable \eqref{eq:extensive-integral-geometry} as one which adopts the form
   \begin{equation}\label{eq:extensive-integral-geometry-d}
-    \phi = \sum_{k=0}^d a_k V_k
+    \phi = \sum_{k=0}^d a_k V_k.
   \end{equation}
 \end{tcolorbox}
+
+Exploiting this theorem, we will use the intrinsic volumes to construct theories of the hard sphere liquid in section \ref{sec:fmt} and subsequent chapters.
+In the next section we will state some useful results for doing calculations in statistical mechanics with the intrinsic volumes.
 
 \begin{SCtable}
   \begin{minipage}[b]{\linewidth}
@@ -354,65 +357,64 @@ We will see the intrinsic volumes used in the construction of a theory for the h
   \label{table:geometric-quantities}
 \end{SCtable}
 
-\subsection{Generalised functions acting on sets}
+%% \subsection{Generalised functions acting on sets}
 
-Scalar multiplication or \emph{dilate}:
-\begin{equation}
-  \epsilon A = \{\epsilon a : a \in A\}
-\end{equation}
-\emph{Minkowski addition}:
-\begin{equation}
-  A + B := \{ a + b : a \in A \textrm{ and } b \in B \}
-\end{equation}
-\emph{Minkowski difference}:
-\begin{equation}
-  A - B := \{ c : c + B \subseteq A \}
-\end{equation}
-Note that these operations are not the inverses of each other as in the the case of arithmetic, i.e.\ in general
-\begin{equation*}
-  A - B \ne A + (-B).
-\end{equation*}
-Instead, set addition and subtraction operations are related through
-\begin{equation*}
-  A - B = (A^C + (-B))^C.
-\end{equation*}
+%% Scalar multiplication or \emph{dilate}:
+%% \begin{equation}
+%%   \epsilon A = \{\epsilon a : a \in A\}
+%% \end{equation}
+%% \emph{Minkowski addition}:
+%% \begin{equation}
+%%   A + B := \{ a + b : a \in A \textrm{ and } b \in B \}
+%% \end{equation}
+%% \emph{Minkowski difference}:
+%% \begin{equation}
+%%   A - B := \{ c : c + B \subseteq A \}
+%% \end{equation}
+%% Note that these operations are not the inverses of each other as in the the case of arithmetic, i.e.\ in general
+%% \begin{equation*}
+%%   A - B \ne A + (-B).
+%% \end{equation*}
+%% Instead, set addition and subtraction operations are related through
+%% \begin{equation*}
+%%   A - B = (A^C + (-B))^C.
+%% \end{equation*}
 
-%% \begin{SCfigure}[H]
-%%   \missingfigure[figwidth=0.333\linewidth]{}%
-%%   \missingfigure[figwidth=0.333\linewidth]{}%
-%%   \missingfigure[figwidth=0.333\linewidth]{}
-%%   \caption{Examples of Minkowski addition with ball:
-%%     ball $\to$ ball,
-%%     line $\to$ capsule/spherocylinder (common in nature: bacterium?),
-%%     circle $\to$ torus.
-%%   }
+%% %% \begin{SCfigure}[H]
+%% %%   \missingfigure[figwidth=0.333\linewidth]{}%
+%% %%   \missingfigure[figwidth=0.333\linewidth]{}%
+%% %%   \missingfigure[figwidth=0.333\linewidth]{}
+%% %%   \caption{Examples of Minkowski addition with ball:
+%% %%     ball $\to$ ball,
+%% %%     line $\to$ capsule/spherocylinder (common in nature: bacterium?),
+%% %%     circle $\to$ torus.
+%% %%   }
+%% %% \end{SCfigure}
+
+%% \begin{SCfigure}
+%%   \includegraphics[width=0.9\linewidth,center]{minkowski-addition}
+%%   \caption[Minkowski addition and difference]{
+%%     Minkowski addition and difference.
+%%     Note how these are not inverse operations.}
 %% \end{SCfigure}
 
-\begin{SCfigure}
-  \includegraphics[width=0.9\linewidth,center]{minkowski-addition}
-  \caption[Minkowski addition and difference]{
-    Minkowski addition and difference.
-    Note how these are not inverse operations.}
-\end{SCfigure}
-
-Distances between sets: the Hausdorff metric.
-
-\begin{tcolorbox}[title=Steiner's formula for parallel volumes]
-  For a compact, convex body $K \in \mathcal{K}^d$ the parallel volume is expressable as:
-  \begin{equation}
-    V_d[K + \epsilon B_d] =
-    \sum_{i=0}^d V_i[K] \omega_{d-i} \epsilon^{d-i}
-  \end{equation}
-\end{tcolorbox}
+%% \begin{tcolorbox}[title=Steiner's formula for parallel volumes]
+%%   For a compact, convex body $K \in \mathcal{K}^d$ the parallel volume is expressable as:
+%%   \begin{equation}
+%%     V_d[K + \epsilon B_d] =
+%%     \sum_{i=0}^d V_i[K] \omega_{d-i} \epsilon^{d-i}
+%%   \end{equation}
+%% \end{tcolorbox}
 
 \subsection{Kinematic formula}
 \label{sec:kinematic-formula}
 
-Motivate: usefulness in evaluating partition functions.
+\hl{Motivate: usefulness in evaluating partition functions.
 Probability of particles `hitting' one another.
-Develop notation.
+Develop notation.}
 
 It is usual for liquid state theories to focus on spherically symmetric potentials, however integral geometry more naturally deals with non-spherical objects so we can consider this generalisation at the small cost of additional notation.
+\todo{This was lifted from chapter 5, needs a bit of editing.}
 In addition to integrations over particle positions $\{\vec{r}_1, \cdots, \vec{r}_n\}$ we also have to consider their orientations $\{\vec{\theta}_1, \cdots, \vec{\theta}_n\}$ where each $\vec{\theta}_i$ represents an Euler angle tuple.
 Then, assuming an isotropic phase where all orientations are equally likely each positional integral generalises to
 \begin{equation*}

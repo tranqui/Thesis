@@ -217,12 +217,12 @@ It is usual to work with the dimensionless \emph{compressibility factor}, define
 in terms of which hard spheres show the same phenomenology as thermal systems in Fig.\ \ref{fig:angell}.
 We find hard spheres are comparable in fragility to various binary Lennard-Jones mixtures.
 
-Things I have not yet mentioned:
+\hl{Things I have not yet mentioned:}
 \begin{itemize}
-\item glass transition: 100s
-\item operationally, what it looks like in thermodynamic potentials as the system falls out of equilibrium.
-\item dynamical heterogeneities
-\item Stokes-Einstein breakdown
+\item \hl{glass transition: 100s}
+\item \hl{operationally, what it looks like in thermodynamic potentials as the system falls out of equilibrium.}
+\item \hl{dynamical heterogeneities (can probably save this until mentioning facilitation though)}
+\item \hl{Stokes-Einstein breakdown}
 \end{itemize}
 
 %% We discussed the static correlation functions at length, which is fine for liquids where equilibrium occurs on a \SI{100}{\pico\second} timescale.
@@ -291,7 +291,10 @@ Moreover, the geometrical interpretation in terms of volume fluctuations $\Delta
 
 \subsection{Mode-coupling theory}
 
+Reviews: \cite{ReichmanJSM2005, JanssenFP2018}
+
 We start with an explicitly dynamical theory.
+Central idea: \emph{slow} and \emph{fast} variables.
 
 To motivate mode-coupling theory we start from the classical Langevin equation of motion, which expresses the equations of motion of a subset of the degrees of freedom.
 Newton's equation becomes
@@ -313,8 +316,6 @@ In mode-coupling theory, an \emph{exact} generalised Langevin equation is derive
   + \vec{f}(t)
 \end{equation}
 where $\vec{\Omega}$ is frequency matrix, $\vec{K}$ is a time-dependent \emph{memory function}, and $\vec{f}$ is the fast fluctuating force.
-
-\cite{ReichmanJSM2005, JanssenFP2018}
 
 The full MCT equation
 \begin{equation}
@@ -338,20 +339,16 @@ Predicts a diverging timescale.
 Nevertheless, liquids can be prepared above this volume fraction in colloidal experiments \cite{BrambillaPRL2009} and simulations \cite{BerthierPRL2016}.
 
 The point of this section is to indicate that pair correlation functions are not enough.
+Extensions with higher order structure \cite{JanssenPRL2015,JanssenFP2018}.
 
 \subsection{Mean-field theory}
 
 A growing consensus is forming around this explanation.
-
-This must trivially occur at the very least $T=0\si{K}$ where relaxation timescales diverges, however much like the lack of a phase transition in the Ising model in $d=1$ this is not a true thermodynamic phase transition because it cannot be crossed.
-Recent numerical evidence suggests that a model glassformer in $d=2$ does not show a transition, also vanishing at $T=0\si{K}$ \cite{BerthierNC2019}.
-So the central question of glass is what happens in $d=3$, is there a vanishing configurational entropy at a finite $T > 0$ with an accompanying thermodynamic glass transition?
-In mean-field, formally in the limit of infinite spatial dimensions $d \to \infty$, the hard sphere system has been shown to have a true transition, however the critical dimensions are unknown so it is unclear what happens in $d=3$. \cite{KurchanJSM2012,KurchanJPCB2013,CharbonneauNC2014,CharbonneauJSM2014}.
-
-Connection between thermodynamics and dynamics.
-Configurational entropy.
-
 Inspired by the solutions of mean-field spin glasses, the great breakthrough of the original papers was that these systems were identical in the structure of the energy landscape.
+Connection between thermodynamics and dynamics, configurational entropy.
+This argument is thermodynamic, which in some sense is structural.
+Structural in the sense of the energy landscape, not necessarily in real space/local structure.
+Compatible with MCT, in fact high dimensional calculations lead to a theory almost identical to MCT \cite{MaimbourgPRL2016,KurchanJSM2016}.
 
 The relevance of mean-field theory in physical dimensions comes from an interpretation \cite{KirkpatrickPRB1987, KirkpatrickPRA1989}, and antecedent ideas found in \cite{AdamJCP1965}.
 RFOT: argument of Ref.\ \cite{BouchaudJCP2004}, introduces point-to-set length.
@@ -361,8 +358,10 @@ It can be rigorously proven that a diverging timescale necessarily must coincide
 The essence of the argument is that for a finite subsystem, there will be a finite barrier, so any dynamics must scale Arrheniusly.
 Therefore, the relaxation time will be bounded from above by the dynamical lengthscale, and super-Arrhenius scaling suggests growing collective behaviour.
 
-This argument is thermodynamic, which in some sense is structural.
-Structural in the sense of the energy landscape, not necessarily in real space/local structure.
+This must trivially occur at the very least $T=0\si{K}$ where relaxation timescales diverges, however much like the lack of a phase transition in the Ising model in $d=1$ this is not a true thermodynamic phase transition because it cannot be crossed.
+Recent numerical evidence suggests that a model glassformer in $d=2$ does not show a transition, also vanishing at $T=0\si{K}$ \cite{BerthierNC2019}.
+So the central question of glass is what happens in $d=3$, is there a vanishing configurational entropy at a finite $T > 0$ with an accompanying thermodynamic glass transition?
+In mean-field, formally in the limit of infinite spatial dimensions $d \to \infty$, the hard sphere system has been shown to have a true transition, however the critical dimensions are unknown so it is unclear what happens in $d=3$. \cite{KurchanJSM2012,KurchanJPCB2013,CharbonneauNC2014,CharbonneauJSM2014}.
 
 \begin{SCfigure}
   \includegraphics[width=0.9\linewidth,outer]{swap-Sconf}
@@ -437,13 +436,12 @@ In the absence of a thermodynamic phase transition, we would not expect the pair
 And even supposing the existence of a transition, the precision required to detect such a signal $g(r)$ may be arbitrarily subtle; however, any the changes approaching a transition \emph{must} be magnified in the higher order correlation functions because of \eqref{eq:correlation-derivatives}.
 This is particularly true as we saw \hl{local mechanisms in the various theories}.
 
-Fourier space vs real space.
-We will be focusing on many-body correlations in real space, in line with the theories of the glass transition mentioned above.
-It is possible for many-body correlation functions to be useful in MCT where it has already found traction \cite{JanssenPRL2015,JanssenFP2018}.
-Although there correlation functions in Fourier space are more useful.
+We will be focusing on many-body correlations in real space, to explore the local mechanisms proposed in theories of the glass transition mentioned above.
+In some situations the correlations in Fourier space may be more useful, most notably in MCT where many-body generalisations have already found some traction \cite{JanssenPRL2015,JanssenFP2018}.
+In principle, our real space correlation functions can be Fourier transformed to obtain these functions, but in practice this is prohibited by the high dimensionality of the correlation functions for even modest $n$.
+However, we indicate below how FMT already provides an easy route to obtaining all the correlation functions in Fourier space, as described by the original papers \cite{RosenfeldPRL1989,RosenfeldJCP1990}.
 
-FMT already provides an easy route to obtaining correlation functions in Fourier space, as was demonstrated in its original papers \cite{RosenfeldPRL1989,RosenfeldJCP1990} and we will summarise below.
-Applying the convolution theorem to the Fourier transform of the direct correlation function in the uniform liquid \eqref{eq:fmt-direct-correlations-uniform-density} to be written rather succinctly as
+Fourier transforming the direct correlation functions for the uniform liquid \eqref{eq:fmt-direct-correlations-uniform-density}, and applying the convolution theorem, allows us to write the rather succinct
 \begin{equation}
   \tilde{c}^{(n)}(\vec{k}^n)
   =
@@ -458,3 +456,6 @@ A further $d(d-1)/2$ degrees of freedom%
   For example, $n=2$ arrangements (a dimer) are isomorphic to a line so they possess $d-1$ rotational degrees of freedom.}
 can be removed by exploiting rotational symmetry.
 Many-particle generalisations of the static structure factor can be obtained from $\tilde{c}^{(n)}(\vec{k}^n)$ by functionally differentiating the Ornstein-Zernike equation \eqref{eq:ornstein-zernike-generic} with respect to density \cite{BarratMP1988}.
+
+This concludes the relevant background on liquid state theory.
+In subsequent chapters we will develop a framework for treating the (real space) many-body correlation functions.
