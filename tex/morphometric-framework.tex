@@ -262,33 +262,17 @@ For a spherical solute these reduce to the values given in \eqref{eq:spt-ansatz}
 
 We now give a brief justification of the above \emph{ansatzes}, in particular why there are only four terms in the expansion.
 Radius is the only natural parameter for a sphere, however for more general geometries there might be arbitrarily many parameters so one may wonder if they should be included in a general geometric expansion.
-Nevertheless, there are compelling arguments from integral geometry \cite{KonigPRL2004} to only retain the four terms listed which we will summarise below.
-
-The basis of the morphometric approach is that the functionals $\{V,A,C,X\}$ are normalisations of the so-called \emph{intrinsic volumes}.
-These play a central role in integral geometry as the \emph{only} physically meaningful size measures in the sense that they:
-\todo{Link in with background section on geometry}
-\begin{enumerate}
-\item Are invariant with respect to translations and rotations.
-\item Increase additively, i.e.\ they transform under combination of subsystems via the inclusion/exclusion relation e.g.\
-  \begin{equation*}\label{eq:additivity}
-    V[A \cup B] = V[A] + V[B] - V[A \cap B],
-  \end{equation*}
-  and similar expressions for $A$, $C$, and $X$.
-\item Are continuous (specifically with respect to the Hausdorff metric).
-  Loosely speaking, this means that the size measures converge as the object is approximated by increasingly finely meshed polyhedra excluding e.g.\ fractal geometries.
-  As a simple intuitive example, the measurement of a length will converge continuously to some number as one uses rulers with progressively finer distance markings.
-\end{enumerate}
-More details on properties of intrinsic volumes can be found in standard texts, e.g.\ Refs.\ \cite{Santalo2004,Klain1997}.
-%\cite{Santalo2004,SchneiderACIG1984,Schneider2008,Klain1997}.
+Nevertheless, we can make compelling arguments using integral geometry, introduced in section \ref{sec:integral-geometry}, to only retain the terms listed.
+Most notably, the terms included are the \emph{only} physically meaningful size measures (cf.\ section \ref{sec:what-is-size}), and so $\Delta \Omega$ is strictly extensive if it is a linear combination of these measures%
+\marginfootnote{See discussion on extensivity and references cited around Eqs.\ \eqref{eq:extensive-homogeneity} and \eqref{eq:extensive-integral-geometry}, as well as Hadwiger's theorem \eqref{eq:extensive-integral-geometry-d}.}.
+This argument was first applied to hard sphere solvation in Ref.\ \cite{KonigPRL2004}.
 
 The central assertion of the morphometric approach is that the insertion cost $\Delta \Omega$ \emph{exactly} possesses the properties above, providing the connection between geometry and thermodynamics \cite{KonigPRL2004}.
-A classic theorem of integral geometry due to Hadwiger \cite{Hadwiger1957} states that the intrinsic volumes are the \emph{only} class of functionals with the properties listed above; a corollary of this is that they form a linear vector space for any functional possessing these properties.
-\todo{Repetition of background.}
 The morphometric form \eqref{eq:morph-ansatz} then follows.
 In addition to providing a more general \emph{ansatz} than SPT, this approach lays out its underlying assumptions explicitly eschewing the ad-hoc way in which the original SPT \emph{ansatz} \eqref{eq:spt-ansatz} was obtained.
 Moreover, classical SPT assumes hard spheres from the outset while our generalisation based on integral geometry is more flexible, allowing for generalisations to mixtures, more realistic pair potentials and non-spherical particles without compromising its assumptions.
 
-The morphometric approach is certainly an approximation, as the insertion cost will not rigorously possess the three properties above in reality.
+The morphometric approach is certainly an approximation, as the insertion cost will not rigorously possess the properties of size measures in reality.
 Notably, in SPT $\Delta\Omega$ is known to contain singularities in its high order derivatives with solute radius%
 \marginfootnote{We review the original argument for this from Ref.\ \cite{ReissJCP1959} in Appendix \ref{appendix:spt-singularities}.
 This argument is quite general, demonstrating that \emph{any} analytic form of $\Delta \Omega$ in terms of geometric quantities cannot be exact.};
