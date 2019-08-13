@@ -224,7 +224,7 @@ More generally, the Euler characteristic is modified by $(-1)^{\nu+1}$ times the
 
 Having defined what we mean by `size', we can start to introduce some useful results from integral geometry.
 This will start with generalisations of the size measures, and their completeness as a vector space for an extensive property \eqref{eq:extensive-homogeneity}.
-Then, we will introduce some formula which are useful in evaluating partition functions for hard particle systems.
+Then, we will introduce formulas which are useful in evaluating partition functions for hard particle systems.
 
 \subsection{Intrinsic volumes as generalised size measures}
 
@@ -261,7 +261,7 @@ To introduce the intuition behind these generalised volumes we start from the ob
 \end{SCtable}
 
 Generalising the above intuition to $d$-dimensions, we see that in general we can imagine $d+1$ projections and so expect $d+1$ corresponding volumes.
-We define the $k$th intrisic volume as the average size of the projections onto $k$-dimensional linear subspaces of $\mathbb{R}^d$, i.e.\ \cite{Santalo}
+We define the $k$th intrisic volume as the average size of the projections onto $k$-dimensional linear subspaces of $\mathbb{R}^d$, i.e.\ \cite{Klain1997,Santalo2004}
 %Denoting the space of all $k$ dimensional linear subspaces in $\mathbb{R}^d$ as $\mathrm{Graff}(d,k)$ (the affine Grassmanian), the intrinsic volume is obtained by
 \begin{equation}\label{eq:intrinsic-volumes}
   V_k(K)
@@ -269,8 +269,7 @@ We define the $k$th intrisic volume as the average size of the projections onto 
   C_{k,d-k}
   \int \chi[K \cap E_{d-k}] \, dE_{d-k}
 \end{equation}
-\todo{Check subscripts of $E$.}
-where the integral is taken over all affine transformations of the plane $E_k$ in $\mathbb{R}^d$, and flag coefficient
+where the integral is taken over all affine transformations of the plane $E_{d-k}$ in $\mathbb{R}^d$, and flag coefficient
 \begin{equation}\label{eq:flag-coefficients}
   C_{k,d-k}
   :=
