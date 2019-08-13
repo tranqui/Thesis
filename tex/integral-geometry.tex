@@ -291,6 +291,7 @@ with values in physical dimensions $d \le 3$ given in Table~\ref{table:ball-intr
 %The intrinsic volumes thus only depend on the dimensionality of the body, not the embedding space.
 A set of common geometrical quantities and their reduction to the intrinsic volumes in $d \le 3$ is given in Table~\ref{table:geometric-quantities}.
 
+%% \vspace{0.5em}
 %% \begin{tcolorbox}[title=Aside: nomenclature of spheres vs balls]
 %%   The terms `sphere' and `ball' are used interchangeably in physics (and colloquially), however in geometry these refer to different things; `ball' refers to the solid object whereas `sphere' refers to its boundary, i.e.\
 %%   \begin{equation*}
@@ -304,6 +305,7 @@ A set of common geometrical quantities and their reduction to the intrinsic volu
 %%   %in the geometric sense.
 %% \end{tcolorbox}
 
+\vspace{0.5em}
 \begin{tcolorbox}[title=Hadwiger's characterisation theorem]
   A classic theorem of integral geometry due to Hadwiger \cite{Hadwiger1957} states that the intrinsic volumes are the \emph{only} class of functionals with the size properties described in section \ref{sec:what-is-size}: rigid-motion invariance, additivity and continuity.
   \vspace{1em}
@@ -398,6 +400,7 @@ In the next section we will state some useful results for doing calculations in 
 %%     Note how these are not inverse operations.}
 %% \end{SCfigure}
 
+%% \vspace{0.5em}
 %% \begin{tcolorbox}[title=Steiner's formula for parallel volumes]
 %%   For a compact, convex body $K \in \mathcal{K}^d$ the parallel volume is expressable as:
 %%   \begin{equation}
@@ -406,17 +409,35 @@ In the next section we will state some useful results for doing calculations in 
 %%   \end{equation}
 %% \end{tcolorbox}
 
-\subsection{Kinematic formula}
+\subsection{Kinematic formulas}
 \label{sec:kinematic-formula}
 
-\hl{Motivate: usefulness in evaluating partition functions.
-Probability of particles `hitting' one another.
-Develop notation.}
+Here we introduce the \emph{kinematic formulas}, which calculate the probability that randomly distributed objects hit one another.
+This problem is applicable to the evaluation of partition functions in statistical mechanics, of which we will see specific examples in section \ref{sec:fmt} and chapter \ref{chapter:resummation}.
+\todo{Edit this section.}
 
-It is usual for liquid state theories to focus on spherically symmetric potentials, however integral geometry more naturally deals with non-spherical objects so we can consider this generalisation at the small cost of additional notation.
-\todo{This was lifted from chapter 5, needs a bit of editing.}
-In addition to integrations over particle positions $\{\vec{r}_1, \cdots, \vec{r}_n\}$ we also have to consider their orientations $\{\vec{\theta}_1, \cdots, \vec{\theta}_n\}$ where each $\vec{\theta}_i$ represents an Euler angle tuple.
-Then, assuming an isotropic phase where all orientations are equally likely each positional integral generalises to
+Two compact and convex objects $K_1, K_2 \in \mathcal{K}^d$ overlap if their intersection is non-empty $K_1 \cap K_2 \ne \emptyset$.
+The intersection of convex objects is also convex, so
+\begin{equation*}
+  \chi[K_1 \cap K_2]
+  =
+  \begin{cases}
+    1 & \textrm{ if } K_1 \cap K_2 \ne \emptyset \\
+    0 & \textrm{ if } K_1 \cap K_2 = \emptyset
+  \end{cases}
+\end{equation*}
+and the probability that the two objects collide is then
+\begin{equation*}
+  \mathrm{Prob}[\textrm{collision}]
+  =
+  \frac{1}{V} \int_V \chi[K_1 \cap K_2(\vec{r})] \, d\vec{r}
+\end{equation*}
+where $K_2$ is uniformly distributed and $K_1$ acts as a fixed target.
+In this integral $K_2$ is translated over the space, however in general these objects will be non-spherical so it is more natural to consider also their relative orientation.
+Integral geometry more naturally deals with integrations over relative positions and orientations, at the small cost of additional notation.
+%In addition to integrations over particle positions $\{\vec{r}_1, \cdots, \vec{r}_n\}$ we also have to consider their orientations $\{\vec{\theta}_1, \cdots, \vec{\theta}_n\}$ where each $\vec{\theta}_i$ represents an Euler angle tuple.
+%Then, assuming an isotropic phase where all orientations are equally likely each positional integral generalises to
+Writing the relative orientation as the Euler angle tuple $\vec{\theta}$, we consider the generalisation
 \begin{equation*}
   \int_{\mathbb{R}^d} d\vec{r}
   \to
@@ -424,29 +445,38 @@ Then, assuming an isotropic phase where all orientations are equally likely each
   :=
   \int_{G_d} dg,
 \end{equation*}
-with the normalisation in the angular measure such that $\int d\vec{\theta} = 1$. In the right-most equality we introduced the rigid motion operation acting on a body $A \subset \mathbb{R}^d$ as
+with the normalisation in the angular measure such that $\int d\vec{\theta} = 1$.
+In the right-most equality we introduced the rigid-motion operation acting on a body $K \in \mathcal{K}^d$ as
 \begin{equation*}
-  g A := \{\mathcal{R}(\vec{\theta}) \vec{a} + \vec{r} \, | \, \vec{a} \in A\},
+  g K := \{\mathcal{R}(\vec{\theta}) \vec{k} + \vec{r} \, | \, \vec{k} \in K\},
   %(\mathcal{T} \circ \mathcal{R})(\vec{r}, \vec{\theta}),
 \end{equation*}
-a member of the rigid motion group $g \in G_d := \mathbb{R}^d \times SO(d)$, and where $\mathcal{R} \in SO(d)$ is the rotation matrix parameterised by $\vec{\theta}$.
-We can take standard results for simple liquids interacting via spherically symmetric pair potentials, and make the above replacement to obtain the correct generalisation for arbitrary shapes.
+a member of the rigid motion group $g \in G_d := \mathbb{R}^d \times \mathrm{SO}(d)$, and where $\mathcal{R}(\vec{\theta}) \in \mathrm{SO}(d)$%
+\marginfootnote{$\mathrm{SO}(d)$ is the \emph{special orthogonal group}, i.e.\ the group of all orthogonal matrices with unit determinant.}
+is the rotation matrix parameterised by $\vec{\theta}$.
+Then the generalised measure for particle collisions becomes
+\begin{equation*}
+  \int_{G_d} \chi[K_1 \cap g K_2] \, dg,
+\end{equation*}
+if they now occupy all of Euclidean space.
+We will see integrals like this emerge from liquid state theory in sections \ref{sec:virial-series} and \ref{sec:fmt}, and later in chapter \ref{chapter:resummation}.
 
+\vspace{0.5em}
 \begin{tcolorbox}[title=Principal kinematic formula]
-  Noting that $\chi = V_0$ is the lowest order intrinsic volume, the latter line of \eqref{eq:low-density-insertion} is ideally suited to a treatment within integral geometry.
-  A central result of this field is the principal kinematic formula of Blaschke and Santal\'o \cite{BlaschkeMZ1936,Blaschke1937,SantaloASI1936} which gives the explicit form of integrals of this type as \cite{Santalo2004,Klain1997}
+  %% Noting that $\chi = V_0$ is the lowest order intrinsic volume, the latter line of \eqref{eq:low-density-insertion} is ideally suited to a treatment within integral geometry.
+  A central result of integral geometry is the principal kinematic formula of Blaschke and Santal\'o \cite{BlaschkeMZ1936,Blaschke1937,SantaloASI1936} which gives the explicit form of collisional integrals as \cite{Santalo2004,Klain1997}
   %\cite{Santalo2004,SchneiderACIG1984,Schneider2008,Klain1997}
   \begin{equation}\label{eq:binomial-kinematic-formula}
     \int_{G_d} \chi[A \cap gB] \, dg
     =
     \sum_{k=0}^d (C_{k,d-k})^{-1} V_k[A] V_{d-k}[B]
   \end{equation}
-  We see the flag coefficients \eqref{eq:flag-coefficients} play an analogous role in conjugating the intrinsic volumes above as binomial coefficients do in algebraic expansions%
+  We see the flag coefficients \eqref{eq:flag-coefficients} play an analogous role in conjugating the intrinsic volumes here as binomial coefficients do in algebraic expansions%
   \marginfootnote{For this reason Klain and Rota argue that integral geometry should be called \emph{continuous combinatorics} \cite{Klain1997}, because it generalises combinatorial results to continuous spaces}.
-  More general formulas exist for integrals over other intersection intrinsic volumes \cite{Klain1997}, however these do not have an interpretation in terms of evaluating partition functions so we will not use them.
+  More general formulas exist for integrals over other intersection intrinsic volumes \cite{Klain1997}, however these do not have an interpretation in terms of evaluating partition functions so we will not be using them.
 \end{tcolorbox}
 
-The principal kinematic formula \eqref{eq:binomial-kinematic-formula} can be iterated for the intersections of many bodies $\{K_i\}$ giving \cite{Santalo2004,MarechalPRE2014}
+The principal kinematic formula \eqref{eq:binomial-kinematic-formula} can be iterated for the intersections of many bodies $\{K_1, \cdots, K_n\}$ giving \cite{Santalo2004,MarechalPRE2014}
 \begin{subequations}\label{eq:multinomial-kinematic-formula}
   \begin{equation}
     \Lambda_{s_1, \cdots, s_n}
@@ -468,7 +498,7 @@ The principal kinematic formula \eqref{eq:binomial-kinematic-formula} can be ite
   \end{equation}
 \end{subequations}
 where $C_{i_0, \cdots, i_n}$ would be the multinomial generalisation of the flag coefficients \eqref{eq:flag-coefficients}.
-We will use this iterated formula in chapter \ref{chapter:resummation} to resum a piece of the virial series (introduced in section \ref{sec:virial-series}).
+We will use this iterated formula in chapter \ref{chapter:resummation} to resum a piece of the virial series (to be introduced in the upcoming section \ref{sec:virial-series}).
 
 %% We have the invariant measure on 1-dimensional linear subspaces of $\mathbb{R}^d$ (\emph{Grassmanians}) as
 %% \begin{equation}
@@ -510,6 +540,7 @@ We will use this iterated formula in chapter \ref{chapter:resummation} to resum 
 %% \end{tabular}
 %% \end{center}
 
+%% \vspace{0.5em}
 %% \begin{tcolorbox}[title=General kinematic formula]
 %%   For $0 \le k \le d$:
 %%   \begin{equation}
