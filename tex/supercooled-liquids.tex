@@ -416,20 +416,34 @@ This is essentially the spirit of the \emph{entropy route}, which writes \cite{W
   S = \sum_{n=1}^\infty S_n
 \end{equation}
 with entropic terms $S_n$ containing contributions from $n$-particle correlations.
-The first few terms are given by
+The first few terms are given by \cite{WallaceJCP1987}
 \begin{subequations}
   \begin{align}
-    S_1
+    \frac{S_1}{\langle N \rangle}
     &=
+    k_B \left( \frac{d}{2} - \ln{\rho \Lambda^d} \right),
     \\
-    S_2
+    \frac{S_2}{\langle N \rangle}
     &=
+    \frac{\rho}{2 T}
+    \int g^{(2)}(\vec{r}) \ln{g^{(2)}(\vec{r})}
+    \, d\vec{r},
     \\
-    S_3
+    \frac{S_3}{\langle N \rangle}
     &=
+    \frac{\rho^2}{6 T}
+    %\int g^{(3)}(\vec{r}, \vec{r}') \delta w^{(3)}(\vec{r}, \vec{r}')
+    \int g^{(3)}(\vec{r}, \vec{r}')
+    \ln{\left(
+      \frac{
+        g^{(3)}(\vec{r}, \vec{r}')
+      }{
+        g^{(2)}(\vec{r}) g^{(2)}(\vec{r}') g^{(2)}(\vec{r} - \vec{r}')
+      }
+      \right)}
+    \, d\vec{r} d\vec{r}'.
   \end{align}
 \end{subequations}
-\todo{Write these out explicitly.}
 
 Second, while it is true that thermodynamic quantities like the pressure can certainly be inferred from the pair correlations, there is no such simple relationship for dynamic quantities.
 In the absence of a thermodynamic phase transition, we would not expect the pair correlation to reveal much about the nature of dynamical arrest, beyond the lack of a transition.
