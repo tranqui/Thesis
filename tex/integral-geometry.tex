@@ -6,9 +6,9 @@
 Geometry has been a recurring theme in physical theories, appealing because of its intuitive nature.
 There are many ways that geometric ideas can be incorporated, but our focus will be on expansions of thermodynamic quantities in terms of \emph{sizes}.
 The usefulness of this particular focus is directly connected to the familiar concept of \emph{extensivity} in statistical mechanics, which we will use to guide the following discussion.
-Thermodynamic potentials must be extensive to remain well-defined in the thermodynamic limit.
+Thermodynamic potentials must be extensive to remain well-defined in the thermodynamic limit,
 %Defining an extensive quantity as one that scales proportionally to system size, the first meaning of size that comes to mind is probably the volume.
-So by focusing on quantities which are extensive we ensure a thermodynamic description which is consistent in this limit.
+so by focusing on extensive quantities we ensure a thermodynamically consistent description in this limit.
 
 %The first notion of size that likely comes to mind is the volume, though we will generalise to all reasonable notions of size.
 %The simplest example we can give is from statistical mechanics: an \emph{extensive variable} is one that scales proportionally to the system volume.
@@ -17,7 +17,7 @@ So by focusing on quantities which are extensive we ensure a thermodynamic descr
 %%   V[K] = \int_K d\vec{r}.
 %% \end{equation}
 %Then,
-As an example, extensive quantities includes the \emph{entropy} of a large system which can be expressed in terms of system volume as
+As an example, extensive quantities include the \emph{entropy} of a large system which can be expressed in terms of system volume as
 \begin{equation*}
   S = s V
 \end{equation*}
@@ -34,8 +34,8 @@ That is, a variable $\phi$ is extensive if
   =
   \lambda \phi(Y_1, \cdots, Y_n)
 \end{equation}
-where $\{Y_i\}$ are a complete (linearly independent) set of extensive variables describing the system size.
-We will explore what other reasonable notions of `size' there may be, in effect finding a complete set of extensive variables, in the hope that we arrive at ideas that prove useful in developing new theories.
+where $\{Y_1, \cdots, Y_n\}$ are a complete (linearly independent) set of extensive variables describing the system size.
+We will explore what other reasonable notions of `size' there may be, in effect finding a complete set of extensive variables, in the hope that we arrive at ideas which prove useful in developing new theories.
 
 We introduced the area above as a size descriptor for a surface.
 Borrowing ideas from differential geometry, we can also characterise the surface's shape through \emph{curvature}.
@@ -91,7 +91,7 @@ Together, the extensive geometric variables we have introduced so far can be wri
 The latter three quantities are \emph{expressed} here as the surface integrals, but we shall see that they are really size measures on the volume $V$.
 These clearly form a linearly independent set%
 \marginfootnote{This can be quickly determined by considering their units, i.e.\ $V: [\si{\metre^3}]$, $A: [\si{\metre^2}]$, $C: [\si{\metre^1}]$, $X: [\si{\metre^0}]$.},
-but less obviously it turns out that these are the \emph{only} reasonable notions of size in three-dimensions.
+but less obvious is the fact that these are the \emph{only} reasonable notions of size in three-dimensions.
 This is a central finding of \emph{integral geometry}, which we will expand on in subsequent sections.
 %is a powerful tool for incorporating intuitive, flexible ideas into theories.
 %For this reason geometric approaches are common in statistical mechanics such as the Young-Laplace equation, which corrects Asakura-Ozawa
@@ -103,7 +103,7 @@ which, as a linear relation, clearly obeys \eqref{eq:extensive-homogeneity} duri
 \marginfootnote{Note: the rescaling of $\lambda V$ here refers to rescaling the volume measure \eqref{eq:volume-measure}, \emph{not} the object $V \subset \mathbb{R}^3$; in the latter case we would obtain the (non-extensive) transformation $\{V, A, C, X\} \to \{\lambda V, \lambda^{2/3} A, \lambda^{1/3} C, X\}$.}
 $\{V, A, C, X\} \to \{\lambda V, \lambda A, \lambda C, \lambda X\}$.
 
-Integral geometry provides elegant and unified description of sizes, and was crucial in the development of modern theories of hard spheres including the main ideas underlying chapters \ref{chapter:morphometric-framework}, \ref{chapter:morphometric-applications} and \ref{chapter:resummation}.
+Integral geometry provides elegant and unified description of sizes, and was crucial in the development of modern theories of hard spheres \cite{RosenfeldPRL1989,KonigPRL2004}, including the main ideas underlying chapters \ref{chapter:morphometric-framework}, \ref{chapter:morphometric-applications} and \ref{chapter:resummation}.
 This framework thus provides the route to generalising geometrical theories such as the Asakura-Oosawa model for depletion forces \cite{AsakuraJCP1954,AsakuraJPS1958}, and more generally any free volume theory which expresses an energy in terms of a volume in space.
 %Integral geometry generalises the underlying geometric principles of these theories into a unified framework for characterising size.
 %% We could argue that fundamentally these theories are based on measuring physical sizes.
@@ -128,7 +128,7 @@ We put forward the following qualities of the measures $V, A, C$ and $X$ which m
   As corollaries, this property contains the idea that the size of nothing is zero, e.g.\ $V[\emptyset] = 0$, and leads to the homogeneity property of extensive variables \eqref{eq:extensive-homogeneity} through \eqref{eq:extensive-integral-geometry}.
 \item They are continuous%
   \marginfootnote{Specifically, in integral geometry this continuity property is with respect to the \emph{Hausdorff metric}.
-    Details on this can be found in standard texts, e.g.\ Refs.\ \cite{Santalo2004,Klain1997}.}.
+    Details on this can be found in standard texts, e.g.\ Refs.\ \cite{Santalo2004,SchneiderACIG1984,Schneider2008,Klain1997}.}.
   Loosely speaking, this means that the size measures converge as the object is approximated by increasingly finely meshed polyhedra excluding e.g.\ fractal geometries.
   As a simple intuitive example, the measurement of a length will converge continuously to some number as one uses rulers with progressively finer distance markings.
 \end{enumerate}
@@ -144,7 +144,7 @@ These properties are the defining characteristics of more general size measures 
 %% Radius is the only natural parameter for a sphere, however for more general geometries there might be arbitrarily many parameters so one may wonder if they should be included in a general geometric expansion.
 
 Naively, we might attempt to evaluate the size measures on all subsets $V \subset \mathbb{R}^3$, however this turns out to be too broad a definition.
-In particular, this leads to the Banach-Tarski paradox in which an object can be broken into two, then recomposed through rigid transformations into two objects identical to the original one  \cite{BanachFM1924}; by \eqref{eq:additivity}, a paradox ensues where the original volume is equal to twice itself.
+In particular, this leads to the \emph{Banach-Tarski paradox} in which an object can be broken into two, then recomposed through rigid transformations into two objects identical to the original one  \cite{BanachFM1924}; by \eqref{eq:additivity}, a paradox ensues where the original volume is equal to twice itself.
 A better definition is the restriction to \emph{polyconvex sets}%
 \marginfootnote{The set of polyconvex objects is also sometimes called the \emph{convex ring}.}: objects formed by countable union of \emph{compact} and \emph{convex} objects.
 By compact, we mean objects which are
@@ -155,7 +155,7 @@ By compact, we mean objects which are
   %This is an important property which we will see by example in discussing the Gauss-Bonnet theorem below.
 \end{enumerate}
 We write the collection of objects in $d$-dimensions which are compact and convex as $\mathcal{K}^d$.
-This class of objects covers most physically relevant geometries, excluding fractals where size measures may be pathological.
+This class of objects covers most physically relevant geometries, excluding geometries where size measures may be pathological such as those with fractal structures.
 %The empty set $\emptyset$ is a compact body, albeit a special case with zero size.
 %Compact convex set $K \in \mathcal{K}$ notation.
 
@@ -169,7 +169,7 @@ This class of objects covers most physically relevant geometries, excluding frac
 %% Connection with entropy, leads to homogeneity in arguments which is the building block for extensivity of a thermodynamic potential.
 %% This provides a geometrically precise foundation for thermodynamic potentials.
 
-As way of justifying the above claims, and a segue into other topics, we introduce a (seemingly) new measure: the \emph{Euler characteristic} $\chi$ which simply counts the number of disjoint objects in a set%
+As a way of justifying the above claims, and as a segue into other topics, we introduce a (seemingly) new measure: the \emph{Euler characteristic} $\chi$ which simply counts the number of disjoint objects in a set%
 \marginfootnote{As an intuitive illustration of why this is a size measure, I like to imagine that the \emph{size} of a pirate's treasure is the \emph{number} of gold coins in their possession, which is the Euler characteristic of their hoard.}.
 More precisely, for a compact and convex object $K \in \mathcal{K}^d$ we define the measure such that
 \begin{equation}\label{eq:euler-characteristic-definition}
@@ -181,15 +181,16 @@ More precisely, for a compact and convex object $K \in \mathcal{K}^d$ we define 
 \end{equation}
 then for it to behave additively \eqref{eq:additivity} for a disjoint collection of objects $K_1, \cdots, K_N \in \mathcal{K}^d$ with $K_i \cap K_j = \emptyset$ for $i \ne j$ we find
 \begin{equation*}
-  \chi[K_1 \cup \cdots \cup K_N] = N.
+  \chi[K_1 \cup \cdots \cup K_N] = N,
 \end{equation*}
+so it is a counting measure.
 Some modification of its definition as a counting measure is needed in case of overlaps, however for now we focus on the fact that this measure is rigid-motion invariant, additive and continuous; as such, it would seem to be an independent measure.
-However, the Gauss-Bonnet theorem from differential geometry equates it with the Gaussian curvature through
+However, the \emph{Gauss-Bonnet theorem} from differential geometry equates it with the Gaussian curvature through
 \begin{equation}\label{eq:gauss-bonnet}
   X[K] = 2\pi \chi[\partial K],
 \end{equation}
 so it is really a manifestation of a size measure we have already seen.
-It is worth emphasising the Euler characteristic in its own right however, as it is a very important \emph{topological invariant}, meaning it does not change with continuous geometric deformations.
+It is worth emphasising the Euler characteristic in its own right however, as it is a very important \emph{topological invariant} meaning it does not change with continuous geometric deformations.
 We state some important properties of the Euler characteristic below.
 
 Compact objects include their boundary, so using the additivity property we can decompose the Euler characteristic on $K \in \mathcal{K}^d$ into surface and interior terms
@@ -266,7 +267,7 @@ To introduce the intuition behind these generalised volumes we start from the ob
 \end{SCtable}
 
 Generalising the above intuition to $d$-dimensions, we see that in general we can imagine $d+1$ projections and so expect $d+1$ corresponding volumes.
-We define the $k$th intrisic volume as the average size of the projections onto $k$-dimensional linear subspaces of $\mathbb{R}^d$, i.e.\ \cite{Klain1997,Santalo2004}
+We define the $k$th intrinsic volume as the average size of the projections onto $k$-dimensional linear subspaces of $\mathbb{R}^d$, i.e.\ \cite{Klain1997,Santalo2004}
 %Denoting the space of all $k$ dimensional linear subspaces in $\mathbb{R}^d$ as $\mathrm{Graff}(d,k)$ (the affine Grassmanian), the intrinsic volume is obtained by
 \begin{equation}\label{eq:intrinsic-volumes}
   V_k(K)
@@ -467,40 +468,44 @@ We will see integrals like this emerge from liquid state theory in sections \ref
 \vspace{0.5em}
 \begin{tcolorbox}[title=Principal kinematic formula]
   %% Noting that $\chi = V_0$ is the lowest order intrinsic volume, the latter line of \eqref{eq:low-density-insertion} is ideally suited to a treatment within integral geometry.
-  A central result of integral geometry is the principal kinematic formula of Blaschke and Santal\'o \cite{BlaschkeMZ1936,Blaschke1937,SantaloASI1936} which gives the explicit form of collisional integrals as \cite{Santalo2004,Klain1997}
+  A central result of integral geometry is the principal kinematic formula of Blaschke and Santal\'o \cite{BlaschkeMZ1936,Blaschke1937,SantaloASI1936} which gives the explicit form of these collisional integrals as \cite{Santalo2004,Klain1997}
   %\cite{Santalo2004,SchneiderACIG1984,Schneider2008,Klain1997}
   \begin{equation}\label{eq:binomial-kinematic-formula}
-    \int_{G_d} \chi[A \cap gB] \, dg
+    \int_{G_d} \chi[K_1 \cap g K_2] \, dg
     =
-    \sum_{k=0}^d (C_{k,d-k})^{-1} V_k[A] V_{d-k}[B]
+    \sum_{k=0}^d (C_{k,d-k})^{-1} V_k[K_1] V_{d-k}[K_2]
   \end{equation}
   We see the flag coefficients \eqref{eq:flag-coefficients} play an analogous role here in conjugating the intrinsic volumes as binomial coefficients do in algebraic expansions%
   \marginfootnote{For this reason Klain and Rota argue that integral geometry should be called \emph{continuous combinatorics} \cite{Klain1997}, because it generalises combinatorial results to continuous spaces}.
-  More general formulas exist for integrals over other intersection intrinsic volumes \cite{Klain1997}, however these do not have an interpretation in terms of evaluating partition functions so we will not be using them.
+  More general formulas exist for more general integrals over $V_k[K_1 \cap K_2]$ for all $k$ \cite{Klain1997}, however these do not have an interpretation in terms of evaluating partition functions so we will not be using them.
 \end{tcolorbox}
 
 The principal kinematic formula \eqref{eq:binomial-kinematic-formula} can be iterated for the intersections of many bodies $\{K_1, \cdots, K_n\}$ giving \cite{Santalo2004,MarechalPRE2014}
 \begin{subequations}\label{eq:multinomial-kinematic-formula}
   \begin{equation}
-    \Lambda_{s_1, \cdots, s_n}
-    =
-      \sum_{\substack{i_0, \cdots, i_n = 0 \\ i_0 + \cdots + i_n = nd}}^d
-      (C_{i_0, \cdots, i_n})^{-1}
-      V_{i_0}(K_0)
-      \prod_{j=1}^n
-      \widetilde{V}_{i_j}(K_{s_j})
+    \begin{split}
+      & \quad
+      \int_{G_d^n} \chi[K_1 \cap g_2 K_2 \cap \cdots \cap g_n K_n]
+      \, dg_2 \cdots dg_n
+      \\ = &
+      \sum_{\substack{i_1, \cdots, i_n = 0 \\ i_1 + \cdots + i_n = nd}}^d
+      (C_{i_1, \cdots, i_n})^{-1}
+      V_{i_1}(K_1)
+      \prod_{j=2}^n
+      V_{i_j}(K_j)
+    \end{split}
   \end{equation}
   \begin{equation}
     \textrm{with} \qquad
-    C_{i_0, \cdots, i_n}
-    := \frac{1}{i_0! \omega_{i_0}}
-    \prod_{j=1}^n
+    C_{i_1, \cdots, i_n}
+    := \frac{1}{i_1! \omega_{i_1}}
+    \prod_{j=2}^n
     \left(
     \frac{d!}{i_j!} \frac{\omega_d}{\omega_{i_j}}
     \right)
   \end{equation}
 \end{subequations}
-where $C_{i_0, \cdots, i_n}$ would be the multinomial generalisation of the flag coefficients \eqref{eq:flag-coefficients}.
+where $C_{i_1, \cdots, i_n}$ would be the multinomial generalisation of the flag coefficients \eqref{eq:flag-coefficients}.
 We will use this iterated formula in chapter \ref{chapter:resummation} to resum a piece of the virial series (to be introduced in the upcoming section \ref{sec:virial-series}).
 
 %% We have the invariant measure on 1-dimensional linear subspaces of $\mathbb{R}^d$ (\emph{Grassmanians}) as
