@@ -68,9 +68,12 @@ We will start by exploring the ways in which supercooled liquids are the \emph{s
 Then we will move onto the ways in which they \emph{differ} from ordinary liquids, notably in their dynamical properties.
 
 \begin{SCfigure}
-  \missingfigure[figwidth=\linewidth]{$g^{(2)}$}%
+  \includegraphics[width=0.9\linewidth,outer]{g2-evolution}
+  %\missingfigure[figwidth=\linewidth]{$g^{(2)}$}%
   \caption[Structural change in the supercooled liquid (at the pair level)]{
-    Minimal change in pairwise structure with increasing density above the melting point, as measured by the pair distribution function \eqref{eq:n-particle-distribution}.
+    Minimal change occurring in pairwise structure of hard spheres as density is increased above the melting point, as measured by the pair distribution function \eqref{eq:n-particle-distribution}.
+    Each state-point is offset for clarity.
+    Results for $\eta = 0.45$ for a 7-component equimolar mixture with 20\% polydispersity using the DynamO software package \cite{BannermanJCC2011}, whereas the data in metastable regime is from colloidal experiments provided by the authors of Ref.\ \cite{HallettNC2018}.
   }
   \label{fig:g2-changes}
 \end{SCfigure}
@@ -119,7 +122,7 @@ Typically this is discussed in the context of two (related) quantities: the \emp
 Viscosity measures how resistant the system is to flow, while relaxation time measures the typical microscopic time for the density profile to relax i.e.\ for liquid-like behaviour caused by particle diffusion.
 A defining feature of supercooled liquids is that these numbers become so large that the precise details of the measurement used does not matter.
 We will discuss this dynamical slowdown further on, but for now we introduce a specific time correlation function in order to frame the discussion.
-A popular measurement is the (self) intermediate scattering function (ISF), defined by \cite{JanssenFP2018}
+A popular measurement is the intermediate scattering function (ISF), defined by \cite{JanssenFP2018}
 \begin{equation}\label{eq:isf}
   F(k, t)
   =
@@ -130,8 +133,13 @@ A popular measurement is the (self) intermediate scattering function (ISF), defi
   }
 \end{equation}
 which reduces to the static structure factor \eqref{eq:static-structure-factor} at zero elapsed time $F(k, t=0) = S^{(2)}(k)$.
-An example ISF is shown in Fig.\ \ref{fig:isf}, displaying many features emblematic of the supercooled liquid which distinguishes it from the regular liquid.
-\hl{describe the features, introduce alpha relaxation time}
+An example ISF is shown in Fig.\ \ref{fig:isf}, displaying many features which distinguish the supercooled liquid from a regular liquid.
+In particular, there is a timescale separation between distinct dynamical processes.
+For short times there is a ballistic regime, where particles are essentially free to move unencumbered.
+At intermediate times, interactions with neighbours inhibit motion and $F(k,t)$ plateaus; this plateau is absent in regular liquids.
+Finally, in the long time limit particles are able to diffuse so that $F(k,t)$ completely relaxes to zero.
+The latter two processes are called $\beta$- and $\alpha$-relaxation respectively.
+The timescale of the longer $\alpha$-relaxation $\tau_\alpha$ is more central to our discusson as it corresponds to the timescale of liquid-like behaviour.
 
 \begin{SCfigure}
   \includegraphics[width=0.9\linewidth,outer]{isf}
@@ -177,7 +185,7 @@ This is an imperfect process however, as even highly polydisperse systems have b
   \label{fig:transition-state}
 \end{SCfigure}
 
-Applying transition-state theory \eqref{eq:reaction-time} to relaxation time in the liquid, we may expect the alpha relaxation time to scale as
+Applying transition-state theory \eqref{eq:reaction-time} to relaxation time in the liquid, we may expect the $\alpha$-relaxation time to scale as
 \begin{equation}\label{eq:tau-barrier}
   \tau_\alpha \sim e^{\beta \Delta \Phi_\alpha}
 \end{equation}
@@ -189,7 +197,7 @@ Naively, we might expect the barrier to remain constant with temperature, corres
 This argument captures the high temperature behaviour very well and, outside of soft matter, it applies reasonably well to molecular glassformers e.g.\ silica-based materials%
 \marginfootnote{That is, the material which the average person would mean when they say ``glass''.},
 where relaxation essentially depends on the timescale to break a covalent bond.
-Experimental data \hl{(citation)} for \ce{SiO2} confirms that $\ln{\tau_\alpha}$ scales linearly with $\beta$ (Fig.\ \ref{fig:angell}).
+Experimental data for \ce{SiO2} \cite{AngellS1995} confirms that $\ln{\tau_\alpha}$ scales linearly with $\beta$ (Fig.\ \ref{fig:angell}).
 By convention, systems which scale in an Arrhenius fashion are called \emph{strong}%
 \marginfootnote{This baffling naming convention has nothing to do with the mechanical properties.}
 glassformers.
@@ -265,10 +273,10 @@ Moreover, the geometrical interpretation in terms of volume fluctuations $\Delta
 \begin{SCfigure}
   \includegraphics[width=0.9\linewidth,outer]{angell}
   \caption[Angell plot]{
-    The \emph{Angell} plot for molecular and model glassformers showing the temperature/pressure dependence of viscosity $\eta$ (or equivalently relaxation time $\tau_\alpha$).
-    The molecular systems \ce{SiO2} and orthoterphenyl (OTP) respectively display the \emph{strong} and \emph{fragile} behaviours described in text.
+    The \emph{Angell} plot \cite{AngellJNS1988} for molecular and model glassformers showing the temperature/pressure dependence of viscosity $\eta$ (or equivalently relaxation time $\tau_\alpha$).
+    The molecular systems \ce{SiO2} and orthoterphenyl (OTP) respectively display the \emph{strong} and \emph{fragile} behaviours described in text, with data obtained from Refs.\ \cite{AngellS1995, BerthierPRE2009}.
     Kob-Anderson (KA) and Wahnstrom (Wahn) are binary mixtures of Lennard-Jones atoms designed to exhibit fragility.
-    The compressibility $Z = \beta p / \rho$ is argued to be equivalent to inverse temperature for hard spheres (HS) \cite{BerthierPRE2009}.
+    The compressibility $Z = \beta p / \rho$ is argued to be equivalent to inverse temperature for hard spheres (HS) \cite{BerthierPRE2009}, with data taken from Ref.\ \cite{RoyallJSM2017}.
     Reproduced from Ref.\ \cite{RoyallPR2015}.
   }
   \label{fig:angell}
