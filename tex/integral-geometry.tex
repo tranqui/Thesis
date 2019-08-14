@@ -172,10 +172,14 @@ This class of objects covers most physically relevant geometries, excluding frac
 As way of justifying the above claims, and a segue into other topics, we introduce a (seemingly) new measure: the \emph{Euler characteristic} $\chi$ which simply counts the number of disjoint objects in a set%
 \marginfootnote{As an intuitive illustration of why this is a size measure, I like to imagine that the \emph{size} of a pirate's treasure is the \emph{number} of gold coins in their possession, which is the Euler characteristic of their hoard.}.
 More precisely, for a compact and convex object $K \in \mathcal{K}^d$ we define the measure such that
-\begin{equation*}
-  \chi[K] := 1
-\end{equation*}
-then for it to behave additively for a disjoint collection of objects $K_1, \cdots, K_N \in \mathcal{K}^d$ with $K_i \cap K_j = \emptyset$ for $i \ne j$ we find
+\begin{equation}\label{eq:euler-characteristic-definition}
+  \chi[K] :=
+  \begin{cases}
+    1 & \textrm{if } K \ne \emptyset \\
+    0 & \textrm{if } K = \emptyset
+  \end{cases}
+\end{equation}
+then for it to behave additively \eqref{eq:additivity} for a disjoint collection of objects $K_1, \cdots, K_N \in \mathcal{K}^d$ with $K_i \cap K_j = \emptyset$ for $i \ne j$ we find
 \begin{equation*}
   \chi[K_1 \cup \cdots \cup K_N] = N.
 \end{equation*}
@@ -248,7 +252,7 @@ To introduce the intuition behind these generalised volumes we start from the ob
     \centering
     \begin{tabular}{ccccc}
       \toprule
-      $k$ & $\omega_k$ & $V_k(B_1)$ & $V_k(B_2)$ & $V_k(B_3)$ \\
+      $k$ & $\omega_k$ & $V_k(\ball_1)$ & $V_k(\ball_2)$ & $V_k(\ball_3)$ \\
       \midrule
       0 & 1 & 1 & 1 & 1 \\
       1 & 2 & 2 & $\pi$ & 4 \\
@@ -257,7 +261,7 @@ To introduce the intuition behind these generalised volumes we start from the ob
       \bottomrule
     \end{tabular}
   \end{minipage}
-  \caption{Intrinsic volumes of the unit ball in physical dimensions $d \le 3$.}
+  \caption{Intrinsic volumes of the $d$-dimensional unit ball $\ball_d$ in physical dimensions $d \le 3$.}
   \label{table:ball-intrinsic-volumes}
 \end{SCtable}
 
@@ -276,14 +280,14 @@ where the integral is taken over all affine transformations of the plane $E_{d-k
   :=
   \frac{d!}{k! (d-k)!} \frac{\omega_d}{\omega_k \omega_{d-k}},
 \end{equation}
-where the volume of the $d$-dimensional ball with unit radius $B_d$ is
+where the volume of the $d$-dimensional ball with unit radius $\ball_d$ is
 \begin{equation}
-  \omega_d := V_d[B_d] = \frac{\pi^{d/2}}{\Gamma(\frac{d}{2} + 1)}.
+  \omega_d := V_d[\ball_d] = \frac{\pi^{d/2}}{\Gamma(\frac{d}{2} + 1)}.
 \end{equation}
 The flag coefficients $C_{k,d-k}$ have a similar structure to binomial coefficients, and play a similar \emph{combinatorial} role in the combination of geometric objects (section \ref{sec:kinematic-formula}).
 By convention, the normalisation of the measure $dE_{d-k}$ in \eqref{eq:intrinsic-volumes} is chosen to give the intrinsic volumes for the unit ball as
 \begin{equation}\label{eq:intrinsic-volume-ball}
-  V_k [B_d]
+  V_k [\ball_d]
   =
   {d \choose k} \frac{\omega_d}{\omega_{d-k}},
 \end{equation}
@@ -295,7 +299,7 @@ A set of common geometrical quantities and their reduction to the intrinsic volu
 %% \begin{tcolorbox}[title=Aside: nomenclature of spheres vs balls]
 %%   The terms `sphere' and `ball' are used interchangeably in physics (and colloquially), however in geometry these refer to different things; `ball' refers to the solid object whereas `sphere' refers to its boundary, i.e.\
 %%   \begin{equation*}
-%%     S_{d-1} = \partial B_d,
+%%     S_{d-1} = \partial \ball_d,
 %%   \end{equation*}
 %%   As a surface manifold, the $(d-1)$-dimensionality of the sphere is reduced by one from its original space.
 %%   So strictly speaking, when we speak of hard spheres in physics we really mean hard balls.
@@ -404,7 +408,7 @@ In the next section we will state some useful results for doing calculations in 
 %% \begin{tcolorbox}[title=Steiner's formula for parallel volumes]
 %%   For a compact, convex body $K \in \mathcal{K}^d$ the parallel volume is expressable as:
 %%   \begin{equation}
-%%     V_d[K + \epsilon B_d] =
+%%     V_d[K + \epsilon \ball_d] =
 %%     \sum_{i=0}^d V_i[K] \omega_{d-i} \epsilon^{d-i}
 %%   \end{equation}
 %% \end{tcolorbox}
@@ -412,12 +416,11 @@ In the next section we will state some useful results for doing calculations in 
 \subsection{Kinematic formulas}
 \label{sec:kinematic-formula}
 
-Here we introduce the \emph{kinematic formulas}, which calculate the probability that randomly distributed objects hit one another.
+Here we introduce the \emph{kinematic formulas} which calculate hitting probabilities, i.e.\ the probability that randomly distributed objects collide.
 This problem is applicable to the evaluation of partition functions in statistical mechanics, of which we will see specific examples in section \ref{sec:fmt} and chapter \ref{chapter:resummation}.
-\todo{Edit this section.}
 
 Two compact and convex objects $K_1, K_2 \in \mathcal{K}^d$ overlap if their intersection is non-empty $K_1 \cap K_2 \ne \emptyset$.
-The intersection of convex objects is also convex, so
+The intersection of convex objects is also convex, so from the definition of the Euler characteristic \eqref{eq:euler-characteristic-definition} we can write
 \begin{equation*}
   \chi[K_1 \cap K_2]
   =
@@ -426,15 +429,15 @@ The intersection of convex objects is also convex, so
     0 & \textrm{ if } K_1 \cap K_2 = \emptyset
   \end{cases}
 \end{equation*}
-and the probability that the two objects collide is then
+then the probability that the two objects collide is
 \begin{equation*}
-  \mathrm{Prob}[\textrm{collision}]
+  \mathrm{Prob} \left[ \textrm{collision} \right]
   =
   \frac{1}{V} \int_V \chi[K_1 \cap K_2(\vec{r})] \, d\vec{r}
 \end{equation*}
 where $K_2$ is uniformly distributed and $K_1$ acts as a fixed target.
-In this integral $K_2$ is translated over the space, however in general these objects will be non-spherical so it is more natural to consider also their relative orientation.
-Integral geometry more naturally deals with integrations over relative positions and orientations, at the small cost of additional notation.
+Here, $K_2$ is \emph{translated} over the accessible volume, however in general these objects will be non-spherical so we should also consider the \emph{rotations}.
+Integral geometry more naturally deals with integrations over relative positions \emph{and} orientations, at the small cost of additional notation.
 %In addition to integrations over particle positions $\{\vec{r}_1, \cdots, \vec{r}_n\}$ we also have to consider their orientations $\{\vec{\theta}_1, \cdots, \vec{\theta}_n\}$ where each $\vec{\theta}_i$ represents an Euler angle tuple.
 %Then, assuming an isotropic phase where all orientations are equally likely each positional integral generalises to
 Writing the relative orientation as the Euler angle tuple $\vec{\theta}$, we consider the generalisation
@@ -448,17 +451,17 @@ Writing the relative orientation as the Euler angle tuple $\vec{\theta}$, we con
 with the normalisation in the angular measure such that $\int d\vec{\theta} = 1$.
 In the right-most equality we introduced the rigid-motion operation acting on a body $K \in \mathcal{K}^d$ as
 \begin{equation*}
-  g K := \{\mathcal{R}(\vec{\theta}) \vec{k} + \vec{r} \, | \, \vec{k} \in K\},
+  g K := \{\mathcal{R}_\theta \, \vec{k} + \vec{r} \, | \, \vec{k} \in K\},
   %(\mathcal{T} \circ \mathcal{R})(\vec{r}, \vec{\theta}),
 \end{equation*}
-a member of the rigid motion group $g \in G_d := \mathbb{R}^d \times \mathrm{SO}(d)$, and where $\mathcal{R}(\vec{\theta}) \in \mathrm{SO}(d)$%
+a member of the rigid motion group $g \in G_d := \mathbb{R}^d \times \mathrm{SO}(d)$, and where $\mathcal{R}_\theta \in \mathrm{SO}(d)$%
 \marginfootnote{$\mathrm{SO}(d)$ is the \emph{special orthogonal group}, i.e.\ the group of all orthogonal matrices with unit determinant.}
 is the rotation matrix parameterised by $\vec{\theta}$.
 Then the generalised measure for particle collisions becomes
 \begin{equation*}
-  \int_{G_d} \chi[K_1 \cap g K_2] \, dg,
+  \int_{G_d} \chi[K_1 \cap g K_2] \, dg
 \end{equation*}
-if they now occupy all of Euclidean space.
+if they occupy all of Euclidean space.
 We will see integrals like this emerge from liquid state theory in sections \ref{sec:virial-series} and \ref{sec:fmt}, and later in chapter \ref{chapter:resummation}.
 
 \vspace{0.5em}
@@ -471,7 +474,7 @@ We will see integrals like this emerge from liquid state theory in sections \ref
     =
     \sum_{k=0}^d (C_{k,d-k})^{-1} V_k[A] V_{d-k}[B]
   \end{equation}
-  We see the flag coefficients \eqref{eq:flag-coefficients} play an analogous role in conjugating the intrinsic volumes here as binomial coefficients do in algebraic expansions%
+  We see the flag coefficients \eqref{eq:flag-coefficients} play an analogous role here in conjugating the intrinsic volumes as binomial coefficients do in algebraic expansions%
   \marginfootnote{For this reason Klain and Rota argue that integral geometry should be called \emph{continuous combinatorics} \cite{Klain1997}, because it generalises combinatorial results to continuous spaces}.
   More general formulas exist for integrals over other intersection intrinsic volumes \cite{Klain1997}, however these do not have an interpretation in terms of evaluating partition functions so we will not be using them.
 \end{tcolorbox}
@@ -523,7 +526,7 @@ We will use this iterated formula in chapter \ref{chapter:resummation} to resum 
 %% \end{equation}
 %% Note that we can rewrite \eqref{eq:intrinsic-volume-ball} using the flag coefficients as
 %% \begin{equation}\label{eq:intrinsic-volume-ball-flag}
-%%   \mu_k (B_d) = {d \choose k} \frac{\omega_d}{\omega_{d-k}}
+%%   \mu_k (\ball_d) = {d \choose k} \frac{\omega_d}{\omega_{d-k}}
 %%   = {d \brack k} \omega_k
 %% \end{equation}
 
