@@ -41,9 +41,8 @@ The dynamics of the system at high density in the metastable regime above the fr
 %In particular, deep questions remain concerning its nucleation kinetics and dynamical arrest approaching the glass transition.
 %Our central application will be to the treatment of many-body correlations in supercooled liquids, a potential new route for assessing causes of dynamical arrest.
 Proposed mechanisms for dynamical phenomena all loosely fall under the broad umbrella of many-body correlations; nucleation occurs via crystal seed formation \cite{SearJPCM2007}, and to explain dynamic arrest approaching the glass transition thermodynamic theories invoke cooperatively rearranging regions \cite{LubchenkoARPC2007} or elastic soft modes \cite{BritoJCP2009} while kinetic theories posit the existence of dynamical defects \cite{ChandlerARPC2010}.
-In a recent letter \cite{RobinsonPRL2019} we proposed a framework for treating many-body correlations, and developed an operational scheme for predicting the populations and dynamics of local structural motifs within a uniform liquid.
+Here we propose a framework for treating many-body correlations, which in the next chapter we will develop into an operational scheme for predicting the populations and dynamics of local structural motifs within a uniform liquid.
 Central to this is the use of the \emph{morphometric approach}.
-\todo{A lot of this is repeated: review after finishing lit review.}
 
 The morphometric approach provides an efficient means of treating the thermodynamics of a bulk liquid without fully determining its equilibrium density profile \cite{KonigPRL2004,RothPRL2006,Hansen-GoosPRL2007,RobinsonPRL2019}.
 Detailed investigations have shown that it is highly accurate in the hard sphere liquid regime \cite{OettelEL2009,AshtonPRE2011,LairdPRE2012,BlokhuisPRE2013,UrrutiaPRE2014,Hansen-GoosJCP2014}, so we can expect an accurate treatment where the bulk system provides background depletion interactions while its detailed microstates remain unimportant.
@@ -53,11 +52,14 @@ Here we derive such a theory using scaled particle theory (SPT).
 
 SPT determines bulk properties from consideration of a spherical solute of varying radius.
 It remains one of most enduring theories of simple liquids; though 60 years old as of this year \cite{ReissJCP1959}, aspects of this approach remain in modern theories.
-This is particularly true for hard spheres where SPT has been unified with the Percus-Yevick integral equation solution \cite{WertheimPRL1963}, another old theory, in the form of fundamental measure theory (FMT) \cite{RosenfeldPRL1989}.
+This is particularly true for hard spheres where SPT has been unified with the Percus-Yevick integral equation solution \eqref{eq:pyc-pressure} \cite{WertheimPRL1963}, another old theory, in the form of fundamental measure theory (FMT) \cite{RosenfeldPRL1989} which we introduced in section \ref{sec:fmt}.
 Though originally a theory of single-component hard spheres \cite{ReissJCP1959}, SPT has been extended to other potentials \cite{ReissJCP1960,HelfandJCP1960,ReissJCP1961} and shapes \cite{GibbonsMP1969,GibbonsMP1970}, mixtures \cite{LebowitzJCP1965}, dimers \cite{StillingerJCP2006,ChatterjeeJCP2006} and discs \cite{HelfandJCP1961,MartinJCP2018,Hansen-GoosJCP2019}.
 Morphological thermodynamics can be seen as a modern generalisation of SPT for a wide class of physically relevant geometries.
 Its basis in integral geometry replaces the semi-empirical approach of classical SPT with clearly defined postulates.
-In this chapter we present the morphometric approach in the context of SPT and derive three theories for the single-component hard sphere liquid: the classical SPT coefficients, the White Bear II morphometric coefficients and a new theory suitable for high densities above freezing.
+In this chapter we present the morphometric approach in the context of SPT and derive three theories for the single-component hard sphere liquid: the classical SPT coefficients, the White Bear II morphometric coefficients%
+\marginfootnote{These are given in \eqref{eq:wbii-coefficients}, which we obtained through their classical derivation as part of FMT.
+  In this chapter we will derive them through a new, self-contained route.}
+and a new theory suitable for high densities above freezing.
 %These extensions typically take a semi-empirical approach, and often the soundness of the assumptions are unclear.
 %The virial expansion provides a few exact results which can be used to explore the limitations of approximate theories.
 
@@ -264,7 +266,7 @@ We now give a brief justification of the above \emph{ansatzes}, in particular wh
 Radius is the only natural parameter for a sphere, however for more general geometries there might be arbitrarily many parameters so one may wonder if they should be included in a general geometric expansion.
 Nevertheless, we can make compelling arguments using integral geometry, introduced in section \ref{sec:integral-geometry}, to only retain the terms listed.
 Most notably, the terms included are the \emph{only} physically meaningful size measures (cf.\ section \ref{sec:what-is-size}), and so $\Delta \Omega$ is strictly extensive if it is a linear combination of these measures%
-\marginfootnote{See discussion on extensivity and references cited around Eqs.\ \eqref{eq:extensive-homogeneity} and \eqref{eq:extensive-integral-geometry}, as well as Hadwiger's theorem \eqref{eq:extensive-integral-geometry-d}.}.
+\marginfootnote{See discussion on extensivity and references cited around equations \eqref{eq:extensive-homogeneity} and \eqref{eq:extensive-integral-geometry}, as well as Hadwiger's theorem \eqref{eq:extensive-integral-geometry-d}.}.
 This argument was first applied to hard sphere solvation in Ref.\ \cite{KonigPRL2004}.
 
 The central assertion of the morphometric approach is that the insertion cost $\Delta \Omega$ \emph{exactly} possesses the properties above, providing the connection between geometry and thermodynamics \cite{KonigPRL2004}.
@@ -306,7 +308,7 @@ The latter set of coefficients was originally obtained as a limiting case of FMT
 
 All coefficients we give are for the molecular geometry bounded by the \emph{molecular surface} ($\partial \mathcal{L}_1$ in Fig.\ \ref{fig:system}b), the surface where interactions occur between the solute and a test particle representing the remaining liquid.
 However, it is usually more convenient to do calculations with the excluded geometry: the space inaccessible to the \emph{center} of a test particle bounded by the \emph{solvent accessible surface} ($\partial \mathcal{L}_2$ in Fig.\ \ref{fig:system}b).
-\todo{Cite: \cite{LeeJMB1971}, find citation for molecular surface. Give ball definitions.}
+The original definitions of these surfaces can be found in Refs.\ \cite{LeeJMB1971,RichardsARBB1977}.
 Note that there is also an infinite family of well-defined parallel surfaces between these two extremes, but they are not widely used in practice so we will not consider them \cite{OettelEL2009}.
 The choice of dividing surface will change the surface tension, and thus requires new coefficients $\{a_0', a_1', a_2'\}$ i.e.\
 \begin{equation}
@@ -410,7 +412,7 @@ For weighted densities consistent with an SPT (or FMT) approach, it has been sho
 \label{sec:classical-spt}
 
 \begin{SCfigure}
-  \includegraphics[width=\linewidth,outer]{g2-contact}
+  \includegraphics[width=0.9\linewidth,outer]{g2-contact}
   \caption[Contact values of pair distribution function $g^{(2)}(r)$]{
     Contact values of the radial distribution function against volume fraction $\eta$ and reduced pressure for the hard sphere liquid using \eqref{eq:contact-g} with \eqref{eq:distribution-solvation} and \eqref{eq:morph-ansatz} for the explicit form of $g^{(2)}$, assuming the Carnahan-Starling (CS) equation of state.
     Contact values are determined with two sets of morphometric coefficients: SPT/CS (section \ref{sec:cs-spt}, specifically \eqref{eq:cs-spt-coefficients}, or equivalently the White Bear II bulk coefficients \eqref{eq:wbii-coefficients} of Ref.\ \cite{Hansen-GoosJPCM2006}) which performs poorly in the supercooled regime (shaded area), and coefficients derived in this chapter (section \ref{sec:virial-spt}) using the virial theorem which is exact by construction.

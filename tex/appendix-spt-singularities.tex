@@ -9,17 +9,27 @@
 \renewcommand{\chaptername}{Appendix}
 \renewcommand{\thechapter}{\Alph{chapter}}
 
+\externaldocument{introduction}
+\externaldocument{background}
+\externaldocument{morphometric-framework}
+\externaldocument{morphometric-applications}
+\externaldocument{resummation}
+\externaldocument{aerosols}
+
 \begin{document}
 \chapter{Existence of singularities in the chemical potential}
 \label{appendix:spt-singularities}
 
-Here we show that the cost of inserting a solute is not generally analytic in geometric measures by revisiting the arguments made by Reiss and coworkers \cite{ReissJCP1959,ReissJCP1960}.
-This argument is worth revisiting as it demonstrates that \emph{any} regular expansion of $\Delta \Omega$ in terms of geometrical measures like curvature must necessarily be approximate.
-In sections \ref{sec:morphometric-theory} and \ref{sec:spt} we will contribute to the theory of such an expansion, so the purpose of this section is to emphasise its approximate nature from the outset as a disclaimer.
-\todo{Fix references and make this appendix more thesis-y}
+This appendix is intended to supplement chapters \ref{chapter:morphometric-framework} and \ref{chapter:resummation} by emphasising the fundamental limitations of the theories we advocate there.
+In those chapters we advanced the \emph{morphometric approach}, an approximate theory for solvation in hard particle systems.
+This approximation scheme expresses a chemical potential as an expansion in terms of geometric properties.
+This expansion is found in any one of equations \eqref{eq:extensive-integral-geometry}, \eqref{eq:extensive-integral-geometry-d}, \eqref{eq:fmt-morphometric-2}, \eqref{eq:morph-ansatz}, or \eqref{eq:morphometric-approach-from-virial}.
+This approach is numerically very accurate, within its regime of validity, however there are fundamental limitations which prevent it from being readily extended.
+Here we revisit old arguments made by Reiss and coworkers \cite{ReissJCP1959,ReissJCP1960} which demonstrate that the cost of inserting a solute is not generally analytic in geometric measures.
+This argument demonstrates that \emph{any} regular expansion of $\Delta \Omega$ in terms of geometrical measures like curvature must necessarily be approximate.
 
 We consider a single-component hard sphere liquid with particles of diameter $\sigma$, and we imagine inserting a hard spherical solute of radius $R$.
-A sphere of radius $R + \sigma/2$ around the solute is excluded to the centers of solvent particles.
+A sphere of radius $R + \sigma/2$ around the solute is then excluded to the centers of solvent particles.
 We write this excluded volume as $V_\mathrm{ex}$, which is clearly the minimum size of cavity required to contain the solute.
 The insertion cost is simply the probability that a randomly chosen position for insertion contains such a cavity, i.e.\
 \begin{equation}\label{eq:insertion-from-p}
@@ -40,8 +50,8 @@ where $F^{(n)}(R)$ is the average number of $n$-tuples of solvent particles cont
   \int_{V_\mathrm{ex}^n} g^{(n)}(\vec{r}^n) \, d\vec{r}^n.
 \end{equation}
 Clearly $F^{(n)}(R) = 0$ for $R < R_n$, the minimum radius capable of containing $n$ hard spheres.
-At any given state point $g^{(n)}$ will be bounded from above by some finite number, so we can write the inequality
-%\footnote{Typically we would expect this to occur where the maximum number of particles are in contact, however that is not a necessary assumption for this argument.},
+At any given state point $g^{(n)}$ will be bounded from above by some finite number, so we can write the inequality%
+\marginfootnote{Typically, we would expect this to occur where the maximum number of particles are in contact, however that is not a necessary assumption for this argument.}
 \begin{equation}\label{eq:spt-tuple-function-upper-bound}
   \begin{split}
     F^{(n)}(R) &\le
@@ -87,9 +97,9 @@ such that $p_0 = p_0^{(n)}$ for $R \le R_{n+1}$.
 Approaching the singular point $R_n$ we find the deviation from the solution for $R < R_n$ is thus
 \begin{equation*}
   \begin{split}
-    \Delta p_0(R) &:=
+    \Delta p_0(R) :=& \;
     p_0(R) - p_0^{(n-1)}(R)
-    \\ &=
+    \\ =& \;
     (-1)^n F^{(n)}(R)
     \qquad R < R_{n+1}
   \end{split}
