@@ -73,7 +73,7 @@ Then we will move onto the ways in which they \emph{differ} from ordinary liquid
   \caption[Structural change in the supercooled liquid (at the pair level)]{
     Minimal change occurring in pairwise structure of hard spheres as density is increased above the melting point, as measured by the pair distribution function \eqref{eq:n-particle-distribution}.
     Each state-point is offset for clarity.
-    Results for $\eta = 0.45$ for a 7-component equimolar mixture with 20\% polydispersity using the DynamO software package \cite{BannermanJCC2011}, whereas the data in metastable regime is from colloidal experiments provided by the authors of Ref.\ \cite{HallettNC2018}.
+    Results for $\eta = 0.45$ for a 7-component equimolar mixture with 16\% polydispersity using the DynamO software package \cite{BannermanJCC2011}, whereas the data in the metastable regime is from colloidal experiments provided by the authors of Ref.\ \cite{HallettNC2018}.
   }
   \label{fig:g2-changes}
 \end{SCfigure}
@@ -194,7 +194,7 @@ Naively, we might expect the barrier to remain constant with temperature, corres
 \begin{equation}\label{eq:arrhenius-law}
   \ln{\tau_\alpha} \propto \frac{1}{T}.
 \end{equation}
-This argument captures the high temperature behaviour very well and, outside of soft matter, it applies reasonably well to molecular glassformers e.g.\ silica-based materials%
+This argument captures the high temperature behaviour very well and, outside of soft matter, it applies reasonably well to many molecular glassformers e.g.\ silica-based materials%
 \marginfootnote{That is, the material which the average person would mean when they say ``glass''.},
 where relaxation essentially depends on the timescale to break a covalent bond.
 Experimental data for \ce{SiO2} \cite{AngellS1995} confirms that $\ln{\tau_\alpha}$ scales linearly with $\beta$ (Fig.\ \ref{fig:angell}).
@@ -202,10 +202,10 @@ By convention, systems which scale in an Arrhenius fashion are called \emph{stro
 \marginfootnote{This baffling naming convention has nothing to do with the mechanical properties.}
 glassformers.
 
-Our focus is on soft matter, with hard spheres as the prototypical model, where the  chemical bonds (typically van der Waals attractions) are much weaker than in molecular systems.
+Our focus is on soft matter, with hard spheres as the prototypical model, where the  chemical bonds (typically van der Waals attractions) are much weaker than in molecular systems (and absent in hard spherse).
 Consequently, there is less of a case for an Arrhenius relationship \eqref{eq:arrhenius-law}, and empirically we find striking deviations from it.
 Many systems show \emph{super-Arrhenius} scaling with temperature (Fig.\ \ref{fig:angell}), including mixtures of Lennard-Jones atoms and molecular orthoterphenyl.
-Correspondingly, systems scaling faster than exponentially are labelled as \emph{fragile}.
+Correspondingly, systems where $\tau_\alpha$ scales faster than exponential are labelled as \emph{fragile}.
 
 Some modification is required for hard particle systems, where temperature is not a natural control parameter.
 As we argued in the introduction, pressure is the only meaningful state variable.
@@ -480,4 +480,4 @@ can be removed by exploiting rotational symmetry.
 Many-particle generalisations of the static structure factor can be obtained from $\tilde{c}^{(n)}(\vec{k}^n)$ by functionally differentiating the Ornstein-Zernike equation \eqref{eq:ornstein-zernike-generic} with respect to density \cite{BarratMP1988}.
 
 This concludes the relevant background on liquid state theory.
-In subsequent chapters we will develop a framework for treating the (real space) many-body correlation functions.
+In subsequent chapters we will develop a framework for treating the many-body correlation functions in real space.
