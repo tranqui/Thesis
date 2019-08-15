@@ -264,9 +264,7 @@ We find hard spheres are comparable in fragility to various binary Lennard-Jones
 %% \end{enumerate}
 
 A super-Arrhenius scaling of $\tau_\alpha$ implies that the thermodynamic barrier itself $\Delta \Phi_\alpha$ increases with supercooling.
-This means that the dynamics fundamentally changes at high densities (or low temperatures), which must be caused by the onset of \emph{collective} effects%
-\marginfootnote{Also referred to as \emph{cooperative} effects.};
-given the weakness of bonds in soft matter, we can conclude that many particles must contribute to create a large barrier.
+This means that the dynamics fundamentally changes at high densities (or low temperatures), which must be caused by the onset of \emph{collective} (or \emph{cooperative}) effects; given the weakness of bonds in soft matter, we can conclude that many particles must contribute to create a large barrier.
 We will discuss this more in the next section.
 Relaxation barriers in hard spheres are entropic in nature, so perhaps it is easier to see the need for collective effects.
 Moreover, the geometrical interpretation in terms of volume fluctuations $\Delta V$ provides a picture for collective motion: at high densities more particles will have to move out of the way to create the space for motion.
@@ -340,34 +338,45 @@ with instantaneous current $\vec{\hat{j}}(\vec{r}, t) := \partial \hat\rho(\vec{
 where $\vec{f}$ is (again) the fluctuating force obtained by integrating out the fast degrees of freedom, $\vec{K}(t')$ is a time-dependent \emph{memory function} containing the history of $\vec{f}$ as an autocorrelation function \cite{ReichmanJSM2005} and $\vec{\Omega}$ is the \emph{frequency matrix} containing the forces internal to the slow variables \cite{JanssenFP2018}.
 Each of these terms has an allegory in the classical Langevin equation \eqref{eq:classical-langevin} above.
 Similar equations to \eqref{eq:general-langevin} can be constructed for observables such as the correlation functions; the goal of MCT is to construct (and solve) an equation for $F(\vec{k}, t)$ \eqref{eq:isf} obtaining the dynamical behaviour of the liquid at long times.
-This requires knowledge of the memory function $\vec{K}$, which must be approximated in general.
+The central challenge of this approach is finding suitable approximations for the memory function $\vec{K}$.
 %% \begin{equation*}
 %%   \vec{K}(t') = \vec{f}(0)^T \vec{f}(t') \cdot (\vec{\tilde{X}}^T \vec{\tilde{X}})^{-1}.
 %% \end{equation*}
 
-\hl{Through a series of algebraic steps, (NOPE)} it is possible to construct an evolution equation for the intermediate scattering function \eqref{eq:isf} from the generalised Langevin equation \eqref{eq:general-langevin}.
-The full, as \cite{ReichmanJSM2005}
-\begin{equation}
+In the standard MCT approach, the fluctuating force is assumed to be dominated by the pair correlations so that $K$ beomes a four-point correlation function.
+Then, through a second approximation where $K$ is factorised into a product of two two-point correlation functions, it is possible to construct an evolution equation for the intermediate scattering function \eqref{eq:isf} as \cite{ReichmanJSM2005}
+\begin{equation}\label{eq:full-mct}
   \frac{d^2 F(k,t)}{d t^2}
   + \frac{k^2}{\beta m S(k)} F(k, t)
   + \int_0^t K_\mathrm{MCT}(k, t') \frac{d F(k, t - t')}{dt} \, dt'
   =
   0
 \end{equation}
-with memory function given by
-\begin{equation}
-  K_\mathrm{MCT}
-  =
-  \frac{\rho}{16 \pi^3 \beta m}
-  \int |V_{\vec{q},\vec{k}-\vec{q}}|^2
-  F(q, t) F(|\vec{k} - \vec{q}|, t)
-  \, d\vec{q}.
-\end{equation}
+with
+\begin{subequations}\label{eq:full-mct-coupled}
+  \begin{align}
+    K_\mathrm{MCT}
+    &=
+    \frac{\rho}{16 \pi^3 \beta m}
+    \int |V_{\vec{q},\vec{k}-\vec{q}}|^2
+    F(q, t) F(|\vec{k} - \vec{q}|, t)
+    \, d\vec{q},
+    \\
+    V_{\vec{q},\vec{k}-\vec{q}}
+    &=
+    \frac{
+      \vec{k} \cdot \vec{q} c^{(2)}(q) + \vec{k} \cdot (\vec{k} - \vec{q}) c^{(2)}(|\vec{k} - \vec{q}|)
+    }{
+      k
+    }.
+  \end{align}
+\end{subequations}
+The latter function $V_{\vec{q},\vec{k}-\vec{q}}$ is the so-called \emph{vertex}, which takes the pair direct correlation, and the initial condition for \eqref{eq:full-mct} is $F(k,t=0) = S^{(2)}(k)$; as such, standard MCT takes only pair correlation functions as input.
+Together \eqref{eq:full-mct} and \eqref{eq:full-mct-coupled} form a non-linear coupled set of integro-differential equations that can be numerically solved, providing a reasonable description of the \emph{onset} of dynamical arrest, with deviations only becoming noticeable at deep supercooling \cite{FlennerPRE2011,BrambillaPRL2009}.
 
 Crucially, MCT predicts a diverging timescale at $\eta \sim 0.52$ in hard spheres, where the dynamics would become completely arrested; corresponding numerical fits with the same power law to colloidal experimental data move this point to $\eta \sim 0.58$ \cite{VanMegenPRE1994}.
 However, these predicted transitions are spurious as recent experiments have managed to equilibrate colloidal hard sphere liquids up to $\eta \lesssim 0.60$ \cite{BrambillaPRL2009,HallettNC2018} and in simulations to even higher densities \cite{BerthierPRL2016}.
 Despite this failing of MCT, it remains the only properly first-principles theory for the treating liquid dynamics.
-Moreover, MCT provides a reasonable description of the \emph{onset} of dynamical arrest, with deviations only becoming noticeable at deep supercooling \cite{FlennerPRE2011,BrambillaPRL2009}.
 
 Extensions incorporating fluctuations can be found in Refs.\ \cite{BiroliPRL2006,SzamelPTEP2013}, and more recently a generalised MCT has been developed which avoids the uncontrolled factorisation of the pair densities by incorporating in closures of the many-body correlation functions \cite{JanssenPRL2015,JanssenFP2018}.
 This latter approach was able to move the diverging timescale to higher densities, bringing the theory in good agreement with available data from simulations and experiments.
