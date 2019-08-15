@@ -123,7 +123,7 @@ Typically this is discussed in the context of two (related) quantities: the \emp
 Viscosity measures how resistant the system is to flow, while relaxation time measures the typical microscopic time for the density profile to relax i.e.\ for liquid-like behaviour caused by particle diffusion.
 A defining feature of supercooled liquids is that these numbers become so large that the precise details of the measurement used does not matter.
 We will discuss this dynamical slowdown further on, but for now we introduce a specific time correlation function in order to frame the discussion.
-A popular measurement is the intermediate scattering function (ISF), defined by \cite{JanssenFP2018}
+A popular measurement is the intermediate scattering function, defined by \cite{JanssenFP2018}
 \begin{equation}\label{eq:isf}
   F(k, t)
   =
@@ -134,7 +134,7 @@ A popular measurement is the intermediate scattering function (ISF), defined by 
   }
 \end{equation}
 which reduces to the static structure factor \eqref{eq:static-structure-factor} at zero elapsed time $F(k, t=0) = S^{(2)}(k)$.
-An example ISF is shown in Fig.\ \ref{fig:isf}, displaying many features which distinguish the supercooled liquid from a regular liquid.
+An example $F(k,t)$ is shown in Fig.\ \ref{fig:isf}, displaying many features which distinguish the supercooled liquid from a regular liquid.
 In particular, there is a timescale separation between distinct dynamical processes.
 For short times there is a ballistic regime, where particles are essentially free to move unencumbered.
 At intermediate times, interactions with neighbours inhibit motion and $F(k,t)$ plateaus; this plateau is absent in regular liquids.
@@ -298,35 +298,55 @@ Moreover, the geometrical interpretation in terms of volume fluctuations $\Delta
 %% high frequency shear modulus is elastic property.
 %% Shear modulus increases by factor 2-5 times, is dwarfed by change in relaxation time.
 
+\hl{Having concluded the phenomenology of supercooled liquids we can now proceed to specific theories of the glass transition.}
+
 \subsection{Mode-coupling theory}
 
-Reviews: \cite{ReichmanJSM2005, JanssenFP2018}
+The central tenet of mode-coupling theory (MCT) is to separate the liquid's degrees of freedoms into \emph{slow} and \emph{fast} variables.
+Fast variables are those that thermalise very quickly, e.g.\ the solvent in a colloidal liquid, so that they can be integrated out leaving only slowly evolving variables of interest.
+We advocate essentially the same philosophy, of coarse-graining onto a few dynamically relevant degrees of freedom, in developing a theory for many-body correlations in chapters \ref{chapter:morphometric-framework} and \ref{chapter:morphometric-applications}.
+The difference between the two approaches is that MCT explicitly treats \emph{dynamical} processes whereas we focus on \emph{static} correlations.
+We will discuss our own approach more in section \ref{sec:correlation-perspective}.
 
-We start with an explicitly dynamical theory.
-Central idea: \emph{slow} and \emph{fast} variables.
-
-To motivate mode-coupling theory we start from the classical Langevin equation of motion, which expresses the equations of motion of a subset of the degrees of freedom.
-Newton's equation becomes
-\begin{equation*}
-  m \ddot{\vec{r}} = - \lambda \dot{\vec{r}} + \vec{F}(t)
-\end{equation*}
-where $\vec{F}$ is a Gaussian random field
-\begin{equation*}
-  \langle F_i(t) F_j(t') \rangle = 2 D \delta_{i,j} \delta(t - t').
-\end{equation*}
-This equation is valid where there is a timescale separation between \emph{slow} and \emph{fast} variables: the position $\vec{r}$ represents a slowly evolving variable of interest, whereas the remaining degrees of freedom (e.g.\ small solvent particles) are imagined to equilibrate rapidly leaving only the force field $\vec{F}$.
-
-In mode-coupling theory, an \emph{exact} generalised Langevin equation is derived as
-\begin{equation}
-  \frac{d \vec{x}(t)}{dt}
+As an example of separation into fast and slow variables, consider classical Langevin equation of motion.
+%, which expresses the equations of motion of a subset of the degrees of freedom.
+Newton's equation for a particle in an external field becomes
+\begin{equation}\label{eq:classical-langevin}
+  m \ddot{\vec{r}}
   =
-  i \vec{\Omega} \cdot \vec{x}
-  - \int_0^t \vec{K} \cdot \vec{x}(t - t') \, dt'
+  \vec{\nabla} \phi_\mathrm{ext}(\vec{r})
+  - \lambda \dot{\vec{r}} + \vec{f}(t)
+\end{equation}
+where $m$ is the particle mass, $\lambda$ is a coefficient of damping and $\vec{f}$ is the \emph{fluctuating force} from the fast variables, normally approximated as a Gaussian random field
+\begin{equation*}
+  \langle f_i(t) f_j(t') \rangle = 2 D \delta_{i,j} \delta(t - t'),
+\end{equation*}
+with diffusion constant $D$.
+Here, the position $\vec{r}$ represents the slowly evolving variable of interest, whereas the remaining degrees of freedom (e.g.\ small solvent particles) are imagined to equilibrate rapidly leaving only the force field $\vec{f}$.
+
+Mode-coupling theory starts from a formally \emph{exact} Langevin equation, which generalises the classical result \eqref{eq:classical-langevin} above.
+Defining the instantaneous state of the liquid as
+\begin{equation*}
+  \vec{X}(t) := \begin{pmatrix} \hat\rho(\vec{r}, t) \\ \vec{\hat{j}}(\vec{r}, t) \end{pmatrix}
+\end{equation*}
+with instantaneous current $\vec{\hat{j}}(\vec{r}, t) := \partial \hat\rho(\vec{r}, t) / \partial t$, the generalised Langevin equation then reads \cite{ReichmanJSM2005, JanssenFP2018}
+\begin{equation}\label{eq:general-langevin}
+  \frac{d \vec{\tilde{X}}(\vec{k}, t)}{dt}
+  =
+  i \vec{\Omega} \cdot \vec{\tilde{X}}(\vec{k}, t)
+  - \int_0^t \vec{K}(t') \cdot \vec{\tilde{X}}(\vec{k}, t - t') \, dt'
   + \vec{f}(t)
 \end{equation}
-where $\vec{\Omega}$ is frequency matrix, $\vec{K}$ is a time-dependent \emph{memory function}, and $\vec{f}$ is the fast fluctuating force.
+where $\vec{f}$ is (again) the fluctuating force obtained by integrating out the fast degrees of freedom, $\vec{K}(t')$ is a time-dependent \emph{memory function} containing the history of $\vec{f}$ as an autocorrelation function \cite{ReichmanJSM2005} and $\vec{\Omega}$ is the \emph{frequency matrix} containing the forces internal to the slow variables \cite{JanssenFP2018}.
+Each of these terms has an allegory in the classical Langevin equation \eqref{eq:classical-langevin} above.
+Similar equations to \eqref{eq:general-langevin} can be constructed for observables such as the correlation functions; the goal of MCT is to construct (and solve) an equation for $F(\vec{k}, t)$ \eqref{eq:isf} obtaining the dynamical behaviour of the liquid at long times.
+This requires knowledge of the memory function $\vec{K}$, which must be approximated in general.
+%% \begin{equation*}
+%%   \vec{K}(t') = \vec{f}(0)^T \vec{f}(t') \cdot (\vec{\tilde{X}}^T \vec{\tilde{X}})^{-1}.
+%% \end{equation*}
 
-The full MCT equation
+\hl{Through a series of algebraic steps, (NOPE)} it is possible to construct an evolution equation for the intermediate scattering function \eqref{eq:isf} from the generalised Langevin equation \eqref{eq:general-langevin}.
+The full, as \cite{ReichmanJSM2005}
 \begin{equation}
   \frac{d^2 F(k,t)}{d t^2}
   + \frac{k^2}{\beta m S(k)} F(k, t)
@@ -334,7 +354,7 @@ The full MCT equation
   =
   0
 \end{equation}
-with the memory function given by
+with memory function given by
 \begin{equation}
   K_\mathrm{MCT}
   =
@@ -344,11 +364,13 @@ with the memory function given by
   \, d\vec{q}.
 \end{equation}
 
-Predicts a diverging timescale.
-Nevertheless, liquids can be prepared above this volume fraction in colloidal experiments \cite{BrambillaPRL2009} and simulations \cite{BerthierPRL2016}.
+Crucially, MCT predicts a diverging timescale at $\eta \sim 0.52$ in hard spheres, where the dynamics would become completely arrested; corresponding numerical fits with the same power law to colloidal experimental data move this point to $\eta \sim 0.58$ \cite{VanMegenPRE1994}.
+However, these predicted transitions are spurious as recent experiments have managed to equilibrate colloidal hard sphere liquids up to $\eta \lesssim 0.60$ \cite{BrambillaPRL2009,HallettNC2018} and in simulations to even higher densities \cite{BerthierPRL2016}.
+Despite this failing of MCT, it remains the only properly first-principles theory for the treating liquid dynamics.
+Moreover, MCT provides a reasonable description of the \emph{onset} of dynamical arrest, with deviations only becoming noticeable at deep supercooling \cite{FlennerPRE2011,BrambillaPRL2009}.
 
-The point of this section is to indicate that pair correlation functions are not enough.
-Extensions with higher order structure \cite{JanssenPRL2015,JanssenFP2018}.
+Extensions incorporating fluctuations can be found in Refs.\ \cite{BiroliPRL2006,SzamelPTEP2013}, and more recently a generalised MCT has been developed which avoids the uncontrolled factorisation of the pair densities by incorporating in closures of the many-body correlation functions \cite{JanssenPRL2015,JanssenFP2018}.
+This latter approach was able to move the diverging timescale to higher densities, bringing the theory in good agreement with available data from simulations and experiments.
 
 \subsection{Mean-field theory}
 
@@ -404,6 +426,7 @@ Theories concentrating on the high density glass: elastic theories.
 Dynamic facilitation.
 
 \subsection{Perspective: role of many-body correlations}
+\label{sec:correlation-perspective}
 
 To motivate the use of many-body correlations we employ an argument due to Evans \cite{EvansPrivate2019}.
 In section \ref{sec:thermodynamic-routes} we saw how the compressibility and virial routes lead to expressions of the free energy in terms of pair correlations.
@@ -453,15 +476,40 @@ The first few terms are given by \cite{WallaceJCP1987}
     \, d\vec{r} d\vec{r}'.
   \end{align}
 \end{subequations}
+Then, for a pair-interacting system the excess free energy is obtained as
+\begin{equation*}
+  \begin{split}
+    \frac{\beta F^\mathrm{ex}}{V}
+    =& \; \hphantom{ + } \;\,
+    \frac{\rho^2}{2} \int g^{(2)}(\vec{r})
+    \left( \beta u(\vec{r}) - \ln{g^{(2)}(\vec{r})} \right)
+    d\vec{r}
+    \\ & \;
+    + \frac{\rho^3}{6}
+    %\int g^{(3)}(\vec{r}, \vec{r}') \delta w^{(3)}(\vec{r}, \vec{r}')
+    \int g^{(3)}(\vec{r}, \vec{r}')
+    \ln{\left(
+      \frac{
+        g^{(3)}(\vec{r}, \vec{r}')
+      }{
+        g^{(2)}(\vec{r}) g^{(2)}(\vec{r}') g^{(2)}(\vec{r} - \vec{r}')
+      }
+      \right)}
+    \, d\vec{r} d\vec{r}'
+    \\ & \;
+    + \mathcal{O}\left( \rho^4 g^{(4)}(\vec{r}, \vec{r}', \vec{r}'') \right),
+  \end{split}
+\end{equation*}
+so the free energy can be directly obtained from accurate determination of the correlation functions.
 
 Second, while it is true that thermodynamic quantities like the pressure can certainly be inferred from the pair correlations, there is no such simple relationship for dynamic quantities.
 In the absence of a thermodynamic phase transition, we would not expect the pair correlation to reveal much about the nature of dynamical arrest, beyond the lack of a transition.
-And even supposing the existence of a transition, the precision required to detect such a signal $g(r)$ may be arbitrarily subtle; however, any the changes approaching a transition \emph{must} be magnified in the higher order correlation functions because of \eqref{eq:correlation-derivatives}.
+And even supposing the existence of a transition, the precision required to detect such a signal $g(r)$ may be arbitrarily subtle; however, any changes approaching a transition \emph{must} be magnified in the higher order correlation functions because of \eqref{eq:correlation-derivatives}.
 This is particularly true as we saw \hl{local mechanisms in the various theories}.
 
 We will be focusing on many-body correlations in real space, to explore the local mechanisms proposed in theories of the glass transition mentioned above.
 In some situations the correlations in Fourier space may be more useful, most notably in MCT where many-body generalisations have already found some traction \cite{JanssenPRL2015,JanssenFP2018}.
-In principle, our real space correlation functions can be Fourier transformed to obtain these functions, but in practice this is prohibited by the high dimensionality of the correlation functions for even modest $n$.
+In principle, our real space correlation functions can be Fourier transformed to obtain these functions, but in practice this is prohibitively expensive because of the high dimensionality of the arguments for even modest $n$.
 However, we indicate below how FMT already provides an easy route to obtaining all the correlation functions in Fourier space, as described by the original papers \cite{RosenfeldPRL1989,RosenfeldJCP1990}.
 
 Fourier transforming the direct correlation functions for the uniform liquid \eqref{eq:fmt-direct-correlations-uniform-density}, and applying the convolution theorem, allows us to write the rather succinct
