@@ -63,6 +63,7 @@ As such, we will be considering the effect of decreasing temperature on the supe
 %First, we describe the phenomenology of supercooled liquids before delving into the specific theories to explain them.
 
 \subsection{Properties of the supercooled liquid}
+\label{sec:glass-phenomenology}
 
 We will start by exploring the ways in which supercooled liquids are the \emph{same} as regular liquids, expanding in more detail on ideas discussed in the introduction.
 Then we will move onto the ways in which they \emph{differ} from ordinary liquids, notably in their dynamical properties.
@@ -118,7 +119,7 @@ The \emph{fluctuation-dissipation relation} for an observable $A$ expresses the 
 where the Heaviside theta function imposes causality.
 These relations are obeyed in supercooled liquids, even though they are not a proper equilibrium state.
 
-Now we turn to discussing the ways in which supercooled liquids are markedly different from normal liquids: in their \emph{dynamics}.
+In spite of these similarities, supercooled liquids are markedly different from normal liquids in their \emph{dynamics}.
 Typically this is discussed in the context of two (related) quantities: the \emph{viscosity} and the \emph{relaxation time}.
 Viscosity measures how resistant the system is to flow, while relaxation time measures the typical microscopic time for the density profile to relax i.e.\ for liquid-like behaviour caused by particle diffusion.
 A defining feature of supercooled liquids is that these numbers become so large that the precise details of the measurement used does not matter.
@@ -173,9 +174,9 @@ Imagining crystallisation to occur by the spontaneous formation of the new phase
 \end{equation*}
 Then, assuming a temperature-independent barrier $\Delta \Phi_\mathrm{crys}$, the timescale for nucleation will increase exponentially as temperature is lowered allowing for the supercooled liquid to become long-lived \cite{CavagnaPR2009}.
 %This is essentially the reason it is possible for supercooled liquids to exist at all, and reach an effectively time-translation invariant state without decaying to the crystal \cite{CavagnaPR2009}.
-This argument is highly system dependent, as systems with small barriers to crystallisation will not be long-lived enough for a metastable supercooled phase to be observed.
+This argument is highly system dependent, as systems with small barriers to crystallisation will not be long-lived enough for the metastable liquid to be observed.
 Single-component hard spheres are particularly prone to crystallise at very high densities, so polydispersity is typically introduced to frustrate the crystal structure and extend the lifetime of the supercooled liquid.
-This is an imperfect process however, as even highly polydisperse systems have been found to crystallise \cite{BommineniPRL2019,BerthierPRL2016}.
+However, this process is imperfect, as even highly polydisperse systems have been found to crystallise \cite{BommineniPRL2019,BerthierPRL2016}.
 
 \begin{SCfigure}
   \includegraphics[width=0.7\linewidth,center]{transition-state}
@@ -191,22 +192,34 @@ Applying transition-state theory \eqref{eq:reaction-time} to relaxation time in 
   \tau_\alpha \sim e^{\beta \Delta \Phi_\alpha}
 \end{equation}
 where $\Delta \Phi_\alpha$ is the barrier to relaxation.
-Naively, we might expect the barrier to remain constant with temperature, corresponding to e.g.\ the cost of breaking a chemical bond, then we arrive at the Arrhenius law
+Naively, we might expect the barrier to remain constant with temperature, corresponding to e.g.\ the cost of breaking a bond, then we arrive at the Arrhenius law
 \begin{equation}\label{eq:arrhenius-law}
   \ln{\tau_\alpha} \propto \frac{1}{T}.
 \end{equation}
 This argument captures the high temperature behaviour very well and, outside of soft matter, it applies reasonably well to many molecular glassformers e.g.\ silica-based materials%
 \marginfootnote{That is, the material which the average person would mean when they say ``glass''.},
-where relaxation essentially depends on the timescale to break a covalent bond.
+where relaxation essentially depends on the timescale to break a chemical bond.
 Experimental data for \ce{SiO2} \cite{AngellS1995} confirms that $\ln{\tau_\alpha}$ scales linearly with $\beta$ (Fig.\ \ref{fig:angell}).
 By convention, systems which scale in an Arrhenius fashion are called \emph{strong}%
 \marginfootnote{This baffling naming convention has nothing to do with the mechanical properties.}
 glassformers.
 
-Our focus is on soft matter, with hard spheres as the prototypical model, where the  chemical bonds (typically van der Waals attractions) are much weaker than in molecular systems (and absent in hard spherse).
+\begin{SCfigure}
+  \includegraphics[width=0.9\linewidth,outer]{angell}
+  \caption[Angell plot]{
+    The \emph{Angell} plot \cite{AngellJNS1988} for molecular and model glassformers showing the temperature/pressure dependence of viscosity $\eta$ (or equivalently relaxation time $\tau_\alpha$).
+    The molecular systems \ce{SiO2} and orthoterphenyl (OTP) respectively display the \emph{strong} and \emph{fragile} behaviours described in text, with data obtained from Refs.\ \cite{AngellS1995, BerthierPRE2009}.
+    Kob-Anderson (KA) and Wahnstrom (Wahn) are binary mixtures of Lennard-Jones atoms designed to exhibit fragility.
+    The compressibility $Z = \beta p / \rho$ is argued to be equivalent to inverse temperature for hard spheres (HS) \cite{BerthierPRE2009}, with data taken from Ref.\ \cite{RoyallJSM2017}.
+    Reproduced from Ref.\ \cite{RoyallPR2015}.
+  }
+  \label{fig:angell}
+\end{SCfigure}
+
+Our focus is on soft matter, with hard spheres as the prototypical model, where the  interactions (typically van der Waals attractions) are much weaker than in molecular systems (and absent in hard spherse).
 Consequently, there is less of a case for an Arrhenius relationship \eqref{eq:arrhenius-law}, and empirically we find striking deviations from it.
 Many systems show \emph{super-Arrhenius} scaling with temperature (Fig.\ \ref{fig:angell}), including mixtures of Lennard-Jones atoms and molecular orthoterphenyl.
-Correspondingly, systems where $\tau_\alpha$ scales faster than exponential are labelled as \emph{fragile}.
+Correspondingly, systems where $\tau_\alpha$ increases more rapidly than exponential are labelled as \emph{fragile}.
 
 Some modification is required for hard particle systems, where temperature is not a natural control parameter.
 As we argued in the introduction, pressure is the only meaningful state variable.
@@ -223,13 +236,20 @@ It is usual to work with the dimensionless \emph{compressibility factor}, define
 \begin{equation}
   Z = \frac{\beta p}{\rho},
 \end{equation}
-in terms of which hard spheres show the same phenomenology as thermal systems in Fig.\ \ref{fig:angell}.
-We find hard spheres are comparable in fragility to various binary Lennard-Jones mixtures.
+in terms of which hard spheres show the same phenomenology as thermal systems (Fig.\ \ref{fig:angell}); we find that hard spheres are comparable in fragility to various binary Lennard-Jones mixtures.
+
+\begin{SCfigure}
+  \includegraphics[width=0.7\linewidth,outer]{dynamic-heterogeneity}
+  \caption[Dynamical heterogeneity in binary hard discs]{
+    Dynamical heteogeneity in a binary hard disc system with a size ratio of $1:1.4$.
+    Particles are coloured according to distance moved over a relaxation time $\tau_\alpha$, with blue having moved the least and red the most.
+    Reproduced from Ref.\ \cite{RoyallPR2015}.
+  }
+\end{SCfigure}
 
 \hl{Things I have not yet mentioned:}
 \begin{itemize}
 \item \hl{glass transition: 100s}
-\item \hl{operationally, what it looks like in thermodynamic potentials as the system falls out of equilibrium.}
 \item \hl{dynamical heterogeneities (can probably save this until mentioning facilitation though)}
 \item \hl{Stokes-Einstein breakdown}
 \end{itemize}
@@ -269,18 +289,6 @@ We will discuss this more in the next section.
 Relaxation barriers in hard spheres are entropic in nature, so perhaps it is easier to see the need for collective effects.
 Moreover, the geometrical interpretation in terms of volume fluctuations $\Delta V$ provides a picture for collective motion: at high densities more particles will have to move out of the way to create the space for motion.
 
-\begin{SCfigure}
-  \includegraphics[width=0.9\linewidth,outer]{angell}
-  \caption[Angell plot]{
-    The \emph{Angell} plot \cite{AngellJNS1988} for molecular and model glassformers showing the temperature/pressure dependence of viscosity $\eta$ (or equivalently relaxation time $\tau_\alpha$).
-    The molecular systems \ce{SiO2} and orthoterphenyl (OTP) respectively display the \emph{strong} and \emph{fragile} behaviours described in text, with data obtained from Refs.\ \cite{AngellS1995, BerthierPRE2009}.
-    Kob-Anderson (KA) and Wahnstrom (Wahn) are binary mixtures of Lennard-Jones atoms designed to exhibit fragility.
-    The compressibility $Z = \beta p / \rho$ is argued to be equivalent to inverse temperature for hard spheres (HS) \cite{BerthierPRE2009}, with data taken from Ref.\ \cite{RoyallJSM2017}.
-    Reproduced from Ref.\ \cite{RoyallPR2015}.
-  }
-  \label{fig:angell}
-\end{SCfigure}
-
 %% We will talk about this metastable branch as if it were in equilibrium.
 %% \todo{create link when mention high density swap data}
 
@@ -296,9 +304,10 @@ Moreover, the geometrical interpretation in terms of volume fluctuations $\Delta
 %% high frequency shear modulus is elastic property.
 %% Shear modulus increases by factor 2-5 times, is dwarfed by change in relaxation time.
 
-\hl{Having concluded the phenomenology of supercooled liquids we can now proceed to specific theories of the glass transition.}
+Having introduced the phenomenology of supercooled liquids we can now proceed to specific theories of the glass transition, beginning with an explicitly dynamical one.
 
 \subsection{Mode-coupling theory}
+\label{sec:mct}
 
 The central tenet of mode-coupling theory (MCT) is to separate the liquid's degrees of freedoms into \emph{slow} and \emph{fast} variables.
 Fast variables are those that thermalise very quickly, e.g.\ the solvent in a colloidal liquid, so that they can be integrated out leaving only slowly evolving variables of interest.
@@ -329,10 +338,10 @@ Defining the instantaneous state of the liquid as
 \end{equation*}
 with instantaneous current $\vec{\hat{j}}(\vec{r}, t) := \partial \hat\rho(\vec{r}, t) / \partial t$, the generalised Langevin equation then reads \cite{ReichmanJSM2005, JanssenFP2018}
 \begin{equation}\label{eq:general-langevin}
-  \frac{d \vec{\tilde{X}}(\vec{k}, t)}{dt}
+  \frac{d \vec{\widetilde{X}}(\vec{k}, t)}{dt}
   =
-  i \vec{\Omega} \cdot \vec{\tilde{X}}(\vec{k}, t)
-  - \int_0^t \vec{K}(t') \cdot \vec{\tilde{X}}(\vec{k}, t - t') \, dt'
+  i \vec{\Omega} \cdot \vec{\widetilde{X}}(\vec{k}, t)
+  - \int_0^t \vec{K}(t') \cdot \vec{\widetilde{X}}(\vec{k}, t - t') \, dt'
   + \vec{f}(t)
 \end{equation}
 where $\vec{f}$ is (again) the fluctuating force obtained by integrating out the fast degrees of freedom, $\vec{K}(t')$ is a time-dependent \emph{memory function} containing the history of $\vec{f}$ as an autocorrelation function \cite{ReichmanJSM2005} and $\vec{\Omega}$ is the \emph{frequency matrix} containing the forces internal to the slow variables \cite{JanssenFP2018}.
@@ -340,7 +349,7 @@ Each of these terms has an allegory in the classical Langevin equation \eqref{eq
 Similar equations to \eqref{eq:general-langevin} can be constructed for observables such as the correlation functions; the goal of MCT is to construct (and solve) an equation for $F(\vec{k}, t)$ \eqref{eq:isf} obtaining the dynamical behaviour of the liquid at long times.
 The central challenge of this approach is finding suitable approximations for the memory function $\vec{K}$.
 %% \begin{equation*}
-%%   \vec{K}(t') = \vec{f}(0)^T \vec{f}(t') \cdot (\vec{\tilde{X}}^T \vec{\tilde{X}})^{-1}.
+%%   \vec{K}(t') = \vec{f}(0)^T \vec{f}(t') \cdot (\vec{\widetilde{X}}^T \vec{\widetilde{X}})^{-1}.
 %% \end{equation*}
 
 In the standard MCT approach, the fluctuating force is assumed to be dominated by the pair correlations so that $K$ beomes a four-point correlation function.
@@ -374,34 +383,96 @@ with
 The latter function $V_{\vec{q},\vec{k}-\vec{q}}$ is the so-called \emph{vertex}, which takes the pair direct correlation, and the initial condition for \eqref{eq:full-mct} is $F(k,t=0) = S^{(2)}(k)$; as such, standard MCT takes only pair correlation functions as input.
 Together \eqref{eq:full-mct} and \eqref{eq:full-mct-coupled} form a non-linear coupled set of integro-differential equations that can be numerically solved, providing a reasonable description of the \emph{onset} of dynamical arrest, with deviations only becoming noticeable at deep supercooling \cite{FlennerPRE2011,BrambillaPRL2009}.
 
-Crucially, MCT predicts a diverging timescale at $\eta \sim 0.52$ in hard spheres, where the dynamics would become completely arrested; corresponding numerical fits with the same power law to colloidal experimental data move this point to $\eta \sim 0.58$ \cite{VanMegenPRE1994}.
-However, these predicted transitions are spurious as recent experiments have managed to equilibrate colloidal hard sphere liquids up to $\eta \lesssim 0.60$ \cite{BrambillaPRL2009,HallettNC2018} and in simulations to even higher densities \cite{BerthierPRL2016}.
-Despite this failing of MCT, it remains the only properly first-principles theory for the treating liquid dynamics.
+Crucially, MCT predicts a diverging timescale at $\eta \sim 0.52$ in hard spheres, where the dynamics would become completely arrested, and numerical fits to colloidal experimental data with the same power behaviour law predicted by MCT move this point up to $\eta \sim 0.58$ \cite{VanMegenPRE1994}.
+However, this predicted transition must be spurious as recent experiments have managed to equilibrate colloidal hard sphere liquids up to $\eta \lesssim 0.60$ \cite{BrambillaPRL2009,HallettNC2018} and to even higher densities in simulations \cite{BerthierPRL2016}.
+Despite this failing of MCT, it remains the only properly first-principles theory for treating liquid dynamics.
 
-Extensions incorporating fluctuations can be found in Refs.\ \cite{BiroliPRL2006,SzamelPTEP2013}, and more recently a generalised MCT has been developed which avoids the uncontrolled factorisation of the pair densities by incorporating in closures of the many-body correlation functions \cite{JanssenPRL2015,JanssenFP2018}.
-This latter approach was able to move the diverging timescale to higher densities, bringing the theory in good agreement with available data from simulations and experiments.
+Extensions incorporating fluctuations can be found in Refs.\ \cite{BiroliPRL2006,SzamelPTEP2013}, and more recently a generalised MCT has been developed which avoids the uncontrolled factorisation of the pair densities \cite{JanssenPRL2015,JanssenFP2018}.
+Importantly, the latter approach incorporates closures of the many-body correlation functions, which will be a central theme of later chapters; by doing this the authors were able to move the diverging timescale to higher densities, bringing the theory into better agreement with available data from simulations and experiments.
 
-\subsection{Mean-field theory}
+\subsection{Mean-field theories}
+\label{sec:mean-field-glass}
 
-A growing consensus is forming around this explanation.
-Inspired by the solutions of mean-field spin glasses, the great breakthrough of the original papers was that these systems were identical in the structure of the energy landscape.
-Connection between thermodynamics and dynamics, configurational entropy.
-This argument is thermodynamic, which in some sense is structural.
-Structural in the sense of the energy landscape, not necessarily in real space/local structure.
-Compatible with MCT, in fact high dimensional calculations lead to a theory almost identical to MCT \cite{MaimbourgPRL2016,KurchanJSM2016}.
+We introduced MCT as an explicitly dynamical theory which attempts to model dynamical arrest in supercooled liquids by directly describing the decay of time correlation functions like $F(k, t)$.
+By contast, \emph{mean-field theories} of glass take a primarily thermodynamic approach, though they are broadly compatible with the dynamical descriptions of MCT.
+The mean-field picture has been rapidly gaining traction in recent years since exact solutions have been developed for hard spheres \cite{ParisiRMP2010,KurchanJSM2012,KurchanJPCB2013,CharbonneauNC2014,CharbonneauJSM2014}.
+To describe mean-field theory we will invoke the concept of an \emph{energy landscape}, the natural generalisation of transition state theory introduced in section \ref{sec:glass-phenomenology} and summarised by \eqref{eq:reaction-time}.
+While this conceptual framework is not unique to mean-field theories, it is most closely associated with them.
 
-The relevance of mean-field theory in physical dimensions comes from an interpretation \cite{KirkpatrickPRB1987, KirkpatrickPRA1989}, and antecedent ideas found in \cite{AdamJCP1965}.
-RFOT: argument of Ref.\ \cite{BouchaudJCP2004}, introduces point-to-set length.
+In an energy landscape description, the thermodynamic potential is interpretted \emph{geometrically} as a mapping from every point in configuration space to a `height' representing energy e.g.\ $\Phi: \mathbb{R}^{dN} \mapsto \mathbb{R}$ for an $N$ particle system.
+The appeal of this approach is that physical processes can be understood \emph{topographically}: the system will spend more time at the bottom of `valleys' (minima of $\Phi$), especially at lower temperatures, and dynamics will occur primarily through low-lying `mountain passes' (saddles of $\Phi$) \cite{StillingerS1995}.
+The timescales of transitions over saddles are expected to scale via the usual Boltzmann weight \eqref{eq:reaction-time}, just as in ordinary transition state theory, however this refined picture emphasises the importance of landscape \emph{connectivity}: the number, separation and relative weights of the various dynamical paths could drive the glass transition.
 
-Point-to-set length is the minimum size of a subsystem for there to be relaxation: the space of states transitions from being a single state (point) to a multitude of states (set).
-It can be rigorously proven that a diverging timescale necessarily must coincide with a diverging point-to-set length: Montanari \cite{MontanariJSP2006}.
-The essence of the argument is that for a finite subsystem, there will be a finite barrier, so any dynamics must scale Arrheniusly.
-Therefore, the relaxation time will be bounded from above by the dynamical lengthscale, and super-Arrhenius scaling suggests growing collective behaviour.
+The energy landscape is particularly relevant in mean-field, formally corresponding to the high dimensional limit%
+\marginfootnote{To understand why, consider the typical number of particle neighbours increases with dimensionality.
+  Then, formally in the limit $d \to \infty$ a particle is able to achieve a macroscopic number of neighbours, equivalent to an interaction with an average field representing the rest of the system.}
+$d \to \infty$, because its \emph{exact} properties can be determined.
+In mean-field, hard spheres undergo a \emph{clustering} (or \emph{dynamical}) transition at a volume fraction $\eta_c$ where the landscape splits into disconnected regions \cite{ParisiRMP2010,KurchanJSM2012,KurchanJSM2016}, and the dynamics are described by an almost identical theory to MCT \cite{MaimbourgPRL2016,KurchanJSM2016}.
+As configuration space becomes disconnected at $\eta_c$, the system is frozen into a single region and so the relaxation time diverges; contemporaneously, the memory function $K_\mathrm{MCT}$ develops a plateau reflecting the fact that the density profile can no longer completely relax \cite{CharbonneauARCMP2017}.
+In this light, the diverging relaxation time predicted by MCT is not necessarily a failure of the theory, but is indicative of this genuine mean-field transition.
 
-This must trivially occur at the very least $T=0\si{K}$ where relaxation timescales diverges, however much like the lack of a phase transition in the Ising model in $d=1$ this is not a true thermodynamic phase transition because it cannot be crossed.
-Recent numerical evidence suggests that a model glassformer in $d=2$ does not show a transition, also vanishing at $T=0\si{K}$ \cite{BerthierNC2019}.
-So the central question of glass is what happens in $d=3$, is there a vanishing configurational entropy at a finite $T > 0$ with an accompanying thermodynamic glass transition?
-In mean-field, formally in the limit of infinite spatial dimensions $d \to \infty$, the hard sphere system has been shown to have a true transition, however the critical dimensions are unknown so it is unclear what happens in $d=3$. \cite{KurchanJSM2012,KurchanJPCB2013,CharbonneauNC2014,CharbonneauJSM2014}.
+Although the dynamics is singular at the dynamical transition, the thermodynamic quantities remain completely continuous as the system is compressed beyond $\eta_c$.
+%% Starting from the definition of the Helmholtz free energy.
+%% \begin{equation*}
+%%   F = \langle U \rangle - T S.
+%% \end{equation*}
+We can imagine what happens to the system under further compression if it could continue to sample these disconnected regions in equilibrium, i.e.\ with Boltzmann weighted measure.
+The Helmholtz free energy, normally expressed as a sum over all microstates $\Gamma$ as in \eqref{eq:canonical-partition}, can be re-expressed as a sum over a collection of \emph{mesostates} $\Gamma = \{\alpha_1, \cdots, \alpha_M\}$ giving
+\begin{equation}
+%\begin{subequations}
+  %\begin{align}
+    F = \sum_{i \in \Gamma} p_i \, (\epsilon_i - k_B T \, \ln{p_i})
+   % \\
+    = \overline{F} - T \Sigma
+  %\end{align}
+%\end{subequations}
+\end{equation}
+where $\epsilon_i$ is the energy of microstate $i$ and $p_i$ its probability measure.
+In the latter step we defined%
+\marginfootnote{This expression is obtained by writing the probabilty of the system being in mesostate $\alpha$ as $p_\alpha = \sum_{i \in \alpha} p_i$, then $p_i / p_\alpha$ is the probability of microstate $i$ given that the system is in this mesostate.}
+\begin{subequations}
+  \begin{align}
+    \overline{F}
+    &=
+    \sum_\alpha p_\alpha
+    \underbrace{
+      \sum_{i \in \alpha} \frac{p_i}{p_\alpha}
+      \left(
+      \epsilon_i - k_B T \, \ln{\frac{p_i}{p_\alpha}}
+      \right)
+    }_\textrm{free energy of mesostate $\alpha$},
+    \\
+    \Sigma &= - k_B \, \sum_\alpha p_\alpha \ln{p_\alpha}.
+  \end{align}
+\end{subequations}
+The \emph{complexity} $\Sigma$ is an extensive quantity characterising the multiplicity of mesostates; at the dynamical transition this becomes a positive non-zero number $\Sigma(\eta = \eta_c) > 0$ corresponding to the clustering in configuration space.
+As the system is compressessed further $\Sigma$ decreases \cite{KirkpatrickPRB1987,KirkpatrickPRA1989,ParisiRMP2010} corresponding to the rarefaction of clustered regions.
+At a volume fraction $\eta_K > \eta_c$ an \emph{entropy crisis} occurs: $\Sigma$ vanishes, leading to the system being frozen into a single, unique region in configuration space called an \emph{ideal glass} phase \cite{KauzmannCR1948,KirkpatrickPRB1987,HallJCP1987,KirkpatrickPRA1989,ParisiRMP2010,BerthierRMP2011}.
+
+If an equilibrium glass state in the regime $\eta \in [\eta_c, \eta_K]$ is compressed out-of-equilibrium without sampling the other clusters, a further phase transition occurs to a so-called \emph{Gardner} phase \cite{KurchanJPCB2013,CharbonneauNC2014,CharbonneauJSM2014}.
+Each cluster splits further into fractal sub-regions arranged hierarchicallly.
+Whereas the clustered regions formed at $\eta_c$ are geometrically disimillar%
+\marginfootnote{As measured by e.g.\ the intermediate scattering function},
+these regions are close in configuration space to one another.
+This phase has deep connections with the jamming transition seen at diverging pressure, providing a unified description of glass and jamming conjectured since the landmark paper of Ref.\ \cite{LiuN1998}.
+Remarkably, this mean-field theory is able to predict anomalous $d$-independent critical scaling coefficients, matching those known around jamming \cite{WyartPRL2012,LernerSM2013,DeGiuliPNAS2014}.
+The existence of the Gardner phase provides context for the importance of mean-field theory, but it cannot be directly connected to our approach in subsequent chapters so we will leave it here.
+For more information on the mean-field Gardner phase see the reviews of Refs. \cite{BerthierJCP2019,CharbonneauARCMP2017}.
+
+%% Specifically, the glass transition can be understood as the division of the energy landscape up into subunits??
+%% Exact properties of the energy landscape can be determined for many mean-field systems, where it is known to play a leading role in dynamical arrest.
+
+The mean-field picture introduces complexity as the important quantity of interest, relating the number of metastable regions in configuration space.
+The relevance of mean-field descriptions in physical dimensions requires a finite-dimensional description of the supercooled liquid.
+
+%% In physical dimensions, the energy landscape does not become completely disconnected, so transitions between metastable states are possible; the dynamical transition becomes a cross-over.
+%% As such, a finite-dimensional description of the supercooled liquid is needed.
+
+%% In physical dimensions, the energy landscape does not become
+%% This quantity is well-defined in mean-field because these regions are completely disconnected, however in finite dimensions transitions can always occur between them through nucleation \cite{KirkpatrickPRB1987,KirkpatrickPRA1989,BouchaudJCP2004}.
+%% The dynamical transition thus becomes a cross-over, and a finite-dimensional description of the supercooled liquid is needed.
+
+\subsection{Finite-dimensional theories}
 
 \begin{SCfigure}
   \includegraphics[width=0.9\linewidth,outer]{swap-Sconf}
@@ -411,30 +482,78 @@ In mean-field, formally in the limit of infinite spatial dimensions $d \to \inft
     The equation of state for this system is given in Fig.\ \ref{fig:swap-eos}.
     Reproduced from Ref.\ \cite{BerthierPNAS2017}.
   }
+  \label{fig:swap-sconf}
 \end{SCfigure}
 
-\subsection{Local structure picture}
+%% Mean-field theories have traditionally been formulated in configuration space, in terms of the energy landscape.
+%% By contast, in $d=3$ the existence of dynamical heterogeneity calls for a real space interpretation.
 
-Stripmine Paddy's review for this section \cite{RoyallPR2015}.
+The relevance of mean-field ideas in physical dimensions can be seen by an interpretation of Refs.\ \cite{KirkpatrickPRB1987,HallJCP1987,KirkpatrickPRA1989}, with antecedent ideas found in \cite{KauzmannCR1948,AdamJCP1965}.
+This \emph{random first-order transition} (RFOT) scenario acknowledges that the clustering of states appearing at the dynamical transition in mean-field will not be strictly metastable over finite lengthscales in finite $d$ \cite{BouchaudJCP2004,MontanariJSP2006}.
+The complexity is thus not well-defined, as there will not be strict separations of metastable states, though they may be long-lived; the dynamical transition of mean-field thus becomes a cross-over.
+In finite dimensions the \emph{configurational entropy} $S_\mathrm{conf}$ is introduced as the closest equivalent to the complexity; this is not uniquely defined, but a common definition invokes the timescale separation being vibrational ($\beta$--) and liquid-like ($\alpha$--) dynamics.
+The configurational entropy then describes the entropy of the latter processes, obtained as the residual entropy after removing vibrations
+\begin{equation}\label{eq:Sconf}
+  S_\mathrm{conf} := S - S_\mathrm{vib},
+\end{equation}
+though some refinement is required for polydisperse systems \cite{OzawaJCP2017,OzawaJCP2018} and where additional non-vibrational processes exist that do not relax the density profile \cite{OzawaPRL2018}.
 
-In conventional condensed matter physics dynamics is determined by structure.
-For example, crystalline solids are fixed on a lattice so do not flow, whereas liquids are disordered and are thus able to flow.
-Soft matter systems (e.g.\ gels, foams, glasses) do not neatly fall into this paradigm: their dynamics are often arrested whilst their structure remains highly disordered.
+The RFOT scenario considers the effect that a depleting $S_\mathrm{conf}$ would have on the dynamics.
+\hl{(argument: RFOT)}
+\hl{Papers on finite dimensions:} \cite{BouchaudJCP2004,DzeroPRB2005,FranzJSM2005,AngeliniJSP2017,RulquinJSM2016,BiroliMeanPRB2018,BiroliFinitePRB2018}
+This argument has been rigorously proven in Ref.\ \cite{MontanariJSP2006}.
+Moreover, they prove that any diverging relaxation time \emph{must} coincide with an entropy crisis $S_\mathrm{conf} \to 0$.
+Measurements of the configurational entropy in deeply supercooled hard spheres suggest a vanishing $S_\mathrm{conf}$ at finite $\eta$ in $d=3$ (Fig.\ \ref{fig:swap-sconf}), pointing to an RFOT scenario.
 
-Frustration-limited domain theory \cite{TarjusJPCM2005}.
+The free energy of a 
+Point-to-set length is the minimum size of a subsystem for there to be relaxation: the space of states transitions from being a single state (point) to a multitude of states (set).
+The essence of the argument is that for a finite subsystem, there will be a finite barrier, so any dynamics must scale Arrheniusly.
+Therefore, the relaxation time will be bounded from above by the dynamical lengthscale, and super-Arrhenius scaling suggests growing collective behaviour.
 
-Previous viewpoints, MCT and mean-field, are structural in the sense of being thermodynamic; however they do not explicitly invoke local structure.
-That being said, they are broadly compatible viewpoints.
-After all, emergence of a structural motif would be sufficient to reduce the configurational entropy (or a manifestation of this, depend on one's viewpoint).
+%% Mean-field argument is thermodynamic, which in some sense is structural.
+%% Structural in the sense of the energy landscape, not necessarily in real space/local structure.
+%% The real space interpretation of mean-field theory is random first-order transition theory (RFOT), also called \emph{mosaic} theory.
 
-Glotzer picture: competition between competing structures \cite{TeichNC2019}.
+%% In conventional condensed matter physics dynamics is determined by structure.
+%% For example, crystalline solids are fixed on a lattice so do not flow, whereas liquids are disordered and are thus able to flow.
+%% Soft matter systems (e.g.\ gels, foams, glasses) do not neatly fall into this paradigm: their dynamics are often arrested whilst their structure remains highly disordered.
 
-\subsection{Other viewpoints: jamming and facilitation}
+\begin{SCfigure}
+  \includegraphics[width=0.7\linewidth,outer]{frustration}
+  \caption[Frustration of tetrahedral structures]{
+    Structures formed by combining tetrahedra.
+    (a) The pentagonal bipyramid constructed from five regular tetrahedra must leave a small gap of \SI{7.4}{\degree}.
+    (b) The icosahedron formed by vertices a distance $a$ from the centroid must have edge length $\sim1.05 a$, so if hard spheres of diameter $a$ were placed on the vertices they would not be in contact.
+    Reproduced from Ref.\ \cite{RoyallPR2015}.
+  }
+  \label{fig:frustration}
+\end{SCfigure}
+
+A different scenario in physical dimensions focuses on the role of geometry.
+This picture starts from the observation that crystal structures (e.g.\ face-centred cubic) are generally not the optimal energetic arrangement for small clusters of particles, even though they must become so in bulk systems.
+For example, isolated Lennard-Jones atoms will preferentially arrange as vertices of a five-fold symmetric \emph{icosahedron} \cite{FrankPRS1952} (Fig.\ \ref{fig:frustration}b).
+As five-fold symmetric structures cannot tesselate Euclidean space, Sir Charles Frank conjectured that glassformers suppress crystallisation by having a propensity to form these \cite{FrankPRS1952}.
+\hl{Notably, in hard spheres tetrahedral structures are typically the densest way to pack for small clusters.
+They pay a cost as the clusters enlarge, as they cannot tesselate space, so they are said to be} \emph{frustrated}.
+This viewpoint was developed into the more complete \emph{frustration-limited domain theory} \cite{TarjusJPCM2005}, \hl{the glass is seen as .}
+This picture is broadly compatible with the mean-field viewpoint: the propensity for a system to form certain structures can be interpretted as a manifestation (or a driver) of a reduced $S_\mathrm{conf}$.
+The downside of this scenario is that the correlation between local structure and dynamics seems to be highly system dependent \cite{HockyPRL2014}.
+A detailed review on the role of local structure in glassy systems can be found in Ref.\ \cite{RoyallPR2015}.
+
+Recently, it has been shown in numerical simulations that \emph{competition} between different favoured structures enhances the propensity for glassformation \cite{TeichNC2019}.
 
 Theories concentrating on the high density glass: elastic theories.
 Dynamic facilitation.
 
-\subsection{Perspective: role of many-body correlations}
+%% The mean-field picture of glass formation interprets the dynamical slowdown entirely within a thermodynamic framework.
+%% In mean-field hard spheres, formally in the limit of infinite spatial dimensions $d \to \infty$,
+%% Hard spheres in mean field have been shown to have a thermodynamic glass transition, however the critical dimensions are unknown so it is unclear what happens in $d=3$. \cite{ParisiRMP2010,KurchanJSM2012,KurchanJPCB2013,CharbonneauNC2014,CharbonneauJSM2014}.
+Recent numerical evidence suggests that a model glassformer in $d=2$ does not show a transition, also vanishing at $T=0\si{K}$ \cite{BerthierNC2019}, pointing to a lower critical dimension of at least $d_L \ge 2$.
+%This must trivially occur at the very least $T=0\si{K}$ where relaxation timescales diverges, however much like the lack of a phase transition in the Ising model in $d=1$ this is not a true thermodynamic phase transition because it cannot be crossed.
+%So the central question of glass is what happens in $d=3$, is there a vanishing configurational entropy at a finite $T > 0$ with an accompanying thermodynamic glass transition?
+Bubbles in space-time.
+
+\subsection{Perspective: usefulness of many-body correlations}
 \label{sec:correlation-perspective}
 
 To motivate the use of many-body correlations we employ an argument due to Evans \cite{EvansPrivate2019}.
@@ -514,12 +633,13 @@ so the free energy can be directly obtained from accurate determination of the c
 Second, while it is true that thermodynamic quantities like the pressure can certainly be inferred from the pair correlations, there is no such simple relationship for dynamic quantities.
 In the absence of a thermodynamic phase transition, we would not expect the pair correlation to reveal much about the nature of dynamical arrest, beyond the lack of a transition.
 And even supposing the existence of a transition, the precision required to detect such a signal $g(r)$ may be arbitrarily subtle; however, any changes approaching a transition \emph{must} be magnified in the higher order correlation functions because of \eqref{eq:correlation-derivatives}.
-This is particularly true as we saw \hl{local mechanisms in the various theories}.
+This is particularly true as we saw \hl{(local mechanisms in the various theories)}.
 
 We will be focusing on many-body correlations in real space, to explore the local mechanisms proposed in theories of the glass transition mentioned above.
 In some situations the correlations in Fourier space may be more useful, most notably in MCT where many-body generalisations have already found some traction \cite{JanssenPRL2015,JanssenFP2018}.
-In principle, our real space correlation functions can be Fourier transformed to obtain these functions, but in practice this is prohibitively expensive because of the high dimensionality of the arguments for even modest $n$.
-However, we indicate below how FMT already provides an easy route to obtaining all the correlation functions in Fourier space, as described by the original papers \cite{RosenfeldPRL1989,RosenfeldJCP1990}.
+In principle, our real space correlation functions can be Fourier transformed to obtain these, but in practice this is prohibitively expensive because of the high dimensionality of the arguments for even modest $n$.
+However, FMT already provides an easy route to obtaining all the correlation functions in Fourier space, as described by the original papers \cite{RosenfeldPRL1989,RosenfeldJCP1990}.
+We show how to obtain these below.
 
 Fourier transforming the direct correlation functions for the uniform liquid \eqref{eq:fmt-direct-correlations-uniform-density}, and applying the convolution theorem, allows us to write the rather succinct
 \begin{equation}

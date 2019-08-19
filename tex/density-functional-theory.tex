@@ -623,14 +623,14 @@ Using the virial coefficients for an $m$-component mixture \eqref{eq:virial-coef
 \end{equation*}
 We consider mixtures of hard spheres of radii $R_i$, so The Mayer function $f_{ij}$ must depend on $R_i$ and $R_j$.
 %where $\rho_i$ and $R_i$ are the (number) density and radius of species $i$.
-The Mayer function for the hard sphere interaction is purely geometric in nature, i.e.\
+The Mayer function for the hard sphere interaction \eqref{eq:hs-interaction} is purely geometric in nature, i.e.\
 \begin{equation*}
   -f_{ij}(\vec{r})
   =
   \Theta(R_i + R_j - |\vec{r}|)
 \end{equation*}
 where $\Theta(\cdot)$ is the Heaviside theta function.
-This can be recast in the revealing form
+This can be recast into the revealing form
 \begin{equation*}\label{eq:hard-mayer-f}
   \begin{split}
     -f_{ij}
@@ -996,7 +996,7 @@ The resulting free energy functional $f^\mathrm{ex}_\mathrm{CS}$ then predicts t
 \end{equation}
 with scaled particle variables $\{\xi_i\}$ defined in \eqref{eq:spt-variables}.
 Other extensions of the CS equation of state to mixtures exist%
-\marginfootnote{The most popular of which is the Boublik-Mansoori-Carnahan-Starling-Leland equation of state \cite{BoublikJCP1970, MansooriJCP1971}, which corresponds to a different FMT functional \cite{RothJPCM2002, YuJCP2002}.},
+\marginfootnote{The most popular of which is the Boublik-Mansoori-Carnahan-Starling-Leland equation of state \cite{BoublikJCP1970, MansooriJCP1971}, which corresponds to a different FMT functional derived in Refs.\ \cite{RothJPCM2002, YuJCP2002}.},
 however the above equation represents the state of the art \cite{SantosPRE2012}.
 The pressures predicted by \eqref{eq:cs-mixtures} compare favourably against novel Monte-Carlo simulations at very high densities (Fig.\ \ref{fig:swap-eos}).
 %although it will fail at very large densities nearing random close packing.
