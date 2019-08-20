@@ -414,10 +414,10 @@ In the next section we will state some useful results for doing calculations in 
 %%   \end{equation}
 %% \end{tcolorbox}
 
-\subsection{Kinematic formulas}
+\subsection{Kinematic formulae}
 \label{sec:kinematic-formula}
 
-Here we introduce the \emph{kinematic formulas} which calculate hitting probabilities, i.e.\ the probability that randomly distributed objects collide.
+Here we introduce the \emph{kinematic formulae} which calculate the probabilities that uniformly distributed objects collide.
 This problem is applicable to the evaluation of partition functions in statistical mechanics, of which we will see specific examples in section \ref{sec:fmt} and chapter \ref{chapter:resummation}.
 
 Two compact and convex objects $K_1, K_2 \in \mathcal{K}^d$ overlap if their intersection is non-empty $K_1 \cap K_2 \ne \emptyset$.
@@ -492,7 +492,7 @@ The principal kinematic formula \eqref{eq:binomial-kinematic-formula} can be ite
       (C_{i_1, \cdots, i_n})^{-1}
       V_{i_1}(K_1)
       \prod_{j=2}^n
-      V_{i_j}(K_j)
+      V_{i_j}(K_j),
     \end{split}
   \end{equation}
   \begin{equation}
@@ -502,10 +502,11 @@ The principal kinematic formula \eqref{eq:binomial-kinematic-formula} can be ite
     \prod_{j=2}^n
     \left(
     \frac{d!}{i_j!} \frac{\omega_d}{\omega_{i_j}}
-    \right)
+    \right),
   \end{equation}
 \end{subequations}
-where $C_{i_1, \cdots, i_n}$ would be the multinomial generalisation of the flag coefficients \eqref{eq:flag-coefficients}.
+where $\int_{G_d^n} dg^n = \int_{G_d} dg_1 \cdots \int_{G_d} dg_n$.
+Here $C_{i_1, \cdots, i_n}$ would be the multinomial generalisation of the flag coefficients \eqref{eq:flag-coefficients}.
 We will use this iterated formula in chapter \ref{chapter:resummation} to resum a piece of the virial series (to be introduced in the upcoming section \ref{sec:virial-series}).
 
 %% We have the invariant measure on 1-dimensional linear subspaces of $\mathbb{R}^d$ (\emph{Grassmanians}) as

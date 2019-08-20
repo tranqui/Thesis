@@ -714,7 +714,7 @@ To determine the coefficients in the virial series, we start by writing the Bolt
   \prod_{1 \le i < j \le N} (1 + f_{ij})
 \end{equation}
 where we introduced the \emph{Mayer function}
-\begin{equation}
+\begin{equation}\label{eq:mayer-function}
   f_{ij} := e^{-\beta u(\vec{r}_i, \vec{r}_j)} - 1.
 \end{equation}
 Expanding out terms in the $n$-particle configurational integral leads to expressions like
@@ -856,7 +856,7 @@ This expression, connecting density and fugacity, can be used to transform the e
       \\
       B_4
       &=
-      - \frac{2}{3!}
+      - \frac{3}{4!}
       \left(
       3 \mayerdiagram[|.||.|][o...]{4}
       + 6 \mayerdiagram[|.||||][o...]{4}
