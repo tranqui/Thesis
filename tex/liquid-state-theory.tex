@@ -172,7 +172,7 @@ The $n$-particle density is an intuitive descriptor for liquid structure because
 \end{equation*}
 to a subset of particles within an open system.
 $\rho^{(n)}$ thus provides the correct procedure for coarse-graining onto selected degrees of freedom within a bulk system.
-The analogy with canonical ensemble fails in that $\rho^{(n)}$ is unnormalised so it is not strictly a probability density function; integrating \eqref{eq:n-particle-density} over the remaining degrees of freedom yields%
+The analogy with the canonical ensemble is imperfect in that $\rho^{(n)}$ is unnormalised so it is not strictly a probability density function; integrating \eqref{eq:n-particle-density} over the remaining degrees of freedom yields%
 \marginfootnote{In keeping with the analogy to canonical ensemble we treat this integral as a partition function, and so account for indistinguishability of the $n$ particles by dividing through by $n!$.}
 \begin{equation*}\label{eq:n-particle-density-normalisation}
   \frac{1}{n!}
@@ -488,7 +488,7 @@ In terms of the structure factor \eqref{eq:compressibility-h2} is written succin
 
 Often the main objective of a statistical physicist is to determine the phase diagram of a system, which can be deduced from the free energy if known.
 Liquid state theory contains several routes to calculate the free energy, of which we will describe two below.
-Ordinarily, the end result of these approaches is an equation of state for the pressure $p = p(\rho)$, giving the free energy implicitly through the thermodynamic relation
+Often, the end result of these approaches is an equation of state for the pressure $p = p(\rho)$, giving the free energy implicitly through the thermodynamic relation
 \begin{equation}\label{eq:pressure-relation-1}
   p
   =
@@ -624,6 +624,7 @@ There are other routes involving different observables (e.g.\ through the potent
 The degree of self-consistency between different routes can act as a proxy for the accuracy of an approximate theory.
 
 \vspace{0.5em}
+
 \begin{tcolorbox}[title=Contact theorem for hard spheres]
   For a single-component system interacting through a spherically symmetric pair potential $u(r)$, the virial route \eqref{eq:virial-route-pressure} yields
   \begin{equation}\label{eq:virial-route-pressure-uniform}
@@ -666,13 +667,15 @@ The degree of self-consistency between different routes can act as a proxy for t
     %% \frac{\rho \omega_d \sigma^d}{2}
     %% y^{(2)}(\sigma)
   \end{equation}
-  The pair distribution function $g^{(2)}$ appeared in the virial route because the specified system interacts via a pair potential; we could reasonably expect the generalisation to an $n$-body interaction potential to give the equation of state in terms of the $n$-body distribution function $g^{(n)}$.
 \end{tcolorbox}
+
+The pair distribution function $g^{(2)}$ appeared in the virial route because the specified system interacts via a pair potential; we could reasonably expect the generalisation to an $n$-body interaction potential to give the equation of state in terms of the $n$-body distribution function $g^{(n)}$.
 
 \subsection{Virial series}
 \label{sec:virial-series}
 
 The virial series provides the only properly rigorous approach to evaluating the partition function, and thus the free energy, from first principles.
+\todo{Need citation}
 We introduce it here as it will be used in chapter \ref{chapter:resummation} to place the fundamental approximation, the morphometric approach, underlying chapters \ref{chapter:morphometric-framework} and \ref{chapter:morphometric-applications} on firmer ground.
 This approach can be used to derive free energy functionals for application to (classical) density functional theory (section \ref{sec:dft}): cf.\ Refs.\ \cite{LeithallPRE2011,KordenPRE2012,MarechalPRE2014}.
 The series derived below is only valid for systems interacting via a pair potential $u(\vec{r})$.
@@ -836,6 +839,7 @@ This expression, connecting density and fugacity, can be used to transform the e
 \end{subequations}
 
 \vspace{0.5em}
+
 \begin{tcolorbox}[title=The virial coefficients]
   Further cancellations occur after inserting the explicit expressions for the cluster integrals \eqref{eq:cluster-integral} into the previous coefficients.
   This remaining terms consist only of the \emph{stars}%
@@ -930,7 +934,7 @@ In the limit of continuous distributions the weighted densities become integrals
 \end{equation*}
 introducing the probability measure $\mu(\sigma)$ for the molarities of particle species such that $\int d\mu(\sigma) = 1$.
 %This reduces to the previous form for discrete mixtures if we set $\mu(s)$ to the counting measure, however in integral form we are free to extend the calculation to continuous mixtures.
-With finite $M$ \eqref{eq:consistent-osmotic-pressure-weighted-densities} remains well-defined in this limit.
+\eqref{eq:consistent-osmotic-pressure-weighted-densities} remains well-defined in this limit so long as there are a finite set of weighted densities.
 
 This concludes our summary of liquid state theory for homogeneous systems.
 In subsqeuent sections we will review its extensions to inhomogeneous systems, with the purpose of introducing the main framework we will use for our treatment of correlations inside the homogeneous liquid in chapters \ref{chapter:morphometric-framework}, \ref{chapter:morphometric-applications} and \ref{chapter:resummation}.

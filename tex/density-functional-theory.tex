@@ -412,6 +412,7 @@ which upon inserting the definition of $H^{(2)}$ from \eqref{eq:pair-density-den
 which is a classic result of liquid state theory (cf.\ Refs.\ \cite{OrnsteinPAS1914,Hansen2013,EvansAP1979}).
 
 \vspace{0.5em}
+
 \begin{tcolorbox}[title=Ornstein-Zernike equation for a uniform simple liquid]
 For a uniform liquid interacting through a spherically symmetric pair potential the Ornstein-Zernike equation becomes
 \begin{equation}\label{eq:ornstein-zernike-spherical}
@@ -436,7 +437,7 @@ In Fourier space the convolution becomes a product so we obtain
   \tilde{c}^{(2)}(\vec{k}) +
   \rho \, \tilde{h}^{(2)}(\vec{k}) \tilde{c}^{(2)}(\vec{k})
 \end{equation*}
-where the tildes over a function denotes its Fourier transform.
+where a tilde over a function denotes its Fourier transform.
 This rearranges to give
 \begin{equation*}
   \tilde{h}^{(2)}(\vec{k})
@@ -640,7 +641,7 @@ This can be recast into the revealing form
       1 & \textrm{ if } B_i \cap B_j \ne \emptyset
     \end{cases}
     \\ &=
-    \chi(B_i \cap B_j)
+    \chi[B_i \cap B_j]
   \end{split}
 \end{equation*}
 i.e.\ the Euler characteristic of their intersection.
@@ -651,7 +652,7 @@ This allows us to write the free energy density in the dilute limit for a homoge
   \frac{\rho^2}{2}
   \sum_{i=1}^m \sum_{j=1}^m
   x_i x_j
-  \int_V \chi(B_i \cap B_j(\vec{r})) d\vec{r}
+  \int_V \chi[B_i \cap B_j(\vec{r})] d\vec{r}
   + \mathcal{O}(\rho^3),
 \end{equation*}
 or in the notation introduced in section \ref{sec:integral-geometry}
@@ -661,7 +662,7 @@ or in the notation introduced in section \ref{sec:integral-geometry}
   \frac{\rho^2}{2}
   \sum_{i=1}^m \sum_{j=1}^m
   x_i x_j
-  \int_{G_d} \chi(B_i \cap g B_j) dg
+  \int_{G_d} \chi[B_i \cap g B_j] dg
   + \mathcal{O}(\rho^3)
 \end{equation*}
 which can be evaluated using the principal kinematic formula \eqref{eq:binomial-kinematic-formula}.
@@ -929,6 +930,7 @@ The direct correlation functions \eqref{eq:fmt-direct-correlations} in the unifo
 \end{equation}
 
 \vspace{0.5em}
+
 \begin{tcolorbox}[title=Percus-Yevick theory in hard spheres]
   Using \eqref{eq:fmt-direct-correlations-uniform-density} the second functional derivative of the Rosenfeld free energy density \eqref{eq:rosenfeld-functional} for the single-component system $R_i + R_j = 2R = \sigma$ yields the Percus-Yevick direct correlation function \cite{RosenfeldJCP1988,WertheimPRL1963}
   \begin{align}
@@ -973,6 +975,7 @@ Curiously, an empirical interpolation between the two solutions of the Percus-Ye
   \end{split}
 \end{equation}
 We will assume this equation of state to construct an accurate theory for correlations in the hard sphere liquid in chapter \ref{chapter:morphometric-framework}.
+However, this equation of state as it predicts a finite pressure until $\eta \to 1$, so given that close packing occurs at $\eta \simeq 0.74$ it \emph{must} fail at high densities.
 
 Crucially, in addition to describing the equilibrium liquid well, the CS equation has been demonstrated to be accurate at very high densities in the supercooled regime \cite{BerthierPRL2016}.
 The liquid is metastable above the melting transition, so high density simulations require the introduction of polydispersity %(section \ref{sec:truncatable-free-energy})
@@ -1009,6 +1012,7 @@ The pressures predicted by \eqref{eq:cs-mixtures} compare favourably against nov
   }
   \label{fig:swap-eos}
 \end{SCfigure}
+\todo{Indicate random close packing in figure.}
 
 Finally, we introduce the central approximation of chapters \ref{chapter:morphometric-framework}, \ref{chapter:morphometric-applications} and \ref{chapter:resummation} as a limit case of FMT.
 The chemical potential of a new sphere $s$ can be determined as the free energy of a mixture where the limit where the new species is infinitely dilute, as in
@@ -1132,3 +1136,9 @@ We label these as the White Bear II (WBII) coefficients because they were first 
 %%   \frac{\delta^n \beta F_{ex}}{\delta \rho(\vec{r}_1)\delta \rho(\vec{r}_2) \cdots \delta \rho(\vec{r}_n)}
 %%   \right|_{\rho(\vec{r})=\rho}
 %% \end{equation}
+
+\section{Summary}
+
+\todo{Write a summary}
+This concludes the relevant background on the liquid state.
+In the next chapter we will discuss the phenomenology of supercooled liquids and the glass transition, which will provide the key context for the treatment of the high density hard sphere liquid in subsequent chapters.

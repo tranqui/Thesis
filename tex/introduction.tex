@@ -21,7 +21,7 @@
 
 It is a matter of some debate over what is precisely meant by ``soft matter'', and how to demarcate the various systems studied.
 %I normally introduce this field by taking a deep breath, and then listing the vast range of ...
-In introducing this field one normally takes a deep breath, then lists the vast range of topics studied, before drawing inferences over what their quintessential features are; this an inherently subjective procedure so the boundaries of the field are necessarily fuzzy.
+In introducing this field one normally takes a deep breath, then lists the vast range of topics studied, before drawing inferences over what their quintessential features are; this is an inherently subjective procedure so the boundaries of the field are necessarily fuzzy.
 In this vein, soft matter encompasses foams, gels, dispersions, liquid crystals, polymer solutions, polymer melts, granular materials, complex plasmas, active matter and many more systems of fundamental, practical and aesthetic importance.
 %% \begin{itemize}
 %% \item Foams,
@@ -35,12 +35,13 @@ In this vein, soft matter encompasses foams, gels, dispersions, liquid crystals,
 %% \item Many more systems of fundamental, practical and aesthetic importance.
 %% \end{itemize}
 A widely proposed definition to unify these disparate topics postulates that a soft matter system possesses energy scales accessible to thermal fluctuations \cite{LubenskySSC1997}.
-In each example above, chemical bonds may spontaneously break and reform allowing for flow, though the physical processes and chemistry involved can become arbitrarily complex allowing for incredible diversity of phenomena.
+In each example above, the interactions involved are weak enough to allow for flow, though the physical processes and chemistry involved can become arbitrarily complex allowing for incredible diversity of phenomena.
 
 Confusingly, the simplest liquids%
 \marginfootnote{By which we mean those formed by the noble gases at high densities.}
 are often not considered a part of soft matter even though temperature is their defining energy scale.
 So in some sense, soft matter can be more easily understood with \emph{vaguer} statements; a prominent worker in the field describes soft matter as ``liquids with bits in them'' \cite{Poon2018}.
+\todo{Place in Paddy's figure. Redefine soft matter with liquids included.}
 The deepest and most universal questions then reside at the level of the most basic liquid, regardless of whether one considers it as a subset of soft matter or as its historical antecedent.
 Unsurprisingly, liquids have been thoroughly explored in their long history of study, though fundamental open questions remain concerning their dynamical behaviour at high densities.
 To initiate this discussion we will introduce \emph{the} archetypal model for simple liquids: hard spheres.
@@ -64,9 +65,8 @@ This \emph{mean-field theory} characterises a system of $N$ particles contained 
   \frac{p - a N}{k_B T} = \frac{N}{V - b N}
 \end{equation}
 where $p$ is the pressure, $k_B$ is the boltzmann constant, $T$ as temperature, and with $a,b$ as perturbations from the ideal gas law due to the interactions.
-We have written this equation such that the left-hand side contains \emph{liquid-like} modifications to the pressure due to the attractions, whereas the right-hand side contains \emph{gas-like} perturbations solely due to geometric constraints from the short-range repulsions.
+We have written this equation such that the left-hand side contains \emph{liquid-like} modifications to the pressure due to the attractions, whereas the right-hand side contains \emph{gas-like} perturbations from the reduction in the accessible volume due to short-range repulsions.
 It was widely believed that improvements to this theory would require sophisticated treatments of the \emph{attractions}, however history has shown that it was the treatment of the \emph{repulsions} which were lacking \cite{Santos2016}.
-\todo{Vague: could be expanded}
 Simple liquids can to a large extent be considered as weak perturbations to the hard sphere model; as such, the left-hand side of \eqref{eq:van-der-waals} is reasonably accurate, but the right-hand side must be refined to account for the non-trivial effects of exclusion \cite{Hansen2013}.
 
 %They thus serve as a foundational toy model for fluids in a similar way the Ising model is \emph{the} system for ferromagnetism and critical phenomena.
@@ -100,9 +100,10 @@ This happens to coincide with a crystal structure observed in real systems, so b
 
 \begin{SCfigure}
   \includegraphics[width=0.85\linewidth,outer]{hs-phase-diagram}
-  \caption[The hard sphere phase diagram]{
-    The hard sphere phase diagram in $d=3$ in terms of volume fraction, and its accompanying equation of state including the metastable branch.
-    We take volume fractions of freezing and melting as the respective values $\eta_f \sim 0.494$ and $\eta_m \sim 0.545$ \cite{HooverJCP1968}, and close packing occurs at $\eta_\mathrm{CP} \sim 0.74$.
+  \caption[The hard sphere equation of state and phase diagram]{
+    The hard sphere equation of state in $d=3$ in terms of volume fraction, including the metastable branch.
+    The one-dimensional phase diagram is overlaid, with the volume fractions of freezing and melting taken as $\eta_f \sim 0.494$ and $\eta_m \sim 0.545$ respectively \cite{HooverJCP1968}.
+    Close packing occurs at $\eta_\mathrm{CP} \sim 0.74$.
     The equations of state were adapted from Refs.\ \cite{CarnahanJCP1969,SpeedyJPCM1998,BannermanJCP2010}.
   }
   \label{fig:hs-phase-diagram}
@@ -122,11 +123,11 @@ By contrast, the actual phase diagram (Fig.\ \ref{fig:hs-phase-diagram}), determ
   However, we will always be focusing on the high density fluid, which serves as the starting point for descriptions of real liquids, so we can justify using `liquid' and `fluid' interchangeably.}[-3cm]
 up to $\eta_f \sim 0.494$ whereupon it undergoes a freezing transition to an ordered phase with an accompanying melting transition at $\eta_m \sim 0.545$ \cite{HooverJCP1968}.
 %Controversial, .
-Despite the early simulation studies being definitive, this result was not immediately accepted by the community.
+This result was not immediately accepted by the community, even though these simulation studies are generally considered definitive in hindsight.
 
 %The hard sphere freezing transition suggests the counterituitive notion that billiard balls will spontaneously order into a crystal at high densities.
 In everyday scenarios crystallisation typically occurs as one lowers temperature, and the classroom explanation posits that the crystal is favoured due to \emph{attractions} between molecules.
-Absent any attractions in hard spheres, we find that \emph{entropy} must drive crystallisation.
+In the absence of any attractions in hard spheres, we find that \emph{entropy} must drive crystallisation.
 Part of the reason people could not believe that the crystal is entropically favoured, is because we often (mistakenly) identify entropy as a measure of disorder making it counterintuitive for an ordered phase to be favoured.
 In reality entropy is more subtle: the crystal may be more ordered than the liquid, with a lower \emph{configurational} entropy, however entropy includes other contributions.
 At high densities, the penalty paid for being locked into the crystal is offset by a \emph{vibrational} entropy, because each particle has more available space for motion.
@@ -139,6 +140,7 @@ The hard interactions between the balls causes%
 them to `crystallise' at high densities as can been seen in the figure.
 Strictly speaking these are not crystals in the sense of long-range \emph{translational} order, instead they are said to possess long-range \emph{orientational} order.
 This subtlety emerges because the floating balls are confined to the water surface making them effectively two dimensional; fluctuations are strong enough in two dimensions to overcome truly long-ranged positional ordering \cite{MerminPRL1966,MerminPR1968}.
+\todo{These are not thermal, so be careful.}
 
 \begin{SCfigure}
   \includegraphics[width=0.75\linewidth,outer]{shade-balls}
@@ -189,6 +191,7 @@ The supercooled liquid is not strictly a phase in the sense of being the free en
 In particular, the supercooled liquid is long-lived and it eventually reaches a steady state with well-defined thermodynamic observables.
 In simple terms, supercooled liquids are indistinguishable from that of an equilibrium phase \emph{until} they spontaneously crystallise.
 We will postpone discussion of the specific properties of supercooled liquids until chapter \ref{chapter:glass}, as for now we only wish to briefly introduce the key questions posed.
+\todo{Demphasise thermodynamics, emphasise dynamics.}
 %so we will find it useful to describe it with similar language.
 
 As we see it, the two central topics regarding the metastable liquid are:
@@ -198,14 +201,16 @@ As we see it, the two central topics regarding the metastable liquid are:
 \item \emph{Nucleation}: given that the crystal is the ground state above the freezing density, can we describe the kinetic pathway by which the liquid orders into the crystal?
 \end{enumerate}
 Each question is complicated by a remarkable change in the timescales involved, requiring new ideas to approach them.
-Regarding nucleation, the rates predicted by theory and experiments differ by some $\sim$12 orders of magnitude, which is claimed to be the second biggest disagreement%
- %\marginfootnote{\hl{The first being the vacuum catastrophe of funadmental physics.}}
-between theory and experiment in all of science \hl{(maybe get rid of this, or at least a citation)}.
+Regarding nucleation, the rates predicted by theory and experiments differ by some $\sim$12 orders of magnitude, which is claimed to be the second worst disagreement%
+\marginfootnote{With the first being the \emph{vacuum catastrophe}, the difference of $\sim$120 orders of magnitude between predicted vacuum energy density and observations of astronomers \cite{Hobson2006}.
+In this context, nucleation predictions become remarkably accurate.}[-3cm]
+between theory and experiment in all of physics \cite{RussoSM2013}.
 
 In the supercooled liquid the time to reach the steady state, or `equilibrium', dramatically increases with density until it becomes effectively infinite above a glass transition%
-\marginfootnote{This is typically taken to occur around $\eta_g \in [0.58, 0.60]$, although the exact point where the system falls out of equilibrium will depend on many factors including the size of the particles in case of colloidal experiments, the specific dynamical rules of a simulation algorithm, and the patience of the observer.}[-2cm]
+\marginfootnote{This is typically taken to occur around $\eta_g \in [0.58, 0.60]$, although the exact point where the system falls out of equilibrium will depend on many factors including the size of the particles in case of colloidal experiments, the specific dynamical rules of a simulation algorithm, and the patience of the observer.}[-1.5cm]
 where it forms a glass.
 If the hard sphere glass is continually compressed to higher densities it will eventually \emph{jam}.
+\todo{Be careful with Gardner: HS are thermal, so pressure diverges. Jamming is more a granular matter thing.}
 Empirically this occurs at \emph{random close packing} (Fig.\ \ref{fig:rcp}) around $\eta_\mathrm{RCP} \sim 0.64$, but as an out-of-equilibrium state jamming is highly protocol dependent so this density may not be well-defined \cite{TorquatoRMP2010}.
 %This is complicated by the fact that as density increases the dynamical timescales increase by $\gtrsim 14$ orders of magnitude, so no ordinary simulation or experiment can probe `equilibrium' properties.
 Our focus will be on the `equilibrium' supercooled liquid, although the nature of the glass and jammed states provide important context for our programme, which we will return to in chapter \ref{chapter:background}.
