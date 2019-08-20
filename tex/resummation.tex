@@ -132,7 +132,7 @@ In this case long-range correlation effects form between the rods which are not 
 We will now obtain the low density asymptotics of the chemical potential, and show that this exactly follows the morphometric form for convex bodies.
 
 Hard particles feature purely geometric interactions, a property that allows us to make progress.
-In particular, the interaction potential between two hard bodies $A,B \subset \mathbb{R}^d$ is normally written
+In particular, the interaction potential between two compact, convex hard bodies $A,B \in \mathcal{K}^d$ is normally written
 \begin{equation*}\label{eq:hard-mayer-f}
   u(A,B)
   =
@@ -456,9 +456,112 @@ Resumming the $\lambda_k^{(n)}$ terms gives the thermodynamic coefficients $a_k$
 \begin{equation}\label{eq:final-a-coefficient}
   \beta a_k = k! \omega_k \sum_{n=1}^\infty \frac{\lambda_k^{(n)}}{n}.
 \end{equation}
-We perform this resummation explicitly for $d \le 3$ in the appendix.
-Notably $a_d = p$ gives the equation of state.
+Notably, $a_d = p$ gives the equation of state.
+We perform this resummation explicitly in physical dimensions $d \le 3$ in the next section.
 %We will consider specific examples of the general result in the next section.
+
+\section{Explicit morphometric contributions in the virial expansion}
+\label{sec:explicit-lambda}
+
+Here we explicitly evaluate the contributions in the virial expansion from configurations sharing a common point of intersection via \eqref{eq:little-lambda}.
+
+For $d=1$ the index runs over $k \in \{0,1\}$, so the criteria on the summation indices is that $N_0 = k$ and $N_1 = n - N_0$ leading to a single term for each value of $k$:
+\begin{subequations}
+  \label{eq:little-lambda-d=1}
+  \begin{align}
+    \lambda_0^{(n)} &= \xi_1^n,
+    \\
+    \lambda_1^{(n)} &= n \xi_0 \xi_1^{n-1}.
+  \end{align}
+\end{subequations}
+For $d=2$ we have $k \in \{0,1,2\}$, with summation conditions $2N_0 + N_1 = k$ and $N_2 = n - N_1 - N_0$ giving:
+\begin{subequations}
+  \label{eq:little-lambda-d=2}
+  \begin{align}
+    \lambda_0^{(n)} &= \xi_2^n,
+    \\
+    \lambda_1^{(n)} &= n \xi_1 \xi_2^{n-1},
+    \\
+    \lambda_2^{(n)} &=
+    n \xi_0 \xi_2^{n-1}
+    + \frac{n(n-1)}{2} \xi_1^2 \xi_2^{n-2}.
+  \end{align}
+\end{subequations}
+Finally, for $d=3$ we have $k \in \{0,1,2,3\}$, with summation conditions $3N_0 + 2N_1 + N_2 = k$ and $N_3 = n - N_2 - N_1 - N_0$ giving:
+\begin{subequations}
+  \label{eq:little-lambda-d=3}
+  \begin{align}
+    \lambda_0^{(n)} &= \xi_3^n,
+    \\
+    \lambda_1^{(n)} &= n \xi_2 \xi_3^{n-1},
+    \\
+    \lambda_2^{(n)} &=
+    n \xi_1 \xi_3^{n-1}
+    + \frac{n(n-1)}{2} \xi_2^2 \xi_3^{n-2},
+    \\
+    \lambda_3^{(n)} &=
+    n \xi_0 \xi_3^{n-1}
+    + n(n-1) \xi_1 \xi_2 \xi_3^{n-2}
+    \nonumber \\ & \qquad
+    + \frac{n(n-1)(n-2)}{6} \xi_2^3 \xi_3^{n-3}.
+  \end{align}
+\end{subequations}
+
+We will now resum $\lambda_k^{(n)}$ over $n$ in order to determine the values of $a_k$ for $d \le 3$.
+For $d=1$ we insert \eqref{eq:little-lambda-d=1} into \eqref{eq:final-a-coefficient}:
+\begin{subequations}
+  \begin{align}
+    \beta a_0
+    &= - \ln{(1 - \eta)},
+    \\
+    \beta p =
+    \beta a_1 &=
+    \frac{2 \xi_0}{1-\eta},
+  \end{align}
+\end{subequations}
+with $\xi_0 = \rho / 2$ giving the exact result for hard rods \eqref{eq:hard-rods-morphometric} and \eqref{eq:hard-rods-eos}.
+For $d=2$ we insert \eqref{eq:little-lambda-d=2} into \eqref{eq:final-a-coefficient}:
+\begin{subequations}
+  \begin{align}
+    \beta a_0 &= -\ln{(1 - \eta)},
+    \\
+    \beta a_1 &= \frac{2 \xi_1}{1-\eta},
+    \\
+    \beta p =
+    \beta a_2 &=
+    2\pi \left(
+    \frac{\xi_0}{1-\eta}
+    + \frac{\xi_1^2}{2(1-\eta)^2}
+    \right).
+  \end{align}
+\end{subequations}
+Note: for hard discs of diameter $\sigma$ we obtain $V_1 = \pi \sigma / 2$ so $\xi_0 = \rho / (2\pi)$ and $\xi_1 = \rho \sigma / 2$ for the single-component fluid.
+Finally, for $d=3$ we insert \eqref{eq:little-lambda-d=3} into \eqref{eq:final-a-coefficient}:
+\begin{subequations}
+  \begin{align}
+    \beta a_0 &= -\ln{(1 - \eta)},
+    \\
+    \beta a_1 &= \frac{2 \xi_2}{1-\eta},
+    \\
+    \beta a_2 &=
+    2 \pi
+    \left(
+    \frac{\xi_1}{1-\eta}
+    + \frac{\xi_2^2}{2(1-\eta)^2}
+    \right),
+    \\
+    \beta p =
+    \beta a_3 &=
+    8 \pi\left(
+    \frac{\xi_0}{1-\eta}
+    + \frac{\xi_1 \xi_2}{(1-\eta)^2}
+    + \frac{\xi_2^3}{3 (1-\eta)^3}
+    \right).
+    \label{eq:a3-d=3}
+  \end{align}
+\end{subequations}
+Note: for hard spheres of diameter $\sigma$ we obtain $V_1 = 2\sigma$ and $V_2 = \pi \sigma^2 / 2$ so $\xi_0 = \rho / (8\pi)$, $\xi_1 = \rho \sigma / (2\pi)$ and $\xi_2 = \rho \pi \sigma^2 / 8$ for the single-component fluid.
+In the above steps we have used the fact that $\xi_d = \eta$ to simplify the resulting expressions.
 
 \section{Results for hard spheres}
 
@@ -490,9 +593,10 @@ To account for the reduced accuracy of this equation of state for $d=3$ compared
 A semi-empirical approach could reweight the final term in \eqref{eq:a3-d=3} to produce the third virial coefficient (if known), giving an equation of state for arbitrary mixtures of convex particles.
 This reweighting is implicit in scaled particle theory and the Rosenfeld FMT functional \cite{TarazonaPRE1997,MarechalPRE2014}.
 
-We see similar accuracy in the predicted surface tension at an infinite planar wall determined by $a_2$
+We see similar accuracy in the predicted surface tension at an infinite planar wall determined by%
 \marginfootnote{This is true up to a normalisation constant, as $a_2$ conjugates with the intrinsic volume $V_2$ rather than the area $A = 2V_2$.
-  The usual planar surface tension is thus obtained as $\gamma_\infty = a_2/2$.}.
+  The usual planar surface tension is thus obtained as $\gamma_\infty = a_2/2$.}
+$a_2$.
 The surface tension at an infinite planar wall is simply $a_2$ because it conjugates with the area.
 In Ref.\ \cite{DavidchackMP2015} the results of extensive simulations measuring $a_2$ were parameterised by the following expression
 \begin{equation}\label{eq:quasi-exact-surface-tension}
@@ -647,20 +751,36 @@ It is possible that additional exact morphometric contributions exist, and they 
 Furthermore, the formal derivation we have followed naturally leads to explicit expressions for $\Delta \Omega_\mathrm{extra}$.
 The next leading contribution from the virial series would be:
 \begin{equation}
-  \Delta \Omega_\mathrm{extra}[K]
-  =
-  \frac{\rho^2}{2}
-  \sum_{s_1=1}^m \sum_{s_2=1}^m
-  x_{s_1} x_{s_2}
-  \left(
-  \int_{G_d^2} \chi(K \cap g_1 K_{s_1}) \chi(K \cap g_2 K_{s_2}) \chi(g_1 K_{s_1} \cap g_2 K_{s_2}) dg_1 dg_2
-  - \Lambda_{s_1,s_2} \right)
-  + \mathcal{O}(\rho^3),
+  \begin{split}
+    \Delta \Omega_\mathrm{extra}[K]
+    =&
+    \frac{\rho^2}{2}
+    \sum_{s_1=1}^m \sum_{s_2=1}^m
+    x_{s_1} x_{s_2}
+    \left(
+    \Delta_{s_1,s_2}
+    %% \int_{G_d^2} \chi(K \cap g_1 K_{s_1})
+    %% \right.
+    %% \\
+    %% &
+    %% \left.
+    %% \chi(K \cap g_2 K_{s_2}) \chi(g_1 K_{s_1} \cap g_2 K_{s_2}) dg_1 dg_2
+    - \Lambda_{s_1,s_2} \right)
+    + \mathcal{O}(\rho^3),
+  \end{split}
 \end{equation}
-which involves a \emph{ring integral}.
-These integrals can be calculated straightforwardly in hard spheres \cite{MontrollJCP1941}, or using the Radon transform for convex geometries of arbitrary shapes \cite{WertheimMP1994,WertheimMP1996,WertheimMP1996a}.
-Corrections could be systematically included by further resummations over topologically identical integrations, with ring integrals as the leading order terms.
-The integral corrections are discussed in Ref.\ \cite{MarechalPRE2014} in the context of free energy functionals for inhomogeneous liquids; our system is effectively homogeneous so we expect it to be easier to construct a theory with higher-order terms.
+where $\Delta_{s_1,s_2}$ is the three-body \emph{ring integral}
+\begin{equation}
+  \Delta_{s_1,s_2}
+  =
+  \int_{G_d^2}
+  \chi(K \cap g_1 K_{s_1}) \chi(K \cap g_2 K_{s_2}) \chi(g_1 K_{s_1} \cap g_2 K_{s_2})
+  \, dg_1 dg_2.
+\end{equation}
+Ring integrals can be calculated straightforwardly in hard spheres \cite{MontrollJCP1941}, or using the Radon transform for convex geometries of arbitrary shapes \cite{WertheimMP1994,WertheimMP1996,WertheimMP1996a}.
+Corrections to the morphometric approximation could be systematically included by further resummations over classes of diagrams, with ring integrals as the leading order terms.
+The integral corrections are discussed in Ref.\ \cite{MarechalPRE2014} in the context of free energy functionals for inhomogeneous liquids; our system is effectively homogeneous so we expect it to be easier to construct a theory with these higher-order terms.
+Notably, the resummation of the ring integrals would lead to a contribution in $\Delta \Omega$ involving a double volume integral over the solute.
 
 The form of the exact contribution is instructive in how it applies to mixtures.
 It is argued in Ref.\ \cite{KodamaJCP2011} that for an $m$-component mixture the appropriate morphometric form reads
@@ -736,111 +856,6 @@ The exact result applies for mixtures of hard convex particles in an isotropic p
 In hard spheres the exact contribution features similar accuracy as scaled particle theory, so it captures most contributions to the bulk free energy and seems to be why the approach has been successful.
 Though as noted in Ref.\ \cite{MarechalPRE2014} this is partially due to a cancellation in the omitted terms of the virial expansion, so it may still desirable to improve the morphometric approach by inclusion of additional terms.
 The exact morphometric contribution provides a suitable starting point for including additional terms to improve accuracy.
-
-%\appendix*
-
-\section{Explicit morphometric contributions in the virial expansion}
-%\label{appendix:lambda}
-
-Here we explicitly evaluate the contributions in the virial expansion from configurations sharing a common point of intersection via \eqref{eq:little-lambda}.
-
-For $d=1$ the index runs over $k \in \{0,1\}$, giving condition on the summation indices $N_0 = k$ and $N_1 = n - N_0$ leading to a single term for each value of $k$:
-\begin{subequations}
-  \label{eq:little-lambda-d=1}
-  \begin{align}
-    \lambda_0^{(n)} &= \xi_1^n
-    \\
-    \lambda_1^{(n)} &= n \xi_0 \xi_1^{n-1}.
-  \end{align}
-\end{subequations}
-For $d=2$ we have $k \in \{0,1,2\}$, with summation conditions $2N_0 + N_1 = k$ and $N_2 = n - N_1 - N_0$ giving:
-\begin{subequations}
-  \label{eq:little-lambda-d=2}
-  \begin{align}
-    \lambda_0^{(n)} &= \xi_2^n
-    \\
-    \lambda_1^{(n)} &= n \xi_1 \xi_2^{n-1}
-    \\
-    \lambda_2^{(n)} &=
-    n \xi_0 \xi_2^{n-1}
-    + \frac{n(n-1)}{2} \xi_1^2 \xi_2^{n-2}.
-  \end{align}
-\end{subequations}
-Finally, for $d=3$ we have $k \in \{0,1,2,3\}$, with summation conditions $3N_0 + 2N_1 + N_2 = k$ and $N_3 = n - N_2 - N_1 - N_0$ giving:
-\begin{subequations}
-  \label{eq:little-lambda-d=3}
-  \begin{align}
-    \lambda_0^{(n)} &= \xi_3^n
-    \\
-    \lambda_1^{(n)} &= n \xi_2 \xi_3^{n-1}
-    \\
-    \lambda_2^{(n)} &=
-    n \xi_1 \xi_3^{n-1}
-    + \frac{n(n-1)}{2} \xi_2^2 \xi_3^{n-2}
-    \\
-    \lambda_3^{(n)} &=
-    n \xi_0 \xi_3^{n-1}
-    + n(n-1) \xi_1 \xi_2 \xi_3^{n-2}
-    \nonumber \\ & \qquad
-    + \frac{n(n-1)(n-2)}{6} \xi_2^3 \xi_3^{n-3}.
-  \end{align}
-\end{subequations}
-
-We will now resum $\lambda_k^{(n)}$ over $n$ in order to determine the values of $a_k$ for $d \le 3$.
-For $d=1$ we insert \eqref{eq:little-lambda-d=1} into \eqref{eq:final-a-coefficient}:
-\begin{subequations}
-  \begin{align}
-    \beta a_0
-    &= - \ln{(1 - \eta)},
-    \\
-    \beta p =
-    \beta a_1 &=
-    \frac{2 \xi_0}{1-\eta},
-  \end{align}
-\end{subequations}
-with $\xi_0 = \rho / 2$ giving the exact result for hard rods \eqref{eq:hard-rods-morphometric} and \eqref{eq:hard-rods-eos}.
-For $d=2$ we insert \eqref{eq:little-lambda-d=2} into \eqref{eq:final-a-coefficient}:
-\begin{subequations}
-  \begin{align}
-    \beta a_0 &= -\ln{(1 - \eta)},
-    \\
-    \beta a_1 &= \frac{2 \xi_1}{1-\eta},
-    \\
-    \beta p =
-    \beta a_2 &=
-    2\pi \left(
-    \frac{\xi_0}{1-\eta}
-    + \frac{\xi_1^2}{2(1-\eta)^2}
-    \right).
-  \end{align}
-\end{subequations}
-Note: for hard discs of diameter $\sigma$ we obtain $V_1 = \pi \sigma / 2$ so $\xi_0 = \rho / (2\pi)$ and $\xi_1 = \rho \sigma / 2$ for the single-component fluid.
-Finally, for $d=3$ we insert \eqref{eq:little-lambda-d=3} into \eqref{eq:final-a-coefficient}:
-\begin{subequations}
-  \begin{align}
-    \beta a_0 &= -\ln{(1 - \eta)},
-    \\
-    \beta a_1 &= \frac{2 \xi_2}{1-\eta},
-    \\
-    \beta a_2 &=
-    2 \pi
-    \left(
-    \frac{\xi_1}{1-\eta}
-    + \frac{\xi_2^2}{2(1-\eta)^2}
-    \right),
-    \\
-    \beta p =
-    \beta a_3 &=
-    8 \pi\left(
-    \frac{\xi_0}{1-\eta}
-    + \frac{\xi_1 \xi_2}{(1-\eta)^2}
-    + \frac{\xi_2^3}{3 (1-\eta)^3}
-    \right).
-    \label{eq:a3-d=3}
-  \end{align}
-\end{subequations}
-Note: for hard spheres of diameter $\sigma$ we obtain $V_1 = 2\sigma$ and $V_2 = \pi \sigma^2 / 2$ so $\xi_0 = \rho / (8\pi)$, $\xi_1 = \rho \sigma / (2\pi)$ and $\xi_2 = \rho \pi \sigma^2 / 8$ for the single-component fluid.
-In the above steps we have used the fact that $\xi_d = \eta$ to simplify the resulting expressions.
 
 \ifdefined\includebibliography
   \printbibliography
