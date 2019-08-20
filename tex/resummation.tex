@@ -169,7 +169,7 @@ from which the Mayer function \eqref{eq:mayer-function} can be written in the re
 \end{equation*}
 The latter form is identical in form to the Euler characteristic, introduced in \eqref{eq:euler-characteristic-definition}, of their intersection i.e.\
 \begin{equation*}
-  \chi(A \cap B) =
+  \chi[A \cap B] =
     \begin{cases}
     0 & \textrm{ if } A \cap B = \emptyset \\
     1 & \textrm{ if } A \cap B \ne \emptyset
@@ -178,7 +178,7 @@ The latter form is identical in form to the Euler characteristic, introduced in 
 valid for convex bodies.
 Comparing this expression with \eqref{eq:hard-mayer-f} we can rewrite the thermodynamic quantity as the purely geometrical measure
 \begin{equation}\label{eq:chi-replacement}
-  1 - e^{-\beta u(A,B)} = \chi(A \cap B) = -f_{AB}.
+  1 - e^{-\beta u(A,B)} = \chi[A \cap B] = -f_{AB}.
 \end{equation}
 Rewriting the interactions in terms of the Euler characteristic allows us to exploit theorems from integral geometry to evaluate thermodynamic quantities.
 
@@ -192,21 +192,21 @@ Including their relative orientations, the cost of inserting a solute $A$ into a
     %% \frac{\rho}{2} \int_{G_d} \left( 1 - e^{-\beta u(A, gB)} \right) dg
     + \mathcal{O}(\rho^2)
     \\ &=
-    \frac{\rho}{2} \int_{G_d} \chi(A \cap gB) dg
+    \frac{\rho}{2} \int_{G_d} \chi[A \cap gB] dg
     + \mathcal{O}(\rho^2)
   \end{split}
 \end{equation}
 where we indicate the $A$ particle with a triangle and the $B$ particle by a circle in the diagram, and we made the replacement \eqref{eq:chi-replacement} in the second line.
 The integrand in the latter line of \eqref{eq:low-density-insertion} can be directly evaluated using the principal kinematic formuala \eqref{eq:binomial-kinematic-formula} giving the morphometric form \eqref{eq:morphometric-approach-d} with coefficients
 \begin{equation*}
-  a_k = \frac{V_{d-k}(B)}{C_{k,d-k}},
+  a_k = \frac{V_{d-k}[B]}{C_{k,d-k}},
 \end{equation*}
 with coefficients $C_{k,d-k}$ defined in \eqref{eq:flag-coefficients}.
 Thus the morphometric approach is exact in the low density limit.
 This leads to elegant formulae e.g.\ for $d = 3$ we obtain
 \begin{equation*}\label{eq:low-density-morphometric-result}
   \frac{\beta \Delta \Omega}{2 \pi \rho} =
-  V(A) X(B) + A(A) C(B) + C(A) A(B) + X(A) V(B)
+  V[A] X[B] + A[A] C[B] + C[A] A[B] + X[A] V[B]
 \end{equation*}
 for $\rho \ll 1$, where we have used normalisations of intrinsic volumes as surface measures given in \eqref{eq:intrinsic-volumes-surface-integrals} and Table \ref{table:geometric-quantities}.
 The low density result is a classic application of integral geometry to the liquid state, first obtained by Isihara \cite{IsiharaJCP1950}.
@@ -330,7 +330,7 @@ where $c_n$ is a combinatorial prefactor independent of the interactions or dime
 \begin{equation}\label{eq:n-particle-intersection-integral}
   \Lambda_{s_1, \cdots, s_n}
   =
-  \int_{G_d^n} dg^n \chi(K_0 \cap g_1 K_{s_1} \cap \cdots \cap g_n K_{s_n})
+  \int_{G_d^n} dg^n \chi[K_0 \cap g_1 K_{s_1} \cap \cdots \cap g_n K_{s_n}]
 \end{equation}
 with $\int_{G_d^n} dg^n = \int_{G_d} dg_1 \cdots \int_{G_d} dg_n$ counts the number of microstates where there is a region of mutual overlap.
 This expression $\Lambda_{s_1, \cdots, s_n}$ is a real contribution in the $n$-particle diagrams of the full virial expansion, and the only approximation here is in neglecting additional terms; this feature makes the resulting theory part of a controlled approximation.
@@ -387,7 +387,7 @@ In a second approximation, the fully connected diagrams are approximated by $n$-
   %\begin{split}
   \mayerdiagram[|||][t..]{3}
   \simeq
-  \int_{G_d^2} dg^2 \chi(K_0 \cap g_1 K_{s_1} \cap g_2 K_{s_2})
+  \int_{G_d^2} dg^2 \chi[K_0 \cap g_1 K_{s_1} \cap g_2 K_{s_2}]
   :=
   \fmtdiagram{3}
   %\end{split}
@@ -803,17 +803,17 @@ Curiously, the error in the new theory scales almost identically to virial/CS th
 %% \end{equation*}
 %% sketched in Fig.\ \ref{fig:minkowski_addition}.
 %% This geometry is non-convex, and for $r > 1$ it is not even simply connected.
-%% For interactions with a convex solvent particle $B$ we have possible Euler characteristics of intersection $\chi(A \cap B) \in \{0, 1, 2\}$ whereas $e^{-\beta u(A, B)} \in \{0, 1\}$, so it is not possible to establish an exact correspondence between the two.
+%% For interactions with a convex solvent particle $B$ we have possible Euler characteristics of intersection $\chi[A \cap B] \in \{0, 1, 2\}$ whereas $e^{-\beta u(A, B)} \in \{0, 1\}$, so it is not possible to establish an exact correspondence between the two.
 %% We can proceed by determining an effective geometry where this relation does hold.
 %% The exact result \eqref{eq:exact-mayer-exclusion} can be written
 %% \begin{equation}
 %%   \begin{split}
 %%     e^{-\beta u(A, \mathcal{T} B)} - 1
-%%     &= -\chi((A \minkplus B) \cap \{\vec{r}\}) \\
-%%     &= -\chi((A \minkplus B \minkminus B) \cap B),
+%%     &= -\chi[(A \minkplus B) \cap \{\vec{r}\}] \\
+%%     &= -\chi[(A \minkplus B \minkminus B) \cap B],
 %%   \end{split}
 %% \end{equation}
-%% with the last line valid so long as $A \minkplus B \minkminus B = \{\vec{c} \, | \, (\vec{c} \minkplus B) \subseteq A \minkplus B\}$ is simply connected, otherwise the Euler characteristic of the intersecting geometry can be greater than one $\chi((A \minkplus B \minkminus B) \cap B) > 1$.
+%% with the last line valid so long as $A \minkplus B \minkminus B = \{\vec{c} \, | \, (\vec{c} \minkplus B) \subseteq A \minkplus B\}$ is simply connected, otherwise the Euler characteristic of the intersecting geometry can be greater than one $\chi[(A \minkplus B \minkminus B) \cap B] > 1$.
 %% The effective geometry $A \minkplus B \minkminus B$ recovers the correspondence between interaction and geometry \eqref{eq:interactions-euler-equivalence}.
 %% Addition (dilation) and subtraction (erosion) operations are not inverse operations so $A \minkplus B \minkminus B \ne A$, however $A \minkplus B \minkminus B \minkplus B = A \minkplus B$ so $A \minkplus B \minkminus B$ acts as an effective generator of the exclusion region.
 %% The effective geometry for the previous example, a nearly convex body with an infinitesimal cavity, recovers the convex object.
@@ -833,7 +833,7 @@ Curiously, the error in the new theory scales almost identically to virial/CS th
 %% A controlled expansion of the solvation energy which allows for different choices of dividing surface must be invariant to the particular choice.
 %% The transformation between the coefficients $\{a_k\}$ and $\{a'_k\}$, which we give explicitly in Appendix \ref{appendix:parallel-surfaces}, are straightforward which is a particular strength of using the morphometric \emph{ansatz}.
 %% When this transformation fails leading to inconsistent thermodynamics, we know the theory has failed.
-%% We find a necessary condition for the theory's validity is thus that $\chi(A \minkplus B^d \minkminus B^d) = \chi(A \minkplus B^d)$.
+%% We find a necessary condition for the theory's validity is thus that $\chi[A \minkplus B^d \minkminus B^d] = \chi[A \minkplus B^d]$.
 
 %% The boundary of the effective volume $\partial(A \minkplus B \minkminus B)$ is commonly called the \emph{molecular surface} \cite{?}, while the boundary of the excluded volume $\partial(A \minkminus B)$ is referred to as the \emph{solvent accessible surface}.
 %% There is also an infinite family of equivalent parallel surfaces in between i.e.\ $\partial(A \minkplus B \minkminus \epsilon B)$ for $\epsilon \in [0, 1]$ but the two extremes are the most natural choices.
@@ -842,7 +842,7 @@ Curiously, the error in the new theory scales almost identically to virial/CS th
 %% At this point, descriptions with different choices of boundary become inconsistent.
 %% Consider the Euler characteristic of the effective body (molecular surface)
 %% \begin{equation}
-%%   \chi(A \minkplus B^d \minkminus B^d)
+%%   \chi[A \minkplus B^d \minkminus B^d]
 %%   =
 %%   \begin{cases}
 %%     1 & r < 2\sqrt{3} \\
@@ -851,7 +851,7 @@ Curiously, the error in the new theory scales almost identically to virial/CS th
 %% \end{equation}
 %% whilst for the parallel volume (solvent accessible surface)
 %% \begin{equation}
-%%   \chi(A \minkplus B^d)
+%%   \chi[A \minkplus B^d]
 %%   =
 %%   \begin{cases}
 %%     1 & r < 2 \\
@@ -900,12 +900,12 @@ The next leading contribution from the virial series would be:
     x_{s_1} x_{s_2}
     \left(
     \Delta_{s_1,s_2}
-    %% \int_{G_d^2} \chi(K \cap g_1 K_{s_1})
+    %% \int_{G_d^2} \chi[K \cap g_1 K_{s_1}]
     %% \right.
     %% \\
     %% &
     %% \left.
-    %% \chi(K \cap g_2 K_{s_2}) \chi(g_1 K_{s_1} \cap g_2 K_{s_2}) dg_1 dg_2
+    %% \chi[K \cap g_2 K_{s_2}] \chi[g_1 K_{s_1} \cap g_2 K_{s_2}] dg_1 dg_2
     - \Lambda_{s_1,s_2} \right)
     + \mathcal{O}(\rho^3),
   \end{split}
@@ -915,7 +915,7 @@ where $\Delta_{s_1,s_2}$ is the three-body \emph{ring integral}
   \Delta_{s_1,s_2}
   =
   \int_{G_d^2}
-  \chi(K \cap g_1 K_{s_1}) \chi(K \cap g_2 K_{s_2}) \chi(g_1 K_{s_1} \cap g_2 K_{s_2})
+  \chi[K \cap g_1 K_{s_1}] \chi[K \cap g_2 K_{s_2}] \chi[g_1 K_{s_1} \cap g_2 K_{s_2}]
   \, dg_1 dg_2.
 \end{equation}
 Ring integrals can be calculated straightforwardly in hard spheres \cite{MontrollJCP1941}, or using the Radon transform for convex geometries of arbitrary shapes \cite{WertheimMP1994,WertheimMP1996,WertheimMP1996a}.
