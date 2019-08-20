@@ -28,9 +28,9 @@ add_latex_document(conclusion.tex
 add_latex_document(appendix-spt-singularities.tex
                    BIBFILES bibliography.bib unpublished.bib USE_BIBLATEX
                    TARGET_NAME appendix-spt-singularities IMAGE_DIRS ../img EXCLUDE_FROM_ALL)
-add_latex_document(appendix-two-spheres.tex
-                   BIBFILES bibliography.bib unpublished.bib USE_BIBLATEX
-                   TARGET_NAME appendix-two-spheres IMAGE_DIRS ../img EXCLUDE_FROM_ALL)
+# add_latex_document(appendix-two-spheres.tex
+#                    BIBFILES bibliography.bib unpublished.bib USE_BIBLATEX
+#                    TARGET_NAME appendix-two-spheres IMAGE_DIRS ../img EXCLUDE_FROM_ALL)
 add_latex_document(appendix-full-geometry.tex
                    BIBFILES bibliography.bib unpublished.bib USE_BIBLATEX
                    TARGET_NAME appendix-full-geometry IMAGE_DIRS ../img EXCLUDE_FROM_ALL)
@@ -38,10 +38,10 @@ add_latex_document(appendix-full-geometry.tex
 #                    TARGET_NAME appendix-diagrams IMAGE_DIRS ../img EXCLUDE_FROM_ALL)
 
 add_custom_target(chapters)
-add_dependencies(chapters introduction background supercooled-liquids morph1 morph2 resummation aerosols conclusion appendix-spt-singularities appendix-two-spheres appendix-full-geometry)
+add_dependencies(chapters introduction background supercooled-liquids morph1 morph2 resummation aerosols conclusion appendix-spt-singularities appendix-full-geometry)
 
 add_latex_document(thesis.tex
-                   INPUTS preamble.sty abstract.tex dedication.tex declaration.tex acknowledgements.tex word-count.tex opening-quote.tex introduction.tex background.tex integral-geometry.tex liquid-state-theory.tex density-functional-theory.tex supercooled-liquids.tex morphometric-framework.tex morphometric-applications.tex resummation.tex aerosols.tex conclusion.tex appendix-spt-singularities.tex appendix-two-spheres.tex appendix-full-geometry.tex
+                   INPUTS preamble.sty abstract.tex dedication.tex declaration.tex acknowledgements.tex word-count.tex opening-quote.tex introduction.tex background.tex integral-geometry.tex liquid-state-theory.tex density-functional-theory.tex supercooled-liquids.tex morphometric-framework.tex morphometric-applications.tex resummation.tex aerosols.tex conclusion.tex appendix-spt-singularities.tex appendix-full-geometry.tex
                    BIBFILES bibliography.bib unpublished.bib
                    USE_BIBLATEX
                    TARGET_NAME thesis
