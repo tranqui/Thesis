@@ -3,7 +3,7 @@
 %TC: macrocount beginSCfigure [figure]
 \documentclass[11pt,twoside]{report}
 \usepackage{preamble}
-\setcounter{chapter}{2}
+\setcounter{chapter}{3}
 \graphicspath{{../img/}}
 \def\includebibliography{}
 
@@ -829,16 +829,6 @@ The pair correlation produced by these coefficients (black line in Fig.\ \ref{fi
   \label{fig:sp3}
 \end{SCfigure}
 
-\begin{SCfigure}
-  \includegraphics[width=0.9\linewidth,outer]{a2-errors}
-  \caption[Comparing of theoretical surface tensions against literature values]{
-    Errors in different morphometric theories for hard spheres.
-    Top panel: error in the coordination defined in \eqref{eq:coordination}, giving the average number of neighbours in the shell $r < 1.4\sigma$ around a particle.
-    Bottom panel: planar surface tensions against volume fraction, using the highly accurate result \eqref{eq:quasi-exact-surface-tension} from Ref.\ \cite{DavidchackMP2015} valid until $\eta \sim 0.5$.
-  The theories compared are virial/CS, new coefficients given in \eqref{eq:virial-coefficients}; SPT/CS, equivalent to the White Bear II \cite{Hansen-GoosJPCM2006} given in \eqref{eq:cs-spt-coefficients}; and SPT/PY, the classical scaled particle theory \cite{ReissJCP1959} given in \eqref{eq:py-coefficients}.}
-  \label{fig:surface-tension}
-\end{SCfigure}
-
 \section{Numerical results}
 \label{sec:numerics}
 
@@ -884,6 +874,16 @@ To illustrate this we consider the concentration of triangles with side lengths 
 \end{equation}
 Comparison of this quantity against molecular dynamics simulations shows similar levels of accuracy for small $\delta$, though the performance decreases as it is increased above the first minimum of the $g^{(2)}(r)$; this is not surprising as our virial closure emphasised accuracy at contact.
 Notably, the Kirkwood approximation performs surprisingly well at the three-body level in both of these tests.
+
+\begin{SCfigure}
+  \includegraphics[width=0.9\linewidth,outer]{a2-errors}
+  \caption[Comparing of theoretical surface tensions against literature values]{
+    Errors in different morphometric theories for hard spheres.
+    Top panel: error in the coordination defined in \eqref{eq:coordination}, giving the average number of neighbours in the shell $r < 1.4\sigma$ around a particle.
+    Bottom panel: planar surface tensions against volume fraction, using the highly accurate result \eqref{eq:quasi-exact-surface-tension} from Ref.\ \cite{DavidchackMP2015} valid until $\eta \sim 0.5$.
+  The theories compared are virial/CS, new coefficients given in \eqref{eq:virial-coefficients}; SPT/CS, equivalent to the White Bear II \cite{Hansen-GoosJPCM2006} given in \eqref{eq:cs-spt-coefficients}; and SPT/PY, the classical scaled particle theory \cite{ReissJCP1959} given in \eqref{eq:py-coefficients}.}
+  \label{fig:surface-tension}
+\end{SCfigure}
 
 Next we compare the theories' predicted surface tension against simulation data.
 The surface tension at a planar wall is simply $a_2$ because it conjugates with the area.
@@ -940,6 +940,7 @@ In this sense it is more accurate to describe the morphometric approach (and rel
 %\end{itemize}
 
 \ifdefined\includebibliography
+  \newgeometry{margin=1in}
   \printbibliography
 \fi
 

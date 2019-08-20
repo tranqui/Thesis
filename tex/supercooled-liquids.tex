@@ -1,5 +1,29 @@
-\section{Approaching high densities: supercooled liquids and glasses}
-\label{sec:glass}
+%TC: macro \marginfootnote [other]
+%TC: envir SCfigure [] other
+%TC: macrocount beginSCfigure [figure]
+\documentclass[11pt,twoside]{report}
+\usepackage{preamble}
+\setcounter{chapter}{2}
+\graphicspath{{../img/}}
+\def\includebibliography{}
+
+\externaldocument{introduction}
+\externaldocument{background}
+\externaldocument{morphometric-framework}
+\externaldocument{morphometric-applications}
+\externaldocument{resummation}
+\externaldocument{aerosols}
+
+\begin{document}
+\chapter{Supercooled liquids and glasses}
+\epigraph{Truly, he thought, the way of enlightenment is like unto half a mile of broken glass.}{Terry Pratchett, \emph{Mort}, (1987).}
+\label{chapter:glass}
+
+In the introduction we established the supercooled liquid in hard spheres as the extension of the stable liquid above the freezing density, where it is metastable to the crystal phase.
+To provide proper context we will discuss supercooled liquids more generally here, including thermal systems where temperature is the more natural control parameter.
+As such, we will be considering the effect of decreasing temperature on the supercooled liquid.
+
+This chapter is more of a conventional literature review.
 
 %% \subsection{Mean-field picture}
 %% The infinite dimensional limit $d \to \infty$.
@@ -56,13 +80,9 @@
 %% Amorphous, apparently amorphous: no periodic arrangement like in crystal.
 %% Homogeneous makes useful for technology: useful for e.g.\ optical properties.
 
-In the introduction we established the supercooled liquid in hard spheres as the extension of the stable liquid above the freezing density, where it is metastable to the crystal phase.
-To provide proper context we will discuss supercooled liquids more generally here, including thermal systems where temperature is the more natural control parameter.
-As such, we will be considering the effect of decreasing temperature on the supercooled liquid.
-
 %First, we describe the phenomenology of supercooled liquids before delving into the specific theories to explain them.
 
-\subsection{Properties of the supercooled liquid}
+\section{Properties of the supercooled liquid}
 \label{sec:glass-phenomenology}
 
 We will start by exploring the ways in which supercooled liquids are the \emph{same} as regular liquids, expanding in more detail on ideas discussed in the introduction.
@@ -307,7 +327,7 @@ Moreover, the geometrical interpretation in terms of volume fluctuations $\Delta
 
 Having introduced the phenomenology of supercooled liquids we can now proceed to specific theories of the glass transition, beginning with an explicitly dynamical one.
 
-\subsection{Mode-coupling theory}
+\section{Mode-coupling theory}
 \label{sec:mct}
 
 The central tenet of mode-coupling theory (MCT) is to separate the liquid's degrees of freedoms into \emph{slow} and \emph{fast} variables.
@@ -391,7 +411,7 @@ Despite this failing of MCT, it remains the only properly first-principles theor
 Extensions incorporating fluctuations can be found in Refs.\ \cite{BiroliPRL2006,SzamelPTEP2013}, and more recently a generalised MCT has been developed which avoids the uncontrolled factorisation of the pair densities \cite{JanssenPRL2015,JanssenFP2018}.
 Importantly, the latter approach incorporates closures of the many-body correlation functions, which will be a central theme of later chapters; by doing this the authors were able to move the diverging timescale to higher densities, bringing the theory into better agreement with available data from simulations and experiments.
 
-\subsection{Mean-field theories}
+\section{Mean-field theories}
 \label{sec:mean-field-glass}
 
 We introduced MCT as an explicitly dynamical theory which attempts to model dynamical arrest in supercooled liquids by directly describing the decay of time correlation functions like $F(k, t)$.
@@ -473,7 +493,7 @@ The relevance of mean-field descriptions in physical dimensions requires a finit
 %% This quantity is well-defined in mean-field because these regions are completely disconnected, however in finite dimensions transitions can always occur between them through nucleation \cite{KirkpatrickPRB1987,KirkpatrickPRA1989,BouchaudJCP2004}.
 %% The dynamical transition thus becomes a cross-over, and a finite-dimensional description of the supercooled liquid is needed.
 
-\subsection{Finite-dimensional theories}
+\section{Finite-dimensional theories}
 
 \begin{SCfigure}
   \includegraphics[width=0.9\linewidth,outer]{swap-Sconf}
@@ -579,7 +599,7 @@ For more information on dynamic facilitation we direct the reader to the review 
 
 %Theories concentrating on the high density glass: elastic theories.
 
-\subsection{Perspective: usefulness of many-body correlations}
+\section{Perspective: usefulness of many-body correlations}
 \label{sec:correlation-perspective}
 
 In subsequent chapters will be heavily focusing on the treatment of static many-body correlation functions in the bulk liquid.
@@ -689,5 +709,12 @@ A further $d(d-1)/2$ degrees of freedom%
 can be removed by exploiting rotational symmetry.
 Many-particle generalisations of the static structure factor can be obtained from $\tilde{c}^{(n)}(\vec{k}^n)$ by functionally differentiating the Ornstein-Zernike equation \eqref{eq:ornstein-zernike-generic} with respect to density \cite{BarratMP1988}.
 
-This concludes the relevant background in liquid state theory and glasses.
-In subsequent chapters we will develop a framework for treating the many-body correlation functions in real space.
+This concludes the relevant background in supercooled liquids and glasses.
+In subsequent chapters we will develop a framework for treating the many-body correlation functions in real space, with the hope that it can address some of the questions outlined here.
+
+\ifdefined\includebibliography
+  \newgeometry{margin=1in}
+  \printbibliography
+\fi
+
+\end{document}

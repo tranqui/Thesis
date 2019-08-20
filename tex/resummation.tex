@@ -3,7 +3,7 @@
 %TC: macrocount beginSCfigure [figure]
 \documentclass[11pt,twoside]{report}
 \usepackage{preamble}
-\setcounter{chapter}{4}
+\setcounter{chapter}{5}
 \graphicspath{{../img/}}
 \def\includebibliography{}
 
@@ -18,13 +18,13 @@
 
 This is the final chapter on the morphometric approach, but has a different focus from the previous two.
 Here we derive the morphometric approach from first-principles in the case of hard particle systems, to place it on rigorous footing and potentially indicate how the approximation may be improved.
-We intend to publish part of this work later this year as Ref.\ \cite{RobinsonResummation2019}.
+We intend to publish part of this work at a later time as Ref.\ \cite{RobinsonResummation2019}.
 
 \section{Introduction}
 
 The standard theoretical framework for treating inhomogeneous liquids is classical density functional theory (DFT), which we introduced in section \ref{sec:dft}.
 Central to this theory is the result that the free energy can be \emph{exactly} expressed as a functional of the density $\Omega = \Omega[\rho(\vec{r})]$ \cite{EvansAP1979}, though approximate functionals must be used in general.
-For example, the fundamental measure theory (FMT) \cite{RosenfeldPRL1989} provides a class of highly accurate functionals for the hard sphere liquid (cf.\ section \ref{sec:fmt}).
+For example, fundamental measure theory (FMT) \cite{RosenfeldPRL1989} provides a class of highly accurate functionals for the hard sphere liquid (cf.\ section \ref{sec:fmt}).
 % relying on physical ingenuity.
 A common practical application of DFT is to its \emph{dual} problem: determining the free energy $\Omega = \Omega[\phi_\mathrm{ext}(\vec{r})]$ for a fixed external potential $\phi_\mathrm{ext}(\vec{r})$.
 Approaching this through DFT requires minimisation of $\Omega$ to obtain the equilibrium density profile, a tractable but expensive procedure.
@@ -953,6 +953,7 @@ Moreover, as functions of the scaled particle variables $\{\xi_i\}$ the coeffici
 With the number of coefficients growing with $m$ in \eqref{eq:morphometric-approach-mixtures}, it is unclear how well-posed the \emph{ansatz} is in this limit.
 
 \ifdefined\includebibliography
+  \newgeometry{margin=1in}
   \printbibliography
 \fi
 

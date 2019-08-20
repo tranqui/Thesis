@@ -3,7 +3,7 @@
 %TC: macrocount beginSCfigure [figure]
 \documentclass[11pt,twoside]{report}
 \usepackage{preamble}
-\setcounter{chapter}{2}
+\setcounter{chapter}{1}
 \graphicspath{{../img/}}
 \def\includebibliography{}
 \renewcommand{\chaptername}{Appendix}
@@ -436,6 +436,7 @@ In this work we have avoided these considerations primarily by restricting ourse
 Construction of the reaction path of $n=6$ particles necessitates an analytic method which uses a quenched geometry, however the geometries for $n=6$ are not pathological so no special consideration is needed.
 
 \ifdefined\includebibliography
+  \newgeometry{margin=1in}
   \printbibliography
 \fi
 
