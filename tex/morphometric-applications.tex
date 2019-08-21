@@ -45,7 +45,6 @@ Furthermore, computer simulations, which naturally deliver full many-body correl
 In this chapter we place theoretical predictions of many-body local structure on a fundamentally more rigorous footing using inhomogeneous liquid state theory \cite{EvansAP1979}, which we reviewed in section \ref{sec:dft} and advanced in chapter \ref{chapter:morphometric-framework}.
 Using the morphometric approach to treat the many-body interactions between a local subsystem and the remaining liquid, we can directly access the many-body \textit{free} energy of local arrangements of particles.
 This allows us to predict the populations of specific local structures in the bulk system across the entire liquid phase and beyond the dynamically accessible supercooled regime.
-\todo{Make clear that in terms of glassy theories our approach does lean more towards a local structure point of view.}
 
 \section{Free energy of local structures}
 
@@ -56,7 +55,7 @@ This allows us to predict the populations of specific local structures in the bu
 %% Almost all methods for Common methods:
 %% \begin{itemize}
 %%   \item Bond orientational order parameters
-%%   \item Bond networks: take some bond detection algorithm (voronoi, 
+%%   \item Bond networks: take some bond detection algorithm (voronoi,
 %% Fom the partition function of the potential of mean force
 %% Suppose we have a definition of a
 %% \end{itemize}
@@ -100,24 +99,20 @@ Written explicitly, the free energy of the local structure is
     \beta F
     &=
     -\ln{
-      \left[
+      \left(
         \frac{1}{\sigma^{d(n-1)} V}
-        \left(
         \int_{\mathcal{D}}
         g^{(n)}(\vec{r}^{n-1}) \, d\vec{r}^{n-1}
-        \right)
-      \right]
+      \right)
     },
     \\
     &=
     -\ln{
-      \left[
+      \left(
         \frac{1}{\sigma^{d(n-1)} V}
-        \left(
         \int_{\mathcal{D}}
         e^{-\beta\phi^{(n)}(\vec{r}^{n-1})} \, d\vec{r}^{n-1}
-        \right)
-      \right]
+      \right)
     }.
   \end{split}
 \end{equation}
@@ -153,7 +148,7 @@ The partition function would then be evaluated using via a perturbation theory a
 \end{equation*}
 which is valid in the case of \emph{smooth} potentials where $\vec{\nabla} \phi^{(n)}(\vec{x}_0) = 0$.
 Then, \cite{Wales2004}
-\begin{equation*}
+\begin{equation}\label{eq:harmonic-approximation}
   \begin{split}
     \int_\mathcal{D} e^{-\beta\phi^{(n)}(\vec{x})} d\vec{x}
     &\simeq
@@ -165,8 +160,8 @@ Then, \cite{Wales2004}
     \sqrt{ \frac{(2\pi)^{d(n-1)}}{\det \vec{H}} }
     e^{-\beta\phi^{(n)}(\vec{x}_0)}
   \end{split}
-\end{equation*}
-where $\vec{H} = \vec{\nabla}\vec{\nabla} \beta \phi^{(n)}(\vec{x}_0)$ is the (postive-definite) Hessian matrix and $\Delta \vec{x} = \vec{x} - \vec{x}_0$, and in the latter line the integral is taken over all of space (as an approximation) using the multivariate Gaussian integral.
+\end{equation}
+where $\vec{H} = \vec{\nabla}\vec{\nabla} \beta \phi^{(n)}(\vec{x}_0)$ is the (positive-definite) Hessian matrix and $\Delta \vec{x} = \vec{x} - \vec{x}_0$, and in the latter line the integral is taken over all of space (as an approximation) using the multivariate Gaussian integral.
 This method is referred to as the \emph{saddlepoint approximation}, \emph{Laplace's method} or the \emph{harmonic approximation} depending on the community.
 This approach fails in hard particle systems because the pair potential is pathological: $\vec{\nabla} \phi^{(n)}(\vec{x}_0) \ne 0$, the Hessian is generally not positive-definite and the integral cannot be approximated over all of space.
 
@@ -174,8 +169,9 @@ This approach fails in hard particle systems because the pair potential is patho
   \includegraphics[width=0.9\linewidth,outer]{packings}
   \caption[Rigid spherical packings of up to 7 particles]{
     Rigid sphere packings for $3 \le n \le 7$ particles, as determined from Refs.\ \cite{ArkusPRL2009,Holmes-CerfonSR2016}.
+    For each packing we show their bond network with particles at half radius (left) and with full size particles (right).
     There are 5 possible rigid packings for $n=7$, of which two correspond to variants of the frustrated pentagonal bipyramid introduced in Fig.\ \ref{fig:frustration}(a).
-    The last 3 structures for $n=7$ (bottom row) do not have standard names so they remain unlabelled.
+    The last 3 structures for $n=7$ (bottom row) do not have standard names so we leave them unlabelled.
   }
   \label{fig:packings}
 \end{SCfigure}
@@ -187,10 +183,21 @@ A complete list of rigid packings of hard spheres for $n \le 14$ particles has b
 As these states are exhaustive, they represent a complete \emph{local library of states}, of fundamental interest to random first-order transition theory \cite{LubchenkoARPC2007} with the potential to significantly improve upon previous extensions of mean-field theory into finite-dimensions \cite{BouchaudJCP2004,DzeroPRB2005,FranzJSM2005,AngeliniJSP2017,RulquinJSM2016,BiroliMeanPRB2018,BiroliFinitePRB2018}.
 \todo{Indicate what makes something rigid.}
 
-As we cannot use perturbation theory, we must \emph{choose} a definition for the basin surrounding each spherical packing.
-For simplicity, we define a particular local structure by its bond topology, using a pairwise cutoff $\sigma_{cut}$ such that separations between particles are in the range $r_{ij} \in [\sigma, \sigma_{cut}]$ if they are ``bonded'' and $r_{ij} > \sigma$ otherwise.
-All the results we present use a cutoff of $\sigma_{cut}=1.2 \sigma$, but we have tested our findings are not significantly affected by a choice of $\sigma_{cut}=1.4 \sigma$ indicating their robustness.
-\todo{More on structure from the appendix}
+As we cannot use perturbation theory \eqref{eq:harmonic-approximation}, we must \emph{choose} a definition for the basin surrounding each spherical packing.
+For simplicity, we define a particular local structure by its bond topology i.e.\ the $m$ contacts at the reference point.
+We write the set of contacts as
+\begin{equation}\label{eq:structure-contacts}
+  \mathcal{M} = \{(a_1, b_1), \cdots, (a_m, b_m)\}
+\end{equation}
+where $a_i, b_i \in \mathbb{N}$ are the indices of touching particles.
+%Naively, we expect $m \sim dn$
+Following \cite{Holmes-CerfonPNAS2013} we introduce the \emph{bond distance} as the size of the gap between particles
+\begin{equation}\label{eq:bond-distance}
+  y_k = |\vec{r}_{a_k} - \vec{r}_{b_k}| - \sigma,
+\end{equation}
+clearly contact occurs where $y_k = 0$ for all $k \in \{1, \cdots, m\}$.
+We introduce a pairwise cutoff $\delta_\mathrm{cut}$ such that the gaps between particle are bonunded in the range $y_k \in [0, \delta_\mathrm{cut}]$, with the lower limt set by the hard particle constraint.
+All the results we present use a cutoff of $\delta_{cut}=0.2 \sigma$, but we have tested that our findings are not significantly affected by a choice of $\delta_{cut}=0.4 \sigma$ indicating their robustness.
 
 %% The hard sphere potential is a pathological case: the singularity in the pair potential dooms harmonic treatments.
 %% To illustrate this, we consider a worked example.
@@ -219,76 +226,101 @@ All the results we present use a cutoff of $\sigma_{cut}=1.2 \sigma$, but we hav
 %% We will however take inspiration of the approach for soft potentials, and hope to adapt these into a framework for doing similar calculations.
 
 %\section{Methods to evaluate the free energy}
-\section{Statics: thermodynamic integration for structure free energies}
+\section{The local library of states}
 
-\todo{State that we want the saddles: they are the primary reason for developing analytical methods}
-
-Before moving on to our approximate analytical integration schemes we describe a method which is essentially exact to within numerical precision, at the cost of greater computational expense.
-We will use thermodynamic integration to test the accuracy of our analytical methods.
-Aspects of this method were inspired by Ref.\ \cite{SchillingJCP2009}.
-As a Monte-Carlo method it would be very difficult to extend this method to saddles which is of great interest.
-
-We perform a thermodynamic integration between two potentials $V_1$ and $V_2$ by considering the intermediate potential
-\begin{equation}
-  V(\vec{r}^n; V_1, V_2) = \lambda V_1(\vec{r}^n) + (1-\lambda) V_2(\vec{r}^n).
+With a definition of the structures we can now evaluate the free energies using thermodynamic integration techniques.
+%We will use thermodynamic integration to test the accuracy of our analytical methods.
+From the fundamental theorem of calculus, the free energy change from the ideal gas can be \emph{exactly} expressed as \cite{Frenkel2002}
+\begin{align}\label{eq:td-integration}
+  %\begin{split}
+  %\nonumber
+  \beta F(\eta)
+  - \beta F^\mathrm{id}
+  &=
+  \int_0^\eta \frac{\partial \beta F(\eta')}{\partial \eta'} \, d\eta'
+  %% \\ &=
+  %% %=
+  %% \nonumber
+  %% - \int_0^\eta
+  %% \frac{
+  %%   \frac{\partial}{\partial \eta'}
+  %%   \left(
+  %%   \int_\mathcal{D} e^{-\beta\phi^{(n)}(\vec{x}; \eta')} d\vec{x}
+  %%   \right)
+  %% }{
+  %%   \int_\mathcal{D} e^{-\beta\phi^{(n)}(\vec{x}; \eta')} d\vec{x}
+  %% }
+  %% \, d\eta',
+  %% \\ &=
+  =
+  \int_0^\eta
+  \left\langle
+  \frac{\partial \beta \phi^{(n)}(\vec{x}; \eta')}{\partial \eta'}
+  \right\rangle_\mathcal{D}
+  \, d\eta',
+  %\end{split}
+\end{align}
+where the latter step used the definition of free energy \eqref{eq:local-structure-free-energy} and $\langle \cdot \rangle_\mathcal{D}$ indicates the thermal average over the structure space $\mathcal{D}$.
+The integrand can be measured within a Monte-Carlo simulation, which equilibrate rapidly for small $n$ so it is straightforward to perform this integration.
+More complicated is the evaluation of the ideal gas term, i.e.\
+\begin{equation}\label{eq:local-structure-free-energy-ideal}
+  \beta F^\mathrm{id}
+  :=
+  \beta F(\eta=0)
+  =
+  -\ln{
+    \left(
+      \frac{1}{\sigma^{d(n-1)} V}
+      \int_{\mathcal{D}} d\vec{x}
+    \right)
+  },
 \end{equation}
-where $\lambda \in \{0,1\}$ is a mixing parameter.
+which still involves an integral over $\mathcal{D}$.
+
+We will introduce approximate analytic methods to evaluate the integral in \eqref{eq:local-structure-free-energy-ideal} in subsequent sections, but here we use another thermodynamic integration step using the method of Ref.\ \cite{SchillingJCP2009} to obtain essentially exact results.
+Introducing an interaction potential which imposes the boundary conditions of $\mathcal{D}$, i.e.\
+\begin{equation*}
+  e^{-\beta W(\vec{x})}
+  =
+  \begin{cases}
+    1 & \vec{x} \in \mathcal{D} \\
+    0 & \textrm{otherwise}
+  \end{cases}
+\end{equation*}
+so that we can switch to an integral over all of space, i.e.\ the replacement
+\begin{equation*}
+  \int_{\mathcal{D}} d\vec{x}
+  =
+  \int_{\mathbb{R}^{d(n-1)}} e^{-\beta W(\vec{x})} d\vec{x}.
+\end{equation*}
+The free energy of the $W$-interacting system is thus identical to $F^\mathrm{id}$.
+To perform the thermodynamic integration we simulate with an intermediate interaction potential \cite{SchillingJCP2009}
+\begin{equation*}
+  \widetilde{W}(\vec{x}, \lambda)
+  =
+  \lambda W(\vec{x}) + (1-\lambda) V_\mathrm{ref}(\vec{x}),
+\end{equation*}
+where $\lambda \in \{0,1\}$ is a mixing parameter that switches between the potential of interest and the reference potential $V_\mathrm{ref}$.
 Over the course of a Monte-Carlo sweep, in addition to regular steps $\lambda$ is allowed to switch between these values according to the Metropolis-Hastings rule.
-The free energy difference between the two systems is determined from the ratio of time spent with each potential active by
-\begin{equation}
-  \Delta F \equiv F_2 - F_1 = -\log{\left( \frac{t_2}{t_1} \right)},
+The free energy difference from the reference system is determined from the ratio of time spent with each potential active by
+\begin{equation}\label{eq:ideal-free-energy-change}
+  F(\eta = 0) - F_\mathrm{ref}
+  = -\log{\left( \frac{t_W}{t_\mathrm{ref}} \right)},
 \end{equation}
-where $t_i$ is the total number of sweeps where potential $i$ is active (by $\lambda$ value).
-
-Local structure is defined in the main text by its bond topology.
-We define an $n \times n$ adjacency matrix $\mathcal{A}$ giving the bond topology of $n$ particles by
-\begin{equation}
-  A_{ij} =
-  \begin{cases}
-  1 \quad i \textrm{ and } j \textrm{ ``bonded''} \\
-  0 \quad \textrm{otherwise}
-  \end{cases}
-\end{equation}
-The hard core interaction ensures $r_{ij} \equiv |\vec{r}_i - \vec{r}_j| > \sigma$ for all $(i,j)$ including non-bonded particles, but the ``bonded'' flag forces the stricter condition that $r_{ij} \in [\sigma, \sigma_{cut}]$ when $A_{ij} = 1$.
+where $t_i$ is the total number of Monte-Carlo steps where potential $i$ is active (as selected by $\lambda$).
+For the reference potential, we introduce harmonic springs between the bonded particles in the contact set \eqref{eq:structure-contacts} i.e.\
+\begin{equation*}
+  V_\mathrm{ref}(\vec{x})
+  =
+  \epsilon \sum_{k=1}^m \left( y_k - \frac{\delta_\mathrm{cut}}{2} \right)^2
+\end{equation*}
 The latter strict criterion is how we are able to focus on specific local structures.
-
-To do the thermodynamic integration we introduce an intermediate potential which takes into account the boundary conditions of the integral:
-\begin{equation}
-  \phi(\vec{r}^n; v_\lambda, \eta) =
-  \sum_{i < j} A_{ij} v_\lambda(r_{ij})
-  + \phi^{(n)}(\vec{r}^n; \eta)
-\end{equation}
-where $v_\lambda$ is a \emph{confining} potential to restrict the Monte-Carlo to integrate only the structure of interest.
-We have indicated the dependence of the potential of mean force on volume fraction, noting that in the ideal gas limit the grand potential (solvation) term vanishes leaving only the potential energy contribution
-\begin{equation}
-  \phi^{(n)}(\vec{r}^n; \eta=0) = \sum_{i < j} v_{hs}(r_{ij}),
-\end{equation}
-where the hard sphere (no-overlap) interaction is
-\begin{equation}
-  v_{hs}(r) =
-  \begin{cases}
-    0 &r > \sigma \\
-    \infty &\textrm{elsewhere}.
-  \end{cases}
-\end{equation}
-The potential of interest is $\phi(\vec{r}^n; v_{hs}, \eta)$, which requires several thermodynamic integration steps to reach.
-
-First, we perform an integration from a reference potential $\phi(\vec{r}^n; v_H, \eta=0)$ to $\phi(\vec{r}^n; v_{SW}, \eta=0)$ where the confining potential $v_\lambda$ takes either the harmonic form
-\begin{equation}
-  v_H(r) = \epsilon \left(\frac{\sigma_{cut} - r}{\sigma}\right)^2
-\end{equation}
-with a value of $\epsilon$ discussed below, or the (infinite) square well form
-\begin{equation}
-  v_{SW}(r) =
-  \begin{cases}
-    0 &\sigma < r < \sigma_{cut} \\
-    \infty &\textrm{elsewhere}
-  \end{cases}
-\end{equation}
-to properly impose the boundary conditions $r_{ij} \in [\sigma, \sigma_{cut}]$ when $A_{ij} = 1$.
-To optimise the simulations the value of $\epsilon$ should be chosen to keep the free energy difference between the two systems of order $\mathcal{O}(1 \, k_B T)$; we found $\epsilon = 75\sigma^2$ to be a reasonable choice for cutoff $\sigma_{cut} = 1.2\sigma$ at the system sizes considered ($n \le 12$).
-The free energy of the reference harmonic system is found by multivariate Gaussian integration, neglecting the effect of the hard sphere interactions for $\epsilon \gg 1$.
-In subsequent steps we integrate between $\phi(\vec{r}^n; v_{SW}, \eta_i)$ and $\phi(\vec{r}^n; v_{SW}, \eta_{i+1})$ until the desired final volume fraction is reached.
+To optimise the simulations the value of $\epsilon$ should be chosen to keep the free energy difference between the two systems of order $\mathcal{O}(1 \, k_B T)$ \cite{SchillingJCP2009}; we found $\epsilon = 75\sigma^2$ to be a reasonable choice with the system sizes considered ($n \le 13$) for the cutoff $\delta_{cut} = 0.2\sigma$.
+As the reference system is exactly harmonic, we can use \eqref{eq:harmonic-approximation} to evaluate $F_\mathrm{ref}$ to within numerical precision%
+\marginfootnote{We are skipping an important step here, because it requires formalism to be introduced in section \ref{sec:bond-distance}.
+  Specifically, this integral must be done in \emph{bond-distance space}, i.e.\ we perform the multivariate Gaussian integral in the space of $\{y_1, \cdots, y_m\}$.
+  Evaluating this Gaussian over all of space i.e.\ $y_k \in [-\infty, \infty]$ introduces a small approximation as we have the geometrical lower bound $y_k > -\sigma$.}.
+Finally, combining this reference $F_\mathrm{ref}$ with the thermodynamic integration steps \eqref{eq:ideal-free-energy-change} and \eqref{eq:td-integration} gives the free energy of the structure at the target volume fraction $F(\eta)$.
 
 \begin{SCfigure}
   \includegraphics[width=\linewidth,center]{structure-populations}
@@ -310,11 +342,13 @@ In subsequent steps we integrate between $\phi(\vec{r}^n; v_{SW}, \eta_i)$ and $
   \label{fig:n12-dos}
 \end{SCfigure}
 
-To demonstrate the effectiveness of this approach we have taken rigid structures for $3 \le n \le 13$ which are global minima of clusters in simple liquids \cite{Wales2004}.
-We determined their free energies at arbitrary volume fraction by thermodynamic integration (details in SM) of Eq.\ \eqref{eq:local-structure-free-energy}.
-\todo{Remove Eq., put integration details back in.}
-In the left panel of Fig.\ \ref{fig:structure-populations} we find excellent agreement between the theoretical prediction and the observed concentration of local structure seen in molecular dynamics simulations of both mono- and moderately polydisperse (8\%) hard spheres at all volume fractions accessed by the simulations i.e.\ $\eta \lesssim 0.585$ (details in SM).
+To demonstrate the effectiveness of this approach we have taken structures for $3 \le n \le 13$ which are global minima of clusters in different simple liquids \cite{Wales2004}; this includes frustrated structures for $n \ge 7$ which do not correspond to rigid packings with unique energy minima.
+We selected these structures because we can identify them in molecular dynamics simulations using the algorithm of Ref.\ \cite{MalinsTCC2013}.
+Using this algorithm we can compare the theoretical predictions against molecular dynamics simulations of both mono- and moderately polydisperse hard spheres at all volume fractions accessed by the simulations i.e.\ $\eta \lesssim 0.585$.
+For the polydisperse simulations we used data from Ref.\ \cite{RoyallJSM2017} with a 5-component equimolar distribution with $\sim8\%$ polydispersity, to avoid freezing at high densities, and for the monodisperse simulations we used the DynamO software for event-driven molecular dynamics \cite{BannermanJCC2011}.
+We determined their free energies using the thermodynamic integration steps outlined above.
 
+In Fig.\ \ref{fig:structure-populations} we find excellent agreement between the theoretical prediction and the observed concentration of local structure seen in the simulations.
 Our approach is able to predict populations of local structures well beyond the regime dynamically accessible to simulation, finding nontrivial structural change deep in the glassy regime highlighted by a rescaling with respect to the trivial $\rho^n$ density contribution.
 The free energy of considered structures changes approximately linearly across the entire liquid regime, with deviations from linear becoming more apparent in the supercooled regime.
 
@@ -326,12 +360,30 @@ In particular, we are able to capture the gradual reduction of the population of
 This is related to the previously observed emergence of fivefold symmetric motifs (such as the full and partial icosahedron) \cite{RoyallPR2015,TarjusJPCM2005,HallettNC2018,DunleavyNC2015}, which is here directly predicted from liquid state theory.
 
 Having tested that the theory is accurate for selected geometries, we now take the exhaustive list of 11980 rigid structures for $n=12$ determined in Ref.\ \cite{Holmes-CerfonSR2016} to obtain a local density of states for a given sized inhomogeneity.
-These rigid structures correspond to unique contact topologies, but in thermal systems (i.e. with finite gaps between particles) we expect many of them to be indistinguishable as found in Ref.\ \cite{TrombachPRE2018}.
-Nevertheless, because of their exhaustiveness these represent a complete local density of states in the liquid, of fundamental interest to random first-order transition theory \cite{LubchenkoARPC2007}.
-We calculated the free energy of all (first-order) rigid (nonsingular) structures using Eq.\ \eqref{eq:local-structure-free-energy} (right panel of Fig.\ \ref{fig:structure-populations}), finding a bimodal distribution with two main peaks separated by a free energy difference that increases with increasing volume fraction.
+We calculated the free energy of all (first-order) rigid (nonsingular) structures using \eqref{eq:local-structure-free-energy} (right panel of Fig.\ \ref{fig:structure-populations}), finding a bimodal distribution with two main peaks separated by a free energy difference that increases with increasing volume fraction.
+\todo{Explain what is meant by first-order and nonsingular here.}
 We find the that lower energy distribution consists of structures rich in fivefold (icosahedral) symmetry in the absence of fourfold (octahedral) symmetry.
+This shows that the hard sphere liquid is highly frustrated, and would be interpretted as the reason hard spheres make good glassformers in the geometric frustration picture \cite{KivelsonPA1995,TarjusJPCM2005}.
+However, this result is potentially compatible with other thermodynamic scenarios like the random first-order transition theory (RFOT) \cite{LubchenkoARPC2007}.
 
-\section{Dynamics: analytical results in bond-distance space}
+Each of the structures correspond to unique contact topologies, but in thermal systems (i.e. with finite gaps between particles) we expect many of them to be indistinguishable as found in Ref.\ \cite{TrombachPRE2018}.
+As such, we have likely overestimated the height of the each peak, and especially the lower energy peak which contains more frustrated structures.
+\todo{Connect with five-fold symmetry calculation later.}
+Nevertheless, because of this set of packings is exhaustive they represent a complete local density of states in the liquid, which is of fundamental interest to RFOT \cite{LubchenkoARPC2007}.
+The distribution of energy levels is a key quantity in RFOT, but to really assess the dynamics we also need to know the \emph{connectivity} of the different energy states.
+For this we need their reaction paths.
+We used thermodynamic integration with Monte-Carlo methods to evaluate the free energies in this section, which cannot be straightforwardly applied along reaction paths which are saddles in the potential.
+In the next section we will introduce analytical methods for evaluating the free energy.
+
+%As a Monte-Carlo method it would be very difficult to extend this method to saddles which is of great interest.
+%Before moving on to our approximate analytical integration schemes we describe a method which is essentially exact to within numerical precision, at the cost of greater computational expense.
+
+\section{Evaluating free energies analytically in bond-distance space}
+\label{sec:bond-distance}
+
+While the thermodynamic integration techniques of the previous section are in principal exact, it is desirable to develop analytic approaches for evaluating the free energy.
+Analytic approaches are typically faster which is desirable for dealing with larger structures, as the number of possible packings seems to grow super-exponentially in $n$ \cite{Holmes-CerfonSR2016}.
+In addition, analytic approaches are more readily able to handle free energy calculations along saddles, which are needed to obtain dynamical information in the vein of energy landscape approaches \cite{Wales2004}.
 
 More generally, we consider the manifold diffeomorphic to translations \emph{and} rotations.
 We define $\mathcal{Q} = \mathcal{D}' \rtimes SE(3)$ where $\textrm{SE}(d)$ is the $d$-dimensional special Euclidean group, leaving the $\mathcal{D}'$ as the space of the structure's internal motion.
@@ -421,9 +473,9 @@ Two methods: assume no hard sphere interactions outside of the bonded particles,
 
 \begin{SCfigure}
   \includegraphics[width=0.9\linewidth,outer]{n7-reaction-path}
-  \caption[The simplest nontrivial reaction path in hard spheres: octahedron to tripyramid]{
-    Reaction for transition between the two $n = 7$ pentagonal bipyramids variant structures.
-    From broken spindle structure to structure with broken five-fold symmetry.
+  \caption[Reaction path for the two variants of the frustrated pentagonal bipyramid]{
+    Reaction for transition between the two $n = 7$ pentagonal bipyramids variant structures, from the variant with a broken spindle (bottom Fig.\ \ref{fig:packings}) to the variant with broken five-fold symmetry (top).
+    The free energy increases monotonically along this reaction path, so there is no barrier separating these two structures.
   }
   \label{fig:reaction-path-7}
 \end{SCfigure}
@@ -442,7 +494,10 @@ However, activated dynamics are not expected in this regime so this agreement ma
 %However, dynamics along the tripyramid--octahedron path continues to increase in an ``Arrhenius'' fashion quite unlike the super-Arrhenius increase exhibited by the $\alpha$--relaxation in the computer simulations (inset of Fig.\ \ref{fig:reaction}).
 %It has been shown in molecular systems that $\beta$--relaxation can be Arrhenius in the deeply supercooled regime where $\alpha$-- relaxation is super-Arrhenius \cite{Yu2015}.
 %Given that typical particle displacements in the tripyramid--octahedron path are around 0.15$\sigma$ per particle, we observe that this relaxation mechanism may be more characteristic of ($\beta$--) relaxation than full ($\alpha$--) relaxation.
+
+
 It is possible to extend our methodology for larger rearrangements, which may be sufficient to access ($\alpha$-) relaxation \emph{at very deep supercooling} for equilibrium systems.
+\todo{Update this with the new Bayesian stuff.}
 However, the rapid growth in the number of possible states presents a considerable numerical challenge requiring new methods and approximations, so we leave this exciting avenue for future study.
 
 \section{Conclusions}
@@ -555,7 +610,7 @@ This suggests a new route for predicting static properties of equilibrium liquid
 %% \begin{itemize}
 %% \item Give a technical definition of local structure with a goal to showing the problems with hard systems.
 %% \item Define structures as manifold: $\mathbb{R}^{dn}$ for $n \ll N$, embedded in $\mathbb{R}^{dN}$
-%% \item Failure of perturbation theory due to singularity of 
+%% \item Failure of perturbation theory due to singularity of
 %% \end{itemize}
 
 %% The energy landscape/inherent structure approach is a powerful theoretical framework for understanding complex phenomena.
