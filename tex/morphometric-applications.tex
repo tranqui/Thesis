@@ -8,6 +8,7 @@
 \def\includebibliography{}
 
 \externaldocument{background}
+\externaldocument{supercooled-liquids}
 \externaldocument{morphometric-framework}
 \externaldocument{appendix-full-geometry}
 
@@ -19,7 +20,6 @@
 The majority of this chapter contains work published as Ref.\ \cite{RobinsonPRL2019}.
 \hl{Later stuff is new.}
 \todo{Should expand this a little. May not write anything new.}
-\todo{\cite{WidomS1967} would be good in the introduction.}
 
 \section{Introduction}
 
@@ -34,18 +34,261 @@ In the case of supercooled liquids, theories based on pair correlations such as 
 Activated dynamics are often rationalised through collective (i.e.\ many-body) effects within contrasting thermodynamic and purely dynamic scenarios \cite{LubchenkoARPC2007,TarjusJPCM2005,BiroliPRL2006,JanssenPRL2015,SzamelPTEP2013,ChandlerARPC2010}.
 These include exact mean-field results in high dimensions \cite{ParisiRMP2010,CharbonneauARCMP2017} whose relevance in finite-dimensional systems is hotly debated \cite{WyartPRL2017}.
 A finite-dimensional theoretical description of many-body effects is therefore much needed.
+We discussed the various theories mentioned above in more detail in chapter \ref{chapter:glass}.
 
 However, many-body correlations are challenging to compute and typically combine both energetic and entropic contributions.
 Physical insight can be gleaned by exploring the potential energy landscape of isolated clusters \cite{Wales2004,ArkusPRL2009}, but such methods are only exhaustive for small system sizes.
 This limitation has been partly addressed by embedding clusters in a mean-field approximation of the surrounding liquid \cite{MossaJCP2003,MossaJNS2006}.
-\todo{Describe Mossa and Tarjus approach in detail.}
 Nonetheless, this approach neglects by construction the intra-cluster entropic contributions that may dominate in the supercooled regime of interest.
-Furthermore, computer simulations, which naturally deliver full many-body correlations are limited in the range of dynamics they can access, hampering an approach to the glass transition, except for recent developments for certain models \cite{BerthierPRL2016}.
+Furthermore, computer simulations, which naturally deliver full many-body correlations are limited in the range of dynamics they can access, hampering an approach to the glass transition, except for recent developments with certain models \cite{BerthierPRL2016}.
 
-Here we place theoretical predictions of many-body local structure on a fundamentally more rigorous footing using inhomogeneous liquid state theory \cite{EvansAP1979}, which we reviewed in section \ref{sec:dft} and advanced in the chapter \ref{chapter:morphometric-framework}.
-We model the many-body interactions between a local subsystem and the remaining liquid, directly accessing the many-body \textit{free} energy of local arrangements of particles.
+In this chapter we place theoretical predictions of many-body local structure on a fundamentally more rigorous footing using inhomogeneous liquid state theory \cite{EvansAP1979}, which we reviewed in section \ref{sec:dft} and advanced in chapter \ref{chapter:morphometric-framework}.
+Using the morphometric approach to treat the many-body interactions between a local subsystem and the remaining liquid, we can directly access the many-body \textit{free} energy of local arrangements of particles.
 This allows us to predict the populations of specific local structures in the bulk system across the entire liquid phase and beyond the dynamically accessible supercooled regime.
 \todo{Make clear that in terms of glassy theories our approach does lean more towards a local structure point of view.}
+
+\section{Free energy of local structures}
+
+%\subsection{Concentrations of local structure}
+
+%% How do we define a local structure?
+%% Most of the literature on structure in amorphous systems falls into one of either two categories
+%% Almost all methods for Common methods:
+%% \begin{itemize}
+%%   \item Bond orientational order parameters
+%%   \item Bond networks: take some bond detection algorithm (voronoi, 
+%% Fom the partition function of the potential of mean force
+%% Suppose we have a definition of a
+%% \end{itemize}
+
+From the definition of the probability density function  \eqref{eq:n-particle-density-pdf} defining the $n$-particle density, the total number of a local structure in a system volume $V$ is
+\begin{equation}\label{eq:structure-population}
+  \mathcal{N} =
+  \int_{\mathcal{Q}} \rho^n g^{(n)}(\vec{r}^n) \, d\vec{r}^n,
+\end{equation}
+where $\mathcal{Q}$ is the domain \emph{defining} the particular local structure.
+In terms of the potential of mean force \eqref{eq:potential-mean-force} this would be written equivalently as
+\begin{equation*}
+  \mathcal{N} =
+  \int_{\mathcal{Q}} \rho^n e^{-\beta \phi^{(n)}(\vec{r}^n)} \, d\vec{r}^n,
+\end{equation*}
+which has a similar structure as the canonical partition function \eqref{eq:canonical-partition} so we can think of structure population $\mathcal{N}$ as being the equivalent partition function in our ensemble%
+\marginfootnote{Formally, this is the \emph{semi-grand canonical ensemble} because there is a chemical potential $\mu$ for the bulk component, but also a fixed number of particles for the local component $n$.}.
+From the latter observation we could define a free energy for the local structure from $-k_B T \, \ln{\mathcal{N}}$,
+%% \begin{equation*}
+%%   \beta F = - \ln{\mathcal{N}},
+%% \end{equation*}
+but we will find it more useful to define it as an excess quantity.
+Specifically, we exploit translational invariance of $\phi^{(n)}$ in the uniform liquid, and fix one particle at the origin and integrate the center of mass over the system volume giving
+\begin{equation}
+  \mathcal{N} =
+  \rho^n V \int_\mathcal{D} g^{(n)}(\vec{r}^n) \, d\vec{r}^{n-1},
+\end{equation}
+defining the internal structure space $\mathcal{D}$ through $\mathcal{Q} = \mathcal{D} \times V^d$.
+The prefactor $\rho^n V$ is the trivial scaling of the ideal gas, so we define the free energy of the structure through the excess quantity%
+\marginfootnote{Note: in previous chapters we used the symbol $F$ to refer to the Helmholtz free energy; here it will \emph{only} refer to the free energy of a local structure.}
+\begin{equation*}
+  e^{-\beta F}
+  =
+  \frac{\mathcal{N}}{\rho^n V \sigma^{d(n-1)}},
+\end{equation*}
+with powers of particle diameter $\sigma$ introduced to make the right-hand side dimensionless.
+Note that $\mathcal{N} / V$ is the \emph{concentration} of the structure, so the right-hand side could be thought of as an excess concentration.
+Written explicitly, the free energy of the local structure is
+\begin{equation}\label{eq:local-structure-free-energy}
+  \begin{split}
+    \beta F
+    &=
+    -\ln{
+      \left[
+        \frac{1}{\sigma^{d(n-1)} V}
+        \left(
+        \int_{\mathcal{D}}
+        g^{(n)}(\vec{r}^{n-1}) \, d\vec{r}^{n-1}
+        \right)
+      \right]
+    },
+    \\
+    &=
+    -\ln{
+      \left[
+        \frac{1}{\sigma^{d(n-1)} V}
+        \left(
+        \int_{\mathcal{D}}
+        e^{-\beta\phi^{(n)}(\vec{r}^{n-1})} \, d\vec{r}^{n-1}
+        \right)
+      \right]
+    }.
+  \end{split}
+\end{equation}
+Evaluating the free energy thus requires a closure for $\phi^{(n)}$, a definition of the structure to set integration limits through $\mathcal{D}$, and a method of actually doing the integration.
+
+We calculate $\phi^{(n)}$ from its definition \eqref{eq:potential-mean-force} and using the morphometric \emph{ansatz} \eqref{eq:morph-ansatz} as a closure for $\Delta \Omega$.
+Our focus is on $d=3$, so we use the virial route coefficients \eqref{eq:virial-coefficients} with the Carnahan-Starling equation of state \eqref{eq:cs-pressure} because of the accuracy of the resulting correlation functions (cf.\ section \ref{sec:framework-numerics}).
+We have already seen how this equation of state is accurate at high densities (Fig.\ \ref{fig:swap-eos}), though it is worth emphasising that it must fail at some point setting limits on our approach.
+%The pair correlation produced by these coefficients is self-consistent with CS at contact by construction; moreover, the new coefficients provide a theory that outperforms the older WBII approach across the whole range of distances typical of neighbouring particles (SM).
+%This enables us to accurately model complex many-particle local structures.
+We calculate the morphological quantities $\{V, A, C, X\}$ using an algorithm described in Ref.\ \cite{KleninJCC2011}, which we have extended to calculate curvature measures (see details in Appendix \ref{appendix:computational-geometry}).
+
+In conventional energy landscape approaches, a structure%
+\marginfootnote{Energy landscape approaches are actually more general than just pertaining to local structures, as they could in principle refer to the landscape of a macroscopic system as they do in e.g.\ mean field approaches (cf.\ section \ref{sec:mean-field-glass}).
+  It is only in this context of small system sizes that they refer to local structures.}
+would be defined by the region, or \emph{basin}, surrounding an energy minimum called the \emph{inherent state} \cite{StillingerPRA1982,StillingerS1995,Wales2004}.
+Defining the location of the inherent state as
+\begin{equation*}
+  \vec{x}_0
+  :=
+  \argmin_{\vec{x} \in \mathcal{D}}{\left( \phi^{(n)}(\vec{x}) \right)},
+\end{equation*}
+with $\vec{x}$ as shorthand for $\vec{r}^{n-1}$.
+The partition function would then be evaluated using via a perturbation theory around the inherent state i.e.\ from the Taylor expansion \cite{Wales2004}
+\begin{equation*}
+  \phi^{(n)}(\vec{x})
+  =
+  \phi^{(n)}(\vec{x}_0)
+  + \frac{1}{2} (\vec{x} - \vec{x}_0) \cdot
+  \vec{\nabla}\vec{\nabla} \phi^{(n)}(\vec{x}_0)
+  \cdot (\vec{x} - \vec{x}_0)
+  + \mathcal{O}(\vec{x}^3)
+\end{equation*}
+which is valid in the case of \emph{smooth} potentials where $\vec{\nabla} \phi^{(n)}(\vec{x}_0) = 0$.
+Then, \cite{Wales2004}
+\begin{equation*}
+  \begin{split}
+    \int_\mathcal{D} e^{-\beta\phi^{(n)}(\vec{x})} d\vec{x}
+    &\simeq
+    e^{-\beta\phi^{(n)}(\vec{x}_0)}
+    \int_\mathcal{D}
+    \exp{\left( - \frac{\Delta\vec{x} \cdot \vec{H} \cdot \Delta\vec{x}}{2} \right)}
+    \, d\vec{x}
+    \\ &\approx
+    \sqrt{ \frac{(2\pi)^{d(n-1)}}{\det \vec{H}} }
+    e^{-\beta\phi^{(n)}(\vec{x}_0)}
+  \end{split}
+\end{equation*}
+where $\vec{H} = \vec{\nabla}\vec{\nabla} \beta \phi^{(n)}(\vec{x}_0)$ is the (postive-definite) Hessian matrix and $\Delta \vec{x} = \vec{x} - \vec{x}_0$, and in the latter line the integral is taken over all of space (as an approximation) using the multivariate Gaussian integral.
+This method is referred to as the \emph{saddlepoint approximation}, \emph{Laplace's method} or the \emph{harmonic approximation} depending on the community.
+This approach fails in hard particle systems because the pair potential is pathological: $\vec{\nabla} \phi^{(n)}(\vec{x}_0) \ne 0$, the Hessian is generally not positive-definite and the integral cannot be approximated over all of space.
+
+\begin{SCfigure}
+  \includegraphics[width=0.9\linewidth,outer]{packings}
+  \caption[Rigid spherical packings of up to 7 particles]{
+    Rigid sphere packings for $3 \le n \le 7$ particles, as determined from Refs.\ \cite{ArkusPRL2009,Holmes-CerfonSR2016}.
+    There are 5 possible rigid packings for $n=7$, of which two correspond to variants of the frustrated pentagonal bipyramid introduced in Fig.\ \ref{fig:frustration}(a).
+    The last 3 structures for $n=7$ (bottom row) do not have standard names so they remain unlabelled.
+  }
+  \label{fig:packings}
+\end{SCfigure}
+
+As the hard sphere pair potential is singular, we require non-perturbative methods to evaluate the free energy which we will introduce in subsequent sections.
+To remain as close as possible to the spirit of the perturbative approach outlined above, we will use a similar definition of structure by starting from the energy minima.
+The dominant term in the morphometric approach is the volume term $pV$ which is minimised when particles form rigid structures in contact; we cannot prove this rigorously, but we have yet to find a counter example.
+A complete list of rigid packings of hard spheres for $n \le 14$ particles has been dilligently determined in Refs.\ \cite{ArkusPRL2009,Holmes-CerfonSR2016}, which we use as inherent states for local structures in hard sphere.
+As these states are exhaustive, they represent a complete \emph{local library of states}, of fundamental interest to random first-order transition theory \cite{LubchenkoARPC2007} with the potential to significantly improve upon previous extensions of mean-field theory into finite-dimensions \cite{BouchaudJCP2004,DzeroPRB2005,FranzJSM2005,AngeliniJSP2017,RulquinJSM2016,BiroliMeanPRB2018,BiroliFinitePRB2018}.
+\todo{Indicate what makes something rigid.}
+
+As we cannot use perturbation theory, we must \emph{choose} a definition for the basin surrounding each spherical packing.
+For simplicity, we define a particular local structure by its bond topology, using a pairwise cutoff $\sigma_{cut}$ such that separations between particles are in the range $r_{ij} \in [\sigma, \sigma_{cut}]$ if they are ``bonded'' and $r_{ij} > \sigma$ otherwise.
+All the results we present use a cutoff of $\sigma_{cut}=1.2 \sigma$, but we have tested our findings are not significantly affected by a choice of $\sigma_{cut}=1.4 \sigma$ indicating their robustness.
+\todo{More on structure from the appendix}
+
+%% The hard sphere potential is a pathological case: the singularity in the pair potential dooms harmonic treatments.
+%% To illustrate this, we consider a worked example.
+%% Consider as a worked example two one-dimensional particles interacting via a repulsive inverse power law $u_{\textrm{pair}}(r) = \epsilon r^{-\gamma}$ for $\gamma > 1$ where $\epsilon > 0$ is the interaction energy, and depletion interactions modelled as a linear term $u_{\textrm{depletion}}(r) = r$.
+%% This toy model approximately corresponds to the small $r$ behaviour close to contact for 3d hard spheres Fig.\ \ref{?}.
+%% The partition function is
+%% \begin{equation}
+%%   %\begin{split}
+%%   Z(\gamma)
+%%   = \int_1^{\infty} \exp{\left(-\frac{\epsilon}{r^\gamma}\right)} \, dr
+%%   = \left[ \frac{r^{1-\gamma}}{1-\gamma} \right]_1^\infty
+%%   = \frac{1}{\gamma - 1}
+%%   %\end{split}
+%% \end{equation}
+%% The free energy is thus
+%% \begin{equation}
+%%   F(\gamma) = \ln{(\gamma - 1)}
+%% \end{equation}
+%% which is a finite quantity for all $r$.
+%% If we compare this against the harmonic approximation, however, we obtain
+%% \begin{equation}
+%%   F(\gamma) \propto \gamma(\gamma - 1)
+%% \end{equation}
+%% which diverges in the hard sphere limit $\gamma \to \infty$.
+%% The hard sphere limit is properly singular, and we must use nonperturbative methods to treat it.
+%% We will however take inspiration of the approach for soft potentials, and hope to adapt these into a framework for doing similar calculations.
+
+%\section{Methods to evaluate the free energy}
+\section{Statics: thermodynamic integration for structure free energies}
+
+\todo{State that we want the saddles: they are the primary reason for developing analytical methods}
+
+Before moving on to our approximate analytical integration schemes we describe a method which is essentially exact to within numerical precision, at the cost of greater computational expense.
+We will use thermodynamic integration to test the accuracy of our analytical methods.
+Aspects of this method were inspired by Ref.\ \cite{SchillingJCP2009}.
+As a Monte-Carlo method it would be very difficult to extend this method to saddles which is of great interest.
+
+We perform a thermodynamic integration between two potentials $V_1$ and $V_2$ by considering the intermediate potential
+\begin{equation}
+  V(\vec{r}^n; V_1, V_2) = \lambda V_1(\vec{r}^n) + (1-\lambda) V_2(\vec{r}^n).
+\end{equation}
+where $\lambda \in \{0,1\}$ is a mixing parameter.
+Over the course of a Monte-Carlo sweep, in addition to regular steps $\lambda$ is allowed to switch between these values according to the Metropolis-Hastings rule.
+The free energy difference between the two systems is determined from the ratio of time spent with each potential active by
+\begin{equation}
+  \Delta F \equiv F_2 - F_1 = -\log{\left( \frac{t_2}{t_1} \right)},
+\end{equation}
+where $t_i$ is the total number of sweeps where potential $i$ is active (by $\lambda$ value).
+
+Local structure is defined in the main text by its bond topology.
+We define an $n \times n$ adjacency matrix $\mathcal{A}$ giving the bond topology of $n$ particles by
+\begin{equation}
+  A_{ij} =
+  \begin{cases}
+  1 \quad i \textrm{ and } j \textrm{ ``bonded''} \\
+  0 \quad \textrm{otherwise}
+  \end{cases}
+\end{equation}
+The hard core interaction ensures $r_{ij} \equiv |\vec{r}_i - \vec{r}_j| > \sigma$ for all $(i,j)$ including non-bonded particles, but the ``bonded'' flag forces the stricter condition that $r_{ij} \in [\sigma, \sigma_{cut}]$ when $A_{ij} = 1$.
+The latter strict criterion is how we are able to focus on specific local structures.
+
+To do the thermodynamic integration we introduce an intermediate potential which takes into account the boundary conditions of the integral:
+\begin{equation}
+  \phi(\vec{r}^n; v_\lambda, \eta) =
+  \sum_{i < j} A_{ij} v_\lambda(r_{ij})
+  + \phi^{(n)}(\vec{r}^n; \eta)
+\end{equation}
+where $v_\lambda$ is a \emph{confining} potential to restrict the Monte-Carlo to integrate only the structure of interest.
+We have indicated the dependence of the potential of mean force on volume fraction, noting that in the ideal gas limit the grand potential (solvation) term vanishes leaving only the potential energy contribution
+\begin{equation}
+  \phi^{(n)}(\vec{r}^n; \eta=0) = \sum_{i < j} v_{hs}(r_{ij}),
+\end{equation}
+where the hard sphere (no-overlap) interaction is
+\begin{equation}
+  v_{hs}(r) =
+  \begin{cases}
+    0 &r > \sigma \\
+    \infty &\textrm{elsewhere}.
+  \end{cases}
+\end{equation}
+The potential of interest is $\phi(\vec{r}^n; v_{hs}, \eta)$, which requires several thermodynamic integration steps to reach.
+
+First, we perform an integration from a reference potential $\phi(\vec{r}^n; v_H, \eta=0)$ to $\phi(\vec{r}^n; v_{SW}, \eta=0)$ where the confining potential $v_\lambda$ takes either the harmonic form
+\begin{equation}
+  v_H(r) = \epsilon \left(\frac{\sigma_{cut} - r}{\sigma}\right)^2
+\end{equation}
+with a value of $\epsilon$ discussed below, or the (infinite) square well form
+\begin{equation}
+  v_{SW}(r) =
+  \begin{cases}
+    0 &\sigma < r < \sigma_{cut} \\
+    \infty &\textrm{elsewhere}
+  \end{cases}
+\end{equation}
+to properly impose the boundary conditions $r_{ij} \in [\sigma, \sigma_{cut}]$ when $A_{ij} = 1$.
+To optimise the simulations the value of $\epsilon$ should be chosen to keep the free energy difference between the two systems of order $\mathcal{O}(1 \, k_B T)$; we found $\epsilon = 75\sigma^2$ to be a reasonable choice for cutoff $\sigma_{cut} = 1.2\sigma$ at the system sizes considered ($n \le 12$).
+The free energy of the reference harmonic system is found by multivariate Gaussian integration, neglecting the effect of the hard sphere interactions for $\epsilon \gg 1$.
+In subsequent steps we integrate between $\phi(\vec{r}^n; v_{SW}, \eta_i)$ and $\phi(\vec{r}^n; v_{SW}, \eta_{i+1})$ until the desired final volume fraction is reached.
 
 \begin{SCfigure}
   \includegraphics[width=\linewidth,center]{structure-populations}
@@ -66,31 +309,6 @@ This allows us to predict the populations of specific local structures in the bu
   }
   \label{fig:n12-dos}
 \end{SCfigure}
-
-We compute morphological quantities and their derivatives following Ref.\ \cite{KleninJCC2011}, which we have extended to calculate curvature measures (see details in Appendix \ref{appendix:computational-geometry}).
-\todo{Needs context and an opener.}
-
-...although it will fail at very large densities nearing random close packing.
-The pair correlation produced by these coefficients is self-consistent with CS at contact by construction; moreover, the new coefficients provide a theory that outperforms the older WBII approach across the whole range of distances typical of neighbouring particles (SM).
-This enables us to accurately model complex many-particle local structures.
-
-\section{Free energy of local structures}
-
-Owing to the high accuracy of the correlations produced with the new morphometric coefficients, we can now calculate many-body correlations in the supercooled regime.
-We denote the population of some chosen local structure as $\mathcal{N} = \rho^n V \sigma^{3(n-1)} e^{-\beta F}$, where $F$ is the free energy of the local structure.
-From the definition of $g^{(n)}$ as a probability distribution we write the free energy as
-\begin{equation}\label{eq:local-structure-free-energy}
-  \beta F = -\ln{
-    \frac{1}{V \sigma^{3(n-1)}}
-    \left(
-    \int_{\mathcal{D}}
-    g^{(n)}(\vec{r}^n) \, d\vec{r}^n
-    \right)
-  },
-\end{equation}
-where the domain of integration $\mathcal{D}$ \emph{defines} the local structure, and $g^{(n)}$ is calculated from the morphometric potential of mean force using Eqs.\ \eqref{eq:potential-mean-force}, \eqref{eq:surface-tension} and \eqref{eq:morphometric-surface-tension} (computational details in SM).
-We define a particular local structure by its bond topology, using a pairwise cutoff $\sigma_{cut}$ such that separations between particles are in the range $r_{ij} \in [\sigma, \sigma_{cut}]$ if they are ``bonded'' and $r_{ij} > \sigma$ otherwise.
-All results presented use a cutoff of $\sigma_{cut}=1.2 \sigma$, but we have tested our findings are are not significantly affected by a choice of $\sigma_{cut}=1.4 \sigma$ indicating their robustness.
 
 To demonstrate the effectiveness of this approach we have taken rigid structures for $3 \le n \le 13$ which are global minima of clusters in simple liquids \cite{Wales2004}.
 We determined their free energies at arbitrary volume fraction by thermodynamic integration (details in SM) of Eq.\ \eqref{eq:local-structure-free-energy}.
@@ -113,6 +331,83 @@ Nevertheless, because of their exhaustiveness these represent a complete local d
 We calculated the free energy of all (first-order) rigid (nonsingular) structures using Eq.\ \eqref{eq:local-structure-free-energy} (right panel of Fig.\ \ref{fig:structure-populations}), finding a bimodal distribution with two main peaks separated by a free energy difference that increases with increasing volume fraction.
 We find the that lower energy distribution consists of structures rich in fivefold (icosahedral) symmetry in the absence of fourfold (octahedral) symmetry.
 
+\section{Dynamics: analytical results in bond-distance space}
+
+More generally, we consider the manifold diffeomorphic to translations \emph{and} rotations.
+We define $\mathcal{Q} = \mathcal{D}' \rtimes SE(3)$ where $\textrm{SE}(d)$ is the $d$-dimensional special Euclidean group, leaving the $\mathcal{D}'$ as the space of the structure's internal motion.
+\todo{Make this consistent with the notation of background chapter.}
+We separate rigid body from internal motion by applying the following transformation to each particle coordinate
+\begin{equation}
+  \vec{r}(\{\vec{t}, \vec{\theta}, \vec{x}\}) =
+  \vec{t} + \vec{R}(\vec{\theta}) \cdot \vec{q}(\vec{x}),
+\end{equation}
+where $\vec{t}$ is the translation vector, $\vec{\theta}$ the Euler angles, $\vec{R}$ the rotation matrix, and $\vec{x} \in \mathbb{R}^{3n-6}$ represents the internal coordinates.
+We need to compute the metric of this transformation $G_{ij} = \vec{G}_i \vec{G}_i^T$ where the (generally curvilinear) basis vectors are $\vec{G}_i = \partial_i \vec{r}$.
+To simplify calculation we choose $\vec{q}(\vec{x})$ to always be in the center-of-mass frame and orthogonal to rotations such that $G_{ij}$ reduces to block-diagonal form.
+If the rotation matrix is expressed in Euler-angle representation as $\vec{R}(\vec{\theta}) = \vec{R}_3(\theta_3) \vec{R}_2(\theta_2) \vec{R}_1(\theta_1)$ then we have
+\begin{equation}
+  \vec{G}(\vec{\theta}, \vec{x}) =
+  \begin{pmatrix}
+    n \vec{E} & 0 & 0 \\
+    0 & \vec{U}^T(\vec{\theta}) \vec{I}(\vec{x}) \vec{U}(\vec{\theta}) & 0 \\
+    0 & 0 & \overline{\vec{G}}(\vec{x})
+  \end{pmatrix},
+\end{equation}
+where $\vec{E}$ is the identity matrix, $\overline{\vec{G}}$ is the metric for internal motion, and we have defined the matrix $\vec{U}$ as%
+\marginfootnote{There is no elegant step omitted here to obtain the form of $\vec{U}$ which gives block diagonal form; rather, I spent an hour guessing its form inside Mathematica until I hit upon this result.
+  There is probably a better route.}
+\begin{equation}
+  \vec{U}(\vec{\theta}) =
+  \begin{pmatrix}
+    1 &  0              & -\sin{\theta_2} \\
+    0 &  \cos{\theta_1} &  \cos{\theta_2} \sin{\theta_1} \\
+    0 & -\sin{\theta_1} &  \cos{\theta_2} \cos{\theta_1} \\
+  \end{pmatrix}
+  \qquad
+  \begin{aligned}
+    \theta_1 &\in [0,2\pi] \\
+    \theta_2 &\in \left[-\frac{\pi}{2},\frac{\pi}{2}\right] \\
+    \theta_3 &\in [0,2\pi].
+  \end{aligned}
+\end{equation}
+Note $\det{\vec{U}} = \cos{\theta_2}$.
+The volume element in the new coordinates is
+\begin{equation}
+  d\vec{r}^n = \frac{\sqrt{\det G_{ij}(\vec{x})}}{\nu}
+  \, d^3 \vec{t} \, d^3 \vec{\theta} \, d^{3n-6} \vec{x},
+\end{equation}
+where $\nu$ is the symmetry number (discussed below) and
+\begin{equation}
+  \sqrt{\det G_{ij}(\vec{x})} =
+  \cos{\theta_2} \sqrt{\det{\vec{I}(\vec{x})}}
+  \sqrt{n^3 \det{\overline{G_{ij}}(\vec{x})}}.
+\end{equation}
+The symmetry number emerges as the choice of internal coordinates typically fixes the particle labels breaking permutation symmetry; we have to multiply by the $n!$ possible labellings, which introduces double counting if the structure possesses rotational symmetry so we have to divide by the correcting factor $\nu$.
+This is explained in detail in Ref.\ \cite{CatesSM2015}.
+Thus \eqref{eq:structure-population} reduces to
+\begin{equation}\label{eq:structural-partition-function-detailed}
+  \frac{\mathcal{N}}{\rho^n V}
+  =
+  \frac{8\pi^2 \sqrt{n^3}}{\nu} \int_{D'}
+  g^{(n)}(\vec{x}) \,
+  \sqrt{\det{\overline{G_{ij}}(\vec{x})} \det{\vec{I}(\vec{x})}}
+  \, d^{3n-6} \vec{x}.
+\end{equation}
+Note that in the limit of linear molecules, i.e.\ where all particles fall on a line, the above approach fails as there is one less rotation mode requiring a modified description.
+
+In general, the integrand in \eqref{eq:structural-partition-function-detailed} is only exactly solvable for the simplest geometries due to the high dimensionality of $\vec{x}$.
+This is further complicated by the fact that the basis vectors for $\overline{G_{ij}}$ are curvilinear.
+We use two methods for evaluating these integrands:
+\begin{enumerate}
+\item Monte Carlo simulation: described in the next section.
+\item Analytically via perturbation theory: described in sections \ref{SI:bond-distance} and \ref{SI:reaction-path}.
+  We use this for a similar integrand along a reaction path where Monte-Carlo cannot be used directly.
+\end{enumerate}
+
+Two methods: assume no hard sphere interactions outside of the bonded particles, or Bayesian inference
+\marginfootnote{In the current zeitgeist this could be construed as a form of machine learning; techniques for Bayesian inference are often thrown in with machine learning in e.g.\ topical reviews like Ref.\ \cite{MehtaPR2019}.
+  Personally, I am hesitant to call this machine learning as the techniques more closely resemble the approximation schemes of traditional statistical mechanics (to me at least) than neural networks which have been driving the recent machine learning revolution.}
+
 \begin{SCfigure}
   \includegraphics[width=0.9\linewidth,outer]{n6-reaction-path}
   \caption[The simplest nontrivial reaction path in hard spheres: octahedron to tripyramid]{
@@ -123,6 +418,16 @@ We find the that lower energy distribution consists of structures rich in fivefo
   \label{fig:reaction-path-6}
 \end{SCfigure}
 \todo{Change compressibility factor to pressure}
+
+\begin{SCfigure}
+  \includegraphics[width=0.9\linewidth,outer]{n7-reaction-path}
+  \caption[The simplest nontrivial reaction path in hard spheres: octahedron to tripyramid]{
+    Reaction for transition between the two $n = 7$ pentagonal bipyramids variant structures.
+    From broken spindle structure to structure with broken five-fold symmetry.
+  }
+  \label{fig:reaction-path-7}
+\end{SCfigure}
+
 
 \todo{Pictures of packings up to n7}
 
@@ -144,6 +449,7 @@ However, the rapid growth in the number of possible states presents a considerab
 
 We have presented a formalism for describing many-body correlations in liquids and developed it into an accurate and computationally efficient parameter-free theory for hard spheres using integral geometry relying solely on the choice of the equation of state.
 The key approximations involved treating the grand potential as continuous and additive (related to extensivity), and imposing the correct contact value of $g^{(2)}(r)$.
+\todo{Change this to local structure.}
 
 We applied the framework to a selection of local structural correlations, therefore predicting nontrivial changes in the energy landscape with supercooling putting previous empirical observations on more solid ground.
 In particular, our analysis provides evidence for the existence of two populations of structures with distinct symmetries and free energies which causes the local density of states to become increasingly bimodal at high densities.
@@ -198,170 +504,6 @@ This suggests a new route for predicting static properties of equilibrium liquid
 %% Possibly can prove they are minimal volume.
 
 %% \section{Locally favoured structures in hard spheres}
-
-%% \subsection{Concentrations of local structure}
-
-%% How do we define a local structure?
-%% Most of the literature on structure in amorphous systems falls into one of either two categories
-%% Almost all methods for Common methods:
-%% \begin{itemize}
-%%   \item Bond orientational order parameters
-%%   \item Bond networks: take some bond detection algorithm (voronoi, 
-%% Fom the partition function of the potential of mean force
-%% Suppose we have a definition of a
-%% \end{itemize}
-
-%% From the definition of the probability density function in Eq.\ \eqref{eq:n-density-pdf}, the total number of local structures of a particular type in a volume $V$ is
-%% \begin{equation}\label{eq:structure-population}
-%%   \mathcal{N} =
-%%   \int_{\mathcal{Q}} \rho^n g^{(n)}(\vec{r}^n) \, d\vec{r}^n,
-%% \end{equation}
-%% where $\mathcal{Q}$ is the domain \emph{defining} the local structure.
-%% To get the free energy expression used in the main text we consider the manifold diffeomorphic to translations, defining $\mathcal{Q} = \mathcal{D} \rtimes \mathbb{V}$ where $\mathbb{V}\subset \mathbb{R}^3$ is the system volume.
-%% Exploiting translational invariance of the potential of mean force, we fix one particle at the origin and integrate the center of mass over the system volume giving
-%% \begin{equation}
-%%   \mathcal{N} =
-%%   \rho^n V \int_{\mathcal{D}} g^{(n)}(\vec{r}^n) \, d\vec{r}^{n-1}.
-%% \end{equation}
-%% We defined a free energy by taking $\mathcal{N} = \sigma^{3(n-1)} \rho^n V e^{-\beta F}$, which together with the above expression gives Eq.\ \eqref{eq:local-structure-free-energy} in the main text.
-
-%% More generally, we consider the manifold diffeomorphic to translations \emph{and} rotations.
-%% We define $\mathcal{Q} = \mathcal{D}' \rtimes SE(3)$ where $\textrm{SE}(d)$ is the $d$-dimensional special Euclidean group, leaving the $\mathcal{D}'$ as the space of the structure's internal motion.
-%% \todo{Make this consistent with the notation of background chapter.}
-%% We separate rigid body from internal motion by applying the following transformation to each particle coordinate
-%% \begin{equation}
-%%   \vec{r}(\{\vec{t}, \vec{\theta}, \vec{x}\}) =
-%%   \vec{t} + \vec{R}(\vec{\theta}) \cdot \vec{q}(\vec{x}),
-%% \end{equation}
-%% where $\vec{t}$ is the translation vector, $\vec{\theta}$ the Euler angles, $\vec{R}$ the rotation matrix, and $\vec{x} \in \mathbb{R}^{3n-6}$ represents the internal coordinates.
-%% We need to compute the metric of this transformation $G_{ij} = \vec{G}_i \vec{G}_i^T$ where the (generally curvilinear) basis vectors are $\vec{G}_i = \partial_i \vec{r}$.
-%% To simplify calculation we choose $\vec{q}(\vec{x})$ to always be in the center-of-mass frame and orthogonal to rotations such that $G_{ij}$ reduces to block-diagonal form.
-%% If the rotation matrix is expressed in Euler-angle representation as $\vec{R}(\vec{\theta}) = \vec{R}_3(\theta_3) \vec{R}_2(\theta_2) \vec{R}_1(\theta_1)$ then we have%
-%% \marginfootnote{There is no elegent omitted step to obtain the form of $\vec{U}$ which gives the block diagonal form; rather, I used a series of educated guesswork within Mathematica to obtain this.
-%%   There is probably a more direct route.}
-%% \begin{equation}
-%%   \vec{G}(\vec{\theta}, \vec{x}) =
-%%   \begin{pmatrix}
-%%     n \vec{E} & 0 & 0 \\
-%%     0 & \vec{U}^T(\vec{\theta}) \vec{I}(\vec{x}) \vec{U}(\vec{\theta}) & 0 \\
-%%     0 & 0 & \overline{\vec{G}}(\vec{x})
-%%   \end{pmatrix},
-%% \end{equation}
-%% where $\vec{E}$ is the identity matrix, $\overline{\vec{G}}$ is the metric for internal motion, and we have defined the matrix $\vec{U}$ as
-%% \begin{equation}
-%%   \vec{U}(\vec{\theta}) =
-%%   \begin{pmatrix}
-%%     1 &  0              & -\sin{\theta_2} \\
-%%     0 &  \cos{\theta_1} &  \cos{\theta_2} \sin{\theta_1} \\
-%%     0 & -\sin{\theta_1} &  \cos{\theta_2} \cos{\theta_1} \\
-%%   \end{pmatrix}
-%%   \qquad
-%%   \begin{aligned}
-%%     \theta_1 &\in [0,2\pi] \\
-%%     \theta_2 &\in \left[-\frac{\pi}{2},\frac{\pi}{2}\right] \\
-%%     \theta_3 &\in [0,2\pi].
-%%   \end{aligned}
-%% \end{equation}
-%% Note $\det{\vec{U}} = \cos{\theta_2}$.
-%% The volume element in the new coordinates is
-%% \begin{equation}
-%%   d\vec{r}^n = \frac{\sqrt{\det G_{ij}(\vec{x})}}{\nu}
-%%   \, d^3 \vec{t} \, d^3 \vec{\theta} \, d^{3n-6} \vec{x},
-%% \end{equation}
-%% where $\nu$ is the symmetry number (discussed below) and
-%% \begin{equation}
-%%   \sqrt{\det G_{ij}(\vec{x})} =
-%%   \cos{\theta_2} \sqrt{\det{\vec{I}(\vec{x})}}
-%%   \sqrt{n^3 \det{\overline{G_{ij}}(\vec{x})}}.
-%% \end{equation}
-%% The symmetry number emerges as the choice of internal coordinates typically fixes the particle labels breaking permutation symmetry; we have to multiply by the $n!$ possible labellings, which introduces double counting if the structure possesses rotational symmetry so we have to divide by the correcting factor $\nu$.
-%% This is explained in detail in Ref.\ \cite{CatesSM2015}.
-%% Thus \eqref{eq:structure-population} reduces to
-%% \begin{equation}\label{eq:structural-partition-function-detailed}
-%%   \frac{\mathcal{N}}{\rho^n V}
-%%   =
-%%   \frac{8\pi^2 \sqrt{n^3}}{\nu} \int_{D'}
-%%   g^{(n)}(\vec{x}) \,
-%%   \sqrt{\det{\overline{G_{ij}}(\vec{x})} \det{\vec{I}(\vec{x})}}
-%%   \, d^{3n-6} \vec{x}.
-%% \end{equation}
-%% Note that in the limit of linear molecules, i.e.\ where all particles fall on a line, the above approach fails as there is one less rotation mode requiring a modified description.
-
-%% In general, the integrand in \eqref{eq:structural-partition-function-detailed} is only exactly solvable for the simplest geometries due to the high dimensionality of $\vec{x}$.
-%% This is further complicated by the fact that the basis vectors for $\overline{G_{ij}}$ are curvilinear.
-%% We use two methods for evaluating these integrands:
-%% \begin{enumerate}
-%% \item Monte Carlo simulation: described in the next section.
-%% \item Analytically via perturbation theory: described in sections \ref{SI:bond-distance} and \ref{SI:reaction-path}.
-%%   We use this for a similar integrand along a reaction path where Monte-Carlo cannot be used directly.
-%% \end{enumerate}
-
-%% \subsection{Bond-distance space}
-%% To evaluate the integrand in Eq.\ \eqref{eq:structural-partition-function-detailed} analytically we need to choose a representation for $\vec{x}$ which is diffeomorphic to $\vec{r}^n$.
-%% For \emph{minimally constrained geometries}, i.e.\ structures with exactly $3n-6$ contacts, a convenient representation exists: bond distance space.
-%% Following Ref.\ \cite{Holmes-CerfonPNAS2013} and its accompanying Supplementary Information we choose each element of $\vec{x}$ to represent the distances between particles in contact, where contact occurs at $\vec{x} = (\sigma, \dots, \sigma)$.
-%% Thus increasing elements of $\vec{x}$ corresponds to thermal fluctuations away from contact.
-%% This representation naturally expresses the limits of integration given in the main text as $\sigma \le x_i \le \sigma_{cut}$.
-
-%% To evaluate the integral we need expressions for the internal metric and moment of inertia terms.
-%% The internal metric is defined in terms of the Jacobian matrix $\vec{J} \in \mathbb{R}^{3n \times 3n-6}$
-%% \begin{equation}
-%%   \overline{G_{ij}} = \vec{J}^T \vec{J}
-%% \end{equation}
-%% where the matrix entries are given by
-%% \begin{equation}
-%%   J_{ij} = \frac{\partial q_i}{\partial y_j}.
-%% \end{equation}
-%% In practice it is easier to calculate its inverse numerically (via finite differences) using
-%% \begin{equation}
-%%   J_{ij}^{-1}
-%%   = \frac{\partial y_j}{\partial q_i}
-%%   = \left. \frac{\partial y_j}{\partial x_i}
-%%   \right|_{\vec{\theta} = \vec{t} = \vec{0}}
-%% \end{equation}
-%% which has linearly independent rows for a minimally constrained geometry so we recover $\vec{J}$ from $\vec{K} = \vec{J}^{-1}$ using the matrix inversion formula $\vec{J} = (\vec{K}^T\vec{K})^{-1} \vec{K}^T$.
-%% The above expressions all depend implicitly on the point $\vec{x}$ as the coordinate scheme is curvilinear, so to keep the integral tractable we approximate this to leading order as
-%% \begin{equation}
-%%   \sqrt{\overline{G_{ij}}(\vec{x})} \simeq \sqrt{\overline{G_{ij}}(\vec{x}_0)}
-%% \end{equation}
-%% where $\vec{x}_0 = (\sigma,\dots,\sigma)$ is contact.
-%% Thus the integral becomes
-%% \begin{equation}\label{eq:structural-partition-function-approximated}
-%%   \frac{\mathcal{N}}{\rho^n V}
-%%   =
-%%   \frac{8\pi^2 G_0}{\nu} \int_{D'}
-%%   g^{(n)}(\vec{x}) \,
-%%   \sqrt{\det{\vec{I}(\vec{x})}}
-%%   \, d^{3n-6} \vec{x}
-%% \end{equation}
-%% where $G_0 = \sqrt{n^3 \det{\overline{G_{ij}}(\vec{x}_0)}}$.
-
-%% Finally, we write the distribution function in terms of the potential of mean force and expand this and the moment of inertia to first order, as in
-%% \begin{align}
-%%   \phi^{(n)}(\vec{x}) &=
-%%   \phi^{(n)}(\vec{x}_0) +
-%%   (\vec{x} - \vec{x}_0) \cdot
-%%   \left. \vec{\nabla} \phi^{(n)}(\vec{x}) \right|_{\vec{x} = \vec{x}_0} +
-%%   \mathcal{O}(\vec{x}^2), \\
-%%   \sqrt{\det{\vec{I}(\vec{x})}} &=
-%%   \sqrt{\det{\vec{I}(\vec{x}_0)}} +
-%%   (\vec{x} - \vec{x}_0) \cdot
-%%   \left. \vec{\nabla} \sqrt{\det{\vec{I}(\vec{x})}} \right|_{\vec{x} = \vec{x}_0} +
-%%   \mathcal{O}(\vec{x}^2).
-%% \end{align}
-%% Using the analytical gradient expressions given in Section \ref{SI:line-curvature} makes this calculation very efficient.
-%% The integral \eqref{eq:structural-partition-function-approximated} separates into $3n-6$ independent one-dimensional integrals of the form
-%% \begin{equation*}
-%%   \int_\sigma^{\sigma_{cut}} (a_i + b_i x_i) e^{-c_i x_i} dx_i
-%%   = \left[
-%%     - \left(
-%%     \frac{(a + b_i x_i)}{c_i} + \frac{b_i}{c_i^2} \right) e^{-c_i x_i}
-%%   \right]_\sigma^{\sigma_{cut}},
-%% \end{equation*}
-%% where $a_i$, $b_i$ and $c_i$ are constants.
-
-%% Loosely speaking, this is the hard-particle analogue of the harmonic approximation with the difference here being that the first derivative does not vanish at the minimum.
-%% For $n=6$ this expansion works rather well, as all structures have exactly $3n-6$ bonds and this perturbation theory captures the free energy well when compared with the ``exact'' result from thermodynamic integration.
 
 %% \section{Introduction}
 
@@ -528,32 +670,6 @@ This suggests a new route for predicting static properties of equilibrium liquid
 %% \end{equation}
 %% where $x_0 = \dfrac{1}{\sqrt{2}}$ is the position of the minimum in the $x > 0$ basin.
 
-%% The hard sphere potential is a pathological case: the singularity in the pair potential dooms harmonic treatments.
-%% To illustrate this, we consider a worked example.
-%% Consider as a worked example two one-dimensional particles interacting via a repulsive inverse power law $u_{\textrm{pair}}(r) = \epsilon r^{-\gamma}$ for $\gamma > 1$ where $\epsilon > 0$ is the interaction energy, and depletion interactions modelled as a linear term $u_{\textrm{depletion}}(r) = r$.
-%% This toy model approximately corresponds to the small $r$ behaviour close to contact for 3d hard spheres Fig.\ \ref{?}.
-%% The partition function is
-%% \begin{equation}
-%%   %\begin{split}
-%%   Z(\gamma)
-%%   = \int_1^{\infty} \exp{\left(-\frac{\epsilon}{r^\gamma}\right)} \, dr
-%%   = \left[ \frac{r^{1-\gamma}}{1-\gamma} \right]_1^\infty
-%%   = \frac{1}{\gamma - 1}
-%%   %\end{split}
-%% \end{equation}
-%% The free energy is thus
-%% \begin{equation}
-%%   F(\gamma) = \ln{(\gamma - 1)}
-%% \end{equation}
-%% which is a finite quantity for all $r$.
-%% If we compare this against the harmonic approximation, however, we obtain
-%% \begin{equation}
-%%   F(\gamma) \propto \gamma(\gamma - 1)
-%% \end{equation}
-%% which diverges in the hard sphere limit $\gamma \to \infty$.
-%% The hard sphere limit is properly singular, and we must use nonperturbative methods to treat it.
-%% We will however take inspiration of the approach for soft potentials, and hope to adapt these into a framework for doing similar calculations.
-
 %% To summarise this section, we note that the basin definition of structures for soft potentials has the properties that: \cite{Wales?}
 %% \begin{itemize}
 %% \item Each basin $B_i$ connects to a unique minimal energy state with a unique geometry.
@@ -697,602 +813,6 @@ This suggests a new route for predicting static properties of equilibrium liquid
 %% \end{equation}
 %% The results show excellent agreement with molecular dynamics simulations across the entire liquid regime, and even into the supercooled regime where simulations are available for a polydisperse system.
 
-%% \subsection{Exact result: thermodynamic integration}
-
-%% \todo{State that we want the saddles: they are the primary reason for developing analytical methods}
-
-%% Before moving on to our approximate analytical integration schemes we describe a method which is essentially exact to within numerical precision, at the cost of greater computational expense.
-%% We will use thermodynamic integration to test the accuracy of our analytical methods.
-%% Aspects of this method were inspired by Ref.\ \cite{SchillingJCP2009}.
-%% As a Monte-Carlo method it would be very difficult to extend this method to saddles which is of great interest.
-
-%% We perform a thermodynamic integration between two potentials $V_1$ and $V_2$ by considering the intermediate potential
-%% \begin{equation}
-%%   V(\vec{r}^n; V_1, V_2) = \lambda V_1(\vec{r}^n) + (1-\lambda) V_2(\vec{r}^n).
-%% \end{equation}
-%% where $\lambda \in \{0,1\}$ is a mixing parameter.
-%% Over the course of a Monte-Carlo sweep, in addition to regular steps $\lambda$ is allowed to switch between these values according to the Metropolis-Hastings rule.
-%% The free energy difference between the two systems is determined from the ratio of time spent with each potential active by
-%% \begin{equation}
-%%   \Delta F \equiv F_2 - F_1 = -\log{\left( \frac{t_2}{t_1} \right)},
-%% \end{equation}
-%% where $t_i$ is the total number of sweeps where potential $i$ is active (by $\lambda$ value).
-
-%% Local structure is defined in the main text by its bond topology.
-%% We define an $n \times n$ adjacency matrix $\mathcal{A}$ giving the bond topology of $n$ particles by
-%% \begin{equation}
-%%   A_{ij} =
-%%   \begin{cases}
-%%   1 \quad i \textrm{ and } j \textrm{ ``bonded''} \\
-%%   0 \quad \textrm{otherwise}
-%%   \end{cases}
-%% \end{equation}
-%% The hard core interaction ensures $r_{ij} \equiv |\vec{r}_i - \vec{r}_j| > \sigma$ for all $(i,j)$ including non-bonded particles, but the ``bonded'' flag forces the stricter condition that $r_{ij} \in [\sigma, \sigma_{cut}]$ when $A_{ij} = 1$.
-%% The latter strict criterion is how we are able to focus on specific local structures.
-
-%% To do the thermodynamic integration we introduce an intermediate potential which takes into account the boundary conditions of the integral:
-%% \begin{equation}
-%%   \phi(\vec{r}^n; v_\lambda, \eta) =
-%%   \sum_{i < j} A_{ij} v_\lambda(r_{ij})
-%%   + \phi^{(n)}(\vec{r}^n; \eta)
-%% \end{equation}
-%% where $v_\lambda$ is a \emph{confining} potential to restrict the Monte-Carlo to integrate only the structure of interest.
-%% We have indicated the dependence of the potential of mean force on volume fraction, noting that in the ideal gas limit the grand potential (solvation) term vanishes leaving only the potential energy contribution
-%% \begin{equation}
-%%   \phi^{(n)}(\vec{r}^n; \eta=0) = \sum_{i < j} v_{hs}(r_{ij}),
-%% \end{equation}
-%% where the hard sphere (no-overlap) interaction is
-%% \begin{equation}
-%%   v_{hs}(r) =
-%%   \begin{cases}
-%%     0 &r > \sigma \\
-%%     \infty &\textrm{elsewhere}.
-%%   \end{cases}
-%% \end{equation}
-%% The potential of interest is $\phi(\vec{r}^n; v_{hs}, \eta)$, which requires several thermodynamic integration steps to reach.
-
-%% First, we perform an integration from a reference potential $\phi(\vec{r}^n; v_H, \eta=0)$ to $\phi(\vec{r}^n; v_{SW}, \eta=0)$ where the confining potential $v_\lambda$ takes either the harmonic form
-%% \begin{equation}
-%%   v_H(r) = \epsilon \left(\frac{\sigma_{cut} - r}{\sigma}\right)^2
-%% \end{equation}
-%% with a value of $\epsilon$ discussed below, or the (infinite) square well form
-%% \begin{equation}
-%%   v_{SW}(r) =
-%%   \begin{cases}
-%%     0 &\sigma < r < \sigma_{cut} \\
-%%     \infty &\textrm{elsewhere}
-%%   \end{cases}
-%% \end{equation}
-%% to properly impose the boundary conditions $r_{ij} \in [\sigma, \sigma_{cut}]$ when $A_{ij} = 1$.
-%% To optimise the simulations the value of $\epsilon$ should be chosen to keep the free energy difference between the two systems of order $\mathcal{O}(1 \, k_B T)$; we found $\epsilon = 75\sigma^2$ to be a reasonable choice for cutoff $\sigma_{cut} = 1.2\sigma$ at the system sizes considered ($n \le 12$).
-%% The free energy of the reference harmonic system is found by multivariate Gaussian integration, neglecting the effect of the hard sphere interactions for $\epsilon \gg 1$.
-%% In subsequent steps we integrate between $\phi(\vec{r}^n; v_{SW}, \eta_i)$ and $\phi(\vec{r}^n; v_{SW}, \eta_{i+1})$ until the desired final volume fraction is reached.
-
-%% \section{Bond distance space and approximate boundary conditions}
-
-%% Here we consider analytical approximations for evaluating \eqref{eq:?}.
-%% These must first involve a definition of structure to set the limits of integration.
-%% These limits will inform the approximation schemes.
-%% As discussed in section \ref{?} the minimum is not as thermodynamically significant as expected for soft systems because of the singularity of the hard sphere potential.
-
-%% \subsection{Our definition of structure}
-
-%% Our minimal energy geometries occur at contact, so we will build our definition of local structure around these as a reference.
-%% We consider a local structure with $m$ contacts at the reference point.
-%% We write the set of contacts as
-%% \begin{equation}
-%%   \mathcal{M} = \{(a_1, b_1), \cdots, (a_m, b_m)\}
-%% \end{equation}
-%% where $a_i, b_i \in \mathbb{N}$ are the indices of touching particles.
-%% Following \cite{Holmes?} we introduce the \emph{bond distance} as the size of the gap between particles
-%% \begin{equation}
-%%   y^k = |\vec{r}_{a_k} - \vec{r}_{b_k}| - \sigma,
-%% \end{equation}
-%% clearly contact occurs where $y^k = 0$ for all $k$.
-%% Our simplifying definition of structure consists of introducing a finite tolerance $\delta$ to these distances so that $y^k \in [0, \delta]$ defines with the lower limit set by the fact that hard particles cannot overlap.
-%% This condition sets the limits $D'$ in \eqref{eq:structural-partition-function-detailed}.
-
-%% Defining the $n$-particle cavity distribution as
-%% \begin{equation}
-%%   \begin{split}
-%%     y^{(n)}(\vec{r}^n)
-%%     &\equiv e^{\beta U_n} g^{(n)}(\vec{r}^n) \\
-%%     &= e^{-\beta(\Delta\Omega - n\mu^\mathrm{ex})}.
-%%   \end{split}
-%% \end{equation}
-%% the integral in \eqref{eq:structural-partition-function-detailed} becomes
-%% \begin{equation}
-%%   I
-%%   =
-%%   \int_{D'}
-%%   e^{-\beta U_n(\vec{x})} \, y^{(n)}(\vec{x}) \, G(\vec{x})
-%%   \, d^{q} \vec{x}.
-%% \end{equation}
-%% Note that the cavity function and metric are analytic functions, whereas the hard sphere interactions are not: the singularity in the pair potential complicates evaluating this integral.
-%% Note that the limits of the integration $D'$ take care of the hard sphere interactions between the particle pairs in $\mathcal{M}$, but not the remaining interactions.
-%% In particular, the hard sphere interaction potential has the form
-%% \begin{equation}
-%%   e^{-\beta U_N(\vec{x})} =
-%%   \prod_{i < j} \left(
-%%   \Theta \Big( |\vec{r}_i - \vec{r}_j| - \sigma \Big)
-%%   \right)
-%% \end{equation}
-%% where $\Theta(\cdot)$ is the Heaviside theta function.
-%% This can be thought of as setting complex integration limits, i.e.\ the additional half-space criterion that $|\vec{r}_i - \vec{r}_j| \in [0, \infty]$.
-
-%% The metric $G(\vec{x})$ is in principle as complicated nonlinear function of geometry, however in numerical experiments we found it to vary weakly.
-%% By contrast the other terms are more rapidly varying, with the cavity function being an exponentially weighted potential of mean force and the hard sphere interaction being singular.
-%% We found Taylor expanding the metric to give sufficient accuracy, i.e.\
-%% \begin{equation*}
-%%   G(\vec{x})
-%%   =
-%%   G(\vec{x}^*)
-%%   + \left. \nabla G \right|_{\vec{x}^*} \cdot \Delta \vec{x}
-%%   + \frac{1}{2} \Delta\vec{x} \cdot \left. \nabla \nabla G \right|_{\vec{x}^*} \cdot \Delta\vec{x}
-%%   + \mathcal{O}(\Delta\vec{x}^3).
-%% \end{equation*}
-%% If we treat the collective effect of the cavity function, hard sphere interactions and boundary conditions as a probability distribution $\mathcal{P}$ acting over \emph{all} of space, so that
-%% \begin{subequations}
-%%   \begin{align}
-%%   I
-%%   &=
-%%   Z \int_{\mathbb{R}^q} p(\vec{x}) G(\vec{x}) d^q \vec{x}
-%%   \\
-%%   Z
-%%   &=
-%%   \int_{\mathbb{R}^q} p(\vec{x}) d^q \vec{x}
-%%   \end{align}
-%% \end{subequations}
-%% where $p(\vec{x}) \sim \mathcal{P}$ and $Z$ is the integral in the absence of the metric.
-%% This leads to
-%% \begin{equation}
-%%   \frac{I}{Z}
-%%   =
-%%   G(\vec{x}^*)
-%%   + \left. \nabla G \right|_{\vec{x}^*} \cdot
-%%   \left\langle \Delta \vec{x} \right\rangle_\mathcal{P}
-%%   + \frac{1}{2} \left. \nabla \nabla G \right|_{\vec{x}^*} :
-%%   \left\langle \Delta\vec{x} \otimes \Delta\vec{x} \right\rangle_\mathcal{P}
-%%   + \mathcal{O}(\langle \Delta\vec{x}^3 \rangle_\mathcal{P})
-%% \end{equation}
-%% with $\langle \cdot \rangle_\mathcal{P} = \int_{\mathbb{R}^q} (\cdot) p(\vec{x}) d^q \vec{x}$ as the average over the distribution $\mathcal{P}$.
-%% With this series expansion in mind, we will concentrate on methods which determine $Z$ and the moments of $\mathcal{P}$ to avoid explicitly considering the nonlinear role of the metric $G(\vec{x})$.
-
-%% We will write the cavity function in terms of the depletion potential and expand
-%% \begin{equation}
-%%   y^{(n)}(\vec{x})
-%%   =
-%%   y^{(n)}(\vec{x}^*)
-%%   \exp{\left( -\vec{A} \cdot \Delta \vec{x} \right)}
-%%   + \mathcal{O}(\Delta \vec{x}^2)
-%% \end{equation}
-%% where we have expanded to leading order $A = \left. \nabla (\beta\Omega) \right|_{\vec{x}^*}$.
-%% This perturbation in the potential is in the spirit of the harmonic approximation, however leading order here is linear rather than quadratic as $\left. \nabla (\beta\Omega) \right|_{\vec{x}^*} \ne \vec{0}$.
-%% Another difference from conventional harmonic approximations is that we cannot evaluate this perturbatively as the temperature is not a meaningful parameter for hard (athermal) systems.
-
-%% \subsection{Minimally constrained geometries}
-
-%% First we consider the simple case for contact geometries with exactly $m=q$ bonds, so that the bond-distance space forms a natural basis for this expansion and we can set $\vec{x} = \{y^k\}$, with the energy minimum occurring at $\vec{x}^* = \vec{0}$.
-%% Such a geometry is called \emph{minimally constrained}, to be distinguished from \emph{isostatic} in the jamming literature which is a bulk phenomenon.
-%% Though these are distinct they share similar simplifying properties, in that the full nonlinear geometry can be reduced to a bond-distance description as was done in \cite{Wyart}.
-%% However, we will have to consider the effects of additional interactions and later we will generalise to case where $z \ne 2d$.
-
-%% In this basis the definition of structure sets the limits of integration to that of a hypercube, i.e.\
-%% \begin{equation*}
-%%   \int_{D'} d^q x
-%%   =
-%%   \int_0^\delta dx_1 \cdots \int_0^\delta dx_m.
-%% \end{equation*}
-%% As our first approximation we ignore the effects of overlaps between any other particle pairs giving
-%% \begin{subequations}
-%%   \begin{align}
-%%     Z
-%%     &=
-%%     \int_0^\delta dx_1 \cdots \int_0^\delta dx_m
-%%     \, y^{(n)}(\vec{x})
-%%     \\
-%%     \langle \cdot \rangle_\mathcal{P}
-%%     &=
-%%     \frac{1}{Z}
-%%     \int_0^\delta dx_1 \cdots \int_0^\delta dx_m
-%%     \, (\cdot) y^{(n)}(\vec{x}).
-%%   \end{align}
-%% \end{subequations}
-%% Introducing the perturbation expansion of the cavity function we obtain
-%% \begin{equation}
-%%   \begin{split}
-%%     Z
-%%     &=
-%%     y^{(n)}(\vec{x}^*)
-%%     \prod_{i=1}^q
-%%     \int_0^\delta
-%%     \exp{\left( -\vec{A} \cdot \vec{e}_i \, x_i \right)}
-%%     \, dx_i
-%%     \\ &=
-%%     y^{(n)}(\vec{x}^*)
-%%     \prod_{i=1}^q
-%%     \left[
-%%     \frac{1 - \exp{\left( -A_i \, \delta \right)}}{A_i}
-%%     \right]
-%%   \end{split}
-%% \end{equation}
-%% with similar expressions for the first few moments.
-%% Inserting these expressions into the formulae of the previous section yields expressions for the local structure's free energy/population.
-%% This approximation is exact in the case where no overlap between other particle pairs is possible over the range of integration, then the pair potential term in the integrand will evaluate to one and this approximation becomes exact.
-
-%% The above formulas are rather simple, however the approximation is uncontrolled and we in general expect large errors for all but the most simple geometries: the hard sphere interactions should have a large effect.
-%% For $n \le 6$ this is very accurate \ref{Fig?}, however for $n \ge 7$ it fails for certain geometries where there are nearly touching particles.
-%% In general we expect the majority of stable structures to fall into this latter category as $n$ is increased, so we desire a more robust method.
-%% Additionally, we wish to model hyperstatic structures (impossible) and higher order expansions in the free energy (difficult with the above approximation, as the modes couple so it no longer reduces to a product of one-dimensional integrals).
-
-%% To go beyond this we will approximate the hard sphere interactions to leading order; in effect, this models the boundary conditions as a polyhedron.
-%% Next, we will use expectation propagation, a technique from Bayesian inference, to evaluate the integral on the resulting polyhedron.
-
-%% \subsection{Polyhedral approximation}
-
-%% We have a bond-distance space $\vec{x} \in \mathbb{R}^q$, $m = q$ constraints (minimally constrained for now) and $n(n-1)/2 - m$ potential interactions not already covered by the limits of integration.
-%% We approximate this by measuring the distances not covered by the limits of integration and expanding them to linear order
-%% \begin{equation}
-%%   \Delta_{ij}(\vec{x})
-%%   \simeq
-%%   \Delta_{ij}(\vec{x}^*)
-%%   + \left. \nabla \Delta_{ij} \right|_{\vec{x}^*} \cdot \Delta \vec{x}
-%%   + \mathcal{O}(\Delta \vec{x}^2)
-%% \end{equation}
-%% and determine at this level of expansion the values of $\vec{x}$ where $\Delta_{ij} > \sigma$.
-%% This is expressed as the inequality
-%% \begin{equation}
-%%   \Delta_{ij}(\vec{x}^*)
-%%   + \left. \nabla \Delta_{ij} \right|_{\vec{x}^*} \cdot \Delta \vec{x}
-%%   > \sigma
-%% \end{equation}
-%% to leading order where $\vec{c}_k = \nabla \Delta_{a_k,b_k}$.
-%% This corresponds to assigning the half space constraint
-%% \begin{equation}
-%%   \vec{c}_k \cdot \Delta \vec{x} \in [\sigma - \Delta_{a_k,b_k}, \infty].
-%% \end{equation}
-%% The combination of half spaces and the cubic limits \eqref{?} describes a polyhedron in phase space, so this is a polyhedral approximation.
-%% Similar approximations have been made for hard sphere free energy calculations in the crystal \cite{?} and other stuff \cite{Leoni?}, where this approximation becomes exact at very high densities approaching close packing.
-
-%% Our partition function becomes an integral of the cavity function, in the exponential family, over a polyhedron.
-%% Besides the simple one dimensional case few exact calculations are possible.
-%% We will use an approximate method from Bayesian inference: expectation propagation.
-
-%% \subsection{Expectation propagation}
-
-%% \begin{SCfigure}
-%%   \missingfigure[figwidth=\linewidth]{}
-%%   \caption[Generalisation of harmonic approximation using machine learning]{
-%%     Sketch of integration scheme proposed as generalisation of harmonic approximation: true distribution modelled as a Gaussian.
-%%     We use expectation propagation as criteria for optimal parameters for the Gaussian.}
-%% \end{SCfigure}
-
-%% Inspired by the Harmonic approximation where the energy is expanded to second order, we will attempt to approximate the basin probability distribution as a Gaussian.
-%% We write this approximate probability distribution as
-%% \begin{equation}
-%%   q(\vec{x}) = Z \mathcal{N}(\vec{x}; \vec{\mu}, \vec{\Sigma}).
-%% \end{equation}
-%% where we have kept it unnormalised for convenience (so it is not strictly a distribution): our goal is to determine $Z$.
-%% The moments of the Gaussian $\vec{\mu}, \vec{\Sigma}$ will be determined alongside $Z$, giving the evaluation of $I$ through \eqref{eq?}.
-%% Note that in the Bayesian inference literature $p(\vec{x}) \sim \mathcal{P}$ would be called the posterior distribution.
-
-%% Consider the free energy difference between the true and approximate distribution
-%% \begin{equation}
-%%   \Delta F
-%%   =
-%%   - \int p(\vec{x})
-%%   \ln{\left( \frac{q(\vec{x})}{p(\vec{x})} \right)} \, d\vec{x}.
-%% \end{equation}
-%% This would be the Kullback-Leibler divergence in information theory, a measure of information loss from using an approximate distribution.
-%% It is identical to a free energy difference in the physics literature, and it is straightforward to prove that it is only zero when $p = q$ \cite{MerminPR1965, EvansAP1979}.
-%% It is schematically identical to the proof of the uniqueness of the equilibrium free energy.
-
-%% $\Delta F = 0$ is impossible unless $p$ is also Gaussian, however by minimising $\Delta F$ we can optimise the $q$ distribution to minimise the approximation error.
-%% It is straightforward to show that for distributions in the exponential family this corresponds to matching the moments of $q$ and $p$ \cite{Minka2001,MinkaUAI2001,Rasmussen2006,Cunningham2011}.
-%% This is still intractable however, matching moments is identical to setting the distributions to one another.
-%% However, an approximate technique expectation propagation matches the moments of marginal distributions has been shown to approximate this well \cite{Minka2001,MinkaUAI2001,Rasmussen2006,Cunningham2011}.
-%% This approximation was inspired by the cavity method of spin glasses (unrelated to the cavity distribution), for application to approximate Bayesian inference problems.
-
-%% Our exposition of the EP method closely follows \cite{Cunningham2011}.
-
-%% We start by noting that the true probability distribution, which includes the limits of integration, can be expressed as the product of distributions
-%% \begin{equation}
-%%   p(\vec{x})
-%%   = y^{(n)}(\vec{x}) \prod_{i=1}^{m} t_i (x_i)
-%% \end{equation}
-%% where the $t_i$ functions represent the constraints \eqref{??} and \eqref{??}.
-%% The EP algorithm constructs projections in each of these constraints to match moments along, a natural decomposition involves writing the approximate distribution in terms of tile distributions $\tilde{t}_i$
-%% \begin{equation}
-%%   q(\vec{x})
-%%   = p_0(\vec{x}) \prod_{i=1}^{m} \tilde{t}_i (x_i)
-%%   = p_0(\vec{x}) \prod_{i=1}^{m} \tilde{Z}_i \mathcal{N}(\vec{x}; \tilde{\mu}_i, \tilde{\sigma}_i^2)
-%% \end{equation}
-%% with projected values
-%% \begin{subequations}
-%%   \begin{align}
-%%     x_i &= \vec{c}_i \cdot \vec{x} \\
-%%     \mu_i &= \vec{c}_i \cdot \vec{\mu}
-%%   \end{align}
-%% \end{subequations}
-%% for $i \in \{1,\cdots,m\}$.
-%% From \eqref{eq:combined-normals} and \eqref{eq:biased-normal} we have
-%% \begin{equation}
-%%   \begin{split}
-%%     q(\vec{x}) &=
-%%     Z_0
-%%     p_0(\vec{x})
-%%     \mathcal{N}(\vec{x}; \vec{\Sigma} \cdot \vec{\nu}, \vec{\Sigma}) \\
-%%     &=
-%%     Z_0
-%%     \exp{\left( \frac{\vec{a} \cdot \vec{\Sigma} \cdot \vec{a}}{2} - \vec{a} \cdot \vec{\Sigma} \cdot{\vec{\nu}} \right)} \;
-%%     \mathcal{N}(\vec{x}; \vec{\Sigma} \cdot (\vec{\nu} - \vec{a}), \vec{\Sigma})
-%%   \end{split}
-%% \end{equation}
-%% where $\vec{\Sigma}, \vec{\nu}, Z_0$ are given by \eqref{eq:combined-normals-sigma}, \eqref{eq:combined-normals-nu} and \eqref{eq:combined-normals-Z} respectively.
-%% We thus have that
-%% \begin{subequations}
-%%   \begin{align}
-%%     \vec{\mu} &= \vec{\Sigma} \cdot (\vec{\nu} - \vec{a})
-%%     \\
-%%     Z &= Z_0
-%%     \exp{\left( \frac{\vec{a} \cdot \vec{\Sigma} \cdot \vec{a}}{2} - \vec{a} \cdot \vec{\Sigma} \cdot \vec{\nu} \right)}
-%%     \\
-%%     Z_0 &=
-%%     \sqrt{ (2\pi)^{n-m} \det{\vec{\Sigma}} }
-%%     \;
-%%     \exp{\left( \frac{\vec{\nu} \cdot \vec{\Sigma} \cdot \vec{\nu}}{2} \right)}
-%%     \prod_{i=1}^m
-%%     \left(
-%%     \frac{\tilde{Z}_i}{\sqrt{ \tilde{\sigma}_i^2 }}
-%%     \exp{\left(-\frac{\tilde{\nu}_i \tilde{\mu}_i}{2}\right)}
-%%     \right)
-%%   \end{align}
-%% \end{subequations}
-%% We marginalise the full probability distribution along one direction to obtain the cavity distribution
-%% \begin{equation}
-%%   q^{\setminus i}(\vec{x}) =
-%%   \frac{\tilde{Z}_i}{Z} \frac{q(\vec{x})}{\tilde{t}_i(x_i)}
-%%   =
-%%   \frac
-%%       {\mathcal{N}(\vec{x}; \vec{\mu}, \vec{\Sigma})}
-%%       {\mathcal{N}(x_i; \tilde{\mu}_i, \tilde{\sigma}_i^2)}.
-%% \end{equation}
-%% This particular normalisation is chosen such that
-%% \begin{equation}\label{eq:approximate-zeroth-moment}
-%%   \int_{\mathbb{R}^n} q^{\setminus i}(\vec{x}) \tilde{t}_i(x_i) \, d\vec{x} =
-%%   \tilde{Z}_i \int_{\mathbb{R}^n} \mathcal{N}(\vec{x}; \vec{\mu}, \vec{\Sigma}) \, d\vec{x} =
-%%   \tilde{Z}_i.
-%% \end{equation}
-%% Integrating this cavity over the orthogonal affine space gives
-%% \begin{equation}
-%%   \begin{split}
-%%     q_{\setminus i}(x_i) &\equiv
-%%     \int_{\mathbb{R}^n \setminus \vec{c}_i} q^{\setminus i} (\vec{x}_{\setminus i}; x_i) \, d\vec{x}_{\setminus i} \\
-%%     &= \frac{1}{\mathcal{N}(x_i; \tilde{\mu}_i, \tilde{\sigma}_i^2)}
-%%     \int_{\mathbb{R}^n \setminus \vec{c}_i} \mathcal{N}(\vec{x}; \vec{\mu}, \vec{\Sigma}) \, d\vec{x}_{\setminus i} \\
-%%     &=
-%%     \frac
-%%         {\mathcal{N}(x_i; \mu_i, \vec{c}_i \cdot \vec{\Sigma} \cdot \vec{c}_i)}
-%%         {\mathcal{N}(x_i; \tilde{\mu}_i, \tilde{\sigma}_i^2)} \\
-%%     &=
-%%         \sqrt{ \frac{\tilde{\sigma}_i^2}{\vec{c}_i \cdot \vec{\Sigma} \cdot \vec{c}_i} }
-%%         \exp{\left( -\frac{(x_i - \mu_i)^2}{2 \vec{c}_i \cdot \vec{\Sigma} \cdot \vec{c}_i} +
-%%           \frac{(x_i - \tilde{\mu}_i)^2}{2 \tilde{\sigma}_i^2} \right)} \\
-%%     &=
-%%         \sqrt{ \frac{\sigma_{\setminus i}^2 + \tilde{\sigma}_i^2}{\sigma_{\setminus i}^2} }
-%%         \exp{\left(
-%%           - \frac{(x_i - \mu_{\setminus i})^2}{2 \sigma_{\setminus i}^2}
-%%           + \frac{1}{2}
-%%           \frac{(\mu_{\setminus i} - \tilde{\mu}_i)^2}{\sigma_{\setminus i}^2 + \tilde{\sigma}_i^2}
-%%           \right)} \\
-%%      &= Z_{\setminus i} \, \mathcal{N}(x_i; \mu_{\setminus i}, \sigma_{\setminus i}^2)
-%%   \end{split}
-%% \end{equation}
-%% where we completed the square in the penultimate step using the cavity parameters:
-%% \begin{align}
-%%   Z_{\setminus i}
-%%   &=
-%%   \sqrt{2 \pi (\sigma_{\setminus i}^2 + \tilde{\sigma}_i^2)}
-%%   \exp{\left(
-%%     \frac{1}{2}
-%%     \frac{(\mu_{\setminus i} - \tilde{\mu}_i)^2}{\sigma_{\setminus i}^2 + \tilde{\sigma}_i^2}
-%%     \right)}
-%%         \\
-%%   \sigma_{\setminus i}^2 &= \left(
-%%   \frac{1}{\vec{c}_i \cdot \vec{\Sigma} \cdot \vec{c}_i} - \frac{1}{\tilde{\sigma}_i^2}
-%%   \right)^{-1} \\
-%%   \mu_{\setminus i} &= \sigma_{\setminus i}^2 \left(
-%%   \frac{\mu_i}{\vec{c}_i \cdot \vec{\Sigma} \cdot \vec{c}_i} - \frac{\tilde{\mu}_i}{\tilde{\sigma}_i^2}
-%%   \right).
-%% \end{align}
-%% Note that the cavity distribution is the properly normalised quantity $q_{\setminus i}(x_i) / Z_{\setminus i}$.
-%% The exact zeroth cavity moment is found via
-%% \begin{equation}\label{eq:exact-zeroth-moment}
-%%   \frac{\hat{Z}_i}{Z_{\setminus i}} =
-%%   \frac{1}{Z_{\setminus i}}
-%%   \int_{\mathbb{R}} q_{\setminus i}(x_i) t_i(x_i) \, dx_i
-%%   = \frac{1}{2} \left( \erf{\beta_i} - \erf{\alpha_i} \right)
-%% \end{equation}
-%% where we have used the shorthand
-%% \begin{align}
-%%   \alpha_i &= \frac{l_i - \mu_{\setminus i}}{\sqrt{2} \sigma_{\setminus i}} \\
-%%   \beta_i &= \frac{u_i - \mu_{\setminus i}}{\sqrt{2} \sigma_{\setminus i}}.
-%% \end{align}
-%% The above relations are numerically unstable in the limit of small $\sigma_i^2 - \tilde{\sigma}_i^2$, so we have to handle this case by Taylor expansion:
-%% \begin{align}
-%%   q_{\setminus i}(x_i) &=
-%%   \frac{
-%%     \mathcal{N}(x_i; \vec{c}_i \cdot \vec{\mu}, \vec{c}_i \cdot \vec{\Sigma} \cdot \vec{c}_i)
-%%   }{
-%%     \mathcal{N}(x_i; \tilde{\mu}_i, \tilde{\sigma}_i^2)
-%%   }
-%%   =
-%%   \frac{\mathcal{N}(x_i; \mu_i, \sigma_i^2)}{
-%%     \mathcal{N}(x_i; \tilde{\mu}_i, \tilde{\sigma}_i^2)
-%%   }
-%%   \\
-%%   &=
-%%   \exp{\left(-a_i x_i
-%%     - \frac{a_i^2 \sigma_i^2}{2}
-%%     + a_i \mu_i
-%%     \right)}
-%%   \frac{\mathcal{N}(x_i; \mu_i + a_i \sigma_i^2, \sigma_i^2)}{
-%%     \mathcal{N}(x_i; \tilde{\mu}_i, \tilde{\sigma}_i^2)
-%%   }
-%% \end{align}
-%% where $a_i = \vec{a} \cdot \vec{c}_i$, giving
-%% \begin{align}
-%%   \hat{Z}_i
-%%   &=
-%%   \int_{\mathbb{R}} q_{\setminus i}(x_i) t_i(x_i) \, dx_i \\
-%%   &=
-%%   \sqrt{ \frac{\tilde{\sigma}_i^2}{\vec{c}_i \cdot \vec{\Sigma} \cdot \vec{c}_i} }
-%%   \int_0^{\delta_i}
-%%   \exp{\left( -\frac{(x_i - \mu_i)^2}{2 \vec{c}_i \cdot \vec{\Sigma} \cdot \vec{c}_i} +
-%%     \frac{(x_i - \tilde{\mu}_i)^2}{2 \tilde{\sigma}_i^2} \right)} \, dx_i
-%%   \\
-%%   &=
-%%   \sqrt{ \frac{\tilde{\sigma}_i^2}{\vec{c}_i \cdot \vec{\Sigma} \cdot \vec{c}_i} }
-%%   \exp{\left(
-%%     - \frac{a_i^2 \sigma_i^2}{2}
-%%     + a_i \mu_i
-%%     \right)}
-%%   \int_0^{\delta_i}
-%%   \exp{\left( -\frac{(x_i - (\mu_i + a_i \sigma_i^2))^2}{2 \vec{c}_i \cdot \vec{\Sigma} \cdot \vec{c}_i} +
-%%     \frac{(x_i - \tilde{\mu}_i)^2}{2 \tilde{\sigma}_i^2} - a_i x_i \right)} \, dx_i.
-%% \end{align}
-%% Matching moments between \eqref{eq:approximate-zeroth-moment} and \eqref{eq:exact-zeroth-moment} gives us
-%% \begin{equation}
-%%   \tilde{Z}_i = \frac{\hat{Z}_i}{Z_{\setminus i}}
-%%   \sqrt{2 \pi (\sigma_{\setminus i}^2 + \tilde{\sigma}_i^2)}
-%%   \exp{\left(
-%%     \frac{1}{2}
-%%     \frac{(\mu_{\setminus i} - \tilde{\mu}_i)^2}{\sigma_{\setminus i}^2 + \tilde{\sigma}_i^2}
-%%     \right)}.
-%% \end{equation}
-%% We calculate $\hat{Z}_i / Z_{\setminus i}$ from \eqref{eq:exact-zeroth-moment} and then obtain the partition function from
-%% \begin{equation}
-%%   \log{\tilde{Z}_i} =
-%%   \frac{1}{2} \left(
-%%   \log{(2\pi)} +
-%%   \log{(\sigma_{\setminus i}^2 + \tilde{\sigma}_i^2)} +
-%%   \frac{(\mu_{\setminus i} - \tilde{\mu}_i)^2}{\sigma_{\setminus i}^2 + \tilde{\sigma}_i^2}
-%%   + \log{\left(\frac{\erf{\beta_i} - \erf{\alpha_i}}{2}\right)}
-%%   \right)
-%% \end{equation}
-%% Giving the final partition function:
-%% \begin{equation}
-%%   \log{Z} =
-%%   \frac{1}{2} \left(
-%%   (n-m) \log{2\pi}
-%%   + \log\det{\vec{\Sigma}}
-%%   + \vec{\nu} \cdot \vec{\Sigma} \cdot \vec{\nu}
-%%   \right)
-%%   + \sum_{i=1}^m \left(
-%%   \log{\tilde{Z}_i}
-%%   - \frac{1}{2}
-%%   \left(
-%%   \log{\tilde{\sigma}_i^2}
-%%   + \tilde{\nu}_i \tilde{\mu}_i
-%%   \right)
-%%   \right)
-%% \end{equation}
-%% where we have either
-%% \begin{equation}
-%%   \begin{split}
-%%   \log{\tilde{Z}_i}
-%%   - \frac{1}{2}
-%%   \left(
-%%   \log{\tilde{\sigma}_i^2}
-%%   + \tilde{\nu}_i \tilde{\mu}_i
-%%   \right)
-%%   &=
-%%   \frac{1}{2} \left(
-%%   \log{(2\pi)} +
-%%   \log{(\sigma_{\setminus i}^2 + \tilde{\sigma}_i^2)} +
-%%   \frac{(\mu_{\setminus i} - \tilde{\mu}_i)^2}{\sigma_{\setminus i}^2 + \tilde{\sigma}_i^2}
-%%   + \log{\left(\frac{\erf{\beta_i} - \erf{\alpha_i}}{2}\right)}
-%%   - \log{\tilde{\sigma}_i^2}
-%%   - \tilde{\nu}_i \tilde{\mu}_i
-%%   \right)
-%%   \\
-%%   &=
-%%   \frac{1}{2} \left(
-%%   \log{(2\pi)} +
-%%   \log{\left(\frac{\sigma_{\setminus i}^2 + \tilde{\sigma}_i^2}{\tilde{\sigma}_i^2}\right)}
-%%   + \frac{(\mu_{\setminus i} - \tilde{\mu}_i)^2}{\sigma_{\setminus i}^2 + \tilde{\sigma}_i^2}
-%%   - \tilde{\nu}_i \tilde{\mu}_i
-%%   + \log{\left(\frac{\erf{\beta_i} - \erf{\alpha_i}}{2}\right)}
-%%   \right)
-%%   \\
-%%   &=
-%%   \frac{1}{2} \left(
-%%   \log{(2\pi)} +
-%%   \log{(1 + \tilde{\tau}_i \sigma_{\setminus i}^2)}
-%%   + \frac{\tilde{\tau}_i \mu_{\setminus i}^2 - 2\tilde{\nu}_i \mu_{\setminus i} - \tilde{\nu}_i^2 \sigma_{\setminus i}^2}
-%%   {1 + \tilde{\tau}_i \sigma_{\setminus i}^2}
-%%   + \log{\left(\frac{\erf{\beta_i} - \erf{\alpha_i}}{2}\right)}
-%%   \right)
-%%   \end{split}
-%% \end{equation}
-%% or for small $\sigma_i^2 - \tilde{\sigma_i^2}$ we use
-%% \begin{equation}
-%%   \begin{split}
-%%   \log{\tilde{Z}_i}
-%%   - \frac{1}{2}
-%%   \left(
-%%   \log{\tilde{\sigma}_i^2}
-%%   + \tilde{\nu}_i \tilde{\mu}_i
-%%   \right)
-%%   &= \\
-%%   \frac{1}{2} \left( -\log{\vec{c}_i \cdot \vec{\Sigma} \cdot \vec{c}_i} \right)
-%%   + a_i \mu_i
-%%   - \frac{a_i^2 \sigma_i^2}{2}
-%%   - \frac{\tilde{\nu}_i \tilde{\mu}_i}{2}
-%%   + & \\
-%%   \log{\left(
-%%   \int_0^{\delta_i}
-%%   \exp{\left( -\frac{(x_i - (\mu_i + a_i \sigma_i^2))^2}{2 \vec{c}_i \cdot \vec{\Sigma} \cdot \vec{c}_i} +
-%%     \frac{(x_i - \tilde{\mu}_i)^2}{2 \tilde{\sigma}_i^2} -a_i x_i \right)} \, dx_i \right)}&.
-%%   \end{split}
-%% \end{equation}
-
-%% \marginfootnote{In the zeitgeist of our time this could be construed as a form of machine learning; techniques for Bayesian inference are often thrown in with machine learning in e.g.\ topical reviews like Ref.\ \cite{MehtaPR2019}.
-%%   Personally, I am hesitant to call this machine learning as the techniques more closely resemble the approximation schemes of traditional statistical mechanics (to me at least) than neural networks which have been driving the recent machine learning revolution.}
-
-%% \todo{Show that EP reduces to the previous integral in the limit that there are no additional constraints: we obtain hypercubic limits.}
-
-%% \subsection{Worked example: area of a triangle}
-
-%% As a simple example we consider the area of a triangle as a unit square.
-%% We can write this area as the integral over a box
-%% \begin{equation}
-%%   A_\Delta
-%%   = \int_0^1 \int_0^1 \Theta(1 - x - y) \, dx dy
-%%   = \frac{1}{2}
-%% \end{equation}
-%% where $\Theta(\cdot)$ is the Heaviside function.
-%% The exact result is fairly trivial, but as it can also be evaluated using expectation propagation we can use this as a worked example and to justify the method.
-
-%% EP gives an area $A_\Delta \simeq 0.515$ for an error of about 3\%.
-%% This is a pathological case: no potential, pure geometry.
-%% We expect the error to improve when integrating functions over the box.
-%% We generalise the integral to
-%% \begin{equation}
-%%   Z_\Delta
-%%   = \int_0^1 \int_0^1 \Theta(1 - x - y) e^{-ax - by} \, dx dy
-%% \end{equation}
-%% with the results shown in Fig.\ \ref{?}.
-%% We see that the effective Gaussian is skewed by the additional constraint, stretching to approximate the triangular shape of the boundary.
-
-%% \begin{SCfigure}
-%%   \missingfigure[figwidth=\linewidth]{}
-%%   \caption[Expectation propagation integration over a triangle]{
-%%     Panel a: Expectation propagation error for integrating a simple potential over a triangle.
-%%     Panel b: approximate pdf for triangular integral.
-%%   }
-%% \end{SCfigure}
-
 %% \section{Results}
 
 %% We take the minimal energy structures as the stable packings determined in Refs.\ \cite{ArkusPRL2009,Holmes-CerfonSR2016}.
@@ -1381,153 +901,6 @@ This suggests a new route for predicting static properties of equilibrium liquid
 %% This means they should be considered as thermal fluctuations of one another, and not be distinguished.
 %% This explains why 5-fold symmetric structures like the icosahedron are thermally stable in the hard sphere liquid.
 %% Note that at jamming the symmetry of these structures must be broken.
-
-%% \section{Properties of multivariate Gaussians}
-
-%% The multivariate Gaussian (moment form)
-%% \begin{equation}
-%%   \begin{split}
-%%     \mathcal{N}(\vec{x}; \vec{\mu}, \vec{\Sigma})
-%%     &\equiv
-%%     \frac{1}{\sqrt{ (2\pi)^n \det{\vec{\Sigma}} }}
-%%     \exp{\left(
-%%       - \frac{1}{2} (\vec{x} - \vec{\mu}) \cdot \vec{\Sigma}^{-1} \cdot (\vec{x} - \vec{\mu})
-%%       \right)}
-%%     \\
-%%     &=
-%%     \frac{1}{\sqrt{ (2\pi)^n \det{\vec{\Sigma}} }}
-%%     \exp{\left(
-%%       - \frac{\vec{x} \cdot \vec{\Sigma}^{-1} \cdot \vec{x}}{2}
-%%       + \vec{x} \cdot \vec{\Sigma}^{-1} \cdot \vec{\mu}
-%%       - \frac{\vec{\mu} \cdot \vec{\Sigma}^{-1} \cdot \vec{\mu}}{2}
-%%       \right)}
-%%   \end{split}
-%% \end{equation}
-%% where $\vec{x} \in \mathbb{R}^n$ is a Gaussian distributed vector in our phase space, with mean $\vec{\mu} \in \mathbb{R}^n$ and covariance matrix $\vec{\Sigma} \in \mathbb{R}^{n \times n}$.
-%% The covariance matrix must be positive definite or else this non-normalisable and thus not a probability distribution.
-
-%% In our EP algorithm we write the multivariate Gaussian approximation in $q$ as the product of univariate Gaussians from the tile distributions approximating the boundary conditions.
-%% To show this, consider the product of univariate Gaussians:
-%% \begin{equation}
-%%   \begin{split}
-%%     \prod_{i=1}^m
-%%     \mathcal{N}(\vec{c}_i \cdot \vec{x}; \tilde{\mu}_i, \tilde{\sigma}_i^2)
-%%     &=
-%%     \prod_{i=1}^m
-%%     \left(
-%%     \frac{1}{\sqrt{ 2\pi \tilde{\sigma}_i^2 }}
-%%     \exp{\left(
-%%       - \frac{1}{2} \frac{(\vec{c}_i \cdot \vec{x} - \tilde{\mu}_i)^2}{\tilde{\sigma}_i^2}
-%%       \right)}
-%%     \right)
-%%     \\
-%%     &=
-%%     \prod_{i=1}^m
-%%     \left(
-%%     \frac{1}{\sqrt{ 2\pi \tilde{\sigma}_i^2 }}
-%%     \exp{\left(
-%%       - \frac{(\vec{c}_i \cdot \vec{x})^2}{2\tilde{\sigma}_i^2}
-%%       + \frac{\tilde{\mu}_i(\vec{c}_i \cdot \vec{x})}{\tilde{\sigma}_i^2}
-%%       - \frac{\tilde{\mu}_i^2}{2\tilde{\sigma}_i^2}
-%%       \right)}
-%%     \right)
-%%     \\
-%%     &=
-%%     \prod_{i=1}^m
-%%     \left(
-%%     \frac{1}{\sqrt{ 2\pi \tilde{\sigma}_i^2 }}
-%%     \exp{\left(-\frac{\tilde{\mu}_i^2}{2\tilde{\sigma}_i^2}\right)}
-%%     \right)
-%%     \exp{\left( \sum_{i=1}^m \left(
-%%       - \frac{(\vec{c}_i \cdot \vec{x})^2}{2\tilde{\sigma}_i^2}
-%%       + \frac{\tilde{\mu}_i(\vec{c}_i \cdot \vec{x})}{\tilde{\sigma}_i^2}
-%%       \right) \right)}
-%%     \\
-%%     &=
-%%     \prod_{i=1}^m
-%%     \left(
-%%     \frac{1}{\sqrt{ 2\pi \tilde{\sigma}_i^2 }}
-%%     \exp{\left(-\frac{\tilde{\nu}_i \tilde{\mu}_i}{2}\right)}
-%%     \right)
-%%     \exp{\left( \sum_{i=1}^m \left(
-%%       - \vec{x} \cdot \frac{\vec{c}_i \otimes \vec{c}_i}{2\tilde{\sigma}_i^2} \cdot \vec{x}
-%%       + (\tilde{\nu}_i\vec{c}_i) \cdot \vec{x}
-%%       \right) \right)}
-%%     \\
-%%     &=
-%%     \prod_{i=1}^m
-%%     \left(
-%%     \frac{1}{\sqrt{ 2\pi \tilde{\sigma}_i^2 }}
-%%     \exp{\left(-\frac{\tilde{\nu}_i \tilde{\mu}_i}{2}\right)}
-%%     \right)
-%%     \mathcal{N}(\vec{x}; \vec{\mu}, \Sigma)
-%%     \;
-%%     \sqrt{ (2\pi)^n \det{\vec{\Sigma}} }
-%%     \;
-%%     \exp{\left( \frac{\vec{\mu} \cdot \vec{\Sigma}^{-1} \cdot \vec{\mu}}{2} \right)}
-%%     \\
-%%     &=
-%%     \prod_{i=1}^m
-%%     \left(
-%%     \frac{1}{\sqrt{ 2\pi \tilde{\sigma}_i^2 }}
-%%     \exp{\left(-\frac{\tilde{\nu}_i \tilde{\mu}_i}{2}\right)}
-%%     \right)
-%%     \mathcal{N}(\vec{x}; \vec{\mu}, \Sigma)
-%%     \;
-%%     \sqrt{ (2\pi)^n \det{\vec{\Sigma}} }
-%%     \;
-%%     \exp{\left( \frac{\vec{\nu} \cdot \vec{\Sigma} \cdot \vec{\nu}}{2} \right)}
-%%     \\
-%%     &=
-%%     Z \mathcal{N}(\vec{x}; \vec{\mu}, \Sigma)
-%%   \end{split}
-%%   \label{eq:combined-normals}
-%% \end{equation}
-%% with
-%% \begin{subequations}
-%% \begin{align}
-%%   \tilde{\nu}_i &= \frac{\tilde{\mu}_i}{\tilde{\sigma}_i^2} \\
-%%   \vec{\Sigma}^{-1} &= \sum_{i=1}^m \frac{\vec{c}_i \otimes \vec{c}_i}{\tilde{\sigma}_i^2}
-%%   \label{eq:combined-normals-sigma}
-%%   \\
-%%   \vec{\mu} &=
-%%   \vec{\Sigma} \cdot \left( \sum_{i=1}^m \tilde{\nu}_i \vec{c}_i \right)
-%%   = \vec{\Sigma} \cdot \vec{\nu}
-%%   \\
-%%   \vec{\nu} &= \sum_{i=1}^m \tilde{\nu}_i \vec{c}_i
-%%   \label{eq:combined-normals-nu}
-%%   \\
-%%   Z &=
-%%   \sqrt{ (2\pi)^{n-m} \det{\vec{\Sigma}} }
-%%   \;
-%%   \exp{\left( \frac{\vec{\nu} \cdot \vec{\Sigma} \cdot \vec{\nu}}{2} \right)}
-%%   \prod_{i=1}^m
-%%   \left(
-%%   \frac{1}{\sqrt{ \tilde{\sigma}_i^2 }}
-%%   \exp{\left(-\frac{\tilde{\nu}_i \tilde{\mu}_i}{2}\right)}
-%%   \right)
-%%   \label{eq:combined-normals-Z}
-%% \end{align}
-%% \end{subequations}
-%% From this we find that
-%% \begin{equation}
-%%   \log{Z} =
-%%   \frac{n-m}{2} \log{2\pi} +
-%%   \frac{1}{2} \log\det{\vec{\Sigma}} +
-%%   \frac{\vec{\nu} \cdot \vec{\Sigma} \cdot \vec{\nu}}{2} -
-%%   \sum_{i=1}^m
-%%   \left(
-%%   \frac{1}{2} \log{\tilde{\sigma}_i^2} +
-%%   \frac{\tilde{\nu}_i \tilde{\mu}_i}{2}
-%%   \right)
-%% \end{equation}
-%% Finally, note that
-%% \begin{equation}\label{eq:biased-normal}
-%%   e^{-\vec{a} \cdot \vec{x}} \mathcal{N}(\vec{x}; \vec{\mu}, \vec{\Sigma})
-%%   =
-%%   \exp{\left( \frac{\vec{a} \cdot \vec{\Sigma} \cdot \vec{a}}{2} - \vec{a} \cdot \vec{\mu} \right)} \;
-%%   \mathcal{N}(\vec{x}; \vec{\mu} - \vec{\Sigma}\cdot\vec{a}, \vec{\Sigma}).
-%% \end{equation}
 
 \ifdefined\includebibliography
   \newgeometry{margin=1in}
