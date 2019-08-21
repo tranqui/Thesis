@@ -8,6 +8,7 @@
 \def\includebibliography{}
 
 \externaldocument{background}
+\externaldocument{supercooled-liquids}
 \externaldocument{morphometric-framework}
 \externaldocument{appendix-spt-singularities}
 
@@ -17,7 +18,7 @@
 \label{chapter:resummation}
 
 This is the final chapter on the morphometric approach, but has a different focus from the previous two.
-Here we derive the morphometric approach from first-principles in the case of hard particle systems, to place it on rigorous footing and potentially indicate how the approximation may be improved.
+Here we derive the morphometric approach from first-principles in the case of hard particle systems, to place it on more rigorous footing and potentially indicate how the approximation may be improved.
 We intend to publish part of this work at a later time as Ref.\ \cite{RobinsonResummation2019}.
 
 \section{Introduction}
@@ -411,9 +412,9 @@ The iterated kinematic formula \eqref{eq:multinomial-kinematic-formula} gives th
     =
       \sum_{\substack{i_0, \cdots, i_n = 0 \\ i_0 + \cdots + i_n = nd}}^d
       (C_{i_0, \cdots, i_n})^{-1}
-      V_{i_0}(K_0)
+      V_{i_0}[K_0]
       \prod_{j=1}^n
-      V_{i_j}(K_{s_j}),
+      V_{i_j}[K_{s_j}],
   \end{equation}
   \begin{equation}
     \textrm{with} \qquad
@@ -427,9 +428,9 @@ The iterated kinematic formula \eqref{eq:multinomial-kinematic-formula} gives th
 \end{subequations}
 Introducing the rescaled volumes
 \begin{equation}\label{eq:rescaled-intrinsic-volumes}
-  \widetilde{V}_k(K_s)
+  \widetilde{V}_k[K_s]
   =
-  \frac{k! \omega_k}{d! \omega_d} V_k(K_s)
+  \frac{k! \omega_k}{d! \omega_d} V_k[K_s]
 \end{equation}
 eliminates the combinatorial factor in \eqref{eq:n-particle-intersection-integral} giving
 \begin{equation}\label{eq:lambda-reduced}
@@ -437,9 +438,9 @@ eliminates the combinatorial factor in \eqref{eq:n-particle-intersection-integra
   =
   d! \omega_d
   \sum_{\substack{i_0, \cdots, i_n = 0 \\ i_0 + \cdots + i_n = nd}}^d
-  \widetilde{V}_{i_0}(K_0)
+  \widetilde{V}_{i_0}[K_0]
   \prod_{j=1}^n
-  \widetilde{V}_{i_j}(K_{s_j}).
+  \widetilde{V}_{i_j}[K_{s_j}]
 \end{equation}
 Summing this equation over all the different species in the mixture gives
 \begin{equation}
@@ -453,14 +454,14 @@ Summing this equation over all the different species in the mixture gives
     \\ &=
     d! \omega_d
     \sum_{\substack{i_0, \cdots, i_n = 0 \\ i_0 + \cdots + i_n = nd}}^d
-    \widetilde{V}_{i_0}(K_0)
+    \widetilde{V}_{i_0}[K_0]
     \prod_{j=1}^n
     \xi_{i_j}
     \\ &=
     d! \omega_d
     \sum_{k = 0}^d
     \frac{\lambda_k^{(n)}}{\rho^n}
-    \widetilde{V}_{k}(K_0)
+    \widetilde{V}_{k}[K_0]
   \end{split}
 \end{equation}
 where we simplified the final expression by reintroducing the \emph{scaled particle variables}%
@@ -470,7 +471,7 @@ where we simplified the final expression by reintroducing the \emph{scaled parti
     \label{eq:spt-variables-resummation}
     \xi_k
     &=
-    \rho \sum_{s = 1}^m x_s \widetilde{V}_k(K_s)
+    \rho \sum_{s = 1}^m x_s \widetilde{V}_k[K_s]
     \\
     \label{eq:little-lambda}
     \lambda_k^{(n)}
@@ -487,7 +488,7 @@ At this point we observe that the resulting free energy is already of morphometr
   \begin{align}
     \beta \Delta \Omega
     &=
-    \sum_{k=0}^d \beta a_k V_k(K_0)
+    \sum_{k=0}^d \beta a_k V_k[K_0]
     \\ \textrm{with} \qquad
     \beta a_k
     &=
@@ -653,6 +654,15 @@ In this limit the chemical potential of inserting a disc of radius $R$ becomes
 \end{equation*}
 It is straightforward to verify by insertion that this satisfies the two-dimensional equivalents of the scaled particle conditions \eqref{eq:spt-point}, \eqref{eq:spt-point-d1} and \eqref{eq:spt-mu}, demonstrating that this is indeed the scaled particle theory solution.
 
+\begin{SCfigure}
+  \includegraphics[width=0.9\linewidth,outer]{resummation-pressure}
+  \caption[Accuracy of the equation of state obtained from partially resumming the virial series]{
+    Equations of state for the single-component hard sphere liquid in $d=3$: Carnahan-Starling (CS), the scaled particle/Percus Yevick (SPT/PY) and the equation obtained from resumming terms in the virial series where there is a common point of intersection.
+    Top panel: pressure equations of state.
+    Bottom panel: errors in the SPT/PY and resummation pressures are comparable across the whole liquid regime, taking the CS equation as the quasi-exact result.}
+  \label{fig:resummation-pressure}
+\end{SCfigure}
+
 Finally, for $d=3$ we insert \eqref{eq:little-lambda-d=3} into \eqref{eq:final-a-coefficient}:
 \begin{subequations}
   \begin{align}
@@ -704,12 +714,11 @@ Such a reweighting approach is redundant because \eqref{eq:py-pressure-mixtures}
 \section{Numerical results for the single-component hard spheres}
 
 \begin{SCfigure}
-  \includegraphics[width=0.9\linewidth,outer]{resummation-pressure}
-  \caption[Accuracy of equation of state from partially resumming the virial series]{
-    Equations of state for the single-component hard sphere liquid: Carnahan-Starling (CS), the scaled particle/Percus Yevick (SPT/PY) and the equation obtained from resumming terms in the virial series where there is a common point of intersection.
-    Top panel: pressure equations of state.
-    Bottom panel: errors in the SPT/PY and resummation pressures are comparable across the whole liquid regime, taking the CS equation as the quasi-exact result.}
-  \label{fig:resummation-pressure}
+  \includegraphics[width=0.9\linewidth,outer]{resummation-a2}
+  \caption[Accuracy of surface tension obtained from partially resumming the virial series]{
+    Comparison of surface tensions for different morphometric theories.
+  using the highly accurate result \eqref{eq:quasi-exact-surface-tension} from Ref.\ \cite{DavidchackMP2015} valid until $\eta \sim 0.5$.}
+  \label{fig:resummation-a2}
 \end{SCfigure}
 
 For single-component hard spheres the pressure obtained from the resummation in the previous section yields
@@ -752,14 +761,6 @@ The surface tensions are plotted in Fig.\ \ref{fig:resummation-a2}; the accuracy
 Unsurprisingly, the other morphometric theories feature more accurate surface tensions; this is likely because they were constructed to satisfy thermodynamic relations which improves their accuracy.
 %By contrast, the resummation route was not constructed for accuracy nor to satisfy thermodynamic relations.
 Curiously, the error in the new theory scales almost identically to virial/CS theory at small $\eta$ even though it has the opposing sign; all of the previous morphometric theories overestimate the surface tension, whereas the resummation route underestimates it.
-
-\begin{SCfigure}
-  \includegraphics[width=0.9\linewidth,outer]{resummation-a2}
-  \caption[Accuracy of surface tension from partially resumming the virial series]{
-    Comparison of surface tensions for different morphometric theories.
-  using the highly accurate result \eqref{eq:quasi-exact-surface-tension} from Ref.\ \cite{DavidchackMP2015} valid until $\eta \sim 0.5$.}
-  \label{fig:resummation-a2}
-\end{SCfigure}
 
 %% \subsection{Beyond convex geometries and the choice of dividing surface}
 %% \label{sec:general-geometries}
@@ -867,26 +868,28 @@ The exact result applies for mixtures of hard convex particles in an isotropic p
 
 %This result is not that surprising as the morphometric approach can be obtained as a limit case of FMT \cite{Hansen-GoosJPCM2006}, which itself can be formulated as the resummation of the same terms in the virial expansion \cite{LeithallPRE2011,KordenPRE2012,MarechalPRE2014}.
 
-In hard spheres the exact contribution features similar accuracy as scaled particle theory, so it captures most contributions to the bulk free energy and seems to be why the approach has been successful.
-Though as noted in Ref.\ \cite{MarechalPRE2014} this is partially due to a cancellation in the omitted terms of the virial expansion, so it may still desirable to improve the morphometric approach by inclusion of additional terms.
-The exact morphometric contribution provides a suitable starting point for including additional terms to improve accuracy.
-
+In hard spheres, this exact contribution features similar accuracy as scaled particle theory, and exactly coincides with it for $d \le 2$.
+Numerical comparison in $d=3$ shows that the pressure and surface tension are comparable in accuracy to the classic SPT/PY route, so it captures the dominant contributions to the bulk free energy across a large density range; this latter fact seems to suggest why the approach has been successful.
+Though as noted in Ref.\ \cite{MarechalPRE2014}, this is partially due to a cancellation in the omitted terms of the virial expansion.%, so it may still be desirable to improve the morphometric approach by inclusion of additional terms.
 %We have derived the morphometric solvation free energy for mixtures of hard convex particles from first-principles using the virial series.
+%% The morphometric theory we have derived from the virial series is less accurate than theories obtained from other routes, so these results are of fundamental rather than practical interest.
+%% Specifically, in $d=3$ the pressure and surface tension are comparable in accuracy to the classic SPT/PY route, and in $d=2$ the approach is identical to scaled particle theory.
+The usefulness of the new route extends beyond mere accuracy; the free energy we have identified emerges \emph{rigorously} as a contribution from the virial series.
 
-The morphometric theory we have derived from the virial series is less accurate than theories obtained from other routes, so these results are of fundamental rather than practical interest.
-Specifically, in $d=3$ the pressure and surface tension are comparable in accuracy to the classic SPT/PY route, and in $d=2$ the approach is identical to scaled particle theory.
-However, the usefulness of the new route extends beyond mere accuracy; the free energy we have identified emerges \emph{rigorously} as a contribution from the virial series.
-The fact that this exact contribution is still reasonably accurate suggests that the corrections are small, providing further justification of the morphometric approach.
-This means we could write the insertion cost for a solute $K$ as the \emph{exact} decomposition
+The fact that the exact contribution is reasonably accurate suggests that the corrections are small, providing further justification of the morphometric approach.
+Moveover, the exact contribution provides a suitable starting point for including additional terms to improve accuracy.
+We could write the insertion cost for a solute $K$ as the \emph{exact} decomposition
 \begin{equation}\label{eq:exact-morph-decomposition}
   \Delta \Omega[K]
   =
-  \sum_{k=0}^d a_k V_k(K)
+  \sum_{k=0}^d a_k V_k[K]
   + \Delta \Omega_\mathrm{extra}[K]
 \end{equation}
 with coefficients $a_k$ as previously calculated, and $\Delta \Omega_\mathrm{extra}$ contains the subleading corrections.
 Notably, the exponentially damped oscillations occuring in pair correlations at asymptotically large separations must be contained within $\Delta \Omega_\mathrm{extra}$.
-The insertion cost is known to contain singularities \cite{ReissJCP1959} so it is unlikely that $\Delta \Omega_\mathrm{extra}$ possesses a simple analytic form.
+The insertion cost is known to contain singularities%
+\marginfootnote{See Appendix \ref{appendix:spt-singularities} where we recount an old argument from Ref.\ \cite{ReissJCP1959} that $\Delta \Omega$ contains singularities.}
+so it is unlikely that $\Delta \Omega_\mathrm{extra}$ possesses a simple analytic form.
 It is possible that additional exact morphometric contributions exist, and they would be contained in $\Delta \Omega_\mathrm{extra}$ also.
 
 Furthermore, the formal derivation we have followed naturally leads to explicit expressions for $\Delta \Omega_\mathrm{extra}$.
@@ -915,7 +918,7 @@ where $\Delta_{s_1,s_2}$ is the three-body \emph{ring integral}
   \Delta_{s_1,s_2}
   =
   \int_{G_d^2}
-  \chi[K \cap g_1 K_{s_1}] \chi[K \cap g_2 K_{s_2}] \chi[g_1 K_{s_1} \cap g_2 K_{s_2}]
+  \chi[K \cap g_1 K_{s_1}] \, \chi[K \cap g_2 K_{s_2}] \, \chi[g_1 K_{s_1} \cap g_2 K_{s_2}]
   \, dg_1 dg_2.
 \end{equation}
 Ring integrals can be calculated straightforwardly in hard spheres \cite{MontrollJCP1941}, or using the Radon transform for convex geometries of arbitrary shapes \cite{WertheimMP1994,WertheimMP1996,WertheimMP1996a}.
@@ -939,18 +942,18 @@ Resumming the ring diagrams would lead to a contribution in $\Delta \Omega$ invo
 The form of the exact contribution is instructive in how it applies to mixtures.
 It is argued in Ref.\ \cite{KodamaJCP2011} that for an $m$-component mixture the appropriate morphometric form reads
 \begin{equation}\label{eq:morphometric-approach-mixtures}
-  \Delta \Omega
+  \Delta \Omega[K]
   =
   \sum_{i=1}^m
-  a_3^{(i)} V_i
-  + a_2^{(i)} A_i
-  + a_1^{(i)} C_i
-  + a_0^{(i)} X_i
+  a_3^{(i)} V_i[K]
+  + a_2^{(i)} A_i[K]
+  + a_1^{(i)} C_i[K]
+  + a_0^{(i)} X_i[K]
 \end{equation}
 where the coefficients $a_k^{(i)}$ now depend on the specific interactions with each species and their composition, and $\{V_i, A_i, C_i, X_i\}$ are geometric measures on some composite body of the solute with solvent particles of species $i$, e.g.\ their specific exluded volume.
 By contrast, our exact morphometric contribution does not involve different intrinsic volumes for the different cross-species interactions, suggesting \eqref{eq:morphometric-approach-d} is a general enough \emph{ansatz} and the extension for mixtures \eqref{eq:morphometric-approach-mixtures} proposed in Ref.\ \cite{KodamaJCP2011} may be unnecessary.
 Moreover, as functions of the scaled particle variables $\{\xi_i\}$ the coefficients we derive remain well-defined in the polydisperse limit $m \to \infty$, discussion of which can be found in section \ref{sec:truncatable-free-energy} and in more detail in Refs.\ \cite{GualtieriJCP1982,WarrenPRL1998,SollichPRL1998,SollichAiCP2001}.
-With the number of coefficients growing with $m$ in \eqref{eq:morphometric-approach-mixtures}, it is unclear how well-posed the \emph{ansatz} is in this limit.
+With the number of coefficients growing with $m$ in \eqref{eq:morphometric-approach-mixtures}, it is unclear how well-posed this \emph{ansatz} is in that limit.
 
 \ifdefined\includebibliography
   \newgeometry{margin=1in}
