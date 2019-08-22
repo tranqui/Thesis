@@ -421,10 +421,12 @@ We will use an approximate method from Bayesian inference: expectation propagati
 \section{Expectation propagation}
 
 \begin{SCfigure}
-  \missingfigure[figwidth=\linewidth]{}
-  \caption[Generalisation of harmonic approximation using machine learning]{
+  \includegraphics[width=0.9\linewidth,outer]{ep-pdf}
+  \caption[Approximate probability distribution assumed in blah]{
     Sketch of integration scheme proposed as generalisation of harmonic approximation: true distribution modelled as a Gaussian.
-    We use expectation propagation as criteria for optimal parameters for the Gaussian.}
+    We use expectation propagation as criteria for optimal parameters for the Gaussian.
+    In each panel the boundary of the integration area is indicated by red lines.
+    For a field strength $\vec{a} = \{1,1\}$.}
 \end{SCfigure}
 
 Inspired by the Harmonic approximation where the energy is expanded to second order, we will attempt to approximate the basin probability distribution as a Gaussian.
@@ -743,10 +745,9 @@ with the results shown in Fig.\ \ref{?}.
 We see that the effective Gaussian is skewed by the additional constraint, stretching to approximate the triangular shape of the boundary.
 
 \begin{SCfigure}
-  \missingfigure[figwidth=\linewidth]{}
-  \caption[Expectation propagation integration over a triangle]{
-    Panel a: Expectation propagation error for integrating a simple potential over a triangle.
-    Panel b: approximate pdf for triangular integral.
+  \includegraphics[width=0.9\linewidth,outer]{ep-errors}
+  \caption[Errors in expectation propagation for integration over a triangle]{
+    Expectation propagation error for integrating a simple potential over a triangle with field $\vec{a} = (a, a)$.
   }
 \end{SCfigure}
 
