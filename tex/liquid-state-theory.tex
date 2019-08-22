@@ -254,7 +254,7 @@ Writing the instantaneous density as
 \end{equation*}
 where $\delta(\cdot)$ is the Dirac delta function, then the various \emph{density moments} are determined as
 %% Similarly, we can define higher-order moments of the instantaneous density in terms of $\rho^{(n)}$ giving e.g.\
-\begin{subequations}
+\begin{subequations}\label{eq:density-moments}
   \begin{align}
     \langle \hat\rho(\vec{r}) \rangle
     =& \,
@@ -287,7 +287,7 @@ The normalisation of these functions gives the moments of particle number $N$, i
 \end{equation}
 We can define a dual hierarchy of \emph{density-density correlation functions} $H^{(n)}$ by the same procedure used to generate $h^{(n)}$ from $g^{(n)}$, i.e.\ through a cumulant generating function.
 The first few functions in this hierarchy are
-\begin{subequations}
+\begin{subequations}\label{eq:density-density-correlations}
   \begin{align}
     H^{(1)}(\vec{r})
     =& \,
@@ -674,10 +674,9 @@ The pair distribution function $g^{(2)}$ appeared in the virial route because th
 \subsection{Virial series}
 \label{sec:virial-series}
 
-The virial series provides the only properly rigorous approach to evaluating the partition function, and thus the free energy, from first principles.
-\todo{Need citation. Can put lots of classic citations here, Ursell functions and Mayer stuff.}
+The virial series provides a properly rigorous approach to evaluating the partition function, and thus the free energy, from first principles \cite{UrsellMPCPS1927,MayerJCP1941,MontrollJCP1941,Hansen2013,Santos2016}.
 We introduce it here as it will be used in chapter \ref{chapter:resummation} to place the fundamental approximation, the morphometric approach, underlying chapters \ref{chapter:morphometric-framework} and \ref{chapter:morphometric-applications} on firmer ground.
-This approach can be used to derive free energy functionals for application to (classical) density functional theory (section \ref{sec:dft}): cf.\ Refs.\ \cite{LeithallPRE2011,KordenPRE2012,MarechalPRE2014}.
+This approach can also be used to derive free energy functionals for application to (classical) density functional theory (section \ref{sec:dft}): cf.\ Refs.\ \cite{LeithallPRE2011,KordenPRE2012,MarechalPRE2014}.
 The series derived below is only valid for systems interacting via a pair potential $u(\vec{r})$.
 
 The partition function $\Xi$, defined in \eqref{eq:grand-canonical-partition}, is an expansion in \emph{fugacity} featuring intractable integrals; the trick to make calculations more tractable is to transform $\Xi$ into a \emph{density} expansion.
@@ -781,7 +780,7 @@ which defines a new hierarchy of \emph{cluster functions}%
 \marginfootnote{These are sometimes called \emph{Ursell functions}.}
 $W^{(n)}$.
 The transformation to cluster functions eliminates all disconnected diagrams, e.g.\ the first few are defined as \cite{Santos2016}
-\begin{subequations}
+\begin{subequations}\label{eq:ursell-functions}
   \begin{align}
     W^{(1)}(\vec{r})
     &=

@@ -37,8 +37,45 @@ I have found myself frequently revisiting the transformations between the variou
 
 \section{Summary}
 
-\todo{Write a summary}
-This concludes the relevant background on the liquid state.
+\begin{SCtable}
+  \begin{minipage}[b]{\linewidth}
+    \centering
+    \begin{tabular}{cc}
+      \toprule
+      \multicolumn{2}{c}{Dual hierarchies} \\
+      \midrule
+      correlation function & dual function \\
+      \midrule
+      distribution $g^{(n)}$ \eqref{eq:n-particle-distribution} &
+      cluster $h^{(n)}$ \eqref{eq:cluster-correlation-functions} \\
+      density moments $\langle \hat{\rho}_1 \cdots \hat{\rho}_n \rangle$ \eqref{eq:density-moments} &
+      density-density $H^{(n)}$ \eqref{eq:density-density-correlations} \\
+      Boltzmann weight $e^{-\beta U_n}$ &
+      Ursell $W^{(n)}$ \eqref{eq:ursell-functions} \\
+      \midrule
+      \multicolumn{2}{c}{Other correlation functions} \\
+      \midrule
+      \multicolumn{2}{c}{$n$-particle density $\rho^{(n)}$ \eqref{eq:n-particle-density}} \\
+      \multicolumn{2}{c}{static structure factor $S^{(n)}$ \eqref{eq:static-structure-factor}} \\
+      \multicolumn{2}{c}{direct $c^{(n)}$ \eqref{eq:direct-correlations}} \\
+      \bottomrule
+    \end{tabular}
+  \end{minipage}
+  \caption{Summary of the various correlation functions in liquid state theory.}
+  \label{table:correlation-functions}
+\end{SCtable}
+
+We have seen that integral geometry provides the formalism for describing sizes, and thus defines an \emph{ansatz} for strictly extensive variables.
+Specifically, such variables must be a linear combination of the $(d+1)$ intrinsic volumes, which are the only meaningful size measures in $d$-dimensions in the sense of rigid-motion invariance, additivity and continuity.
+We expect in general that thermodynamic potentials are extensive in the thermodynamic limit, so this formalism provides a good starting point for their description.
+However, it is worth noting that extensive quantities could contain subleading terms which disappear in the thermodynamic limit; these would not be captured by an integral geometric \emph{ansatz}.
+
+We introduced liquid state theory, with a particular focus on the various correlation functions which are summarised in Table \ref{table:correlation-functions}.
+A key result for hard spheres was the highly accurate Carnahan-Starling equation of state \eqref{eq:cs-pressure}, which we will use throughout to treat the hard sphere liquid.
+We saw how the intrinsic volumes could be applied to liquid state theory to construct accurate free energy functionals for hard particle systems.
+We obtained the morphometric approach, an expansion of the chemical potential with the properties of sizes outlined above, as a special case of this theory.
+In chapters \ref{chapter:morphometric-framework} and \ref{chapter:resummation} we will provide additional justifications of this approach, and we will apply it to predict the concentrations of local structures in chapter \ref{chapter:morphometric-applications}.
+
 In the next chapter we will discuss the phenomenology of supercooled liquids and the glass transition, which will provide the key context for the treatment of the high density hard sphere liquid in subsequent chapters.
 
 \ifdefined\includebibliography

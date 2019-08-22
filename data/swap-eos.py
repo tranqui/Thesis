@@ -24,14 +24,26 @@ n3 = eta
 # Z = (n0 / (1 - n3) + n1*n2 / (1-n3)**2 + n2**3 * (3 - n3) / (36*np.pi * (1 - n3)**3)) / rho
 # plt.plot(eta, Z, '--', label='BMCSL')
 
+c = [next(plt.gca()._get_lines.prop_cycler)['color'] for _ in range(4)]
+
+import matplotlib.colors as mc
+import colorsys
+jam_c = c[-1]
+amount = 0.5
+jam_c = colorsys.rgb_to_hls(*mc.to_rgb(jam_c))
+jam_c = colorsys.hls_to_rgb(jam_c[0], 1 - amount * (1 - jam_c[1]), jam_c[2])
+plt.axvspan(0.6487, 0.6534, color=jam_c, ec='none')
+plt.text(0.6534 + 1e-3, 24, r'$\eta_J$',
+         horizontalalignment='left', verticalalignment='center')
+
 Z = (n0 / (1 - n3) + 4/3 * n1*n2 / (1-n3)**2 + 2/3 * n2**3 / (12*np.pi * (1 - n3)**3) - 4*np.pi / (1-n3) * n1**2*n2 / (n2**2 + 12*np.pi * n1 * (1-n3))) / rho
-plt.plot(eta, Z, '--', label='CS')
+plt.plot(eta, Z, '--', c=c[0], label='CS')
 
 eta, Z = np.genfromtxt('swap-eos-n1000.dat').T
-plt.plot(eta, Z, 'o', mew=0.5, mfc='None', label='MC N=1000')
+plt.plot(eta, Z, 'o', mew=0.5, c=c[1], mfc='None', label='MC N=1000')
 
 eta, Z = np.genfromtxt('swap-eos-n8000.dat').T
-plt.plot(eta, Z, '^', mew=0.5, mfc='None', ms=3.5, label='MC N=8000')
+plt.plot(eta, Z, '^', mew=0.5, c=c[2], mfc='None', ms=3.5, label='MC N=8000')
 
 plt.legend(loc='best')
 plt.xlabel(r'$\eta$')
