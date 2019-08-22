@@ -11,15 +11,24 @@
 \externaldocument{supercooled-liquids}
 \externaldocument{morphometric-framework}
 \externaldocument{appendix-full-geometry}
+\externaldocument{appendix-bayesian}
 
 \begin{document}
 \chapter{Local structure in the hard sphere liquid}
 \epigraph{\textbf{hardball 1.1} \emph{informal} Uncompromising and ruthless methods or dealings.}{Oxford English Dictionary (2019).}
 \label{chapter:morphometric-applications}
 
+This chapter applies the theory developed in the previous chapter to the treatment of local structures in the hard sphere liquid.
+Using the framework of many-body correlations and the morphometric approach, we calculate absolute free energies of local geometric motifs.
+We find these to be in excellent quantitative agreement with molecular dynamics simulations across the liquid and supercooled liquid regimes.
+We find a bimodality in the density library of states where fivefold symmetric structures appear lower in free energy than fourfold symmetric structures, and from a single reaction path predict an Arrhenius-like scaling of local relaxation dynamics.
+The method provides a new route to assess changes in the free energy landscape at volume fractions dynamically inaccessible to conventional techniques.
+
 The majority of this chapter contains work published as Ref.\ \cite{RobinsonPRL2019}.
-\hl{Later stuff is new.}
-\todo{Should expand this a little. May not write anything new.}
+Towards the end of this chapter we introduce an unpublished method using Bayesian inference to evaluate the free energy of local structures in hard spheres, which has the potential to treat the saddles of the hard sphere energy landscape.
+
+%% While `sphere' and `ball' are used interchangeably in physics (and colloquially), in geometry they refer to different things: balls $\ball^d$ are the solid objects whereas spheres are the boundaries $\partial \ball^d$.
+%% As such, physicists really mean `hard balls' rather than hard spheres; the epigraph rang true for me as I undertook the work of this chapter.
 
 \section{Introduction}
 
@@ -62,15 +71,21 @@ This allows us to predict the populations of specific local structures in the bu
 
 From the definition of the probability density function  \eqref{eq:n-particle-density-pdf} defining the $n$-particle density, the total number of a local structure in a system volume $V$ is
 \begin{equation}\label{eq:structure-population}
-  \mathcal{N} =
-  \int_{\mathcal{Q}} \rho^n g^{(n)}(\vec{r}^n) \, d\vec{r}^n,
+  \mathcal{N}
+  =
+  \frac{1}{n!}
+  \int_{\mathcal{Q}}
+  \rho^n g^{(n)}(\vec{r}^n)
+  \, d\vec{r}^n,
 \end{equation}
 where $\mathcal{Q}$ is the domain \emph{defining} the particular local structure.
 In terms of the potential of mean force \eqref{eq:potential-mean-force} this would be written equivalently as
 \begin{equation*}
-  \mathcal{N} =
-  \int_{\mathcal{Q}} \rho^n
-  \exp{\left(-\beta\phi^{(n)}(\vec{r}^n)\right)}
+  \mathcal{N}
+  =
+  \frac{1}{n!}
+  \int_{\mathcal{Q}}
+  \rho^n \exp{\left(-\beta\phi^{(n)}(\vec{r}^n)\right)}
   %e^{-\beta \phi^{(n)}(\vec{r}^n)}
   \, d\vec{r}^n,
 \end{equation*}
@@ -83,8 +98,12 @@ From the latter observation we could define a free energy for the local structur
 but we will find it more useful to define the free energy as an excess quantity.
 Specifically, we exploit translational invariance of $\phi^{(n)}$ in the uniform liquid to integrate the center of mass over the system volume, as in
 \begin{equation}
-  \mathcal{N} =
-  \rho^n V \int_\mathcal{D} g^{(n)}(\vec{r}^{n-1}) \, d\vec{r}^{n-1},
+  \mathcal{N}
+  =
+  \frac{\rho^n V}{n!}
+  \int_\mathcal{D}
+  g^{(n)}(\vec{r}^{n-1})
+  \, d\vec{r}^{n-1},
 \end{equation}
 defining the internal structure space $\mathcal{D}$ through $\mathcal{Q} = \mathcal{D} \times V^d$.
 The prefactor $\rho^n V$ is the trivial scaling of the ideal gas, so we define the free energy of the structure through the excess quantity%
@@ -92,7 +111,7 @@ The prefactor $\rho^n V$ is the trivial scaling of the ideal gas, so we define t
 \begin{equation*}
   e^{-\beta F}
   =
-  \frac{\mathcal{N}}{\rho^n V \sigma^{d(n-1)}},
+  \frac{\mathcal{N}}{\sigma^{d(n-1)} \rho^n V},
 \end{equation*}
 with powers of particle diameter $\sigma$ introduced to make the right-hand side dimensionless.
 Note that $\mathcal{N} / V$ is the \emph{concentration} of the structure, so the right-hand side could be thought of as an excess concentration.
@@ -103,7 +122,7 @@ Written explicitly, the free energy of the local structure is
     &=
     -\ln{
       \left(
-        \frac{1}{\sigma^{d(n-1)} V}
+        \frac{1}{\sigma^{d(n-1)} n!}
         \int_{\mathcal{D}}
         g^{(n)}(\vec{r}^{n-1}) \, d\vec{r}^{n-1}
       \right)
@@ -112,7 +131,7 @@ Written explicitly, the free energy of the local structure is
     &=
     -\ln{
       \left(
-        \frac{1}{\sigma^{d(n-1)} V}
+        \frac{1}{\sigma^{d(n-1)} n!}
         \int_{\mathcal{D}}
         \exp{\left(-\beta\phi^{(n)}(\vec{r}^{n-1})\right)}
         \, d\vec{r}^{n-1}
@@ -135,7 +154,7 @@ In conventional energy landscape approaches, a structure%
 would be defined by the region, or \emph{basin}, surrounding an energy minimum called the \emph{inherent state} \cite{StillingerPRA1982,StillingerS1995,Wales2004}.
 Defining the location of the inherent state as
 \begin{equation*}
-  \vec{x}_0
+  \vec{x}^*
   :=
   \argmin_{\vec{x} \in \mathcal{D}}{\left( \phi^{(n)}(\vec{x}) \right)},
 \end{equation*}
@@ -144,36 +163,38 @@ The partition function would then be evaluated using via a perturbation theory a
 \begin{equation*}
   \phi^{(n)}(\vec{x})
   =
-  \phi^{(n)}(\vec{x}_0)
-  + \frac{1}{2} (\vec{x} - \vec{x}_0) \cdot
-  \vec{\nabla}\vec{\nabla} \phi^{(n)}(\vec{x}_0)
-  \cdot (\vec{x} - \vec{x}_0)
+  \phi^{(n)}(\vec{x}^*)
+  + \frac{1}{2} (\vec{x} - \vec{x}^*) \cdot
+  \vec{\nabla}\vec{\nabla} \phi^{(n)}(\vec{x}^*)
+  \cdot (\vec{x} - \vec{x}^*)
   + \mathcal{O}(\vec{x}^3)
 \end{equation*}
-which is valid in the case of \emph{smooth} potentials where $\vec{\nabla} \phi^{(n)}(\vec{x}_0) = 0$.
+which is valid in the case of \emph{smooth} potentials where $\vec{\nabla} \phi^{(n)}(\vec{x}^*) = 0$.
 Then, \cite{Wales2004}
 \begin{equation}\label{eq:harmonic-approximation}
   \begin{split}
     \int_\mathcal{D} e^{-\beta\phi^{(n)}(\vec{x})} d\vec{x}
     &\simeq
-    e^{-\beta\phi^{(n)}(\vec{x}_0)}
+    e^{-\beta\phi^{(n)}(\vec{x}^*)}
     \int_\mathcal{D}
     \exp{\left( - \frac{\Delta\vec{x} \cdot \vec{H} \cdot \Delta\vec{x}}{2} \right)}
     \, d\vec{x}
     \\ &\approx
     \sqrt{ \frac{(2\pi)^{d(n-1)}}{\det \vec{H}} }
-    e^{-\beta\phi^{(n)}(\vec{x}_0)}
+    e^{-\beta\phi^{(n)}(\vec{x}^*)}
   \end{split}
 \end{equation}
-where $\vec{H} = \vec{\nabla}\vec{\nabla} \beta \phi^{(n)}(\vec{x}_0)$ is the (positive-definite) Hessian matrix and $\Delta \vec{x} = \vec{x} - \vec{x}_0$, and in the latter line the integral is taken over all of space (as an approximation) using the multivariate Gaussian integral.
+where $\vec{H} = \vec{\nabla}\vec{\nabla} \beta \phi^{(n)}(\vec{x}^*)$ is the (positive-definite) Hessian matrix and $\Delta \vec{x} = \vec{x} - \vec{x}^*$, and in the latter line the integral is taken over all of space (as an approximation) using the multivariate Gaussian integral%
+\marginfootnote{As a simplification in this step we ignored rigid rotations, which cannot be treated perturbatively in general.
+  We give the correct treatment of rotations in section \ref{sec:structure-definition}.}.
 This method is variously referred to as the \emph{saddlepoint approximation}, \emph{Laplace's method} or the \emph{harmonic approximation} in different communities.
-This approach fails in hard particle systems because the pair potential is pathological: $\vec{\nabla} \phi^{(n)}(\vec{x}_0) \ne 0$, the Hessian is generally not positive-definite and the integral cannot be approximated over all of space.
+This approach fails in hard particle systems because the pair potential is pathological: $\vec{\nabla} \phi^{(n)}(\vec{x}^*) \ne 0$, the Hessian is generally not positive-definite and the integral cannot be approximated over all of space.
 
-As the hard sphere pair potential is singular, we require non-perturbative methods to evaluate the free energy which we will introduce in subsequent sections.
-We will begin by proposing a definition for the structures so that we have a domain of integration.
-\todo{Reference specific sections}
+As the hard sphere pair potential is singular, we require non-perturbative methods to evaluate the free energy which we will introduce in sections \ref{sec:local-library} and \ref{sec:reaction-paths}.
+We will begin by proposing an operational definition for the structures so that we have a domain of integration.
 
 \section{How do we define a local structure?}
+\label{sec:structure-definition}
 
 An ideal definition of local structures would exactly partition the phase space of possible states within the liquid, so that the free energy and configurational entropy with varying lengthscale (through $n$) could be assessed.
 This would allow direct comparison with the mean-field of glass (sections \ref{sec:mean-field-glass} and \ref{sec:finite-d-glass}), particularly with equations \eqref{eq:rfot-barrier} and \eqref{eq:rfot-xi}.
@@ -201,9 +222,9 @@ The first few packings for $3 \le n \le 7$ are shown in Fig.\ \ref{fig:packings}
 As these states are exhaustive, they represent a complete \emph{local library of states}, of fundamental interest to random first-order transition theory \cite{LubchenkoARPC2007} with the potential to significantly improve upon previous extensions of mean-field theory into finite-dimensions \cite{KirkpatrickPRB1987,HallJCP1987,KirkpatrickPRA1989,BouchaudJCP2004,DzeroPRB2005,FranzJSM2005,AngeliniJSP2017,RulquinJSM2016,BiroliMeanPRB2018,BiroliFinitePRB2018}.
 
 Some explanation of what is meant by `rigid' is warranted.
-A structure is rigid if the only degrees of freedom are rigid-body motions i.e.\ translations and rotations.
+A structure is rigid if the only degrees of freedom are rigid-body motions i.e.\ translations and rotations, but this is hard to test so stronger criterions are required in general.
 Some of the oldest ideas surrounding rigidity originate to Maxwell \cite{MaxwellRigidity1864} and focus on the number of contacts.
-These ideas are based on linear algebra where each particle coordinate is a degree of freedom and each contact is a constraint.
+These ideas are based on linear algebra: each particle coordinate is a degree of freedom and each contact is a constraint.
 Matching the number of freedoms and constraints yields the \emph{Maxwell criterion}, where the number of contacts is exactly \cite{MaxwellRigidity1864}
 \begin{equation}\label{eq:maxwell-criterion}
   M_\mathrm{Maxwell} = dn - \frac{d(d+1)}{2},
@@ -219,11 +240,11 @@ In the thermodynamic limit $n \to \infty$ we obtain the \emph{isostatic} conditi
 These ideas have been refined in \cite{CalladineIJSS1978}, but they are still fundamentally based on a linear analysis.
 By contrast, rigidity is a non-linear notion for $d > 1$ and so these ideas are not rigorous%
 \marginfootnote{In $d=3$ rigid structures exist which violate the Maxwell criterion \eqref{eq:maxwell-criterion}; examples exist of both \emph{hyperstatic} structures like the face-centred cubic unit cell with $M > M_\mathrm{Maxwell}$ and \emph{hypostatic} structures with $M < M_\mathrm{Maxwell}$ \cite{Holmes-CerfonSR2016,Holmes-CerfonARCMP2017}.}.
-Curiously, the overwhelming majority of structures appear to satisfy the Maxwell criterion \eqref{eq:maxwell-criterion} \cite{Holmes-CerfonSR2016,Holmes-CerfonARCMP2017} despite the linear theories being inexact.
+Curiously, the overwhelming majority of structures appear to satisfy the Maxwell criterion \eqref{eq:maxwell-criterion} \cite{Holmes-CerfonSR2016,Holmes-CerfonARCMP2017} even though the linear theories are not exact.
 Furthermore, jammed states are empirically found to be isostatic, a result also predicted by mean-field calculations \cite{CharbonneauJSM2014,CharbonneauNC2014}.
 
 Geometries with at least $d$ contacts for each particle and exactly $M = M_\mathrm{Maxwell}$ overall contacts are termed \emph{minimally rigid} \cite{ArkusPRL2009}, but this is neither a necessary not sufficient criterion for rigidity \cite{Holmes-CerfonARCMP2017}.
-In the fully non-linear theory, rigidity is classified into three categories: \cite{ConnellySJDM1996,Holmes-CerfonARCMP2017}
+Three sufficient criteria for rigidity are: \cite{ConnellySJDM1996,Holmes-CerfonARCMP2017}
 \begin{enumerate}
 \item \emph{First-order rigidity}: the natural extension of the Maxwell criterion ensuring the contraints are linearly independent, based on a first-order expansion of the forces about contact.
   This is also called \emph{Calladine's extension} \cite{CalladineIJSS1978}.
@@ -234,7 +255,7 @@ In the fully non-linear theory, rigidity is classified into three categories: \c
   It is a non-linear criterion and is satisfied by all of the packings determined in Refs.\ \cite{ArkusPRL2009,Holmes-CerfonSR2016}.
 \end{enumerate}
 All of our calculations are valid for first-order rigid structures, though recently methods have been developed to do free energy calculations with prestress stable structures \cite{KallusPRE2017}.
-It would be interesting to extend the current work to these other structures to explore the full library of local structures.
+It would be interesting to extend the current work to these other structures to explore the full library of states.
 
 As we cannot use perturbation theory \eqref{eq:harmonic-approximation}, we must \emph{choose} a definition for the basin surrounding each energy minimum occuring at contact.
 For simplicity, we define a particular local structure by its bond topology i.e.\ the $M$ contacts at the reference point.
@@ -242,7 +263,7 @@ We write the set of contacts as
 \begin{equation}\label{eq:structure-contacts}
   \mathcal{M} = \{(a_1, b_1), \cdots, (a_M, b_M)\}
 \end{equation}
-where $a_i, b_i \in \mathbb{N}$ are the indices of touching particles.
+where $a_i, b_i \in \{1, \cdots, n\}$ are the indices of touching particles.
 %Naively, we expect $m \sim dn$
 Following \cite{Holmes-CerfonPNAS2013} we introduce the \emph{bond distance} as the size of the gap between particles
 \begin{equation}\label{eq:bond-distance}
@@ -262,31 +283,39 @@ In addition, it is unclear whether the fundamental assumptions of the morphometr
 As such, the above equation is not valid for our approach, which is why we must explicitly evaluate the free energy through integrals over $\mathcal{D}$ rather than using effective potentials.
 
 The definition of structure in terms of bond-distances \eqref{eq:bond-distance} naturally leads to calculations in \emph{bond-distance space} as introduced in Ref.\ \cite{Holmes-CerfonPNAS2013} in the context of sticky spheres.
-More generally, we consider the manifold diffeomorphic to translations \emph{and} rotations.
-We define $\mathcal{Q} = \mathcal{D}' \rtimes SE(3)$ where $\textrm{SE}(d)$ is the $d$-dimensional special Euclidean group, leaving the $\mathcal{D}'$ as the space of the structure's internal motion.
-\todo{Make this consistent with the notation of background chapter.}
+The bond-distances are unaffected by rigid rotations so we must integrate them out, and for simplicity we now specialise to $d=3$.
+%More generally, we consider the manifold diffeomorphic to translations \emph{and} rotations.
+We define%
+\marginfootnote{Here we have reintroduced the notation from section \ref{sec:kinematic-formula} where the rigid-motion group $G_d := \mathbb{R}^d \times \mathrm{SO}(d)$ is the space of translations and rotations.}
+$\mathcal{Q} = \mathcal{D}' \times G_3$ with $\mathcal{D}'$ as the space of the structure's internal degrees of freedom i.e.\ the thermal vibrations.
 We separate rigid body from internal motion by applying the following transformation to each particle coordinate
-\begin{equation}
-  \vec{r}(\{\vec{t}, \vec{\theta}, \vec{x}\}) =
-  \vec{t} + \vec{R}(\vec{\theta}) \cdot \vec{q}(\vec{x}),
-\end{equation}
-where $\vec{t}$ is the translation vector, $\vec{\theta}$ the Euler angles, $\vec{R}$ the rotation matrix, and $\vec{x} \in \mathbb{R}^{3n-6}$ represents the internal coordinates.
-We need to compute the metric of this transformation $G_{ij} = \vec{G}_i \vec{G}_i^T$ where the (generally curvilinear) basis vectors are $\vec{G}_i = \partial_i \vec{r}$.
-To simplify calculation we choose $\vec{q}(\vec{x})$ to always be in the center-of-mass frame and orthogonal to rotations such that $G_{ij}$ reduces to block-diagonal form.
+\begin{equation*}
+  \vec{r}
+  =
+  \vec{t} + \vec{R}(\vec{\theta}) \, \vec{f}(\vec{q}),
+\end{equation*}
+where $\vec{t}$ is the translation vector, $\vec{R}$ the rotation matrix for Euler angles $\vec{\theta}$, and $\vec{f}(\cdot)$ is a mapping from the structure's internal coordinates $\vec{q} \in \mathbb{R}^{3n-6}$ to real-space.
+For a minimally constrained geometry $\vec{q}$ could simply correspond to the bond distances $\vec{y}$, which we will take advantage of in section \ref{sec:reaction-paths} for simple analytical calculations.
+We need to compute the metric of the above transformation $G_{ij} = \vec{G}_i \vec{G}_i^T$ where the (generally curvilinear) basis vectors are $\vec{G}_i = \partial_i \vec{r}$, and indices $i,j$ summing over all of $\{\vec{t}, \vec{\theta}, \vec{q}\}$.
+To do this we loosely follow the method outlined in the Supplementary Information of Ref.\ \cite{Holmes-CerfonPNAS2013}.
+
+To simplify calculation we choose $\vec{f}(\vec{q})$ to always be in the center-of-mass frame and orthogonal to rotations such that $G_{ij}$ reduces to block-diagonal form.
 If the rotation matrix is expressed in Euler-angle representation as $\vec{R}(\vec{\theta}) = \vec{R}_3(\theta_3) \vec{R}_2(\theta_2) \vec{R}_1(\theta_1)$ then we have
 \begin{equation}
-  \vec{G}(\vec{\theta}, \vec{x}) =
+  \vec{G}(\vec{\theta}, \vec{q})
+  =
   \begin{pmatrix}
     n \vec{E} & 0 & 0 \\
-    0 & \vec{U}^T(\vec{\theta}) \vec{I}(\vec{x}) \vec{U}(\vec{\theta}) & 0 \\
-    0 & 0 & \overline{\vec{G}}(\vec{x})
+    0 & \vec{U}^T(\vec{\theta}) \vec{I}(\vec{q}) \vec{U}(\vec{\theta}) & 0 \\
+    0 & 0 & \overline{\vec{G}}(\vec{q})
   \end{pmatrix},
 \end{equation}
 where $\vec{E}$ is the identity matrix, $\overline{\vec{G}}$ is the metric for internal motion, and we have defined the matrix $\vec{U}$ as%
-\marginfootnote{There is no elegant step omitted here to obtain the form of $\vec{U}$ which gives block diagonal form; rather, I spent an hour guessing its form inside Mathematica until I hit upon this result.
+\marginfootnote{There is no elegant step omitted here to obtain the form of $\vec{U}$ giving block diagonal form; rather, I spent an hour guessing inside Mathematica until I hit upon this result.
   There is probably a better route.}
 \begin{equation}
-  \vec{U}(\vec{\theta}) =
+  \vec{U}(\vec{\theta})
+  =
   \begin{pmatrix}
     1 &  0              & -\sin{\theta_2} \\
     0 &  \cos{\theta_1} &  \cos{\theta_2} \sin{\theta_1} \\
@@ -299,39 +328,48 @@ where $\vec{E}$ is the identity matrix, $\overline{\vec{G}}$ is the metric for i
     \theta_3 &\in [0,2\pi].
   \end{aligned}
 \end{equation}
-Note $\det{\vec{U}} = \cos{\theta_2}$.
+Importantly, $\det{\vec{U}} = \cos{\theta_2}$ is independent of $\vec{q}$ so it can be integrated out.
 The volume element in the new coordinates is
 \begin{equation}
-  d\vec{r}^n = \frac{\sqrt{\det G_{ij}(\vec{x})}}{\nu}
-  \, d^3 \vec{t} \, d^3 \vec{\theta} \, d^{3n-6} \vec{x},
+  d\vec{r}^n
+  =
+  \frac{\sqrt{\det G_{ij}(\vec{q})}}{\nu}
+  \, d^3 \vec{t} \, d^3 \vec{\theta} \, d^{3n-6} \vec{q},
 \end{equation}
 where $\nu$ is the symmetry number (discussed below) and
 \begin{equation}
-  \sqrt{\det G_{ij}(\vec{x})} =
-  \cos{\theta_2} \sqrt{\det{\vec{I}(\vec{x})}}
-  \sqrt{n^3 \det{\overline{G_{ij}}(\vec{x})}}.
+  \sqrt{\det G_{ij}(\vec{q})}
+  =
+  \cos{\theta_2} \sqrt{\det{\vec{I}(\vec{q})}}
+  \sqrt{n^3 \det{\overline{G_{ij}}(\vec{q})}}.
 \end{equation}
-The symmetry number emerges as the choice of internal coordinates typically fixes the particle labels breaking permutation symmetry; we have to multiply by the $n!$ possible labellings, which introduces double counting if the structure possesses rotational symmetry so we have to divide by the correcting factor $\nu$.
+The symmetry number emerges because the choice of internal coordinates typically fixes the particle labels breaking permutation symmetry; we have to multiply by the $n!$ possible labellings, which introduces double counting if the structure possesses rotational symmetry so we have to divide by the correcting factor $\nu$.
 This is explained in detail in Ref.\ \cite{CatesSM2015}.
-Thus \eqref{eq:structure-population} reduces to
+Thus \eqref{eq:structure-population} reduces to%
+\marginfootnote{This form is not valid in the limit of linear molecules, i.e.\ where all particles fall on a line, where there is one less rotation mode.}
 \begin{equation}\label{eq:structural-partition-function-detailed}
   \frac{\mathcal{N}}{\rho^n V}
   =
   \frac{8\pi^2 \sqrt{n^3}}{\nu} \int_{D'}
-  g^{(n)}(\vec{x}) \,
-  \sqrt{\det{\overline{G_{ij}}(\vec{x})} \det{\vec{I}(\vec{x})}}
-  \, d^{3n-6} \vec{x}.
+  g^{(n)}(\vec{q}) \,
+  \sqrt{\det{\overline{G_{ij}}(\vec{q})} \det{\vec{I}(\vec{q})}}
+  \, d^{3n-6} \vec{q}.
 \end{equation}
-Note that in the limit of linear molecules, i.e.\ where all particles fall on a line, the above approach fails as there is one less rotation mode requiring a modified description.
+This is essentially the classical equivalent of the molecular partition function.
 
-In general, the integrand in \eqref{eq:structural-partition-function-detailed} is only exactly solvable for the simplest geometries due to the high dimensionality of $\vec{x}$.
-This is further complicated by the fact that the basis vectors for $\overline{G_{ij}}$ are curvilinear.
-We use two methods for evaluating these integrands:
-\begin{enumerate}
-\item Monte Carlo simulation: described in the next section.
-\item Analytically via perturbation theory: described in sections \ref{SI:bond-distance} and \ref{SI:reaction-path}.
-  We use this for a similar integrand along a reaction path where Monte-Carlo cannot be used directly.
-\end{enumerate}
+In general, the integrand in \eqref{eq:structural-partition-function-detailed} is only exactly solvable for the simplest geometries due to the high dimensionality of $\vec{q}$.
+This is further complicated by the fact that the basis vectors for $\overline{G_{ij}}$ are curvilinear, and must be evaluated perturbatively in general; full details are given in Appendix \ref{appendix:bayesian}.
+We have now defined our structures and presented the general formalism for calculating their free energies.
+In the next section we introduce numerical methods to evaluate the partition functions.
+We will return to the analytical calculations in \ref{sec:reaction-paths} for the reaction paths.
+
+%% %As a worked example we consider the molecular generalisation of the harmonic approximation \eqref{eq:harmonic-approximation} as
+%% We use two methods for evaluating these integrands:
+%% \begin{enumerate}
+%% \item Monte Carlo simulation: described in the next section.
+%% \item Analytically via perturbation theory: described in sections \ref{SI:bond-distance} and \ref{SI:reaction-path}.
+%%   We use this for a similar integrand along a reaction path where Monte-Carlo cannot be used directly.
+%% \end{enumerate}
 
 %% The hard sphere potential is a pathological case: the singularity in the pair potential dooms harmonic treatments.
 %% To illustrate this, we consider a worked example.
@@ -361,6 +399,7 @@ We use two methods for evaluating these integrands:
 
 %\section{Methods to evaluate the free energy}
 \section{The local library of states}
+\label{sec:local-library}
 
 With a definition of the structures we can now evaluate the free energies using thermodynamic integration techniques.
 %We will use thermodynamic integration to test the accuracy of our analytical methods.
@@ -448,12 +487,11 @@ For the reference potential, we introduce harmonic springs between the bonded pa
   =
   \epsilon \sum_{k=1}^m \left( y_k - \frac{\delta_\mathrm{cut}}{2} \right)^2
 \end{equation*}
-The latter strict criterion is how we are able to focus on specific local structures.
-To optimise the simulations the value of $\epsilon$ should be chosen to keep the free energy difference between the two systems of order $\mathcal{O}(1 \, k_B T)$ \cite{SchillingJCP2009}; we found $\epsilon = 75\sigma^2$ to be a reasonable choice with the system sizes considered ($n \le 13$) for the cutoff $\delta_{cut} = 0.2\sigma$.
+%The latter strict criterion is how we are able to focus on specific local structures.
+To optimise the simulations the value of $\epsilon$ should be chosen to keep the free energy difference of order $\mathcal{O}(1 \, k_B T)$ \cite{SchillingJCP2009}; we found $\epsilon = 75\sigma^2$ to be a reasonable choice with the system sizes considered for the cutoff $\delta_\mathrm{cut} = 0.2\sigma$.
 As the reference system is exactly harmonic, we can use \eqref{eq:harmonic-approximation} to evaluate $F_\mathrm{ref}$ to within numerical precision%
-\marginfootnote{We are skipping an important step here, because it requires formalism to be introduced in section \ref{sec:bond-distance}.
-  Specifically, this integral must be done in \emph{bond-distance space}, i.e.\ we perform the multivariate Gaussian integral in the space of $\{y_1, \cdots, y_m\}$.
-  Evaluating this Gaussian over all of space i.e.\ $y_k \in [-\infty, \infty]$ introduces a small approximation as we have the strict lower bound $y_k > -\sigma$ from \eqref{eq:bond-distance}.}.
+\marginfootnote{This integral must be done in bond-distance space of section \ref{sec:structure-definition}, i.e.\ we perform the multivariate Gaussian integral in the space of $\{y_1, \cdots, y_m\}$ with a perturbation expansion of the rotational metric in \eqref{eq:structural-partition-function-detailed}.
+  In addition, evaluating this Gaussian over all of space i.e.\ $y_k \in [-\infty, \infty]$ introduces a small approximation as we have the strict lower bound $y_k > -\sigma$ from \eqref{eq:bond-distance}.}.
 Finally, combining this reference $F_\mathrm{ref}$ with the thermodynamic integration steps \eqref{eq:ideal-free-energy-change} and \eqref{eq:td-integration} gives the free energy of the structure at the target volume fraction $F(\eta)$.
 
 \begin{SCfigure}
@@ -466,17 +504,8 @@ Finally, combining this reference $F_\mathrm{ref}$ with the thermodynamic integr
   \label{fig:structure-populations}
 \end{SCfigure}
 
-\begin{SCfigure}
-  \includegraphics[width=0.9\linewidth,outer]{n12-dos}
-  \caption[Free energy distribution of 12 particle structures]{
-    Theoretical free energy distribution for the $n=12$ local library of states at several volume fractions.
-    The distribution is shifted to lower energies at higher volume fractions, and develops an increasingly bimodal structure.
-    Populations are decomposed into those structures containing pentagonal bipyramids without octahedra (light fill) and the remaining structures (dark fill).
-  }
-  \label{fig:n12-dos}
-\end{SCfigure}
-
-To demonstrate the effectiveness of this approach we have taken structures for $3 \le n \le 13$ which are global minima of clusters in different simple liquids \cite{Wales2004}; this includes frustrated structures for $n \ge 7$ which do not correspond to rigid packings with unique energy minima.
+To demonstrate the effectiveness of this approach we have taken structures for $3 \le n \le 13$ which are global minima of clusters in different simple liquids \cite{Wales2004}.
+This set includes frustrated structures for $n \ge 7$ which do not correspond to rigid packings with unique energy minima; we will return to the rigid packings afterwards.
 We selected these structures because we can identify them in molecular dynamics simulations using the algorithm of Ref.\ \cite{MalinsTCC2013}.
 Using this algorithm we can compare the theoretical predictions against molecular dynamics simulations of both mono- and moderately polydisperse hard spheres at all volume fractions accessed by the simulations i.e.\ $\eta \lesssim 0.585$.
 For the polydisperse simulations we used data from Ref.\ \cite{RoyallJSM2017} with a 5-component equimolar distribution with $\sim8\%$ polydispersity, to avoid freezing at high densities, and for the monodisperse simulations we used the DynamO software for event-driven molecular dynamics \cite{BannermanJCC2011}.
@@ -493,31 +522,41 @@ We can also estimate vibrational contributions, which allow us to match not only
 In particular, we are able to capture the gradual reduction of the population of octahedral motifs in favour of the tripyramids at high volume fractions.
 This is related to the previously observed emergence of fivefold symmetric motifs (such as the full and partial icosahedron) \cite{RoyallPR2015,TarjusJPCM2005,HallettNC2018,DunleavyNC2015}, which is here directly predicted from liquid state theory.
 
+\begin{SCfigure}
+  \includegraphics[width=0.9\linewidth,outer]{n12-dos}
+  \caption[Free energy distribution of 12 particle structures]{
+    Theoretical free energy distribution for the $n=12$ local library of states at several volume fractions.
+    The distribution is shifted to lower energies at higher volume fractions, and develops an increasingly bimodal structure.
+    Populations are decomposed into those structures containing pentagonal bipyramids without octahedra (light fill) and the remaining structures (dark fill).
+  }
+  \label{fig:n12-dos}
+\end{SCfigure}
+
 Having tested that the theory is accurate for selected geometries, we now take the exhaustive list of 11980 rigid structures for $n=12$ determined in Ref.\ \cite{Holmes-CerfonSR2016} to obtain a local density of states for a given sized inhomogeneity.
-We calculated the free energy of all (first-order) rigid (nonsingular) structures using \eqref{eq:local-structure-free-energy} (right panel of Fig.\ \ref{fig:structure-populations}), finding a bimodal distribution with two main peaks separated by a free energy difference that increases with increasing volume fraction.
-\todo{Explain what is meant by first-order and nonsingular here.}
+We calculated the free energy of all (first-order) rigid structures using \eqref{eq:local-structure-free-energy} (right panel of Fig.\ \ref{fig:structure-populations}), finding a bimodal distribution with two main peaks separated by a free energy difference that increases with increasing volume fraction.
 We find the that lower energy distribution consists of structures rich in fivefold (icosahedral) symmetry in the absence of fourfold (octahedral) symmetry.
 This shows that the hard sphere liquid is highly frustrated, and would be interpretted as the reason hard spheres make good glassformers in the geometric frustration picture \cite{KivelsonPA1995,TarjusJPCM2005}.
 However, this result is potentially compatible with other thermodynamic scenarios like random first-order transition theory (RFOT) \cite{LubchenkoARPC2007}.
 
 Each of the structures correspond to unique contact topologies, but in thermal systems (i.e. with finite gaps between particles) we expect many of them to be indistinguishable as found in Ref.\ \cite{TrombachPRE2018}.
-As such, we have likely overestimated the height of the each peak, and especially the lower energy peak which contains more frustrated structures.
-\todo{Connect with five-fold symmetry calculation later.}
-Nevertheless, because of this set of packings is exhaustive they represent a complete local density of states in the liquid, which is of fundamental interest to RFOT \cite{LubchenkoARPC2007}.
-The distribution of energy levels is a key quantity in RFOT, but to really assess the dynamics we also need to know the \emph{connectivity} of the different energy states.
+As such, we have likely overestimated the height of the each peak, and especially the lower energy peak which contains more frustrated structures; we will find evidence of this in the next section.
+Nevertheless, because this set of packings is exhaustive they represent a complete local density of states in the liquid, which is of fundamental interest to RFOT \cite{LubchenkoARPC2007}.
+The distribution of energy levels is a key quantity, but to really examine the connection with dynamics we also need to know the \emph{connectivity} of the different energy states.
 For this we need their reaction paths.
-We used thermodynamic integration with Monte-Carlo methods to evaluate the free energies in this section, which cannot be straightforwardly applied along reaction paths which are saddles in the potential.
-In the next section we will introduce analytical methods for evaluating the free energy.
+
+We used thermodynamic integration with Monte-Carlo methods to evaluate the free energies in this section, which cannot be straightforwardly applied along reaction paths.
+Along reaction paths the geometries are saddles of the potential $\phi^{(n)}$, so the unstable direction must be excluded from integration.
+In the next section we introduce analytical methods for evaluating the free energy to address this problem.
 
 %As a Monte-Carlo method it would be very difficult to extend this method to saddles which is of great interest.
 %Before moving on to our approximate analytical integration schemes we describe a method which is essentially exact to within numerical precision, at the cost of greater computational expense.
 
-\section{Evaluating free energies analytically in bond-distance space}
-\label{sec:bond-distance}
+\section{Free energies along reaction paths}
+\label{sec:reaction-paths}
 
-While the thermodynamic integration techniques of the previous section are in principal exact, it is desirable to develop analytic approaches for evaluating the free energy.
-Analytic approaches are typically faster which is desirable for dealing with larger structures, as the number of possible packings seems to grow super-exponentially in $n$ \cite{Holmes-CerfonSR2016}.
-In addition, analytic approaches are more readily able to handle free energy calculations along saddles, which are needed to obtain dynamical information in the vein of energy landscape approaches \cite{Wales2004}.
+While the thermodynamic integration techniques of the previous section are exact in principle, it is desirable to develop analytic approaches for evaluating the free energy.
+Analytic approaches are typically faster which is desirable for dealing with larger $n$, as the number of possible packings appears to grow super-exponentially with particle number \cite{Holmes-CerfonSR2016}.
+Moreover, analytic approaches are more readily able to calculate free energies along saddles, which are needed to obtain dynamical information in the vein of energy landscape approaches \cite{Wales2004}.
 
 Two methods: assume no hard sphere interactions outside of the bonded particles, or Bayesian inference
 \marginfootnote{In the current zeitgeist this could be construed as a form of machine learning; techniques for Bayesian inference are often thrown in with machine learning in e.g.\ topical reviews like Ref.\ \cite{MehtaPR2019}.
@@ -532,8 +571,6 @@ Two methods: assume no hard sphere interactions outside of the bonded particles,
   }
   \label{fig:reaction-path-6}
 \end{SCfigure}
-
-\section{Dynamics: free energy along a reaction path}
 
 We have thus far focused on static thermodynamic properties: yet a connection with dynamics can be made by calculating the free energy along reaction paths between (geometrically similar) structures.
 This calculation along unstable directions in the free energy landscape requires an analytic approach (described in the SM), and generates paths such as the one in Fig.\ \ref{fig:reaction-path-6}.
