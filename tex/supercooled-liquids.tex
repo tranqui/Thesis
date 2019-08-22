@@ -472,7 +472,7 @@ At a volume fraction $\eta_K > \eta_c$ an \emph{entropy crisis} occurs: $\Sigma$
 
 If an equilibrium glass state in the regime $\eta \in [\eta_c, \eta_K]$ is compressed out-of-equilibrium without sampling the other clusters, a further phase transition occurs to a so-called \emph{Gardner} phase \cite{KurchanJPCB2013,CharbonneauNC2014,CharbonneauJSM2014}.
 Each cluster splits further into fractal sub-regions arranged hierarchicallly.
-Whereas the clustered regions formed at $\eta_c$ are geometrically disimillar%
+Whereas the clustered regions formed at $\eta_c$ are geometrically dissimillar%
 \marginfootnote{As measured by e.g.\ the intermediate scattering function},
 these regions are close in configuration space to one another.
 This phase has deep connections with the jamming transition seen at diverging pressure, providing a unified description of glass and jamming conjectured since the landmark paper of Ref.\ \cite{LiuN1998}.
@@ -494,6 +494,7 @@ The relevance of mean-field descriptions in physical dimensions requires a finit
 %% The dynamical transition thus becomes a cross-over, and a finite-dimensional description of the supercooled liquid is needed.
 
 \section{Finite-dimensional theories}
+\label{sec:finite-d-glass}
 
 \begin{SCfigure}
   \includegraphics[width=0.9\linewidth,outer]{swap-Sconf}
@@ -512,7 +513,7 @@ The relevance of mean-field descriptions in physical dimensions requires a finit
 The relevance of mean-field ideas in physical dimensions can be seen by an interpretation of Refs.\ \cite{KirkpatrickPRB1987,HallJCP1987,KirkpatrickPRA1989}, with antecedent ideas found in \cite{KauzmannCR1948,AdamJCP1965}.
 This \emph{random first-order transition} (RFOT) scenario acknowledges that the clustering of states appearing at the dynamical transition in mean-field will not be strictly metastable over finite lengthscales in finite $d$ \cite{BouchaudJCP2004,MontanariJSP2006}.
 As such, the complexity is not well-defined because the metastable states will not be strictly separated with infinite barriers, though they may be arbitrarily long-lived; the dynamical transition of mean-field thus becomes a cross-over.
-In finite dimensions the \emph{configurational entropy} $S_\mathrm{conf}$ is introduced as the closest equivalent to the complexity; this does not have a generally agreed upon meaning, but a common definition invokes the timescale separation being vibrational ($\beta$--) and liquid-like ($\alpha$--) dynamics.
+In finite dimensions the \emph{configurational entropy} $S_\mathrm{conf}$ is introduced as the closest equivalent to the complexity; this does not have a generally agreed upon meaning, but a common definition invokes the timescale separation between vibrational ($\beta$--) and liquid-like ($\alpha$--) dynamics.
 The configurational entropy then describes the entropy of the latter process, obtained as the residual entropy after removing vibrations
 \begin{equation}\label{eq:sconf}
   S_\mathrm{conf} := S - S_\mathrm{vib},
@@ -520,7 +521,7 @@ The configurational entropy then describes the entropy of the latter process, ob
 though some refinement is required for polydisperse systems \cite{OzawaJCP2017,OzawaJCP2018} and where additional non-vibrational processes exist that do not relax the density profile \cite{OzawaPRL2018}.
 
 The RFOT scenario imagines the mean-field dynamical transition as a crossover to an \emph{energy landscape dominated} dynamics.
-Specifically, the number of unique (non-vibrational) states possible in a subregion of size $\xi$ will scale as $\exp{(s_\mathrm{conf} \xi^d / k_B)}$, where $s_\mathrm{conf} = S_\mathrm{conf} / V$ is the configurational entropy density.
+Specifically, the number of unique (non-vibrational) states possible in a subregion of size $\xi$ will scale $\propto \exp{(s_\mathrm{conf} \xi^d / k_B)}$, where $s_\mathrm{conf} = S_\mathrm{conf} / V$ is the configurational entropy density.
 A dynamical event which changes a state is expected to pay an energy penalty $\gamma_\mathrm{eff} \xi^\theta$ where $\theta \le d$ from inducing a mismatch with the surrounding fluid.
 The thermodynamic potential for this subregion is then expected to adopt the form
 \begin{equation}\label{eq:rfot-barrier}
@@ -531,21 +532,22 @@ The maximum of $\Phi$ occurs at the \emph{point-to-set}%
 length
 \begin{equation}\label{eq:rfot-xi}
   \xi_\mathrm{PS}
+  := \argmax{(\Phi)}
   \sim
   \left(
   \frac{\theta \gamma_\mathrm{eff}}{d T s_\mathrm{conf}}
   \right)^\frac{1}{d-\theta},
 \end{equation}
-after which $\Phi$ grows infinitely negative, so the metastable states are unstable to activated dynamics for $\xi > \xi_\mathrm{PS}$.
+after which $\Phi$ grows infinitely negative, so the metastable states are unstable to activated dynamics for $\xi \gtrsim \xi_\mathrm{PS}$.
 The RFOT interpretation thus predicts the formation of a \emph{mosaic} of droplets of typical lengthscale $\xi_\mathrm{PS}$ \cite{KirkpatrickPRB1987,HallJCP1987,KirkpatrickPRA1989,BouchaudJCP2004}.
 The nature of the entropic droplets forming the mosaic state and the processes by which they relax is an active area of study \cite{BouchaudJCP2004,DzeroPRB2005,FranzJSM2005,AngeliniJSP2017,RulquinJSM2016,BiroliMeanPRB2018,BiroliFinitePRB2018}.
-Notably, a lot of attention is paid to the treatment of the subleading term $\gamma_\mathrm{eff} \xi^\theta$.
+Notably, a lot of attention has been devoted to the treatment of the subleading term $\gamma_\mathrm{eff} \xi^\theta$.
 
 This thermodynamic argument above concerns whether a region of the liquid \emph{will} relax eventually, but an even more direct connection with relaxation timescale was proven in Ref.\ \cite{MontanariJSP2006}.
-Briefly, dynamical barriers must remain finite in a finite subregion, so they scale Arrheniusly via \eqref{eq:reaction-time}; any Arrhenius process will eventually overwhelm the super-Arrhenius scaling of $\tau_\alpha$ at deep supercooling.
+Briefly, dynamical barriers must remain finite within a finite subregion, so they scale Arrheniusly via \eqref{eq:reaction-time}; any Arrhenius process will eventually overwhelm the super-Arrhenius scaling of $\tau_\alpha$ at deep supercooling.
 Fragile behaviour then suggests a reduction in $S_\mathrm{conf}$ to limit the number of possible Arrhenius processes.
 Moreover, the authors of Ref.\ \cite{MontanariJSP2006} then show that the relaxation time is rigorously bounded from above by $S_\mathrm{conf}$, proving that any diverging relaxation time \emph{must} coincide with an entropy crisis $S_\mathrm{conf} \to 0$.
-Measurements of the configurational entropy from simulations of hard spheres suggest a vanishing $S_\mathrm{conf}$ at finite pressure in $d=3$ (Fig.\ \ref{fig:swap-sconf}), pointing to an RFOT scenario in hard spheres.
+Measurements of the configurational entropy from simulations of hard spheres suggest a vanishing $S_\mathrm{conf}$ at finite pressure in $d=3$ (Fig.\ \ref{fig:swap-sconf}), pointing to a mean-field/RFOT scenario in hard spheres.
 However, this necessarily relies on extrapolation as the point where $S_\mathrm{conf}$ vanishes cannot be reached in finite time because of the argument above.
 
 %% Mean-field argument is thermodynamic, which in some sense is structural.
@@ -590,7 +592,7 @@ A detailed review on the role of local structure in glassy systems can be found 
 Recent numerical evidence suggests that $S_\mathrm{conf}$ only vanishes at $T=\SI{0}{\kelvin}$ for a model glassformer in $d=2$ \cite{BerthierNC2019}.
 As this point cannot be crossed no thermodynamic transition can occur in $d = 2$, pointing to a lower critical dimension for mean-field theory of at least $d_L \ge 2$.
 It is possible that low-dimensional fluctuations prevent any thermodynamic transition, and it has been argued that even if there is a thermodynamic transition at $\eta_K$ this may not be responsible for the dynamic slowdown seen around the operational glass transition $\eta_g \ll \eta_K$ \cite{WyartPRL2017}.
-As such, there is room for alternative pictures to the RFOT/mean-field scenario.
+As such, there is room for alternative pictures to the mean-field/RFOT scenario.
 The main opposition theory is \emph{dynamic facilitation}, which focuses on the dynamic heterogeneities as the fundamental feature of glass.
 In this picture dynamical events occur through string-like motion between dynamical defects, and the relaxation time remains finite until $T = \SI{0}{\kelvin}$.
 For more information on dynamic facilitation we direct the reader to the review of Ref.\ \cite{ChandlerARPC2010}.

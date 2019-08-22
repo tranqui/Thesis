@@ -222,7 +222,7 @@ This idea was explored in Ref.\ \cite{Hansen-GoosJPCM2006} to show that the morp
 The remaining contributions are unlikely to be rigorously of this form, and their omission is an approximation.
 
 We consider an $(m+1)$-component mixture and we label each species with index $s \in \{0, 1, \cdots, m\}$: the components labelled $\{1, \cdots, m\}$ make up those species present the bulk liquid while the additional component with index $\{0\}$ represents the solute.
-Furthermore, we assume each particle in this mixture is a compact and convex body $K_i \in \mathcal{K}^d$ for each $K_i \in \{K_0, \cdots, K_m\}$.
+Furthermore, we assume each particle in this mixture is a compact and convex body $K_0, K_1, \cdots K_m \in \mathcal{K}^d$.
 We will shortly find the chemical potential of the solute by considering the infinitely dilute limit.
 For convenience, we restate the virial series for the excess free energy density \eqref{eq:free-energy-density} here as
 \begin{equation}
@@ -342,7 +342,7 @@ To obtain these new diagrams we can rewrite the Mayer function \eqref{eq:mayer-f
 \begin{equation*}
   1 = e_{ij} - f_{ij}
 \end{equation*}
-where $e_{ij} = \exp{(-\beta u_{ij})}$ is the Boltzmann weight of the pair potential.
+where $e_{ij} := \exp{(-\beta u_{ij})}$ is the Boltzmann weight of the pair potential.
 We represent this rule \emph{graphically} as
 \begin{equation*}
   \mayerdiagram[.][oo]{2} =
@@ -369,38 +369,47 @@ By repeatedly applying this rule to the Mayer diagrams we obtain the fully conne
     %% 2 \mayerdiagram[|:||||]{4}
   \end{split}
 \end{equation*}
-These diagrams have two distinct advantages: firstly, cancellations occur reduce the overall number of diagrams, and secondly each diagram correspond to unique geometries \cite{ReeJCP1964}.
+These diagrams have two distinct advantages: firstly, cancellations occur reducing the overall number of diagrams, and secondly each diagram corresponds to unique and disjoint regions of phase space reducing the redundancy of calculation \cite{ReeJCP1964}.
 This approach has been laid out in detail in Refs.\ \cite{KordenPRE2012,MarechalPRE2014} in the context of FMT.
-The main result of this formalism is that the only diagrams contributing to $\Lambda_{s_1, \cdots, s_n}$ are the fully $f$-connected diagrams, i.e.\ without any $e$-bonds.
+The main result of this formalism is that the only diagrams contributing to $\Lambda_{s_1, \cdots, s_n}$ are the fully $f$-connected diagrams, i.e.\ those without any $e$-bonds.
 %after using permutation invariance in the final step.
 So as a first approximation, the free energy density is approximated by the series
 \begin{equation*}
-  \frac{\beta F^\mathrm{ex}}{V} \approx
-  \mayerdiagram[|][t.]{2} +
-  \mayerdiagram[|||][t..]{3} +
-  \mayerdiagram[||||||][t...]{4} +
-  \mayerdiagram[||||||||||][t....]{5}
+  \frac{\beta F^\mathrm{ex}}{V}
+  \approx
+  \mayerdiagram[|][t.]{2}
+  + \mayerdiagram[|||][t..]{3}
+  + \mayerdiagram[||||||][t...]{4}
+  + \mayerdiagram[||||||||||][t....]{5}
   + \mathcal{O}(\rho^6),
 \end{equation*}
 with prefactors $c_n \rho^n$ omitted for clarity.
 In a second approximation, the fully connected diagrams are approximated by $n$-particle intersections e.g.\ \cite{KordenPRE2012,MarechalPRE2014}
 \begin{equation*}
-  %\begin{split}
-  \mayerdiagram[|||][t..]{3}
-  \simeq
-  \int_{G_d^2} dg^2 \chi[K_0 \cap g_1 K_{s_1} \cap g_2 K_{s_2}]
-  :=
-  \fmtdiagram{3}
-  %\end{split}
+  \begin{split}
+    \mayerdiagram[|||][t..]{3}
+    :=&
+    \int_{G_d^2}
+    \chi[K \cap g_1 K_{s_1}] \, \chi[K \cap g_2 K_{s_2}] \, \chi[g_1 K_{s_1} \cap g_2 K_{s_2}]
+    \, dg_1 dg_2.
+    \\ \simeq&
+    \int_{G_d^2} dg^2 \chi[K_0 \cap g_1 K_{s_1} \cap g_2 K_{s_2}]
+    = \Lambda_{s_1, s_2} := \fmtdiagram{3}
+  \end{split}
 \end{equation*}
 using a diagram with a single-vertex to represent an integral of an $n$-particle intersection \eqref{eq:n-particle-intersection-integral}.
 Making these replacements approximates the free energy density as
 \begin{equation}\label{eq:fmt-diagrams}
-  \frac{\beta F^\mathrm{ex}}{V} \approx
-  \rho^2 \fmtdiagram{2} +
-  \rho^3 \fmtdiagram{3} +
-  \rho^4 \fmtdiagram{4} +
-  \rho^5 \fmtdiagram{5}
+  \frac{\beta F^\mathrm{ex}}{V}
+  \approx
+  \fmtdiagram{2}
+  + \fmtdiagram{3}
+  + \fmtdiagram{4}
+  + \fmtdiagram{5}
+  %% + \rho^2 \fmtdiagram{2}
+  %% + \rho^3 \fmtdiagram{3}
+  %% + \rho^4 \fmtdiagram{4}
+  %% + \rho^5 \fmtdiagram{5}
   + \mathcal{O}(\rho^6).
 \end{equation}
 This diagrammatic formulation provides a formal context, but is unnecessary for the derivation to follow.
@@ -692,7 +701,7 @@ For hard spheres of diameter $\sigma$ we obtain $V_1 = 2\sigma$ and $V_2 = \pi \
 This is similar but not identical to the Percus-Yevick equation of state%
 \marginfootnote{Specifically via the compressibility route.
   See section \ref{sec:fmt} for a description of the single-component case.}
-for additive mixtures, which in terms of the current normalisations of the scaled particle variables reads \cite{Santos2016}
+for additive mixtures, which in terms of this chapter's normalisations of the scaled particle variables reads \cite{Santos2016}
 \begin{equation}\label{eq:py-pressure-mixtures}
   \beta p^\mathrm{PY} =
   8 \pi
@@ -913,18 +922,18 @@ The next leading contribution from the virial series would be:
     + \mathcal{O}(\rho^3),
   \end{split}
 \end{equation}
-where $\Delta_{s_1,s_2}$ is the three-body \emph{ring integral}
-\begin{equation}
-  \Delta_{s_1,s_2}
-  =
-  \int_{G_d^2}
-  \chi[K \cap g_1 K_{s_1}] \, \chi[K \cap g_2 K_{s_2}] \, \chi[g_1 K_{s_1} \cap g_2 K_{s_2}]
-  \, dg_1 dg_2.
-\end{equation}
+where $\Delta_{s_1,s_2}$ is the three-body \emph{ring integral} given explicitly in the first line of \eqref{eq:ring-integral-3}.
+%% \begin{equation}\label{eq:ring-integral-3}
+%%   \Delta_{s_1,s_2}
+%%   =
+%%   \int_{G_d^2}
+%%   \chi[K \cap g_1 K_{s_1}] \, \chi[K \cap g_2 K_{s_2}] \, \chi[g_1 K_{s_1} \cap g_2 K_{s_2}]
+%%   \, dg_1 dg_2.
+%% \end{equation}
 Ring integrals can be calculated straightforwardly in hard spheres \cite{MontrollJCP1941}, or using the Radon transform for convex geometries of arbitrary shapes \cite{WertheimMP1994,WertheimMP1996,WertheimMP1996a}.
 Corrections to the morphometric approximation could be systematically included by further resummations over classes of diagrams, with ring integrals as the leading order terms.
 The integral corrections are discussed in Ref.\ \cite{MarechalPRE2014} in the context of free energy functionals for inhomogeneous liquids; our system is effectively homogeneous so we expect it to be easier to construct a theory with these higher-order terms.
-Notably, the ring integrals are the sole contributions in the mean-field infinite-dimensional limit, i.e.\ for a single-component system \cite{ParisiRMP2010}
+Notably, the ring integrals are argued to be the sole contributions in the mean-field infinite-dimensional limit, i.e.\ for a single-component system \cite{ParisiRMP2010}
 \begin{equation*}
   \lim_{d \to \infty}
   \frac{\beta F_{ex}}{V}
