@@ -250,23 +250,23 @@ $h^{(2)}(\vec{r}_1, \vec{r}_2) = g^{(2)}(\vec{r}_1, \vec{r}_2) - 1$ is the main 
 We can define two further hierarchies of correlation functions from the moments and fluctuations in the density.
 Writing the instantaneous density as
 \begin{equation*}\label{eq:instantaneous-density}
-  \hat\rho(\vec{r}) = \sum_{i=1}^N \delta(\vec{r} - \vec{r}_i)
+  \widehat\rho(\vec{r}) = \sum_{i=1}^N \delta(\vec{r} - \vec{r}_i)
 \end{equation*}
 where $\delta(\cdot)$ is the Dirac delta function, then the various \emph{density moments} are determined as
 %% Similarly, we can define higher-order moments of the instantaneous density in terms of $\rho^{(n)}$ giving e.g.\
 \begin{subequations}\label{eq:density-moments}
   \begin{align}
-    \langle \hat\rho(\vec{r}) \rangle
+    \langle \widehat\rho(\vec{r}) \rangle
     =& \,
     \rho^{(1)}(\vec{r}),
     \label{eq:single-particle-density}
     \\
-    \big\langle \hat\rho(\vec{r}_1) \hat\rho(\vec{r}_2) \big\rangle
+    \big\langle \widehat\rho(\vec{r}_1) \widehat\rho(\vec{r}_2) \big\rangle
     =& \,
     \rho^{(2)}(\vec{r}_1, \vec{r}_2) +
     \rho^{(1)}(\vec{r}_1) \delta(\vec{r}_1 - \vec{r}_2),
     \\
-    \big\langle \hat\rho(\vec{r}_1) \hat\rho(\vec{r}_2) \hat\rho(\vec{r}_3) \big\rangle
+    \big\langle \widehat\rho(\vec{r}_1) \widehat\rho(\vec{r}_2) \widehat\rho(\vec{r}_3) \big\rangle
     =& \,
     \rho^{(3)}(\vec{r}_1, \vec{r}_2, \vec{r}_3) +
     \{3\} \rho^{(2)}(\vec{r}_1, \vec{r}_2) \delta(\vec{r}_1 - \vec{r}_3)
@@ -279,7 +279,7 @@ The normalisation of these functions gives the moments of particle number $N$, i
 \begin{equation}
   \int_{V^n}
   \left\langle
-  \prod_{i=1}^n \hat\rho(\vec{r}_i)
+  \prod_{i=1}^n \widehat\rho(\vec{r}_i)
   \right\rangle
   \, d\vec{r}^n
   =
@@ -291,23 +291,23 @@ The first few functions in this hierarchy are
   \begin{align}
     H^{(1)}(\vec{r})
     =& \,
-    %% \big\langle \hat\rho(\vec{r}) \big\rangle
+    %% \big\langle \widehat\rho(\vec{r}) \big\rangle
     %% =
     \rho^{(1)}(\vec{r}),
     \\
     H^{(2)}(\vec{r}_1, \vec{r}_2)
     =& \,
-    \big\langle \hat\rho(\vec{r}_1) \hat\rho(\vec{r}_2) \big\rangle
+    \big\langle \widehat\rho(\vec{r}_1) \widehat\rho(\vec{r}_2) \big\rangle
     - \rho^{(1)}(\vec{r}_1) \rho^{(1)}(\vec{r}_2),
     \label{eq:pair-density-density-correlation}
     \\
     H^{(3)}(\vec{r}_1, \vec{r}_2, \vec{r}_3)
     =& \,
-    \big\langle \hat\rho(\vec{r}_1) \hat\rho(\vec{r}_2) \hat\rho(\vec{r}_3) \big\rangle
-    - \{3\} \big\langle \hat\rho(\vec{r}_1) \hat\rho(\vec{r}_2) \big\rangle \rho^{(1)}(\vec{r}_3)
-    %- \big\langle \hat\rho(\vec{r}_2) \hat\rho(\vec{r}_3) \big\rangle \rho^{(1)}(\vec{r}_1)
+    \big\langle \widehat\rho(\vec{r}_1) \widehat\rho(\vec{r}_2) \widehat\rho(\vec{r}_3) \big\rangle
+    - \{3\} \big\langle \widehat\rho(\vec{r}_1) \widehat\rho(\vec{r}_2) \big\rangle \rho^{(1)}(\vec{r}_3)
+    %- \big\langle \widehat\rho(\vec{r}_2) \widehat\rho(\vec{r}_3) \big\rangle \rho^{(1)}(\vec{r}_1)
     \nonumber \\ & \,
-    %- \big\langle \hat\rho(\vec{r}_3) \hat\rho(\vec{r}_1) \big\rangle \rho^{(1)}(\vec{r}_2)
+    %- \big\langle \widehat\rho(\vec{r}_3) \widehat\rho(\vec{r}_1) \big\rangle \rho^{(1)}(\vec{r}_2)
     + \rho^{(1)}(\vec{r}_1) \rho^{(1)}(\vec{r}_2) \rho^{(1)}(\vec{r}_3),
   \end{align}
 \end{subequations}
