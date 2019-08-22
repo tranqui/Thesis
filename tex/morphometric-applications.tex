@@ -210,12 +210,12 @@ The minima of $\phi^{(n)}$ occur around contact in hard spheres.
 To justify this, consider that the dominant term in the morphometric approach \eqref{eq:morph-ansatz} is the volume term $pV$, which is minimised when particles are as compact as possible i.e.\ at contact; we cannot prove this rigorously, but we have yet to find a counter example.
 
 \begin{SCfigure}
-  \includegraphics[width=0.9\linewidth,outer]{packings}
+  \includegraphics[width=\linewidth,outer]{packings}
   \caption[Rigid spherical packings of up to 7 particles]{
-    Rigid sphere packings for $3 \le n \le 7$ particles, as determined from Refs.\ \cite{ArkusPRL2009,Holmes-CerfonSR2016}.
+    Rigid sphere packings for $3 \le n \le 7$ particles, as determined in Refs.\ \cite{ArkusPRL2009,Holmes-CerfonSR2016}.
     For each packing we show their bond network with particles at half radius (left) and with full size particles (right).
     There are 5 possible rigid packings for $n=7$, of which two correspond to variants of the frustrated pentagonal bipyramid introduced in Fig.\ \ref{fig:frustration}(a).
-    The last 3 structures for $n=7$ (bottom row) do not have standard names so we leave them unlabelled.
+    The first 3 structures for $n=7$ (left column) do not have standard names so we leave them unlabelled.
   }
   \label{fig:packings}
 \end{SCfigure}
@@ -331,7 +331,7 @@ where $\vec{E}$ is the identity matrix, $\overline{\vec{G}}$ is the metric for i
     \theta_3 &\in [0,2\pi].
   \end{aligned}
 \end{equation}
-Importantly, $\det{\vec{U}} = \cos{\theta_2}$ is independent of $\vec{q}$ so it can be integrated out.
+Importantly, $\det{\vec{U}} = \cos{\theta_2}$ is independent of $\vec{q}$, so the angular dependence can be integrated out.
 The volume element in the new coordinates is
 \begin{equation}
   d\vec{r}^n
@@ -477,7 +477,7 @@ To perform the thermodynamic integration we simulate with an intermediate intera
   \lambda W(\vec{x}) + (1-\lambda) V_\mathrm{ref}(\vec{x}),
 \end{equation*}
 where $\lambda \in \{0,1\}$ is a mixing parameter that switches between the potential of interest and the reference potential $V_\mathrm{ref}$.
-Over the course of a Monte-Carlo sweep, in addition to regular steps $\lambda$ is allowed to switch between these values according to the Metropolis-Hastings rule.
+Over the course of a Monte-Carlo sweep, in addition to regular steps, $\lambda$ is allowed to switch between these values according to the Metropolis-Hastings rule.
 The free energy difference from the reference system is determined from the ratio of time spent with each potential active by
 \begin{equation}\label{eq:ideal-free-energy-change}
   F(\eta = 0) - F_\mathrm{ref}
