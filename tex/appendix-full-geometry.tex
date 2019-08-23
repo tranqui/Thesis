@@ -10,6 +10,10 @@
 \renewcommand{\thechapter}{\Alph{chapter}}
 
 \externaldocument{background}
+\externaldocument{morphometric-framework}
+\externaldocument{morphometric-applications}
+\externaldocument{resummation}
+\externaldocument{appendix-bayesian}
 
 \begin{document}
 \chapter{Computational geometry for the union of many spheres}
@@ -17,16 +21,15 @@
 
 \section{Introduction}
 
-The two curvature measures, $C_{\partial\mathcal{L}}$ and $X_{\partial\mathcal{L}}$ (integrated mean and Gaussian curvatures respectively), are required for the morphological thermodynamics used extensively in the main text.
+The two curvature measures, $C_{\partial\mathcal{L}}$ and $X_{\partial\mathcal{L}}$ (integrated mean and Gaussian curvatures respectively), are required for the morphological thermodynamics used extensively in chapters \ref{chapter:morphometric-framework}, \ref{chapter:morphometric-applications} and \ref{chapter:resummation}.
 In this section we give details on their geometric construction to aid morphological calculations.
 The relevant formulas for $C_{\partial\mathcal{L}}$ and $X_{\partial\mathcal{L}}$ in hard sphere systems have previously been given in references \cite{MeckeAA1994} and \cite{RothPRL2006}.
 Here, we restate these formulas and extend them by computing their derivatives with respect to atomic coordinates.
 This technical description is only likely to be of interest to those wishing to do morphological calculations of their own.
-\todo{Tidy this appendix up so it is more thesis-y, and fix references!}
 
-To briefly motivate these derivative calculations, we remind the reader that derivatives were used in the main text in the calculation of the free energy of local structures along the octahedron-tripyramid reaction path.
+To briefly motivate these derivative calculations, we remind the reader that derivatives were used in \ref{chapter:morphometric-applications} in the calculation of the free energy of local structures along reaction paths (see also Appendix \ref{appendix:bayesian}).
 Gradients were required for this calculation, providing an analytic method (with perturbation theory) where the numerical method (thermodynamic integration) fails due the instability of intermediate points along the reaction path.
-Full details of this method are given in Sec.\ \ref{SI:reaction-path}.
+Full details of this method are given in section \ref{sec:reaction-paths} and Appendix \ref{appendix:bayesian}.
 It is worth stating that the usefulness of gradient calculations extends beyond this one application.
 
 The gradient gives the mean depletion forces between (nearby) particles within the bulk liquid, which is generally a quantity of interest in liquid state theories.
@@ -37,16 +40,17 @@ For the latter case one requires a solvent accessible surface $\partial{\mathcal
 
 For correlations in homogeneous liquids composed of identical balls, the curvatures must be computed across the solvent accessible surface $\partial\mathcal{L}$ where the enclosed volume is
 \begin{equation*}
-  \mathcal{L} = \cup_{i=1}^n B_\sigma(\vec{r}_i).
+  \mathcal{L} = \cup_{i=1}^n \ball_\sigma^d(\vec{r}_i),
 \end{equation*}
+where $\ball_\sigma^d(\vec{r})$ is a $d$-dimensional ball of diameter $\sigma$ centered on $\vec{r}$.
 In order to keep the formulas as general as possible, we will consider a small generalisation of this surface where the spheres are of arbitrary radii, i.e.\
 \begin{equation}\label{eq:generalised-volume}
-  \mathcal{L} = \cup_{i=1}^n B_{\sigma_i}(\vec{r}_i),
+  \mathcal{L} = \cup_{i=1}^n \ball_{\sigma_i}^d(\vec{r}_i),
 \end{equation}
 where $\sigma_i$ is the diameter of particle $i$.
-One obtains the surface used in the main text by setting $\sigma_i = \sigma$ for all $i$.
-Let $K^d \subseteq \mathbb{R}^d$ denote the space of \emph{polyconvex} subsets of $d$-dimensional Euclidean space.
-By \emph{polyconvex} we mean subsets composed of a \emph{finite} union of convex subsets; this means the surfaces are well-behaved so standard geometric descriptions and intuitions apply.
+The surface used in the main chapters for single-component hard spheres is recovered by setting $\sigma_i = \sigma$ for all $i$.
+%% Let $K^d \subseteq \mathbb{R}^d$ denote the space of \emph{polyconvex} subsets of $d$-dimensional Euclidean space.
+%% By \emph{polyconvex} we mean subsets composed of a \emph{finite} union of convex subsets; this means the surfaces are well-behaved so standard geometric descriptions and intuitions apply.
 By construction $\mathcal{L} \in \mathcal{K}^d$ and $\partial\mathcal{L} \in \mathcal{K}^{d-1}$.
 
 If particle $i$ is on the surface of $\mathcal{L}$, i.e.
@@ -54,8 +58,8 @@ If particle $i$ is on the surface of $\mathcal{L}$, i.e.
   S_i %\equiv \partial B_\sigma(\vec{r}_i)
   \cap \partial\mathcal{L} \notin \emptyset %\in \mathcal{K}^{d-1}
 \end{equation*}
-where $S_i \equiv \partial B_{\sigma_i}(\vec{r}_i)$ is the spherical surface of particle $i$, then integrals over $\partial\mathcal{L}$ must carefully consider pieces $S_i$ and intersections $\bigcap_i S_i$ separately.
-Intersections, e.g.\ $S_i \cap S_j$ for $i \ne j$, contribute zero area, but may have nonvanishing curvature; this is usually understood by considering the parallel surface $\partial(\mathcal{L}+B_\epsilon)$ in the limit as $\epsilon \to 0$.
+where $S_i := \partial \ball_{\sigma_i}^d(\vec{r}_i)$ is the spherical surface of particle $i$, then integrals over $\partial\mathcal{L}$ must carefully consider pieces $S_i$ and intersections $\bigcap_i S_i$ separately.
+Intersections, e.g.\ $S_i \cap S_j$ for $i \ne j$, contribute zero area, but may have nonvanishing curvature; this is usually understood by considering the parallel surface $\partial(\mathcal{L}+\ball_\epsilon)$ in the limit as $\epsilon \to 0$.
 Hard core interactions ensure pathological cases where spheres share a centre are excluded, so intersections of two spheres must result in a (one) lower dimensional manifold $S_i \cap S_j \in \mathcal{K}^{d-2}$.
 It is straightforward to extend this argument to $n \le d$ intersections $\bigcap_{i=1}^{n} S_i \in \mathcal{K}^{d-n}$.
 For $n = d$ intersections the solution is a zero-dimensional manifold, i.e.\ a point.
@@ -65,7 +69,7 @@ To see this, consider an overlap of $n > d$ hard spheres.
 By the above argument one can decompose the surface of the resulting structure into $k$-dimensional submanifolds where $0 \le k \le d$.
 Higher order surface intersections $n>d$ requires multiple $n=d$ intersections to occur at the same point, which is overconstrained and occurs with measure zero.
 Thus, the probability of finding points where $n > d$ spheres intersect occurs with measure zero.
-This argument only applies because we considered the \emph{boundary} of the intersections; it is more common in the physics literature to consider the Mayer f-function (related to the Euler characteristic) of the intersection \emph{volumes}, where the measure is nonzero leading to slow convergence of the virial series \cite{Hansen2013}.
+This argument only applies because we considered the \emph{boundary} of the intersections; it is more common in the physics literature to consider the Mayer function \eqref{eq:mayer-function} (related to the Euler characteristic) of the intersection \emph{volumes}, where the measure is nonzero leading to slow convergence of the virial series \cite{Hansen2013}.
 Despite having zero measure, there are cases where one would construct a geometry containing a higher order intersection so we will return to this topic in more detail in section \ref{sec:higher-order-intersections}.
 
 In summary, for $d=3$ the surface $\partial\mathcal{L}$ contains the following submanifolds:
@@ -86,7 +90,7 @@ We extended their implementation to also compute integrated curvature measures, 
 
 \subsection{Notation}
 
-In the main text we expressed the coordinates $\vec{r}^n \in \mathbb{R}^{3n}$ as the direct sum $\vec{r}^n = \vec{r}_1 \oplus \cdots \oplus \vec{r}_n$.
+%In the main text we expressed the coordinates $\vec{r}^n \in \mathbb{R}^{3n}$ as the direct sum $\vec{r}^n = \vec{r}_1 \oplus \cdots \oplus \vec{r}_n$.
 As each line contribution in \eqref{eq:integrated-curvature} depends on the positions of 2 central spheres, whose intersection forms a circle, together with 2 additional spheres whose intersections with the first two spheres creates terminating vertices for the circular arc.
 Thus the line contribution depends on the positions of up to 4 particles, so the domain and image of the gradient is (potentially) 12-dimensional.
 Fewer particles can be involved, and thus the dimension of the space is reduced, if:
@@ -113,35 +117,43 @@ For example, we write the coordinates in summation convention as
 \end{equation*}
 One obtains the gradient from components of differentiation by summing over the basis vectors, as in
 \begin{equation*}
-  \vec{\nabla} f =
+  \nabla f =
   \frac{\partial f}{\partial r_i^\alpha} \vec{e}_i^\alpha.
 \end{equation*}
 The latter expression can be used to determine gradients from the explicit forms of differentials given in subsequent sections.
 
-\subsection{Problem}
+\subsection{Problem statement: form of the integrated mean curvature}
 
 The integrated mean curvature for the generalised solvent accessible surface $\partial\mathcal{L}$ where $\mathcal{L}$ is composed of spheres of differing radii as in \eqref{eq:generalised-volume} is given as \cite{RothPRL2006}
 \begin{equation}\label{eq:integrated-curvature}
-  C_{\partial\mathcal{L}} =
-  \sum_{s \in S} \frac{A_s}{\sigma_s} -
-  \sum_{l \in L} \frac{\phi_l R_l}{2} (\theta_l^{(1)} + \theta_l^{(2)}),
+  C_{\partial\mathcal{L}}
+  =
+  \sum_{s \in S} \frac{A_s}{\sigma_s}
+  - \sum_{l \in L} \frac{\phi_l R_l}{2} (\theta_l^{(1)} + \theta_l^{(2)}),
 \end{equation}
 where $A_s$ is the area of spherical cap $s$, $\phi_l$ is the angular length of the line $l$, $\phi_l R_l$ its arc length, and $\theta_l^{(1)}$ and $\theta_l^{(2)}$ are the angles between the spheres and the plane of intersection defined in Refs.\ \cite{ConnollyJAC1983,ConnollyJACS1985}, see Fig.\ \ref{fig:curvature-geometry}(a).
 Algorithms already exist for computing the differential of the total area \cite{BryantDCG2004,KleninJCC2011}, so we do not need to consider the first term in \eqref{eq:integrated-curvature}.
 This leaves only the line contributions for consideration.
-The curvature contribution from a single line differentiates to give
+The curvature contribution from a single line differentiates to
 \begin{equation}\label{eq:line-curvature-differential}
-  \frac{\partial C_{\partial\mathcal{L}}}{\partial r_i^\alpha} =
-  \sum_{s \in S} \frac{1}{\sigma_s}
-  \frac{\partial A_s}{\partial r_i^\alpha} -
-  \frac{1}{2} \sum_{l \in L} \left(
-  \frac{\partial \phi_l}{\partial r_i^\alpha} R_l (\theta_l^{(1)} + \theta_l^{(2)}) +
-  \phi_l \frac{\partial R_l}{\partial r_i^\alpha} (\theta_l^{(1)} + \theta_l^{(2)}) +
-  (\phi_l R_l) \left(
-  \frac{\partial \theta_l^{(1)}}{\partial r_i^\alpha} +
-  \frac{\partial \theta_l^{(2)}}{\partial r_i^\alpha}
-  \right)
-  \right).
+  \begin{split}
+    \frac{\partial C_{\partial\mathcal{L}}}{\partial r_i^\alpha}
+    =&
+    \sum_{s \in S} \frac{1}{\sigma_s}
+    \frac{\partial A_s}{\partial r_i^\alpha}
+    - \frac{1}{2} \sum_{l \in L} \left(
+    \vphantom{\frac{\partial \theta_l^{(1)}}{\partial r_i^\alpha}}
+    \frac{\partial \phi_l}{\partial r_i^\alpha} R_l (\theta_l^{(1)} + \theta_l^{(2)})
+    \right.
+    \\ &
+    \left.
+    + \phi_l \frac{\partial R_l}{\partial r_i^\alpha} (\theta_l^{(1)} + \theta_l^{(2)})
+    + (\phi_l R_l) \left(
+    \frac{\partial \theta_l^{(1)}}{\partial r_i^\alpha}
+    + \frac{\partial \theta_l^{(2)}}{\partial r_i^\alpha}
+    \right)
+    \right).
+  \end{split}
 \end{equation}
 In subsequent sections we will give explicit formulas for each differential in this expression.
 
@@ -150,7 +162,7 @@ In subsequent sections we will give explicit formulas for each differential in t
 %%   A_{\partial\mathcal{L}} = \sum_i A[S_i]
 %% \end{equation}
 
-To get the curvature for the surface used in the main text one sets $\sigma_i = \sigma \; \forall \; i \in \{1 \dots n\}$.
+To get the curvature for the surface used in the results chapters one sets $\sigma_i = \sigma \; \forall \; i \in \{1 \dots n\}$.
 In this limiting case the curvature \eqref{eq:integrated-curvature} simplifies to
 \begin{equation*}
   C_{\partial\mathcal{L}} =
@@ -195,7 +207,7 @@ We will label the particles whose intersection creates the circle of arc as 1 an
 We consider the distances from these particles to the center of the circle as $b_l^{(1)}$ and $b_l^{(2)}$, see Fig.\ \ref{fig:curvature-geometry}(a).
 Clearly $|\vec{\Delta}_{12}| = b_l^{(1)} + b_l^{(2)}$.
 These distances form equilateral triangles with circle radius $R_l$ of hypotenuse $\sigma_i$ for $i \in \{1,2\}$.
-This geometry is sketched in Fig.\ \ref{fig:curvature-geometry}a.
+This geometry is sketched in Fig.\ \ref{fig:curvature-geometry}(a).
 By Pythagoras' theorem we find the unknown distances as
 \begin{align}
   R_l
@@ -251,7 +263,7 @@ As we must calculate the angles $\theta_l^{(1)}$ and $\theta_l^{(2)}$ and their 
 \end{subequations}
 
 The expressions in this section are the only quantities which explicitly depend on the sizes of the spheres $\sigma_i$, so we see how it is straightforward to consider the more general surface composed of arbitrarily sized spheres.
-The above formulas are simplified if spheres are of equal sizes i.e.\ $\sigma_i = \sigma$ (as in the main text) leading to vanishing of $\sigma_1^2 - \sigma_2^2$ terms.
+The above formulas are simplified if spheres are of equal sizes i.e.\ $\sigma_i = \sigma$ (as in the results chapters) leading to vanishing of $\sigma_1^2 - \sigma_2^2$ terms.
 
 \subsection{Angular length}
 
@@ -266,7 +278,7 @@ The center of the intersection circle is
   = \vec{r}_1 + b_l^{(1)} \frac{\vec{\Delta}_{12}}{|\vec{\Delta}_{12}|}
   = \vec{r}_2 - b_l^{(2)} \frac{\vec{\Delta}_{12}}{|\vec{\Delta}_{12}|}.
 \end{equation}
-The plane of intersection is seen by looking along $\vec{\Delta}_{12}$, making the arc $\phi_l R_l$ perfectly circular, shown in Fig.\ \ref{fig:curvature-geometry}b.
+The plane of intersection is seen by looking along $\vec{\Delta}_{12}$, making the arc $\phi_l R_l$ perfectly circular, shown in Fig.\ \ref{fig:curvature-geometry}(b).
 By convention we choose the arc to be a clockwise migration from a `left' vertex to a `right' vertex, which we label $v_l^{(L)}$ and $v_l^{(R)}$ accordingly.
 These vertices form at 3-particle intersections, so we will use the suffixes $L$ and $R$ to indicate the 3rd particle index (distinct from 1 and 2) where appropriate.
 We write the vertex coordinates as
@@ -281,7 +293,7 @@ where the unit vectors are
   {|\vec{v}_l^{(i)} - \vec{c}_l|}
   \qquad i \in \{L,R\}.
 \end{equation}
-The unit vectors for the `right' component are sketched in Fig.\ \ref{fig:curvature-geometry}b.
+The unit vectors for the `right' component are sketched in Fig.\ \ref{fig:curvature-geometry}(b).
 The central angle is thus defined as the angle (going clockwise) between these unit vectors, i.e.
 \begin{equation}
   \cos{\phi_l} = \vec{g}_l^{(L)} \cdot \vec{g}_l^{(R)},
@@ -329,7 +341,7 @@ then these basis vectors take the form
   \frac{\vec{\Delta}_{12} \times \vec{n}_l^{(R)}}{|\vec{\Delta}_{12}|}.
 \end{align}
 \end{subequations}
-Finally, from Fig.\ \ref{fig:curvature-geometry}c we have
+Finally, from Fig.\ \ref{fig:curvature-geometry}(c) we have
 \begin{equation}
   b_l^{(i)} \sin{\beta_l^{(i)}} - R_l \cos{\beta_l^{(i)}}
   = \frac{b_l^{(1)} - b_l^{(i)} \cos{\psi_l^{(i)}}}{\tan{\psi_l^{(i)}}}
@@ -370,36 +382,44 @@ Second, we take the derivatives of the basis vectors themselves \eqref{eq:vertex
 \end{subequations}
 Finally, we differentiate the angles from \eqref{eq:cos-psi} and \eqref{eq:cos-beta} to get
 \begin{subequations}
-\begin{align}
- \frac{\partial \beta_l^{(j)}}{\partial r_i^\alpha} &=
-  \frac{
-  \frac{\partial R_l}{\partial r_i^\alpha}
-  \cos{\beta_l^{(j)}} -
-  \frac{\partial}{\partial r_i^\alpha}
-  \left( R_l \cos{\beta_l^{(j)}} \right)}
-  {R_l \sin{\beta_l^{(j)}}}, \\
- \frac{\partial}{\partial r_i^\alpha}
-  \left( R_l \cos{\beta_l^{(j)}} \right) &=
-  \frac{1}{\sin{\psi_l^{(j)}}}
-  \frac{\partial b_l^{(j)}}{\partial r_i^\alpha}
-  - \frac{1}{\tan{\psi_l^{(j)}}}
-  \frac{\partial b_l^{(1)}}{\partial r_i^\alpha}
-  - \frac{b_l^{(j)} \cos{\psi_l^{(j)}} - b_l^{(1)}}
-  {\sin^2{\psi_l^{(j)}}}
-  \frac{\partial \psi_l^{(j)}}{\partial r_i^\alpha}, \\
-  \frac{\partial \psi_l^{(j)}}{\partial r_i^\alpha} =
-  -\frac{1}{\sin\psi_l^{(j)}} \frac{\partial(\cos{\psi_l^{(j)}})}{\partial r_i^\alpha} &=
-  -\frac{1}{\sin\psi_l^{(j)}}
-  \left(
-  \frac{\partial}{\partial r_i^\alpha}
-  \left( \frac{\vec{\Delta}_{12}}{|\vec{\Delta}_{12}|} \right) \cdot
-  \frac{\vec{\Delta}_{1j}}{|\vec{\Delta}_{1j}|}
-  +
-  \frac{\vec{\Delta}_{12}}{|\vec{\Delta}_{12}|} \cdot
-  \frac{\partial}{\partial r_i^\alpha}
-  \left( \frac{\vec{\Delta}_{1j}}{|\vec{\Delta}_{1j}|} \right)
-  \right),
-\end{align}
+  \begin{align}
+    \frac{\partial \beta_l^{(j)}}{\partial r_i^\alpha}
+    &=
+    \frac{
+      \frac{\partial R_l}{\partial r_i^\alpha}
+      \cos{\beta_l^{(j)}} -
+      \frac{\partial}{\partial r_i^\alpha}
+      \left( R_l \cos{\beta_l^{(j)}} \right)
+    }{
+      R_l \sin{\beta_l^{(j)}}
+    },
+    \\
+    \frac{\partial}{\partial r_i^\alpha}
+    \left( R_l \cos{\beta_l^{(j)}} \right)
+    &=
+    \frac{1}{\sin{\psi_l^{(j)}}}
+    \frac{\partial b_l^{(j)}}{\partial r_i^\alpha}
+    - \frac{1}{\tan{\psi_l^{(j)}}}
+    \frac{\partial b_l^{(1)}}{\partial r_i^\alpha}
+    - \frac{b_l^{(j)} \cos{\psi_l^{(j)}} - b_l^{(1)}}
+    {\sin^2{\psi_l^{(j)}}}
+    \frac{\partial \psi_l^{(j)}}{\partial r_i^\alpha},
+    \\
+    \frac{\partial \psi_l^{(j)}}{\partial r_i^\alpha}
+    &=
+    -\frac{1}{\sin\psi_l^{(j)}} \frac{\partial(\cos{\psi_l^{(j)}})}{\partial r_i^\alpha}
+    \nonumber \\ &=
+    -\frac{1}{\sin\psi_l^{(j)}}
+    \left(
+    \frac{\partial}{\partial r_i^\alpha}
+    \left( \frac{\vec{\Delta}_{12}}{|\vec{\Delta}_{12}|} \right) \cdot
+    \frac{\vec{\Delta}_{1j}}{|\vec{\Delta}_{1j}|}
+    +
+    \frac{\vec{\Delta}_{12}}{|\vec{\Delta}_{12}|} \cdot
+    \frac{\partial}{\partial r_i^\alpha}
+    \left( \frac{\vec{\Delta}_{1j}}{|\vec{\Delta}_{1j}|} \right)
+    \right),
+  \end{align}
 \end{subequations}
 for $j \in \{L,R\}$ in each expression.
 
@@ -407,13 +427,14 @@ for $j \in \{L,R\}$ in each expression.
 
 $\partial\mathcal{L}$ forms a closed two-dimensional surface, so by the Gauss-Bonnet theorem \eqref{eq:gauss-bonnet} we find $X$ is a topological constant of the surface.
 Thus, the derivative of $X$ is zero everywhere except at pathological points where a topological change in the surface occurs.
-In practice this happens when a cavity larger than a particle size forms inside the structure, or when a particle dissociates; being interested in \emph{compact} local structures, we can exclude both of these scenarios from consideration.
+In practice this happens when a cavity larger than a particle size forms inside the structure, or when a particle dissociates; being interested in high densities where local structures are condensed, we can exclude both of these scenarios from consideration.
 Thus, for all local structures $\chi=2$, and the gradient of $X$ is zero everywhere.
 
 Under the above assumptions we do not need to compute $X_{\partial\mathcal{L}}$, but nevertheless it is convenient to do so in order to check the correctness of the algorithm:
 \begin{equation}
-  X_{\partial\mathcal{L}} =
-  -\sum_{l \in L} \phi_l (\sin{\theta_l^{(1)}} + \sin{\theta_l^{(2)}}) +
+  X_{\partial\mathcal{L}}
+  =
+  -\sum_{l \in L} \phi_l \, (\sin{\theta_l^{(1)}} + \sin{\theta_l^{(2)}}) +
   \sum_{(i,j,k) \in V} \Omega_{ijk}
 \end{equation}
 where $\Omega_{ijk}$ is the solid angle spanned by the 3-vectors at vertex $S_i \cap S_j \cap S_k$ \cite{MeckeAA1994}.
@@ -434,8 +455,8 @@ In atomic coordinates derivatives can contain poles and step discontinuities.
 As the example above illustrates, the gradient is not well defined at pathological points where many spheres intersect.
 It is thus impossible to quench these geometries using standard algorithms (which assume smooth functions) and perturbation theories (e.g.\ the harmonic approximation for the free energy) will fail.
 A proper treatment of these cases would be required for an investigation of quenched geometries.
-In this work we have avoided these considerations primarily by restricting ourselves to geometries thermalised using a Monte-Carlo algorithm (Figures \ref{fig:structure-populations} and \ref{fig:reaction} in the main text).
-Construction of the reaction path of $n=6$ particles necessitates an analytic method which uses a quenched geometry, however the geometries for $n=6$ are not pathological so no special consideration is needed.
+In chapter \ref{chapter:morphometric-applications} we avoided these pitfalls primarily by restricting ourselves to geometries thermalised using a Monte-Carlo algorithm (Figs.\ \ref{fig:structure-populations} and \ref{fig:n12-dos}).
+Construction of the reaction paths particles necessitated an analytic method which uses a quenched geometry, however the geometries for $n=6$ and $n=7$ are not pathological so no special consideration was needed.
 
 \ifdefined\includebibliography
   \newgeometry{margin=1in}
