@@ -15,177 +15,43 @@
 \chapter{Evaluating free energies of hard sphere structures analytically}
 \label{appendix:bayesian}
 
-Here we consider analytical approximations for evaluating \eqref{eq:?}.
+Here we consider analytical approximations for evaluating the free energies of local structures in hard spheres \eqref{eq:structural-partition-function-detailed}.
 These must first involve a definition of structure to set the limits of integration.
 These limits will inform the approximation schemes.
-As discussed in section \ref{?} the minimum is not as thermodynamically significant as expected for soft systems because of the singularity of the hard sphere potential.
+%As discussed in section \ref{?} the minimum is not as thermodynamically significant as expected for soft systems because of the singularity of the hard sphere potential.
 
-\section{Our definition of structure}
+%% \section{Simple integral}
 
-%% Our minimal energy geometries occur at contact, so we will build our definition of local structure around these as a reference.
-%% We consider a local structure with $m$ contacts at the reference point.
-%% We write the set of contacts as
-%% \begin{equation}
-%%   \mathcal{M} = \{(a_1, b_1), \cdots, (a_m, b_m)\}
-%% \end{equation}
-%% where $a_i, b_i \in \mathbb{N}$ are the indices of touching particles.
-%% Following \cite{Holmes?} we introduce the \emph{bond distance} as the size of the gap between particles
-%% \begin{equation}
-%%   y^k = |\vec{r}_{a_k} - \vec{r}_{b_k}| - \sigma,
-%% \end{equation}
-%% clearly contact occurs where $y^k = 0$ for all $k$.
-%% Our simplifying definition of structure consists of introducing a finite tolerance $\delta$ to these distances so that $y^k \in [0, \delta]$ defines with the lower limit set by the fact that hard particles cannot overlap.
-%% This condition sets the limits $D'$ in \eqref{eq:structural-partition-function-detailed}.
+%% Finally, we write the distribution function in terms of the potential of mean force and expand this and the moment of inertia to first order, as in
+%% \begin{align}
+%%   \phi^{(n)}(\vec{x}) &=
+%%   \phi^{(n)}(\vec{x}_0) +
+%%   (\vec{x} - \vec{x}_0) \cdot
+%%   \left. \vec{\nabla} \phi^{(n)}(\vec{x}) \right|_{\vec{x} = \vec{x}_0} +
+%%   \mathcal{O}(\vec{x}^2), \\
+%%   \sqrt{\det{\vec{I}(\vec{x})}} &=
+%%   \sqrt{\det{\vec{I}(\vec{x}_0)}} +
+%%   (\vec{x} - \vec{x}_0) \cdot
+%%   \left. \vec{\nabla} \sqrt{\det{\vec{I}(\vec{x})}} \right|_{\vec{x} = \vec{x}_0} +
+%%   \mathcal{O}(\vec{x}^2).
+%% \end{align}
+%% Using the analytical gradient expressions given in Section \ref{SI:line-curvature} makes this calculation very efficient.
+%% The integral \eqref{eq:structural-partition-function-approximated} separates into $3n-6$ independent one-dimensional integrals of the form
+%% \begin{equation*}
+%%   \int_\sigma^{\sigma_{cut}} (a_i + b_i x_i) e^{-c_i x_i} dx_i
+%%   = \left[
+%%     - \left(
+%%     \frac{(a + b_i x_i)}{c_i} + \frac{b_i}{c_i^2} \right) e^{-c_i x_i}
+%%   \right]_\sigma^{\sigma_{cut}},
+%% \end{equation*}
+%% where $a_i$, $b_i$ and $c_i$ are constants.
 
-Defining the $n$-particle cavity distribution as
-\begin{equation}
-  \begin{split}
-    y^{(n)}(\vec{r}^n)
-    &\equiv e^{\beta U_n} g^{(n)}(\vec{r}^n) \\
-    &= e^{-\beta(\Delta\Omega - n\mu^\mathrm{ex})}.
-  \end{split}
-\end{equation}
-the integral in \eqref{eq:structural-partition-function-detailed} becomes
-\begin{equation}
-  I
-  =
-  \int_{D'}
-  e^{-\beta U_n(\vec{x})} \, y^{(n)}(\vec{x}) \, G(\vec{x})
-  \, d^{q} \vec{x}.
-\end{equation}
-Note that the cavity function and metric are analytic functions, whereas the hard sphere interactions are not: the singularity in the pair potential complicates evaluating this integral.
-Note that the limits of the integration $D'$ take care of the hard sphere interactions between the particle pairs in $\mathcal{M}$, but not the remaining interactions.
-In particular, the hard sphere interaction potential has the form
-\begin{equation}
-  e^{-\beta U_N(\vec{x})} =
-  \prod_{i < j} \left(
-  \Theta \Big( |\vec{r}_i - \vec{r}_j| - \sigma \Big)
-  \right)
-\end{equation}
-where $\Theta(\cdot)$ is the Heaviside theta function.
-This can be thought of as setting complex integration limits, i.e.\ the additional half-space criterion that $|\vec{r}_i - \vec{r}_j| \in [0, \infty]$.
-
-The metric $G(\vec{x})$ is in principle as complicated nonlinear function of geometry, however in numerical experiments we found it to vary weakly.
-By contrast the other terms are more rapidly varying, with the cavity function being an exponentially weighted potential of mean force and the hard sphere interaction being singular.
-We found Taylor expanding the metric to give sufficient accuracy, i.e.\
-\begin{equation*}
-  G(\vec{x})
-  =
-  G(\vec{x}^*)
-  + \left. \nabla G \right|_{\vec{x}^*} \cdot \Delta \vec{x}
-  + \frac{1}{2} \Delta\vec{x} \cdot \left. \nabla \nabla G \right|_{\vec{x}^*} \cdot \Delta\vec{x}
-  + \mathcal{O}(\Delta\vec{x}^3).
-\end{equation*}
-If we treat the collective effect of the cavity function, hard sphere interactions and boundary conditions as a probability distribution $\mathcal{P}$ acting over \emph{all} of space, so that
-\begin{subequations}
-  \begin{align}
-  I
-  &=
-  Z \int_{\mathbb{R}^q} p(\vec{x}) G(\vec{x}) d^q \vec{x}
-  \\
-  Z
-  &=
-  \int_{\mathbb{R}^q} p(\vec{x}) d^q \vec{x}
-  \end{align}
-\end{subequations}
-where $p(\vec{x}) \sim \mathcal{P}$ and $Z$ is the integral in the absence of the metric.
-This leads to
-\begin{equation}
-  \frac{I}{Z}
-  =
-  G(\vec{x}^*)
-  + \left. \nabla G \right|_{\vec{x}^*} \cdot
-  \left\langle \Delta \vec{x} \right\rangle_\mathcal{P}
-  + \frac{1}{2} \left. \nabla \nabla G \right|_{\vec{x}^*} :
-  \left\langle \Delta\vec{x} \otimes \Delta\vec{x} \right\rangle_\mathcal{P}
-  + \mathcal{O}(\langle \Delta\vec{x}^3 \rangle_\mathcal{P})
-\end{equation}
-with $\langle \cdot \rangle_\mathcal{P} = \int_{\mathbb{R}^q} (\cdot) p(\vec{x}) d^q \vec{x}$ as the average over the distribution $\mathcal{P}$.
-With this series expansion in mind, we will concentrate on methods which determine $Z$ and the moments of $\mathcal{P}$ to avoid explicitly considering the nonlinear role of the metric $G(\vec{x})$.
-
-We will write the cavity function in terms of the depletion potential and expand
-\begin{equation}
-  y^{(n)}(\vec{x})
-  =
-  y^{(n)}(\vec{x}^*)
-  \exp{\left( -\vec{A} \cdot \Delta \vec{x} \right)}
-  + \mathcal{O}(\Delta \vec{x}^2)
-\end{equation}
-where we have expanded to leading order $A = \left. \nabla (\beta\Omega) \right|_{\vec{x}^*}$.
-This perturbation in the potential is in the spirit of the harmonic approximation, however leading order here is linear rather than quadratic as $\left. \nabla (\beta\Omega) \right|_{\vec{x}^*} \ne \vec{0}$.
-Another difference from conventional harmonic approximations is that we cannot evaluate this perturbatively as the temperature is not a meaningful parameter for hard (athermal) systems.
-
-\section{Simple integral}
-
-To evaluate the integrand in Eq.\ \eqref{eq:structural-partition-function-detailed} analytically we need to choose a representation for $\vec{x}$ which is diffeomorphic to $\vec{r}^n$.
-For \emph{minimally constrained geometries}, i.e.\ structures with exactly $3n-6$ contacts, a convenient representation exists: bond distance space.
-Following Ref.\ \cite{Holmes-CerfonPNAS2013} and its accompanying Supplementary Information we choose each element of $\vec{x}$ to represent the distances between particles in contact, where contact occurs at $\vec{x} = (\sigma, \dots, \sigma)$.
-Thus increasing elements of $\vec{x}$ corresponds to thermal fluctuations away from contact.
-This representation naturally expresses the limits of integration given in the main text as $\sigma \le x_i \le \sigma_{cut}$.
-
-To evaluate the integral we need expressions for the internal metric and moment of inertia terms.
-The internal metric is defined in terms of the Jacobian matrix $\vec{J} \in \mathbb{R}^{3n \times 3n-6}$
-\begin{equation}
-  \overline{G_{ij}} = \vec{J}^T \vec{J}
-\end{equation}
-where the matrix entries are given by
-\begin{equation}
-  J_{ij} = \frac{\partial q_i}{\partial y_j}.
-\end{equation}
-In practice it is easier to calculate its inverse numerically (via finite differences) using
-\begin{equation}
-  J_{ij}^{-1}
-  = \frac{\partial y_j}{\partial q_i}
-  = \left. \frac{\partial y_j}{\partial x_i}
-  \right|_{\vec{\theta} = \vec{t} = \vec{0}}
-\end{equation}
-which has linearly independent rows for a minimally constrained geometry so we recover $\vec{J}$ from $\vec{K} = \vec{J}^{-1}$ using the matrix inversion formula $\vec{J} = (\vec{K}^T\vec{K})^{-1} \vec{K}^T$.
-The above expressions all depend implicitly on the point $\vec{x}$ as the coordinate scheme is curvilinear, so to keep the integral tractable we approximate this to leading order as
-\begin{equation}
-  \sqrt{\overline{G_{ij}}(\vec{x})} \simeq \sqrt{\overline{G_{ij}}(\vec{x}_0)}
-\end{equation}
-where $\vec{x}_0 = (\sigma,\dots,\sigma)$ is contact.
-Thus the integral becomes
-\begin{equation}\label{eq:structural-partition-function-approximated}
-  \frac{\mathcal{N}}{\rho^n V}
-  =
-  \frac{8\pi^2 G_0}{\nu} \int_{D'}
-  g^{(n)}(\vec{x}) \,
-  \sqrt{\det{\vec{I}(\vec{x})}}
-  \, d^{3n-6} \vec{x}
-\end{equation}
-where $G_0 = \sqrt{n^3 \det{\overline{G_{ij}}(\vec{x}_0)}}$.
-
-Finally, we write the distribution function in terms of the potential of mean force and expand this and the moment of inertia to first order, as in
-\begin{align}
-  \phi^{(n)}(\vec{x}) &=
-  \phi^{(n)}(\vec{x}_0) +
-  (\vec{x} - \vec{x}_0) \cdot
-  \left. \vec{\nabla} \phi^{(n)}(\vec{x}) \right|_{\vec{x} = \vec{x}_0} +
-  \mathcal{O}(\vec{x}^2), \\
-  \sqrt{\det{\vec{I}(\vec{x})}} &=
-  \sqrt{\det{\vec{I}(\vec{x}_0)}} +
-  (\vec{x} - \vec{x}_0) \cdot
-  \left. \vec{\nabla} \sqrt{\det{\vec{I}(\vec{x})}} \right|_{\vec{x} = \vec{x}_0} +
-  \mathcal{O}(\vec{x}^2).
-\end{align}
-Using the analytical gradient expressions given in Section \ref{SI:line-curvature} makes this calculation very efficient.
-The integral \eqref{eq:structural-partition-function-approximated} separates into $3n-6$ independent one-dimensional integrals of the form
-\begin{equation*}
-  \int_\sigma^{\sigma_{cut}} (a_i + b_i x_i) e^{-c_i x_i} dx_i
-  = \left[
-    - \left(
-    \frac{(a + b_i x_i)}{c_i} + \frac{b_i}{c_i^2} \right) e^{-c_i x_i}
-  \right]_\sigma^{\sigma_{cut}},
-\end{equation*}
-where $a_i$, $b_i$ and $c_i$ are constants.
-
-Loosely speaking, this is the hard-particle analogue of the harmonic approximation with the difference here being that the first derivative does not vanish at the minimum.
-For $n=6$ this expansion works rather well, as all structures have exactly $3n-6$ bonds and this perturbation theory captures the free energy well when compared with the ``exact'' result from thermodynamic integration.
+%% Loosely speaking, this is the hard-particle analogue of the harmonic approximation with the difference here being that the first derivative does not vanish at the minimum.
+%% For $n=6$ this expansion works rather well, as all structures have exactly $3n-6$ bonds and this perturbation theory captures the free energy well when compared with the ``exact'' result from thermodynamic integration.
 
 \section{Properties of multivariate Gaussians}
 
-The multivariate Gaussian (moment form)
+The multivariate Gaussian is defined as
 \begin{equation}
   \begin{split}
     \mathcal{N}(\vec{x}; \vec{\mu}, \vec{\Sigma})
@@ -204,16 +70,17 @@ The multivariate Gaussian (moment form)
       \right)}
   \end{split}
 \end{equation}
-where $\vec{x} \in \mathbb{R}^n$ is a Gaussian distributed vector in our phase space, with mean $\vec{\mu} \in \mathbb{R}^n$ and covariance matrix $\vec{\Sigma} \in \mathbb{R}^{n \times n}$.
-The covariance matrix must be positive definite or else this non-normalisable and thus not a probability distribution.
+where $\vec{x} \in \mathbb{R}^n$ is the Gaussian distributed vector in our phase space, with mean $\vec{\mu} \in \mathbb{R}^n$ and (positive-definite) covariance matrix $\vec{\Sigma} \in \mathbb{R}^{n \times n}$.
 
-In our EP algorithm we write the multivariate Gaussian approximation in $q$ as the product of univariate Gaussians from the tile distributions approximating the boundary conditions.
+In the EP algorithm we write the multivariate Gaussian approximation in $q$ as the product of univariate Gaussians from the tile distributions approximating the boundary conditions.
 To show this, consider the product of univariate Gaussians:
-\begin{equation}
-  \begin{split}
+\begin{align}
+  %\begin{split}
+    &
     \prod_{i=1}^m
     \mathcal{N}(\vec{c}_i \cdot \vec{x}; \tilde{\mu}_i, \tilde{\sigma}_i^2)
-    &=
+    %\nonumber \\ =&
+    =
     \prod_{i=1}^m
     \left(
     \frac{1}{\sqrt{ 2\pi \tilde{\sigma}_i^2 }}
@@ -221,8 +88,7 @@ To show this, consider the product of univariate Gaussians:
       - \frac{1}{2} \frac{(\vec{c}_i \cdot \vec{x} - \tilde{\mu}_i)^2}{\tilde{\sigma}_i^2}
       \right)}
     \right)
-    \\
-    &=
+    \nonumber \\ =&
     \prod_{i=1}^m
     \left(
     \frac{1}{\sqrt{ 2\pi \tilde{\sigma}_i^2 }}
@@ -232,8 +98,7 @@ To show this, consider the product of univariate Gaussians:
       - \frac{\tilde{\mu}_i^2}{2\tilde{\sigma}_i^2}
       \right)}
     \right)
-    \\
-    &=
+    \nonumber \\ =&
     \prod_{i=1}^m
     \left(
     \frac{1}{\sqrt{ 2\pi \tilde{\sigma}_i^2 }}
@@ -243,8 +108,7 @@ To show this, consider the product of univariate Gaussians:
       - \frac{(\vec{c}_i \cdot \vec{x})^2}{2\tilde{\sigma}_i^2}
       + \frac{\tilde{\mu}_i(\vec{c}_i \cdot \vec{x})}{\tilde{\sigma}_i^2}
       \right) \right)}
-    \\
-    &=
+    \nonumber \\ =&
     \prod_{i=1}^m
     \left(
     \frac{1}{\sqrt{ 2\pi \tilde{\sigma}_i^2 }}
@@ -254,8 +118,7 @@ To show this, consider the product of univariate Gaussians:
       - \vec{x} \cdot \frac{\vec{c}_i \otimes \vec{c}_i}{2\tilde{\sigma}_i^2} \cdot \vec{x}
       + (\tilde{\nu}_i\vec{c}_i) \cdot \vec{x}
       \right) \right)}
-    \\
-    &=
+    \nonumber \\ =&
     \prod_{i=1}^m
     \left(
     \frac{1}{\sqrt{ 2\pi \tilde{\sigma}_i^2 }}
@@ -266,8 +129,7 @@ To show this, consider the product of univariate Gaussians:
     \sqrt{ (2\pi)^n \det{\vec{\Sigma}} }
     \;
     \exp{\left( \frac{\vec{\mu} \cdot \vec{\Sigma}^{-1} \cdot \vec{\mu}}{2} \right)}
-    \\
-    &=
+    \nonumber \\ =&
     \prod_{i=1}^m
     \left(
     \frac{1}{\sqrt{ 2\pi \tilde{\sigma}_i^2 }}
@@ -278,12 +140,11 @@ To show this, consider the product of univariate Gaussians:
     \sqrt{ (2\pi)^n \det{\vec{\Sigma}} }
     \;
     \exp{\left( \frac{\vec{\nu} \cdot \vec{\Sigma} \cdot \vec{\nu}}{2} \right)}
-    \\
-    &=
+    \nonumber \\ =&
     Z \mathcal{N}(\vec{x}; \vec{\mu}, \Sigma)
-  \end{split}
+  %\end{split}
   \label{eq:combined-normals}
-\end{equation}
+\end{align}
 with
 \begin{subequations}
 \begin{align}
@@ -332,10 +193,25 @@ Finally, note that
 
 \section{Minimally constrained geometries}
 
-First we consider the simple case for contact geometries with exactly $m=q$ bonds, so that the bond-distance space forms a natural basis for this expansion and we can set $\vec{x} = \{y^k\}$, with the energy minimum occurring at $\vec{x}^* = \vec{0}$.
-Such a geometry is called \emph{minimally constrained}, to be distinguished from \emph{isostatic} in the jamming literature which is a bulk phenomenon.
-Though these are distinct they share similar simplifying properties, in that the full nonlinear geometry can be reduced to a bond-distance description as was done in \cite{Wyart}.
-However, we will have to consider the effects of additional interactions and later we will generalise to case where $z \ne 2d$.
+First, we consider the simplest case of \emph{minimally constrained} geometries which have exactly $m=q$ bonds, so that the bond-distance space forms a natural basis for this expansion and we can set $\vec{x} = \{h_1, \cdots, h_m\}$, with the energy minimum occurring at $\vec{x}^* = 0$.
+This special case simplifies calculation in a similar way that isostaticity can be exploited to derive theories for systems approaching jamming, \cite{WyartAP2005,BritoEEL2006}.
+However, we will have to consider the effects of additional interactions and later we will generalise to the case where $m \ge q$.
+
+As an aside, we describe how to calculate the internal metric entering into $R(\vec{x})$ for this choice of coordinates.
+This metric is defined by
+\begin{equation*}
+  \overline{G_{ij}} = \vec{J}^T \vec{J}
+\end{equation*}
+where the Jacobian matrix entries are given by
+\begin{equation*}
+  J_{ij} = \frac{\partial x_i}{\partial h_j}.
+\end{equation*}
+In practice it is easier to calculate its inverse numerically (via e.g.\ finite differences) using
+\begin{equation*}
+  J_{ij}^{-1}
+  = \frac{\partial h_j}{\partial x_i}
+\end{equation*}
+which has linearly independent rows for a minimally constrained geometry so we can recover $\vec{J}$ from $\vec{K} = \vec{J}^{-1}$ using the matrix inversion formula $\vec{J} = (\vec{K}^T\vec{K})^{-1} \vec{K}^T$.
 
 In this basis the definition of structure sets the limits of integration to that of a hypercube, i.e.\
 \begin{equation*}
@@ -343,6 +219,7 @@ In this basis the definition of structure sets the limits of integration to that
   =
   \int_0^\delta dx_1 \cdots \int_0^\delta dx_m.
 \end{equation*}
+Helpfully, the hard sphere interactions between particle pairs $a_k,b_k \in \mathcal{M}$ have been absorbed into the integration limits, so we only have to consider the remaining $n(n-1)/2 - m$ interactions.
 As our first approximation we ignore the effects of overlaps between any other particle pairs giving
 \begin{subequations}
   \begin{align}
@@ -358,7 +235,7 @@ As our first approximation we ignore the effects of overlaps between any other p
     \, (\cdot) y^{(n)}(\vec{x}).
   \end{align}
 \end{subequations}
-Introducing the perturbation expansion of the cavity function we obtain
+Introducing the perturbation expansion of the cavity function \eqref{eq:cavity-perturbation} we obtain
 \begin{equation}
   \begin{split}
     Z
@@ -377,15 +254,27 @@ Introducing the perturbation expansion of the cavity function we obtain
   \end{split}
 \end{equation}
 with similar expressions for the first few moments.
-Inserting these expressions into the formulae of the previous section yields expressions for the local structure's free energy/population.
-This approximation is exact in the case where no overlap between other particle pairs is possible over the range of integration, then the pair potential term in the integrand will evaluate to one and this approximation becomes exact.
+Inserting this expression into the structural partition function \eqref{eq:structural-partition-function-detailed} yields expressions for the local structure's free energy/concentration.
+This approximation is exact in the case where no overlap between other particle pairs is possible over the range of integration.
 
-The above formulas are rather simple, however the approximation is uncontrolled and we in general expect large errors for all but the most simple geometries: the hard sphere interactions should have a large effect.
-For $n \le 6$ this is very accurate \ref{Fig?}, however for $n \ge 7$ it fails for certain geometries where there are nearly touching particles.
-In general we expect the majority of stable structures to fall into this latter category as $n$ is increased, so we desire a more robust method.
-Additionally, we wish to model hyperstatic structures (impossible) and higher order expansions in the free energy (difficult with the above approximation, as the modes couple so it no longer reduces to a product of one-dimensional integrals).
+The above formulae are rather simple, however the approximation is uncontrolled and we in general expect large errors for all but the most simple geometries: the hard sphere interactions should have a large effect.
+We find this approximation is reasonably accurate for $n \le 6$, however it fails for $n \ge 7$ with selected geometries.
+In Fig.\ \ref{fig:ep-n7} (top panel) we see that the error in this method is comparable between 4 out of the 5 possible structures, with a similar trend against density.
+However, one structure deviates strongly from the main trend with the error becoming substantial at high densities.
+The geometry in question is a variant of the frustrated pentagonal bipyramid with broken five-fold symmetry (top variant Fig.\ \ref{fig:packings}); the particles with the broken bond are almost touching so ignoring their interaction is a serious approximation.
+In general, we expect the majority of stable structures require treatment of more hard sphere interactions than just the contacts.
 
-To go beyond this we will approximate the hard sphere interactions to leading order; in effect, this models the boundary conditions as a polyhedron.
+\begin{SCfigure}
+  \includegraphics[width=0.9\linewidth,outer]{ep-n7}
+  \caption[Errors in EP]{
+    Error in the free energy evaluated with analytic methods (described in text) for the five $n = 7$ structures in Fig.\ \ref{fig:packings}.
+    The exact result is taken from thermodynamic integration.
+    The orange curve is for broken five-fold symmetry (spindle intact), thermal fluctuations very easily create overlaps.
+  }
+  \label{fig:ep-n7}
+\end{SCfigure}
+
+To go beyond this approximation we will approximate the geometry of hard sphere interactions to leading order; in effect, this models the boundary conditions as a polyhedron.
 Next, we will use expectation propagation, a technique from Bayesian inference, to evaluate the integral on the resulting polyhedron.
 
 \section{Polyhedral approximation}
@@ -412,7 +301,7 @@ This corresponds to assigning the half space constraint
   \vec{c}_k \cdot \Delta \vec{x} \in [\sigma - \Delta_{a_k,b_k}, \infty].
 \end{equation}
 The combination of half spaces and the cubic limits \eqref{?} describes a polyhedron in phase space, so this is a polyhedral approximation.
-Similar approximations have been made for hard sphere free energy calculations in the crystal \cite{?} and other stuff \cite{Leoni?}, where this approximation becomes exact at very high densities approaching close packing.
+Similar approximations have been made for hard sphere free energy calculations in the crystal \cite{RadinPRL2005,KochPRE2005} and related systems \cite{LeoniPRL2017}, where this approximation becomes exact at very high densities approaching close packing.
 
 Our partition function becomes an integral of the cavity function, in the exponential family, over a polyhedron.
 Besides the simple one dimensional case few exact calculations are possible.
@@ -420,22 +309,13 @@ We will use an approximate method from Bayesian inference: expectation propagati
 
 \section{Expectation propagation}
 
-\begin{SCfigure}
-  \includegraphics[width=0.9\linewidth,outer]{ep-pdf}
-  \caption[Approximate probability distribution assumed in blah]{
-    Sketch of integration scheme proposed as generalisation of harmonic approximation: true distribution modelled as a Gaussian.
-    We use expectation propagation as criteria for optimal parameters for the Gaussian.
-    In each panel the boundary of the integration area is indicated by red lines.
-    For a field strength $\vec{a} = \{1,1\}$.}
-\end{SCfigure}
-
 Inspired by the Harmonic approximation where the energy is expanded to second order, we will attempt to approximate the basin probability distribution as a Gaussian.
 We write this approximate probability distribution as
 \begin{equation}
   q(\vec{x}) = Z \mathcal{N}(\vec{x}; \vec{\mu}, \vec{\Sigma}).
 \end{equation}
 where we have kept it unnormalised for convenience (so it is not strictly a distribution): our goal is to determine $Z$.
-The moments of the Gaussian $\vec{\mu}, \vec{\Sigma}$ will be determined alongside $Z$, giving the evaluation of $I$ through \eqref{eq?}.
+The moments of the Gaussian $\vec{\mu}, \vec{\Sigma}$ will be determined alongside $Z$, giving the evaluation of $I$ through \eqref{eq:rotation-metric-perturbations}.
 Note that in the Bayesian inference literature $p(\vec{x}) \sim \mathcal{P}$ would be called the posterior distribution.
 
 Consider the free energy difference between the true and approximate distribution
@@ -491,7 +371,7 @@ From \eqref{eq:combined-normals} and \eqref{eq:biased-normal} we have
   \end{split}
 \end{equation}
 where $\vec{\Sigma}, \vec{\nu}, Z_0$ are given by \eqref{eq:combined-normals-sigma}, \eqref{eq:combined-normals-nu} and \eqref{eq:combined-normals-Z} respectively.
-We thus have that
+We thus have
 \begin{subequations}
   \begin{align}
     \vec{\mu} &= \vec{\Sigma} \cdot (\vec{\nu} - \vec{a})
@@ -550,7 +430,7 @@ Integrating this cavity over the orthogonal affine space gives
      &= Z_{\setminus i} \, \mathcal{N}(x_i; \mu_{\setminus i}, \sigma_{\setminus i}^2)
   \end{split}
 \end{equation}
-where we completed the square in the penultimate step using the cavity parameters:
+where we completed the square in the penultimate step using the cavity parameters: \cite{Rasmussen2006,Cunningham2011}
 \begin{align}
   Z_{\setminus i}
   &=
@@ -568,7 +448,7 @@ where we completed the square in the penultimate step using the cavity parameter
   \right).
 \end{align}
 Note that the cavity distribution is the properly normalised quantity $q_{\setminus i}(x_i) / Z_{\setminus i}$.
-The exact zeroth cavity moment is found via
+The exact zeroth cavity moment is found via \cite{Cunningham2011}
 \begin{equation}\label{eq:exact-zeroth-moment}
   \frac{\hat{Z}_i}{Z_{\setminus i}} =
   \frac{1}{Z_{\setminus i}}
@@ -592,8 +472,7 @@ The above relations are numerically unstable in the limit of small $\sigma_i^2 -
   \frac{\mathcal{N}(x_i; \mu_i, \sigma_i^2)}{
     \mathcal{N}(x_i; \tilde{\mu}_i, \tilde{\sigma}_i^2)
   }
-  \\
-  &=
+  \nonumber \\ &=
   \exp{\left(-a_i x_i
     - \frac{a_i^2 \sigma_i^2}{2}
     + a_i \mu_i
@@ -605,21 +484,21 @@ The above relations are numerically unstable in the limit of small $\sigma_i^2 -
 where $a_i = \vec{a} \cdot \vec{c}_i$, giving
 \begin{align}
   \hat{Z}_i
-  &=
-  \int_{\mathbb{R}} q_{\setminus i}(x_i) t_i(x_i) \, dx_i \\
-  &=
+  =&
+  \int_{\mathbb{R}} q_{\setminus i}(x_i) t_i(x_i) \, dx_i
+  \nonumber \\ =&
   \sqrt{ \frac{\tilde{\sigma}_i^2}{\vec{c}_i \cdot \vec{\Sigma} \cdot \vec{c}_i} }
   \int_0^{\delta_i}
   \exp{\left( -\frac{(x_i - \mu_i)^2}{2 \vec{c}_i \cdot \vec{\Sigma} \cdot \vec{c}_i} +
     \frac{(x_i - \tilde{\mu}_i)^2}{2 \tilde{\sigma}_i^2} \right)} \, dx_i
-  \\
-  &=
+  \nonumber \\ =&
   \sqrt{ \frac{\tilde{\sigma}_i^2}{\vec{c}_i \cdot \vec{\Sigma} \cdot \vec{c}_i} }
   \exp{\left(
     - \frac{a_i^2 \sigma_i^2}{2}
     + a_i \mu_i
     \right)}
-  \int_0^{\delta_i}
+  \nonumber \\ &
+  \times \int_0^{\delta_i}
   \exp{\left( -\frac{(x_i - (\mu_i + a_i \sigma_i^2))^2}{2 \vec{c}_i \cdot \vec{\Sigma} \cdot \vec{c}_i} +
     \frac{(x_i - \tilde{\mu}_i)^2}{2 \tilde{\sigma}_i^2} - a_i x_i \right)} \, dx_i.
 \end{align}
@@ -634,122 +513,145 @@ Matching moments between \eqref{eq:approximate-zeroth-moment} and \eqref{eq:exac
 \end{equation}
 We calculate $\hat{Z}_i / Z_{\setminus i}$ from \eqref{eq:exact-zeroth-moment} and then obtain the partition function from
 \begin{equation}
-  \log{\tilde{Z}_i} =
-  \frac{1}{2} \left(
-  \log{(2\pi)} +
-  \log{(\sigma_{\setminus i}^2 + \tilde{\sigma}_i^2)} +
-  \frac{(\mu_{\setminus i} - \tilde{\mu}_i)^2}{\sigma_{\setminus i}^2 + \tilde{\sigma}_i^2}
-  + \log{\left(\frac{\erf{\beta_i} - \erf{\alpha_i}}{2}\right)}
-  \right)
+  \begin{split}
+    \log{\tilde{Z}_i}
+    =
+    \frac{1}{2} \left(
+    \log{(2\pi)} +
+    \log{(\sigma_{\setminus i}^2 + \tilde{\sigma}_i^2)} +
+    \frac{(\mu_{\setminus i} - \tilde{\mu}_i)^2}{\sigma_{\setminus i}^2 + \tilde{\sigma}_i^2}
+    \right.&
+    \\
+    \left.
+    + \log{\left(\frac{\erf{\beta_i} - \erf{\alpha_i}}{2}\right)}
+    \right)&
+  \end{split}
 \end{equation}
 Giving the final partition function:
 \begin{equation}
-  \log{Z} =
-  \frac{1}{2} \left(
-  (n-m) \log{2\pi}
-  + \log\det{\vec{\Sigma}}
-  + \vec{\nu} \cdot \vec{\Sigma} \cdot \vec{\nu}
-  \right)
-  + \sum_{i=1}^m \left(
-  \log{\tilde{Z}_i}
-  - \frac{1}{2}
-  \left(
-  \log{\tilde{\sigma}_i^2}
-  + \tilde{\nu}_i \tilde{\mu}_i
-  \right)
-  \right)
+  \begin{split}
+    \log{Z}
+    =&
+    \frac{1}{2} \left(
+    (n-m) \log{2\pi}
+    + \log\det{\vec{\Sigma}}
+    + \vec{\nu} \cdot \vec{\Sigma} \cdot \vec{\nu}
+    \right)
+    \\ &
+    + \sum_{i=1}^m \left(
+    \log{\tilde{Z}_i}
+    - \frac{1}{2}
+    \left(
+    \log{\tilde{\sigma}_i^2}
+    + \tilde{\nu}_i \tilde{\mu}_i
+    \right)
+    \right)
+  \end{split}
 \end{equation}
 where we have either
-\begin{equation}
-  \begin{split}
-  \log{\tilde{Z}_i}
+\begin{align}
+  & \log{\tilde{Z}_i}
   - \frac{1}{2}
   \left(
   \log{\tilde{\sigma}_i^2}
   + \tilde{\nu}_i \tilde{\mu}_i
   \right)
-  &=
+  \nonumber \\ =&
   \frac{1}{2} \left(
   \log{(2\pi)} +
   \log{(\sigma_{\setminus i}^2 + \tilde{\sigma}_i^2)} +
   \frac{(\mu_{\setminus i} - \tilde{\mu}_i)^2}{\sigma_{\setminus i}^2 + \tilde{\sigma}_i^2}
+  \right.
+  \nonumber \\ & \qquad
+  \left.
   + \log{\left(\frac{\erf{\beta_i} - \erf{\alpha_i}}{2}\right)}
   - \log{\tilde{\sigma}_i^2}
   - \tilde{\nu}_i \tilde{\mu}_i
   \right)
-  \\
-  &=
+  \nonumber \\ =&
   \frac{1}{2} \left(
   \log{(2\pi)} +
   \log{\left(\frac{\sigma_{\setminus i}^2 + \tilde{\sigma}_i^2}{\tilde{\sigma}_i^2}\right)}
   + \frac{(\mu_{\setminus i} - \tilde{\mu}_i)^2}{\sigma_{\setminus i}^2 + \tilde{\sigma}_i^2}
+  \right.
+  \nonumber \\ & \qquad
+  \left.
   - \tilde{\nu}_i \tilde{\mu}_i
   + \log{\left(\frac{\erf{\beta_i} - \erf{\alpha_i}}{2}\right)}
   \right)
-  \\
-  &=
+  \nonumber \\ =&
   \frac{1}{2} \left(
   \log{(2\pi)} +
   \log{(1 + \tilde{\tau}_i \sigma_{\setminus i}^2)}
   + \frac{\tilde{\tau}_i \mu_{\setminus i}^2 - 2\tilde{\nu}_i \mu_{\setminus i} - \tilde{\nu}_i^2 \sigma_{\setminus i}^2}
   {1 + \tilde{\tau}_i \sigma_{\setminus i}^2}
+  \right.
+  \nonumber \\ & \qquad
+  \left.
   + \log{\left(\frac{\erf{\beta_i} - \erf{\alpha_i}}{2}\right)}
   \right)
-  \end{split}
-\end{equation}
+\end{align}
 or for small $\sigma_i^2 - \tilde{\sigma_i^2}$ we use
 \begin{equation}
   \begin{split}
-  \log{\tilde{Z}_i}
-  - \frac{1}{2}
-  \left(
-  \log{\tilde{\sigma}_i^2}
-  + \tilde{\nu}_i \tilde{\mu}_i
-  \right)
-  &= \\
-  \frac{1}{2} \left( -\log{\vec{c}_i \cdot \vec{\Sigma} \cdot \vec{c}_i} \right)
-  + a_i \mu_i
-  - \frac{a_i^2 \sigma_i^2}{2}
-  - \frac{\tilde{\nu}_i \tilde{\mu}_i}{2}
-  + & \\
-  \log{\left(
-  \int_0^{\delta_i}
-  \exp{\left( -\frac{(x_i - (\mu_i + a_i \sigma_i^2))^2}{2 \vec{c}_i \cdot \vec{\Sigma} \cdot \vec{c}_i} +
-    \frac{(x_i - \tilde{\mu}_i)^2}{2 \tilde{\sigma}_i^2} -a_i x_i \right)} \, dx_i \right)}&.
+    &
+    \log{\tilde{Z}_i}
+    - \frac{1}{2}
+    \left(
+    \log{\tilde{\sigma}_i^2}
+    + \tilde{\nu}_i \tilde{\mu}_i
+    \right)
+    \\ =&
+    \frac{1}{2} \left( -\log{\vec{c}_i \cdot \vec{\Sigma} \cdot \vec{c}_i} \right)
+    + a_i \mu_i
+    - \frac{a_i^2 \sigma_i^2}{2}
+    - \frac{\tilde{\nu}_i \tilde{\mu}_i}{2}
+    \\ & + 
+    \log{\left(
+      \int_0^{\delta_i}
+      \exp{\left( -\frac{(x_i - (\mu_i + a_i \sigma_i^2))^2}{2 \vec{c}_i \cdot \vec{\Sigma} \cdot \vec{c}_i} +
+        \frac{(x_i - \tilde{\mu}_i)^2}{2 \tilde{\sigma}_i^2} -a_i x_i \right)} \, dx_i
+      \right)}.
   \end{split}
 \end{equation}
 
-\todo{Show that EP reduces to the previous integral in the limit that there are no additional constraints: we obtain hypercubic limits.}
+\begin{SCfigure}
+  \includegraphics[width=0.9\linewidth,outer]{ep-errors}
+  \caption[Errors in expectation propagation for integration over a triangle]{
+    Expectation propagation error for integrating a simple potential over a triangle with field $\vec{A} = (a, a)$.
+  }
+  \label{fig:ep-errors}
+\end{SCfigure}
 
 \section{Worked example: area of a triangle}
 
 As a simple example we consider the area of a triangle as a unit square.
 We can write this area as the integral over a box
 \begin{equation}
-  A_\Delta
-  = \int_0^1 \int_0^1 \Theta(1 - x - y) \, dx dy
+  A = \int_0^1 \int_0^1 \Theta(1 - x - y) \, dx dy
   = \frac{1}{2}
 \end{equation}
 where $\Theta(\cdot)$ is the Heaviside function.
 The exact result is fairly trivial, but as it can also be evaluated using expectation propagation we can use this as a worked example and to justify the method.
+EP gives an area $A \simeq 0.515$ for an error of about 3\%.
 
-EP gives an area $A_\Delta \simeq 0.515$ for an error of about 3\%.
+\begin{SCfigure}
+  \includegraphics[width=0.9\linewidth,outer]{ep-pdf}
+  \caption[Approximate probability distribution assumed in blah]{
+    Sketch of integration scheme proposed as generalisation of harmonic approximation: true distribution modelled as a Gaussian.
+    We use expectation propagation as criteria for optimal parameters for the Gaussian.
+    In each panel the boundary of the integration area is indicated by red lines.
+    For a field $\vec{A} = \{1,1\}$.}
+\end{SCfigure}
+
 This is a pathological case: no potential, pure geometry.
 We expect the error to improve when integrating functions over the box.
 We generalise the integral to
 \begin{equation}
-  Z_\Delta
-  = \int_0^1 \int_0^1 \Theta(1 - x - y) e^{-ax - by} \, dx dy
+  Z = \int_0^1 \int_0^1 \Theta(1 - x - y) e^{-A_x x - A_y y} \, dx dy
 \end{equation}
-with the results shown in Fig.\ \ref{?}.
+with the results shown in Fig.\ \ref{fig:ep-errors}.
 We see that the effective Gaussian is skewed by the additional constraint, stretching to approximate the triangular shape of the boundary.
-
-\begin{SCfigure}
-  \includegraphics[width=0.9\linewidth,outer]{ep-errors}
-  \caption[Errors in expectation propagation for integration over a triangle]{
-    Expectation propagation error for integrating a simple potential over a triangle with field $\vec{a} = (a, a)$.
-  }
-\end{SCfigure}
 
 \ifdefined\includebibliography
   \newgeometry{margin=1in}
