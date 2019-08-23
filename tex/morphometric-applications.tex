@@ -570,30 +570,30 @@ However, the smoothly varying parts of the integrands can and will be treated pe
 \label{sec:analytic-integrals}
 
 The integrals in \eqref{eq:structural-partition-function-detailed} are generically of the form
-\begin{equation}
+\begin{equation}\label{eq:schematic-partition-function}
   \mathcal{I}
   =
   \int_{D'}
   %e^{-\beta U_n(\vec{x})} \, y^{(n)}(\vec{x})
   g^{(n)}(\vec{x}) R(\vec{x})
-  \, d^q \vec{x},
+  \, d^l \vec{x},
 \end{equation}
-where $q = 3n - 6$ and $R(\vec{x}) = \sqrt{\det{\overline{G_{ij}}(\vec{x})} \det{\vec{I}(\vec{x})}}$ is the rotational metric.
+where $l = 3n - 6$ and $R(\vec{x}) = \sqrt{\det{\overline{G_{ij}}(\vec{x})} \det{\vec{I}(\vec{x})}}$ is the rotational metric.
 The rotational metric is a complicated function as the internal coordinates are curvilinear in general, however we found it to be slowly varying in all of our numerical tests so we can treat it perturbatively.
 Treating the combined effect of the distribution function $g^{(n)}$, including the hard sphere interactions, and integration limits of $\mathcal{D'}$ as a probability distribution $\mathcal{P}$ acting over \emph{all} of space, we can formally write
 \begin{subequations}
   \begin{align}
     \mathcal{I}
     &=
-    Z \int_{\mathbb{R}^q} p(\vec{x}) R(\vec{x}) \, d^q \vec{x},
+    Z \int_{\mathbb{R}^l} p(\vec{x}) R(\vec{x}) \, d^l \vec{x},
     \\
     Z
     &=
-    \int_{\mathcal{D}'} g^{(n)}(\vec{x}) \, d^q \vec{x},
+    \int_{\mathcal{D}'} g^{(n)}(\vec{x}) \, d^l \vec{x},
     \\
     1
     &=
-    \int_{\mathbb{R}^q} p(\vec{x}) \, d^q \vec{x},
+    \int_{\mathbb{R}^l} p(\vec{x}) \, d^l \vec{x},
   \end{align}
 \end{subequations}
 where $p(\vec{x}) \sim \mathcal{P}$ and $Z$ is the normalisation of the integral in the absence of the metric.
@@ -618,7 +618,7 @@ where $\Delta \vec{x} = \vec{x} - \vec{x}^*$ leads to the formula
   \left\langle \Delta\vec{x} \otimes \Delta\vec{x} \right\rangle_\mathcal{P}
   + \mathcal{O}(\langle \Delta\vec{x}^3 \rangle_\mathcal{P}),
 \end{equation}
-with $\langle \cdot \rangle_\mathcal{P} = \int_{\mathbb{R}^q} (\cdot) p(\vec{x}) \, d^q \vec{x}$ as the average over the distribution $\mathcal{P}$.
+with $\langle \cdot \rangle_\mathcal{P} = \int_{\mathbb{R}^l} (\cdot) p(\vec{x}) \, d^l \vec{x}$ as the average over the distribution $\mathcal{P}$.
 With this series expansion in mind, we will concentrate on methods which determine $Z$ and the moments of $\mathcal{P}$ to avoid explicitly considering the nonlinear role of the metric $R(\vec{x})$.
 This formalism shifts all the complexity into determining approximation schemes for $p(\vec{x})$.
 
@@ -626,7 +626,7 @@ Formally, the probability distribution is written
 \begin{equation}
   p(\vec{x})
   =
-  \frac{g^{(n)}(\vec{x})}{Z} \chi_{\mathcal{D}'}(\vec{x})
+  \frac{g^{(n)}(\vec{x}) \chi_{\mathcal{D}'}(\vec{x})}{Z}
 \end{equation}
 with indicator function%
 \marginfootnote{This is really the Euler characteristic \eqref{eq:euler-characteristic-definition} of the intersection $\chi[\mathcal{D}' \cap \vec{x}]$.}
@@ -667,11 +667,10 @@ The cavity distribution is known to be a continuous function \cite{Hansen2013}, 
 \begin{equation}\label{eq:cavity-perturbation}
   y^{(n)}(\vec{x})
   =
-  y^{(n)}(\vec{x}^*)
-  \exp{\left( -\vec{A} \cdot \Delta \vec{x} \right)}
+  y^{(n)}(\vec{x}^*) e^{-\vec{A} \cdot \Delta \vec{x}}
   + \mathcal{O}(\Delta \vec{x}^2)
 \end{equation}
-where $\vec{A} = \nabla \beta\Omega(\vec{x}^*) \ne 0$ in general.
+where $\vec{A} = \nabla \beta\Omega(\vec{x}^*) \ne 0$.
 By contrast, the singular terms require a non-perturbative treatment.
 
 %% However, the singularity of the pair potential complicates the integral.
@@ -685,14 +684,42 @@ By contrast, the singular terms require a non-perturbative treatment.
 %% where $\Theta(\cdot)$ is the Heaviside theta function.
 %% This can be thought of as setting complex integration limits, i.e.\ the additional half-space criterion that $|\vec{r}_i - \vec{r}_j| \in [0, \infty]$.
 
-We use two methods:
-\begin{enumerate}
-\item Simple: minimally constrained geometries, ignoring $\Theta(\cdot)$
-\item Expectation propagation (EP): $p(\vec{x})$ is approximated by a Gaussian $q(\vec{x})$ by matching the moment-matching of projections in the directions of the singular subspaces.
-  See Refs.\ \cite{MinkaUAI2001,Minka2001,Rasmussen2006} for general introductions to EP, and Ref.\ \cite{Cunningham2011} for application to integrations.
-  Reduces to the first method for minimally constrained geometries where no other hard sphere interactions occur, but more general.
-  %This method was inspired by the \emph{cavity method} of spin-glasses
-\end{enumerate}
+Inspired by the Harmonic approximation where the energy is expanded to second order, we will attempt to approximate the basin probability distribution as a Gaussian.
+We write this approximate probability distribution as
+\begin{equation}
+  q(\vec{x}) = Z \mathcal{N}(\vec{x}; \vec{\mu}, \vec{\Sigma}).
+\end{equation}
+where we have kept it unnormalised for convenience (so it is not strictly a distribution): our goal is to determine $Z$.
+The moments of the Gaussian $\vec{\mu}, \vec{\Sigma}$ will be determined alongside $Z$, giving the evaluation of $I$ through \eqref{eq:rotation-metric-perturbations}.
+Note that in the Bayesian inference literature $p(\vec{x}) \sim \mathcal{P}$ would be called the posterior distribution.
+
+Consider the free energy difference between the true and approximate distribution
+\begin{equation}
+  \Delta F
+  =
+  - \int p(\vec{x})
+  \ln{\left( \frac{q(\vec{x})}{p(\vec{x})} \right)} \, d\vec{x}.
+\end{equation}
+In information theory this would be called the \emph{Kullback-Leibler divergence}, a measure of information loss from using the approximate distribution $\vec{q}$.
+It is identical to a free energy difference in the physics literature, and it is straightforward to prove that it is only zero when $p = q$ \cite{MerminPR1965, EvansAP1979}.
+It is schematically identical to the proof of the uniqueness of the equilibrium free energy.
+
+$\Delta F = 0$ is impossible unless $p$ is also Gaussian, however by minimising $\Delta F$ we can optimise the $q$ distribution to minimise the approximation error.
+It is straightforward to show that for distributions in the exponential family this corresponds to matching the moments of $q$ and $p$ \cite{Minka2001,MinkaUAI2001,Rasmussen2006,Cunningham2011}.
+This is still intractable however, matching moments is identical to setting the distributions to one another.
+However, an approximate technique expectation propagation matches the moments of marginal distributions has been shown to approximate this well \cite{Minka2001,MinkaUAI2001,Rasmussen2006,Cunningham2011}.
+This approximation was inspired by the cavity method of spin glasses (unrelated to the cavity distribution), for application to approximate Bayesian inference problems.
+\todo{edit this part!}
+
+%% We use two methods:
+%% \begin{enumerate}
+%% \item Simple: minimally constrained geometries, ignoring $\Theta(\cdot)$
+%% \item Expectation propagation (EP): $p(\vec{x})$ is approximated by a Gaussian $q(\vec{x})$ by matching the moment-matching of projections in the directions of the singular subspaces.
+%%   See Refs.\ \cite{MinkaUAI2001,Minka2001,Rasmussen2006} for general introductions to EP, and Ref.\ \cite{Cunningham2011} for application to integrations.
+%%   Reduces to the first method for minimally constrained geometries where no other hard sphere interactions occur, but more general.
+%%   %This method was inspired by the \emph{cavity method} of spin-glasses
+%% \end{enumerate}
+%% \todo{Write this part.}
 %% Loosely speaking, this is the hard-particle analogue of the harmonic approximation with the difference here being that the first derivative does not vanish at the minimum.
 %% For $n=6$ this expansion works rather well, as all structures have exactly $3n-6$ bonds and this perturbation theory captures the free energy well when compared with the ``exact'' result from thermodynamic integration.
 
@@ -728,13 +755,13 @@ We therefore obtain from \eqref{eq:structural-partition-function-detailed}
     - \ln \left(
     \frac{8\pi^2 \sqrt{n^3}}{\nu} \int_{D' \setminus x_b}
     g^{(n)}(\vec{z}; x_b) R(\vec{z}; x_b) \,
-    \, d^{q-1} \vec{z}
+    \, d^{l-1} \vec{z}
     \right),
   \end{split}
 \end{equation}
 where $\vec{z} \in \mathbb{R}^{(3n-7)}$ does not include the reaction coordinate $x_a$.
-Importantly, $\nu$ is the new symmetry number along this reaction path, which is in general different from the symmetry number at the terminating minima \cite{Wales2004}.
-We evaluate the integral in \eqref{eq:reaction-path-free-energy} using the methods outlined in the previous section and described in full in Appendix \ref{appendix:bayesian}.
+Importantly, $\nu$ is the new symmetry number along this reaction path, which is different in general from the symmetry numbers of the terminating minima \cite{Wales2004}.
+This integral has the same form as \eqref{eq:schematic-partition-function}, which we evaluate using the methods outlined in the previous section and described in full in Appendix \ref{appendix:bayesian}.
 %, i.e.\ by Taylor expansion up to linear terms in the potential and inertia so the integral reduces to a sum of one-dimensional integrals.
 
 In Fig.\ \ref{fig:packings} we see that for $n < 6$ only a single rigid packing of hard spheres exists, but for $n=6$ we see two distinct packings making it the first interesting landscape.
@@ -747,11 +774,11 @@ However, activated dynamics are not expected in this regime so this agreement ma
 %Given that typical particle displacements in the tripyramid--octahedron path are around 0.15$\sigma$ per particle, we observe that this relaxation mechanism may be more characteristic of ($\beta$--) relaxation than full ($\alpha$--) relaxation.
 
 Secondly, we consider the reaction path separating the two variants of the frustrated pentagonal bipyramid with $n=7$ in Fig.\ \ref{fig:reaction-path-7}.
-We find that the energy changes monotonically so there is no activation barrier separating these two; this means that neither structure is long-lived i.e.\ they are simply thermal fluctuations of the same structure.
+We find that the energy increases monotonically along the path without an activation barrier; this means that these are really thermal fluctuation of the same structure.
 %This is not a surprising result, but it opens the way to exploring the for other structures.
 This further justifies the use of the frustrated structures in Fig.\ \ref{fig:structure-populations}, even though they do not strictly correspond to unique energy minimum.
-On the flip side, it shows that our definition of structures solely in terms of minima needs refining, indicating that we have likely overcounted the number of structures in the density of states \ref{fig:n12-dos}.
-This calculation was only possible using expectation propagation, which opens the way to a complete exploration of the connectivity of the energy landscape for hard sphere local structures.
+On the flip side, it shows that our operational definition of structures which started from the minima needs refining, indicating that we have likely overcounted the number of structures in the density of states \ref{fig:n12-dos}.
+This calculation was made possible by expectation propagation \cite{MinkaUAI2001,Minka2001,Rasmussen2006,Cunningham2011}, which opens the way to assess the connectivity of the energy landscape for local structures in hard spheres.
 
 \begin{SCfigure}
   \includegraphics[width=0.9\linewidth,outer]{n7-reaction-path}

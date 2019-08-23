@@ -15,9 +15,48 @@
 \chapter{Evaluating free energies of hard sphere structures analytically}
 \label{appendix:bayesian}
 
-Here we consider analytical approximations for evaluating the free energies of local structures in hard spheres \eqref{eq:structural-partition-function-detailed}.
-These must first involve a definition of structure to set the limits of integration.
-These limits will inform the approximation schemes.
+This appendix develops analytical methods for evaluating the free energy of hard sphere structures introduced in chapter \ref{chapter:morphometric-applications}.
+Specifically, we need to evaluate integrals of the form of \eqref{eq:schematic-partition-function} which we repeat here as
+\begin{equation*}
+  \mathcal{I}
+  =
+  \int_{D'}
+  %e^{-\beta U_n(\vec{x})} \, y^{(n)}(\vec{x})
+  g^{(n)}(\vec{x}) R(\vec{x})
+  \, d^l \vec{x},
+\end{equation*}
+where $R(\vec{x})$ rotational metric.
+In section \eqref{sec:analytic-integrals} we demonstrated that it is sufficient to solve
+\begin{equation*}
+  Z = \int_{\mathcal{D}'} g^{(n)}(\vec{x}) \, d^l \vec{x},
+\end{equation*}
+and determine the first few moments of the probability distribution
+\begin{equation*}
+  \begin{split}
+  p(\vec{x})
+  &=
+  \frac{g^{(n)}(\vec{x}) \chi_{\mathcal{D}'}(\vec{x})}{Z}
+  \\ &=
+  \underbrace{
+    \frac{y^{(n)}(\vec{x})}{Z}
+    \vphantom{\prod_{i < j}}
+  }_\textrm{smooth}
+  \;
+  \underbrace{
+    \chi_{\mathcal{D}'}(\vec{x})
+    \prod_{i < j}
+    \Theta \Big( |\vec{r}_i - \vec{r}_j| - \sigma \Big)
+  }_\textrm{singular terms},
+  \\ &\simeq
+  \frac{y^{(n)}(\vec{x}^*) e^{-\vec{A} \cdot \Delta \vec{x}}}{Z}
+  \;
+  \chi_{\mathcal{D}'}(\vec{x})
+  \prod_{i < j}
+  \Theta \Big( |\vec{r}_i - \vec{r}_j| - \sigma \Big)
+  \end{split}
+\end{equation*}
+with $\int_{\mathbb{R}^l} p(\vec{x}) d^l\vec{x} = 1$, to evaluate the effects of rotations perturbatively through \eqref{eq:rotation-metric-perturbations}.
+
 %As discussed in section \ref{?} the minimum is not as thermodynamically significant as expected for soft systems because of the singularity of the hard sphere potential.
 
 %% \section{Simple integral}
@@ -49,20 +88,132 @@ These limits will inform the approximation schemes.
 %% Loosely speaking, this is the hard-particle analogue of the harmonic approximation with the difference here being that the first derivative does not vanish at the minimum.
 %% For $n=6$ this expansion works rather well, as all structures have exactly $3n-6$ bonds and this perturbation theory captures the free energy well when compared with the ``exact'' result from thermodynamic integration.
 
+\section{Minimally constrained geometries}
+\label{sec:no-ep-integration}
+
+First, we consider the simplest case of \emph{minimally constrained} geometries which have exactly $m=q$ bonds, so that the bond-distance space forms a natural basis for this expansion and we can set $\vec{x} = \{h_1, \cdots, h_m\}$, with the energy minimum occurring at $\vec{x}^* = 0$.
+This special case simplifies calculation in a similar way that isostaticity can be exploited to derive theories for systems approaching jamming, \cite{WyartAP2005,BritoEEL2006}.
+However, we will have to consider the effects of additional interactions and later we will generalise to the case where $m \ge q$.
+
+As an aside, we describe how to calculate the internal metric entering into $R(\vec{x})$ for this choice of coordinates.
+This metric is defined by
+\begin{equation*}
+  \overline{G_{ij}} = \vec{J}^T \vec{J}
+\end{equation*}
+where the Jacobian matrix entries are given by
+\begin{equation*}
+  J_{ij} = \frac{\partial x_i}{\partial h_j}.
+\end{equation*}
+In practice it is easier to calculate its inverse numerically (via e.g.\ finite differences) using
+\begin{equation*}
+  J_{ij}^{-1}
+  = \frac{\partial h_j}{\partial x_i}
+\end{equation*}
+which has linearly independent rows for a minimally constrained geometry so we can recover $\vec{J}$ from $\vec{K} = \vec{J}^{-1}$ using the matrix inversion formula $\vec{J} = (\vec{K}^T\vec{K})^{-1} \vec{K}^T$.
+
+In this basis the definition of structure sets the limits of integration to that of a hypercube, i.e.\
+\begin{equation*}
+  \int_{D'} d^q x
+  =
+  \int_0^\delta dx_1 \cdots \int_0^\delta dx_m.
+\end{equation*}
+Helpfully, the hard sphere interactions between particle pairs $a_k,b_k \in \mathcal{M}$ have been absorbed into the integration limits, so we only have to consider the remaining $n(n-1)/2 - m$ interactions.
+As our first approximation we ignore the effects of overlaps between any other particle pairs giving
+\begin{subequations}
+  \begin{align}
+    Z
+    &=
+    \int_0^\delta dx_1 \cdots \int_0^\delta dx_m
+    \, y^{(n)}(\vec{x})
+    \\
+    \langle \cdot \rangle_\mathcal{P}
+    &=
+    \frac{1}{Z}
+    \int_0^\delta dx_1 \cdots \int_0^\delta dx_m
+    \, (\cdot) y^{(n)}(\vec{x}).
+  \end{align}
+\end{subequations}
+Introducing the perturbation expansion of the cavity function \eqref{eq:cavity-perturbation} we obtain
+\begin{equation}
+  \begin{split}
+    Z
+    &=
+    y^{(n)}(\vec{x}^*)
+    \prod_{i=1}^l
+    \int_0^\delta
+    \exp{\left( -\vec{A} \cdot \vec{e}_i \, x_i \right)}
+    \, dx_i
+    \\ &=
+    y^{(n)}(\vec{x}^*)
+    \prod_{i=1}^l
+    \left[
+    \frac{1 - \exp{\left( -A_i \, \delta \right)}}{A_i}
+    \right]
+  \end{split}
+\end{equation}
+with similar expressions for the first few moments.
+Inserting this expression into the structural partition function \eqref{eq:structural-partition-function-detailed} yields expressions for the local structure's free energy/concentration.
+This approximation is exact in the case where no overlap between other particle pairs is possible over the range of integration.
+
+The above formulae are rather simple, however the approximation is uncontrolled and we in general expect large errors for all but the most simple geometries: the hard sphere interactions should have a large effect.
+We find this approximation is reasonably accurate for $n \le 6$, however it fails for $n \ge 7$ with selected geometries.
+In Fig.\ \ref{fig:ep-n7} (top panel) we see that the error in this method is comparable between 4 out of the 5 possible structures, with a similar trend against density.
+However, one structure deviates strongly from the main trend with the error becoming substantial at high densities.
+The geometry in question is a variant of the frustrated pentagonal bipyramid with broken five-fold symmetry (top variant Fig.\ \ref{fig:packings}); the particles with the broken bond are almost touching so ignoring their interaction is a serious approximation.
+In general, we expect the majority of stable structures to require treatment of more hard sphere interactions than just the contacts.
+
+To go beyond this approximation we will approximate the geometry of hard sphere interactions to leading order; in effect, this models the boundary conditions as a polyhedron.
+Next, we will use expectation propagation, a technique from Bayesian inference, to evaluate the integral on the resulting polyhedron.
+
+\section{Polyhedral approximation}
+\label{sec:polyhedral-approximation}
+
+We have a bond-distance space $\vec{x} \in \mathbb{R}^q$, $m = q$ constraints (minimally constrained for now) and $n(n-1)/2 - m$ potential interactions not already covered by the limits of integration.
+We approximate this by measuring the distances not covered by the limits of integration and expanding them to linear order
+\begin{equation}
+  \Delta_{ij}(\vec{x})
+  \simeq
+  \Delta_{ij}(\vec{x}^*)
+  + \left. \nabla \Delta_{ij} \right|_{\vec{x}^*} \cdot \Delta \vec{x}
+  + \mathcal{O}(\Delta \vec{x}^2)
+\end{equation}
+and determine at this level of expansion the values of $\vec{x}$ where $\Delta_{ij} > \sigma$.
+This is expressed as the inequality
+\begin{equation}
+  \Delta_{ij}(\vec{x}^*)
+  + \left. \nabla \Delta_{ij} \right|_{\vec{x}^*} \cdot \Delta \vec{x}
+  > \sigma
+\end{equation}
+to leading order where $\vec{c}_k = \nabla \Delta_{a_k,b_k}$.
+This corresponds to assigning the half space constraint
+\begin{equation}
+  \vec{c}_k \cdot \Delta \vec{x} \in [\sigma - \Delta_{a_k,b_k}, \infty].
+\end{equation}
+The combination of half spaces and the cubic limits \eqref{?} describes a polyhedron in phase space, so this is a polyhedral approximation.
+Similar approximations have been made for hard sphere free energy calculations in the crystal \cite{RadinPRL2005,KochPRE2005} and related systems \cite{LeoniPRL2017}, where this approximation becomes exact at very high densities approaching close packing.
+\todo{Edit this section!}
+
+Our partition function becomes an integral of the cavity function, in the exponential family, over a polyhedron.
+Besides the simple one dimensional case few exact calculations are possible.
+We will use an approximate method from Bayesian inference: expectation propagation.
+\todo{Write closer}
+
 \section{Properties of multivariate Gaussians}
+
+\todo{Write opener}
 
 The multivariate Gaussian is defined as
 \begin{equation}
   \begin{split}
     \mathcal{N}(\vec{x}; \vec{\mu}, \vec{\Sigma})
     &\equiv
-    \frac{1}{\sqrt{ (2\pi)^n \det{\vec{\Sigma}} }}
+    \frac{1}{\sqrt{ (2\pi)^l \det{\vec{\Sigma}} }}
     \exp{\left(
       - \frac{1}{2} (\vec{x} - \vec{\mu}) \cdot \vec{\Sigma}^{-1} \cdot (\vec{x} - \vec{\mu})
       \right)}
     \\
     &=
-    \frac{1}{\sqrt{ (2\pi)^n \det{\vec{\Sigma}} }}
+    \frac{1}{\sqrt{ (2\pi)^l \det{\vec{\Sigma}} }}
     \exp{\left(
       - \frac{\vec{x} \cdot \vec{\Sigma}^{-1} \cdot \vec{x}}{2}
       + \vec{x} \cdot \vec{\Sigma}^{-1} \cdot \vec{\mu}
@@ -70,7 +221,7 @@ The multivariate Gaussian is defined as
       \right)}
   \end{split}
 \end{equation}
-where $\vec{x} \in \mathbb{R}^n$ is the Gaussian distributed vector in our phase space, with mean $\vec{\mu} \in \mathbb{R}^n$ and (positive-definite) covariance matrix $\vec{\Sigma} \in \mathbb{R}^{n \times n}$.
+where $\vec{x} \in \mathbb{R}^l$ is the Gaussian distributed vector in our phase space, with mean $\vec{\mu} \in \mathbb{R}^l$ and (positive-definite) covariance matrix $\vec{\Sigma} \in \mathbb{R}^{l \times l}$.
 
 In the EP algorithm we write the multivariate Gaussian approximation in $q$ as the product of univariate Gaussians from the tile distributions approximating the boundary conditions.
 To show this, consider the product of univariate Gaussians:
@@ -126,7 +277,7 @@ To show this, consider the product of univariate Gaussians:
     \right)
     \mathcal{N}(\vec{x}; \vec{\mu}, \Sigma)
     \;
-    \sqrt{ (2\pi)^n \det{\vec{\Sigma}} }
+    \sqrt{ (2\pi)^l \det{\vec{\Sigma}} }
     \;
     \exp{\left( \frac{\vec{\mu} \cdot \vec{\Sigma}^{-1} \cdot \vec{\mu}}{2} \right)}
     \nonumber \\ =&
@@ -137,7 +288,7 @@ To show this, consider the product of univariate Gaussians:
     \right)
     \mathcal{N}(\vec{x}; \vec{\mu}, \Sigma)
     \;
-    \sqrt{ (2\pi)^n \det{\vec{\Sigma}} }
+    \sqrt{ (2\pi)^l \det{\vec{\Sigma}} }
     \;
     \exp{\left( \frac{\vec{\nu} \cdot \vec{\Sigma} \cdot \vec{\nu}}{2} \right)}
     \nonumber \\ =&
@@ -160,7 +311,7 @@ with
   \label{eq:combined-normals-nu}
   \\
   Z &=
-  \sqrt{ (2\pi)^{n-m} \det{\vec{\Sigma}} }
+  \sqrt{ (2\pi)^{l-m} \det{\vec{\Sigma}} }
   \;
   \exp{\left( \frac{\vec{\nu} \cdot \vec{\Sigma} \cdot \vec{\nu}}{2} \right)}
   \prod_{i=1}^m
@@ -174,7 +325,7 @@ with
 From this we find that
 \begin{equation}
   \log{Z} =
-  \frac{n-m}{2} \log{2\pi} +
+  \frac{l-m}{2} \log{2\pi} +
   \frac{1}{2} \log\det{\vec{\Sigma}} +
   \frac{\vec{\nu} \cdot \vec{\Sigma} \cdot \vec{\nu}}{2} -
   \sum_{i=1}^m
@@ -191,151 +342,12 @@ Finally, note that
   \mathcal{N}(\vec{x}; \vec{\mu} - \vec{\Sigma}\cdot\vec{a}, \vec{\Sigma}).
 \end{equation}
 
-\section{Minimally constrained geometries}
-
-First, we consider the simplest case of \emph{minimally constrained} geometries which have exactly $m=q$ bonds, so that the bond-distance space forms a natural basis for this expansion and we can set $\vec{x} = \{h_1, \cdots, h_m\}$, with the energy minimum occurring at $\vec{x}^* = 0$.
-This special case simplifies calculation in a similar way that isostaticity can be exploited to derive theories for systems approaching jamming, \cite{WyartAP2005,BritoEEL2006}.
-However, we will have to consider the effects of additional interactions and later we will generalise to the case where $m \ge q$.
-
-As an aside, we describe how to calculate the internal metric entering into $R(\vec{x})$ for this choice of coordinates.
-This metric is defined by
-\begin{equation*}
-  \overline{G_{ij}} = \vec{J}^T \vec{J}
-\end{equation*}
-where the Jacobian matrix entries are given by
-\begin{equation*}
-  J_{ij} = \frac{\partial x_i}{\partial h_j}.
-\end{equation*}
-In practice it is easier to calculate its inverse numerically (via e.g.\ finite differences) using
-\begin{equation*}
-  J_{ij}^{-1}
-  = \frac{\partial h_j}{\partial x_i}
-\end{equation*}
-which has linearly independent rows for a minimally constrained geometry so we can recover $\vec{J}$ from $\vec{K} = \vec{J}^{-1}$ using the matrix inversion formula $\vec{J} = (\vec{K}^T\vec{K})^{-1} \vec{K}^T$.
-
-In this basis the definition of structure sets the limits of integration to that of a hypercube, i.e.\
-\begin{equation*}
-  \int_{D'} d^q x
-  =
-  \int_0^\delta dx_1 \cdots \int_0^\delta dx_m.
-\end{equation*}
-Helpfully, the hard sphere interactions between particle pairs $a_k,b_k \in \mathcal{M}$ have been absorbed into the integration limits, so we only have to consider the remaining $n(n-1)/2 - m$ interactions.
-As our first approximation we ignore the effects of overlaps between any other particle pairs giving
-\begin{subequations}
-  \begin{align}
-    Z
-    &=
-    \int_0^\delta dx_1 \cdots \int_0^\delta dx_m
-    \, y^{(n)}(\vec{x})
-    \\
-    \langle \cdot \rangle_\mathcal{P}
-    &=
-    \frac{1}{Z}
-    \int_0^\delta dx_1 \cdots \int_0^\delta dx_m
-    \, (\cdot) y^{(n)}(\vec{x}).
-  \end{align}
-\end{subequations}
-Introducing the perturbation expansion of the cavity function \eqref{eq:cavity-perturbation} we obtain
-\begin{equation}
-  \begin{split}
-    Z
-    &=
-    y^{(n)}(\vec{x}^*)
-    \prod_{i=1}^q
-    \int_0^\delta
-    \exp{\left( -\vec{A} \cdot \vec{e}_i \, x_i \right)}
-    \, dx_i
-    \\ &=
-    y^{(n)}(\vec{x}^*)
-    \prod_{i=1}^q
-    \left[
-    \frac{1 - \exp{\left( -A_i \, \delta \right)}}{A_i}
-    \right]
-  \end{split}
-\end{equation}
-with similar expressions for the first few moments.
-Inserting this expression into the structural partition function \eqref{eq:structural-partition-function-detailed} yields expressions for the local structure's free energy/concentration.
-This approximation is exact in the case where no overlap between other particle pairs is possible over the range of integration.
-
-The above formulae are rather simple, however the approximation is uncontrolled and we in general expect large errors for all but the most simple geometries: the hard sphere interactions should have a large effect.
-We find this approximation is reasonably accurate for $n \le 6$, however it fails for $n \ge 7$ with selected geometries.
-In Fig.\ \ref{fig:ep-n7} (top panel) we see that the error in this method is comparable between 4 out of the 5 possible structures, with a similar trend against density.
-However, one structure deviates strongly from the main trend with the error becoming substantial at high densities.
-The geometry in question is a variant of the frustrated pentagonal bipyramid with broken five-fold symmetry (top variant Fig.\ \ref{fig:packings}); the particles with the broken bond are almost touching so ignoring their interaction is a serious approximation.
-In general, we expect the majority of stable structures require treatment of more hard sphere interactions than just the contacts.
-
-\begin{SCfigure}
-  \includegraphics[width=0.9\linewidth,outer]{ep-n7}
-  \caption[Errors in EP]{
-    Error in the free energy evaluated with analytic methods (described in text) for the five $n = 7$ structures in Fig.\ \ref{fig:packings}.
-    The exact result is taken from thermodynamic integration.
-    The orange curve is for broken five-fold symmetry (spindle intact), thermal fluctuations very easily create overlaps.
-  }
-  \label{fig:ep-n7}
-\end{SCfigure}
-
-To go beyond this approximation we will approximate the geometry of hard sphere interactions to leading order; in effect, this models the boundary conditions as a polyhedron.
-Next, we will use expectation propagation, a technique from Bayesian inference, to evaluate the integral on the resulting polyhedron.
-
-\section{Polyhedral approximation}
-
-We have a bond-distance space $\vec{x} \in \mathbb{R}^q$, $m = q$ constraints (minimally constrained for now) and $n(n-1)/2 - m$ potential interactions not already covered by the limits of integration.
-We approximate this by measuring the distances not covered by the limits of integration and expanding them to linear order
-\begin{equation}
-  \Delta_{ij}(\vec{x})
-  \simeq
-  \Delta_{ij}(\vec{x}^*)
-  + \left. \nabla \Delta_{ij} \right|_{\vec{x}^*} \cdot \Delta \vec{x}
-  + \mathcal{O}(\Delta \vec{x}^2)
-\end{equation}
-and determine at this level of expansion the values of $\vec{x}$ where $\Delta_{ij} > \sigma$.
-This is expressed as the inequality
-\begin{equation}
-  \Delta_{ij}(\vec{x}^*)
-  + \left. \nabla \Delta_{ij} \right|_{\vec{x}^*} \cdot \Delta \vec{x}
-  > \sigma
-\end{equation}
-to leading order where $\vec{c}_k = \nabla \Delta_{a_k,b_k}$.
-This corresponds to assigning the half space constraint
-\begin{equation}
-  \vec{c}_k \cdot \Delta \vec{x} \in [\sigma - \Delta_{a_k,b_k}, \infty].
-\end{equation}
-The combination of half spaces and the cubic limits \eqref{?} describes a polyhedron in phase space, so this is a polyhedral approximation.
-Similar approximations have been made for hard sphere free energy calculations in the crystal \cite{RadinPRL2005,KochPRE2005} and related systems \cite{LeoniPRL2017}, where this approximation becomes exact at very high densities approaching close packing.
-
-Our partition function becomes an integral of the cavity function, in the exponential family, over a polyhedron.
-Besides the simple one dimensional case few exact calculations are possible.
-We will use an approximate method from Bayesian inference: expectation propagation.
+\todo{Write closer}
 
 \section{Expectation propagation}
+\label{sec:ep-integration}
 
-Inspired by the Harmonic approximation where the energy is expanded to second order, we will attempt to approximate the basin probability distribution as a Gaussian.
-We write this approximate probability distribution as
-\begin{equation}
-  q(\vec{x}) = Z \mathcal{N}(\vec{x}; \vec{\mu}, \vec{\Sigma}).
-\end{equation}
-where we have kept it unnormalised for convenience (so it is not strictly a distribution): our goal is to determine $Z$.
-The moments of the Gaussian $\vec{\mu}, \vec{\Sigma}$ will be determined alongside $Z$, giving the evaluation of $I$ through \eqref{eq:rotation-metric-perturbations}.
-Note that in the Bayesian inference literature $p(\vec{x}) \sim \mathcal{P}$ would be called the posterior distribution.
-
-Consider the free energy difference between the true and approximate distribution
-\begin{equation}
-  \Delta F
-  =
-  - \int p(\vec{x})
-  \ln{\left( \frac{q(\vec{x})}{p(\vec{x})} \right)} \, d\vec{x}.
-\end{equation}
-This would be the Kullback-Leibler divergence in information theory, a measure of information loss from using an approximate distribution.
-It is identical to a free energy difference in the physics literature, and it is straightforward to prove that it is only zero when $p = q$ \cite{MerminPR1965, EvansAP1979}.
-It is schematically identical to the proof of the uniqueness of the equilibrium free energy.
-
-$\Delta F = 0$ is impossible unless $p$ is also Gaussian, however by minimising $\Delta F$ we can optimise the $q$ distribution to minimise the approximation error.
-It is straightforward to show that for distributions in the exponential family this corresponds to matching the moments of $q$ and $p$ \cite{Minka2001,MinkaUAI2001,Rasmussen2006,Cunningham2011}.
-This is still intractable however, matching moments is identical to setting the distributions to one another.
-However, an approximate technique expectation propagation matches the moments of marginal distributions has been shown to approximate this well \cite{Minka2001,MinkaUAI2001,Rasmussen2006,Cunningham2011}.
-This approximation was inspired by the cavity method of spin glasses (unrelated to the cavity distribution), for application to approximate Bayesian inference problems.
-
-Our exposition of the EP method closely follows \cite{Cunningham2011}.
+Our exposition of the expectation propagation (EP) method closely follows \cite{Cunningham2011}.
 
 We start by noting that the true probability distribution, which includes the limits of integration, can be expressed as the product of distributions
 \begin{equation}
@@ -343,6 +355,7 @@ We start by noting that the true probability distribution, which includes the li
   = y^{(n)}(\vec{x}) \prod_{i=1}^{m} t_i (x_i)
 \end{equation}
 where the $t_i$ functions represent the constraints \eqref{??} and \eqref{??}.
+\todo{Edit this section.}
 The EP algorithm constructs projections in each of these constraints to match moments along, a natural decomposition involves writing the approximate distribution in terms of tile distributions $\tilde{t}_i$
 \begin{equation}
   q(\vec{x})
@@ -380,7 +393,7 @@ We thus have
     \exp{\left( \frac{\vec{a} \cdot \vec{\Sigma} \cdot \vec{a}}{2} - \vec{a} \cdot \vec{\Sigma} \cdot \vec{\nu} \right)}
     \\
     Z_0 &=
-    \sqrt{ (2\pi)^{n-m} \det{\vec{\Sigma}} }
+    \sqrt{ (2\pi)^{l-m} \det{\vec{\Sigma}} }
     \;
     \exp{\left( \frac{\vec{\nu} \cdot \vec{\Sigma} \cdot \vec{\nu}}{2} \right)}
     \prod_{i=1}^m
@@ -401,17 +414,17 @@ We marginalise the full probability distribution along one direction to obtain t
 \end{equation}
 This particular normalisation is chosen such that
 \begin{equation}\label{eq:approximate-zeroth-moment}
-  \int_{\mathbb{R}^n} q^{\setminus i}(\vec{x}) \tilde{t}_i(x_i) \, d\vec{x} =
-  \tilde{Z}_i \int_{\mathbb{R}^n} \mathcal{N}(\vec{x}; \vec{\mu}, \vec{\Sigma}) \, d\vec{x} =
+  \int_{\mathbb{R}^l} q^{\setminus i}(\vec{x}) \tilde{t}_i(x_i) \, d\vec{x} =
+  \tilde{Z}_i \int_{\mathbb{R}^l} \mathcal{N}(\vec{x}; \vec{\mu}, \vec{\Sigma}) \, d\vec{x} =
   \tilde{Z}_i.
 \end{equation}
 Integrating this cavity over the orthogonal affine space gives
 \begin{equation}
   \begin{split}
     q_{\setminus i}(x_i) &\equiv
-    \int_{\mathbb{R}^n \setminus \vec{c}_i} q^{\setminus i} (\vec{x}_{\setminus i}; x_i) \, d\vec{x}_{\setminus i} \\
+    \int_{\mathbb{R}^l \setminus \vec{c}_i} q^{\setminus i} (\vec{x}_{\setminus i}; x_i) \, d\vec{x}_{\setminus i} \\
     &= \frac{1}{\mathcal{N}(x_i; \tilde{\mu}_i, \tilde{\sigma}_i^2)}
-    \int_{\mathbb{R}^n \setminus \vec{c}_i} \mathcal{N}(\vec{x}; \vec{\mu}, \vec{\Sigma}) \, d\vec{x}_{\setminus i} \\
+    \int_{\mathbb{R}^l \setminus \vec{c}_i} \mathcal{N}(\vec{x}; \vec{\mu}, \vec{\Sigma}) \, d\vec{x}_{\setminus i} \\
     &=
     \frac
         {\mathcal{N}(x_i; \mu_i, \vec{c}_i \cdot \vec{\Sigma} \cdot \vec{c}_i)}
@@ -502,6 +515,19 @@ where $a_i = \vec{a} \cdot \vec{c}_i$, giving
   \exp{\left( -\frac{(x_i - (\mu_i + a_i \sigma_i^2))^2}{2 \vec{c}_i \cdot \vec{\Sigma} \cdot \vec{c}_i} +
     \frac{(x_i - \tilde{\mu}_i)^2}{2 \tilde{\sigma}_i^2} - a_i x_i \right)} \, dx_i.
 \end{align}
+
+\begin{SCfigure}
+  \includegraphics[width=0.9\linewidth,outer]{ep-n7}
+  \caption[Errors in analytical integration techniques for the free energies of $n=7$ structures]{
+    Errors in analytic integration techniques for free energies of the five $n = 7$ structures in Fig.\ \ref{fig:packings}.
+    Top panel: simple integration ignoring hard sphere interactions not explicitly captured by the boundary conditions (section \ref{sec:no-ep-integration}).
+    Bottom panel: expectation propagation (EP) integration which approximates the combined effect of boundary conditions and hard sphere interactions using (section \ref{sec:ep-integration}).
+    In each case, the numerically exact result was obtained using thermodynamic integration described in chapter \ref{chapter:morphometric-applications}.
+    The orange curve which deviates from the main trend without EP is the structure corresponding to a pentagonal bipyramid with broken five-fold symmetry; treatment of the broken bond with EP corrects the deviation.
+  }
+  \label{fig:ep-n7}
+\end{SCfigure}
+
 Matching moments between \eqref{eq:approximate-zeroth-moment} and \eqref{eq:exact-zeroth-moment} gives us
 \begin{equation}
   \tilde{Z}_i = \frac{\hat{Z}_i}{Z_{\setminus i}}
@@ -533,7 +559,7 @@ Giving the final partition function:
     \log{Z}
     =&
     \frac{1}{2} \left(
-    (n-m) \log{2\pi}
+    (l-m) \log{2\pi}
     + \log\det{\vec{\Sigma}}
     + \vec{\nu} \cdot \vec{\Sigma} \cdot \vec{\nu}
     \right)
@@ -591,7 +617,7 @@ where we have either
   + \log{\left(\frac{\erf{\beta_i} - \erf{\alpha_i}}{2}\right)}
   \right)
 \end{align}
-or for small $\sigma_i^2 - \tilde{\sigma_i^2}$ we use
+or for small $\sigma_i^2 - \tilde{\sigma}_i^2$ we use
 \begin{equation}
   \begin{split}
     &
@@ -616,42 +642,44 @@ or for small $\sigma_i^2 - \tilde{\sigma_i^2}$ we use
 \end{equation}
 
 \begin{SCfigure}
-  \includegraphics[width=0.9\linewidth,outer]{ep-errors}
-  \caption[Errors in expectation propagation for integration over a triangle]{
-    Expectation propagation error for integrating a simple potential over a triangle with field $\vec{A} = (a, a)$.
+  \includegraphics[width=0.9\linewidth,outer]{ep-pdf}
+  \caption[Approximate probability distribution for integrating areas of simple 2d shapes]{
+    Approximate (Gaussian) probability distribution $q(x,y)$ produced by expectation propagation for integrating over a square (top) and a right-angled triangle (bottom).
+    In each panel the boundary of the true integration area is indicated by red lines.
   }
-  \label{fig:ep-errors}
+  \label{fig:ep-pdf}
 \end{SCfigure}
 
 \section{Worked example: area of a triangle}
 
-As a simple example we consider the area of a triangle as a unit square.
+As a simple worked example we consider the area of a right-angled triangle with vertices $(0,0)$, $(1,0)$, and $(0,1)$ i.e.\ half of the unit square.
 We can write this area as the integral over a box
-\begin{equation}
-  A = \int_0^1 \int_0^1 \Theta(1 - x - y) \, dx dy
+\begin{equation}\label{eq:ep-area-integral}
+  A_\Delta = \int_0^1 \int_0^1 \Theta(1 - x - y) \, dx dy
   = \frac{1}{2}
 \end{equation}
 where $\Theta(\cdot)$ is the Heaviside function.
-The exact result is fairly trivial, but as it can also be evaluated using expectation propagation we can use this as a worked example and to justify the method.
-EP gives an area $A \simeq 0.515$ for an error of about 3\%.
+The exact result is fairly trivial, but it has the same form as the integrals we have been studying with e.g.\ $x,y$ representing the contact particles and $\Theta(1 - x - y)$ representing an additional hard sphere interaction between non-contact particles.
+As such, we can evaluate the area using expectation propagation giving $A_\Delta^\mathrm{EP} \simeq 0.515$ for an error of about 3\%.
+The effective probability distribution $p(x,y)$ for this integral is shown in \ref{fig:ep-pdf} (lower panel) which illustrates how the method builds in geometric information of additional constraints (in this case $\Theta(1 - x - y)$.
+The distribution for the equivalent integral without this constraint is shown in the same figure (upper panel).
+As an extension of the above problem we introduce an external field representing the perturbation expansion of the potential of mean force $\phi^{(n)}$.
+We obtain the integral
+\begin{equation}\label{eq:ep-triangle-integral}
+  Z_\Delta = \int_0^1 \int_0^1 \Theta(1 - x - y) e^{-A_x x  A_y y} \, dx dy
+\end{equation}
+with the errors of expectation propagation shown in Fig.\ \ref{fig:ep-errors}.
+The error of 3\% in the area is recovered in the limit $\vec{A} \to 0$, which increases to a maximum of around 4\% at moderate field strength.
+At very large field strengths the error drops to essentially zero as the effect of the extra boundary condition is not seen, and the method becomes exact.
 
 \begin{SCfigure}
-  \includegraphics[width=0.9\linewidth,outer]{ep-pdf}
-  \caption[Approximate probability distribution assumed in blah]{
-    Sketch of integration scheme proposed as generalisation of harmonic approximation: true distribution modelled as a Gaussian.
-    We use expectation propagation as criteria for optimal parameters for the Gaussian.
-    In each panel the boundary of the integration area is indicated by red lines.
-    For a field $\vec{A} = \{1,1\}$.}
+  \includegraphics[width=0.9\linewidth,outer]{ep-errors}
+  \caption[Errors in expectation propagation for integrating a field over a triangle]{
+    Errors in expecation propagation for integrating a field over a triangle.
+    The exact integral is given by \eqref{eq:ep-triangle-integral}, taking field $\vec{A} = (A, A)$.
+  }
+  \label{fig:ep-errors}
 \end{SCfigure}
-
-This is a pathological case: no potential, pure geometry.
-We expect the error to improve when integrating functions over the box.
-We generalise the integral to
-\begin{equation}
-  Z = \int_0^1 \int_0^1 \Theta(1 - x - y) e^{-A_x x - A_y y} \, dx dy
-\end{equation}
-with the results shown in Fig.\ \ref{fig:ep-errors}.
-We see that the effective Gaussian is skewed by the additional constraint, stretching to approximate the triangular shape of the boundary.
 
 \ifdefined\includebibliography
   \newgeometry{margin=1in}

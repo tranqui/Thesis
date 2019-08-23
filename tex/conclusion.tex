@@ -11,11 +11,81 @@
 \chapter{Conclusion}
 \epigraph{We demand rigidly defined areas of doubt and uncertainty!}{Douglas Adams, \emph{Hitchhiker's guide to the galaxy}, (1979).}
 
+We have presented the morphometric approach as a generalisation of SPT, thus placing the scaled particle \emph{ansatz} on more precise and physically motivated assumptions i.e.\ those underlying the theorems of integral geometry.
+Using the scaled particle approach we have systematically derived several theories for the hard sphere liquid.
+This included the classical SPT solution and the morphometric theory obtained in the bulk limit of free energy functionals based on the CS equation of state%
+\marginfootnote{See the discussion around \eqref{eq:wbii-coefficients} in section \ref{sec:fmt} for details of the original derivation.},
+although our method of deriving the latter theory is new.
+The third theory we derived is particularly suited for treating many-body correlations, which we used to accurately treat local structures in the hard sphere liquid in Ref.\ \cite{RobinsonPRL2019}.
+
+By making the underlying assumptions explicit we can better understand the limits of the theory: any deviation from the morphometric/SPT \emph{ansatz} must be due to a violation of translation/rotation invariance, additivity or continuity.
+The fact that these theories are very accurate for hard spheres suggests that the assumptions are only weakly violated for this system.
+While translational/rotational invariance and continuity are physically plausible conditions on $\Delta \Omega$, additivity is a very strong assumption.
+In particular, we expect significant deviations from additivity where the liquid develops a static length scale exceeding the size of the solute \cite{KonigPRL2004}.
+As such, we expect the validity of the morphometric approach to require the solute to be larger than the point-to-set length \cite{MontanariJSP2006}, which acts as an upper bound for all structural length scales \cite{YaidaPRE2016}.
+The morphometric \emph{ansatz} must break down approaching a critical point, so it cannot be used to obtain asymptotics in the event of a thermodynamic glass transition.
+
+Finally, we remark that while it is tempting to call the treatment of bulk degrees of freedom with the morphometric approach mean-field, this is not a completely accurate characterisation.
+Mean-field theories typically become formally exact in the limit of infinite spatial dimensions, where the thermodynamic role of fluctuations disappears.
+By contrast, the morphometric approach (and related theories like SPT and FMT) become formally exact in the one-dimensional limit of hard rods%
+\marginfootnote{We will discuss this limit in more detail in chapter \ref{chapter:resummation}.}.
+Though this theory does not explicitly describe fluctuations, they are built into the choice of thermodynamic coefficients entering the theory.
+In this sense it is more accurate to describe the morphometric approach (and related theories) as an \emph{excluded volume} theory, or as a \emph{free volume} theory because the thermodynamics only shows divergent behaviour as $\eta \to 1$.
+
+We have presented a formalism for treating local structure in simple liquids using the framework of many-body correlations.
+Using the morphometric approach of the previous chapter as input, we developed this formalism into an accurate and computationally efficient parameter-free theory for hard spheres relying solely on the equation of state as input.
+%This formalism requires knowledge of the energy minima of the potential of mean force to  an operational definition of structures, which could be refined.
+
+We applied the framework to a selection of local structures, therefore predicting nontrivial changes in the energy landscape with supercooling putting previous empirical observations on more solid ground.
+In particular, our analysis provides evidence for the existence of two populations of structures with distinct symmetries and free energies which causes the local density of states to become increasingly bimodal at high densities.
+We note that we have treated densities corresponding to a degree of supercooling only accessible using novel swap Monte Carlo techniques \cite{BerthierPRL2016}; however, these simulations introduce large polydispersity, changing the local structure \cite{CoslovichJPCM2018} and thus limiting direct comparison with our calculations for the monodisperse liquid.
+
+Our framework can be easily adapted to more complex liquids such as systems with soft repulsive interactions and polydisperse mixtures \cite{KodamaJCP2011}.
+Calculations may even become easier with softer interactions, as perturbation techniques \eqref{eq:harmonic-approximation} could be used in place of thermodynamic integration or the bespoke analytic techniques presented in this chapter.
+However, extending the approach to softer interactions would require new morphometric coefficients as input to the theory.
+This suggests a route for predicting static properties of equilibrium liquids, with direct applications to self-assembly, nucleation and protein structure.
+A morphometric approach would be applicable to a general class of liquids where the soft part of the potential may be treated as a perturbation around a hard core \cite{Hansen2013}, such that a geometric decomposition still applies.
+\todo{Mention issues defining a surface.}
+
+The morphometric approach can extend straightforwardly to hard particles of more complex shapes where the interaction potential is still geometric in nature; in the next chapter we will derive a morphometric theory for arbitrary mixtures of hard convex particles.
+The downside of this extension is that this introduces rotational degrees of freedom for each particle, and more complex interactions, so evaluating free energies is likely to become substantially more complicated.
+
+We have derived an exact morphometric contribution for a general class of hard particle liquids by resumming terms in the virial series.
+Previous studies have primarily used FMT to develop morphometric theories, so we have successfully developed an independent justification for the morphometric approach as the leading term in a controlled expansion.
+The exact result applies for mixtures of hard convex particles in an isotropic phase.
+
+%This result is not that surprising as the morphometric approach can be obtained as a limit case of FMT \cite{Hansen-GoosJPCM2006}, which itself can be formulated as the resummation of the same terms in the virial expansion \cite{LeithallPRE2011,KordenPRE2012,MarechalPRE2014}.
+
+In hard spheres, this exact contribution features similar accuracy as scaled particle theory, and exactly coincides with it for $d \le 2$.
+Numerical comparison in $d=3$ shows that the pressure and surface tension are comparable in accuracy to the classic SPT/PY route, so it captures the dominant contributions to the bulk free energy across a large density range; this latter fact seems to suggest why the approach has been successful.
+Though as noted in Ref.\ \cite{MarechalPRE2014}, this is partially due to a cancellation in the omitted terms of the virial expansion.%, so it may still be desirable to improve the morphometric approach by inclusion of additional terms.
+%We have derived the morphometric solvation free energy for mixtures of hard convex particles from first-principles using the virial series.
+%% The morphometric theory we have derived from the virial series is less accurate than theories obtained from other routes, so these results are of fundamental rather than practical interest.
+%% Specifically, in $d=3$ the pressure and surface tension are comparable in accuracy to the classic SPT/PY route, and in $d=2$ the approach is identical to scaled particle theory.
+The usefulness of the new route extends beyond mere accuracy; the free energy we have identified emerges \emph{rigorously} as a contribution from the virial series.
+
+The fact that the exact contribution is reasonably accurate suggests that the corrections are small, providing further justification of the morphometric approach.
+Moveover, the exact contribution provides a suitable starting point for including additional terms to improve accuracy.
+
 To conclude...
 \todo{Present morphometric approach as an alternative ensemble (semi-grand) to canonical.}
 Mention self assembly: \cite{TeichNC2019}
 
-A morphometric approach would be applicable to a general class of liquids where the soft part of the potential may be treated as a perturbation around a hard core \cite{Hansen2013}, such that a geometric decomposition still applies.
+We have developed a numerical model based on a diffusion equation with an extrapolation of the diffusion constant to high concentrations assuming the Stokes-Einstein relation.
+The resulting droplet evolution conforms well to the experimental trajectories.
+Assuming boundary dominated nucleation we are able to predict nucleation rates inside the droplet, and extract nucleation rates at differing state points from the experimental trajectories.
+
+We found that CNT works well for predicting crystal nucleation in \ce{NaCl} but not \ce{NaNO3} aerosols.
+In both cases CNT predicts nucleation essentially after a threshold surface saturation is reached, whereas experiments show nucleation in \ce{NaNO3} has stochastic behaviour.
+This emerges from the fact that nucleation rates predicted by CNT monotonically increase in concentration and temperature.
+In particular, the change in nucleation rate from increased concentration is so dramatic that the behaviour of CNT is essentially unchanged by small adjustments to the model parameters.
+
+CNT is a model for homogeneous nucleation, so it is possible that it fails because crystallisation occurs for \ce{NaNO3} through heterogeneous nucleation.
+The same stochastic phenomena are observed when repeating the experiments with the same droplet on a cycle of decreasing and increasing the RH to dry and melt the droplet; this rules out heterogeneous nucleation through impurities, as the chemical makeup is the same in each cycle yet the phenomenon persists.
+This leaves the gas-liquid phase boundary itself as a site for hetereogeneous nucleation.
+
+This work is important in showing that the nucleation rate of nitrate aerosol is not only influenced by the level of supersaturation, but also by the drying kinetics itself because of an interplay between the inhomogeneity of the concentration profile and droplet temperature.
+This is important for climate predictions where an understanding of the phase of atmospheric aerosol is crucial, and also valuable for spray-drying models where control over the resulting phase could be enabled by tuning the various drying parameters.
 
 \ifdefined\includebibliography
   \newgeometry{margin=1in}
