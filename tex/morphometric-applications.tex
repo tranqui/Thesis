@@ -25,8 +25,9 @@ We find a bimodality in the density library of states where fivefold symmetric s
 The method provides a new route to assess changes in the free energy landscape at volume fractions dynamically inaccessible to conventional techniques.
 
 The majority of this chapter consists of work published as Ref.\ \cite{RobinsonPRL2019}.
-Towards the end of this chapter we introduce a new unpublished method which uses Bayesian inference to evaluate the free energy of local structures in hard spheres.
+Towards the end of this chapter we introduce a new unpublished method for analytical calculations.
 This has the potential to improve the efficiency of evaluating hard sphere free energies, as well as treat the saddles of the hard sphere energy landscape to make a connection with dynamics.
+The details are somewhat technical however, so we have relegated them to Appendix \ref{appendix:bayesian}.
 
 %% While `sphere' and `ball' are used interchangeably in physics (and colloquially), in geometry they refer to different things: balls $\ball^d$ are the solid objects whereas spheres are the boundaries $\partial \ball^d$.
 %% As such, physicists really mean `hard balls' rather than hard spheres; the epigraph rang true for me as I undertook the work of this chapter.
@@ -73,7 +74,7 @@ in the bulk system across the entire liquid phase, and beyond the dynamically ac
 %% Suppose we have a definition of a
 %% \end{itemize}
 
-From the definition of the probability density function  \eqref{eq:n-particle-density-pdf} defining the $n$-particle density, the total number of a local structure in a system volume $V$ is
+From the definition of the $n$-particle density \eqref{eq:n-particle-density-pdf} as a probability density function, the total number of a local structure in a system volume $V$ is
 \begin{equation}\label{eq:structure-population}
   \mathcal{N}
   =
@@ -146,7 +147,7 @@ Written explicitly, the free energy of the local structure is
 Evaluating this free energy thus requires a closure for $\phi^{(n)}$, a definition of the structure to set integration limits through $\mathcal{D}$, and a method of actually doing the integration.
 
 We calculate $\phi^{(n)}$ from its definition \eqref{eq:potential-mean-force} and using the morphometric \emph{ansatz} \eqref{eq:morph-ansatz} as a closure for $\Delta \Omega$.
-Our focus is on $d=3$, so we use the virial route coefficients \eqref{eq:virial-coefficients} with the Carnahan-Starling equation of state \eqref{eq:cs-pressure} because of the accuracy of the resulting correlation functions (cf.\ section \ref{sec:framework-numerics}).
+Our focus is on $d=3$, so we use the virial route coefficients \eqref{eq:virial-coefficients} with the Carnahan-Starling equation of state \eqref{eq:cs-pressure} because the resulting correlation functions are highly accurate (cf.\ section \ref{sec:framework-numerics}).
 We have already seen how this equation of state is accurate at high densities (Fig.\ \ref{fig:swap-eos}), though it is worth emphasising that it must fail at some point setting limits on our approach.
 %The pair correlation produced by these coefficients is self-consistent with CS at contact by construction; moreover, the new coefficients provide a theory that outperforms the older WBII approach across the whole range of distances typical of neighbouring particles (SM).
 %This enables us to accurately model complex many-particle local structures.
@@ -163,7 +164,7 @@ Defining the location of the inherent state as
   \argmin_{\vec{y} \in \mathcal{D}}{\left( \phi^{(n)}(\vec{y}) \right)},
 \end{equation*}
 with $\vec{y}$ as shorthand for $\vec{r}^{n-1}$.
-The partition function would then be evaluated using via a perturbation theory around the inherent state i.e.\ from the Taylor expansion \cite{Wales2004}
+The partition function would then be evaluated via a perturbation theory around the inherent state, i.e.\ from the Taylor expansion \cite{Wales2004}
 \begin{equation*}
   \phi^{(n)}(\vec{y})
   =
@@ -226,7 +227,7 @@ The first few packings for $3 \le n \le 7$ are shown in Fig.\ \ref{fig:packings}
 As these states are exhaustive, they represent a complete \emph{local library of states}, of fundamental interest to random first-order transition theory \cite{LubchenkoARPC2007} with the potential to significantly improve upon previous extensions of mean-field theory into finite-dimensions \cite{KirkpatrickPRB1987,HallJCP1987,KirkpatrickPRA1989,BouchaudJCP2004,DzeroPRB2005,FranzJSM2005,AngeliniJSP2017,RulquinJSM2016,BiroliMeanPRB2018,BiroliFinitePRB2018}.
 
 Some explanation of what is meant by `rigid' is warranted.
-A structure is rigid if the only degrees of freedom are rigid-body motions i.e.\ translations and rotations, but this is hard to test so stronger criterions are required in general.
+A structure is rigid if the only degrees of freedom are rigid-body motions i.e.\ translations and rotations, but this is hard to test so stronger criterions are required in general \cite{ConnellySJDM1996,Holmes-CerfonSR2016,Holmes-CerfonARCMP2017}.
 Some of the oldest ideas surrounding rigidity originate to Maxwell \cite{MaxwellRigidity1864} and focus on the number of contacts.
 These ideas are based on a linear analysis: each particle coordinate is a degree of freedom and each contact is a constraint.
 Matching the number of freedoms and constraints yields the \emph{Maxwell criterion}, where the number of contacts is exactly \cite{MaxwellRigidity1864}
@@ -241,25 +242,25 @@ In the thermodynamic limit $n \to \infty$ we obtain the \emph{isostatic} conditi
   \lim_{n \to \infty} \frac{2m_\mathrm{Maxwell}}{n}
   = 2d.
 \end{equation*}
-These ideas have been refined in \cite{CalladineIJSS1978}, but they are still fundamentally based on a linear analysis.
+These ideas have been refined in Ref.\ \cite{CalladineIJSS1978}, but they are still fundamentally based on a linear analysis.
 By contrast, rigidity is a non-linear notion for $d > 1$ and so these ideas are not rigorous%
 \marginfootnote{In $d=3$ rigid structures exist which violate the Maxwell criterion \eqref{eq:maxwell-criterion}; examples exist of both \emph{hyperstatic} structures like the face-centred cubic unit cell with $m > m_\mathrm{Maxwell}$ and \emph{hypostatic} structures with $m < m_\mathrm{Maxwell}$ \cite{Holmes-CerfonSR2016,Holmes-CerfonARCMP2017}.}.
-Curiously, the overwhelming majority of structures appear to satisfy the Maxwell criterion \eqref{eq:maxwell-criterion} \cite{Holmes-CerfonSR2016,Holmes-CerfonARCMP2017} even though the linear theories are not exact.
+Curiously, the overwhelming majority of rigid structures appear to satisfy the Maxwell criterion \eqref{eq:maxwell-criterion} \cite{Holmes-CerfonSR2016,Holmes-CerfonARCMP2017}, even though the linear theories are not exact.
 Furthermore, jammed states are empirically found to be isostatic, a result also predicted by mean-field calculations \cite{CharbonneauJSM2014,CharbonneauNC2014}.
 
-Geometries with at least $d$ contacts for each particle and exactly $m = m_\mathrm{Maxwell}$ overall contacts are termed \emph{minimally rigid} \cite{ArkusPRL2009}, but this is neither a necessary not sufficient criterion for rigidity \cite{Holmes-CerfonARCMP2017}.
+Geometries with at least $d$ contacts for each particle and exactly $m = m_\mathrm{Maxwell}$ overall contacts are termed \emph{minimally rigid} \cite{ArkusPRL2009}, but this is neither a necessary nor sufficient criterion for rigidity \cite{Holmes-CerfonARCMP2017}.
 Three sufficient criteria for rigidity are: \cite{ConnellySJDM1996,Holmes-CerfonARCMP2017}
 \begin{enumerate}
 \item \emph{First-order rigidity}: the natural extension of the Maxwell criterion ensuring the contraints are linearly independent, based on a first-order expansion of the forces about contact.
   This is also called \emph{Calladine's extension} \cite{CalladineIJSS1978}.
 \item \emph{Second-order rigidity}: based on an expansion of the forces to second-order.
-  This is very hard to test numerically.
+  This is hard to test numerically \cite{Holmes-CerfonARCMP2017}.
 \item \emph{Prestress stability}: the structure would be stable for an effective (harmonic) energy function \cite{ConnellySJDM1996}.
   This is a stronger criterion than second-order rigidity, but can be tested more efficiently.
   It is a non-linear criterion and is satisfied by all of the packings determined in Refs.\ \cite{ArkusPRL2009,Holmes-CerfonSR2016}.
 \end{enumerate}
 All of our calculations are valid for first-order rigid structures, though recently methods have been developed to do free energy calculations with prestress stable structures \cite{KallusPRE2017}.
-It would be interesting to extend the current work to these other structures to explore the full library of states.
+It would be interesting to extend the current work to these other structures to explore a more complete library of possible states.
 
 As we cannot use perturbation theory \eqref{eq:harmonic-approximation}, we must \emph{choose} a definition for the basin surrounding each energy minimum occuring at contact.
 For simplicity, we define a particular local structure by its bond topology i.e.\ the $m$ contacts at the reference point.
@@ -274,7 +275,7 @@ Following \cite{Holmes-CerfonPNAS2013} we introduce the \emph{bond distance} as 
   h_k = |\vec{r}_{a_k} - \vec{r}_{b_k}| - \sigma,
 \end{equation}
 clearly contact occurs where $h_k = 0$ for all $k \in \{1, \cdots, m\}$.
-We introduce a pairwise cutoff $\delta$ such that the gaps between particle are bonunded in the range $h_k \in [0, \delta]$, with the lower limt set by the hard particle constraint.
+We introduce a pairwise cutoff $\delta$ such that the gaps between these particles are bounded in the range $h_k \in [0, \delta]$, with the lower limt set by the hard particle constraint.
 All the results we present use a cutoff of $\delta_{cut}=0.2 \sigma$, but we have tested that our findings are not significantly affected by a choice of $\delta_{cut}=0.4 \sigma$ indicating their robustness.
 
 As an aside, it was demonstrated in \cite{BritoEEL2006} that for hard sphere glasses approacing isostaticity, every pair of contacting particles $a_k,b_k \in \mathcal{M}$ interacts through the effective potential
@@ -290,7 +291,7 @@ The definition of structure in terms of bond-distances \eqref{eq:bond-distance} 
 The bond-distances are unaffected by rigid rotations so we must integrate them out, and for simplicity we now specialise to $d=3$.
 %More generally, we consider the manifold diffeomorphic to translations \emph{and} rotations.
 We define%
-\marginfootnote{Here we have reintroduced the notation from section \ref{sec:kinematic-formula} where the rigid-motion group $G_d := \mathbb{R}^d \times \mathrm{SO}(d)$ is the space of translations and rotations.}
+\marginfootnote{Here we have reintroduced the notation from section \ref{sec:kinematic-formula} where the rigid-motion group $G_d := \mathbb{R}^d \times \mathrm{SO}(d)$ is the space of translations and rotations.}[-1cm]
 $\mathcal{Q} = \mathcal{D}' \times G_3$ with $\mathcal{D}'$ as the space of the structure's internal degrees of freedom i.e.\ the thermal vibrations.
 We separate rigid body from internal motion by applying the following transformation to each particle coordinate
 \begin{equation*}
@@ -299,7 +300,7 @@ We separate rigid body from internal motion by applying the following transforma
   \vec{t} + \vec{R}(\vec{\theta}) \, \vec{f}(\vec{x}),
 \end{equation*}
 where $\vec{t}$ is the translation vector, $\vec{R}$ the rotation matrix for Euler angles $\vec{\theta}$, and $\vec{f}(\cdot)$ is a mapping from the structure's internal coordinates $\vec{x} \in \mathbb{R}^{3n-6}$ to real-space.
-For a minimally constrained geometry $\vec{x}$ could simply correspond to the bond distances $\vec{y}$, which we will take advantage of in section \ref{sec:reaction-paths} for simple analytical calculations.
+For a minimally constrained geometry $\vec{x}$ could simply correspond to the bond distances $\vec{y}$, which can be taken advantage for simple analytical calculations (Appendix \ref{appendix:bayesian}).
 We need to compute the metric of the above transformation $G_{ij} = \vec{G}_i \vec{G}_i^T$ where the (generally curvilinear) basis vectors are $\vec{G}_i = \partial_i \vec{r}$, and indices $i,j$ summing over all of $\{\vec{t}, \vec{\theta}, \vec{x}\}$.
 To do this we loosely follow the method outlined in the Supplementary Information of Ref.\ \cite{Holmes-CerfonPNAS2013}.
 
@@ -365,7 +366,7 @@ In general, the integrand in \eqref{eq:structural-partition-function-detailed} i
 This is further complicated by the fact that the basis vectors for $\overline{G_{ij}}$ are curvilinear, and must be evaluated perturbatively in general; we will do this in section \ref{sec:analytic-integrals}.
 We have now defined our structures and presented the general formalism for calculating their free energies.
 In the next section we introduce numerical methods to evaluate the partition functions.
-We will return to the analytical calculations in \ref{sec:reaction-paths} for the reaction paths.
+We will return to analytical calculations in \ref{sec:reaction-paths} for the reaction paths.
 
 %% %As a worked example we consider the molecular generalisation of the harmonic approximation \eqref{eq:harmonic-approximation} as
 %% We use two methods for evaluating these integrands:
@@ -626,35 +627,35 @@ Formally, the probability distribution is written
 \begin{equation}
   p(\vec{x})
   =
-  \frac{g^{(n)}(\vec{x}) \chi_{\mathcal{D}'}(\vec{x})}{Z}
+  \frac{g^{(n)}(\vec{x}) \mathbb{I}_{\mathcal{D}'}(\vec{x})}{Z}
 \end{equation}
 with indicator function%
 \marginfootnote{This is really the Euler characteristic \eqref{eq:euler-characteristic-definition} of the intersection $\chi[\mathcal{D}' \cap \vec{x}]$.}
 \begin{equation*}
-  \chi_{\mathcal{D}'}(\vec{x})
+  \mathbb{I}_{\mathcal{D}'}(\vec{x})
   =
   \begin{cases}
     1 & \textrm{ if } \vec{x} \in \mathcal{D}' \\
     0 & \textrm{ otherwise}.
   \end{cases}
 \end{equation*}
-The probability distribution contains singularities from both the hard sphere interactions in $g^{(n)}$ and from the integration limits of $\mathcal{D}'$ through $\chi_{\mathcal{D}'}$.
+The probability distribution contains singularities from both the hard sphere interactions in $g^{(n)}$ and from the integration limits of $\mathcal{D}'$ through $\mathbb{I}_{\mathcal{D}'}$.
 Separated into smooth and singular contributions, we can write
 \begin{equation*}
   p(\vec{x})
   =
   \underbrace{
     \frac{y^{(n)}(\vec{x})}{Z}
-    \vphantom{\prod_{i < j}}
+    \vphantom{\prod_{\substack{i < j \\ (i,j) \notin \mathcal{M}}}}
   }_\textrm{smooth}
   \;
   \underbrace{
-    \chi_{\mathcal{D}'}(\vec{x})
-    \prod_{i < j}
+    \mathbb{I}_{\mathcal{D}'}(\vec{x})
+    \prod_{\substack{i < j \\ (i,j) \notin \mathcal{M}}}
     \Theta \Big( |\vec{r}_i - \vec{r}_j| - \sigma \Big)
   }_\textrm{singular terms},
 \end{equation*}
-where we defined the $n$-particle cavity distribution as
+where we did not include the particles in $\mathcal{M}$ in the final product because their effect is already by the definition of structure $\mathbb{I}_{\mathcal{D}'}$, and where we defined the $n$-particle cavity distribution as
 \begin{equation*}
   \begin{split}
     y^{(n)}(\vec{x})
@@ -673,6 +674,53 @@ The cavity distribution is known to be a continuous function \cite{Hansen2013}, 
 where $\vec{A} = \nabla \beta\Omega(\vec{x}^*) \ne 0$.
 By contrast, the singular terms require a non-perturbative treatment.
 
+The singular terms can be expressed in terms of one-dimensional indicator functions; specifically, our choice of structure laid out in \ref{sec:structure-definition} is a restriction of to the space $h_k \in [0, \delta]$ for particles in contact at the reference point $\vec{x}^*$, and the full space $[0, \infty]$ for the remaining particle pairs.
+We write this as
+\begin{subequations}
+  \begin{align}
+    \mathbb{I}_{\mathcal{D}'}(\vec{x})
+    =
+    \prod_{k = 1}^m
+    %% \Theta \Big( |\vec{r}_i - \vec{r}_j| - \sigma \Big)
+    %% \Theta \Big( \delta - (|\vec{r}_i - \vec{r}_j| - \sigma) \Big)
+    \Theta ( h_k )
+    \Theta ( \delta - h_k )
+    &=
+    \prod_{k = 1}^m \mathbb{I}_{[0, \delta]}(h_k)
+  %% \end{equation}
+    %% \begin{equation}
+    \\
+    \prod_{\substack{i < j \\ (i,j) \notin \mathcal{M}}}
+    \Theta \Big( |\vec{r}_i - \vec{r}_j| - \sigma \Big)
+    &=
+    \prod_{\substack{i < j \\ (i,j) \notin \mathcal{M}}}
+    \mathbb{I}_{[0, \infty]}
+    \Big( |\vec{r}_i - \vec{r}_j| - \sigma \Big).
+  \end{align}
+\end{subequations}
+So together with \eqref{eq:cavity-perturbation}, the probability distribution becomes
+\begin{equation}\label{eq:expanded-structure-p}
+  p(\vec{x})
+  \simeq
+  \frac{y^{(n)}(\vec{x}^*) e^{-\vec{A} \cdot \Delta \vec{x}}}{Z}
+  \,
+  \prod_{k = 1}^m \mathbb{I}_{[0, \delta]}(h_k)
+  \prod_{\substack{i < j \\ (i,j) \notin \mathcal{M}}}
+  \mathbb{I}_{[0, \infty]}(|\vec{r}_i - \vec{r}_j| - \sigma).
+  %+ \mathcal{O}(\Delta \vec{x}^2)
+\end{equation}
+In the special case of minimally constrained geometries i.e.\ $m = l$, then the integration limits are equivalent to a hypercube.
+The resulting integral can be evaluated analytically if the additional hard sphere interactions are ignored (Appendix \ref{appendix:bayesian}).
+
+More generally, we employ two approximations (full details in Appendix \ref{appendix:bayesian}):
+\begin{enumerate}
+\item \emph{Polyhedral approximation}: we approximate the integration domain as a high dimensional polyhedron.
+  \todo{say a bit more here}
+\item \emph{Expectation propagation}: inspired by the harmonic approximation \eqref{eq:harmonic-approximation}, we approximate $Z p(\vec{x})$ by an unnormalised Gaussian distribution with parameters obtained using this technique from Bayesian inference described in Refs.\ \cite{Minka2001,MinkaUAI2001,Rasmussen2006,Cunningham2011}.
+  This method yields an approximate $Z$, and the Gaussian parameters immediately give the first and second moments of $p(\vec{x})$; the perturbative effects of the rotation metric can thus be included through application of \eqref{eq:rotation-metric-perturbations}.
+\end{enumerate}
+In the next section we apply this approximate technique to the calculation of free energies along reaction paths.
+
 %% However, the singularity of the pair potential complicates the integral.
 %% Note that the limits of the integration $D'$ take care of the hard sphere interactions between the particle pairs in $\mathcal{M}$, but not the remaining interactions.
 %% In particular, the hard sphere interaction potential has the form
@@ -683,33 +731,6 @@ By contrast, the singular terms require a non-perturbative treatment.
 %% \end{equation}
 %% where $\Theta(\cdot)$ is the Heaviside theta function.
 %% This can be thought of as setting complex integration limits, i.e.\ the additional half-space criterion that $|\vec{r}_i - \vec{r}_j| \in [0, \infty]$.
-
-Inspired by the Harmonic approximation where the energy is expanded to second order, we will attempt to approximate the basin probability distribution as a Gaussian.
-We write this approximate probability distribution as
-\begin{equation}
-  q(\vec{x}) = Z \mathcal{N}(\vec{x}; \vec{\mu}, \vec{\Sigma}).
-\end{equation}
-where we have kept it unnormalised for convenience (so it is not strictly a distribution): our goal is to determine $Z$.
-The moments of the Gaussian $\vec{\mu}, \vec{\Sigma}$ will be determined alongside $Z$, giving the evaluation of $I$ through \eqref{eq:rotation-metric-perturbations}.
-Note that in the Bayesian inference literature $p(\vec{x}) \sim \mathcal{P}$ would be called the posterior distribution.
-
-Consider the free energy difference between the true and approximate distribution
-\begin{equation}
-  \Delta F
-  =
-  - \int p(\vec{x})
-  \ln{\left( \frac{q(\vec{x})}{p(\vec{x})} \right)} \, d\vec{x}.
-\end{equation}
-In information theory this would be called the \emph{Kullback-Leibler divergence}, a measure of information loss from using the approximate distribution $\vec{q}$.
-It is identical to a free energy difference in the physics literature, and it is straightforward to prove that it is only zero when $p = q$ \cite{MerminPR1965, EvansAP1979}.
-It is schematically identical to the proof of the uniqueness of the equilibrium free energy.
-
-$\Delta F = 0$ is impossible unless $p$ is also Gaussian, however by minimising $\Delta F$ we can optimise the $q$ distribution to minimise the approximation error.
-It is straightforward to show that for distributions in the exponential family this corresponds to matching the moments of $q$ and $p$ \cite{Minka2001,MinkaUAI2001,Rasmussen2006,Cunningham2011}.
-This is still intractable however, matching moments is identical to setting the distributions to one another.
-However, an approximate technique expectation propagation matches the moments of marginal distributions has been shown to approximate this well \cite{Minka2001,MinkaUAI2001,Rasmussen2006,Cunningham2011}.
-This approximation was inspired by the cavity method of spin glasses (unrelated to the cavity distribution), for application to approximate Bayesian inference problems.
-\todo{edit this part!}
 
 %% We use two methods:
 %% \begin{enumerate}
@@ -743,8 +764,8 @@ This approximation was inspired by the cavity method of spin glasses (unrelated 
 %We have thus far focused on static thermodynamic properties:
 We are now able to make a connection with dynamical properties of the supercooled liquid by calculating the free energy along reaction paths between (geometrically similar) structures.
 %This calculation along unstable directions in the free energy landscape requires an analytic approach (described in the SM), and generates paths such as the one in Fig.\ \ref{fig:reaction-path-6}.
-We obtain a reaction path by breaking a bond creating an unstable direction.
-Along this reaction path we obtain the free energies by integrating over all but the unstable direction $x_b$.
+We obtain a reaction path by breaking a contact, which creates an unstable direction that can be explored using the technique suggested in the Supplementary Material of Ref.\ \cite{Holmes-CerfonSR2016}.
+Along this reaction path we obtain the free energies by integrating over all but the coordinate parameterising the unstable direction $s$.
 We therefore obtain from \eqref{eq:structural-partition-function-detailed}
 \begin{equation}\label{eq:reaction-path-free-energy}
   \begin{split}
@@ -753,13 +774,13 @@ We therefore obtain from \eqref{eq:structural-partition-function-detailed}
     %% - \ln \left( \frac{\mathcal{N}}{\sigma^{3(n-1)} \rho^n V},
     %% \\ =&
     - \ln \left(
-    \frac{8\pi^2 \sqrt{n^3}}{\nu} \int_{D' \setminus x_b}
-    g^{(n)}(\vec{z}; x_b) R(\vec{z}; x_b) \,
+    \frac{8\pi^2 \sqrt{n^3}}{\nu} \int_{D' \setminus s}
+    g^{(n)}(\vec{z}; s) R(\vec{z}; s) \,
     \, d^{l-1} \vec{z}
     \right),
   \end{split}
 \end{equation}
-where $\vec{z} \in \mathbb{R}^{(3n-7)}$ does not include the reaction coordinate $x_a$.
+where $\vec{z} \in \mathbb{R}^{(3n-7)}$ does not include the reaction coordinate $s$.
 Importantly, $\nu$ is the new symmetry number along this reaction path, which is different in general from the symmetry numbers of the terminating minima \cite{Wales2004}.
 This integral has the same form as \eqref{eq:schematic-partition-function}, which we evaluate using the methods outlined in the previous section and described in full in Appendix \ref{appendix:bayesian}.
 %, i.e.\ by Taylor expansion up to linear terms in the potential and inertia so the integral reduces to a sum of one-dimensional integrals.
@@ -777,13 +798,14 @@ Secondly, we consider the reaction path separating the two variants of the frust
 We find that the energy increases monotonically along the path without an activation barrier; this means that these are really thermal fluctuation of the same structure.
 %This is not a surprising result, but it opens the way to exploring the for other structures.
 This further justifies the use of the frustrated structures in Fig.\ \ref{fig:structure-populations}, even though they do not strictly correspond to unique energy minimum.
-On the flip side, it shows that our operational definition of structures which started from the minima needs refining, indicating that we have likely overcounted the number of structures in the density of states \ref{fig:n12-dos}.
-This calculation was made possible by expectation propagation \cite{MinkaUAI2001,Minka2001,Rasmussen2006,Cunningham2011}, which opens the way to assess the connectivity of the energy landscape for local structures in hard spheres.
+On the flip side, it shows that our operational definition of structures needs refining, as we cannot meaningfully distinguish the different energy minima after thermalisation.
+This suggests that we have likely overcounted the number of structures in the density of states \ref{fig:n12-dos}.
+This calculation relied on expectation propagation \cite{MinkaUAI2001,Minka2001,Rasmussen2006,Cunningham2011} (and Appendix \ref{appendix:bayesian}), which opens the way to assess the connectivity of the energy landscape for local structures in hard spheres.
 
 \begin{SCfigure}
   \includegraphics[width=0.9\linewidth,outer]{n7-reaction-path}
   \caption[Reaction path for the two variants of the frustrated pentagonal bipyramid]{
-    Reaction for transition between the two $n = 7$ pentagonal bipyramids variant structures, from the variant with a broken spindle (bottom variant in Fig.\ \ref{fig:packings}) to the variant with broken five-fold symmetry (top variant).
+    Reaction for transition between the two $n = 7$ pentagonal bipyramids variant structures, from the variant with a broken spindle (bottom variant in Fig.\ \ref{fig:packings}) to the variant with broken fivefold symmetry (top variant).
     The free energy increases monotonically along this reaction path, so there is no barrier separating these two structures.
   }
   \label{fig:reaction-path-7}
@@ -795,15 +817,19 @@ However, the rapid growth in the number of possible states presents a considerab
 \section{Conclusions}
 
 We have presented a formalism for treating local structure in simple liquids using the framework of many-body correlations.
-Using the morphometric approach of the previous chapter as input, we developed this formalism into an accurate and computationally efficient parameter-free theory for hard spheres relying solely on the equation of state as input.
+Using the morphometric approach of the previous chapter, we developed this formalism into an accurate and computationally efficient parameter-free theory for hard spheres relying solely on the equation of state as input.
 %This formalism requires knowledge of the energy minima of the potential of mean force to  an operational definition of structures, which could be refined.
 
-We applied the framework to a selection of local structures, therefore predicting nontrivial changes in the energy landscape with supercooling putting previous empirical observations on more solid ground.
-In particular, our analysis provides evidence for the existence of two populations of structures with distinct symmetries and free energies which causes the local density of states to become increasingly bimodal at high densities.
-We note that we have treated densities corresponding to a degree of supercooling only accessible using novel swap Monte Carlo techniques \cite{BerthierPRL2016}; however, these simulations introduce large polydispersity, changing the local structure \cite{CoslovichJPCM2018} and thus limiting direct comparison with our calculations for the monodisperse liquid.
+We applied the framework to a selection of local structures, therefore predicting nontrivial changes in the energy landscape with supercooling.
+This placed previous empirical observations on more solid ground.
+In particular, our analysis provides evidence for the existence of two populations of structures with distinct symmetries and free energies which causes the local density of states to become increasingly bimodal at high densities; this observation supports structural interpretations of dynamical arrest.
+Examining the reaction pathways we found there was no activation barrier separating two structures with fivefold symmetry, suggesting we have overestimated the number of structures in the lower energy peak.
+However, this latter limitation does not challenge the existence of the bimodality caused by an energy separation.
+
+We note that we have treated densities corresponding to a degree of supercooling only accessible using novel swap Monte Carlo techniques \cite{BerthierPRL2016}; however, these simulations introduce large polydispersity, changing the local structure \cite{CoslovichJPCM2018} and thus limiting direct comparison with our calculations for the single-component liquid.
 
 Our framework can be easily adapted to more complex liquids such as systems with soft repulsive interactions and polydisperse mixtures \cite{KodamaJCP2011}.
-Calculations may even become easier with softer interactions, as perturbation techniques \eqref{eq:harmonic-approximation} could be used in place of thermodynamic integration or the bespoke analytic techniques presented in this chapter.
+Calculations may even become easier with softer interactions, as perturbation techniques \eqref{eq:harmonic-approximation} could be used in place of thermodynamic integration, or the bespoke analytic techniques presented in this chapter.
 However, extending the approach to softer interactions would require new morphometric coefficients as input to the theory.
 This suggests a route for predicting static properties of equilibrium liquids, with direct applications to self-assembly, nucleation and protein structure.
 

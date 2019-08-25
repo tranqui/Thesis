@@ -15,8 +15,8 @@
 \chapter{Evaluating free energies of hard sphere structures analytically}
 \label{appendix:bayesian}
 
-This appendix develops analytical methods for evaluating the free energy of hard sphere structures introduced in chapter \ref{chapter:morphometric-applications}.
-Specifically, we need to evaluate integrals of the form of \eqref{eq:schematic-partition-function} which we repeat here as
+This appendix describes analytical methods for evaluating the free energy of hard sphere structures used in chapter \ref{chapter:morphometric-applications} to obtain free energies along reaction paths.
+We need to evaluate integrals of the form of \eqref{eq:schematic-partition-function} which we repeat here as
 \begin{equation*}
   \mathcal{I}
   =
@@ -30,7 +30,7 @@ In section \eqref{sec:analytic-integrals} we demonstrated that it is sufficient 
 \begin{equation*}
   Z = \int_{\mathcal{D}'} g^{(n)}(\vec{x}) \, d^l \vec{x},
 \end{equation*}
-and determine the first few moments of the probability distribution
+and to evaluate the effects of rotations perturbatively using \eqref{eq:rotation-metric-perturbations} it is sufficient to determine the first few moments of the probability distribution
 \begin{equation*}
   \begin{split}
   p(\vec{x})
@@ -55,7 +55,37 @@ and determine the first few moments of the probability distribution
   \Theta \Big( |\vec{r}_i - \vec{r}_j| - \sigma \Big)
   \end{split}
 \end{equation*}
-with $\int_{\mathbb{R}^l} p(\vec{x}) d^l\vec{x} = 1$, to evaluate the effects of rotations perturbatively through \eqref{eq:rotation-metric-perturbations}.
+with $\int_{\mathbb{R}^l} p(\vec{x}) d^l\vec{x} = 1$, and in the final line we have used the first-order expansion of the potential of mean force \eqref{eq:cavity-perturbation} $\vec{A} = \nabla \beta\Omega(\vec{x}^*)$.
+
+Inspired by the Harmonic approximation where the energy is expanded to second order, we will attempt to approximate the basin probability distribution as a Gaussian.
+We write this approximate probability distribution as
+\begin{equation}
+  q(\vec{x}) = Z \mathcal{N}(\vec{x}; \vec{\mu}, \vec{\Sigma}).
+\end{equation}
+where we have kept it unnormalised for convenience (so it is not strictly a distribution): our goal is to determine $Z$.
+The moments of the Gaussian $\vec{\mu}, \vec{\Sigma}$ will be determined alongside $Z$, giving the evaluation of $I$ through \eqref{eq:rotation-metric-perturbations}.
+Note that in the Bayesian inference literature $p(\vec{x}) \sim \mathcal{P}$ would be called the posterior distribution.
+
+Consider the free energy difference between the true and approximate distribution
+\begin{equation}
+  \Delta F
+  =
+  - \int p(\vec{x})
+  \ln{\left( \frac{q(\vec{x})}{p(\vec{x})} \right)} \, d\vec{x}.
+\end{equation}
+In information theory this would be called the \emph{Kullback-Leibler divergence}, a measure of information loss from using the approximate distribution $\vec{q}$.
+It is identical to a free energy difference in the physics literature, and it is straightforward to prove that it is only zero when $p = q$ \cite{MerminPR1965, EvansAP1979}.
+It is schematically identical to the proof of the uniqueness of the equilibrium free energy.
+
+$\Delta F = 0$ is impossible unless $p$ is also Gaussian, however by minimising $\Delta F$ we can optimise the $q$ distribution to minimise the approximation error.
+It is straightforward to show that for distributions in the exponential family this corresponds to matching the moments of $q$ and $p$ \cite{Minka2001,MinkaUAI2001,Rasmussen2006,Cunningham2011}.
+This is still intractable however, matching moments is identical to setting the distributions to one another.
+However, an approximate technique expectation propagation matches the moments of marginal distributions has been shown to approximate this well \cite{Minka2001,MinkaUAI2001,Rasmussen2006,Cunningham2011}.
+This approximation was inspired by the cavity method of spin glasses (unrelated to the cavity distribution), for application to approximate Bayesian inference problems.
+
+First, we show how this integral can be solved for the simplest case of minimally constrained geometries and where no additional hard sphere overlaps can occur over the integration domain; this approximation is valid for the smallest geometries up to $n \le 6$, however fails for $n=7$ where frustrated packings appear.
+In section ? we generalise to the the more general case with additional hard sphere interactions.
+\todo{A bit of editing needed.}
 
 %As discussed in section \ref{?} the minimum is not as thermodynamically significant as expected for soft systems because of the singularity of the hard sphere potential.
 
@@ -91,9 +121,9 @@ with $\int_{\mathbb{R}^l} p(\vec{x}) d^l\vec{x} = 1$, to evaluate the effects of
 \section{Minimally constrained geometries}
 \label{sec:no-ep-integration}
 
-First, we consider the simplest case of \emph{minimally constrained} geometries which have exactly $m=q$ bonds, so that the bond-distance space forms a natural basis for this expansion and we can set $\vec{x} = \{h_1, \cdots, h_m\}$, with the energy minimum occurring at $\vec{x}^* = 0$.
+First, we consider the simplest case of \emph{minimally constrained} geometries which have exactly $m=q$ bonds, so that the bond-distance space forms a natural basis for this expansion and we can set $\vec{x} = \{h_1, \cdots, h_m\}$, with the energy minimum occurring at $\vec{x}^* = \{0, \cdots, 0\} = \vec{0}$.
 This special case simplifies calculation in a similar way that isostaticity can be exploited to derive theories for systems approaching jamming, \cite{WyartAP2005,BritoEEL2006}.
-However, we will have to consider the effects of additional interactions and later we will generalise to the case where $m \ge q$.
+However, we will have to consider the effects of additional hard sphere interactions and later we will generalise to the case where $m \ge q$.
 
 As an aside, we describe how to calculate the internal metric entering into $R(\vec{x})$ for this choice of coordinates.
 This metric is defined by
@@ -113,7 +143,7 @@ which has linearly independent rows for a minimally constrained geometry so we c
 
 In this basis the definition of structure sets the limits of integration to that of a hypercube, i.e.\
 \begin{equation*}
-  \int_{D'} d^q x
+  \int_{D'} d^l x
   =
   \int_0^\delta dx_1 \cdots \int_0^\delta dx_m.
 \end{equation*}
@@ -168,7 +198,7 @@ Next, we will use expectation propagation, a technique from Bayesian inference, 
 \section{Polyhedral approximation}
 \label{sec:polyhedral-approximation}
 
-We have a bond-distance space $\vec{x} \in \mathbb{R}^q$, $m = q$ constraints (minimally constrained for now) and $n(n-1)/2 - m$ potential interactions not already covered by the limits of integration.
+We have a bond-distance space $\vec{x} \in \mathbb{R}^l$, $l = m$ constraints (minimally constrained for now) and $n(n-1)/2 - m$ potential interactions not already covered by the limits of integration.
 We approximate this by measuring the distances not covered by the limits of integration and expanding them to linear order
 \begin{equation}
   \Delta_{ij}(\vec{x})
