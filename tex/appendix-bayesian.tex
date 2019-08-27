@@ -30,41 +30,84 @@ In section \eqref{sec:analytic-integrals} we demonstrated that it is sufficient 
 \begin{equation*}
   Z = \int_{\mathcal{D}'} g^{(n)}(\vec{x}) \, d^l \vec{x},
 \end{equation*}
-and to evaluate the effects of rotations perturbatively using \eqref{eq:rotation-metric-perturbations} it is sufficient to determine the first few moments of the probability distribution
+and to evaluate the effects of rotations perturbatively using \eqref{eq:rotation-metric-perturbations} it is sufficient to determine the first few moments of the probability distribution $p(\vec{x})$.
+We restate its definition \eqref{eq:expanded-structure-p} as a reminder here as
 \begin{equation*}
   \begin{split}
-  p(\vec{x})
-  &=
-  \frac{g^{(n)}(\vec{x}) \chi_{\mathcal{D}'}(\vec{x})}{Z}
-  \\ &=
-  \underbrace{
+    p(\vec{x})
+    &=
     \frac{y^{(n)}(\vec{x})}{Z}
-    \vphantom{\prod_{i < j}}
-  }_\textrm{smooth}
-  \;
-  \underbrace{
-    \chi_{\mathcal{D}'}(\vec{x})
-    \prod_{i < j}
-    \Theta \Big( |\vec{r}_i - \vec{r}_j| - \sigma \Big)
-  }_\textrm{singular terms},
-  \\ &\simeq
-  \frac{y^{(n)}(\vec{x}^*) e^{-\vec{A} \cdot \Delta \vec{x}}}{Z}
-  \;
-  \chi_{\mathcal{D}'}(\vec{x})
-  \prod_{i < j}
-  \Theta \Big( |\vec{r}_i - \vec{r}_j| - \sigma \Big)
+    \,
+    \prod_{(i,j) \in \mathcal{M}} \mathbb{I}_{[0, \delta]}(h_{ij})
+    \prod_{\substack{i < j \\ (i,j) \notin \mathcal{M}}}
+    \mathbb{I}_{[0, \infty]} (h_{ij}),
+    %% \prod_{k = 1}^m \mathbb{I}_{[0, \delta]}(h_k)
+    %% \prod_{\substack{i < j \\ (i,j) \notin \mathcal{M}}}
+    %% \mathbb{I}_{[0, \infty]}(|\vec{r}_i - \vec{r}_j| - \sigma).
+    \\ &\simeq
+    \frac{y^{(n)}(\vec{x}^*) e^{-\vec{A} \cdot \Delta \vec{x}}}{Z}
+    \,
+    \prod_{(i,j) \in \mathcal{M}} \mathbb{I}_{[0, \delta]}(h_{ij})
+    \prod_{\substack{i < j \\ (i,j) \notin \mathcal{M}}}
+    \mathbb{I}_{[0, \infty]} (h_{ij}),
+    %% \prod_{k = 1}^m \mathbb{I}_{[0, \delta]}(h_k)
+    %% \prod_{\substack{i < j \\ (i,j) \notin \mathcal{M}}}
+    %% \mathbb{I}_{[0, \infty]}(|\vec{r}_i - \vec{r}_j| - \sigma),
+    %+ \mathcal{O}(\Delta \vec{x}^2)
   \end{split}
 \end{equation*}
+%% \begin{equation*}
+%%   \begin{split}
+%%   p(\vec{x})
+%%   &=
+%%   \frac{g^{(n)}(\vec{x}) \chi_{\mathcal{D}'}(\vec{x})}{Z}
+%%   \\ &=
+%%   \underbrace{
+%%     \frac{y^{(n)}(\vec{x})}{Z}
+%%     \vphantom{\prod_{i < j}}
+%%   }_\textrm{smooth}
+%%   \;
+%%   \underbrace{
+%%     \chi_{\mathcal{D}'}(\vec{x})
+%%     \prod_{i < j}
+%%     \Theta \Big( |\vec{r}_i - \vec{r}_j| - \sigma \Big)
+%%   }_\textrm{singular terms},
+%%   \\ &\simeq
+%%   \frac{y^{(n)}(\vec{x}^*) e^{-\vec{A} \cdot \Delta \vec{x}}}{Z}
+%%   \;
+%%   \chi_{\mathcal{D}'}(\vec{x})
+%%   \prod_{i < j}
+%%   \Theta \Big( |\vec{r}_i - \vec{r}_j| - \sigma \Big)
+%%   \end{split}
+%% \end{equation*}
 with $\int_{\mathbb{R}^l} p(\vec{x}) d^l\vec{x} = 1$, and in the final line we have used the first-order expansion of the potential of mean force \eqref{eq:cavity-perturbation} $\vec{A} = \nabla \beta\Omega(\vec{x}^*)$.
+Introducing the \emph{tile distribution}
+\begin{equation}\label{eq:ep-tile-distribution}
+  t_{ij}(h_{ij})
+  =
+  \begin{cases}
+    \mathbb{I}_{[0, \delta]}(h_{ij}) & \textrm{ if } (i,j) \in \mathcal{M} \\
+    \mathbb{I}_{[0, \infty]}(h_{ij}) & \textrm{ if } (i,j) \notin \mathcal{M}
+  \end{cases}
+\end{equation}
+then the probability distribution becomes
+\begin{equation}\label{eq:ep-p-tiles}
+  p(\vec{x})
+  =
+  \frac{y^{(n)}(\vec{x}^*) e^{-\vec{A} \cdot \Delta \vec{x}}}{Z}
+  \,
+  \prod_{i < j} t_{ij}(h_{ij}).
+\end{equation}
 
-Inspired by the Harmonic approximation where the energy is expanded to second order, we will attempt to approximate the basin probability distribution as a Gaussian.
+Inspired by the Harmonic approximation \eqref{eq:harmonic-approximation}, where the energy is expanded to second order, we will attempt to approximate the basin probability distribution $p(\vec{x})$ as a Gaussian.
 We write this approximate probability distribution as
 \begin{equation}
   q(\vec{x}) = Z \mathcal{N}(\vec{x}; \vec{\mu}, \vec{\Sigma}).
 \end{equation}
 where we have kept it unnormalised for convenience (so it is not strictly a distribution): our goal is to determine $Z$.
 The moments of the Gaussian $\vec{\mu}, \vec{\Sigma}$ will be determined alongside $Z$, giving the evaluation of $I$ through \eqref{eq:rotation-metric-perturbations}.
-Note that in the Bayesian inference literature $p(\vec{x}) \sim \mathcal{P}$ would be called the posterior distribution.
+%Note that in the Bayesian inference literature $p(\vec{x})$ would be called the posterior distribution.
+Some relevant properties of multivariate Gaussians, including its explicit form, are given in section \ref{sec:gaussian-properties}
 
 Consider the free energy difference between the true and approximate distribution
 \begin{equation}
@@ -121,9 +164,11 @@ In section ? we generalise to the the more general case with additional hard sph
 \section{Minimally constrained geometries}
 \label{sec:no-ep-integration}
 
-First, we consider the simplest case of \emph{minimally constrained} geometries which have exactly $m=q$ bonds, so that the bond-distance space forms a natural basis for this expansion and we can set $\vec{x} = \{h_1, \cdots, h_m\}$, with the energy minimum occurring at $\vec{x}^* = \{0, \cdots, 0\} = \vec{0}$.
+First, we consider the simplest case of \emph{minimally constrained} geometries which have exactly $m = l$ bonds%
+\marginfootnote{As a reminder, $l = 3n - 6$ is the number of (non-rigid body) degrees of freedom.},
+so that the bond-distance space forms a natural basis for this expansion and we can set $\vec{x} = \{h_{a_1 b_1}, \cdots, h_{a_m b_m}\}$, with the energy minimum occurring at $\vec{x}^* = \{0, \cdots, 0\} = \vec{0}$.
 This special case simplifies calculation in a similar way that isostaticity can be exploited to derive theories for systems approaching jamming, \cite{WyartAP2005,BritoEEL2006}.
-However, we will have to consider the effects of additional hard sphere interactions and later we will generalise to the case where $m \ge q$.
+However, we will have to consider the effects of additional hard sphere interactions and later we will generalise to the case where $m \ge l$.
 
 As an aside, we describe how to calculate the internal metric entering into $R(\vec{x})$ for this choice of coordinates.
 This metric is defined by
@@ -132,16 +177,16 @@ This metric is defined by
 \end{equation*}
 where the Jacobian matrix entries are given by
 \begin{equation*}
-  J_{ij} = \frac{\partial x_i}{\partial h_j}.
+  J_{ij} = \frac{\partial x_i}{\partial h_{a_j b_j}}.
 \end{equation*}
-In practice it is easier to calculate its inverse numerically (via e.g.\ finite differences) using
+In practice it is usually easier to calculate its inverse numerically (via e.g.\ finite differences) using
 \begin{equation*}
-  J_{ij}^{-1}
-  = \frac{\partial h_j}{\partial x_i}
+  J_{ij}^{-1} = \frac{\partial h_{a_i b_i}}{\partial x_j},
 \end{equation*}
-which has linearly independent rows for a minimally constrained geometry so we can recover $\vec{J}$ from $\vec{K} = \vec{J}^{-1}$ using the matrix inversion formula $\vec{J} = (\vec{K}^T\vec{K})^{-1} \vec{K}^T$.
+which has linearly independent rows for a minimally constrained geometry.
+We can recover $\vec{J}$ from $\vec{K} := \vec{J}^{-1}$ using the matrix inversion formula $\vec{J} = (\vec{K}^T\vec{K})^{-1} \vec{K}^T$.
 
-In this basis the definition of structure sets the limits of integration to that of a hypercube, i.e.\
+In this basis, the definition of structure (and limits of integration) is equivalent to a hypercube, i.e.\
 \begin{equation*}
   \int_{D'} d^l x
   =
@@ -183,195 +228,51 @@ Introducing the perturbation expansion of the cavity function \eqref{eq:cavity-p
 \end{equation}
 with similar expressions for the first few moments.
 Inserting this expression into the structural partition function \eqref{eq:structural-partition-function-detailed} yields expressions for the local structure's free energy/concentration.
-This approximation is exact in the case where no overlap between other particle pairs is possible over the range of integration.
 
 The above formulae are rather simple, however the approximation is uncontrolled and we in general expect large errors for all but the most simple geometries: the hard sphere interactions should have a large effect.
-We find this approximation is reasonably accurate for $n \le 6$, however it fails for $n \ge 7$ with selected geometries.
+We find that ignoring the effect of hard sphere interactions not in $\mathcal{M}$ to be a reasonably accurate approximation for $n \le 6$, however it fails for $n \ge 7$ with selected geometries.
 In Fig.\ \ref{fig:ep-n7} (top panel) we see that the error in this method is comparable between 4 out of the 5 possible structures, with a similar trend against density.
 However, one structure deviates strongly from the main trend with the error becoming substantial at high densities.
 The geometry in question is a variant of the frustrated pentagonal bipyramid with broken five-fold symmetry (top variant Fig.\ \ref{fig:packings}); the particles with the broken bond are almost touching so ignoring their interaction is a serious approximation.
 In general, we expect the majority of stable structures to require treatment of more hard sphere interactions than just the contacts.
 
 To go beyond this approximation we will approximate the geometry of hard sphere interactions to leading order; in effect, this models the boundary conditions as a polyhedron.
-Next, we will use expectation propagation, a technique from Bayesian inference, to evaluate the integral on the resulting polyhedron.
+Finally, we will use expectation propagation to evaluate the integral on the resulting polyhedron.
 
 \section{Polyhedral approximation}
 \label{sec:polyhedral-approximation}
 
-We have a bond-distance space $\vec{x} \in \mathbb{R}^l$, $l = m$ constraints (minimally constrained for now) and $n(n-1)/2 - m$ potential interactions not already covered by the limits of integration.
+If not minimally constrained then need to choose a subset of the pairs in $\mathcal{M}$ as a basis first.
+
+We have a bond-distance space $\vec{x} \in \mathbb{R}^l$, $l = m$ constraints (minimally constrained for now) and 
 We approximate this by measuring the distances not covered by the limits of integration and expanding them to linear order
 \begin{equation}
-  \Delta_{ij}(\vec{x})
+  h_{ij}(\vec{x})
   \simeq
-  \Delta_{ij}(\vec{x}^*)
-  + \left. \nabla \Delta_{ij} \right|_{\vec{x}^*} \cdot \Delta \vec{x}
+  h_{ij}(\vec{x}^*)
+  + \nabla h_{ij}(\vec{x}^*) \cdot \Delta \vec{x}
   + \mathcal{O}(\Delta \vec{x}^2)
 \end{equation}
-and determine at this level of expansion the values of $\vec{x}$ where $\Delta_{ij} > \sigma$.
-This is expressed as the inequality
-\begin{equation}
-  \Delta_{ij}(\vec{x}^*)
-  + \left. \nabla \Delta_{ij} \right|_{\vec{x}^*} \cdot \Delta \vec{x}
-  > \sigma
-\end{equation}
-to leading order where $\vec{c}_k = \nabla \Delta_{a_k,b_k}$.
+and determine at this level of expansion the values of $\vec{x}$ where $h_{ij} > 0$.
+To leading order, the tile distribution \eqref{eq:ep-tile-distribution} then constrains the bond distances to the regions
+\begin{equation*}
+  \nabla h_{ij}(\vec{x}^*) \cdot \Delta \vec{x}
+  \in
+  \begin{cases}
+    [-h_{ij}(\vec{x}^*), \delta - h_{ij}(\vec{x}^*)] & \textrm{ if } (i,j) \in \mathcal{M} \\
+    [-h_{ij}(\vec{x}^*), \infty] & \textrm{ if } (i,j) \notin \mathcal{M}
+  \end{cases}
+\end{equation*}
+The latter line includes the $n(n-1)/2 - m$ interactions not covered by $\mathcal{M}$; empirically, for $n \le 7$ we find that most of these constraints are satisfied for all $\vec{x}$ (with $\delta \le 0.4\sigma$) and can be ignored.
 This corresponds to assigning the half space constraint
 \begin{equation}
   \vec{c}_k \cdot \Delta \vec{x} \in [\sigma - \Delta_{a_k,b_k}, \infty].
 \end{equation}
-The combination of half spaces and the cubic limits \eqref{?} describes a polyhedron in phase space, so this is a polyhedral approximation.
-Similar approximations have been made for hard sphere free energy calculations in the crystal \cite{RadinPRL2005,KochPRE2005} and related systems \cite{LeoniPRL2017}, where this approximation becomes exact at very high densities approaching close packing.
-\todo{Edit this section!}
+Similar approximations have been made for hard sphere free energy calculations in the crystal \cite{RadinPRL2005,KochPRE2005} and related systems \cite{LeoniPRL2017}; these approximations become exact at very high densities approaching close packing.
 
 Our partition function becomes an integral of the cavity function, in the exponential family, over a polyhedron.
 Besides the simple one dimensional case few exact calculations are possible.
 We will use an approximate method from Bayesian inference: expectation propagation.
-\todo{Write closer}
-
-\section{Properties of multivariate Gaussians}
-
-\todo{Write opener}
-
-The multivariate Gaussian is defined as
-\begin{equation}
-  \begin{split}
-    \mathcal{N}(\vec{x}; \vec{\mu}, \vec{\Sigma})
-    &\equiv
-    \frac{1}{\sqrt{ (2\pi)^l \det{\vec{\Sigma}} }}
-    \exp{\left(
-      - \frac{1}{2} (\vec{x} - \vec{\mu}) \cdot \vec{\Sigma}^{-1} \cdot (\vec{x} - \vec{\mu})
-      \right)}
-    \\
-    &=
-    \frac{1}{\sqrt{ (2\pi)^l \det{\vec{\Sigma}} }}
-    \exp{\left(
-      - \frac{\vec{x} \cdot \vec{\Sigma}^{-1} \cdot \vec{x}}{2}
-      + \vec{x} \cdot \vec{\Sigma}^{-1} \cdot \vec{\mu}
-      - \frac{\vec{\mu} \cdot \vec{\Sigma}^{-1} \cdot \vec{\mu}}{2}
-      \right)}
-  \end{split}
-\end{equation}
-where $\vec{x} \in \mathbb{R}^l$ is the Gaussian distributed vector in our phase space, with mean $\vec{\mu} \in \mathbb{R}^l$ and (positive-definite) covariance matrix $\vec{\Sigma} \in \mathbb{R}^{l \times l}$.
-
-In the EP algorithm we write the multivariate Gaussian approximation in $q$ as the product of univariate Gaussians from the tile distributions approximating the boundary conditions.
-To show this, consider the product of univariate Gaussians:
-\begin{align}
-  %\begin{split}
-    &
-    \prod_{i=1}^m
-    \mathcal{N}(\vec{c}_i \cdot \vec{x}; \tilde{\mu}_i, \tilde{\sigma}_i^2)
-    %\nonumber \\ =&
-    =
-    \prod_{i=1}^m
-    \left(
-    \frac{1}{\sqrt{ 2\pi \tilde{\sigma}_i^2 }}
-    \exp{\left(
-      - \frac{1}{2} \frac{(\vec{c}_i \cdot \vec{x} - \tilde{\mu}_i)^2}{\tilde{\sigma}_i^2}
-      \right)}
-    \right)
-    \nonumber \\ =&
-    \prod_{i=1}^m
-    \left(
-    \frac{1}{\sqrt{ 2\pi \tilde{\sigma}_i^2 }}
-    \exp{\left(
-      - \frac{(\vec{c}_i \cdot \vec{x})^2}{2\tilde{\sigma}_i^2}
-      + \frac{\tilde{\mu}_i(\vec{c}_i \cdot \vec{x})}{\tilde{\sigma}_i^2}
-      - \frac{\tilde{\mu}_i^2}{2\tilde{\sigma}_i^2}
-      \right)}
-    \right)
-    \nonumber \\ =&
-    \prod_{i=1}^m
-    \left(
-    \frac{1}{\sqrt{ 2\pi \tilde{\sigma}_i^2 }}
-    \exp{\left(-\frac{\tilde{\mu}_i^2}{2\tilde{\sigma}_i^2}\right)}
-    \right)
-    \exp{\left( \sum_{i=1}^m \left(
-      - \frac{(\vec{c}_i \cdot \vec{x})^2}{2\tilde{\sigma}_i^2}
-      + \frac{\tilde{\mu}_i(\vec{c}_i \cdot \vec{x})}{\tilde{\sigma}_i^2}
-      \right) \right)}
-    \nonumber \\ =&
-    \prod_{i=1}^m
-    \left(
-    \frac{1}{\sqrt{ 2\pi \tilde{\sigma}_i^2 }}
-    \exp{\left(-\frac{\tilde{\nu}_i \tilde{\mu}_i}{2}\right)}
-    \right)
-    \exp{\left( \sum_{i=1}^m \left(
-      - \vec{x} \cdot \frac{\vec{c}_i \otimes \vec{c}_i}{2\tilde{\sigma}_i^2} \cdot \vec{x}
-      + (\tilde{\nu}_i\vec{c}_i) \cdot \vec{x}
-      \right) \right)}
-    \nonumber \\ =&
-    \prod_{i=1}^m
-    \left(
-    \frac{1}{\sqrt{ 2\pi \tilde{\sigma}_i^2 }}
-    \exp{\left(-\frac{\tilde{\nu}_i \tilde{\mu}_i}{2}\right)}
-    \right)
-    \mathcal{N}(\vec{x}; \vec{\mu}, \Sigma)
-    \;
-    \sqrt{ (2\pi)^l \det{\vec{\Sigma}} }
-    \;
-    \exp{\left( \frac{\vec{\mu} \cdot \vec{\Sigma}^{-1} \cdot \vec{\mu}}{2} \right)}
-    \nonumber \\ =&
-    \prod_{i=1}^m
-    \left(
-    \frac{1}{\sqrt{ 2\pi \tilde{\sigma}_i^2 }}
-    \exp{\left(-\frac{\tilde{\nu}_i \tilde{\mu}_i}{2}\right)}
-    \right)
-    \mathcal{N}(\vec{x}; \vec{\mu}, \Sigma)
-    \;
-    \sqrt{ (2\pi)^l \det{\vec{\Sigma}} }
-    \;
-    \exp{\left( \frac{\vec{\nu} \cdot \vec{\Sigma} \cdot \vec{\nu}}{2} \right)}
-    \nonumber \\ =&
-    Z \mathcal{N}(\vec{x}; \vec{\mu}, \Sigma)
-  %\end{split}
-  \label{eq:combined-normals}
-\end{align}
-with
-\begin{subequations}
-\begin{align}
-  \tilde{\nu}_i &= \frac{\tilde{\mu}_i}{\tilde{\sigma}_i^2} \\
-  \vec{\Sigma}^{-1} &= \sum_{i=1}^m \frac{\vec{c}_i \otimes \vec{c}_i}{\tilde{\sigma}_i^2}
-  \label{eq:combined-normals-sigma}
-  \\
-  \vec{\mu} &=
-  \vec{\Sigma} \cdot \left( \sum_{i=1}^m \tilde{\nu}_i \vec{c}_i \right)
-  = \vec{\Sigma} \cdot \vec{\nu}
-  \\
-  \vec{\nu} &= \sum_{i=1}^m \tilde{\nu}_i \vec{c}_i
-  \label{eq:combined-normals-nu}
-  \\
-  Z &=
-  \sqrt{ (2\pi)^{l-m} \det{\vec{\Sigma}} }
-  \;
-  \exp{\left( \frac{\vec{\nu} \cdot \vec{\Sigma} \cdot \vec{\nu}}{2} \right)}
-  \prod_{i=1}^m
-  \left(
-  \frac{1}{\sqrt{ \tilde{\sigma}_i^2 }}
-  \exp{\left(-\frac{\tilde{\nu}_i \tilde{\mu}_i}{2}\right)}
-  \right)
-  \label{eq:combined-normals-Z}
-\end{align}
-\end{subequations}
-From this we find that
-\begin{equation}
-  \log{Z} =
-  \frac{l-m}{2} \log{2\pi} +
-  \frac{1}{2} \log\det{\vec{\Sigma}} +
-  \frac{\vec{\nu} \cdot \vec{\Sigma} \cdot \vec{\nu}}{2} -
-  \sum_{i=1}^m
-  \left(
-  \frac{1}{2} \log{\tilde{\sigma}_i^2} +
-  \frac{\tilde{\nu}_i \tilde{\mu}_i}{2}
-  \right)
-\end{equation}
-Finally, note that
-\begin{equation}\label{eq:biased-normal}
-  e^{-\vec{a} \cdot \vec{x}} \mathcal{N}(\vec{x}; \vec{\mu}, \vec{\Sigma})
-  =
-  \exp{\left( \frac{\vec{a} \cdot \vec{\Sigma} \cdot \vec{a}}{2} - \vec{a} \cdot \vec{\mu} \right)} \;
-  \mathcal{N}(\vec{x}; \vec{\mu} - \vec{\Sigma}\cdot\vec{a}, \vec{\Sigma}).
-\end{equation}
-
 \todo{Write closer}
 
 \section{Expectation propagation}
@@ -386,11 +287,11 @@ We start by noting that the true probability distribution, which includes the li
 \end{equation}
 where the $t_i$ functions represent the constraints \eqref{??} and \eqref{??}.
 \todo{Edit this section.}
-The EP algorithm constructs projections in each of these constraints to match moments along, a natural decomposition involves writing the approximate distribution in terms of tile distributions $\tilde{t}_i$
+The EP algorithm constructs projections in each of these constraints to match moments along, a natural decomposition involves writing the approximate distribution in terms of tile distributions $\widetilde{t}_i$
 \begin{equation}
   q(\vec{x})
-  = p_0(\vec{x}) \prod_{i=1}^{m} \tilde{t}_i (x_i)
-  = p_0(\vec{x}) \prod_{i=1}^{m} \tilde{Z}_i \mathcal{N}(\vec{x}; \tilde{\mu}_i, \tilde{\sigma}_i^2)
+  = p_0(\vec{x}) \prod_{i=1}^{m} \widetilde{t}_i (x_i)
+  = p_0(\vec{x}) \prod_{i=1}^{m} \widetilde{Z}_i \mathcal{N}(\vec{x}; \widetilde{\mu}_i, \widetilde{\sigma}_i^2)
 \end{equation}
 with projected values
 \begin{subequations}
@@ -404,12 +305,12 @@ From \eqref{eq:combined-normals} and \eqref{eq:biased-normal} we have
 \begin{equation}
   \begin{split}
     q(\vec{x}) &=
-    Z_0
-    p_0(\vec{x})
+    Z_0 \,
+    p_0(\vec{x}) \,
     \mathcal{N}(\vec{x}; \vec{\Sigma} \cdot \vec{\nu}, \vec{\Sigma}) \\
     &=
     Z_0
-    \exp{\left( \frac{\vec{a} \cdot \vec{\Sigma} \cdot \vec{a}}{2} - \vec{a} \cdot \vec{\Sigma} \cdot{\vec{\nu}} \right)} \;
+    \exp{\left( \frac{\vec{a} \cdot \vec{\Sigma} \cdot \vec{a}}{2} - \vec{a} \cdot \vec{\Sigma} \cdot{\vec{\nu}} \right)} \,
     \mathcal{N}(\vec{x}; \vec{\Sigma} \cdot (\vec{\nu} - \vec{a}), \vec{\Sigma})
   \end{split}
 \end{equation}
@@ -428,72 +329,72 @@ We thus have
     \exp{\left( \frac{\vec{\nu} \cdot \vec{\Sigma} \cdot \vec{\nu}}{2} \right)}
     \prod_{i=1}^m
     \left(
-    \frac{\tilde{Z}_i}{\sqrt{ \tilde{\sigma}_i^2 }}
-    \exp{\left(-\frac{\tilde{\nu}_i \tilde{\mu}_i}{2}\right)}
+    \frac{\widetilde{Z}_i}{\sqrt{ \widetilde{\sigma}_i^2 }}
+    \exp{\left(-\frac{\widetilde{\nu}_i \widetilde{\mu}_i}{2}\right)}
     \right)
   \end{align}
 \end{subequations}
 We marginalise the full probability distribution along one direction to obtain the cavity distribution
 \begin{equation}
   q^{\setminus i}(\vec{x}) =
-  \frac{\tilde{Z}_i}{Z} \frac{q(\vec{x})}{\tilde{t}_i(x_i)}
+  \frac{\widetilde{Z}_i}{Z} \frac{q(\vec{x})}{\widetilde{t}_i(x_i)}
   =
   \frac
       {\mathcal{N}(\vec{x}; \vec{\mu}, \vec{\Sigma})}
-      {\mathcal{N}(x_i; \tilde{\mu}_i, \tilde{\sigma}_i^2)}.
+      {\mathcal{N}(x_i; \widetilde{\mu}_i, \widetilde{\sigma}_i^2)}.
 \end{equation}
 This particular normalisation is chosen such that
 \begin{equation}\label{eq:approximate-zeroth-moment}
-  \int_{\mathbb{R}^l} q^{\setminus i}(\vec{x}) \tilde{t}_i(x_i) \, d\vec{x} =
-  \tilde{Z}_i \int_{\mathbb{R}^l} \mathcal{N}(\vec{x}; \vec{\mu}, \vec{\Sigma}) \, d\vec{x} =
-  \tilde{Z}_i.
+  \int_{\mathbb{R}^l} q^{\setminus i}(\vec{x}) \widetilde{t}_i(x_i) \, d\vec{x} =
+  \widetilde{Z}_i \int_{\mathbb{R}^l} \mathcal{N}(\vec{x}; \vec{\mu}, \vec{\Sigma}) \, d\vec{x} =
+  \widetilde{Z}_i.
 \end{equation}
 Integrating this cavity over the orthogonal affine space gives
 \begin{equation}
   \begin{split}
-    q_{\setminus i}(x_i) &\equiv
+    q_{\setminus i}(x_i) :=&
     \int_{\mathbb{R}^l \setminus \vec{c}_i} q^{\setminus i} (\vec{x}_{\setminus i}; x_i) \, d\vec{x}_{\setminus i} \\
-    &= \frac{1}{\mathcal{N}(x_i; \tilde{\mu}_i, \tilde{\sigma}_i^2)}
+    =& \frac{1}{\mathcal{N}(x_i; \widetilde{\mu}_i, \widetilde{\sigma}_i^2)}
     \int_{\mathbb{R}^l \setminus \vec{c}_i} \mathcal{N}(\vec{x}; \vec{\mu}, \vec{\Sigma}) \, d\vec{x}_{\setminus i} \\
-    &=
+    =&
     \frac
         {\mathcal{N}(x_i; \mu_i, \vec{c}_i \cdot \vec{\Sigma} \cdot \vec{c}_i)}
-        {\mathcal{N}(x_i; \tilde{\mu}_i, \tilde{\sigma}_i^2)} \\
-    &=
-        \sqrt{ \frac{\tilde{\sigma}_i^2}{\vec{c}_i \cdot \vec{\Sigma} \cdot \vec{c}_i} }
+        {\mathcal{N}(x_i; \widetilde{\mu}_i, \widetilde{\sigma}_i^2)} \\
+    =&
+        \sqrt{ \frac{\widetilde{\sigma}_i^2}{\vec{c}_i \cdot \vec{\Sigma} \cdot \vec{c}_i} }
         \exp{\left( -\frac{(x_i - \mu_i)^2}{2 \vec{c}_i \cdot \vec{\Sigma} \cdot \vec{c}_i} +
-          \frac{(x_i - \tilde{\mu}_i)^2}{2 \tilde{\sigma}_i^2} \right)} \\
-    &=
-        \sqrt{ \frac{\sigma_{\setminus i}^2 + \tilde{\sigma}_i^2}{\sigma_{\setminus i}^2} }
+          \frac{(x_i - \widetilde{\mu}_i)^2}{2 \widetilde{\sigma}_i^2} \right)} \\
+    =&
+        \sqrt{ \frac{\sigma_{\setminus i}^2 + \widetilde{\sigma}_i^2}{\sigma_{\setminus i}^2} }
         \exp{\left(
           - \frac{(x_i - \mu_{\setminus i})^2}{2 \sigma_{\setminus i}^2}
           + \frac{1}{2}
-          \frac{(\mu_{\setminus i} - \tilde{\mu}_i)^2}{\sigma_{\setminus i}^2 + \tilde{\sigma}_i^2}
+          \frac{(\mu_{\setminus i} - \widetilde{\mu}_i)^2}{\sigma_{\setminus i}^2 + \widetilde{\sigma}_i^2}
           \right)} \\
-     &= Z_{\setminus i} \, \mathcal{N}(x_i; \mu_{\setminus i}, \sigma_{\setminus i}^2)
+     =& Z_{\setminus i} \, \mathcal{N}(x_i; \mu_{\setminus i}, \sigma_{\setminus i}^2)
   \end{split}
 \end{equation}
 where we completed the square in the penultimate step using the cavity parameters: \cite{Rasmussen2006,Cunningham2011}
 \begin{align}
   Z_{\setminus i}
   &=
-  \sqrt{2 \pi (\sigma_{\setminus i}^2 + \tilde{\sigma}_i^2)}
+  \sqrt{2 \pi (\sigma_{\setminus i}^2 + \widetilde{\sigma}_i^2)}
   \exp{\left(
     \frac{1}{2}
-    \frac{(\mu_{\setminus i} - \tilde{\mu}_i)^2}{\sigma_{\setminus i}^2 + \tilde{\sigma}_i^2}
+    \frac{(\mu_{\setminus i} - \widetilde{\mu}_i)^2}{\sigma_{\setminus i}^2 + \widetilde{\sigma}_i^2}
     \right)}
         \\
   \sigma_{\setminus i}^2 &= \left(
-  \frac{1}{\vec{c}_i \cdot \vec{\Sigma} \cdot \vec{c}_i} - \frac{1}{\tilde{\sigma}_i^2}
+  \frac{1}{\vec{c}_i \cdot \vec{\Sigma} \cdot \vec{c}_i} - \frac{1}{\widetilde{\sigma}_i^2}
   \right)^{-1} \\
   \mu_{\setminus i} &= \sigma_{\setminus i}^2 \left(
-  \frac{\mu_i}{\vec{c}_i \cdot \vec{\Sigma} \cdot \vec{c}_i} - \frac{\tilde{\mu}_i}{\tilde{\sigma}_i^2}
+  \frac{\mu_i}{\vec{c}_i \cdot \vec{\Sigma} \cdot \vec{c}_i} - \frac{\widetilde{\mu}_i}{\widetilde{\sigma}_i^2}
   \right).
 \end{align}
 Note that the cavity distribution is the properly normalised quantity $q_{\setminus i}(x_i) / Z_{\setminus i}$.
 The exact zeroth cavity moment is found via \cite{Cunningham2011}
 \begin{equation}\label{eq:exact-zeroth-moment}
-  \frac{\hat{Z}_i}{Z_{\setminus i}} =
+  \frac{\widehat{Z}_i}{Z_{\setminus i}} =
   \frac{1}{Z_{\setminus i}}
   \int_{\mathbb{R}} q_{\setminus i}(x_i) t_i(x_i) \, dx_i
   = \frac{1}{2} \left( \erf{\beta_i} - \erf{\alpha_i} \right)
@@ -503,17 +404,17 @@ where we have used the shorthand
   \alpha_i &= \frac{l_i - \mu_{\setminus i}}{\sqrt{2} \sigma_{\setminus i}} \\
   \beta_i &= \frac{u_i - \mu_{\setminus i}}{\sqrt{2} \sigma_{\setminus i}}.
 \end{align}
-The above relations are numerically unstable in the limit of small $\sigma_i^2 - \tilde{\sigma}_i^2$, so we have to handle this case by Taylor expansion:
+The above relations are numerically unstable in the limit of small $\sigma_i^2 - \widetilde{\sigma}_i^2$, so we have to handle this case by Taylor expansion:
 \begin{align}
   q_{\setminus i}(x_i) &=
   \frac{
     \mathcal{N}(x_i; \vec{c}_i \cdot \vec{\mu}, \vec{c}_i \cdot \vec{\Sigma} \cdot \vec{c}_i)
   }{
-    \mathcal{N}(x_i; \tilde{\mu}_i, \tilde{\sigma}_i^2)
+    \mathcal{N}(x_i; \widetilde{\mu}_i, \widetilde{\sigma}_i^2)
   }
   =
   \frac{\mathcal{N}(x_i; \mu_i, \sigma_i^2)}{
-    \mathcal{N}(x_i; \tilde{\mu}_i, \tilde{\sigma}_i^2)
+    \mathcal{N}(x_i; \widetilde{\mu}_i, \widetilde{\sigma}_i^2)
   }
   \nonumber \\ &=
   \exp{\left(-a_i x_i
@@ -521,21 +422,21 @@ The above relations are numerically unstable in the limit of small $\sigma_i^2 -
     + a_i \mu_i
     \right)}
   \frac{\mathcal{N}(x_i; \mu_i + a_i \sigma_i^2, \sigma_i^2)}{
-    \mathcal{N}(x_i; \tilde{\mu}_i, \tilde{\sigma}_i^2)
+    \mathcal{N}(x_i; \widetilde{\mu}_i, \widetilde{\sigma}_i^2)
   }
 \end{align}
 where $a_i = \vec{a} \cdot \vec{c}_i$, giving
 \begin{align}
-  \hat{Z}_i
+  \widehat{Z}_i
   =&
   \int_{\mathbb{R}} q_{\setminus i}(x_i) t_i(x_i) \, dx_i
   \nonumber \\ =&
-  \sqrt{ \frac{\tilde{\sigma}_i^2}{\vec{c}_i \cdot \vec{\Sigma} \cdot \vec{c}_i} }
+  \sqrt{ \frac{\widetilde{\sigma}_i^2}{\vec{c}_i \cdot \vec{\Sigma} \cdot \vec{c}_i} }
   \int_0^{\delta_i}
   \exp{\left( -\frac{(x_i - \mu_i)^2}{2 \vec{c}_i \cdot \vec{\Sigma} \cdot \vec{c}_i} +
-    \frac{(x_i - \tilde{\mu}_i)^2}{2 \tilde{\sigma}_i^2} \right)} \, dx_i
+    \frac{(x_i - \widetilde{\mu}_i)^2}{2 \widetilde{\sigma}_i^2} \right)} \, dx_i
   \nonumber \\ =&
-  \sqrt{ \frac{\tilde{\sigma}_i^2}{\vec{c}_i \cdot \vec{\Sigma} \cdot \vec{c}_i} }
+  \sqrt{ \frac{\widetilde{\sigma}_i^2}{\vec{c}_i \cdot \vec{\Sigma} \cdot \vec{c}_i} }
   \exp{\left(
     - \frac{a_i^2 \sigma_i^2}{2}
     + a_i \mu_i
@@ -543,7 +444,7 @@ where $a_i = \vec{a} \cdot \vec{c}_i$, giving
   \nonumber \\ &
   \times \int_0^{\delta_i}
   \exp{\left( -\frac{(x_i - (\mu_i + a_i \sigma_i^2))^2}{2 \vec{c}_i \cdot \vec{\Sigma} \cdot \vec{c}_i} +
-    \frac{(x_i - \tilde{\mu}_i)^2}{2 \tilde{\sigma}_i^2} - a_i x_i \right)} \, dx_i.
+    \frac{(x_i - \widetilde{\mu}_i)^2}{2 \widetilde{\sigma}_i^2} - a_i x_i \right)} \, dx_i.
 \end{align}
 
 \begin{SCfigure}
@@ -560,22 +461,22 @@ where $a_i = \vec{a} \cdot \vec{c}_i$, giving
 
 Matching moments between \eqref{eq:approximate-zeroth-moment} and \eqref{eq:exact-zeroth-moment} gives us
 \begin{equation}
-  \tilde{Z}_i = \frac{\hat{Z}_i}{Z_{\setminus i}}
-  \sqrt{2 \pi (\sigma_{\setminus i}^2 + \tilde{\sigma}_i^2)}
+  \widetilde{Z}_i = \frac{\widehat{Z}_i}{Z_{\setminus i}}
+  \sqrt{2 \pi (\sigma_{\setminus i}^2 + \widetilde{\sigma}_i^2)}
   \exp{\left(
     \frac{1}{2}
-    \frac{(\mu_{\setminus i} - \tilde{\mu}_i)^2}{\sigma_{\setminus i}^2 + \tilde{\sigma}_i^2}
+    \frac{(\mu_{\setminus i} - \widetilde{\mu}_i)^2}{\sigma_{\setminus i}^2 + \widetilde{\sigma}_i^2}
     \right)}.
 \end{equation}
-We calculate $\hat{Z}_i / Z_{\setminus i}$ from \eqref{eq:exact-zeroth-moment} and then obtain the partition function from
+We calculate $\widehat{Z}_i / Z_{\setminus i}$ from \eqref{eq:exact-zeroth-moment} and then obtain the partition function from
 \begin{equation}
   \begin{split}
-    \log{\tilde{Z}_i}
+    \log{\widetilde{Z}_i}
     =
     \frac{1}{2} \left(
     \log{(2\pi)} +
-    \log{(\sigma_{\setminus i}^2 + \tilde{\sigma}_i^2)} +
-    \frac{(\mu_{\setminus i} - \tilde{\mu}_i)^2}{\sigma_{\setminus i}^2 + \tilde{\sigma}_i^2}
+    \log{(\sigma_{\setminus i}^2 + \widetilde{\sigma}_i^2)} +
+    \frac{(\mu_{\setminus i} - \widetilde{\mu}_i)^2}{\sigma_{\setminus i}^2 + \widetilde{\sigma}_i^2}
     \right.&
     \\
     \left.
@@ -595,78 +496,78 @@ Giving the final partition function:
     \right)
     \\ &
     + \sum_{i=1}^m \left(
-    \log{\tilde{Z}_i}
+    \log{\widetilde{Z}_i}
     - \frac{1}{2}
     \left(
-    \log{\tilde{\sigma}_i^2}
-    + \tilde{\nu}_i \tilde{\mu}_i
+    \log{\widetilde{\sigma}_i^2}
+    + \widetilde{\nu}_i \widetilde{\mu}_i
     \right)
     \right)
   \end{split}
 \end{equation}
 where we have either
 \begin{align}
-  & \log{\tilde{Z}_i}
+  & \log{\widetilde{Z}_i}
   - \frac{1}{2}
   \left(
-  \log{\tilde{\sigma}_i^2}
-  + \tilde{\nu}_i \tilde{\mu}_i
+  \log{\widetilde{\sigma}_i^2}
+  + \widetilde{\nu}_i \widetilde{\mu}_i
   \right)
   \nonumber \\ =&
   \frac{1}{2} \left(
   \log{(2\pi)} +
-  \log{(\sigma_{\setminus i}^2 + \tilde{\sigma}_i^2)} +
-  \frac{(\mu_{\setminus i} - \tilde{\mu}_i)^2}{\sigma_{\setminus i}^2 + \tilde{\sigma}_i^2}
+  \log{(\sigma_{\setminus i}^2 + \widetilde{\sigma}_i^2)} +
+  \frac{(\mu_{\setminus i} - \widetilde{\mu}_i)^2}{\sigma_{\setminus i}^2 + \widetilde{\sigma}_i^2}
   \right.
   \nonumber \\ & \qquad
   \left.
   + \log{\left(\frac{\erf{\beta_i} - \erf{\alpha_i}}{2}\right)}
-  - \log{\tilde{\sigma}_i^2}
-  - \tilde{\nu}_i \tilde{\mu}_i
+  - \log{\widetilde{\sigma}_i^2}
+  - \widetilde{\nu}_i \widetilde{\mu}_i
   \right)
   \nonumber \\ =&
   \frac{1}{2} \left(
   \log{(2\pi)} +
-  \log{\left(\frac{\sigma_{\setminus i}^2 + \tilde{\sigma}_i^2}{\tilde{\sigma}_i^2}\right)}
-  + \frac{(\mu_{\setminus i} - \tilde{\mu}_i)^2}{\sigma_{\setminus i}^2 + \tilde{\sigma}_i^2}
+  \log{\left(\frac{\sigma_{\setminus i}^2 + \widetilde{\sigma}_i^2}{\widetilde{\sigma}_i^2}\right)}
+  + \frac{(\mu_{\setminus i} - \widetilde{\mu}_i)^2}{\sigma_{\setminus i}^2 + \widetilde{\sigma}_i^2}
   \right.
   \nonumber \\ & \qquad
   \left.
-  - \tilde{\nu}_i \tilde{\mu}_i
+  - \widetilde{\nu}_i \widetilde{\mu}_i
   + \log{\left(\frac{\erf{\beta_i} - \erf{\alpha_i}}{2}\right)}
   \right)
   \nonumber \\ =&
   \frac{1}{2} \left(
   \log{(2\pi)} +
-  \log{(1 + \tilde{\tau}_i \sigma_{\setminus i}^2)}
-  + \frac{\tilde{\tau}_i \mu_{\setminus i}^2 - 2\tilde{\nu}_i \mu_{\setminus i} - \tilde{\nu}_i^2 \sigma_{\setminus i}^2}
-  {1 + \tilde{\tau}_i \sigma_{\setminus i}^2}
+  \log{(1 + \widetilde{\tau}_i \sigma_{\setminus i}^2)}
+  + \frac{\widetilde{\tau}_i \mu_{\setminus i}^2 - 2\widetilde{\nu}_i \mu_{\setminus i} - \widetilde{\nu}_i^2 \sigma_{\setminus i}^2}
+  {1 + \widetilde{\tau}_i \sigma_{\setminus i}^2}
   \right.
   \nonumber \\ & \qquad
   \left.
   + \log{\left(\frac{\erf{\beta_i} - \erf{\alpha_i}}{2}\right)}
   \right)
 \end{align}
-or for small $\sigma_i^2 - \tilde{\sigma}_i^2$ we use
+or for small $\sigma_i^2 - \widetilde{\sigma}_i^2$ we use
 \begin{equation}
   \begin{split}
     &
-    \log{\tilde{Z}_i}
+    \log{\widetilde{Z}_i}
     - \frac{1}{2}
     \left(
-    \log{\tilde{\sigma}_i^2}
-    + \tilde{\nu}_i \tilde{\mu}_i
+    \log{\widetilde{\sigma}_i^2}
+    + \widetilde{\nu}_i \widetilde{\mu}_i
     \right)
     \\ =&
     \frac{1}{2} \left( -\log{\vec{c}_i \cdot \vec{\Sigma} \cdot \vec{c}_i} \right)
     + a_i \mu_i
     - \frac{a_i^2 \sigma_i^2}{2}
-    - \frac{\tilde{\nu}_i \tilde{\mu}_i}{2}
+    - \frac{\widetilde{\nu}_i \widetilde{\mu}_i}{2}
     \\ & + 
     \log{\left(
       \int_0^{\delta_i}
       \exp{\left( -\frac{(x_i - (\mu_i + a_i \sigma_i^2))^2}{2 \vec{c}_i \cdot \vec{\Sigma} \cdot \vec{c}_i} +
-        \frac{(x_i - \tilde{\mu}_i)^2}{2 \tilde{\sigma}_i^2} -a_i x_i \right)} \, dx_i
+        \frac{(x_i - \widetilde{\mu}_i)^2}{2 \widetilde{\sigma}_i^2} -a_i x_i \right)} \, dx_i
       \right)}.
   \end{split}
 \end{equation}
@@ -710,6 +611,153 @@ At very large field strengths the error drops to essentially zero as the effect 
   }
   \label{fig:ep-errors}
 \end{SCfigure}
+
+\section{Properties of multivariate Gaussians}
+\label{sec:gaussian-properties}
+
+\todo{Write opener}
+
+The multivariate Gaussian is defined as
+\begin{equation}
+  \begin{split}
+    \mathcal{N}(\vec{x}; \vec{\mu}, \vec{\Sigma})
+    :=&
+    \frac{1}{\sqrt{ (2\pi)^l \det{\vec{\Sigma}} }}
+    \exp{\left(
+      - \frac{1}{2} (\vec{x} - \vec{\mu}) \cdot \vec{\Sigma}^{-1} \cdot (\vec{x} - \vec{\mu})
+      \right)}
+    \\
+    =&
+    \frac{1}{\sqrt{ (2\pi)^l \det{\vec{\Sigma}} }}
+    \exp{\left(
+      - \frac{\vec{x} \cdot \vec{\Sigma}^{-1} \cdot \vec{x}}{2}
+      + \vec{x} \cdot \vec{\Sigma}^{-1} \cdot \vec{\mu}
+      - \frac{\vec{\mu} \cdot \vec{\Sigma}^{-1} \cdot \vec{\mu}}{2}
+      \right)}
+  \end{split}
+\end{equation}
+where $\vec{x} \in \mathbb{R}^l$ is the Gaussian distributed vector in our phase space, with mean $\vec{\mu} \in \mathbb{R}^l$ and (positive-definite) covariance matrix $\vec{\Sigma} \in \mathbb{R}^{l \times l}$.
+
+In the EP algorithm we wrote the multivariate Gaussian approximation in $q$ as the product of univariate Gaussians from the tile distributions approximating the boundary conditions.
+To show this, consider the product of univariate Gaussians:
+\begin{align}
+  %\begin{split}
+    &
+    \prod_{i=1}^m
+    \mathcal{N}(\vec{c}_i \cdot \vec{x}; \widetilde{\mu}_i, \widetilde{\sigma}_i^2)
+    %\nonumber \\ =&
+    =
+    \prod_{i=1}^m
+    \left(
+    \frac{1}{\sqrt{ 2\pi \widetilde{\sigma}_i^2 }}
+    \exp{\left(
+      - \frac{1}{2} \frac{(\vec{c}_i \cdot \vec{x} - \widetilde{\mu}_i)^2}{\widetilde{\sigma}_i^2}
+      \right)}
+    \right)
+    %% \nonumber \\ =&
+    %% \prod_{i=1}^m
+    %% \left(
+    %% \frac{1}{\sqrt{ 2\pi \widetilde{\sigma}_i^2 }}
+    %% \exp{\left(
+    %%   - \frac{(\vec{c}_i \cdot \vec{x})^2}{2\widetilde{\sigma}_i^2}
+    %%   + \frac{\widetilde{\mu}_i(\vec{c}_i \cdot \vec{x})}{\widetilde{\sigma}_i^2}
+    %%   - \frac{\widetilde{\mu}_i^2}{2\widetilde{\sigma}_i^2}
+    %%   \right)}
+    %% \right)
+    \nonumber \\ =&
+    \prod_{i=1}^m
+    \left(
+    \frac{1}{\sqrt{ 2\pi \widetilde{\sigma}_i^2 }}
+    \exp{\left(-\frac{\widetilde{\mu}_i^2}{2\widetilde{\sigma}_i^2}\right)}
+    \right)
+    \exp{\left( \sum_{i=1}^m \left(
+      - \frac{(\vec{c}_i \cdot \vec{x})^2}{2\widetilde{\sigma}_i^2}
+      + \frac{\widetilde{\mu}_i(\vec{c}_i \cdot \vec{x})}{\widetilde{\sigma}_i^2}
+      \right) \right)}
+    %% \nonumber \\ =&
+    %% \prod_{i=1}^m
+    %% \left(
+    %% \frac{1}{\sqrt{ 2\pi \widetilde{\sigma}_i^2 }}
+    %% \exp{\left(-\frac{\widetilde{\nu}_i \widetilde{\mu}_i}{2}\right)}
+    %% \right)
+    %% \exp{\left( \sum_{i=1}^m \left(
+    %%   - \vec{x} \cdot \frac{\vec{c}_i \otimes \vec{c}_i}{2\widetilde{\sigma}_i^2} \cdot \vec{x}
+    %%   + (\widetilde{\nu}_i\vec{c}_i) \cdot \vec{x}
+    %%   \right) \right)}
+    %% \nonumber \\ =&
+    %% \prod_{i=1}^m
+    %% \left(
+    %% \frac{1}{\sqrt{ 2\pi \widetilde{\sigma}_i^2 }}
+    %% \exp{\left(-\frac{\widetilde{\nu}_i \widetilde{\mu}_i}{2}\right)}
+    %% \right)
+    %% \mathcal{N}(\vec{x}; \vec{\mu}, \Sigma)
+    %% \;
+    %% \sqrt{ (2\pi)^l \det{\vec{\Sigma}} }
+    %% \;
+    %% \exp{\left( \frac{\vec{\mu} \cdot \vec{\Sigma}^{-1} \cdot \vec{\mu}}{2} \right)}
+    \nonumber \\ =&
+    \prod_{i=1}^m
+    \left(
+    \frac{1}{\sqrt{ 2\pi \widetilde{\sigma}_i^2 }}
+    \exp{\left(-\frac{\widetilde{\nu}_i \widetilde{\mu}_i}{2}\right)}
+    \right)
+    \mathcal{N}(\vec{x}; \vec{\mu}, \Sigma)
+    \;
+    \sqrt{ (2\pi)^l \det{\vec{\Sigma}} }
+    \;
+    \exp{\left( \frac{\vec{\nu} \cdot \vec{\Sigma} \cdot \vec{\nu}}{2} \right)}
+    \nonumber \\ =&
+    Z \mathcal{N}(\vec{x}; \vec{\mu}, \Sigma)
+  %\end{split}
+  \label{eq:combined-normals}
+\end{align}
+with
+\begin{subequations}
+\begin{align}
+  \widetilde{\nu}_i &= \frac{\widetilde{\mu}_i}{\widetilde{\sigma}_i^2} \\
+  \vec{\Sigma}^{-1} &= \sum_{i=1}^m \frac{\vec{c}_i \otimes \vec{c}_i}{\widetilde{\sigma}_i^2}
+  \label{eq:combined-normals-sigma}
+  \\
+  \vec{\mu} &=
+  \vec{\Sigma} \cdot \left( \sum_{i=1}^m \widetilde{\nu}_i \vec{c}_i \right)
+  = \vec{\Sigma} \cdot \vec{\nu}
+  \\
+  \vec{\nu} &= \sum_{i=1}^m \widetilde{\nu}_i \vec{c}_i
+  \label{eq:combined-normals-nu}
+  \\
+  Z &=
+  \sqrt{ (2\pi)^{l-m} \det{\vec{\Sigma}} }
+  \;
+  \exp{\left( \frac{\vec{\nu} \cdot \vec{\Sigma} \cdot \vec{\nu}}{2} \right)}
+  \prod_{i=1}^m
+  %\left(
+  \frac{1}{\sqrt{ \widetilde{\sigma}_i^2 }}
+  \exp{\left(-\frac{\widetilde{\nu}_i \widetilde{\mu}_i}{2}\right)}
+  %\right)
+  \label{eq:combined-normals-Z}
+\end{align}
+\end{subequations}
+From this we find that
+\begin{equation}
+  \log{Z} =
+  \frac{l-m}{2} \log{2\pi} +
+  \frac{1}{2} \log\det{\vec{\Sigma}} +
+  \frac{\vec{\nu} \cdot \vec{\Sigma} \cdot \vec{\nu}}{2} -
+  \sum_{i=1}^m
+  \left(
+  \frac{1}{2} \log{\widetilde{\sigma}_i^2} +
+  \frac{\widetilde{\nu}_i \widetilde{\mu}_i}{2}
+  \right)
+\end{equation}
+Finally, note that
+\begin{equation}\label{eq:biased-normal}
+  e^{-\vec{a} \cdot \vec{x}} \mathcal{N}(\vec{x}; \vec{\mu}, \vec{\Sigma})
+  =
+  \exp{\left( \frac{\vec{a} \cdot \vec{\Sigma} \cdot \vec{a}}{2} - \vec{a} \cdot \vec{\mu} \right)} \;
+  \mathcal{N}(\vec{x}; \vec{\mu} - \vec{\Sigma}\cdot\vec{a}, \vec{\Sigma}).
+\end{equation}
+
+\todo{Write closer}
 
 \ifdefined\includebibliography
   \newgeometry{margin=1in}

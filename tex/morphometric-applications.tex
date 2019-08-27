@@ -272,15 +272,15 @@ where $a_i, b_i \in \{1, \cdots, n\}$ are the indices of touching particles.
 %Naively, we expect $m \sim dn$
 Following \cite{Holmes-CerfonPNAS2013} we introduce the \emph{bond distance} as the size of the gap between particles
 \begin{equation}\label{eq:bond-distance}
-  h_k = |\vec{r}_{a_k} - \vec{r}_{b_k}| - \sigma,
+  h_{a_k b_k} = |\vec{r}_{a_k} - \vec{r}_{b_k}| - \sigma,
 \end{equation}
-clearly contact occurs where $h_k = 0$ for all $k \in \{1, \cdots, m\}$.
-We introduce a pairwise cutoff $\delta$ such that the gaps between these particles are bounded in the range $h_k \in [0, \delta]$, with the lower limt set by the hard particle constraint.
-All the results we present use a cutoff of $\delta_{cut}=0.2 \sigma$, but we have tested that our findings are not significantly affected by a choice of $\delta_{cut}=0.4 \sigma$ indicating their robustness.
+clearly contact occurs where $h_{a_k b_k} = 0$ for all $k \in \{1, \cdots, m\}$.
+We introduce a pairwise cutoff $\delta$ such that the gaps between these particles are bounded in the range $h_{a_k b_k} \in [0, \delta]$, with the lower limt set by the hard particle constraint.
+All the results we present use a cutoff of $\delta = 0.2 \sigma$, but we have tested that our findings are not significantly affected by a choice of $\delta = 0.4 \sigma$ indicating their robustness.
 
-As an aside, it was demonstrated in \cite{BritoEEL2006} that for hard sphere glasses approacing isostaticity, every pair of contacting particles $a_k,b_k \in \mathcal{M}$ interacts through the effective potential
+As an aside, it was demonstrated in \cite{BritoEEL2006} that for hard sphere glasses approacing isostaticity, every pair of contacting particles $i,j \in \mathcal{M}$ interacts through the effective potential
 \begin{equation*}
-  \beta u_\mathrm{eff}(h_k) = \beta u(\sigma + h_k) - \ln{h_k},
+  \beta u_\mathrm{eff}(h_{ij}) = \beta u(\sigma + h_{ij}) - \ln{(h_{ij})},
 \end{equation*}
 where $u(\cdot)$ is the bare hard sphere potential.
 Approaching a jammed state, we expect strong deviations from the Carnahan-Starling equation of state input to the morphometric theory \eqref{eq:cs-pressure}, so our approach is limited to the non-isostatic liquid.
@@ -490,13 +490,13 @@ For the reference potential, we introduce harmonic springs between the bonded pa
 \begin{equation*}
   V_\mathrm{ref}(\vec{x})
   =
-  \epsilon \sum_{k=1}^m \left( h_k - \frac{\delta}{2} \right)^2
+  \epsilon \sum_{(i,j) \in \mathcal{M}} \left( h_{ij} - \frac{\delta}{2} \right)^2
 \end{equation*}
 %The latter strict criterion is how we are able to focus on specific local structures.
 To optimise the simulations the value of $\epsilon$ should be chosen to keep the free energy difference of order $\mathcal{O}(1 \, k_B T)$ \cite{SchillingJCP2009}; we found $\epsilon = 75/\sigma^2$ to be a reasonable choice with the system sizes considered for the cutoff $\delta = 0.2\sigma$.
 As the reference system is exactly harmonic, we can use \eqref{eq:harmonic-approximation} to evaluate $F_\mathrm{ref}$ to within numerical precision%
-\marginfootnote{This integral must be done in the bond-distance space introduced of section \ref{sec:structure-definition}, i.e.\ we perform the multivariate Gaussian integral in the space of $\{h_1, \cdots, h_m\}$ with a perturbation expansion of the rotational metric in \eqref{eq:structural-partition-function-detailed}.
-  In addition, evaluating this Gaussian over all of space i.e.\ $h_k \in [-\infty, \infty]$ introduces a small approximation as we have the strict lower bound $h_k > -\sigma$ from \eqref{eq:bond-distance}.}.
+\marginfootnote{This integral must be done in the bond-distance space introduced of section \ref{sec:structure-definition}, i.e.\ we perform the multivariate Gaussian integral in the space of $\{h_{a_1 b_1}, \cdots, h_{a_m b_m}\}$ with a perturbation expansion of the rotational metric in \eqref{eq:structural-partition-function-detailed}.
+  In addition, evaluating this Gaussian over all of space i.e.\ $h_{a_k b_k} \in [-\infty, \infty]$ introduces a small approximation as we have the strict lower bound $h_{a_k b_k} > -\sigma$ from \eqref{eq:bond-distance}.}.
 Finally, combining this reference $F_\mathrm{ref}$ with the thermodynamic integration steps \eqref{eq:ideal-free-energy-change} and \eqref{eq:td-integration} gives the free energy of the structure at the target volume fraction $F(\eta)$.
 
 \begin{SCfigure}
@@ -674,7 +674,7 @@ The cavity distribution is known to be a continuous function \cite{Hansen2013}, 
 where $\vec{A} = \nabla \beta\Omega(\vec{x}^*) \ne 0$.
 By contrast, the singular terms require a non-perturbative treatment.
 
-The singular terms can be expressed in terms of one-dimensional indicator functions; specifically, our choice of structure laid out in \ref{sec:structure-definition} is a restriction of to the space $h_k \in [0, \delta]$ for particles in contact at the reference point $\vec{x}^*$, and the full space $[0, \infty]$ for the remaining particle pairs.
+The singular terms can be expressed in terms of one-dimensional indicator functions; specifically, our choice of structure laid out in \ref{sec:structure-definition} is a restriction of to the space $h_{ij} \in [0, \delta]$ for particles in contact at the reference point $\vec{x}^*$, and the full space $[0, \infty]$ for the remaining particle pairs.
 We write this as
 \begin{subequations}
   \begin{align}
@@ -683,10 +683,10 @@ We write this as
     \prod_{k = 1}^m
     %% \Theta \Big( |\vec{r}_i - \vec{r}_j| - \sigma \Big)
     %% \Theta \Big( \delta - (|\vec{r}_i - \vec{r}_j| - \sigma) \Big)
-    \Theta ( h_k )
-    \Theta ( \delta - h_k )
+    \Theta ( h_{a_k b_k} )
+    \Theta ( \delta - h_{a_k b_k} )
     &=
-    \prod_{k = 1}^m \mathbb{I}_{[0, \delta]}(h_k)
+    \prod_{(i,j) \in \mathcal{M}} \mathbb{I}_{[0, \delta]} (h_{ij})
   %% \end{equation}
     %% \begin{equation}
     \\
@@ -694,8 +694,7 @@ We write this as
     \Theta \Big( |\vec{r}_i - \vec{r}_j| - \sigma \Big)
     &=
     \prod_{\substack{i < j \\ (i,j) \notin \mathcal{M}}}
-    \mathbb{I}_{[0, \infty]}
-    \Big( |\vec{r}_i - \vec{r}_j| - \sigma \Big).
+    \mathbb{I}_{[0, \infty]} (h_{ij}).
   \end{align}
 \end{subequations}
 So together with \eqref{eq:cavity-perturbation}, the probability distribution becomes
@@ -704,9 +703,12 @@ So together with \eqref{eq:cavity-perturbation}, the probability distribution be
   \simeq
   \frac{y^{(n)}(\vec{x}^*) e^{-\vec{A} \cdot \Delta \vec{x}}}{Z}
   \,
-  \prod_{k = 1}^m \mathbb{I}_{[0, \delta]}(h_k)
+  %\prod_{k = 1}^m \mathbb{I}_{[0, \delta]}(h_k)
+  \prod_{(i,j) \in \mathcal{M}} \mathbb{I}_{[0, \delta]}(h_{ij})
   \prod_{\substack{i < j \\ (i,j) \notin \mathcal{M}}}
-  \mathbb{I}_{[0, \infty]}(|\vec{r}_i - \vec{r}_j| - \sigma).
+  \mathbb{I}_{[0, \infty]} (h_{ij}).
+  %% \prod_{\substack{i < j \\ (i,j) \notin \mathcal{M}}}
+  %% \mathbb{I}_{[0, \infty]}(|\vec{r}_i - \vec{r}_j| - \sigma).
   %+ \mathcal{O}(\Delta \vec{x}^2)
 \end{equation}
 In the special case of minimally constrained geometries i.e.\ $m = l$, then the integration limits are equivalent to a hypercube.
