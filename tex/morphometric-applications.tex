@@ -716,9 +716,15 @@ The resulting integral can be evaluated analytically if the additional hard sphe
 
 More generally, we employ two approximations (full details in Appendix \ref{appendix:bayesian}):
 \begin{enumerate}
-\item \emph{Polyhedral approximation}: we approximate the integration domain as a high dimensional polyhedron.
-  \todo{say a bit more here}
-\item \emph{Expectation propagation}: inspired by the harmonic approximation \eqref{eq:harmonic-approximation}, we approximate $Z p(\vec{x})$ by an unnormalised Gaussian distribution with parameters obtained using this technique from Bayesian inference described in Refs.\ \cite{Minka2001,MinkaUAI2001,Rasmussen2006,Cunningham2011}.
+\item \emph{Polyhedral approximation}: we approximate the integration domain as a high dimensional polyhedron by expanding the generally curvilinear bond-distances to leading order i.e.\
+  \begin{equation*}
+    h_{ij}(\vec{x})
+    \simeq
+    h_{ij}(\vec{x}^*)
+    + \nabla h_{ij}(\vec{x}^*) \cdot \Delta \vec{x}
+    + \mathcal{O}(\Delta \vec{x}^2).
+  \end{equation*}
+\item \emph{Expectation propagation}: inspired by the harmonic approximation \eqref{eq:harmonic-approximation}, we approximate $p(\vec{x})$ by a Gaussian distribution with parameters obtained using this technique from Bayesian inference described in Refs.\ \cite{Minka2001,MinkaUAI2001,Rasmussen2006,Cunningham2011}.
   This method yields an approximate $Z$, and the Gaussian parameters immediately give the first and second moments of $p(\vec{x})$; the perturbative effects of the rotation metric can thus be included through application of \eqref{eq:rotation-metric-perturbations}.
 \end{enumerate}
 In the next section we apply this approximate technique to the calculation of free energies along reaction paths.
@@ -797,12 +803,12 @@ However, activated dynamics are not expected in this regime so this agreement ma
 %Given that typical particle displacements in the tripyramid--octahedron path are around 0.15$\sigma$ per particle, we observe that this relaxation mechanism may be more characteristic of ($\beta$--) relaxation than full ($\alpha$--) relaxation.
 
 Secondly, we consider the reaction path separating the two variants of the frustrated pentagonal bipyramid with $n=7$ in Fig.\ \ref{fig:reaction-path-7}.
-We find that the energy increases monotonically along the path without an activation barrier; this means that these are really thermal fluctuation of the same structure.
+We find that the energy increases monotonically along the path without an activation barrier; this means that these two distinct packings are really just thermal fluctuation of the same structure.
 %This is not a surprising result, but it opens the way to exploring the for other structures.
 This further justifies the use of the frustrated structures in Fig.\ \ref{fig:structure-populations}, even though they do not strictly correspond to unique energy minimum.
 On the flip side, it shows that our operational definition of structures needs refining, as we cannot meaningfully distinguish the different energy minima after thermalisation.
 This suggests that we have likely overcounted the number of structures in the density of states \ref{fig:n12-dos}.
-This calculation relied on expectation propagation \cite{MinkaUAI2001,Minka2001,Rasmussen2006,Cunningham2011} (and Appendix \ref{appendix:bayesian}), which opens the way to assess the connectivity of the energy landscape for local structures in hard spheres.
+This calculation relied on expectation propagation \cite{MinkaUAI2001,Minka2001,Rasmussen2006,Cunningham2011} (and Appendix \ref{appendix:bayesian}) to handle the hard sphere interactions, which opens the way to assess the connectivity of the energy landscape for local structures in hard spheres.
 
 \begin{SCfigure}
   \includegraphics[width=0.9\linewidth,outer]{n7-reaction-path}

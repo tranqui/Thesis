@@ -104,31 +104,32 @@ We write this approximate probability distribution as
 \begin{equation}
   q(\vec{x}) = Z \mathcal{N}(\vec{x}; \vec{\mu}, \vec{\Sigma}).
 \end{equation}
-where we have kept it unnormalised for convenience (so it is not strictly a distribution): our goal is to determine $Z$.
+where we have kept it unnormalised for convenience (so it is not strictly a distribution) as our goal is to determine $Z$.
 The moments of the Gaussian $\vec{\mu}, \vec{\Sigma}$ will be determined alongside $Z$, giving the evaluation of $I$ through \eqref{eq:rotation-metric-perturbations}.
 %Note that in the Bayesian inference literature $p(\vec{x})$ would be called the posterior distribution.
 Some relevant properties of multivariate Gaussians, including its explicit form, are given in section \ref{sec:gaussian-properties}
 
 Consider the free energy difference between the true and approximate distribution
-\begin{equation}
+\begin{equation*}
   \Delta F
   =
   - \int p(\vec{x})
-  \ln{\left( \frac{q(\vec{x})}{p(\vec{x})} \right)} \, d\vec{x}.
-\end{equation}
-In information theory this would be called the \emph{Kullback-Leibler divergence}, a measure of information loss from using the approximate distribution $\vec{q}$.
-It is identical to a free energy difference in the physics literature, and it is straightforward to prove that it is only zero when $p = q$ \cite{MerminPR1965, EvansAP1979}.
-It is schematically identical to the proof of the uniqueness of the equilibrium free energy.
+  \ln{\left( \frac{q(\vec{x})}{Z p(\vec{x})} \right)} \, d\vec{x}.
+\end{equation*}
+In information theory this would be called the \emph{Kullback-Leibler divergence}, a measure of information loss from using the approximate distribution $q(\vec{x})/Z$.
+It is straightforward to prove that it is only zero when $p(\vec{x}) = q(\vec{x}) / Z$ \cite{MerminPR1965, EvansAP1979}, but this is impossible to achieve unless $p(\vec{x})$ is also Gaussian.
+%It is schematically identical to the proof of the uniqueness of the equilibrium free energy.
+However, by minimising $\Delta F$ we can optimise the parameters of $q(\vec{x})$ to minimise the error of the approximation.
+It is straightforward to show that for distributions in the exponential family this corresponds to matching the moments of $q(\vec{x})$ and $p(\vec{x})$ \cite{Minka2001,MinkaUAI2001,Rasmussen2006,Cunningham2011}.
+Matching the moments is still intractable because of the high dimensionality of $\vec{x}$.
+Expectation propagation (EP) is a technique to approximate this procedure, which involves matching moments along marginal distributions instead of the whole space \cite{Minka2001,MinkaUAI2001,Rasmussen2006,Cunningham2011}.
+This approximation scheme was inspired by the cavity method of spin glasses, for applications to approximate Bayesian inference.
 
-$\Delta F = 0$ is impossible unless $p$ is also Gaussian, however by minimising $\Delta F$ we can optimise the $q$ distribution to minimise the approximation error.
-It is straightforward to show that for distributions in the exponential family this corresponds to matching the moments of $q$ and $p$ \cite{Minka2001,MinkaUAI2001,Rasmussen2006,Cunningham2011}.
-This is still intractable however, matching moments is identical to setting the distributions to one another.
-However, an approximate technique expectation propagation matches the moments of marginal distributions has been shown to approximate this well \cite{Minka2001,MinkaUAI2001,Rasmussen2006,Cunningham2011}.
-This approximation was inspired by the cavity method of spin glasses (unrelated to the cavity distribution), for application to approximate Bayesian inference problems.
-
-First, we show how this integral can be solved for the simplest case of minimally constrained geometries and where no additional hard sphere overlaps can occur over the integration domain; this approximation is valid for the smallest geometries up to $n \le 6$, however fails for $n=7$ where frustrated packings appear.
-In section ? we generalise to the the more general case with additional hard sphere interactions.
-\todo{A bit of editing needed.}
+In section \ref{sec:no-ep-integration} we show how $Z$ can be calculated exactly for the simplest case of minimally constrained geometries and where no additional hard sphere overlaps can occur over the integration domain; this approximation is valid for the smallest geometries up to $n \le 6$, however fails for $n=7$ where frustrated packings appear.
+In subsequent sections we generalise this integration to the the more general case with additional hard sphere interactions using the approximation scheme outlined above.
+In section \ref{sec:polyhedral-approximation} we introduce the \emph{polyhedral approximation} to the integration limits that simplifies treating the tile distributions appearing in \eqref{eq:ep-p-tiles}, before we describe the EP method to obtain the optimal Gaussian parameters in section \ref{sec:ep-integration}.
+Throughout this exposition we invoke properties of multivariate Gaussians, which are summarised at the end in section \ref{sec:gaussian-properties}.
+As this method is a little technical, we provide an example for a simple integration on a triangle in section \ref{sec:ep-worked-example} as an illustration.
 
 %As discussed in section \ref{?} the minimum is not as thermodynamically significant as expected for soft systems because of the singularity of the hard sphere potential.
 
@@ -168,7 +169,7 @@ First, we consider the simplest case of \emph{minimally constrained} geometries 
 \marginfootnote{As a reminder, $l = 3n - 6$ is the number of (non-rigid body) degrees of freedom.},
 so that the bond-distance space forms a natural basis for this expansion and we can set $\vec{x} = \{h_{a_1 b_1}, \cdots, h_{a_m b_m}\}$, with the energy minimum occurring at $\vec{x}^* = \{0, \cdots, 0\} = \vec{0}$.
 This special case simplifies calculation in a similar way that isostaticity can be exploited to derive theories for systems approaching jamming, \cite{WyartAP2005,BritoEEL2006}.
-However, we will have to consider the effects of additional hard sphere interactions and later we will generalise to the case where $m \ge l$.
+However, we will have to consider the effects of additional hard sphere interactions and later using EP can generalise to the case where $m \ge l$.
 
 As an aside, we describe how to calculate the internal metric entering into $R(\vec{x})$ for this choice of coordinates.
 This metric is defined by
@@ -233,65 +234,75 @@ The above formulae are rather simple, however the approximation is uncontrolled 
 We find that ignoring the effect of hard sphere interactions not in $\mathcal{M}$ to be a reasonably accurate approximation for $n \le 6$, however it fails for $n \ge 7$ with selected geometries.
 In Fig.\ \ref{fig:ep-n7} (top panel) we see that the error in this method is comparable between 4 out of the 5 possible structures, with a similar trend against density.
 However, one structure deviates strongly from the main trend with the error becoming substantial at high densities.
-The geometry in question is a variant of the frustrated pentagonal bipyramid with broken five-fold symmetry (top variant Fig.\ \ref{fig:packings}); the particles with the broken bond are almost touching so ignoring their interaction is a serious approximation.
+The geometry in question is a variant of the frustrated pentagonal bipyramid with broken fivefold symmetry (top variant Fig.\ \ref{fig:packings}); the particles with the broken bond are almost touching so ignoring their interaction is a serious approximation.
 In general, we expect the majority of stable structures to require treatment of more hard sphere interactions than just the contacts.
 
-To go beyond this approximation we will approximate the geometry of hard sphere interactions to leading order; in effect, this models the boundary conditions as a polyhedron.
-Finally, we will use expectation propagation to evaluate the integral on the resulting polyhedron.
+To go beyond this approximation we will approximate the geometry of hard sphere interactions to leading order; in effect, this models the domain of integration as a polyhedron.
+Finally, we will use the EP technique to evaluate the integral on the resulting polyhedron.
 
 \section{Polyhedral approximation}
 \label{sec:polyhedral-approximation}
 
-If not minimally constrained then need to choose a subset of the pairs in $\mathcal{M}$ as a basis first.
-
-We have a bond-distance space $\vec{x} \in \mathbb{R}^l$, $l = m$ constraints (minimally constrained for now) and 
-We approximate this by measuring the distances not covered by the limits of integration and expanding them to linear order
-\begin{equation}
+The bond-distance arguments $h_{ij}$ to the tile distributions in \eqref{eq:ep-p-tiles} are complicated functions of $\vec{x}$ in general.
+Our central simplifying approximation is to approximate them by an expansion to linear order, as in
+\begin{equation*}
   h_{ij}(\vec{x})
   \simeq
   h_{ij}(\vec{x}^*)
   + \nabla h_{ij}(\vec{x}^*) \cdot \Delta \vec{x}
-  + \mathcal{O}(\Delta \vec{x}^2)
-\end{equation}
-and determine at this level of expansion the values of $\vec{x}$ where $h_{ij} > 0$.
+  + \mathcal{O}(\Delta \vec{x}^2),
+\end{equation*}
 To leading order, the tile distribution \eqref{eq:ep-tile-distribution} then constrains the bond distances to the regions
 \begin{equation*}
   \nabla h_{ij}(\vec{x}^*) \cdot \Delta \vec{x}
   \in
   \begin{cases}
-    [-h_{ij}(\vec{x}^*), \delta - h_{ij}(\vec{x}^*)] & \textrm{ if } (i,j) \in \mathcal{M} \\
-    [-h_{ij}(\vec{x}^*), \infty] & \textrm{ if } (i,j) \notin \mathcal{M}
+    [0, \delta] & \textrm{ if } (i,j) \in \mathcal{M} \\
+    [-h_{ij}(\vec{x}^*), \infty] & \textrm{ if } (i,j) \notin \mathcal{M},
   \end{cases}
 \end{equation*}
-The latter line includes the $n(n-1)/2 - m$ interactions not covered by $\mathcal{M}$; empirically, for $n \le 7$ we find that most of these constraints are satisfied for all $\vec{x}$ (with $\delta \le 0.4\sigma$) and can be ignored.
-This corresponds to assigning the half space constraint
-\begin{equation}
-  \vec{c}_k \cdot \Delta \vec{x} \in [\sigma - \Delta_{a_k,b_k}, \infty].
-\end{equation}
+noting that $h_{ij}(\vec{x}^*) = 0$ iff $(i,j) \in \mathcal{M}$ by definition.
+The latter line includes the $n(n-1)/2 - m$ interactions not covered by $\mathcal{M}$; empirically, for $n \le 7$ we find that most of these constraints are satisfied for all $\vec{x}$ (with $\delta \le 0.4\sigma$) and can be safely ignored.
+
+Within this linear approximation, the combined effect of the tile distributions is to constrain the domain of integration to a high-dimensional polyhedron.
+Our partition function becomes an integral of the cavity function, in the exponential family to leading order, over this polyhedron.
 Similar approximations have been made for hard sphere free energy calculations in the crystal \cite{RadinPRL2005,KochPRE2005} and related systems \cite{LeoniPRL2017}; these approximations become exact at very high densities approaching close packing.
 
-Our partition function becomes an integral of the cavity function, in the exponential family, over a polyhedron.
-Besides the simple one dimensional case few exact calculations are possible.
-We will use an approximate method from Bayesian inference: expectation propagation.
-\todo{Write closer}
+Finally, we note that for implementations the derivatives $\nabla h_{ij}$ have to be calculated in some coordinate basis.
+For minimally constrained geometries with $m=l$ the natural basis is the bond-distances for pairs in $\mathcal{M}$ as outlined in the previous section.
+For $m \ge l$ any choice of $m$ pairs will serve as a basis, though the choice may affect the end result.
 
+\newpage
 \section{Expectation propagation}
 \label{sec:ep-integration}
 
-Our exposition of the expectation propagation (EP) method closely follows \cite{Cunningham2011}.
+Having introduced the relevant prerequisites, we now describe the EP algorithm which optimises the parameters of the approximate distribution $q(\vec{x})$ to obtain an estimate of the integral $Z$.
+Our exposition of this technique closely follows \cite{Cunningham2011}.
 
-We start by noting that the true probability distribution, which includes the limits of integration, can be expressed as the product of distributions
-\begin{equation}
+%We start by noting that the true probability distribution, which includes the limits of integration, can be expressed as the product of distributions
+For convenience we will ignore prefactors $y^{(n)}(\vec{x}^*)$ in \eqref{eq:ep-p-tiles}, which can be substituted back in at the end to obtain the full solution, and we assume in the chosen coordinates $\vec{x}^* = 0$ so that we can write $\Delta\vec{x} = \vec{x}$.
+Then replacing the double indices in the tile distributions with a single index $h_{ij} \to h_k$ we have
+\begin{equation*}
   p(\vec{x})
-  = y^{(n)}(\vec{x}) \prod_{i=1}^{m} t_i (x_i)
-\end{equation}
-where the $t_i$ functions represent the constraints \eqref{??} and \eqref{??}.
-\todo{Edit this section.}
-The EP algorithm constructs projections in each of these constraints to match moments along, a natural decomposition involves writing the approximate distribution in terms of tile distributions $\widetilde{t}_i$
+  =
+  e^{-\vec{A} \cdot \vec{x}}
+  \prod_{k=1}^{m^*} t_k (\vec{c}_k \cdot \vec{x})
+\end{equation*}
+where $\vec{c}_k = \nabla h_k(0)$ and $m^*$ is the number of tile distributions which contribute after making the polyhedral approximation of the previous section ($m \le m^* \le n(n-1)/2$).
+
+The EP algorithm constructs projections in the marginal distributions parallel to each of these constraints.
+The moments are then matched along these univariate distributions, which is much more tractable than for the full probability distribution.
+To facilitate this, a natural decomposition of $q(\vec{x})$ involves writing it in terms of approximate tile distributions $\widetilde{t}_i$, i.e.\
 \begin{equation}
   q(\vec{x})
-  = p_0(\vec{x}) \prod_{i=1}^{m} \widetilde{t}_i (x_i)
-  = p_0(\vec{x}) \prod_{i=1}^{m} \widetilde{Z}_i \mathcal{N}(\vec{x}; \widetilde{\mu}_i, \widetilde{\sigma}_i^2)
+  =
+  e^{-\vec{A} \cdot \vec{x}} \,
+  %p_0(\vec{x})
+  \prod_{i=1}^{m^*} \widetilde{t}_i (x_i)
+  =
+  e^{-\vec{A} \cdot \vec{x}} \,
+  %p_0(\vec{x})
+  \prod_{i=1}^{m^*} \widetilde{Z}_i \mathcal{N}(x_i; \widetilde{\mu}_i, \widetilde{\sigma}_i^2)
 \end{equation}
 with projected values
 \begin{subequations}
@@ -305,29 +316,30 @@ From \eqref{eq:combined-normals} and \eqref{eq:biased-normal} we have
 \begin{equation}
   \begin{split}
     q(\vec{x}) &=
-    Z_0 \,
-    p_0(\vec{x}) \,
+    Z_0
+    \exp{\left( -\vec{A} \cdot \vec{x} \right)} \,
+    %p_0(\vec{x}) \,
     \mathcal{N}(\vec{x}; \vec{\Sigma} \cdot \vec{\nu}, \vec{\Sigma}) \\
     &=
     Z_0
-    \exp{\left( \frac{\vec{a} \cdot \vec{\Sigma} \cdot \vec{a}}{2} - \vec{a} \cdot \vec{\Sigma} \cdot{\vec{\nu}} \right)} \,
-    \mathcal{N}(\vec{x}; \vec{\Sigma} \cdot (\vec{\nu} - \vec{a}), \vec{\Sigma})
+    \exp{\left( \frac{\vec{A} \cdot \vec{\Sigma} \cdot \vec{A}}{2} - \vec{A} \cdot \vec{\Sigma} \cdot{\vec{\nu}} \right)} \,
+    \mathcal{N}(\vec{x}; \vec{\Sigma} \cdot (\vec{\nu} - \vec{A}), \vec{\Sigma})
   \end{split}
 \end{equation}
 where $\vec{\Sigma}, \vec{\nu}, Z_0$ are given by \eqref{eq:combined-normals-sigma}, \eqref{eq:combined-normals-nu} and \eqref{eq:combined-normals-Z} respectively.
 We thus have
 \begin{subequations}
   \begin{align}
-    \vec{\mu} &= \vec{\Sigma} \cdot (\vec{\nu} - \vec{a})
+    \vec{\mu} &= \vec{\Sigma} \cdot (\vec{\nu} - \vec{A})
     \\
     Z &= Z_0
-    \exp{\left( \frac{\vec{a} \cdot \vec{\Sigma} \cdot \vec{a}}{2} - \vec{a} \cdot \vec{\Sigma} \cdot \vec{\nu} \right)}
+    \exp{\left( \frac{\vec{A} \cdot \vec{\Sigma} \cdot \vec{A}}{2} - \vec{A} \cdot \vec{\Sigma} \cdot \vec{\nu} \right)}
     \\
     Z_0 &=
-    \sqrt{ (2\pi)^{l-m} \det{\vec{\Sigma}} }
+    \sqrt{ (2\pi)^{l-m^*} \det{\vec{\Sigma}} }
     \;
     \exp{\left( \frac{\vec{\nu} \cdot \vec{\Sigma} \cdot \vec{\nu}}{2} \right)}
-    \prod_{i=1}^m
+    \prod_{i=1}^{m^*}
     \left(
     \frac{\widetilde{Z}_i}{\sqrt{ \widetilde{\sigma}_i^2 }}
     \exp{\left(-\frac{\widetilde{\nu}_i \widetilde{\mu}_i}{2}\right)}
@@ -394,12 +406,19 @@ where we completed the square in the penultimate step using the cavity parameter
 Note that the cavity distribution is the properly normalised quantity $q_{\setminus i}(x_i) / Z_{\setminus i}$.
 The exact zeroth cavity moment is found via \cite{Cunningham2011}
 \begin{equation}\label{eq:exact-zeroth-moment}
-  \frac{\widehat{Z}_i}{Z_{\setminus i}} =
-  \frac{1}{Z_{\setminus i}}
-  \int_{\mathbb{R}} q_{\setminus i}(x_i) t_i(x_i) \, dx_i
-  = \frac{1}{2} \left( \erf{\beta_i} - \erf{\alpha_i} \right)
+  \begin{split}
+    \frac{\widehat{Z}_i}{Z_{\setminus i}}
+    &=
+    \frac{1}{Z_{\setminus i}}
+    \int_{\mathbb{R}} q_{\setminus i}(x_i) t_i(x_i) \, dx_i
+    \\ &=
+    \frac{1}{Z_{\setminus i}}
+    \int_{l_i}^{u_i} q_{\setminus i}(x_i) \, dx_i
+    =
+    \frac{1}{2} \left( \erf{\beta_i} - \erf{\alpha_i} \right)
+  \end{split}
 \end{equation}
-where we have used the shorthand
+where $l_i, u_i$ are the limits imposed by the tile distribution, and where we have introduced the shorthand
 \begin{align}
   \alpha_i &= \frac{l_i - \mu_{\setminus i}}{\sqrt{2} \sigma_{\setminus i}} \\
   \beta_i &= \frac{u_i - \mu_{\setminus i}}{\sqrt{2} \sigma_{\setminus i}}.
@@ -417,48 +436,43 @@ The above relations are numerically unstable in the limit of small $\sigma_i^2 -
     \mathcal{N}(x_i; \widetilde{\mu}_i, \widetilde{\sigma}_i^2)
   }
   \nonumber \\ &=
-  \exp{\left(-a_i x_i
-    - \frac{a_i^2 \sigma_i^2}{2}
-    + a_i \mu_i
+  \exp{\left(-A_i x_i
+    - \frac{A_i^2 \sigma_i^2}{2}
+    + A_i \mu_i
     \right)}
-  \frac{\mathcal{N}(x_i; \mu_i + a_i \sigma_i^2, \sigma_i^2)}{
+  \frac{\mathcal{N}(x_i; \mu_i + A_i \sigma_i^2, \sigma_i^2)}{
     \mathcal{N}(x_i; \widetilde{\mu}_i, \widetilde{\sigma}_i^2)
   }
 \end{align}
-where $a_i = \vec{a} \cdot \vec{c}_i$, giving
+where $A_i = \vec{A} \cdot \vec{c}_i$, giving
 \begin{align}
   \widehat{Z}_i
   =&
   \int_{\mathbb{R}} q_{\setminus i}(x_i) t_i(x_i) \, dx_i
   \nonumber \\ =&
   \sqrt{ \frac{\widetilde{\sigma}_i^2}{\vec{c}_i \cdot \vec{\Sigma} \cdot \vec{c}_i} }
-  \int_0^{\delta_i}
+  %\int_0^{\delta_i}
+  \int_{l_i}^{u_i}
   \exp{\left( -\frac{(x_i - \mu_i)^2}{2 \vec{c}_i \cdot \vec{\Sigma} \cdot \vec{c}_i} +
-    \frac{(x_i - \widetilde{\mu}_i)^2}{2 \widetilde{\sigma}_i^2} \right)} \, dx_i
-  \nonumber \\ =&
-  \sqrt{ \frac{\widetilde{\sigma}_i^2}{\vec{c}_i \cdot \vec{\Sigma} \cdot \vec{c}_i} }
-  \exp{\left(
-    - \frac{a_i^2 \sigma_i^2}{2}
-    + a_i \mu_i
-    \right)}
-  \nonumber \\ &
-  \times \int_0^{\delta_i}
-  \exp{\left( -\frac{(x_i - (\mu_i + a_i \sigma_i^2))^2}{2 \vec{c}_i \cdot \vec{\Sigma} \cdot \vec{c}_i} +
-    \frac{(x_i - \widetilde{\mu}_i)^2}{2 \widetilde{\sigma}_i^2} - a_i x_i \right)} \, dx_i.
+    \frac{(x_i - \widetilde{\mu}_i)^2}{2 \widetilde{\sigma}_i^2} \right)}
+  %t_i(x_i)
+  \, dx_i,
+  %% \nonumber \\ =&
+  %% \sqrt{ \frac{\widetilde{\sigma}_i^2}{\vec{c}_i \cdot \vec{\Sigma} \cdot \vec{c}_i} }
+  %% \exp{\left(
+  %%   - \frac{A_i^2 \sigma_i^2}{2}
+  %%   + A_i \mu_i
+  %%   \right)}
+  %% \nonumber \\ &
+  %% \times \int_0^{\delta_i}
+  %% \exp{\left( -\frac{(x_i - (\mu_i + A_i \sigma_i^2))^2}{2 \vec{c}_i \cdot \vec{\Sigma} \cdot \vec{c}_i} +
+  %%   \frac{(x_i - \widetilde{\mu}_i)^2}{2 \widetilde{\sigma}_i^2} - A_i x_i \right)} \, dx_i.
 \end{align}
+which is in a suitable form for a perturbation expansion.
 
-\begin{SCfigure}
-  \includegraphics[width=0.9\linewidth,outer]{ep-n7}
-  \caption[Errors in analytical integration techniques for the free energies of $n=7$ structures]{
-    Errors in analytic integration techniques for free energies of the five $n = 7$ structures in Fig.\ \ref{fig:packings}.
-    Top panel: simple integration ignoring hard sphere interactions not explicitly captured by the boundary conditions (section \ref{sec:no-ep-integration}).
-    Bottom panel: expectation propagation (EP) integration which approximates the combined effect of boundary conditions and hard sphere interactions using (section \ref{sec:ep-integration}).
-    In each case, the numerically exact result was obtained using thermodynamic integration described in chapter \ref{chapter:morphometric-applications}.
-    The orange curve which deviates from the main trend without EP is the structure corresponding to a pentagonal bipyramid with broken five-fold symmetry; treatment of the broken bond with EP corrects the deviation.
-  }
-  \label{fig:ep-n7}
-\end{SCfigure}
-
+In the EP algorithm an iterative scheme is constructed to obtain the parameters $\{\widetilde{Z}_i, \widetilde{\mu}_i, \widetilde{\sigma}_i^2\}$ so that the equality \eqref{eq:exact-zeroth-moment} is achieved along with similar equalities for the higher-order moments \cite{Minka2001,MinkaUAI2001,Rasmussen2006,Cunningham2011}.
+This process is simpler than before because in each iteration the parameters are univariate.
+After obtaining the optimal parameters, we have to the univariate distributions back together to obtain the final value of $Z$.
 Matching moments between \eqref{eq:approximate-zeroth-moment} and \eqref{eq:exact-zeroth-moment} gives us
 \begin{equation}
   \widetilde{Z}_i = \frac{\widehat{Z}_i}{Z_{\setminus i}}
@@ -468,8 +482,8 @@ Matching moments between \eqref{eq:approximate-zeroth-moment} and \eqref{eq:exac
     \frac{(\mu_{\setminus i} - \widetilde{\mu}_i)^2}{\sigma_{\setminus i}^2 + \widetilde{\sigma}_i^2}
     \right)}.
 \end{equation}
-We calculate $\widehat{Z}_i / Z_{\setminus i}$ from \eqref{eq:exact-zeroth-moment} and then obtain the partition function from
-\begin{equation}
+We calculate $\widehat{Z}_i / Z_{\setminus i}$ from \eqref{eq:exact-zeroth-moment} and then obtain the partition function as
+\begin{equation}\label{eq:well-behaved-logZhat}
   \begin{split}
     \log{\widetilde{Z}_i}
     =
@@ -481,50 +495,51 @@ We calculate $\widehat{Z}_i / Z_{\setminus i}$ from \eqref{eq:exact-zeroth-momen
     \\
     \left.
     + \log{\left(\frac{\erf{\beta_i} - \erf{\alpha_i}}{2}\right)}
-    \right)&
+    \right)&.
   \end{split}
 \end{equation}
-Giving the final partition function:
+From \eqref{eq:pre-ep-logZ} the final partition function is found as
 \begin{equation}
   \begin{split}
     \log{Z}
     =&
-    \frac{1}{2} \left(
-    (l-m) \log{2\pi}
+    \frac{1}{2} \Big(
+    (l-m^*) \log{2\pi}
     + \log\det{\vec{\Sigma}}
     + \vec{\nu} \cdot \vec{\Sigma} \cdot \vec{\nu}
-    \right)
+    \Big)
     \\ &
-    + \sum_{i=1}^m \left(
+    + \sum_{i=1}^{m^*} \left(
     \log{\widetilde{Z}_i}
     - \frac{1}{2}
     \left(
     \log{\widetilde{\sigma}_i^2}
-    + \widetilde{\nu}_i \widetilde{\mu}_i
+    %+ \widetilde{\nu}_i \widetilde{\mu}_i
+    + \frac{\widetilde{\mu}_i^2}{\widetilde{\sigma}_i^2}
     \right)
     \right)
   \end{split}
 \end{equation}
-where we have either
+where the term inside the summation is given by \cite{Cunningham2011}
 \begin{align}
   & \log{\widetilde{Z}_i}
   - \frac{1}{2}
   \left(
   \log{\widetilde{\sigma}_i^2}
-  + \widetilde{\nu}_i \widetilde{\mu}_i
+  + \frac{\widetilde{\mu}_i^2}{\widetilde{\sigma}_i^2}
   \right)
-  \nonumber \\ =&
-  \frac{1}{2} \left(
-  \log{(2\pi)} +
-  \log{(\sigma_{\setminus i}^2 + \widetilde{\sigma}_i^2)} +
-  \frac{(\mu_{\setminus i} - \widetilde{\mu}_i)^2}{\sigma_{\setminus i}^2 + \widetilde{\sigma}_i^2}
-  \right.
-  \nonumber \\ & \qquad
-  \left.
-  + \log{\left(\frac{\erf{\beta_i} - \erf{\alpha_i}}{2}\right)}
-  - \log{\widetilde{\sigma}_i^2}
-  - \widetilde{\nu}_i \widetilde{\mu}_i
-  \right)
+  %% \nonumber \\ =&
+  %% \frac{1}{2} \left(
+  %% \log{(2\pi)} +
+  %% \log{(\sigma_{\setminus i}^2 + \widetilde{\sigma}_i^2)} +
+  %% \frac{(\mu_{\setminus i} - \widetilde{\mu}_i)^2}{\sigma_{\setminus i}^2 + \widetilde{\sigma}_i^2}
+  %% \right.
+  %% \nonumber \\ & \qquad
+  %% \left.
+  %% + \log{\left(\frac{\erf{\beta_i} - \erf{\alpha_i}}{2}\right)}
+  %% - \log{\widetilde{\sigma}_i^2}
+  %% - \widetilde{\nu}_i \widetilde{\mu}_i
+  %% \right)
   \nonumber \\ =&
   \frac{1}{2} \left(
   \log{(2\pi)} +
@@ -533,55 +548,44 @@ where we have either
   \right.
   \nonumber \\ & \qquad
   \left.
-  - \widetilde{\nu}_i \widetilde{\mu}_i
+  %- \widetilde{\nu}_i \widetilde{\mu}_i
+  - \frac{\widetilde{\mu}_i^2}{\widetilde{\sigma}_i^2}
   + \log{\left(\frac{\erf{\beta_i} - \erf{\alpha_i}}{2}\right)}
-  \right)
-  \nonumber \\ =&
-  \frac{1}{2} \left(
-  \log{(2\pi)} +
-  \log{(1 + \widetilde{\tau}_i \sigma_{\setminus i}^2)}
-  + \frac{\widetilde{\tau}_i \mu_{\setminus i}^2 - 2\widetilde{\nu}_i \mu_{\setminus i} - \widetilde{\nu}_i^2 \sigma_{\setminus i}^2}
-  {1 + \widetilde{\tau}_i \sigma_{\setminus i}^2}
-  \right.
-  \nonumber \\ & \qquad
-  \left.
-  + \log{\left(\frac{\erf{\beta_i} - \erf{\alpha_i}}{2}\right)}
-  \right)
+  \right),
+  %% \nonumber \\ =&
+  %% \frac{1}{2} \left(
+  %% \log{(2\pi)} +
+  %% \log{(1 + \widetilde{\tau}_i \sigma_{\setminus i}^2)}
+  %% + \frac{\widetilde{\tau}_i \mu_{\setminus i}^2 - 2\widetilde{\nu}_i \mu_{\setminus i} - \widetilde{\nu}_i^2 \sigma_{\setminus i}^2}
+  %% {1 + \widetilde{\tau}_i \sigma_{\setminus i}^2}
+  %% \right.
+  %% \nonumber \\ & \qquad
+  %% \left.
+  %% + \log{\left(\frac{\erf{\beta_i} - \erf{\alpha_i}}{2}\right)}
+  %% \right),
 \end{align}
-or for small $\sigma_i^2 - \widetilde{\sigma}_i^2$ we use
-\begin{equation}
-  \begin{split}
-    &
-    \log{\widetilde{Z}_i}
-    - \frac{1}{2}
-    \left(
-    \log{\widetilde{\sigma}_i^2}
-    + \widetilde{\nu}_i \widetilde{\mu}_i
-    \right)
-    \\ =&
-    \frac{1}{2} \left( -\log{\vec{c}_i \cdot \vec{\Sigma} \cdot \vec{c}_i} \right)
-    + a_i \mu_i
-    - \frac{a_i^2 \sigma_i^2}{2}
-    - \frac{\widetilde{\nu}_i \widetilde{\mu}_i}{2}
-    \\ & + 
-    \log{\left(
-      \int_0^{\delta_i}
-      \exp{\left( -\frac{(x_i - (\mu_i + a_i \sigma_i^2))^2}{2 \vec{c}_i \cdot \vec{\Sigma} \cdot \vec{c}_i} +
-        \frac{(x_i - \widetilde{\mu}_i)^2}{2 \widetilde{\sigma}_i^2} -a_i x_i \right)} \, dx_i
-      \right)}.
-  \end{split}
-\end{equation}
+from \eqref{eq:well-behaved-logZhat}.
+Note that the latter quantity is numerically unstable for small $\sigma_i^2 - \widetilde{\sigma}_i^2$, so a perturbation expansion must be used instead; this ensures that this method reduces to the exact integral of section \ref{sec:no-ep-integration} in cases where $m=l$ and no additional hard sphere overlaps are possible.
+
+In Fig.\ \ref{fig:ep-n7} (bottom panel) we see that this method can handle the effect of additional hard sphere interactions.
+There is a systematic error brought about by the approximations in this integration scheme, however this error scales similarly for all 5 of the packings available for $n=7$ particles.
+
+This has been a rather technical account of the method, so in the next section we show how $q(\vec{x})$ approximates the tile distributions in the simple case of an integration over a triangle.
 
 \begin{SCfigure}
-  \includegraphics[width=0.9\linewidth,outer]{ep-pdf}
-  \caption[Approximate probability distribution for integrating areas of simple 2d shapes]{
-    Approximate (Gaussian) probability distribution $q(x,y)$ produced by expectation propagation for integrating over a square (top) and a right-angled triangle (bottom).
-    In each panel the boundary of the true integration area is indicated by red lines.
+  \includegraphics[width=0.9\linewidth,outer]{ep-n7}
+  \caption[Errors in analytical integration techniques for the free energies of $n=7$ structures]{
+    Errors in analytic integration techniques for free energies of the five $n = 7$ structures in Fig.\ \ref{fig:packings}.
+    Top panel: simple integration ignoring hard sphere interactions not explicitly captured by the boundary conditions (section \ref{sec:no-ep-integration}).
+    Bottom panel: expectation propagation (EP) integration which approximates the combined effect of boundary conditions and hard sphere interactions using (section \ref{sec:ep-integration}).
+    In each case, the numerically exact result was obtained using thermodynamic integration described in chapter \ref{chapter:morphometric-applications}.
+    The orange curve which deviates from the main trend without EP is the structure corresponding to a pentagonal bipyramid with broken fivefold symmetry; treatment of the broken bond with EP corrects the deviation.
   }
-  \label{fig:ep-pdf}
+  \label{fig:ep-n7}
 \end{SCfigure}
 
 \section{Worked example: area of a triangle}
+\label{sec:ep-worked-example}
 
 As a simple worked example we consider the area of a right-angled triangle with vertices $(0,0)$, $(1,0)$, and $(0,1)$ i.e.\ half of the unit square.
 We can write this area as the integral over a box
@@ -594,6 +598,7 @@ The exact result is fairly trivial, but it has the same form as the integrals we
 As such, we can evaluate the area using expectation propagation giving $A_\Delta^\mathrm{EP} \simeq 0.515$ for an error of about 3\%.
 The effective probability distribution $p(x,y)$ for this integral is shown in \ref{fig:ep-pdf} (lower panel) which illustrates how the method builds in geometric information of additional constraints (in this case $\Theta(1 - x - y)$.
 The distribution for the equivalent integral without this constraint is shown in the same figure (upper panel).
+
 As an extension of the above problem we introduce an external field representing the perturbation expansion of the potential of mean force $\phi^{(n)}$.
 We obtain the integral
 \begin{equation}\label{eq:ep-triangle-integral}
@@ -603,19 +608,18 @@ with the errors of expectation propagation shown in Fig.\ \ref{fig:ep-errors}.
 The error of 3\% in the area is recovered in the limit $\vec{A} \to 0$, which increases to a maximum of around 4\% at moderate field strength.
 At very large field strengths the error drops to essentially zero as the effect of the extra boundary condition is not seen, and the method becomes exact.
 
+
 \begin{SCfigure}
-  \includegraphics[width=0.9\linewidth,outer]{ep-errors}
-  \caption[Errors in expectation propagation for integrating a field over a triangle]{
-    Errors in expecation propagation for integrating a field over a triangle.
-    The exact integral is given by \eqref{eq:ep-triangle-integral}, taking field $\vec{A} = (A, A)$.
+  \includegraphics[width=0.9\linewidth,outer]{ep-pdf}
+  \caption[Approximate probability distribution for integrating areas of simple 2d shapes]{
+    Approximate (Gaussian) probability distribution $q(x,y)$ produced by expectation propagation for an integration over a square (top) and a right-angled triangle (bottom).
+    In each panel the boundary of the true integration area is indicated by red lines, though the approximate probability distribution spans all of space.
   }
-  \label{fig:ep-errors}
+  \label{fig:ep-pdf}
 \end{SCfigure}
 
-\section{Properties of multivariate Gaussians}
+\section{Addendum: properties of multivariate Gaussians}
 \label{sec:gaussian-properties}
-
-\todo{Write opener}
 
 The multivariate Gaussian is defined as
 \begin{equation}
@@ -638,16 +642,25 @@ The multivariate Gaussian is defined as
 \end{equation}
 where $\vec{x} \in \mathbb{R}^l$ is the Gaussian distributed vector in our phase space, with mean $\vec{\mu} \in \mathbb{R}^l$ and (positive-definite) covariance matrix $\vec{\Sigma} \in \mathbb{R}^{l \times l}$.
 
+\begin{SCfigure}
+  \includegraphics[width=0.9\linewidth,outer]{ep-errors}
+  \caption[Errors in expectation propagation for integrating a field over a triangle]{
+    Errors in expectation propagation for integrating a field over a triangle.
+    The exact integral is given by \eqref{eq:ep-triangle-integral}, taking field $\vec{A} = (A, A)$.
+  }
+  \label{fig:ep-errors}
+\end{SCfigure}
+
 In the EP algorithm we wrote the multivariate Gaussian approximation in $q$ as the product of univariate Gaussians from the tile distributions approximating the boundary conditions.
 To show this, consider the product of univariate Gaussians:
 \begin{align}
   %\begin{split}
     &
-    \prod_{i=1}^m
+    \prod_{i=1}^{m^*}
     \mathcal{N}(\vec{c}_i \cdot \vec{x}; \widetilde{\mu}_i, \widetilde{\sigma}_i^2)
     %\nonumber \\ =&
     =
-    \prod_{i=1}^m
+    \prod_{i=1}^{m^*}
     \left(
     \frac{1}{\sqrt{ 2\pi \widetilde{\sigma}_i^2 }}
     \exp{\left(
@@ -655,7 +668,7 @@ To show this, consider the product of univariate Gaussians:
       \right)}
     \right)
     %% \nonumber \\ =&
-    %% \prod_{i=1}^m
+    %% \prod_{i=1}^{m^*}
     %% \left(
     %% \frac{1}{\sqrt{ 2\pi \widetilde{\sigma}_i^2 }}
     %% \exp{\left(
@@ -665,27 +678,27 @@ To show this, consider the product of univariate Gaussians:
     %%   \right)}
     %% \right)
     \nonumber \\ =&
-    \prod_{i=1}^m
+    \prod_{i=1}^{m^*}
     \left(
     \frac{1}{\sqrt{ 2\pi \widetilde{\sigma}_i^2 }}
     \exp{\left(-\frac{\widetilde{\mu}_i^2}{2\widetilde{\sigma}_i^2}\right)}
     \right)
-    \exp{\left( \sum_{i=1}^m \left(
+    \exp{\left( \sum_{i=1}^{m^*} \left(
       - \frac{(\vec{c}_i \cdot \vec{x})^2}{2\widetilde{\sigma}_i^2}
       + \frac{\widetilde{\mu}_i(\vec{c}_i \cdot \vec{x})}{\widetilde{\sigma}_i^2}
       \right) \right)}
     %% \nonumber \\ =&
-    %% \prod_{i=1}^m
+    %% \prod_{i=1}^{m^*}
     %% \left(
     %% \frac{1}{\sqrt{ 2\pi \widetilde{\sigma}_i^2 }}
     %% \exp{\left(-\frac{\widetilde{\nu}_i \widetilde{\mu}_i}{2}\right)}
     %% \right)
-    %% \exp{\left( \sum_{i=1}^m \left(
+    %% \exp{\left( \sum_{i=1}^{m^*} \left(
     %%   - \vec{x} \cdot \frac{\vec{c}_i \otimes \vec{c}_i}{2\widetilde{\sigma}_i^2} \cdot \vec{x}
     %%   + (\widetilde{\nu}_i\vec{c}_i) \cdot \vec{x}
     %%   \right) \right)}
     %% \nonumber \\ =&
-    %% \prod_{i=1}^m
+    %% \prod_{i=1}^{m^*}
     %% \left(
     %% \frac{1}{\sqrt{ 2\pi \widetilde{\sigma}_i^2 }}
     %% \exp{\left(-\frac{\widetilde{\nu}_i \widetilde{\mu}_i}{2}\right)}
@@ -696,7 +709,7 @@ To show this, consider the product of univariate Gaussians:
     %% \;
     %% \exp{\left( \frac{\vec{\mu} \cdot \vec{\Sigma}^{-1} \cdot \vec{\mu}}{2} \right)}
     \nonumber \\ =&
-    \prod_{i=1}^m
+    \prod_{i=1}^{m^*}
     \left(
     \frac{1}{\sqrt{ 2\pi \widetilde{\sigma}_i^2 }}
     \exp{\left(-\frac{\widetilde{\nu}_i \widetilde{\mu}_i}{2}\right)}
@@ -715,21 +728,21 @@ with
 \begin{subequations}
 \begin{align}
   \widetilde{\nu}_i &= \frac{\widetilde{\mu}_i}{\widetilde{\sigma}_i^2} \\
-  \vec{\Sigma}^{-1} &= \sum_{i=1}^m \frac{\vec{c}_i \otimes \vec{c}_i}{\widetilde{\sigma}_i^2}
+  \vec{\Sigma}^{-1} &= \sum_{i=1}^{m^*} \frac{\vec{c}_i \otimes \vec{c}_i}{\widetilde{\sigma}_i^2}
   \label{eq:combined-normals-sigma}
   \\
   \vec{\mu} &=
-  \vec{\Sigma} \cdot \left( \sum_{i=1}^m \widetilde{\nu}_i \vec{c}_i \right)
+  \vec{\Sigma} \cdot \left( \sum_{i=1}^{m^*} \widetilde{\nu}_i \vec{c}_i \right)
   = \vec{\Sigma} \cdot \vec{\nu}
   \\
-  \vec{\nu} &= \sum_{i=1}^m \widetilde{\nu}_i \vec{c}_i
+  \vec{\nu} &= \sum_{i=1}^{m^*} \widetilde{\nu}_i \vec{c}_i
   \label{eq:combined-normals-nu}
   \\
   Z &=
-  \sqrt{ (2\pi)^{l-m} \det{\vec{\Sigma}} }
+  \sqrt{ (2\pi)^{l-m^*} \det{\vec{\Sigma}} }
   \;
   \exp{\left( \frac{\vec{\nu} \cdot \vec{\Sigma} \cdot \vec{\nu}}{2} \right)}
-  \prod_{i=1}^m
+  \prod_{i=1}^{m^*}
   %\left(
   \frac{1}{\sqrt{ \widetilde{\sigma}_i^2 }}
   \exp{\left(-\frac{\widetilde{\nu}_i \widetilde{\mu}_i}{2}\right)}
@@ -738,12 +751,12 @@ with
 \end{align}
 \end{subequations}
 From this we find that
-\begin{equation}
+\begin{equation}\label{eq:pre-ep-logZ}
   \log{Z} =
-  \frac{l-m}{2} \log{2\pi} +
+  \frac{l-m^*}{2} \log{2\pi} +
   \frac{1}{2} \log\det{\vec{\Sigma}} +
   \frac{\vec{\nu} \cdot \vec{\Sigma} \cdot \vec{\nu}}{2} -
-  \sum_{i=1}^m
+  \sum_{i=1}^{m^*}
   \left(
   \frac{1}{2} \log{\widetilde{\sigma}_i^2} +
   \frac{\widetilde{\nu}_i \widetilde{\mu}_i}{2}
@@ -751,13 +764,11 @@ From this we find that
 \end{equation}
 Finally, note that
 \begin{equation}\label{eq:biased-normal}
-  e^{-\vec{a} \cdot \vec{x}} \mathcal{N}(\vec{x}; \vec{\mu}, \vec{\Sigma})
+  e^{-\vec{A} \cdot \vec{x}} \mathcal{N}(\vec{x}; \vec{\mu}, \vec{\Sigma})
   =
-  \exp{\left( \frac{\vec{a} \cdot \vec{\Sigma} \cdot \vec{a}}{2} - \vec{a} \cdot \vec{\mu} \right)} \;
-  \mathcal{N}(\vec{x}; \vec{\mu} - \vec{\Sigma}\cdot\vec{a}, \vec{\Sigma}).
+  \exp{\left( \frac{\vec{A} \cdot \vec{\Sigma} \cdot \vec{A}}{2} - \vec{A} \cdot \vec{\mu} \right)} \;
+  \mathcal{N}(\vec{x}; \vec{\mu} - \vec{\Sigma}\cdot\vec{A}, \vec{\Sigma}).
 \end{equation}
-
-\todo{Write closer}
 
 \ifdefined\includebibliography
   \newgeometry{margin=1in}
