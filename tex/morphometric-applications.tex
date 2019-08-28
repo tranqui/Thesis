@@ -101,7 +101,7 @@ From the latter observation we could define a free energy for the local structur
 %%   \beta F = - \ln{\mathcal{N}},
 %% \end{equation*}
 but we will find it more useful to define the free energy as an excess quantity.
-Specifically, we exploit translational invariance of $\phi^{(n)}$ in the uniform liquid to integrate the center of mass over the system volume, as in
+Specifically, we exploit translational invariance of $\phi^{(n)}$ in the uniform liquid to integrate the centre of mass over the system volume, as in
 \begin{equation}
   \mathcal{N}
   =
@@ -222,12 +222,12 @@ To justify this, consider that the dominant term in the morphometric approach \e
   \label{fig:packings}
 \end{SCfigure}
 
-A complete list of rigid packings of hard spheres for $n \le 14$ particles has been dilligently determined in Refs.\ \cite{ArkusPRL2009,ArkusSJDM2011,Holmes-CerfonSR2016,Holmes-CerfonARCMP2017}, which we use as inherent states for local structures in hard sphere.
+A complete list of rigid packings of hard spheres for $n \le 14$ particles has been diligently determined in Refs.\ \cite{ArkusPRL2009,ArkusSJDM2011,Holmes-CerfonSR2016,Holmes-CerfonARCMP2017}, which we use as inherent states for local structures in hard sphere.
 The first few packings for $3 \le n \le 7$ are shown in Fig.\ \ref{fig:packings}.
 As these states are exhaustive, they represent a complete \emph{local library of states}, of fundamental interest to random first-order transition theory \cite{LubchenkoARPC2007} with the potential to significantly improve upon previous extensions of mean-field theory into finite-dimensions \cite{KirkpatrickPRB1987,HallJCP1987,KirkpatrickPRA1989,BouchaudJCP2004,DzeroPRB2005,FranzJSM2005,AngeliniJSP2017,RulquinJSM2016,BiroliMeanPRB2018,BiroliFinitePRB2018}.
 
 Some explanation of what is meant by `rigid' is warranted.
-A structure is rigid if the only degrees of freedom are rigid-body motions i.e.\ translations and rotations, but this is hard to test so stronger criterions are required in general \cite{ConnellySJDM1996,Holmes-CerfonSR2016,Holmes-CerfonARCMP2017}.
+A structure is rigid if the only degrees of freedom are rigid-body motions i.e.\ translations and rotations, but this is hard to test so stronger criteria are required in general \cite{ConnellySJDM1996,Holmes-CerfonSR2016,Holmes-CerfonARCMP2017}.
 Some of the oldest ideas surrounding rigidity originate to Maxwell \cite{MaxwellRigidity1864} and focus on the number of contacts.
 These ideas are based on a linear analysis: each particle coordinate is a degree of freedom and each contact is a constraint.
 Matching the number of freedoms and constraints yields the \emph{Maxwell criterion}, where the number of contacts is exactly \cite{MaxwellRigidity1864}
@@ -251,7 +251,7 @@ Furthermore, jammed states are empirically found to be isostatic, a result also 
 Geometries with at least $d$ contacts for each particle and exactly $m = m_\mathrm{Maxwell}$ overall contacts are termed \emph{minimally rigid} \cite{ArkusPRL2009}, but this is neither a necessary nor sufficient criterion for rigidity \cite{Holmes-CerfonARCMP2017}.
 Three sufficient criteria for rigidity are: \cite{ConnellySJDM1996,Holmes-CerfonARCMP2017}
 \begin{enumerate}
-\item \emph{First-order rigidity}: the natural extension of the Maxwell criterion ensuring the contraints are linearly independent, based on a first-order expansion of the forces about contact.
+\item \emph{First-order rigidity}: the natural extension of the Maxwell criterion ensuring the constraints are linearly independent, based on a first-order expansion of the forces about contact.
   This is also called \emph{Calladine's extension} \cite{CalladineIJSS1978}.
 \item \emph{Second-order rigidity}: based on an expansion of the forces to second-order.
   This is hard to test numerically \cite{Holmes-CerfonARCMP2017}.
@@ -262,7 +262,7 @@ Three sufficient criteria for rigidity are: \cite{ConnellySJDM1996,Holmes-Cerfon
 All of our calculations are valid for first-order rigid structures, though recently methods have been developed to do free energy calculations with prestress stable structures \cite{KallusPRE2017}.
 It would be interesting to extend the current work to these other structures to explore a more complete library of possible states.
 
-As we cannot use perturbation theory \eqref{eq:harmonic-approximation}, we must \emph{choose} a definition for the basin surrounding each energy minimum occuring at contact.
+As we cannot use perturbation theory \eqref{eq:harmonic-approximation}, we must \emph{choose} a definition for the basin surrounding each energy minimum occurring at contact.
 For simplicity, we define a particular local structure by its bond topology i.e.\ the $m$ contacts at the reference point.
 We write the set of contacts as
 \begin{equation}\label{eq:structure-contacts}
@@ -275,10 +275,10 @@ Following \cite{Holmes-CerfonPNAS2013} we introduce the \emph{bond distance} as 
   h_{a_k b_k} = |\vec{r}_{a_k} - \vec{r}_{b_k}| - \sigma,
 \end{equation}
 clearly contact occurs where $h_{a_k b_k} = 0$ for all $k \in \{1, \cdots, m\}$.
-We introduce a pairwise cutoff $\delta$ such that the gaps between these particles are bounded in the range $h_{a_k b_k} \in [0, \delta]$, with the lower limt set by the hard particle constraint.
+We introduce a pairwise cutoff $\delta$ such that the gaps between these particles are bounded in the range $h_{a_k b_k} \in [0, \delta]$, with the lower limit set by the hard particle constraint.
 All the results we present use a cutoff of $\delta = 0.2 \sigma$, but we have tested that our findings are not significantly affected by a choice of $\delta = 0.4 \sigma$ indicating their robustness.
 
-As an aside, it was demonstrated in \cite{BritoEEL2006} that for hard sphere glasses approacing isostaticity, every pair of contacting particles $i,j \in \mathcal{M}$ interacts through the effective potential
+As an aside, it was demonstrated in \cite{BritoEEL2006} that for hard sphere glasses approaching isostaticity, every pair of contacting particles $i,j \in \mathcal{M}$ interacts through the effective potential
 \begin{equation*}
   \beta u_\mathrm{eff}(h_{ij}) = \beta u(\sigma + h_{ij}) - \ln{(h_{ij})},
 \end{equation*}
@@ -304,7 +304,7 @@ For a minimally constrained geometry $\vec{x}$ could simply correspond to the bo
 We need to compute the metric of the above transformation $G_{ij} = \vec{G}_i \vec{G}_i^T$ where the (generally curvilinear) basis vectors are $\vec{G}_i = \partial_i \vec{r}$, and indices $i,j$ summing over all of $\{\vec{t}, \vec{\theta}, \vec{x}\}$.
 To do this we loosely follow the method outlined in the Supplementary Information of Ref.\ \cite{Holmes-CerfonPNAS2013}.
 
-To simplify calculation we choose $\vec{f}(\vec{x})$ to always be in the center-of-mass frame and orthogonal to rotations such that $G_{ij}$ reduces to block-diagonal form.
+To simplify calculation we choose $\vec{f}(\vec{x})$ to always be in the centre-of-mass frame and orthogonal to rotations such that $G_{ij}$ reduces to block-diagonal form.
 If the rotation matrix is expressed in Euler-angle representation as $\vec{R}(\vec{\theta}) = \vec{R}_3(\theta_3) \vec{R}_2(\theta_2) \vec{R}_1(\theta_1)$ then we have
 \begin{equation}
   \vec{G}(\vec{\theta}, \vec{x})
@@ -540,7 +540,7 @@ This is related to the previously observed emergence of fivefold symmetric motif
 Having tested that the theory is accurate for selected geometries, we now take the exhaustive list of 11980 rigid structures for $n=12$ determined in Ref.\ \cite{Holmes-CerfonSR2016} to obtain a local density of states for a given sized inhomogeneity.
 We calculated the free energy of all (first-order) rigid structures using \eqref{eq:local-structure-free-energy} (right panel of Fig.\ \ref{fig:structure-populations}), finding a bimodal distribution with two main peaks separated by a free energy difference that increases with increasing volume fraction.
 We find the that lower energy distribution consists of structures rich in fivefold (icosahedral) symmetry in the absence of fourfold (octahedral) symmetry.
-This shows that the hard sphere liquid is highly frustrated, and would be interpretted as the reason hard spheres make good glassformers in the geometric frustration picture \cite{KivelsonPA1995,TarjusJPCM2005}.
+This shows that the hard sphere liquid is highly frustrated, and would be interpreted as the reason hard spheres make good glassformers in the geometric frustration picture \cite{KivelsonPA1995,TarjusJPCM2005}.
 However, this result is potentially compatible with other thermodynamic scenarios like random first-order transition theory (RFOT) \cite{LubchenkoARPC2007}.
 
 Each of the structures correspond to unique contact topologies, but in thermal systems (i.e. with finite gaps between particles) we expect many of them to be indistinguishable as found in Ref.\ \cite{TrombachPRE2018}.

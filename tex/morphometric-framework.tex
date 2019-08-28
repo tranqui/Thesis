@@ -272,7 +272,7 @@ This argument was first applied to hard sphere solvation in Ref.\ \cite{KonigPRL
 
 The central assertion of the morphometric approach is that the insertion cost $\Delta \Omega$ \emph{exactly} possesses the properties above, providing the connection between geometry and thermodynamics \cite{KonigPRL2004}.
 The morphometric form \eqref{eq:morph-ansatz} then follows.
-In addition to providing a more general \emph{ansatz} than SPT, this approach lays out its underlying assumptions explicitly eschewing the ad-hoc way in which the original SPT \emph{ansatz} \eqref{eq:spt-ansatz} was obtained.
+In addition to providing a more general \emph{ansatz} than SPT, this approach lays out its underlying assumptions explicitly eschewing the \emph{ad hoc} way in which the original SPT \emph{ansatz} \eqref{eq:spt-ansatz} was obtained.
 Moreover, classical SPT assumes hard spheres from the outset while our generalisation based on integral geometry is more flexible, allowing for generalisations to mixtures, more realistic pair potentials and non-spherical particles without compromising its assumptions.
 
 The morphometric approach is certainly an approximation, as the insertion cost will not rigorously possess the properties of size measures in reality.
@@ -301,14 +301,14 @@ Nevertheless, the approximation is accurate in hard spheres \cite{OettelEL2009,A
 \section{Obtaining thermodynamic coefficients}
 \label{sec:spt}
 
-We will consider a single-component hard sphere fluid, for particles of diamter $\sigma$ and bulk volume fraction $\eta$.
+We will consider a single-component hard sphere fluid, for particles of diameter $\sigma$ and bulk volume fraction $\eta$.
 We will take the morphometric \emph{ansatz} \eqref{eq:morph-ansatz} and obtain coefficients for this system using scaled particle arguments.
 However, unlike the classical arguments this \emph{ansatz} is more general in its scope; we will exploit this feature of the morphometric approach to construct new theories suitable for the treatment of many-body correlations with high accuracy.
 Before we obtain new coefficients we will rederive the classical SPT and the White Bear II coefficients.
 The latter set of coefficients was originally obtained as a limiting case of FMT \cite{Hansen-GoosJPCM2006}; here we obtain them through purely scaled particle arguments, which lays the groundwork for construction of the new coefficients.
 
 All coefficients we give are for the molecular geometry bounded by the \emph{molecular surface} ($\partial \mathcal{L}_1$ in Fig.\ \ref{fig:system}b), the surface where interactions occur between the solute and a test particle representing the remaining liquid.
-However, it is usually more convenient to do calculations with the excluded geometry: the space inaccessible to the \emph{center} of a test particle bounded by the \emph{solvent accessible surface} ($\partial \mathcal{L}_2$ in Fig.\ \ref{fig:system}b).
+However, it is usually more convenient to do calculations with the excluded geometry: the space inaccessible to the \emph{centre} of a test particle bounded by the \emph{solvent accessible surface} ($\partial \mathcal{L}_2$ in Fig.\ \ref{fig:system}b).
 The original definitions of these surfaces can be found in Refs.\ \cite{LeeJMB1971,RichardsARBB1977}.
 Note that there is also an infinite family of well-defined parallel surfaces between these two extremes, but they are not widely used in practice so we will not consider them \cite{OettelEL2009}.
 The choice of dividing surface will change the surface tension, and thus requires new coefficients $\{a_0', a_1', a_2'\}$ i.e.\
@@ -833,7 +833,7 @@ The pair correlation produced by these coefficients (black line in Fig.\ \ref{fi
 \section{Numerical results}
 \label{sec:framework-numerics}
 
-We apply the thermodynamic coefficients determined in previous sections for a system of hard spheres to obtain two-- and three--body distribution functions using the generlaised potential of mean force \eqref{eq:potential-mean-force} with the morphometric approach \eqref{eq:morph-ansatz}, and compare these against molecular dynamics simulations.
+We apply the thermodynamic coefficients determined in previous sections for a system of hard spheres to obtain two-- and three--body distribution functions using the generalised potential of mean force \eqref{eq:potential-mean-force} with the morphometric approach \eqref{eq:morph-ansatz}, and compare these against molecular dynamics simulations.
 For the analytics we determine the input geometric quantities $\{V,A,C,X\}$ using the algorithms of Refs.\ \cite{MeckeAA1994,KleninJCC2011}.
 For the simulations we performed event-driven molecular dynamics of $N=1372$ monodisperse hard spheres using the DynamO software package \cite{BannermanJCP2010}.
 We measure the pair and triplet distribution functions $g^{(2)}$ and $g^{(3)}$ for simulations at $\eta = 0.45$.
@@ -862,7 +862,7 @@ We also compare the morphometric theories against the Kirkwood approximation \ci
 \end{equation}
 where we take the values of $g^{(2)}$ from the virial/CS theory because of its already demonstrated accuracy at the two body level.
 Comparison of the morphometric correlation functions, including with the Kirkwood closure, against molecular dynamics are shown in Fig.\ \ref{fig:g3}.
-The virial/CS closure most closely matches the simulations at high densities, suggesting the theory is suitable for modeling complex many-particle local structures \cite{RobinsonPRL2019}.
+The virial/CS closure most closely matches the simulations at high densities, suggesting the theory is suitable for modelling complex many-particle local structures \cite{RobinsonPRL2019}.
 To illustrate this we consider the concentration of triangles with side lengths $r,s,t \in [\sigma, \sigma + \delta]$ in the bulk liquid, from \eqref{eq:n-particle-density-pdf} we find this as%
 \marginfootnote{We state the measure here without proof, though we present a general method to obtain this (at least numerically) for arbitrary $n$ in the next chapter.
   The analytic form $rst \, dr ds dt$ for the specific three-body case is presented in e.g.\ Ref.\ \cite{KrumhanslJCP1972}.}

@@ -42,7 +42,7 @@ For correlations in homogeneous liquids composed of identical balls, the curvatu
 \begin{equation*}
   \mathcal{L} = \cup_{i=1}^n \ball_\sigma^d(\vec{r}_i),
 \end{equation*}
-where $\ball_\sigma^d(\vec{r})$ is a $d$-dimensional ball of diameter $\sigma$ centered on $\vec{r}$.
+where $\ball_\sigma^d(\vec{r})$ is a $d$-dimensional ball of diameter $\sigma$ centred on $\vec{r}$.
 In order to keep the formulas as general as possible, we will consider a small generalisation of this surface where the spheres are of arbitrary radii, i.e.\
 \begin{equation}\label{eq:generalised-volume}
   \mathcal{L} = \cup_{i=1}^n \ball_{\sigma_i}^d(\vec{r}_i),
@@ -181,7 +181,7 @@ Note that in the computational algorithm which we use to compute $\partial\mathc
 
 \subsection{Particle separations}
 
-The separation between two particle centers is
+The separation between two particle centres is
 \begin{equation}
   \vec{\Delta}_{ij} = \vec{r}_i - \vec{r}_j
 \end{equation}
@@ -204,7 +204,7 @@ The basis vector for separations differentiates as
 \subsection{Quantities in the plane orthogonal to intersection}
 
 We will label the particles whose intersection creates the circle of arc as 1 and 2 for convenience.
-We consider the distances from these particles to the center of the circle as $b_l^{(1)}$ and $b_l^{(2)}$, see Fig.\ \ref{fig:curvature-geometry}(a).
+We consider the distances from these particles to the centre of the circle as $b_l^{(1)}$ and $b_l^{(2)}$, see Fig.\ \ref{fig:curvature-geometry}(a).
 Clearly $|\vec{\Delta}_{12}| = b_l^{(1)} + b_l^{(2)}$.
 These distances form equilateral triangles with circle radius $R_l$ of hypotenuse $\sigma_i$ for $i \in \{1,2\}$.
 This geometry is sketched in Fig.\ \ref{fig:curvature-geometry}(a).
@@ -272,7 +272,7 @@ In general, the line consists of an arc along a circle of radius $R_l$, which te
 %It is possible for lines to not terminate at vertices, however we do not need to consider this special case as it occurs where $\phi_l = 2\pi$ is a constant so the gradient is zero and can be ignored.
 
 We consider the 2d plane containing the intersection $S_1 \cap S_2$.
-The center of the intersection circle is
+The centre of the intersection circle is
 \begin{equation}
   \vec{c}_l
   = \vec{r}_1 + b_l^{(1)} \frac{\vec{\Delta}_{12}}{|\vec{\Delta}_{12}|}
@@ -447,7 +447,7 @@ A common task with computer simulations is to quench a geometry to find the mini
 Quenched geometries are inherently athermal so the argument above that intersections of $n>d$ spheres should occur with vanishing probability does not apply; it is common to find intersections of 4 or more particles at the surface in $d=3$ \emph{after a quench}.
 To investigate quenched geometries one must properly treat such intersections, as we will demonstrate below with an illustrative example.
 
-An example of these intersections in $d=3$ occurs where 4 particles are arranged in a perfect square (as in e.g.\ any outer face of the body-centered cubic unit cell).
+An example of these intersections in $d=3$ occurs where 4 particles are arranged in a perfect square (as in e.g.\ any outer face of the body-centred cubic unit cell).
 This special geometry corresponds to a bifurcation point in configuration space, where two pairs of surface vertices are simultaneously created and annihilated.
 The gradient is not continuous at these points \emph{with respect to the atomic coordinates}, as the continuity of the morphological free energy is only guaranteed with respect to the set $\mathcal{L}$ according to the Hausdorff metric.
 In atomic coordinates derivatives can contain poles and step discontinuities.

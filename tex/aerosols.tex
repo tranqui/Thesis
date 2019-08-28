@@ -37,7 +37,7 @@ In particular, the radiative forcing caused by anthropogenic aerosols in clouds 
 Thus, the importance of improving models for atmospheric aerosols to better predict climate change and inform policy cannot be overstated.
 In addition, atmospheric aerosols have potential applications in geoengineering \cite{PringleACP2012}.
 
-Notably, radiative forcing of atmospheric aerosols is stongly influenced by their optical properties \cite{HodasACP2015,CotterellACP2017}.
+Notably, radiative forcing of atmospheric aerosols is strongly influenced by their optical properties \cite{HodasACP2015,CotterellACP2017}.
 The solute concentration and physical state (i.e.\ whether it is crystalline or amorphous) can thus have a dramatic effect on climate predictions.
 Central to this is the nucleation and drying kinetics of atmospheric droplets.
 Where aerosols are included in climate models the focus is typically on sulphates \cite{MannACP2014,ZhuNC2019}.
@@ -113,13 +113,13 @@ To determine the concentration profile trajectory for a drying droplet we have t
 Our approximations will reduce this to a moving boundary problem with solely diffusional mixing.
 
 Prior to crystallisation a drying droplet will be approximately spherical, so we consider a phase boundary at radius $R(t)$ evolving in time $t$.
-Writing the distance from the center of the droplet as $r$, the phase boundary separates the liquid phase inside $r \in [0, R(t))$ from the vapour phase outside $r \in (R(t), \infty]$.
+Writing the distance from the centre of the droplet as $r$, the phase boundary separates the liquid phase inside $r \in [0, R(t))$ from the vapour phase outside $r \in (R(t), \infty]$.
 The droplet is sketched in Fig.\ \ref{fig:aerosol-droplet}.
 %In the experiments are performed in ambient conditions so the surrounding gas is strictly speaking a mixture, but to a reasonable approximation we can treat it as a single component.
 
 We label the solute and (ambient) gas components as $s$ and $g$ respectively, and the evaporating solvent component as $f$ for \emph{fluid} as it exists in both the liquid and gas phases.
 The density is $\rho = \sum_i \rho^{(i)}$ where the (mass) concentration of each component is $\rho^{(i)}$ for $i \in (f,s)$ in the droplet and $i \in (f,g)$ in the gas.
-A useful auxillary variable is the mass fraction of each component, i.e.\
+A useful auxiliary variable is the mass fraction of each component, i.e.\
 \begin{equation}\label{eq:mass-fraction}
   Y^{(i)} = \frac{\rho^{(i)}}{\rho}.
   %{\sum_j \rho^{(j)}}
@@ -566,7 +566,7 @@ Denoting the rate of solute nucleation per unit volume as $J$, the continuum lim
   =
   4\pi \int_0^R J(r) \, r^2 dr.
 \end{equation}
-Both the local $J$ and total rates $W$ contain an implciit time dependence because of their dependency on the evolving variables $R$, $\rho^{(s)}$ and $T$.
+Both the local $J$ and total rates $W$ contain an implicit time dependence because of their dependency on the evolving variables $R$, $\rho^{(s)}$ and $T$.
 For homogeneous nucleation $J$ depends solely on the state variables $\rho^{(s)}$ and $T$.
 Nucleation rates are typically strongly concentration dependent \cite{ValerianiJCP2005,DesarnaudJPCL2014,SearJPCM2007}, so we anticipate nucleation to occur at the boundary $r=R(t)$ where the solute concentration is greatest.
 Allowing for heterogeneous nucleation $J$ could acquire an additional dependence on the inhomogeneities in the system; as the experiments were performed with high-purity precursor compounds to mitigate the effect of chemical impurities, we expect the main potential site for heterogeneous nucleation to be the liquid-air interface.
@@ -700,7 +700,7 @@ where $t_s$ is the time at which saturation is reached $\rho^{(s)}(R) = \rho^{(s
 subject to the constraint that the fitting parameters $a, b, c \in [0, \infty]$ to ensure that $p_\mathrm{liq}$ decreases monotonically from $p_\mathrm{liq}(t=0)=1$.
 
 We perform this inversion procedure for the \ce{NaNO3} droplets in Fig.\ \ref{fig:state-points}(b).
-The resulting nucleation rates show non-mononic behaviour, increasing to a maximum before decreasing to essentially zero over the duration of the experiment.
+The resulting nucleation rates show non-monotonic behaviour, increasing to a maximum before decreasing to essentially zero over the duration of the experiment.
 This results in a finite final survival probability $p_\mathrm{liq} > 0$, and starkly contrasts with the picture predicted by CNT where $p_\mathrm{liq}$ would remain close to unity for most of the experiment before sharply dropping to zero as all droplets reproducibly crystallise.
 
 \begin{SCfigure}
@@ -725,7 +725,7 @@ In particular, the change in nucleation rate from increased concentration is so 
 
 CNT is a model for homogeneous nucleation, so it is possible that it fails because crystallisation occurs for \ce{NaNO3} through heterogeneous nucleation.
 The same stochastic phenomena are observed when repeating the experiments with the same droplet on a cycle of decreasing and increasing the RH to dry and melt the droplet; this rules out heterogeneous nucleation through impurities, as the chemical makeup is the same in each cycle yet the phenomenon persists.
-This leaves the gas-liquid phase boundary itself as a site for hetereogeneous nucleation.
+This leaves the gas-liquid phase boundary itself as a site for heterogeneous nucleation.
 
 It is highly likely that the model overestimates the surface enrichment because at long times the simulated evaporation rates become limited by solute diffusion at the boundary.
 The diffusion limit would persist even if more sophisticated transport phenomena were introduced to the evaporation model.
@@ -733,7 +733,7 @@ Surface enrichment is overestimated because we have neglected the effect of temp
 Temperature gradients create inward convection currents reducing surface enrichment.
 Our extrapolation of the diffusion constant assumed the Stokes-Einstein relation holds across the whole state space, however this relation can be violated at high viscosities \cite{BerthierRMP2011}.
 The rapid increase of viscosity with salt concentration in our model leads to a feedback loop where diffusion becomes increasingly difficult as the surface is enriched.
-Correcting for these effects, we expect the surface concentrations explored by the experiments to increase to a maximum before decreasing which could explain non-monoticity.
+Correcting for these effects, we expect the surface concentrations explored by the experiments to increase to a maximum before decreasing which could explain non-monotonicity.
 However, this can only partially explain the observed behaviour because CNT is extremely sensitive to concentration.
 
 %Our evaporation model considerably simplifies the transport phenomena at the phase boundary, though it becomes limited by the rate of solute diffusion at the boundary at long times suggesting that we are underestimating the rate of mixing.
