@@ -102,7 +102,7 @@ Then we will move onto the ways in which they \emph{differ} from ordinary liquid
 \todo{Check $\tau_0$ and $\tau_\alpha$ values: seems like a small number according to paddy.}
 
 Thermodynamically, supercooled liquids are not meaningfully different from their ordinary counterparts.
-Operationally, a supercooled liqiud is equilibrated in the sense that all observables are time independent and the thermodynamics is self-consistent%
+Operationally, a supercooled liquid is equilibrated in the sense that all observables are time independent and the thermodynamics is self-consistent%
 \marginfootnote{Different routes to measuring thermodynamic quantities, e.g.\ the pressure, may give different values in an out-of-equilibrium system.
   This is not the case in supercooled liquids, even though they are not strictly in equilibrium.}.
 Formally speaking, the system is sometimes said to be in \emph{local equilibrium}, where it samples all the liquid microstates ergodically; or that it obeys \emph{detailed balance}, where the dynamics is microscopically reversible.
@@ -156,25 +156,22 @@ A popular measurement is the intermediate scattering function, defined by \cite{
   }
 \end{equation}
 which reduces to the static structure factor \eqref{eq:static-structure-factor} at zero elapsed time $F(k, t=0) = S^{(2)}(k)$.
-An example $F(k,t)$ is shown in Fig.\ \ref{fig:isf}, displaying many features which distinguish the supercooled liquid from a regular liquid.
+An example $F(k,t)$ is shown in Fig.\ \ref{fig:isf}, displaying features which distinguish the supercooled liquid from a regular liquid.
 In particular, there is a timescale separation between distinct dynamical processes.
 For short times there is a ballistic regime, where particles are essentially free to move unencumbered.
-At intermediate times, interactions with neighbours inhibit motion and $F(k,t)$ plateaus; this plateau is absent in regular liquids.
+At intermediate times, highly correlated interactions with neighbours inhibit motion and $F(k,t)$ plateaus; this plateau is absent in regular liquids.
 Finally, in the long time limit particles are able to diffuse so that $F(k,t)$ completely relaxes to zero.
 The latter two processes are called $\beta$- and $\alpha$-relaxation respectively.
-The timescale of the longer $\alpha$-relaxation $\tau_\alpha$ is more central to our discusson as it corresponds to the timescale of liquid-like behaviour.
-\todo{Mention the onset temperature where non-exponential begins.}
+The timescale of the longer $\alpha$-relaxation $\tau_\alpha$ is more central to our discussion as it corresponds to the timescale of liquid-like behaviour.
 
 \begin{SCfigure}
   \includegraphics[width=0.9\linewidth,outer]{isf}
   \caption[Intermediate scattering function in a supercooled liquid]{
-    Typical intermediate scattering function in a supercooled liquid.
-    The power law predictions are from mode-coupling theory.
-    Reproduced from Ref.\ \cite{JanssenFP2018}.
+    Typical intermediate scattering functions in a supercooled liquid.
+    In the ordinary liquid decay is purely exponential, but as a liquid is supercooled we observe a timescale separation between short-time vibrational ($\beta$-) and longer time liquid-like ($\alpha$-) relaxation processes.
   }
   \label{fig:isf}
 \end{SCfigure}
-\todo{Remove MCT mumbo jumbo.}
 
 A helpful framework to guide discussion of dynamical processes is \emph{transition state theory}.
 In this approach a dynamical process, e.g.\ a chemical reaction, is imagined to occur through a dynamical bottleneck (Fig.\ \ref{fig:transition-state}).
@@ -241,7 +238,7 @@ glassformers.
   \label{fig:angell}
 \end{SCfigure}
 
-Our focus is on soft matter, with hard spheres as the prototypical model, where the  interactions (typically van der Waals attractions) are much weaker than in molecular systems (and absent in hard spherse).
+Our focus is on soft matter, with hard spheres as the prototypical model, where the  interactions (typically van der Waals attractions) are much weaker than in molecular systems (and absent in hard spheres).
 Consequently, there is less of a case for an Arrhenius relationship \eqref{eq:arrhenius-law}, and empirically we find striking deviations from it.
 Many systems show \emph{super-Arrhenius} scaling with temperature (Fig.\ \ref{fig:angell}), including mixtures of Lennard-Jones atoms and molecular systems such as orthoterphenyl.
 Correspondingly, systems where $\tau_\alpha$ increases more rapidly than exponential are labelled as \emph{fragile}.
@@ -271,7 +268,7 @@ Moreover, the geometrical interpretation in terms of volume fluctuations $\Delta
 \begin{SCfigure}
   \includegraphics[width=0.7\linewidth,outer]{dynamic-heterogeneity}
   \caption[Dynamical heterogeneity in binary hard discs]{
-    Dynamical heteogeneity in a binary hard disc system with a size ratio of $1:1.4$.
+    Dynamical heterogeneity in a binary hard disc system with a size ratio of $1:1.4$.
     Particles are coloured according to distance moved over a relaxation time $\tau_\alpha$, with blue having moved the least and red the most.
     Reproduced from Ref.\ \cite{RoyallPR2015}.
   }
@@ -284,10 +281,15 @@ Moreover, the geometrical interpretation in terms of volume fluctuations $\Delta
 \item \hl{Dynamic heterogeneities} Fig.\ \ref{fig:dynamic-heterogeneities}
 \item \hl{Stokes-Einstein breakdown}
 \end{itemize}
-\todo{Paragraph on facilitation vs thermodynamics (frustration, RFOT and AG)}
 
-The main point of contention is over what causes this slow-down: whether it is driven by an underlying phase transition in the \emph{thermodynamic} view, or it is purely a kinetic effect in the \emph{dynamic} view.
-These are not completely mutually exclusive viewpoints, as it is possible hybrid scenarios exist where a phase transition is 
+The main point of contention is over what causes this slow-down: whether it is driven by an underlying phase transition in the thermodynamic viewpoint, or if it is purely a kinetic effect.
+The former viewpoint includes the related \emph{mode-coupling} and \emph{random first-order transition} theories, which are loosely based on mean-field theory.
+By contrast, the kinetic viewpoint \emph{dynamical facilitation} is based entirely around study of fluctuations.
+Having introduced the phenomenology of supercooled liquids we can now proceed to discuss these theories in turn.
+We will emphasise the thermodynamic theories because in recent years there has been a substantial shift towards them because of the success of mean-field theories.
+Furthermore, our approach focuses on static many-body correlation functions and local structure, which lends itself more towards a thermodynamic viewpoint.
+
+%These are not \emph{completely} mutually exclusive viewpoints, as it is possible hybrid scenarios exist where a phase transition is 
 
 %% We discussed the static correlation functions at length, which is fine for liquids where equilibrium occurs on a \SI{100}{\pico\second} timescale.
 %% Dynamical effects are highly nontrivial at high densities.
@@ -332,8 +334,6 @@ These are not completely mutually exclusive viewpoints, as it is possible hybrid
 %% \end{equation}
 %% high frequency shear modulus is elastic property.
 %% Shear modulus increases by factor 2-5 times, is dwarfed by change in relaxation time.
-
-Having introduced the phenomenology of supercooled liquids we can now proceed to specific theories of the glass transition, beginning with an explicitly dynamical one.
 
 \section{Mode-coupling theory}
 \label{sec:mct}
@@ -381,7 +381,7 @@ The central challenge of this approach is finding suitable approximations for th
 %%   \vec{K}(t') = \vec{f}(0)^T \vec{f}(t') \cdot (\vec{\widetilde{X}}^T \vec{\widetilde{X}})^{-1}.
 %% \end{equation*}
 
-In the standard MCT approach, the fluctuating force is assumed to be dominated by the pair correlations so that $K$ beomes a four-point correlation function.
+In the standard MCT approach, the fluctuating force is assumed to be dominated by the pair correlations so that $K$ becomes a four-point correlation function.
 Then, through a second approximation where $K$ is factorised into a product of two two-point correlation functions, it is possible to construct an evolution equation for the intermediate scattering function \eqref{eq:isf} as \cite{ReichmanJSM2005}
 \begin{equation}\label{eq:full-mct}
   \frac{d^2 F(k,t)}{d t^2}
@@ -424,7 +424,7 @@ Importantly, the latter approach incorporates closures of the many-body correlat
 
 We introduced MCT as an explicitly dynamical theory which attempts to model dynamical arrest in supercooled liquids by directly describing the decay of time correlation functions like $F(k, t)$.
 Thermodynamics only entered implicitly into MCT through the structural input of the static structure factor $S^{(2)}(k)$.
-By contast, \emph{mean-field theories} of glass take a primarily thermodynamic approach, though they are broadly compatible with the dynamical descriptions of MCT.
+By contrast, \emph{mean-field theories} of glass take a primarily thermodynamic approach, though they are broadly compatible with the dynamical descriptions of MCT.
 The mean-field picture has been rapidly gaining traction in recent years since exact solutions have been developed for hard spheres \cite{ParisiRMP2010,KurchanJSM2012,KurchanJPCB2013,CharbonneauNC2014,CharbonneauJSM2014}.
 To describe mean-field theory we will invoke the concept of an \emph{energy landscape}, the natural generalisation of transition state theory introduced in section \ref{sec:glass-phenomenology} and summarised by \eqref{eq:reaction-time}.
 While this conceptual framework is not unique to mean-field theories, it is most closely associated with them.
@@ -461,7 +461,7 @@ $\Gamma$, can be re-expressed as a sum over a collection of \emph{mesostates} $\
 \end{equation}
 where $\epsilon_i$ is the energy of microstate $i$ and $p_i$ its probability measure.
 In the latter step we defined%
-\marginfootnote{This expression is obtained by writing the probabilty of the system being in mesostate $\alpha$ as $p_\alpha = \sum_{i \in \alpha} p_i$, then $p_i / p_\alpha$ is the probability of microstate $i$ given that the system is in this mesostate.}
+\marginfootnote{This expression is obtained by writing the probability of the system being in mesostate $\alpha$ as $p_\alpha = \sum_{i \in \alpha} p_i$, then $p_i / p_\alpha$ is the probability of microstate $i$ given that the system is in this mesostate.}
 \begin{subequations}
   \begin{align}
     \overline{\Phi}
@@ -478,12 +478,12 @@ In the latter step we defined%
   \end{align}
 \end{subequations}
 The \emph{complexity} $\Sigma$ is an extensive quantity characterising the multiplicity of mesostates; at the dynamical transition this becomes a positive non-zero number $\Sigma(\eta = \eta_c) > 0$ corresponding to the clustering in configuration space.
-As the system is compressessed further $\Sigma$ decreases \cite{KirkpatrickPRB1987,KirkpatrickPRA1989,ParisiRMP2010} corresponding to the rarefaction of clustered regions.
+As the system is compressed further $\Sigma$ decreases \cite{KirkpatrickPRB1987,KirkpatrickPRA1989,ParisiRMP2010} corresponding to the rarefaction of clustered regions.
 At a volume fraction $\eta_K > \eta_c$ an \emph{entropy crisis} occurs: $\Sigma$ vanishes, leading to the system being frozen into a single, unique region in configuration space called an \emph{ideal glass} phase \cite{KauzmannCR1948,KirkpatrickPRB1987,HallJCP1987,KirkpatrickPRA1989,ParisiRMP2010,BerthierRMP2011}.
 
 If an equilibrium glass state in the regime $\eta \in [\eta_c, \eta_K]$ is compressed out-of-equilibrium without sampling the other clusters, a further phase transition occurs to a so-called \emph{Gardner} phase \cite{KurchanJPCB2013,CharbonneauNC2014,CharbonneauJSM2014}.
-Each cluster splits further into fractal sub-regions arranged hierarchicallly.
-Whereas the clustered regions formed at $\eta_c$ are geometrically dissimillar%
+Each cluster splits further into fractal sub-regions arranged hierarchically.
+Whereas the clustered regions formed at $\eta_c$ are geometrically dissimilar%
 \marginfootnote{As measured by e.g.\ the intermediate scattering function},
 these regions are close in configuration space to one another.
 This phase has deep connections with the jamming transition seen at diverging pressure, providing a unified description of glass and jamming conjectured since the landmark paper of Ref.\ \cite{LiuN1998}.
@@ -584,13 +584,13 @@ However, this necessarily relies on extrapolation as the point where $S_\mathrm{
 A different scenario in physical dimensions focuses on the role of geometry.
 This picture starts from the observation that crystal structures (e.g.\ the face-centred cubic introduced for hard spheres at close packing) are generally not the optimal energetic arrangement for small clusters of particles, even though they must be for bulk systems.
 For example, 13 isolated Lennard-Jones atoms will preferentially arrange as vertices of a five-fold symmetric \emph{icosahedron} \cite{FrankPRS1952} (Fig.\ \ref{fig:frustration}b).
-As five-fold symmetric structures cannot tesselate Euclidean space, Sir Charles Frank conjectured that glassformers suppress crystallisation through formation of icosahedra (or similar structures) \cite{FrankPRS1952}.
+As five-fold symmetric structures cannot tessellate Euclidean space, Sir Charles Frank conjectured that glassformers suppress crystallisation through formation of icosahedra (or similar structures) \cite{FrankPRS1952}.
 The above viewpoint has been developed into the more complete theory called \emph{geometric frustration} \cite{KivelsonPA1995,TarjusJPCM2005}.
 This approach characterises the liquid by its \emph{locally favoured structures} (LFS), i.e.\ those structures which are energetically favoured at small length scales.
 A system could have a single LFS, or a whole collection; recently, it has been shown through numerical simulations that \emph{competition} between different LFS enhances the propensity for glassformation \cite{TeichNC2019}.
 Crucially, these structures do not tile space so the formation of large domains of LFS leads to the build up of \emph{frustration}, leading to a similar relation as in RFOT \eqref{eq:rfot-barrier} though the resulting phase behaviour is quite different; details can be found in the review of Ref.\ \cite{TarjusJPCM2005}.
 
-The frustration picture is broadly compatible with the mean-field viewpoint: the propensity for a system to form certain structures can be interpretted as a manifestation (or a driving force) of a reduced $S_\mathrm{conf}$.
+The frustration picture is broadly compatible with the mean-field viewpoint: the propensity for a system to form certain structures can be interpreted as a manifestation (or a driving force) of a reduced $S_\mathrm{conf}$.
 The downside of this scenario is that the correlation between local structure and dynamics seems to be highly system dependent \cite{HockyPRL2014}.
 In hard spheres, the dominant LFS are found to be tetrahedral structures, which form very dense local packings and their presence is highly correlated with dynamics \cite{HallettNC2018} \hl{(additional citations?)}.
 At high densities the tetrahedra form large connected domains \cite{HallettNC2018} rich in five-fold symmetric structures.
@@ -614,6 +614,17 @@ For more information on dynamic facilitation we direct the reader to the review 
 
 %Theories concentrating on the high density glass: elastic theories.
 
+\begin{SCfigure}
+  \includegraphics[width=\linewidth,outer]{icosahedra-hallett}
+  \caption[Growth of icosahedral domains in the supercooled hard sphere liquid]{
+    Growth of icosahedral domains in the hard sphere liquid with supercooling i.e.\ increased volume fraction $\eta$, over a density change which coincides with minimal structural change at the pair level (Fig.\ \ref{fig:g2-changes}).
+    (a) STED nanoscopy image for $\eta = 0.598$, with scale bar \SI{3}{\micro\meter}.
+    (b), (c) Rendered coordinates of partial icosahedra (green, top right structure) and full icosahedra (purple, bottom right structure) for volume fractions $\eta = 0.523$ (b) and $\eta = 0.598$ (c), respectively.
+    Reproduced from Ref.\ \cite{HallettNC2018}.
+  }
+  \label{fig:icosahedra-domains}
+\end{SCfigure}
+
 \section{Perspective: usefulness of many-body correlations}
 \label{sec:correlation-perspective}
 
@@ -624,6 +635,7 @@ Firstly, it is natural to wonder what new (thermodynamic) information is contain
 In section \ref{sec:thermodynamic-routes} we saw how the compressibility and virial routes lead to expressions of the free energy in terms of pair correlations.
 This is emblematic of conventional routes to the free energy, so in some sense all of the thermodynamically relevant information is contained in the two body correlation functions.
 As far as thermodynamics is concerned, we motivate their study borrowing an argument originally made by Evans \cite{EvansPrivate2019}.
+
 The key observation is that the pair correlation yields thermodynamic quantities which are \emph{derivatives} of the free energy at an instantaneous state point, so to infer the free energy multiple state points must be sampled.
 Equivalently, we could consider the derivatives of the pair correlation function.
 It is straightforward to show that \cite{Santos2016}
@@ -696,11 +708,11 @@ Then, for a pair-interacting system the excess free energy is obtained as
 so the free energy can be directly obtained from accurate determination of the correlation functions.
 %Similarly, a theory treating the many-body correlation functions must have the free energy (and phase behaviour) built in.
 
-Secondly, while it is true that thermodynamic quantities like the pressure can certainly be inferred from the pair correlations, there is no such simple relationship for dynamic quantities.
+Secondly, while it is true that thermodynamic quantities like the pressure can certainly be inferred from the pair correlations, there is no such simple relationship for dynamical quantities.
 In the absence of a thermodynamic phase transition, we would not expect the pair correlation function alone to reveal much about the nature of dynamical arrest, beyond the lack of a transition.
 Even supposing the existence of a transition, the precision required to detect such a signal $g(r)$ may be arbitrarily subtle; however, any changes approaching a transition \emph{must} be magnified at the many-body level because of \eqref{eq:correlation-derivatives}.
 The many-body correlation functions have potential to place the entropic droplet scenario of \eqref{eq:rfot-barrier} on more rigorous footing, by providing a means to calculate the subleading penalty term $\gamma_\mathrm{eff} \xi^\theta$.
-Alternatively, the theories which postulate local mechanisms such as the LFS in geometric frustration or the dynamical defects in facilitation should be identifiable within the many-body correlation functions.
+Alternatively, the theories which postulate local mechanisms such as the LFS in geometrical viewpoints or the dynamical defects in facilitation should be identifiable within the many-body correlation functions.
 
 We will be focusing on many-body correlations in real space, to explore the local mechanisms proposed in theories of the glass transition described above.
 In some situations the correlations in Fourier space may be more useful, most notably in MCT where many-body generalisations have already found some traction \cite{JanssenPRL2015,JanssenFP2018}.
