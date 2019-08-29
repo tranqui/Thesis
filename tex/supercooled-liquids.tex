@@ -744,33 +744,37 @@ Then, for a pair-interacting system the excess free energy is obtained as
 so the free energy can be directly obtained from accurate determination of the correlation functions.
 %Similarly, a theory treating the many-body correlation functions must have the free energy (and phase behaviour) built in.
 
-We will be focusing on many-body correlations in real space, to explore the local mechanisms proposed in theories of the glass transition described above.
-In some situations the correlations in Fourier space may be more useful, most notably in MCT where many-body generalisations have already found some traction \cite{JanssenPRL2015,JanssenFP2018}.
-In principle, our real space correlation functions can be Fourier transformed to obtain these, but in practice this is prohibitively expensive because of the high dimensionality of the arguments for even modest values of $n$.
-However, FMT already provides an easy route to obtaining all the correlation functions in Fourier space, as described by the original papers \cite{RosenfeldPRL1989,RosenfeldJCP1990}.
-We show how to obtain these below.
+%% We will be focusing on many-body correlations in real space, to explore the local mechanisms proposed in theories of the glass transition described above.
+%% In some situations the correlations in Fourier space may be more useful, most notably in MCT where many-body generalisations have already found some traction \cite{JanssenPRL2015,JanssenFP2018}.
+%% In principle, our real space correlation functions can be Fourier transformed to obtain these, but in practice this is prohibitively expensive because of the high dimensionality of the arguments for even modest values of $n$.
+%% However, FMT already provides an easy route to obtaining all the correlation functions in Fourier space, as described by the original papers \cite{RosenfeldPRL1989,RosenfeldJCP1990}.
+%% We show how to obtain these below.
 
-Fourier transforming the direct correlation functions for the uniform liquid \eqref{eq:fmt-direct-correlations-uniform-density}, and applying the convolution theorem, allows us to write the rather succinct
-\begin{equation}
-  \widetilde{c}^{(n)}(\vec{k}^n)
-  =
-  - \sum_{\alpha_1, \alpha_2, \cdots, \alpha_n}
-  \partial^n_{\alpha_1, \alpha_2, \cdots, \alpha_n} \beta f^\mathrm{ex} \;
-  \left( \prod_{i=1}^n \widetilde{\omega}_{\alpha_i}(\vec{k}_i) \right)
-  \delta(\vec{k}_1 + \vec{k}_2 + \cdots + \vec{k}_n).
-\end{equation}
-The delta function enforces the `ring' condition $\sum_{i=1}^n \vec{k}_i = 0$ which emerges from translational symmetry of the weight functions, reducing the dimensionality of the domain by $d$.
-A further $d(d-1)/2$ degrees of freedom%
-\marginfootnote{This many degrees of freedom can be removed for general $n \ge d$, but we expect fewer for $n < d$.
-  For example, $n=2$ arrangements (a dimer) are isomorphic to a line so they possess $d-1$ rotational degrees of freedom.}
-can be removed by exploiting rotational symmetry.
-Many-particle generalisations of the static structure factor can be obtained from $\widetilde{c}^{(n)}(\vec{k}^n)$ by functionally differentiating the Ornstein-Zernike equation \eqref{eq:ornstein-zernike-generic} with respect to density \cite{BarratMP1988}.
+%% Fourier transforming the direct correlation functions for the uniform liquid \eqref{eq:fmt-direct-correlations-uniform-density}, and applying the convolution theorem, allows us to write the rather succinct
+%% \begin{equation}
+%%   \widetilde{c}^{(n)}(\vec{k}^n)
+%%   =
+%%   - \sum_{\alpha_1, \alpha_2, \cdots, \alpha_n}
+%%   \partial^n_{\alpha_1, \alpha_2, \cdots, \alpha_n} \beta f^\mathrm{ex} \;
+%%   \left( \prod_{i=1}^n \widetilde{\omega}_{\alpha_i}(\vec{k}_i) \right)
+%%   \delta(\vec{k}_1 + \vec{k}_2 + \cdots + \vec{k}_n).
+%% \end{equation}
+%% The delta function enforces the `ring' condition $\sum_{i=1}^n \vec{k}_i = 0$ which emerges from translational symmetry of the weight functions, reducing the dimensionality of the domain by $d$.
+%% A further $d(d-1)/2$ degrees of freedom%
+%% \marginfootnote{This many degrees of freedom can be removed for general $n \ge d$, but we expect fewer for $n < d$.
+%%   For example, $n=2$ arrangements (a dimer) are isomorphic to a line so they possess $d-1$ rotational degrees of freedom.}
+%% can be removed by exploiting rotational symmetry.
+%% Many-particle generalisations of the static structure factor can be obtained from $\widetilde{c}^{(n)}(\vec{k}^n)$ by functionally differentiating the Ornstein-Zernike equation \eqref{eq:ornstein-zernike-generic} with respect to density \cite{BarratMP1988}.
 
 \section{Summary}
 
+We introduced the central question as ?
+Thermodynamic theories.
+
 This concludes the relevant background in supercooled liquids and glasses.
 In subsequent chapters we will develop a framework for treating the many-body correlation functions in real space, with the hope that it can address some of the questions outlined here.
-\todo{More more more, according to Paddy. ``What does it all mean?'' Static lengthscales $=n$}
+
+Static lengthscales $=n$
 
 \ifdefined\includebibliography
   \newgeometry{margin=1in}
