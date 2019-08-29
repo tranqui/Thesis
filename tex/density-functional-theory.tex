@@ -432,24 +432,24 @@ For a uniform liquid interacting through a spherically symmetric pair potential 
 where $r = |\vec{r}_2 - \vec{r}_1|$ and $(f*g)(\vec{r})$ denotes a convolution between functions $f$ and $g$.
 In Fourier space the convolution becomes a product so we obtain
 \begin{equation*}
-  \tilde{h}^{(2)}(\vec{k})
+  \widetilde{h}^{(2)}(\vec{k})
   =
-  \tilde{c}^{(2)}(\vec{k}) +
-  \rho \, \tilde{h}^{(2)}(\vec{k}) \tilde{c}^{(2)}(\vec{k})
+  \widetilde{c}^{(2)}(\vec{k}) +
+  \rho \, \widetilde{h}^{(2)}(\vec{k}) \widetilde{c}^{(2)}(\vec{k})
 \end{equation*}
 where a tilde over a function denotes its Fourier transform.
 This rearranges to give
 \begin{equation*}
-  \tilde{h}^{(2)}(\vec{k})
+  \widetilde{h}^{(2)}(\vec{k})
   =
-  \frac{\tilde{c}^{(2)}(\vec{k})}{1 - \rho \tilde{c}^{(2)}(\vec{k})}
+  \frac{\widetilde{c}^{(2)}(\vec{k})}{1 - \rho \widetilde{c}^{(2)}(\vec{k})}
 \end{equation*}
 which gives the static structure factor \eqref{eq:static-structure-factor} as
 \begin{equation*}
   S^{(2)}(\vec{k})
   =
   \rho \delta(\vec{k}) +
-  \frac{1}{1 - \rho \tilde{c}^{(2)}(\vec{k})}.
+  \frac{1}{1 - \rho \widetilde{c}^{(2)}(\vec{k})}.
 \end{equation*}
 \end{tcolorbox}
 
@@ -457,7 +457,7 @@ If the pair direct correlation function is known it is thus straightforward to o
 \begin{equation*}
   \frac{\beta p}{\rho}
   =
-  1 - \frac{1}{\rho} \int_0^\rho \tilde{c}^{(2)}(0) \rho' d\rho'.
+  1 - \frac{1}{\rho} \int_0^\rho \widetilde{c}^{(2)}(0) \rho' d\rho'.
 \end{equation*}
 The main task in an integral equation approach is to find an approximate closure for $c^{(2)}$ in order to solve the Ornstein-Zernike equation.
 The process of determining the direct correlation functions is equivalent (at least formally) to finding its generating functional $\mathcal{F}^\mathrm{ex}$.
@@ -1124,7 +1124,7 @@ We label these as the White Bear II (WBII) coefficients because they were first 
 %% \todo{Check this expression is correct - it almost certainly is not.}
 %% \begin{equation}
 %%   S^{(n)}(\vec{k}^n) =
-%%   (1 + \tilde{c}^{(n)}(\vec{k}^n))
+%%   (1 + \widetilde{c}^{(n)}(\vec{k}^n))
 %%   \prod_{i < j} S^{(2)}(\vec{k}_i, \vec{k}_j)
 %% \end{equation}
 %% satisfies the sum rule but fails to satisfy the hard-core condition.

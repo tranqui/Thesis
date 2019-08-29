@@ -21,13 +21,13 @@ plt.xlim([0, 5])
 plt.xlabel('$r / \sigma$')
 plt.ylabel('$g^{(2)}(r)$')
 
-plt.text(3.4, 4.1, r'$\tau_\alpha \sim 10^5\;\; \tau_0$',
-         horizontalalignment='left', verticalalignment='bottom')
-plt.text(3.4, 3.1, r'$\tau_\alpha \sim 10\;\;\;\, \tau_0$',
-         horizontalalignment='left', verticalalignment='bottom')
-plt.text(3.4, 2.1, r'$\tau_\alpha \sim 0.1\;\;\, \tau_0$',
-         horizontalalignment='left', verticalalignment='bottom')
-plt.text(3.4, 1.1, r'$\tau_\alpha \sim 0.01\, \tau_0$',
-         horizontalalignment='left', verticalalignment='bottom')
+plt.text(4.7, 4.1, r'$\tau_\alpha \sim \mathcal{O}(10^6)\, \tau_0$',
+         horizontalalignment='right', verticalalignment='bottom')
+plt.text(4.7, 3.1, r'$\tau_\alpha \sim \mathcal{O}(10^3)\, \tau_0$',
+         horizontalalignment='right', verticalalignment='bottom')
+plt.text(4.7, 2.1, r'$\tau_\alpha \sim \mathcal{O}(\,10\;)\, \tau_0$',
+         horizontalalignment='right', verticalalignment='bottom')
+plt.text(4.7, 1.1, r'$\tau_\alpha \sim \mathcal{O}(\;\,1\;\,)\, \tau_0$',
+         horizontalalignment='right', verticalalignment='bottom')
 
 plt.show()
