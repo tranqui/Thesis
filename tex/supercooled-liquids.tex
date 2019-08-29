@@ -282,7 +282,11 @@ However, in practice $\tau_\alpha$ is increasing so rapidly by this point that t
 As the final piece of the phenomenology we introduce two more important dynamical features which differentiates the supercooled liquid from normal liquids.
 First, the Stokes-Einstein equation, relating diffusion, temperature and viscosity, holds at high temperatures (low densities) but significant deviations are observed at supercooling to low temperatures (high densities) \cite{BerthierRMP2011}.
 This finding possibly suggests the existence of multiple competing relaxation mechanisms in the supercooled liquid, which are probed differently by the two measures \cite{EdigerARPC2000}.
-Second, \hl{Dynamic heterogeneities} Fig.\ \ref{fig:dynamic-heterogeneities}
+Second, the dynamics becomes highly spatially heterogeneous at increased supercooling (Fig.\ \ref{fig:dynamic-heterogeneities}).
+Furthermore, simulation studies have revealed that the initial configuration strongly correlates with the locations of mobile events \cite{Widmer-CooperJPCM2005}.
+This suggests that the sites of mobility are encoded in the static configuration, which could be interpreted structurally.
+%The size of these hetereogeneities is captured by a dynamic lengthscale $\xi_\mathrm{dyn}$, whereas thermodynamic theories typically concern static lengthscales.
+%A requirement of a thermodynamic theory is thus that $\xi_\mathrm{dyn}$ scales with the proposed static length.
 
 %% To unveil static quantities, it is tempting to link dynamical heterogeneity to structural heterogeneity.
 %% Stable structures should move less than unstable ones.
@@ -656,13 +660,19 @@ For more information on dynamic facilitation we direct the reader to the review 
 
 In subsequent chapters will be heavily focusing on the treatment of static many-body correlation functions in the bulk liquid.
 Here, we motivate their study for the treatment of the supercooled liquid.
-
-Firstly, it is natural to wonder what new (thermodynamic) information is contained in the many-body correlation functions that is not already present at the pair level.
+It is natural to wonder what new information can be obtained from the many-body correlation functions that is not already present at the pair level.
 In section \ref{sec:thermodynamic-routes} we saw how the compressibility and virial routes lead to expressions of the free energy in terms of pair correlations.
 This is emblematic of conventional routes to the free energy, so in some sense all of the thermodynamically relevant information is contained in the two body correlation functions.
-As far as thermodynamics is concerned, we motivate their study borrowing an argument originally made by Evans \cite{EvansPrivate2019}.
 
-The key observation is that the pair correlation yields thermodynamic quantities which are \emph{derivatives} of the free energy at an instantaneous state point, so to infer the free energy multiple state points must be sampled.
+Firstly, while it is true that thermodynamic quantities like the pressure can certainly be inferred from the pair correlations, there is no such simple relationship for dynamical quantities.
+In the absence of a thermodynamic phase transition, we would not expect the pair correlation function alone to reveal much about the nature of dynamical arrest, beyond the lack of a transition.
+Even supposing the existence of a transition, the precision required to detect such a signal $g^{(2)}(r)$ may be arbitrarily subtle; however, any changes approaching a transition \emph{must} be magnified at the many-body level because of \eqref{eq:correlation-derivatives}.
+The many-body correlation functions have potential to place the entropic droplet scenario of \eqref{eq:rfot-barrier} on more rigorous footing, by providing a means to calculate the subleading penalty term $\gamma_\mathrm{eff} \xi^\theta$.
+Alternatively, the theories which postulate local mechanisms such as the LFS in geometrical viewpoints or the dynamical defects in facilitation should be identifiable within the many-body correlation functions.
+
+Secondly, even at the thermodynamic level the many-body correlations have advantages.
+To illustrate this we borrow an argument originally made by Evans \cite{EvansPrivate2019}.
+Pair correlations yield thermodynamic quantities which are \emph{derivatives} of the free energy at an instantaneous state point, so to infer the free energy multiple state points must be sampled.
 Equivalently, we could consider the derivatives of the pair correlation function.
 It is straightforward to show that \cite{Santos2016}
 \begin{equation}\label{eq:correlation-derivatives}
@@ -734,12 +744,6 @@ Then, for a pair-interacting system the excess free energy is obtained as
 so the free energy can be directly obtained from accurate determination of the correlation functions.
 %Similarly, a theory treating the many-body correlation functions must have the free energy (and phase behaviour) built in.
 
-Secondly, while it is true that thermodynamic quantities like the pressure can certainly be inferred from the pair correlations, there is no such simple relationship for dynamical quantities.
-In the absence of a thermodynamic phase transition, we would not expect the pair correlation function alone to reveal much about the nature of dynamical arrest, beyond the lack of a transition.
-Even supposing the existence of a transition, the precision required to detect such a signal $g^{(2)}(r)$ may be arbitrarily subtle; however, any changes approaching a transition \emph{must} be magnified at the many-body level because of \eqref{eq:correlation-derivatives}.
-The many-body correlation functions have potential to place the entropic droplet scenario of \eqref{eq:rfot-barrier} on more rigorous footing, by providing a means to calculate the subleading penalty term $\gamma_\mathrm{eff} \xi^\theta$.
-Alternatively, the theories which postulate local mechanisms such as the LFS in geometrical viewpoints or the dynamical defects in facilitation should be identifiable within the many-body correlation functions.
-
 We will be focusing on many-body correlations in real space, to explore the local mechanisms proposed in theories of the glass transition described above.
 In some situations the correlations in Fourier space may be more useful, most notably in MCT where many-body generalisations have already found some traction \cite{JanssenPRL2015,JanssenFP2018}.
 In principle, our real space correlation functions can be Fourier transformed to obtain these, but in practice this is prohibitively expensive because of the high dimensionality of the arguments for even modest values of $n$.
@@ -766,7 +770,7 @@ Many-particle generalisations of the static structure factor can be obtained fro
 
 This concludes the relevant background in supercooled liquids and glasses.
 In subsequent chapters we will develop a framework for treating the many-body correlation functions in real space, with the hope that it can address some of the questions outlined here.
-\todo{More more more, according to Paddy. ``What does it all mean?''}
+\todo{More more more, according to Paddy. ``What does it all mean?'' Static lengthscales $=n$}
 
 \ifdefined\includebibliography
   \newgeometry{margin=1in}
