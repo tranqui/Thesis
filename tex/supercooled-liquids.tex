@@ -266,8 +266,8 @@ Moreover, the geometrical interpretation in terms of volume fluctuations $\Delta
 
 \begin{SCfigure}
   \includegraphics[width=0.7\linewidth,outer]{dynamic-heterogeneity}
-  \caption[Dynamical heterogeneity in binary hard discs]{
-    Dynamical heterogeneity in a binary hard disc system with a size ratio of $1:1.4$.
+  \caption[Dynamic heterogeneity in binary hard discs]{
+    Dynamic heterogeneity in a binary hard disc system with a size ratio of $1:1.4$.
     Particles are coloured according to distance moved over a relaxation time $\tau_\alpha$, with blue having moved the least and red the most.
     Reproduced from Ref.\ \cite{RoyallPR2015}.
   }
@@ -282,9 +282,10 @@ However, in practice $\tau_\alpha$ is increasing so rapidly by this point that t
 As the final piece of the phenomenology we introduce two more important dynamical features which differentiates the supercooled liquid from normal liquids.
 First, the Stokes-Einstein equation, relating diffusion, temperature and viscosity, holds at high temperatures (low densities) but significant deviations are observed at supercooling to low temperatures (high densities) \cite{BerthierRMP2011}.
 This finding possibly suggests the existence of multiple competing relaxation mechanisms in the supercooled liquid, which are probed differently by the two measures \cite{EdigerARPC2000}.
-Second, the dynamics becomes highly spatially heterogeneous at increased supercooling (Fig.\ \ref{fig:dynamic-heterogeneities}).
+Second, the dynamics becomes highly spatially heterogeneous with increased supercooling (Fig.\ \ref{fig:dynamic-heterogeneities}).
 Furthermore, simulation studies have revealed that the initial configuration strongly correlates with the locations of mobile events \cite{Widmer-CooperJPCM2005}.
-This suggests that the sites of mobility are encoded in the static configuration, which could be interpreted structurally.
+This shows that the sites of mobility are encoded in the static configuration, which could be interpreted structurally.
+Dynamic heterogeneities are now seen as quintessential features of the glass transition \cite{BerthierRMP2011,BiroliJCP2013}, so the origin of the growing dynamic length would be a necessary component for any theory to be accepted.
 %The size of these hetereogeneities is captured by a dynamic lengthscale $\xi_\mathrm{dyn}$, whereas thermodynamic theories typically concern static lengthscales.
 %A requirement of a thermodynamic theory is thus that $\xi_\mathrm{dyn}$ scales with the proposed static length.
 
@@ -292,7 +293,7 @@ This suggests that the sites of mobility are encoded in the static configuration
 %% Stable structures should move less than unstable ones.
 %% Widmer-Cooper and Harrowell 11 demonstrated that the initial configuration of a simulation, independently of the initial dynamics, has a role in the heterogeneity of the dynamics.
 
-The main point of contention is over what causes this slow-down: whether it is driven by an underlying phase transition in the thermodynamic viewpoint, or if it is purely a kinetic effect.
+The main point of contention is over what causes the dynamical slow-down: whether it is driven by an underlying phase transition in the thermodynamic viewpoint, or if it is purely a kinetic effect.
 The former viewpoint includes the related \emph{mode-coupling} and \emph{random first-order transition} theories, which are loosely based on mean-field theory.
 By contrast, the kinetic viewpoint \emph{dynamical facilitation} is based entirely around study of fluctuations.
 Having introduced the phenomenology of supercooled liquids we can now proceed to discuss these theories in turn.
@@ -570,7 +571,9 @@ Briefly, dynamical barriers must remain finite within a finite subregion, so the
 Fragile behaviour then suggests a reduction in $S_\mathrm{conf}$ to limit the number of possible Arrhenius processes.
 Moreover, the authors of Ref.\ \cite{MontanariJSP2006} then show that the relaxation time is rigorously bounded from above by $S_\mathrm{conf}$, proving that any diverging relaxation time \emph{must} coincide with an entropy crisis where $S_\mathrm{conf}$ becomes sub-extensive.
 Measurements of the configurational entropy from simulations of hard spheres suggest a vanishing $S_\mathrm{conf}$ at finite pressure in $d=3$ (Fig.\ \ref{fig:swap-sconf}), pointing to a mean-field/RFOT scenario in hard spheres.
-However, this necessarily relies on extrapolation as the point where $S_\mathrm{conf}$ vanishes cannot be reached in finite time because of the argument above.
+This necessarily relies on extrapolation as the point where $S_\mathrm{conf}$ vanishes cannot be reached in finite time because of the argument above.
+Recent numerical evidence suggests that $S_\mathrm{conf}$ only vanishes at $T=\SI{0}{\kelvin}$ for a model glassformer in $d=2$ \cite{BerthierNC2019}, suggesting a lower critical dimension for mean-field/RFOT scenario of at least $d_L \ge 2$.
+However, while a vanishing $S_\mathrm{conf}$ would necessarily coincide with a phase transition, it was argued in Ref.\ \cite{WyartPRL2017} that this cannot explain the observed dynamical arrest around the operational glass transition; see also Ref.\ \cite{BerthierJCP2019} for interesting discussion of this argument.
 
 %% Mean-field argument is thermodynamic, which in some sense is structural.
 %% Structural in the sense of the energy landscape, not necessarily in real space/local structure.
@@ -601,44 +604,53 @@ This approach characterises the liquid by its \emph{locally favoured structures}
 A system could have a single LFS, or a whole collection; recently, it has been shown through numerical simulations that \emph{competition} between different LFS enhances the propensity for glassformation \cite{TeichNC2019}.
 This competition is an example of \emph{frustration} where continual growth of domains of LFS is hindered by geometric constraints.
 Frustration can also emerge from a single LFS if it cannot tile space, as is the case of fivefold symmetric structures like icosahedra.
-Incorporating frustration into a theory modelling the energy of LFS-rich domains leads to a similar scaling relation as in RFOT \eqref{eq:rfot-barrier}, though the resulting phase behaviour is quite different.
-The static lengthscale which emerges from this theory is interpreted as the size of the domains, which is more easily understood than the amorphous lengthscale $\xi_\mathrm{PS}$ of RFOT.
+Incorporating frustration into a theory modelling the energy of LFS-rich domains leads to a similar scaling relation as in RFOT \eqref{eq:rfot-barrier}.
+The key difference from RFOT is that the theory predicts an avoided phase transition, the proximity to which causes dynamical arrest.
+Static lengthscales%
+\marginfootnote{There are multiple ways of extracting lengthscales from the LFS, see e.g.\ Refs.\ \cite{CharbonneauPRL2012,CharbonneauPRE2013,HallettNC2018}.}
+emerging from this theory $\xi_\mathrm{LFS}$ are interpreted as the size of the domains.
 Details can be found in the review of Ref.\ \cite{TarjusJPCM2005}.
 
-The frustration picture is broadly compatible with the mean-field viewpoint: the propensity for a system to form certain structures can be interpreted as a manifestation (or a driving force) of a reduced $S_\mathrm{conf}$.
-The downside of this scenario is that the correlation between local structure and dynamics seems to be highly system dependent \cite{HockyPRL2014}.
+The prototypical model for geometric frustration is the Wahnstrom mixture, whose icosahedral LFS can form a crystal in curved space; flattening space induces frustration suppressing the crystal structure \cite{CharbonneauPRL2012,RoyallPR2015}.
+In a recent work, Turci et al.\ \cite{TurciPRL2017} varied the curvature of space to effectively treat frustration as a control parameter.
+They found that the collective dynamic behaviour was dominated by the LFS for small frustration, as expected, but that increasingly the static and dynamical lengthscales decouple with strong frustration \cite{TurciPRL2017}.
+This decoupling signals the appearance of additional relaxation mechanisms beyond the geometric frustration picture.
+In Euclidean space model systems are typically too strongly frustrated for this scenario to apply verbatim.
 
-Whereas RFOT postulates amorphous order, geometric ideas propose simpler static orderings based around e.g.\ LFS domains.
+Even though the full geometric frustration scenario now seems implausible for most systems, there is room for geometric ideas play a role in a more complete theory.
+Notably, the formation of LFS has been found to strongly correlate with dynamically slow regions in gels \cite{RoyallNM2008}, binary Lennard-Jones mixtures \cite{CoslovichJCP2007,CoslovichJCP2007a} and colloidal hard spheres \cite{LeocmachNC2012}.
+Unfortunately, this correlation seems to be highly system dependent \cite{HockyPRL2014}, so it may only be one piece in the puzzle.
+A more complete review of the phenomenology of LFS can be found in \cite{RoyallPR2015}.
+Finally, a viewpoint emphasising the role of local structure is broadly compatible with the mean-field picture: the propensity for a system to form certain structures can be interpreted as a manifestation (or a driving force) of a reduced $S_\mathrm{conf}$.
+Then, the amorphous lengthscale of RFOT would be given a simpler structural interpretation i.e.\ $\xi_\mathrm{PS} \sim \xi_\mathrm{LFS}$.
 
-CPR: local structure fixes gel \cite{RoyallNM2008}.
-Charbonneau: growth of length scale associated with LFS does not correlate with dynamical length scale \cite{CharbonneauPRL2012}, possibly multiple relaxation mechanisms or a non-static length scale.
-Leacmach: \cite{LeocmachNC2012}
-Coslovich: \cite{CoslovichJCP2007,CoslovichJCP2007a}
-Turci: \cite{TurciPRL2017}
+%Charbonneau: growth of length scale associated with LFS does not correlate with dynamical length scale \cite{CharbonneauPRL2012,CharbonneauPRE2013}, possibly multiple relaxation mechanisms or a non-static length scale.
+%Leacmach: \cite{LeocmachNC2012}
 
 In hard spheres, the dominant LFS are found to be icosahedral motifs in accordance with Frank's original conjecture.
+Icosahedral motifs cannot be formed by regular tetrahedra  (Fig.\ \ref{fig:frustration}) and do not tile space, so these are highly frustrated.
 In Fig.\ \ref{fig:icosahedral-domains} we see the growth of large domains of icosahedra in the supercooled liquid, over a range in densities where $\tau_\alpha$ changes by a factor of $\mathcal{O}(10^5)$ (Fig.\ \ref{fig:g2-changes}) \cite{HallettNC2018}.
 This fact demonstrates that significant structural change occurs alongside dynamical arrest, even though minimal changes are seen at the pair level.
 This does not prove that structural change \emph{causes} the slowdown, but it does suggest the idea is worth investigating.
 %Furthermore, the vicinity of an icosahedral motif is found to be highly correlated with local particle mobility \cite{HallettNC2018}.
 
 %At high densities the tetrahedra form large connected domains \cite{HallettNC2018} rich in fivefold symmetric structures.
-Spherical packings ideally form regular tetrahedra which cannot perfectly form pentagonal structures (Fig.\ \ref{fig:frustration}), so fivefold symmetric structures are highly frustrated.
-A detailed review on the role of local structure in glassy systems can be found in Ref.\ \cite{RoyallPR2015}.
-\todo{Should definitely cite more Royall group work here, possibly Tanaka too. What's the most appropriate cross-section of papers?}
+%A detailed review on the role of local structure in glassy systems can be found in Ref.\ \cite{RoyallPR2015}.
+%\todo{Should definitely cite more Royall group work here, possibly Tanaka too. What's the most appropriate cross-section of papers?}
 
 %% The mean-field picture of glass formation interprets the dynamical slowdown entirely within a thermodynamic framework.
 %% In mean-field hard spheres, formally in the limit of infinite spatial dimensions $d \to \infty$,
 %% Hard spheres in mean field have been shown to have a thermodynamic glass transition, however the critical dimensions are unknown so it is unclear what happens in $d=3$. \cite{ParisiRMP2010,KurchanJSM2012,KurchanJPCB2013,CharbonneauNC2014,CharbonneauJSM2014}.
-Recent numerical evidence suggests that $S_\mathrm{conf}$ only vanishes at $T=\SI{0}{\kelvin}$ for a model glassformer in $d=2$ \cite{BerthierNC2019}.
-As this point cannot be crossed no thermodynamic transition can occur in $d = 2$, pointing to a lower critical dimension for mean-field theory of at least $d_L \ge 2$.
-It is possible that low-dimensional fluctuations prevent any thermodynamic transition, and it has been argued that even if there is a thermodynamic transition at $\eta_K$ this may not be responsible for the dynamic slowdown seen around the operational glass transition $\eta_g \ll \eta_K$ \cite{WyartPRL2017}.
-As such, there is room for alternative pictures to the mean-field/RFOT scenario.
+%% It is possible that low-dimensional fluctuations prevent any thermodynamic transition, and it has been argued that even if there is a thermodynamic transition at $\eta_K$ this may not be responsible for the dynamic slowdown seen around the operational glass transition $\eta_g \ll \eta_K$ \cite{WyartPRL2017}.
+%% As such, there is room for alternative pictures to the mean-field/RFOT scenario.
 
-The main opposition theory is \emph{dynamic facilitation}, which focuses on the dynamic heterogeneities as the fundamental feature of glass.
-In this picture dynamical events occur through string-like motion between dynamical defects, and the relaxation time remains finite until $T = \SI{0}{\kelvin}$.
-\todo{Paddy: Expand on this substantially}
-For more information on dynamic facilitation we direct the reader to the review of Ref.\ \cite{ChandlerARPC2010}.
+The main opposition theory to the thermodynamic scenarios outlined above is \emph{dynamic facilitation}, which focuses on the role of kinetic constraints.
+This theory was motivated by \emph{kinetically constrained models}, which share many of the same phenomenology as supercooled liquids but possess trivial thermodynamics ruling out the thermodynamic theories outlined above.
+Instead, dynamics is inhibited through kinetic constraints which must be overcome by a series of subsequent localised events \cite{SpeckJSM2019}, rather than single collective events predicted by e.g.\ the mean-field/RFOT scenario.
+Inspired by this, dynamic facilitation posits that relaxation in supercooled liquids occurs through a series of connected elementary excitations \cite{ChandlerARPC2010,SpeckJSM2019}.
+Dynamic heterogeneity and its associated lengthscale are the fundamental features of glass in this picture, and no thermodynamic phase transition occurs so the relaxation time remains finite until $T = \SI{0}{\kelvin}$.
+The dynamic lengthscale corresponds to the distance between dynamical defects in this theory, which could have a structural interpretation although the nature of the defects are usually considered incidental to the theory.
+Notably, the agreement of dynamic facilitation with to available data is comparable with the mean-field/RFOT scenario up to the experimental glass transition \cite{ChandlerARPC2010}.
 %This must trivially occur at the very least $T=0\si{K}$ where relaxation timescales diverges, however much like the lack of a phase transition in the Ising model in $d=1$ this is not a true thermodynamic phase transition because it cannot be crossed.
 %So the central question of glass is what happens in $d=3$, is there a vanishing configurational entropy at a finite $T > 0$ with an accompanying thermodynamic glass transition?
 
@@ -660,20 +672,13 @@ For more information on dynamic facilitation we direct the reader to the review 
 
 In subsequent chapters will be heavily focusing on the treatment of static many-body correlation functions in the bulk liquid.
 Here, we motivate their study for the treatment of the supercooled liquid.
-It is natural to wonder what new information can be obtained from the many-body correlation functions that is not already present at the pair level.
 In section \ref{sec:thermodynamic-routes} we saw how the compressibility and virial routes lead to expressions of the free energy in terms of pair correlations.
 This is emblematic of conventional routes to the free energy, so in some sense all of the thermodynamically relevant information is contained in the two body correlation functions.
+It is thus natural to wonder what new information can be obtained from the many-body correlation functions that is not already present at the pair level.
 
 Firstly, while it is true that thermodynamic quantities like the pressure can certainly be inferred from the pair correlations, there is no such simple relationship for dynamical quantities.
 In the absence of a thermodynamic phase transition, we would not expect the pair correlation function alone to reveal much about the nature of dynamical arrest, beyond the lack of a transition.
-Even supposing the existence of a transition, the precision required to detect such a signal $g^{(2)}(r)$ may be arbitrarily subtle; however, any changes approaching a transition \emph{must} be magnified at the many-body level because of \eqref{eq:correlation-derivatives}.
-The many-body correlation functions have potential to place the entropic droplet scenario of \eqref{eq:rfot-barrier} on more rigorous footing, by providing a means to calculate the subleading penalty term $\gamma_\mathrm{eff} \xi^\theta$.
-Alternatively, the theories which postulate local mechanisms such as the LFS in geometrical viewpoints or the dynamical defects in facilitation should be identifiable within the many-body correlation functions.
-
-Secondly, even at the thermodynamic level the many-body correlations have advantages.
-To illustrate this we borrow an argument originally made by Evans \cite{EvansPrivate2019}.
-Pair correlations yield thermodynamic quantities which are \emph{derivatives} of the free energy at an instantaneous state point, so to infer the free energy multiple state points must be sampled.
-Equivalently, we could consider the derivatives of the pair correlation function.
+Even supposing the existence of a transition, the precision required to detect such a signal $g^{(2)}(r)$ may be arbitrarily subtle.
 It is straightforward to show that \cite{Santos2016}
 \begin{equation}\label{eq:correlation-derivatives}
   \chi_T \rho
@@ -683,7 +688,21 @@ It is straightforward to show that \cite{Santos2016}
   + \int \rho^{(n+1)}(\vec{r}^{n+1}) \, d\vec{r}_{n+1}.
 \end{equation}
 The important feature to take away from this expression is the presence of $\rho^{(n+1)}$; we see the emergence of higher-order correlation functions in the derivatives.
-This means we could in principle measure the free energy at a single state point by introducing highly accurate measurements of the many-body correlation functions.
+As such, any changes in the pair correlations approaching a transition \emph{must} be magnified at the many-body level.
+
+We have emphasised the structural components of theories of the glass transition such as the amorphous ordering in RFOT, the LFS in geometrical viewpoints and even the static structure factors which are input into MCT.
+Notably, incorporating many-body generalisations of structural measures has been found to significantly improve MCT \cite{JanssenPRL2015,JanssenFP2018}.
+The many-body correlation functions have potential to place the entropic droplet scenario of \eqref{eq:rfot-barrier} on more rigorous footing, by providing a means to calculate the subleading penalty term $\gamma_\mathrm{eff} \xi^\theta$.
+Alternatively, local mechanisms based on LFS should show strong signatures at the many-body level.
+The usefulness of many-body correlation functions is less obvious in kinetic theories such as facilitation, which do not posit a thermodynamic or explicitly structural mechanism.
+In this case, the \emph{absence} of a thermodynamic signal would potentially support kinetic theories.
+Moreover, the correlation function $g^{(n)}$ explores a liquid lengthscale set by $n$, so in a trivial sense these functions must be able to explore facilitation in the limit of large $n$ where bulk behaviour is recovered.
+
+Secondly, even at the thermodynamic level the many-body correlations have advantages.
+To illustrate this we borrow an argument originally made by Evans \cite{EvansPrivate2019}.
+Pair correlations yield thermodynamic quantities which are \emph{derivatives} of the free energy at an instantaneous state point, so to infer the free energy multiple state points must be sampled.
+Equivalently, we could consider the derivatives of the pair correlation function.
+Considering \eqref{eq:correlation-derivatives}, we could in principle use highly accurate measurements of the many-body correlation functions to infer $g^{(2)}$ at other statepoints, and thus measure the free energy at a \emph{single} state point.
 This is essentially the spirit of the \emph{entropy route}, which writes \cite{WallaceJCP1987}
 \begin{equation}
   S = \sum_{n=1}^\infty S_n
@@ -768,13 +787,20 @@ so the free energy can be directly obtained from accurate determination of the c
 
 \section{Summary}
 
-We introduced the central question as ?
-Thermodynamic theories.
+We introduced the basic phenomenology of dynamical arrest as supercooled liquids undergo a glass transition.
+The liquid undergoes a dramatic slowdown, accompanied by changes in the relaxation mechanisms.
+Most notably, the autocorrelation functions feature a timescale separation between short-time vibrational and longer-time liquid-like processes signifying collective effects, and the dynamics become highly spatially heterogeneous.
+Structurally, minimal change is seen at the pair level, but more subtle measures of structure which are explicitly many-body do show marked change.
+
+In the mean-field/RFOT scenario, an underlying amorphous order caused by a reduction in configurational entropy is proposed as the mechanism for dynamical arrest.
+Broadly compatible geometric viewpoints interpret the growth of amorphous order geometrically, as the size of domains of locally favoured structures.
+We argued that any subtle structural changes in these thermodynamic approaches should be detectable by examining the many-body correlation functions.
+Furthermore, the connectivity of the energy landscape for local arrangements of particles inside the fluid could in principle place the formalism of RFOT on more precise footing.
+By contrast, the dynamical facilitation picture does not require static ordering, in which case structural signs of arrest should be absent from the many-body correlation functions.
 
 This concludes the relevant background in supercooled liquids and glasses.
-In subsequent chapters we will develop a framework for treating the many-body correlation functions in real space, with the hope that it can address some of the questions outlined here.
-
-Static lengthscales $=n$
+In subsequent chapters we will develop a framework for treating the many-body correlation functions, with the hope that it can address some of the questions outlined here.
+By setting the number of particles in the correlation function we effectively fix the liquid lengthscale.%, so we can hopefully start to address some of the questions outlined here.
 
 \ifdefined\includebibliography
   \newgeometry{margin=1in}
