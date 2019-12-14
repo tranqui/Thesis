@@ -49,25 +49,44 @@ Furthermore, the intrinsic free energy can be decomposed into an \emph{ideal} an
 The excess component emerges as from the interactions between particles and in general it is intractably hard to determine this exactly except in special limits (e.g.\ in the one-dimensional limit).
 As such, approximate forms for $\mathcal{F}^\mathrm{ex}$ must be used in general which constrains the success of applications of DFT to the accuracy of this contribution.
 By contrast, the ideal component can be computed explicitly.
-The partition function for the ideal gas is easily calculated giving
+For an ideal gas, the absence of particle interactions leads to
+\begin{equation*}
+  U_N = \sum_{i=1}^N \phi_\mathrm{ex}(\vec{r}_i)
+\end{equation*}
+and the partition function is easily calculated giving
 \begin{equation}\label{eq:ideal-grand-canonical-partition}
   \Xi^\mathrm{id}
   =
   \sum_{N=0}^\infty
-  \frac{(e^{\beta\mu} Z_1)^N}{N!}
+  \frac{(z Z_1)^N}{N!}
   =
-  \exp{\left( \frac{Z_1 e^{\beta \mu}}{\Lambda^d} \right)}.
+  \exp{\left( \frac{Z_1 e^{\beta \mu}}{\Lambda^d} \right)},
 \end{equation}
+with single-particle partition function
+\begin{equation*}
+  Z_1 = \int e^{-\beta \phi_\mathrm{ext}(\vec{r}')} \, d\vec{r}'.
+\end{equation*}
 Then, following Ref.\ \cite{AshcroftAJP1996}, we write the equilibrium single-particle density as
 \begin{equation*}
-  \rho^{(1)}(\vec{r})
-  =
-  \left\langle
-  \sum_{i=1}^N \delta(\vec{r} - \vec{r}_i)
-  e^{-\beta \phi_\mathrm{ext}(\vec{r})}
-  \right\rangle
+  \begin{split}
+    \rho^{(1)}(\vec{r})
+    =&
+    \left\langle
+    \sum_{i=1}^N \delta(\vec{r} - \vec{r}_i)
+    \right\rangle
+    \\
+    =&
+    \frac{1}{\Xi} \sum_{N=0}^\infty \frac{z^N}{N!}
+    \int_{V^N} \sum_{i=1}^N \Big( \delta(\vec{r} - \vec{r}_i) \Big)
+    e^{- \beta U_N} \, d\vec{r}^N,
+    \\
+    =&
+    \frac{1}{\Xi} \sum_{N=0}^\infty \frac{z^N}{N!}
+    N e^{-\beta \phi_\mathrm{ext}(\vec{r})} Z_1^{N-1}
+  \end{split}
 \end{equation*}
-which in the absence of particle interactions reduces to
+using the definition of the thermal average \eqref{eq:grand-canonical-average} in the second line.
+Comparison with \eqref{eq:ideal-grand-canonical-partition} above yields the simplified form
 \begin{equation}\label{eq:ideal-density}
   \rho^{(1)}(\vec{r})
   =
@@ -122,7 +141,7 @@ Our focus will be on correlations within the equilibrium liquid, so in the next 
 \subsection{Thermodynamic potentials as generating functionals}
 
 Having defined thermodynamic potentials for an inhomogeneous system as functionals, we can make a connection to liquid structure through the various correlation functions.
-In sections \ref{sec:liquid-structure} and \ref{sec:virial-series} we saw how the homogeneous correlation functions could obtained from various generating functions.
+In sections \ref{sec:liquid-structure} and \ref{sec:virial-series} we saw how the homogeneous correlation functions could be obtained from various generating functions.
 In the inhomogeneous liquid correlation functions are obtained in a similar way from \emph{generating functionals}.
 
 The fundamental thermodynamic relation describing an infinitesimal change in the Helmholtz free energy, i.e.\
@@ -256,7 +275,7 @@ To bring the variational principle to more practical use we can insert the funct
   - \psi(\vec{r})
   =
   \int
-  \rho^{(1)}(\vec{r}') \frac{\delta \psi(\vec{r})'}{\delta \rho^{(1)}(\vec{r})}
+  \rho^{(1)}(\vec{r}') \frac{\delta \psi(\vec{r}')}{\delta \rho^{(1)}(\vec{r})}
   \, d\vec{r}'.
 \end{equation*}
 The separate condition \eqref{eq:psi-generator} causes the first two terms to cancel, leading to the two equilibrium conditions
@@ -266,7 +285,7 @@ The separate condition \eqref{eq:psi-generator} causes the first two terms to ca
     \frac{\delta \mathcal{F}^\mathrm{id}[\rho(\vec{r})]}{\delta \rho(\vec{r}')}
     + \frac{\delta \mathcal{F}^\mathrm{ex}[\rho(\vec{r})]}{\delta \rho(\vec{r}')}
     &=
-    \psi(\vec{r}),
+    \psi(\vec{r}'),
     \\
     \int
     \rho^{(1)}(\vec{r}) \frac{\delta \psi(\vec{r})}{\delta \rho^{(1)}(\vec{r}')}
@@ -409,7 +428,7 @@ which upon inserting the definition of $H^{(2)}$ from \eqref{eq:pair-density-den
   c^{(2)}(\vec{r}', \vec{r}_2)
   \, d\vec{r}',
 \end{equation}
-which is a classic result of liquid state theory (cf.\ Refs.\ \cite{OrnsteinPAS1914,Hansen2013,EvansAP1979}).
+which is a classic result of liquid state theory (cf.\ Refs.\ \cite{OrnsteinPASA1914,Hansen2013,EvansAP1979}).
 
 \vspace{0.5em}
 
@@ -422,7 +441,7 @@ For a uniform liquid interacting through a spherically symmetric pair potential 
     c^{(2)}(r) +
     \rho
     \int
-    h^{(2)}(r)
+    h^{(2)}(r')
     c^{(2)}(|\vec{r}' - \vec{r}|)
     \, d\vec{r}'
     \\ &=
@@ -610,7 +629,7 @@ Noting that the free energy is determined from the free energy density through
 \begin{equation*}
   \beta \mathcal{F}^\mathrm{ex} = \int_V \beta f^\mathrm{ex} \, d\vec{r},
 \end{equation*}
-we can make a correspondence with the virial series expression for the free energy density \eqref{eq:virial-series-excess-free-energy}.
+we can draw a correspondence with the virial series expression for the free energy density \eqref{eq:virial-series-excess-free-energy}.
 Using the virial coefficients for an $m$-component mixture \eqref{eq:virial-coefficients-mixtures}, the free energy density in the dilute limit becomes%
 \marginfootnote{In this step we are implicitly focusing on systems interacting through pair potentials, where the virial coefficients introduced in section \ref{sec:virial-series} are valid.}
 \begin{equation*}
@@ -622,7 +641,7 @@ Using the virial coefficients for an $m$-component mixture \eqref{eq:virial-coef
   \, d\vec{r}
   + \mathcal{O}(\rho^3).
 \end{equation*}
-We consider mixtures of hard spheres of radii $R_i$, so The Mayer function $f_{ij}$ must depend on $R_i$ and $R_j$.
+We consider mixtures of hard spheres of radii $R_i$, so the Mayer function $f_{ij}$ must depend on $R_i$ and $R_j$.
 %where $\rho_i$ and $R_i$ are the (number) density and radius of species $i$.
 The Mayer function for the hard sphere interaction \eqref{eq:hs-interaction} is purely geometric in nature, i.e.\
 \begin{equation*}
@@ -637,11 +656,11 @@ This can be recast into the revealing form
     -f_{ij}
     &=
     \begin{cases}
-      0 & \textrm{ if } B_i \cap B_j = \emptyset \\
-      1 & \textrm{ if } B_i \cap B_j \ne \emptyset
+      0 & \textrm{ if } \ball_i \cap \ball_j = \emptyset \\
+      1 & \textrm{ if } \ball_i \cap \ball_j \ne \emptyset
     \end{cases}
     \\ &=
-    \chi[B_i \cap B_j]
+    \chi[\ball_i \cap \ball_j]
   \end{split}
 \end{equation*}
 i.e.\ the Euler characteristic of their intersection.
@@ -652,7 +671,7 @@ This allows us to write the free energy density in the dilute limit for a homoge
   \frac{\rho^2}{2}
   \sum_{i=1}^m \sum_{j=1}^m
   x_i x_j
-  \int_V \chi[B_i \cap B_j(\vec{r})] d\vec{r}
+  \int_V \chi[\ball_i \cap \ball_j(\vec{r})] d\vec{r}
   + \mathcal{O}(\rho^3),
 \end{equation*}
 or in the notation introduced in section \ref{sec:integral-geometry}
@@ -662,7 +681,7 @@ or in the notation introduced in section \ref{sec:integral-geometry}
   \frac{\rho^2}{2}
   \sum_{i=1}^m \sum_{j=1}^m
   x_i x_j
-  \int_{G_d} \chi[B_i \cap g B_j] dg
+  \int_{G_d} \chi[\ball_i \cap g \ball_j] dg
   + \mathcal{O}(\rho^3)
 \end{equation*}
 which can be evaluated using the principal kinematic formula \eqref{eq:binomial-kinematic-formula}.
@@ -692,8 +711,8 @@ Inspired by the intrinsic volumes and the principal kinematic formula, Rosenfeld
     + \omega_i^{(2)} \otimes \omega_j^{(1)}
     + \omega_i^{(3)} \otimes \omega_j^{(0)}
     \\ &
-    - \omega_i^{(1)} \otimes \omega_j^{(2)}
-    - \omega_i^{(2)} \otimes \omega_j^{(1)}
+    - \vec\omega_i^{(1)} \otimes \vec\omega_j^{(2)}
+    - \vec\omega_i^{(2)} \otimes \vec\omega_j^{(1)}
   \end{split}
 \end{equation*}
 introducing the weight functions
@@ -748,7 +767,16 @@ The low density excess free energy becomes a local function of the (nonlocal) we
 Fortuitously, all of the molarity information has been absorbed into the definition of the weighted densities, so the final form contains no explicit mixture dependence; this is an example of a truncatable free energy (section \ref{sec:truncatable-free-energy}).
 
 To generalise the exact dilute limit result to arbitrary densities, we postulate that the free energy remains a functional of density \emph{only} through the weighted densities $\{n_\alpha\}$: this is the central assumption of FMT.
-We start by writing the chemical potential of species $i$ as
+This assumption can be expressed as the \emph{ansatz}
+\begin{equation}\label{eq:fmt-functional}
+  \beta \mathcal{F}^\mathrm{ex}[\{\rho_i\}]
+  =
+  \beta \mathcal{F}^\mathrm{ex}[\{n_\alpha\}]
+  =
+  \int_V \beta f^\mathrm{ex}(\{n_\alpha\}) \, d\vec{r},
+\end{equation}
+which is postulated to be exact for all densities.
+To determine approximate functionals of the above form, we start by writing the chemical potential of species $i$ as
 \begin{equation}\label{eq:fmt-chemical-potential}
   \beta \mu_i^\mathrm{ex}
   =
@@ -850,7 +878,7 @@ with
     \frac{n_2^3 - 3 n_2 \, \vec{n}_2 \cdot \vec{n}_2}{24 \pi (1 - n_3)^2}.
   \end{align}
 \end{subequations}
-This defines a whole class of self-consistent free energy functionals which differ only by the choice of the function $\Psi$ which corresponds to fixing the free energy density of the bulk liquid.
+This defines a whole class of self-consistent free energy functionals which differ only by the choice of function $\Psi$ which corresponds to fixing the free energy density of the bulk liquid.
 The simplest functional in this class is the Rosenfeld (RF) functional which takes $\Psi_\mathrm{RF}(\cdot) = 0$.
 Written explicitly the resulting free energy density is then \cite{RosenfeldPRL1989}
 \begin{equation}\label{eq:rosenfeld-functional}
@@ -932,11 +960,12 @@ The direct correlation functions \eqref{eq:fmt-direct-correlations} in the unifo
 \vspace{0.5em}
 
 \begin{tcolorbox}[title=Percus-Yevick theory in hard spheres]
-  Using \eqref{eq:fmt-direct-correlations-uniform-density} the second functional derivative of the Rosenfeld free energy density \eqref{eq:rosenfeld-functional} for the single-component system $R_i + R_j = 2R = \sigma$ yields the Percus-Yevick direct correlation function \cite{RosenfeldJCP1988,WertheimPRL1963}
+  Inserting the Rosenfeld free energy density \eqref{eq:rosenfeld-functional} into \eqref{eq:fmt-functional} yields the functional $\beta \mathcal{F}_\mathrm{RF}^\mathrm{ex}$.
+  Taking the second functional derivative of this using \eqref{eq:fmt-direct-correlations-uniform-density} for the single-component system $R_i + R_j = 2R = \sigma$ yields the Percus-Yevick direct correlation function \cite{RosenfeldJCP1988,WertheimPRL1963}
   \begin{align}
     c^{(2)}_\mathrm{PY}(r)
     =
-    - \frac{\delta^2 f_\mathrm{RF}^\mathrm{ex}}{\delta \rho(\vec{r}) \delta \rho(\vec{r}')}
+    - \frac{\delta^2 \beta \mathcal{F}_\mathrm{RF}^\mathrm{ex}}{\delta \rho(\vec{r}) \delta \rho(\vec{r}')}
     =&
     - \chi_{3,3}(f_\mathrm{RF}^\mathrm{ex}) \Delta V(r)
     - \chi_{3,2}(f_\mathrm{RF}^\mathrm{ex}) \Delta A(r)
@@ -1001,13 +1030,28 @@ with scaled particle variables $\{\xi_i\}$ defined in \eqref{eq:spt-variables}.
 Other extensions of the CS equation of state to mixtures exist%
 \marginfootnote{The most popular of which is the Boublik-Mansoori-Carnahan-Starling-Leland equation of state \cite{BoublikJCP1970, MansooriJCP1971}, which corresponds to a different FMT functional derived in Refs.\ \cite{RothJPCM2002, YuJCP2002}.},
 however the above equation represents the state of the art \cite{SantosPRE2012}.
-The pressures predicted by \eqref{eq:cs-mixtures} compare favourably against novel Monte-Carlo simulations at very high densities (Fig.\ \ref{fig:swap-eos}).
+
+The pressures predicted by \eqref{eq:cs-mixtures} compare favourably against novel Monte-Carlo simulations of a highly polydipserse hard sphere system \cite{BerthierPRL2016} at very high densities in Fig.\ \ref{fig:swap-eos}.
+To apply the CS equation of state \eqref{eq:cs-mixtures} for a polydisperse system we must use the generalisations of $\{\xi_i\}$ for continuous mixtures outlined in section \ref{sec:truncatable-free-energy}.
+For Fig.\ \ref{fig:swap-eos} we had to select the size distribution measure $d\mu(\sigma)$ entering \eqref{eq:continuous-xi} to correspond to the system used in Ref.\ \cite{BerthierPRL2016}.
+Specifically, this corresponds to
+\begin{equation}\label{eq:berthier-size-measure}
+  d\mu(\sigma)
+  \propto
+  \begin{cases}
+    \frac{1}{\sigma^3} d\sigma \quad & \sigma \in [0.4492, 1]
+    \\
+    0 & \textrm{otherwise}
+  \end{cases}
+\end{equation}
+with a proportionality constant to ensure normalisation.
 %although it will fail at very large densities nearing random close packing.
 
 \begin{SCfigure}
   \includegraphics[width=0.9\linewidth,outer]{swap-cs-santos}
   \caption[Accuracy of Carnahan-Starling equation at high densities]{
     Accuracy of empirical Carnahan-Starling (CS) equation of state \eqref{eq:cs-mixtures} in the supercooled regime from comparison with novel Monte-Carlo (MC) simulations for a system with 23\% polydispersity.
+    The size distribution of this system is described by \eqref{eq:berthier-size-measure}.
     The range of jamming volume fractions $\eta_J$ from non-equilibrium compression protocols with this system are indicated by the blue region.
     Simulation data and jamming densities reproduced from Ref.\ \cite{BerthierPRL2016}.
   }

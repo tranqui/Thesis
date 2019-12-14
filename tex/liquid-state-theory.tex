@@ -224,7 +224,8 @@ where the first few terms are given by \cite{UhlenbeckJMP1963}
   \begin{align}
     h^{(1)}(\vec{r})
     =& \,
-    g^{(1)}(\vec{r}),
+    g^{(1)}(\vec{r})
+    = 1,
     \\
     h^{(2)}(\vec{r}_1, \vec{r}_2)
     =& \,
@@ -317,7 +318,7 @@ or more generally \cite{Hansen2013}
   =
   \left\langle
   \prod_{i=1}^n
-  \Big[ \rho(\vec{r}_i) - \rho^{(1)}(\vec{r}_i) \Big]
+  \Big[ \widehat\rho(\vec{r}_i) - \rho^{(1)}(\vec{r}_i) \Big]
   \right\rangle
   \qquad \forall \; n \ge 2.
 \end{equation}
@@ -492,7 +493,7 @@ Often, the end result of these approaches is an equation of state for the pressu
 \begin{equation}\label{eq:pressure-relation-1}
   p
   =
-  - \left( \frac{\partial F}{\partial V} \right)_{N,T},
+  - \left( \frac{\partial \Omega}{\partial V} \right)_{\mu,T},
 \end{equation}
 although a state equation for any other thermodynamic observable would suffice.
 
@@ -524,21 +525,24 @@ Integrating this relation over the density and making use of the isothermal comp
 i.e.\ the \emph{compressibility route} to the pressure.
 
 Another option evaluates the pressure directly \eqref{eq:pressure-relation-1} from the partition function.
-In terms of the canonical partition function this is
+In terms of partition functions this becomes
 \begin{equation}\label{eq:pressure-relation-2}
   \beta p
   =
-  \left( \frac{\partial (\ln{Z_N})}{\partial V} \right)_{N,T}.
+  \left( \frac{\partial (\ln{\Xi})}{\partial V} \right)_{\mu,T}
+  =
+  \frac{1}{\Xi} \sum_{N=0}^\infty \frac{z^N}{N!}
+  \left( \frac{\partial Z_N}{\partial V} \right)_{N,T}.
 \end{equation}
 We consider what happens during a volume change $V \to \alpha^d V$ emerging from the affine rescaling $\vec{r} \to \alpha \vec{r}$, so that the configurational integral \eqref{eq:canonical-partition} becomes
-\begin{equation}\label{eq:inflated-canonical-partition}
+\begin{equation*}
   Z_N(\alpha^d V)
   =
   \int_{\alpha V^N} e^{-\beta U_N(\vec{r}^N)} d\vec{r}^N
   =
   \alpha^{dN}
   \int_{V^N} e^{-\beta U_N(\alpha \vec{r}^N)} d\vec{r}^N
-\end{equation}
+\end{equation*}
 Using the identity
 \begin{equation*}
   \frac{\partial f(xy)}{\partial y}
@@ -546,22 +550,23 @@ Using the identity
   \frac{x}{y} \frac{\partial f(xy)}{\partial x},
 \end{equation*}
 we can write
-\begin{equation}
-  \frac{\partial (\ln{Z_N(\alpha^d V)})}{\partial V}
+\begin{equation}\label{eq:inflated-canonical-Z-derivative}
+  \frac{\partial (Z_N(\alpha^d V))}{\partial V}
   =
   \frac{\alpha}{d V}
-  \frac{\partial (\ln{Z_N(\alpha^d V)})}{\partial \alpha}.
+  \frac{\partial (Z_N(\alpha^d V))}{\partial \alpha}.
 \end{equation}
-This trick allows the pressure relation \eqref{eq:pressure-relation-2} to be re-expressed as
+This trick allows the derivatives appearing on the right-hand side of the pressure relation \eqref{eq:pressure-relation-2} to be re-expressed as
 \begin{equation*}
-  \frac{\beta p}{\rho}
+  \left( \frac{\partial Z_N}{\partial V} \right)_{N,T}
+  %\frac{\beta p}{\rho}
   =
-  \frac{1}{d N}
+  \frac{1}{d V}
   \left.
-  \frac{\partial (\ln{Z_N(\alpha^d V)})}{\partial \alpha}
+  \frac{\partial (Z_N(\alpha^d V))}{\partial \alpha}
   \right|_{\alpha = 1}.
 \end{equation*}
-The derivative of \eqref{eq:inflated-canonical-partition} with respect to $\alpha$ can be calculated explicitly as
+The derivative of $Z_N(\alpha^d V)$  with respect to $\alpha$ can be calculated explicitly as
 \begin{equation*}
   \begin{split}
     \frac{\partial Z_N(\alpha^d V)}{\partial \alpha}
@@ -589,36 +594,37 @@ The derivative of \eqref{eq:inflated-canonical-partition} with respect to $\alph
     d\vec{r}^N,
   \end{split}
 \end{equation*}
-giving the final result
+which combined with \eqref{eq:inflated-canonical-Z-derivative} yields
+\begin{equation*}
+  \left( \frac{\partial Z_N}{\partial V} \right)_{N,T}
+  =
+  \rho Z_N
+  -
+  \frac{1}{d V}
+  %\sum_{i,j}
+  \int_{V^N}
+  \left. \frac{\partial \beta U_N(\alpha \vec{r}^N)}{\partial \alpha} \right|_{\alpha = 1}
+  e^{-\beta U_N}
+  d\vec{r}^N.
+\end{equation*}
+Inserting this back into \eqref{eq:pressure-relation-2} gives the final result
 \begin{equation}\label{eq:virial-route-pressure}
-  \begin{split}
-    \frac{\beta p}{\rho}
-    &=
-    1
-    -
-    \frac{1}{\rho d Z_N}
-    \int_{V^N}
-    \left.
-    \frac{\partial \beta U_N(\alpha \vec{r}^N)}{\partial \alpha}
-    \right|_{\alpha = 1}
-    e^{-\beta U_N}
-    d\vec{r}^N
-    \\ &=
-    1
-    -
-    \frac{1}{\rho d}
-    \left\langle
-    \left.
-    \frac{\partial \beta U_N(\alpha \vec{r}^N)}{\partial \alpha}
-    \right|_{\alpha = 1}
-    \right\rangle,
-  \end{split}
+  \frac{\beta p}{\rho}
+  =
+  1
+  -
+  \frac{1}{\rho d V}
+  \left\langle
+  \left.
+  \frac{\partial \beta U_N(\alpha \vec{r}^N)}{\partial \alpha}
+  \right|_{\alpha = 1}
+  \right\rangle,
 \end{equation}
 which is known as the \emph{virial route}%
 \marginfootnote{This is so-named because historically it was derived through the virial theorem.
 Despite the similar name, this approach has no relation to the virial series which will be introduced in section \ref{sec:virial-series}.}
 to the pressure.
-In the latter step we replaced the canonical average with the grand-canonical average \eqref{eq:grand-canonical-average} from ensemble equivalence in the thermodynamic limit.
+%In the latter step we replaced the canonical average with the grand-canonical average \eqref{eq:grand-canonical-average} from ensemble equivalence in the thermodynamic limit.
 
 There are other routes involving different observables (e.g.\ through the potential energy or the chemical potential \cite{Santos2016}) to obtain the equation of state from the correlation functions; however, we will not discuss them as we will only use the virial route in the results chapters.
 The degree of self-consistency between different routes can act as a proxy for the accuracy of an approximate theory.
@@ -660,7 +666,7 @@ The degree of self-consistency between different routes can act as a proxy for t
     1
     +
     \frac{\eta (2\sigma)^d}{2}
-    y^{(2)}(\sigma).
+    y^{(2)}(\sigma^+).
     %% \\ &=
     %% 1
     %% +
@@ -925,12 +931,12 @@ with weighted densities adopting the form
 \end{equation*}
 where $f_k(\cdot)$ is the probability measure describing the size distribution.
 In the limit of continuous distributions the weighted densities become integrals
-\begin{equation*}
+\begin{equation}\label{eq:continuous-xi}
   \xi_k
   =
   \rho \int f_k(\sigma) d\mu(\sigma)
   %\rho \int d\mu(s),
-\end{equation*}
+\end{equation}
 introducing the probability measure $\mu(\sigma)$ for the molarities of particle species such that $\int d\mu(\sigma) = 1$.
 %This reduces to the previous form for discrete mixtures if we set $\mu(s)$ to the counting measure, however in integral form we are free to extend the calculation to continuous mixtures.
 \eqref{eq:consistent-osmotic-pressure-weighted-densities} remains well-defined in this limit so long as there are a finite set of weighted densities.

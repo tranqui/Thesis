@@ -17,16 +17,16 @@ so by focusing on extensive quantities we ensure a thermodynamically consistent 
 %%   V[K] = \int_K d\vec{r}.
 %% \end{equation}
 %Then,
-As an example, extensive quantities include the \emph{entropy} of a large system which can be expressed in terms of system volume as
+As an example, extensive quantities include the \emph{potential energy} of a large system which can be expressed in terms of system volume as
 \begin{equation*}
-  S = s V
+  \lim_{V \to \infty} U = u V
 \end{equation*}
-where $s$ would be an entropy density which is \emph{intensive}, meaning it does not change with system volume.
-Another example is the surface energy
+where $u$ would be an energy density which is \emph{intensive}, meaning it does not change with system volume.
+Another example is the surface free energy, defined in the absence of entropic effects as the excess quantity $U_\mathrm{ex} = U - uV$ and in the macroscopic limit this yields
 \begin{equation*}
-  E = \gamma A
+  \lim_{V \to \infty} U_\mathrm{ex} = \gamma A
 \end{equation*}
-where $\gamma$ is the surface tension and $A$ is the surface area.
+where $\gamma$ is the intensive surface tension and $A$ is the extensive surface area i.e.\ another size measure.
 More refined notions define a variable as extensive if it is a \emph{first-order homogeneous function} of any linearly independent set of (different) extensive variables characterising the system size \cite{Chandler1987}.
 That is, a variable $\phi$ is extensive if
 \begin{equation}\label{eq:extensive-homogeneity}
@@ -129,7 +129,7 @@ We put forward the following qualities of the measures $V, A, C$ and $X$ which m
 \item They are continuous%
   \marginfootnote{Specifically, in integral geometry this continuity property is with respect to the \emph{Hausdorff metric}.
     Details on this can be found in standard texts, e.g.\ Refs.\ \cite{Santalo2004,SchneiderACIG1984,Schneider2008,Klain1997}.}.
-  Loosely speaking, this means that the size measures converge as the object is approximated by increasingly finely meshed polyhedra excluding e.g.\ fractal geometries.
+  Loosely speaking, this means that the size measures converge as the object is approximated by increasingly finely meshed polyhedra excluding fractal geometries.
   As a simple intuitive example, the measurement of a length will converge continuously to some number as one uses rulers with progressively finer distance markings.
 \end{enumerate}
 The final property specifically excludes geometries for which we do not expect there to be any reasonable measurement of size.
