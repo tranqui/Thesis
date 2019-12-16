@@ -120,8 +120,8 @@ The one-dimensional analogue of a hard sphere is a hard rod%
 \marginfootnote{In fact, rods are the only convex shape possible in 1d (as line segments) so they are really the one-dimensional analogue of \emph{any} convex object.}.
 The cost of inserting a new rod of length $L$ exactly fits the morphometric form independent of density.
 
-Imagine a hard rod liquid occupying all of space.
-If we insert a single fixed hard point at the origin, this splits the liquid into two half spaces on either side of the origin, i.e.\ $x < 0$ (left) and $x > 0$ (right).
+Imagine a hard rod fluid occupying all of space.
+If we insert a single fixed hard point at the origin, this splits the fluid into two half spaces on either side of the origin, i.e.\ $x < 0$ (left) and $x > 0$ (right).
 Because the interactions are hard the two half spaces will be completely decorrelated; thus, growing the point to become a rod of finite size $L$ will simply correspond to translating one of the spaces a distance $L$ requiring work $p L$.
 In the limit $L \to 0$ where the rod becomes a point there will be a fixed insertion cost
 \begin{equation*}
@@ -183,7 +183,7 @@ Comparing this expression with \eqref{eq:hard-mayer-f} we can rewrite the thermo
 \end{equation}
 Rewriting the interactions in terms of the Euler characteristic allows us to exploit theorems from integral geometry to evaluate thermodynamic quantities.
 
-Including their relative orientations, the cost of inserting a solute $A$ into a liquid of $B$ particles in the low density limit $\rho \ll 1$ is determined from leading contribution in the virial series using \cite{Hansen2013,Santos2016}
+Including their relative orientations, the cost of inserting a solute $A$ into a liquid of $B$ particles in the low density limit $\rho \ll 1$ is determined from the leading contribution to the virial series using \cite{Hansen2013,Santos2016}
 \begin{equation}\label{eq:low-density-insertion}
   \begin{split}
     \beta\Delta\Omega
@@ -193,7 +193,7 @@ Including their relative orientations, the cost of inserting a solute $A$ into a
     %% \frac{\rho}{2} \int_{G_d} \left( 1 - e^{-\beta u(A, gB)} \right) dg
     + \mathcal{O}(\rho^2)
     \\ &=
-    \frac{\rho}{2} \int_{G_d} \chi[A \cap gB] dg
+    \frac{\rho}{2} \int_{G_d} \chi[A \cap gB] \, dg
     + \mathcal{O}(\rho^2)
   \end{split}
 \end{equation}
@@ -245,7 +245,7 @@ and restating the $n$th virial coefficient \label{eq:virial-coefficients-mixture
 where $x_i$ is the mole fraction of species $i$ such that $x_i > 0$ and $\sum_{i=0}^m x_i = 1$.
 $B_{s_1, \cdots, s_n}$ are the composition independent virial coefficients describing the contribution from interactions between $n$ particles of species $\{s_0, s_1, \cdots, s_n\}$.
 Each contribution contains integrals over all configurations of the $n$ particles \cite{Hansen2013,Santos2016}.
-We will refer to these contributions as diagrams because they are normally represented using graph theoretic tools such as when they were introduced in section \ref{sec:virial-series}.
+We will refer to these integrals as diagrams because they are normally represented using graph theoretic tools, such as when they were introduced in section \ref{sec:virial-series}.
 
 We now identify the insertion cost for a new solute particle with its chemical potential in the dilute limit.
 The chemical potential of the solute species is
@@ -286,7 +286,7 @@ with modified virial coefficient
   B_{0, s_1, \cdots, s_n}
   \prod_{i=1}^n x_{s_i}
 \end{equation}
-which contains contributions from all diagrams including a single member of the solute species.
+which contains contributions from all diagrams containing a single member of the solute species.
 In a single-component system we obtain the first few terms as \cite{Santos2016}
 \begin{subequations}
   \begin{align}
@@ -449,28 +449,28 @@ eliminates the combinatorial factor in \eqref{eq:n-particle-intersection-integra
   \sum_{\substack{i_0, \cdots, i_n = 0 \\ i_0 + \cdots + i_n = nd}}^d
   \widetilde{V}_{i_0}[K_0]
   \prod_{j=1}^n
-  \widetilde{V}_{i_j}[K_{s_j}]
+  \widetilde{V}_{i_j}[K_{s_j}].
 \end{equation}
 Summing this equation over all the different species in the mixture gives
 \begin{equation}
   \label{eq:final-lambda}
   \begin{split}
     \Lambda^*
-    & :=
+    :=&
     \sum_{s_1, \cdots s_n = 1}^m
     \Lambda_{s_1, \cdots, s_n}
     \prod_{i=1}^n x_{s_i}
-    \\ &=
+    \\ =&
     d! \omega_d
     \sum_{\substack{i_0, \cdots, i_n = 0 \\ i_0 + \cdots + i_n = nd}}^d
     \widetilde{V}_{i_0}[K_0]
     \prod_{j=1}^n
     \xi_{i_j}
-    \\ &=
+    \\ =&
     d! \omega_d
     \sum_{k = 0}^d
     \frac{\lambda_k^{(n)}}{\rho^n}
-    \widetilde{V}_{k}[K_0]
+    \widetilde{V}_{k}[K_0],
   \end{split}
 \end{equation}
 where we simplified the final expression by reintroducing the \emph{scaled particle variables}%
@@ -490,9 +490,9 @@ where we simplified the final expression by reintroducing the \emph{scaled parti
     \xi_{i_j}.
   \end{align}
 \end{subequations}
-The bulk volume fraction is generically $\eta = \xi_d$, and the Euler characteristic of the particles must be unity in this approach giving $\xi_0 = \rho / (d! \omega_d)$.
+The bulk volume fraction is generically $\eta = \xi_d$, and the Euler characteristic of the particles must be unity for convex particles giving $\xi_0 = \rho / (d! \omega_d)$.
 
-At this point we observe that the resulting free energy is already of morphometric form, as can be seen by combining \eqref{eq:insertion-with-lambda}, \eqref{eq:rescaled-intrinsic-volumes} and \eqref{eq:final-lambda} giving
+At this point we can observe that the resulting free energy is already of morphometric form, as can be seen by combining \eqref{eq:insertion-with-lambda}, \eqref{eq:rescaled-intrinsic-volumes} and \eqref{eq:final-lambda} giving
 \begin{subequations}\label{eq:morphometric-approach-from-virial}
   \begin{align}
     \beta \Delta \Omega
@@ -720,7 +720,7 @@ Such a reweighting approach is redundant because \eqref{eq:py-pressure-mixtures}
 
 %Generically $V_d$ is the $d$-dimensional volume, so we will find $\xi_d = \eta$.
 
-\section{Numerical results for the single-component hard spheres}
+\section{Numerical results for single-component hard spheres}
 
 \begin{SCfigure}
   \includegraphics[width=0.9\linewidth,outer]{resummation-a2}
@@ -879,7 +879,8 @@ The exact result applies for mixtures of hard convex particles in an isotropic p
 
 In hard spheres, this exact contribution features similar accuracy as scaled particle theory, and exactly coincides with it for $d \le 2$.
 Numerical comparison in $d=3$ shows that the pressure and surface tension are comparable in accuracy to the classic SPT/PY route, so it captures the dominant contributions to the bulk free energy across a large density range; this latter fact seems to suggest why the approach has been successful.
-Though as noted in Ref.\ \cite{MarechalPRE2014}, this is partially due to a cancellation in the omitted terms of the virial expansion.%, so it may still be desirable to improve the morphometric approach by inclusion of additional terms.
+Though as noted in Ref.\ \cite{MarechalPRE2014}, this is partially due to a cancellation in the omitted terms of the virial expansion.
+%, so it may still be desirable to improve the morphometric approach by inclusion of additional terms.
 %We have derived the morphometric solvation free energy for mixtures of hard convex particles from first-principles using the virial series.
 %% The morphometric theory we have derived from the virial series is less accurate than theories obtained from other routes, so these results are of fundamental rather than practical interest.
 %% Specifically, in $d=3$ the pressure and surface tension are comparable in accuracy to the classic SPT/PY route, and in $d=2$ the approach is identical to scaled particle theory.
