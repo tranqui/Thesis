@@ -166,7 +166,7 @@ The timescale of the longer $\alpha$-relaxation $\tau_\alpha$ is more central to
 \begin{SCfigure}
   \includegraphics[width=0.9\linewidth,outer]{isf}
   \caption[Intermediate scattering function in a supercooled liquid]{
-    Typical intermediate scattering functions in a supercooled liquid.
+    Typical intermediate scattering functions in a supercooled liquid, for values of $k \sim 2\pi / \sigma$ where $\sigma$ is the interaction lengthscale.
     In the ordinary liquid decay is purely exponential, but as a liquid is supercooled we observe a timescale separation between short-time vibrational ($\beta$-) and longer time liquid-like ($\alpha$-) relaxation processes.
   }
   \label{fig:isf}
@@ -231,7 +231,7 @@ glassformers.
     The \emph{Angell} plot \cite{AngellJNS1988} for molecular and model glassformers showing the temperature/pressure dependence of viscosity (labelled here as $\eta$) or equivalently relaxation time $\tau_\alpha$.
     The molecular systems \ce{SiO2} and orthoterphenyl (OTP) respectively display the \emph{strong} and \emph{fragile} behaviours described in text, with data obtained from Refs.\ \cite{AngellS1995, BerthierPRE2009}.
     Kob-Anderson (KA) and Wahnstrom (Wahn) are binary mixtures of Lennard-Jones atoms designed to exhibit fragility.
-    The compressibility $Z = \beta p / \rho$ is argued to be equivalent to inverse temperature for hard spheres (HS) \cite{BerthierPRE2009}, with data taken from Ref.\ \cite{RoyallJSM2017}.
+    The compressibility factor $Z = \beta p / \rho$ is argued to be equivalent to inverse temperature for hard spheres (HS) \cite{BerthierPRE2009}, with data taken from Ref.\ \cite{RoyallJSM2017}.
     Reproduced from Ref.\ \cite{RoyallPR2015}.
   }
   \label{fig:angell}
@@ -246,7 +246,9 @@ This means that the dynamics fundamentally changes at high densities (or low tem
 We will discuss this more in the next section.
 
 Some modification is required for hard particle systems, where temperature is not a natural control parameter.
-As we argued in the introduction, pressure is the only meaningful state variable.
+As we argued in the introduction, pressure%
+\marginfootnote{Equivalent to density, with the connection made through the equation of state $p = p(\rho)$.}
+is the only meaningful state variable.
 The authors of Ref.\ \cite{BerthierPRE2009} argue that pressure plays a role equivalent to inverse temperature in athermal systems, because of similarities in their limit behaviour.
 Alternatively, we could make a free volume argument, where we expect a relaxation event to involve fluctuations of volume $\Delta V$.
 In equilibrium, volume fluctuations are created by reversible work $p \Delta V$ so to leading order%
@@ -266,8 +268,8 @@ Moreover, the geometrical interpretation in terms of volume fluctuations $\Delta
 
 \begin{SCfigure}
   \includegraphics[width=0.7\linewidth,outer]{dynamic-heterogeneity}
-  \caption[Dynamic heterogeneity in binary hard discs]{
-    Dynamic heterogeneity in a binary hard disc system with a size ratio of $1:1.4$.
+  \caption[Dynamical heterogeneities in binary hard discs]{
+    Dynamical heterogeneities in a binary hard disc system with a size ratio of $1:1.4$.
     Particles are coloured according to distance moved over a relaxation time $\tau_\alpha$, with blue having moved the least and red the most.
     Reproduced from Ref.\ \cite{RoyallPR2015}.
   }
@@ -285,8 +287,8 @@ This finding possibly suggests the existence of multiple competing relaxation me
 Second, the dynamics becomes highly spatially heterogeneous with increased supercooling (Fig.\ \ref{fig:dynamic-heterogeneities}).
 Furthermore, simulation studies have revealed that the initial configuration strongly correlates with the locations of mobile events \cite{Widmer-CooperJPCM2005}.
 This shows that the sites of mobility are encoded in the static configuration, which could be interpreted structurally.
-Dynamic heterogeneities are now seen as quintessential features of the glass transition \cite{BerthierRMP2011,BiroliJCP2013}, so the origin of the growing dynamic length would be a necessary component for any theory to be accepted.
-%The size of these hetereogeneities is captured by a dynamic lengthscale $\xi_\mathrm{dyn}$, whereas thermodynamic theories typically concern static lengthscales.
+Dynamical heterogeneities are now seen as quintessential features of the glass transition \cite{BerthierRMP2011,BiroliJCP2013}, so the origin of the growing dynamical length would be a necessary component for any theory to be accepted.
+%The size of these hetereogeneities is captured by a dynamical lengthscale $\xi_\mathrm{dyn}$, whereas thermodynamic theories typically concern static lengthscales.
 %A requirement of a thermodynamic theory is thus that $\xi_\mathrm{dyn}$ scales with the proposed static length.
 
 %% To unveil static quantities, it is tempting to link dynamical heterogeneity to structural heterogeneity.
@@ -401,7 +403,8 @@ Then, through a second approximation where $K$ is factorised into a product of t
   =
   0
 \end{equation}
-with
+with%
+\marginfootnote{As a reminder to the reader, the $c^{(2)}$ appearing here is the two-body direct correlation function defined through \eqref{eq:direct-correlations}.}
 \begin{subequations}\label{eq:full-mct-coupled}
   \begin{align}
     K_\mathrm{MCT}
@@ -414,14 +417,16 @@ with
     V_{\vec{q},\vec{k}-\vec{q}}
     &=
     \frac{
-      \vec{k} \cdot \vec{q} c^{(2)}(q) + \vec{k} \cdot (\vec{k} - \vec{q}) c^{(2)}(|\vec{k} - \vec{q}|)
+      \vec{k} \cdot \vec{q} \, c^{(2)}(q)
+      + \vec{k} \cdot (\vec{k} - \vec{q}) \, c^{(2)}(|\vec{k} - \vec{q}|)
     }{
       k
     }.
   \end{align}
 \end{subequations}
 The latter function $V_{\vec{q},\vec{k}-\vec{q}}$ is the so-called \emph{vertex}, which takes the pair direct correlation, and the initial condition for \eqref{eq:full-mct} is $F(k,t=0) = S^{(2)}(k)$; as such, standard MCT takes only pair correlation functions as input.
-Together \eqref{eq:full-mct} and \eqref{eq:full-mct-coupled} form a non-linear coupled set of integro-differential equations that can be numerically solved, providing a reasonable description of the \emph{onset} of dynamical arrest, with deviations only becoming noticeable at deep supercooling \cite{FlennerPRE2011,BrambillaPRL2009}.
+This method requires knowledge of the structure factor, which implicitly depends the state point.
+Together \eqref{eq:full-mct} and \eqref{eq:full-mct-coupled} form a non-linear coupled set of integro-differential equations that can be numerically solved, providing a reasonable description of the first few decades of dynamical slowdown, with deviations only becoming noticeable at deep supercooling \cite{FlennerPRE2011,BrambillaPRL2009}.
 
 Crucially, MCT predicts a diverging timescale at $\eta \sim 0.52$ in hard spheres, where the dynamics would become completely arrested, and numerical fits to colloidal experimental data with the same power behaviour law predicted by MCT move this point up to $\eta \sim 0.58$ \cite{VanMegenPRE1994}.
 However, this predicted transition must be spurious as recent experiments have managed to equilibrate colloidal hard sphere liquids up to $\eta \lesssim 0.60$ \cite{BrambillaPRL2009,HallettNC2018} and to even higher densities in simulations \cite{BerthierPRL2016}.
@@ -492,7 +497,7 @@ The \emph{complexity} $\Sigma$ is an extensive quantity characterising the multi
 As the system is compressed further $\Sigma$ decreases \cite{KirkpatrickPRB1987,KirkpatrickPRA1989,ParisiRMP2010} corresponding to the rarefaction of clustered regions.
 At a volume fraction $\eta_K > \eta_c$ an \emph{entropy crisis} occurs: $\Sigma$ vanishes, leading to the system being frozen into a single, unique region in configuration space called an \emph{ideal glass} phase \cite{KauzmannCR1948,KirkpatrickPRB1987,HallJCP1987,KirkpatrickPRA1989,ParisiRMP2010,BerthierRMP2011}.
 
-If an equilibrium glass state in the regime $\eta \in [\eta_c, \eta_K]$ is compressed out-of-equilibrium without sampling the other clusters, a further phase transition occurs to a so-called \emph{Gardner} phase \cite{KurchanJPCB2013,CharbonneauNC2014,CharbonneauJSM2014}.
+If an equilibrium glass state in the regime $\eta \in [\eta_c, \eta_K]$ is compressed out-of-equilibrium without sampling the other clusters, a further phase transition occurs to a so-called \emph{Gardner phase} \cite{KurchanJPCB2013,CharbonneauNC2014,CharbonneauJSM2014}.
 Each cluster splits further into fractal sub-regions arranged hierarchically.
 Whereas the clustered regions formed at $\eta_c$ are geometrically dissimilar%
 \marginfootnote{As measured by e.g.\ the intermediate scattering function},
@@ -539,23 +544,23 @@ As such, the complexity is not well-defined because the metastable states will n
 In finite dimensions, the \emph{configurational entropy} $S_\mathrm{conf}$ is introduced as the closest equivalent to the complexity; this does not have a generally agreed upon meaning, but a common definition invokes the timescale separation between vibrational ($\beta$--) and liquid-like ($\alpha$--) dynamics.
 The configurational entropy then describes the entropy of the latter process, obtained as the residual entropy after removing vibrations
 \begin{equation}\label{eq:sconf}
-  S_\mathrm{conf} := S - S_\mathrm{vib},
+  S_\mathrm{conf} := S - S_\mathrm{vib}
 \end{equation}
-though some refinement is required for polydisperse systems \cite{OzawaJCP2017,OzawaJCP2018} and where additional non-vibrational processes exist that do not relax the density profile \cite{OzawaPRL2018}.
+with $S_\mathrm{vib}$ as the \emph{vibrational entropy}, though some refinement is required for polydisperse systems \cite{OzawaJCP2017,OzawaJCP2018} and where additional non-vibrational processes exist that do not relax the density profile \cite{OzawaPRL2018}.
+The exact definition of $S_\mathrm{conf}$ thus depends on how one defines $S_\mathrm{vib}$, which can be defined in multiple distinct, though broadly equivalent, ways.
+For example, a common convention is to define the vibrations as all those excitations around an energy minimum \cite{Wales2004}; we will use this convention in chapter \ref{chapter:morphometric-applications}.
 
 The RFOT scenario imagines the mean-field dynamical transition as a crossover to an \emph{energy landscape dominated} dynamics.
 Specifically, the number of unique (non-vibrational) states possible in a subregion of size $\xi$ will scale $\propto \exp{(s_\mathrm{conf} \xi^d / k_B)}$, where $s_\mathrm{conf} = S_\mathrm{conf} / V$ is the configurational entropy density.
 A dynamical event which changes a state is expected to pay an energy penalty $\gamma_\mathrm{eff} \xi^\theta$ where $\theta \le d$ from inducing a mismatch with the surrounding fluid.
 The thermodynamic potential for this subregion is then expected to adopt the form
 \begin{equation}\label{eq:rfot-barrier}
-  \Phi \sim \gamma_\mathrm{eff} \xi^\theta - T s_\mathrm{conf} \, \xi^d.
+  \Phi(\xi) \sim \gamma_\mathrm{eff} \xi^\theta - T s_\mathrm{conf} \, \xi^d.
 \end{equation}
-The maximum of $\Phi$ occurs at the \emph{point-to-set}%
-\marginfootnote{So-named because this lengthscale marks the crossover from the subregion being confined to a single `point' in its configuration space to a `set' of states.}
-length
+The maximum of $\Phi$ occurs at the \emph{point-to-set} length
 \begin{equation}\label{eq:rfot-xi}
   \xi_\mathrm{PS}
-  := \argmax{(\Phi)}
+  := \argmax_\xi{(\Phi(\xi))}
   \sim
   \left(
   \frac{\theta \gamma_\mathrm{eff}}{d T s_\mathrm{conf}}
@@ -613,16 +618,17 @@ Details can be found in the review of Ref.\ \cite{TarjusJPCM2005}.
 
 The prototypical model for geometric frustration is the Wahnstrom mixture, whose icosahedral LFS can form a crystal in curved space; flattening space induces frustration suppressing the crystal structure \cite{CharbonneauPRL2012,RoyallPR2015}.
 In a recent work, Turci et al.\ \cite{TurciPRL2017} varied the curvature of space to effectively treat frustration as a control parameter.
-They found that the collective dynamic behaviour was dominated by the LFS for small frustration, as expected, but that increasingly the static and dynamical lengthscales decouple with strong frustration \cite{TurciPRL2017}.
+They found that the collective dynamical behaviour was dominated by the LFS for small frustration, as expected, but that increasingly the static and dynamical lengthscales decouple with strong frustration \cite{TurciPRL2017}.
 This decoupling signals the appearance of additional relaxation mechanisms beyond the geometric frustration picture.
-In Euclidean space model systems are typically too strongly frustrated for this scenario to apply verbatim.
+In Euclidean space, model systems are typically too strongly frustrated for this scenario to apply verbatim.
 
 Even though the full geometric frustration scenario now seems implausible for most systems, there is room for geometric ideas play a role in a more complete theory.
 Notably, the formation of LFS has been found to strongly correlate with dynamically slow regions in gels \cite{RoyallNM2008}, binary Lennard-Jones mixtures \cite{CoslovichJCP2007,CoslovichJCP2007a} and colloidal hard spheres \cite{LeocmachNC2012}.
 Unfortunately, this correlation seems to be highly system dependent \cite{HockyPRL2014}, so it may only be one piece in the puzzle.
 A more complete review of the phenomenology of LFS can be found in \cite{RoyallPR2015}.
 Finally, a viewpoint emphasising the role of local structure is broadly compatible with the mean-field picture: the propensity for a system to form certain structures can be interpreted as a manifestation (or a driving force) of a reduced $S_\mathrm{conf}$.
-Then, the amorphous lengthscale of RFOT would be given a simpler structural interpretation i.e.\ $\xi_\mathrm{PS} \sim \xi_\mathrm{LFS}$.
+In this picture repeating patches in the liquid would be interpreted as indicative of a growing amorphous order \cite{KurchanJPMT2011}.
+%Then, the amorphous lengthscale of RFOT would be given a simpler structural interpretation i.e.\ $\xi_\mathrm{PS} \sim \xi_\mathrm{LFS}$.
 
 %Charbonneau: growth of length scale associated with LFS does not correlate with dynamical length scale \cite{CharbonneauPRL2012,CharbonneauPRE2013}, possibly multiple relaxation mechanisms or a non-static length scale.
 %Leacmach: \cite{LeocmachNC2012}
@@ -641,16 +647,16 @@ This does not prove that structural change \emph{causes} the slowdown, but it do
 %% The mean-field picture of glass formation interprets the dynamical slowdown entirely within a thermodynamic framework.
 %% In mean-field hard spheres, formally in the limit of infinite spatial dimensions $d \to \infty$,
 %% Hard spheres in mean field have been shown to have a thermodynamic glass transition, however the critical dimensions are unknown so it is unclear what happens in $d=3$. \cite{ParisiRMP2010,KurchanJSM2012,KurchanJPCB2013,CharbonneauNC2014,CharbonneauJSM2014}.
-%% It is possible that low-dimensional fluctuations prevent any thermodynamic transition, and it has been argued that even if there is a thermodynamic transition at $\eta_K$ this may not be responsible for the dynamic slowdown seen around the operational glass transition $\eta_g \ll \eta_K$ \cite{WyartPRL2017}.
+%% It is possible that low-dimensional fluctuations prevent any thermodynamic transition, and it has been argued that even if there is a thermodynamic transition at $\eta_K$ this may not be responsible for the dynamical slowdown seen around the operational glass transition $\eta_g \ll \eta_K$ \cite{WyartPRL2017}.
 %% As such, there is room for alternative pictures to the mean-field/RFOT scenario.
 
-The main opposition theory to the thermodynamic scenarios outlined above is \emph{dynamic facilitation}, which focuses on the role of kinetic constraints.
+The main opposition theory to the thermodynamic scenarios outlined above is \emph{dynamical facilitation}, which focuses on the role of kinetic constraints.
 This theory was motivated by \emph{kinetically constrained models}, which share many of the same phenomenology as supercooled liquids but possess trivial thermodynamics ruling out the thermodynamic theories outlined above.
 Instead, dynamics is inhibited through kinetic constraints which must be overcome by a series of subsequent localised events \cite{SpeckJSM2019}, rather than single collective events predicted by e.g.\ the mean-field/RFOT scenario.
-Inspired by this, dynamic facilitation posits that relaxation in supercooled liquids occurs through a series of connected elementary excitations \cite{ChandlerARPC2010,SpeckJSM2019}.
-Dynamic heterogeneity and its associated lengthscale are the fundamental features of glass in this picture, and no thermodynamic phase transition occurs so the relaxation time remains finite until $T = \SI{0}{\kelvin}$.
-The dynamic lengthscale corresponds to the distance between dynamical defects in this theory, which could have a structural interpretation although the nature of the defects are usually considered incidental to the theory.
-Notably, the agreement of dynamic facilitation with to available data is comparable with the mean-field/RFOT scenario up to the experimental glass transition \cite{ChandlerARPC2010}.
+Inspired by this, dynamical facilitation posits that relaxation in supercooled liquids occurs through a series of connected elementary excitations \cite{ChandlerARPC2010,SpeckJSM2019}.
+Dynamical heterogeneity and its associated lengthscale are the fundamental features of glass in this picture, and no thermodynamic phase transition occurs so the relaxation time remains finite until $T = \SI{0}{\kelvin}$.
+The dynamical lengthscale corresponds to the distance between dynamical defects in this theory, which could have a structural interpretation although the nature of the defects are usually considered incidental to the theory.
+Notably, the agreement of dynamical facilitation with available data is comparable with the mean-field/RFOT scenario up to the experimental glass transition \cite{ChandlerARPC2010}.
 %This must trivially occur at the very least $T=0\si{K}$ where relaxation timescales diverges, however much like the lack of a phase transition in the Ising model in $d=1$ this is not a true thermodynamic phase transition because it cannot be crossed.
 %So the central question of glass is what happens in $d=3$, is there a vanishing configurational entropy at a finite $T > 0$ with an accompanying thermodynamic glass transition?
 
@@ -670,7 +676,7 @@ Notably, the agreement of dynamic facilitation with to available data is compara
 \section{Perspective: usefulness of many-body correlations}
 \label{sec:correlation-perspective}
 
-In subsequent chapters will be heavily focusing on the treatment of static many-body correlation functions in the bulk liquid.
+In subsequent chapters we will heavily focus on the treatment of static many-body correlation functions in the bulk liquid.
 Here, we motivate their study for the treatment of the supercooled liquid.
 In section \ref{sec:thermodynamic-routes} we saw how the compressibility and virial routes lead to expressions of the free energy in terms of pair correlations.
 This is emblematic of conventional routes to the free energy, so in some sense all of the thermodynamically relevant information is contained in the two body correlation functions.
@@ -678,7 +684,7 @@ It is thus natural to wonder what new information can be obtained from the many-
 
 Firstly, while it is true that thermodynamic quantities like the pressure can certainly be inferred from the pair correlations, there is no such simple relationship for dynamical quantities.
 In the absence of a thermodynamic phase transition, we would not expect the pair correlation function alone to reveal much about the nature of dynamical arrest, beyond the lack of a transition.
-Even supposing the existence of a transition, the precision required to detect such a signal $g^{(2)}(r)$ may be arbitrarily subtle.
+Even supposing the existence of a transition, the precision required to detect such a signal in $g^{(2)}(r)$ may be arbitrarily subtle.
 It is straightforward to show that \cite{Santos2016}
 \begin{equation}\label{eq:correlation-derivatives}
   \chi_T \rho
@@ -713,7 +719,7 @@ The first few terms are given by \cite{WallaceJCP1987}
   \begin{align}
     \frac{S_1}{V}%\langle N \rangle}
     &=
-    k_B \, \rho \left( \frac{d}{2} - \ln{\rho \Lambda^d} \right),
+    k_B \, \rho \left( 1 + \frac{d}{2} - \ln{\rho \Lambda^d} \right),
     \\
     \frac{S_2}{V}%\langle N \rangle}
     &=

@@ -1,39 +1,6 @@
 \section{Statistical physics of fluids}
 \label{sec:liquid-state-theory}
 
-%% \subsection{Notes}
-
-%% Here we talk in general terms about descriptions of the liquid state.
-%% Broadly speaking, in its historical development approaches can be placed inside one of two categories.
-%% Namely, theories involving
-%% \begin{enumerate}
-%%   \item Local geometric approximations capturing the short range interactions (free volume theory/cell theory, scaled particle theory), and
-%%   \item Integral equations (Ornstein-Zernike closures, density functional theory) which properly treat the long range correlations.
-%% \end{enumerate}
-%% These two approaches are not mutually exclusive, and hybrid theories can improve on.
-%% For instance, fundamental measure theory (FMT) involves the synthesis of integral geometry with the formalism of density functional theory which involves minimising a functional (i.e.\ an integral equation).
-
-%% Classical theory of phase transitions (Landau).
-%% Van der waals theory.
-%% How does the transition occur?
-%% Metastability leads into kinetics.
-
-%% Kinetics vs thermodynamics.
-%% Thermodynamic driving force vs activation barrier.
-
-%% Relaxation behaviour controlled by activation barrier.
-%% A thermal fluctuation which takes the system over the barrier%
-%% \marginfootnote{These fluctuations are conventionally called \emph{instantons} as they spontaneously appear and vanish just like virtual particles in fundamental physics.
-%%   The name for this relatively straightforward phenomenon is thus a reference to a much more counterintuitive and bizarre phenomenon, because physicists are good at making helpful analogies.}
-%% occurs with rate $\exp{-\beta \Delta U}$ \cite{Langer}.
-
-%% Liquids:
-%% Free volume theory.
-%% Early curvature corrections.
-%% Free volume theory depends on the free volume (duh).
-%% This is an example of an integral geometric theory.
-%% Morphological
-
 \subsection{Statistical mechanics}
 \label{sec:stat-mech}
 
@@ -379,8 +346,9 @@ or defining the dimensionless \emph{isothermal susceptibility} as \begin{equatio
   \frac{1}{\rho}
   \left( \frac{\partial \rho}{\partial (\beta \mu)} \right)_{V,T}.
 \end{equation*}
-It is straightforward to evaluate this through the grand canonical average \eqref{eq:grand-canonical-average} of density $\rho = \langle N \rangle / V$, obtaining
-\begin{equation}
+It is straightforward to evaluate this through the grand canonical average \eqref{eq:grand-canonical-average} of density $\rho = \langle N \rangle / V$, obtaining%
+\marginfootnote{The thermodynamic definitions of $\kappa_T$ and $\chi_T$ above apply to a bulk homogeneous liquid, whereas the definition of $\chi_T$ in \eqref{eq:chiT-inhomogeneous} allows generalisation to an inhomogeneous liquid.}
+\begin{equation}\label{eq:chiT-inhomogeneous}
   \chi_T
   =
   \frac{ \langle N^2 \rangle - \langle N \rangle^2 }{\langle N \rangle}.
@@ -659,20 +627,21 @@ The degree of self-consistency between different routes can act as a proxy for t
     r y^{(2)}(r) \frac{d}{dr} \left( e^{-\beta u(r)} \right)
     d\vec{r},
   \end{equation*}
-  which for $d$-dimensional hard spheres of diameter $\sigma$ yields the \emph{contact theorem}:
+  which for $d$-dimensional hard spheres of diameter $\sigma$ yields
   \begin{equation}\label{eq:contact-theorem}
     \frac{\beta p}{\rho}
     =
     1
     +
     \frac{\eta (2\sigma)^d}{2}
-    y^{(2)}(\sigma^+).
+    y^{(2)}(\sigma^+),
     %% \\ &=
     %% 1
     %% +
     %% \frac{\rho \omega_d \sigma^d}{2}
     %% y^{(2)}(\sigma)
   \end{equation}
+   the \emph{contact theorem}, so-named because only the value at contact $y^{(2)}(\sigma^+) = \lim\limits_{r\to\sigma} y^{(2)}(r)$ (approached from $r > \sigma$) remains.
 \end{tcolorbox}
 
 The pair distribution function $g^{(2)}$ appeared in the virial route because the specified system interacts via a pair potential; we could reasonably expect the generalisation to an $n$-body interaction potential to give the equation of state in terms of the $n$-body distribution function $g^{(n)}$.

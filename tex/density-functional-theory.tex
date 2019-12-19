@@ -142,7 +142,7 @@ Our focus will be on correlations within the equilibrium liquid, so in the next 
 
 Having defined thermodynamic potentials for an inhomogeneous system as functionals, we can make a connection to liquid structure through the various correlation functions.
 In sections \ref{sec:liquid-structure} and \ref{sec:virial-series} we saw how the homogeneous correlation functions could be obtained from various generating functions.
-In the inhomogeneous liquid correlation functions are obtained in a similar way from \emph{generating functionals}.
+In the inhomogeneous liquid, correlation functions are obtained in a similar way using \emph{generating functionals}.
 
 The fundamental thermodynamic relation describing an infinitesimal change in the Helmholtz free energy, i.e.\
 \begin{equation*}
@@ -248,7 +248,7 @@ Focusing on the grand potential, the following two properties are provable%
       \Omega[\rho^{(1)}(\vec{r})] = \Omega.
     \end{equation*}
 \end{enumerate}
-These two properties can be elegantly summarised by the \emph{variational principle}
+These two properties can be elegantly captured by the \emph{variational principle}
 \begin{equation}\label{eq:dft-equilibrium}
   \left.
   \frac{\delta \Omega}{\delta \rho^{(1)}(\vec{r})}
@@ -258,7 +258,7 @@ These two properties can be elegantly summarised by the \emph{variational princi
 \end{equation}
 which provides the route to numerical applications of DFT; minimisation of the grand potential with respect to density is sufficient to determine the equilibrium density profile and its corresponding free energy.
 
-To bring the variational principle to more practical use we can insert the functional form of the grand potential deduced in section \ref{sec:inhomogeneous-potentials} into \eqref{eq:dft-equilibrium} giving
+To bring the variational principle to more practical use we can insert the functional form of $\Omega$ deduced in section \ref{sec:inhomogeneous-potentials} into \eqref{eq:dft-equilibrium} giving
 \begin{equation*}
   %\frac{\delta \Omega}{\delta \rho^{(1)}(\vec{r})}
   %= 0
@@ -305,7 +305,8 @@ The first functional derivative of the ideal intrinsic free energy \eqref{eq:ide
   =
   \ln{(\Lambda^d \rho^{(1)}(\vec{r}))},
 \end{equation*}
-and with the excess term is the generating functional of $c^{(n)}$ \eqref{eq:direct-correlations} we obtain
+and using %the fact that the excess term is the generating functional of $c^{(n)}$
+\eqref{eq:direct-correlations} we obtain
 \begin{equation*}
   \ln{(\Lambda^d \rho^{(1)}(\vec{r}))}
   - c^{(1)}(\vec{r})
@@ -325,7 +326,7 @@ Importantly, this process incorporates an arbitrary external potential inside $\
 This example provides a potential way of using an inhomogeneous framework to approach the homogeneous liquid, illustrating the usefulness of the DFT formalism.
 
 Further functional derivatives of the equilibrium condition provides a whole hierarchy of equivalent equilibrium criteria.
-Of particular note is the next equation in the hierarchy, the Ornstein-Zernike equation, which forms the basis of integral theories of the liquid state%
+Of particular note is the next equation in the hierarchy, the Ornstein-Zernike equation, which forms the basis for integral theories of the liquid state%
 \marginfootnote{Conventionally this class of theories is presented in its own right rather than as a special case of density functional theory; we opted for this more modern presentation to be marginally more economical with chapter length.}.
 This connects the density-density and direct correlation functions through the chain rule of functional calculus, i.e.\
 \begin{equation}\label{eq:oz-chain-rule}
@@ -449,7 +450,7 @@ For a uniform liquid interacting through a spherically symmetric pair potential 
   \end{split}
 \end{equation}
 where $r = |\vec{r}_2 - \vec{r}_1|$ and $(f*g)(\vec{r})$ denotes a convolution between functions $f$ and $g$.
-In Fourier space the convolution becomes a product so we obtain
+In Fourier space the convolution becomes% a product so we obtain
 \begin{equation*}
   \widetilde{h}^{(2)}(\vec{k})
   =
@@ -472,7 +473,7 @@ which gives the static structure factor \eqref{eq:static-structure-factor} as
 \end{equation*}
 \end{tcolorbox}
 
-If the pair direct correlation function is known it is thus straightforward to obtain the equation of state through the compressibility route \eqref{eq:compressibility-route-pressure}
+If the pair direct correlation function is known, it is thus straightforward to obtain the equation of state through the compressibility route \eqref{eq:compressibility-route-pressure}
 \begin{equation*}
   \frac{\beta p}{\rho}
   =
@@ -671,7 +672,7 @@ This allows us to write the free energy density in the dilute limit for a homoge
   \frac{\rho^2}{2}
   \sum_{i=1}^m \sum_{j=1}^m
   x_i x_j
-  \int_V \chi[\ball_i \cap \ball_j(\vec{r})] d\vec{r}
+  \int_V \chi[\ball_i \cap \ball_j(\vec{r})] \, d\vec{r}
   + \mathcal{O}(\rho^3),
 \end{equation*}
 or in the notation introduced in section \ref{sec:integral-geometry}
@@ -681,7 +682,7 @@ or in the notation introduced in section \ref{sec:integral-geometry}
   \frac{\rho^2}{2}
   \sum_{i=1}^m \sum_{j=1}^m
   x_i x_j
-  \int_{G_d} \chi[\ball_i \cap g \ball_j] dg
+  \int_{G_d} \chi[\ball_i \cap g \ball_j] \, dg
   + \mathcal{O}(\rho^3)
 \end{equation*}
 which can be evaluated using the principal kinematic formula \eqref{eq:binomial-kinematic-formula}.

@@ -37,11 +37,13 @@ Part of the work in this chapter is published in Ref.\ \cite{RobinsonPRL2019}, a
 
 \section{Introduction}
 
-Since the beginnings of modern liquid state theory \cite{KirkwoodJCP1935}, the hard sphere liquid has remained the archetypal model for atomic systems and soft matter.
+Since the beginnings of modern liquid state theory%
+\marginfootnote{By ``modern'' theories we mean those which provide a statistical mechanical description of the liquid based on correlation functions.}
+\cite{KirkwoodJCP1935}, the hard sphere liquid has remained the archetypal model for atomic systems and soft matter.
 The dynamics of the system at high density in the metastable regime above the freezing transition are hotly debated, despite relentless study.
 %In particular, deep questions remain concerning its nucleation kinetics and dynamical arrest approaching the glass transition.
 %Our central application will be to the treatment of many-body correlations in supercooled liquids, a potential new route for assessing causes of dynamical arrest.
-Proposed mechanisms for dynamical phenomena all loosely fall under the broad umbrella of many-body correlations; nucleation occurs via crystal seed formation \cite{SearJPCM2007}, and to explain dynamic arrest approaching the glass transition thermodynamic theories invoke cooperatively rearranging regions \cite{LubchenkoARPC2007} or elastic soft modes \cite{BritoJCP2009} while kinetic theories posit the existence of dynamical defects \cite{ChandlerARPC2010}.
+Proposed mechanisms for dynamical phenomena all loosely fall under the broad umbrella of many-body correlations; nucleation occurs via crystal seed formation \cite{SearJPCM2007}, and to explain dynamical arrest approaching the glass transition thermodynamic theories invoke cooperatively rearranging regions \cite{LubchenkoARPC2007} or elastic soft modes \cite{BritoJCP2009} while kinetic theories posit the existence of dynamical defects \cite{ChandlerARPC2010}.
 Here we propose a framework for treating many-body correlations, which in the next chapter we will develop into an operational scheme for predicting the populations and dynamics of local structural motifs within a uniform liquid.
 Central to this is the use of the \emph{morphometric approach}.
 
@@ -133,14 +135,14 @@ Thus, \eqref{eq:n-particle-density-term-separation} becomes
 \begin{equation*}
   \rho^{(n)}(\vec{r}^n)
   =
-  z^n e^{-\beta (U_n + \Omega - \Omega_\mathrm{hom})}.
+  z^n e^{-\beta (U_n + \Omega_n - \Omega_\mathrm{hom})}.
 \end{equation*}
-where $\Omega$ is the grand potential of the solvent in the presence of the $n$-particle inhomogeneity.
+where $\Omega_n$ is the grand potential of the solvent in the presence of the $n$-particle inhomogeneity.
 Splitting the chemical potential into its ideal and excess parts so that $\beta\mu = \ln{\Lambda^d \rho} + \beta\mu^\mathrm{ex}$ gives
 \begin{equation*}
   \rho^{(n)}(\vec{r}^n)
   =
-  \rho^n e^{-\beta (U_n + \Omega - \Omega_\mathrm{hom} - n\mu^\mathrm{ex})}.
+  \rho^n e^{-\beta (U_n + \Omega_n - \Omega_\mathrm{hom} - n\mu^\mathrm{ex})}.
 \end{equation*}
 The $n$-particle distribution functions are then determined from \eqref{eq:n-particle-distribution}
 \begin{equation}\label{eq:distribution-solvation}
@@ -148,7 +150,7 @@ The $n$-particle distribution functions are then determined from \eqref{eq:n-par
   := \frac{\rho^{(n)}(\vec{r}^n)}{\rho^n}
   = e^{-\beta(U_n + \Delta\Omega - n\mu^\mathrm{ex})}
 \end{equation}
-where $\Delta\Omega := \Omega - \Omega_\mathrm{hom}$ is the reversible (free energy) cost of inserting the particles at fixed position $\vec{r}^n$, or equivalently describes the average depletion interactions between mobile particles.
+where $\Delta\Omega := \Omega_n - \Omega_\mathrm{hom}$ is the reversible (free energy) cost of inserting the particles at fixed position $\vec{r}^n$, or equivalently describes the average depletion interactions between mobile particles.
 For $n=1$ we have $\Delta\Omega = \mu^\mathrm{ex}$ and this is identical to the potential distribution theorem of Widom \cite{WidomJCP1963,WidomJPC1982}.
 The distribution functions are written in terms of the potential
 \begin{equation}\label{eq:potential-mean-force}
@@ -212,13 +214,13 @@ The total volume is $V = V_\mathcal{L} + V_\mathcal{R}$ so the homogeneous grand
 \end{equation*}
 After inserting the inhomogeneity the total volume accessible to the rest of the liquid will be reduced by $V_\mathcal{L}$, so the grand potential becomes
 \begin{equation*}
-  \Omega = -p V_\mathcal{R} + \Omega_\mathrm{ex}[\partial\mathcal{L}],
+  \Omega_n = -p V_\mathcal{R} + \Omega_\mathrm{ex}[\partial\mathcal{L}],
 \end{equation*}
 where $\Omega_\mathrm{ex}$ is an excess term brought about by the introduction of a dividing surface $\partial\mathcal{L}$ between the two liquid components.
 Subtracting these two expressions gives
 \begin{equation*}
   \Delta \Omega
-  := \Omega - \Omega_\mathrm{hom}
+  := \Omega_n - \Omega_\mathrm{hom}
   = p V_\mathcal{L} + \Omega_\mathrm{ex}[\partial\mathcal{L}].
 \end{equation*}
 This dividing surface has area $A_{\partial\mathcal{L}}$, creating a surface tension $\gamma$ so we can write the excess term as
@@ -276,11 +278,15 @@ In addition to providing a more general \emph{ansatz} than SPT, this approach la
 Moreover, classical SPT assumes hard spheres from the outset while our generalisation based on integral geometry is more flexible, allowing for generalisations to mixtures, more realistic pair potentials and non-spherical particles without compromising its assumptions.
 
 The morphometric approach is certainly an approximation, as the insertion cost will not rigorously possess the properties of size measures in reality.
+This approximation must break down approaching a critical point if the interaction potential features attractions, because a diverging bulk correlation length would violate the additivity assumption.
+Similarly, attractions would lead to surface phase transitions involving the formation of wetting or drying films \cite{EvansELE2003,EvansJCP2004}, which cannot  be captured by this analytic theory.
+Even for hard spheres we expect to see singularities which cannot be captured by the morphometric \emph{ansatz} \eqref{eq:morph-ansatz}.
 Notably, in SPT $\Delta\Omega$ is known to contain singularities in its high order derivatives with solute radius%
 \marginfootnote{We review the original argument for this from Ref.\ \cite{ReissJCP1959} in Appendix \ref{appendix:spt-singularities}.
 This argument is quite general, demonstrating that \emph{any} analytic form of $\Delta \Omega$ in terms of geometric quantities cannot be exact.};
 these non-analytic terms result from violations of the additivity assumption.
-Nevertheless, the approximation is accurate in hard spheres \cite{OettelEL2009,AshtonPRE2011,LairdPRE2012,BlokhuisPRE2013,UrrutiaPRE2014,Hansen-GoosJCP2014} so these violations should be small.
+Nevertheless, the approximation has been found to be numerically accurate in hard spheres when compared with simulations \cite{OettelEL2009,AshtonPRE2011,LairdPRE2012,BlokhuisPRE2013,UrrutiaPRE2014,Hansen-GoosJCP2014} so these violations should be small%
+\marginfootnote{Below the freezing density at least, where these numerical tests were performed.}[1.5cm].
 
 %% The connection between intrinsic volumes and thermodynamics was made by K\"onig et al \cite{KonigPRL2004}.
 %% They argued that $\Delta \Omega$ possesses all three properties above, so it must be expressable as a linear sum of the volumes $\{V_k\}$ through the theorem of Hadwiger \cite{Hadwiger1957}.
@@ -509,27 +515,28 @@ Before we move on to generalisations of SPT, we will review one more thermodynam
 This emphasises the remarkable degree of self-consistency of SPT, and the additional relation will be used to construct new theories in subsequent sections.
 
 We can relate the radial derivative of $\Delta\Omega(R)$ to the solvent density at contact; by connecting this to the virial theorem we can obtain a new thermodynamic relation.
-Following Ref.\ \cite{BrykPRE2003} we take the normal derivative of $\Omega$ with respect to $R$, and noting that $\Delta\Omega(R) = \Omega(R) - \Omega_\mathrm{hom}$ gives
+Following Ref.\ \cite{BrykPRE2003} we take the normal derivative of $\Omega$ with respect to $R$, and noting that $\Delta\Omega(R) = \Omega(R) - \Omega_\mathrm{hom}$ and the $R$ dependence only enters through the external potential gives
 \begin{equation}\label{eq:spt-derivative}
-  \begin{split}
-    \left( \frac{\partial \Delta \Omega}{\partial R} \right)_{\mu,V,T}
-    =&
-    \left( \frac{\partial \Omega}{\partial R} \right)_{\mu,V,T}
-    \\ =&
-    \int
-    \frac{\delta \Omega[\rho^{(1)}(\vec{r})]}{\delta \rho}
-    \left( \frac{\partial \rho^{(1)}(\vec{r})}{\partial R} \right)_{\mu,V,T}
-    \, d\vec{r}
-    \\ &
-    + \int
-    \rho^{(1)}(\vec{r})
-    \left( \frac{\partial \phi_\mathrm{ext}(\vec{r}; R)}{\partial R} \right)_{\mu,V,T}
-    \, d\vec{r},
-  \end{split}
+  %\begin{split}
+  \left( \frac{\partial \Delta \Omega}{\partial R} \right)_{\mu,V,T}
+  =%&
+  \left( \frac{\partial \Omega}{\partial R} \right)_{\mu,V,T}
+  %\\ =&
+  %% \int
+  %% \frac{\delta \Omega[\rho^{(1)}(\vec{r})]}{\delta \rho}
+  %% \left( \frac{\partial \rho^{(1)}(\vec{r})}{\partial R} \right)_{\mu,V,T}
+  %% \, d\vec{r}
+  %% \\ &
+  %% +
+  = \int
+  \rho^{(1)}(\vec{r})
+  \left( \frac{\partial \phi_\mathrm{ext}(\vec{r}; R)}{\partial R} \right)_{\mu,V,T}
+  \, d\vec{r},
+  %\end{split}
 \end{equation}
 where $\phi_\mathrm{ext}$ is the external potential (i.e.\ the potential of the solute).
 As a reminder, we defined $\rho^{(1)}$ as the equilibrium density profile in \eqref{eq:single-particle-density}.
-In equilibrium $\Omega$ is minimised \eqref{eq:dft-equilibrium} so the first integral in \eqref{eq:spt-derivative} vanishes.
+%In equilibrium $\Omega$ is minimised \eqref{eq:dft-equilibrium} so the first integral in \eqref{eq:spt-derivative} vanishes.
 As the solute is hard, the external potential and its derivative are zero everywhere except at a distance $\frac{\sigma}{2}$ from the surface where both $\rho^{(1)}$ and $\phi_\mathrm{ext}$ are discontinuous.
 We consider its Boltzmann weight, i.e.\
 \begin{equation*}
@@ -552,7 +559,7 @@ Inserting this expression into \eqref{eq:spt-derivative} and using the fact that
   \rho^{(1)}\left( R + \frac{\sigma}{2} \right)
 \end{equation*}
 and the contact density in this inhomogeneous system is $\rho^{(1)}(\sigma; \phi_\mathrm{ext}) := \rho^{(2)}(\sigma)/\rho = \rho \, g^{(2)}(\sigma)$ recalling the definition of $\rho^{(n)}$ for the homogeneous system%
-\marginfootnote{This is argument, due to Percus \cite{PercusPRL1962}, is ordinarily used to construct integral equation theories based around the Ornstein-Zernike equation \eqref{eq:ornstein-zernike-spherical} (cf.\ Ch.\ 4 of Ref.\ \cite{Hansen2013}).}
+\marginfootnote{This argument, due to Percus \cite{PercusPRL1962}, is ordinarily used to construct integral equation theories based around the Ornstein-Zernike equation \eqref{eq:ornstein-zernike-spherical} (cf.\ Ch.\ 4 of Ref.\ \cite{Hansen2013}).}
 \eqref{eq:n-particle-density-pdf}, so we have
 \begin{equation*}\label{eq:spt-contact-density}
   \begin{split}
@@ -573,7 +580,7 @@ So inserting the SPT \emph{ansatz} \eqref{eq:spt-ansatz} gives
   =
   \frac{4\pi \sigma^2 \rho}{\beta} \, g^{(2)}(\sigma).
 \end{equation}
-The \emph{virial theorem} \eqref{eq:contact-theorem} in $d=3$ gives the value of $g^{(2)}(r)$ at contact as
+The virial theorem \eqref{eq:contact-theorem} in $d=3$ gives the value of $g^{(2)}(r)$ at contact as
 \begin{equation}\label{eq:contact-g}
   g^{(2)}(\sigma) =
   \frac{3}{2\pi \sigma^3 \rho} \left( \frac{\beta p}{\rho} - 1 \right),
@@ -916,6 +923,11 @@ This included the classical SPT solution and the morphometric theory obtained in
 \marginfootnote{See the discussion around \eqref{eq:wbii-coefficients} in section \ref{sec:fmt} for details of the original derivation.},
 although our method of deriving the latter theory is new.
 The third theory we derived is particularly suited for treating many-body correlations, which we used to accurately treat local structures in the hard sphere liquid in Ref.\ \cite{RobinsonPRL2019}.
+
+In principle this approach could be extended to simple liquids where the interaction potential can be approximated as a perturbation around a hard core.
+However, as we exploited features of the hard sphere interaction potential to achieve closed form expressions, more realistic interaction potentials would likely require numerical expressions.
+Additionally, attractions can introduce non-analytic behaviour through surface phase transitions not present in our theory \cite{EvansELE2003,EvansJCP2004}.
+In chapter \ref{chapter:resummation} we provide a generalisation to arbitrary mixtures of hard (convex) particles in arbitrary dimensions.
 
 By making the underlying assumptions explicit we can better understand the limits of the theory: any deviation from the morphometric/SPT \emph{ansatz} must be due to a violation of translation/rotation invariance, additivity or continuity.
 The fact that these theories are very accurate for hard spheres suggests that the assumptions are only weakly violated for this system.

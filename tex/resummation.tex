@@ -58,6 +58,7 @@ Fundamental questions remain over \emph{why} it is accurate and how one might im
 Inaccuracies become significant in hard spheres at very high densities approaching the glass transition, as we have seen in previous chapters, so an approximation scheme including additional terms could be desirable.
 In this chapter we will attempt to start the path towards supplementing the morphometric approach \eqref{eq:morphometric-approach-d} with higher-order terms, by deriving the known terms as the leading contribution in the only properly rigorous free energy expansion: the \emph{virial series} introduced in section \ref{sec:virial-series}.
 This route suggests a properly controlled way of including successive corrections to the approach.
+The virial series is dimension-independent so this approach could potentially connect with calculations in high dimensions \cite{LeithallPRE2011,ParisiRMP2010}; though we work in physical dimensions $d \le 3$ it would be straightforward to extend to $d > 3$.
 
 Traditionally, expansions of $\Delta \Omega$ have been obtained in an \emph{ad hoc} way rather than as part of a controlled expansion.
 To illustrate this we consider what happens if one attempts to extend \eqref{eq:morphometric-approach-d} by including higher moments of curvature.
@@ -82,7 +83,10 @@ The inclusion of higher-order curvatures was originally motivated by continuum e
 
 More generally, we find that \emph{any} analytic geometric expansion of $\Delta \Omega$ cannot be exact.
 It was shown in the original papers on scaled particle theory \cite{ReissJCP1959,ReissJCP1960} that $\Delta \Omega$ contains singularities, which cannot be captured by simple geometric expansions; we recount this argument in Appendix \ref{appendix:spt-singularities}.
-The virial series is in principle exact, so any singularities should be captured by resumming its terms which could suggest forms for new approximation schemes.
+The virial series is in principle exact%
+\marginfootnote{This is true within the radius of convergence of the series, which is not known for $d > 1$.
+The weak convergence of this series has been a major obstacle in being used to predict e.g.\ bulk phase behaviour.}
+, so any singularities should be captured by resumming its terms which could suggest forms for new approximation schemes.
 %Correspondingly, proposed approximations of $\Omega[\phi_\mathrm{ext}(\vec{r})]$ which do not share this feature can be ruled out as general expansions.
 
 %% Our argument can be summarised by.
@@ -183,7 +187,7 @@ Comparing this expression with \eqref{eq:hard-mayer-f} we can rewrite the thermo
 \end{equation}
 Rewriting the interactions in terms of the Euler characteristic allows us to exploit theorems from integral geometry to evaluate thermodynamic quantities.
 
-Including their relative orientations, the cost of inserting a solute $A$ into a liquid of $B$ particles in the low density limit $\rho \ll 1$ is determined from the leading contribution to the virial series using \cite{Hansen2013,Santos2016}
+Including their relative orientations, the cost of inserting a solute $A$ into a liquid of $B$ particles in the low density limit $\rho \to 0$ is determined from the leading contribution to the virial series using \cite{Hansen2013,Santos2016}
 \begin{equation}\label{eq:low-density-insertion}
   \begin{split}
     \beta\Delta\Omega
@@ -216,7 +220,7 @@ The low density result is a classic application of integral geometry to the liqu
 \label{sec:finite-densities}
 
 We can identify the insertion cost of a solute particle with the chemical potential of a new species of particle (a single solute) in the infinitely dilute limit \cite{ReissJCP1959,Hansen-GoosJPCM2006,Hansen-GoosJCP2014}.
-Interestingly, taking this limit for a bulk hard sphere system modelled with fundamental measure theory (FMT) gives the morphometric approach (cf.\ section \ref{sec:fmt} and Ref.\ \cite{Hansen-GoosJPCM2006}); this is due to the approximation underlying FMT is that the free energy density can be represented in terms of weighted densities, which are deeply connected to intrinsic volumes.
+Interestingly, taking this limit for a bulk hard sphere system modelled with fundamental measure theory (FMT) gives the morphometric approach (cf.\ section \ref{sec:fmt} and Ref.\ \cite{Hansen-GoosJPCM2006}); this is due to the approximation underlying FMT, i.e.\ that the free energy density can be represented in terms of weighted densities which are deeply connected to intrinsic volumes.
 Alternatively, the exact free energy of this system can be expressed as a virial expansion \cite{Hansen2013}.
 This idea was explored in Ref.\ \cite{Hansen-GoosJPCM2006} to show that the morphometric approach \eqref{eq:morphometric-approach-d} is inexact, however here we will attempt a different strategy: we will identify a contribution in the virial expansion which guarantees an insertion cost of morphometric form.
 The remaining contributions are unlikely to be rigorously of this form, and their omission is an approximation.
@@ -256,7 +260,7 @@ The chemical potential of the solute species is
   \frac{\partial}{\partial x_0}
   \left( \frac{\beta F^\mathrm{ex}}{V} \right)_{V,T}
 \end{equation}
-giving in the dilute limit $x_0 \ll \rho$
+giving in the dilute limit $x_0 \ll 1$
 \begin{equation}\label{eq:chemical-potential-mixture}
   \begin{split}
     \beta \Delta\Omega
@@ -435,7 +439,9 @@ The iterated kinematic formula \eqref{eq:multinomial-kinematic-formula} gives th
     \right).
   \end{equation}
 \end{subequations}
-Introducing the rescaled volumes
+Introducing the rescaled volumes%
+\marginfootnote{As a reminder to the reader, the $\omega_d$ terms appearing in these expressions are the volumes of the $d$-dimensional unit ball $\ball_d$ defined in \eqref{eq:unit-ball-volumes}.
+  Explicit values are given in Table \ref{table:ball-intrinsic-volumes}, along with their corresponding intrinsic volumes $V_k[\ball_d]$.}
 \begin{equation}\label{eq:rescaled-intrinsic-volumes}
   \widetilde{V}_k[K_s]
   =
@@ -506,7 +512,7 @@ At this point we can observe that the resulting free energy is already of morpho
   \end{align}
 \end{subequations}
 which has the form of the morphometric approach \eqref{eq:morphometric-approach-d}.
-This is not surprising as the integral in \eqref{eq:n-particle-intersection-integral} rigorously has the properties of intrinsic volumes outlined in section \label{sec:morph-overview}, so Hadwiger's theorem \eqref{eq:extensive-integral-geometry-d} (and Ref.\ \cite{Hadwiger1957}) states that it \emph{must} adopt this form i.e.\ as a linear combination of the intrinsic volumes.
+This is not surprising as the integral in \eqref{eq:n-particle-intersection-integral} rigorously has the properties of intrinsic volumes outlined in section \ref{sec:what-is-size}, so Hadwiger's theorem \eqref{eq:extensive-integral-geometry-d} (and Ref.\ \cite{Hadwiger1957}) states that it \emph{must} adopt this form i.e.\ as a linear combination of the intrinsic volumes.
 To find explicit expressions for the thermodynamic coefficients $a_k$ we have to determine the combinatorial prefactor $c_n$ and evaluate the geometric/mixture contribution $\lambda_k^{(n)}$.
 
 To obtain the combinatorial coefficient $c_n$ we use a technique suggested in \cite{MarechalPRE2014}: the coefficients are independent of dimensionality so we can compare the form of \eqref{eq:morphometric-approach-from-virial} against the exact free energy known for $d=0$.
@@ -886,8 +892,9 @@ Though as noted in Ref.\ \cite{MarechalPRE2014}, this is partially due to a canc
 %% Specifically, in $d=3$ the pressure and surface tension are comparable in accuracy to the classic SPT/PY route, and in $d=2$ the approach is identical to scaled particle theory.
 The usefulness of the new route extends beyond mere accuracy; the free energy we have identified emerges \emph{rigorously} as a contribution from the virial series.
 
-The fact that the exact contribution is reasonably accurate suggests that the corrections are small, providing further justification of the morphometric approach.
-Moreover, the exact contribution provides a suitable starting point for including additional terms to improve accuracy.
+The free energy we have identified emerges \emph{rigorously} as a contribution from the virial series, and its accuracy indicates that the success of morphological theories reported in previous investigations \cite{RothPRL2006,LairdPRE2012,BlokhuisPRE2013,UrrutiaPRE2014,Hansen-GoosJCP2014,RobinsonPRL2019} is enabled by this being a significant leading contribution.
+%The fact that the exact contribution is reasonably accurate suggests that the corrections are small, providing further justification of the morphometric approach.
+Moreover, the exact contribution provides a suitable starting point for including additional terms where improved accuracy is needed at e.g.\ high densities approaching dynamical arrest.
 We could write the insertion cost for a solute $K$ as the \emph{exact} decomposition
 \begin{equation}\label{eq:exact-morph-decomposition}
   \Delta \Omega[K]
@@ -895,14 +902,12 @@ We could write the insertion cost for a solute $K$ as the \emph{exact} decomposi
   \sum_{k=0}^d a_k V_k[K]
   + \Delta \Omega_\mathrm{extra}[K]
 \end{equation}
-with coefficients $a_k$ as previously calculated, and $\Delta \Omega_\mathrm{extra}$ contains the subleading corrections.
+with coefficients $a_k$ as previously calculated, and $\Delta \Omega_\mathrm{extra}$ containing the subleading corrections.
 Notably, the exponentially damped oscillations occurring in pair correlations at asymptotically large separations must be contained within $\Delta \Omega_\mathrm{extra}$.
-The insertion cost is known to contain singularities%
-\marginfootnote{See Appendix \ref{appendix:spt-singularities} where we recount an old argument from Ref.\ \cite{ReissJCP1959} that $\Delta \Omega$ contains singularities.}
-so it is unlikely that $\Delta \Omega_\mathrm{extra}$ possesses a simple analytic form.
+The insertion cost is known to contain singularities \cite{ReissJCP1959} so it is unlikely that $\Delta \Omega_\mathrm{extra}$ possesses a simple analytic form.
 It is possible that additional exact morphometric contributions exist, and they would be contained in $\Delta \Omega_\mathrm{extra}$ also.
-
 Furthermore, the formal derivation we have followed naturally leads to explicit expressions for $\Delta \Omega_\mathrm{extra}$.
+
 The next leading contribution from the virial series would be:
 \begin{equation}
   \begin{split}
@@ -932,9 +937,9 @@ where $\Delta_{s_1,s_2}$ is the three-body \emph{ring integral} given explicitly
 %%   \, dg_1 dg_2.
 %% \end{equation}
 Ring integrals can be calculated straightforwardly in hard spheres \cite{MontrollJCP1941}, or using the Radon transform for convex geometries of arbitrary shapes \cite{WertheimMP1994,WertheimMP1996,WertheimMP1996a}.
-Corrections to the morphometric approximation could be systematically included by further resummations over classes of diagrams, with ring integrals as the leading order terms.
+Corrections to the morphometric approximation could be systematically included by further resummations over other classes of diagrams, with ring integrals as the leading order terms.
 The integral corrections are discussed in Ref.\ \cite{MarechalPRE2014} in the context of free energy functionals for inhomogeneous liquids; our system is effectively homogeneous so we expect it to be easier to construct a theory with these higher-order terms.
-Notably, the ring integrals are argued to be the sole contributions in the mean-field infinite-dimensional limit, i.e.\ for a single-component system \cite{ParisiRMP2010}
+Notably, the ring integrals are argued to be the sole contributions in the mean-field infinite-dimensional limit, i.e.\ for a single-component system \cite{ParisiRMP2010,Parisi2020}
 \begin{equation*}
   \lim_{d \to \infty}
   \frac{\beta F_{ex}}{V}

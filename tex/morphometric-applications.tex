@@ -42,8 +42,8 @@ However, to resolve these integrated quantities \emph{spatially} into structural
 While such a many-body approach may often be neglected in normal liquids, long-standing challenges such as the dramatic dynamical changes occurring in supercooled liquids approaching their glass transition \cite{BerthierRMP2011,RoyallPR2015} and phase transitions such as crystal nucleation \cite{RussoSR2012} call for a many-body description.
 
 In the case of supercooled liquids, theories based on pair correlations such as the standard mode-coupling framework \cite{Gotze2009} fail to account for activated events thus predicting a spurious ergodicity breaking transition \cite{BrambillaPRL2009,HallettNC2018}.
-Activated dynamics are often rationalised through collective (i.e.\ many-body) effects within contrasting thermodynamic and purely dynamic scenarios \cite{LubchenkoARPC2007,TarjusJPCM2005,BiroliPRL2006,JanssenPRL2015,SzamelPTEP2013,ChandlerARPC2010}.
-These include exact mean-field results in high dimensions \cite{ParisiRMP2010,CharbonneauARCMP2017} whose relevance in finite-dimensional systems is hotly debated \cite{WyartPRL2017}.
+Activated dynamics are often rationalised through collective (i.e.\ many-body) effects within contrasting thermodynamic and purely kinetic scenarios \cite{LubchenkoARPC2007,TarjusJPCM2005,BiroliPRL2006,JanssenPRL2015,SzamelPTEP2013,ChandlerARPC2010}.
+These include exact mean-field results in high dimensions \cite{ParisiRMP2010,CharbonneauARCMP2017} whose relevance to the dynamics of finite-dimensional systems is hotly debated \cite{WyartPRL2017}.
 A finite-dimensional theoretical description of many-body effects is therefore much needed.
 We discussed the various theories mentioned above in more detail in chapter \ref{chapter:glass}.
 
@@ -84,7 +84,7 @@ From the definition of the $n$-particle density \eqref{eq:n-particle-density-pdf
   \, d\vec{r}^n,
 \end{equation}
 where $\mathcal{Q}$ is the domain \emph{defining} the particular local structure.
-In terms of the potential of mean force \eqref{eq:potential-mean-force} this would be written equivalently as
+In terms of the potential of mean force $\phi^{(n)}$ defined in \eqref{eq:potential-mean-force} this would be written equivalently as
 \begin{equation*}
   \mathcal{N}
   =
@@ -112,7 +112,7 @@ Specifically, we exploit translational invariance of $\phi^{(n)}$ in the uniform
 \end{equation}
 defining the internal structure space $\mathcal{D}$ through $\mathcal{Q} = \mathcal{D} \times V^d$.
 The prefactor $\rho^n V$ is the trivial scaling of the ideal gas, so we define the free energy of the structure through the excess quantity%
-\marginfootnote{Note: in previous chapters we used the symbol $F$ to refer to the Helmholtz free energy; here it will \emph{only} refer to the free energy of a local structure.}
+\marginfootnote{In previous chapters we used the symbol $F$ to refer to the Helmholtz free energy; here it will \emph{only} refer to the free energy of a local structure.}
 \begin{equation*}
   e^{-\beta F}
   =
@@ -155,7 +155,7 @@ We calculate the morphological quantities $\{V, A, C, X\}$ using an algorithm de
 
 In conventional energy landscape approaches, a structure%
 \marginfootnote{Energy landscape approaches are actually more general than just pertaining to local structures, as they could in principle refer to the landscape of a macroscopic system as they do in e.g.\ mean field approaches (cf.\ section \ref{sec:mean-field-glass}).
-  It is only in this context of small system sizes that they refer to local structures.}
+  It is only in this context of small system sizes that they refer to local structures.}[-1cm]
 would be defined by the region, or \emph{basin}, surrounding an energy minimum called the \emph{inherent state} \cite{StillingerPRA1982,StillingerS1995,Wales2004}.
 Defining the location of the inherent state as
 \begin{equation*}
@@ -201,7 +201,7 @@ We will begin by proposing an operational definition for the structures so that 
 \section{How do we define a local structure?}
 \label{sec:structure-definition}
 
-An ideal definition of local structures would exactly partition the phase space of possible states within the liquid, so that the free energy and configurational entropy with varying lengthscale (through $n$) could be assessed.
+An ideal definition of local structures would exactly partition the phase space of possible states within the liquid, so that the free energy and configurational entropy with varying lengthscale (through $n$) could be determined.
 This would allow direct comparison with the mean-field of glass (sections \ref{sec:mean-field-glass} and \ref{sec:finite-d-glass}), particularly with equations \eqref{eq:rfot-barrier} and \eqref{eq:rfot-xi}.
 In an attempt to work towards this ideal, we develop an approximate coarse-graining scheme borrowing intuition from traditional energy landscape approaches.
 
@@ -244,8 +244,9 @@ In the thermodynamic limit $n \to \infty$ we obtain the \emph{isostatic} conditi
 \end{equation*}
 These ideas have been refined in Ref.\ \cite{CalladineIJSS1978}, but they are still fundamentally based on a linear analysis.
 By contrast, rigidity is a non-linear notion for $d > 1$ and so these ideas are not rigorous%
-\marginfootnote{In $d=3$ rigid structures exist which violate the Maxwell criterion \eqref{eq:maxwell-criterion}; examples exist of both \emph{hyperstatic} structures like the face-centred cubic unit cell with $m > m_\mathrm{Maxwell}$ and \emph{hypostatic} structures with $m < m_\mathrm{Maxwell}$ \cite{Holmes-CerfonSR2016,Holmes-CerfonARCMP2017}.}.
-Curiously, the overwhelming majority of rigid structures appear to satisfy the Maxwell criterion \eqref{eq:maxwell-criterion} \cite{Holmes-CerfonSR2016,Holmes-CerfonARCMP2017}, even though the linear theories are not exact.
+\marginfootnote{In $d=3$ rigid structures exist which violate the Maxwell criterion \eqref{eq:maxwell-criterion}; examples exist of both \emph{hyperstatic} structures like the face-centred cubic unit cell with $m > m_\mathrm{Maxwell}$ and \emph{hypostatic} structures with $m < m_\mathrm{Maxwell}$ \cite{Holmes-CerfonSR2016,Holmes-CerfonARCMP2017}.
+Finally, note that hypostatic structures are the dominant packings for non-spherical particles \cite{BritoPNAS2018}.}[-1cm].
+Curiously, the overwhelming majority of rigid structures appear to satisfy the Maxwell criterion \eqref{eq:maxwell-criterion} \cite{Holmes-CerfonSR2016,Holmes-CerfonARCMP2017}, even though the linear theories are inexact.
 Furthermore, jammed states are empirically found to be isostatic, a result also predicted by mean-field calculations \cite{CharbonneauJSM2014,CharbonneauNC2014}.
 
 Geometries with at least $d$ contacts for each particle and exactly $m = m_\mathrm{Maxwell}$ overall contacts are termed \emph{minimally rigid} \cite{ArkusPRL2009}, but this is neither a necessary nor sufficient criterion for rigidity \cite{Holmes-CerfonARCMP2017}.
@@ -280,12 +281,12 @@ All the results we present use a cutoff of $\delta = 0.2 \sigma$, but we have te
 
 As an aside, it was demonstrated in \cite{BritoEEL2006} that for hard sphere glasses approaching isostaticity, every pair of contacting particles $i,j \in \mathcal{M}$ interacts through the effective potential
 \begin{equation*}
-  \beta u_\mathrm{eff}(h_{ij}) = \beta u(\sigma + h_{ij}) - \ln{(h_{ij})},
+  \beta u_\mathrm{eff}(\overline{h_{ij}}) = - \ln{(\overline{h_{ij}})},
 \end{equation*}
-where $u(\cdot)$ is the bare hard sphere potential.
-Approaching a jammed state, we expect strong deviations from the Carnahan-Starling equation of state input to the morphometric theory \eqref{eq:cs-pressure}, so our approach is limited to the non-isostatic liquid.
-In addition, it is unclear whether the fundamental assumptions of the morphometric approach are valid in this regime.
-As such, the above equation is not valid for our approach, which is why we must explicitly evaluate the free energy through integrals over $\mathcal{D}$ rather than using effective potentials.
+where $\overline{\cdot}$ indicates averaging over all spacings $\{h_{ij}\}_\mathcal{M}$.
+This form describes an effective force between \emph{average positions} rather than the average of instantaneous forces described by the potential of mean force $\phi^{(n)}$; as such, the above form is not valid for our approach and we must explicitly evaluate the free energy through integrals over $\mathcal{D}$.
+In addition, it is unclear whether the fundamental assumptions of the morphometric approach are valid approaching jamming.
+In that regime, we expect strong deviations from the Carnahan-Starling equation of state input to the morphometric theory \eqref{eq:cs-pressure}, so our approach is limited to the non-isostatic liquid.
 
 The definition of structure in terms of bond-distances \eqref{eq:bond-distance} naturally leads to calculations in \emph{bond-distance space} as introduced in Ref.\ \cite{Holmes-CerfonPNAS2013} in the context of sticky spheres.
 The bond-distances are unaffected by rigid rotations so we must integrate them out, and for simplicity we now specialise to $d=3$.
@@ -300,7 +301,7 @@ We separate rigid body from internal motion by applying the following transforma
   \vec{t} + \vec{R}(\vec{\theta}) \, \vec{f}(\vec{x}),
 \end{equation*}
 where $\vec{t}$ is the translation vector, $\vec{R}$ the rotation matrix for Euler angles $\vec{\theta}$, and $\vec{f}(\cdot)$ is a mapping from the structure's internal coordinates $\vec{x} \in \mathbb{R}^{3n-6}$ to real-space.
-For a minimally constrained geometry $\vec{x}$ could simply correspond to the bond distances $\vec{y}$, which can be taken advantage for simple analytical calculations (Appendix \ref{appendix:bayesian}).
+For a minimally constrained geometry $\vec{x}$ could simply correspond to the bond distances $\vec{y}$; we can take advantage of this simple analytical calculations (Appendix \ref{appendix:bayesian}).
 We need to compute the metric of the above transformation $G_{ij} = \vec{G}_i \vec{G}_i^T$ where the (generally curvilinear) basis vectors are $\vec{G}_i = \partial_i \vec{r}$, and indices $i,j$ summing over all of $\{\vec{t}, \vec{\theta}, \vec{x}\}$.
 To do this we loosely follow the method outlined in the Supplementary Information of Ref.\ \cite{Holmes-CerfonPNAS2013}.
 
@@ -315,9 +316,7 @@ If the rotation matrix is expressed in Euler-angle representation as $\vec{R}(\v
     0 & 0 & \overline{\vec{G}}(\vec{x})
   \end{pmatrix},
 \end{equation}
-where $\vec{E}$ is the identity matrix, $\overline{\vec{G}}$ is the metric for internal motion, and we have defined the matrix $\vec{U}$ as%
-\marginfootnote{There is no elegant step omitted here to obtain the form of $\vec{U}$ giving block diagonal form; rather, I spent an hour guessing inside Mathematica until I hit upon this result.
-  There is probably a better route.}
+where $\vec{E}$ is the identity matrix, $\overline{\vec{G}}$ is the metric for internal motion, $\vec{I}$ is the moment of inertia tensor, and we have defined the matrix $\vec{U}$ as
 \begin{equation}
   \vec{U}(\vec{\theta})
   =
@@ -456,16 +455,23 @@ More complicated is the evaluation of the ideal gas term, i.e.\
 which still involves an integral over $\mathcal{D}$.
 
 We will introduce approximate analytic methods to evaluate the integral in \eqref{eq:local-structure-free-energy-ideal} in subsequent sections, but here we use another thermodynamic integration step using the method of Ref.\ \cite{SchillingJCP2009} to obtain essentially exact results.
-Introducing an interaction potential which imposes the integration limits of $\mathcal{D}$, i.e.\
+We introduce an interaction potential which imposes the integration limits of $\mathcal{D}$, i.e.\
 \begin{equation*}
   e^{-\beta W(\vec{x})}
   =
+  \mathbb{I}_\mathcal{D}(\vec{x})
+\end{equation*}
+defining the indicator function%
+\marginfootnote{This is really the Euler characteristic \eqref{eq:euler-characteristic-definition} of the intersection $\chi[\mathcal{D} \cap \vec{x}]$.}
+\begin{equation*}
+  \mathbb{I}_{\mathcal{D}}(\vec{x})
+  =
   \begin{cases}
-    1 & \vec{x} \in \mathcal{D} \\
-    0 & \textrm{otherwise}
+    1 & \textrm{ if } \vec{x} \in \mathcal{D} \\
+    0 & \textrm{ otherwise}.
   \end{cases}
 \end{equation*}
-so that we can switch to an integral over all of space, i.e.\ the replacement
+We use the interaction potential $W(\vec{x})$ to switch to an integral over all of space, i.e.\ we make the replacement
 \begin{equation*}
   \int_{\mathcal{D}} d\vec{x}
   =
@@ -480,30 +486,30 @@ To perform the thermodynamic integration we simulate with an intermediate intera
 \end{equation*}
 where $\lambda \in \{0,1\}$ is a mixing parameter that switches between the potential of interest and the reference potential $V_\mathrm{ref}$.
 Over the course of a Monte-Carlo sweep, in addition to regular steps, $\lambda$ is allowed to switch between these values according to the Metropolis-Hastings rule.
-The free energy difference from the reference system is determined from the ratio of time spent with each potential active by
+The free energy difference from the reference system is determined from the ratio of histogram frequencies describing the probability that each potential is active, i.e.\
 \begin{equation}\label{eq:ideal-free-energy-change}
   F(\eta = 0) - F_\mathrm{ref}
-  = -\log{\left( \frac{t_W}{t_\mathrm{ref}} \right)},
+  = -\log{\left( \frac{t_W}{t_\mathrm{ref}} \right)}
 \end{equation}
-where $t_i$ is the total number of Monte-Carlo steps where potential $i$ is active (as selected by $\lambda$).
+where $t_i$ is the probability that potential $i$ is active (as selected by $\lambda$).
 For the reference potential, we introduce harmonic springs between the bonded particles in the contact set \eqref{eq:structure-contacts} i.e.\
 \begin{equation*}
   V_\mathrm{ref}(\vec{x})
   =
-  \epsilon \sum_{(i,j) \in \mathcal{M}} \left( h_{ij} - \frac{\delta}{2} \right)^2
+  \epsilon \sum_{(i,j) \in \mathcal{M}} \left( h_{ij} - \frac{\delta}{2} \right)^2.
 \end{equation*}
 %The latter strict criterion is how we are able to focus on specific local structures.
 To optimise the simulations the value of $\epsilon$ should be chosen to keep the free energy difference of order $\mathcal{O}(1 \, k_B T)$ \cite{SchillingJCP2009}; we found $\epsilon = 75/\sigma^2$ to be a reasonable choice with the system sizes considered for the cutoff $\delta = 0.2\sigma$.
 As the reference system is exactly harmonic, we can use \eqref{eq:harmonic-approximation} to evaluate $F_\mathrm{ref}$ to within numerical precision%
-\marginfootnote{This integral must be done in the bond-distance space introduced of section \ref{sec:structure-definition}, i.e.\ we perform the multivariate Gaussian integral in the space of $\{h_{a_1 b_1}, \cdots, h_{a_m b_m}\}$ with a perturbation expansion of the rotational metric in \eqref{eq:structural-partition-function-detailed}.
-  In addition, evaluating this Gaussian over all of space i.e.\ $h_{a_k b_k} \in [-\infty, \infty]$ introduces a small approximation as we have the strict lower bound $h_{a_k b_k} > -\sigma$ from \eqref{eq:bond-distance}.}.
+\marginfootnote{This integral must be performed in the bond-distance space introduced of section \ref{sec:structure-definition}, i.e.\ we perform the multivariate Gaussian integral in the space of $\{h_{a_1 b_1}, \cdots, h_{a_m b_m}\}$ with a perturbation expansion of the rotational metric in \eqref{eq:structural-partition-function-detailed}.
+  In addition, evaluating this Gaussian over all of space i.e.\ $h_{a_k b_k} \in [-\infty, \infty]$ introduces a small approximation as we have the strict lower bound $h_{a_k b_k} > -\sigma$ from \eqref{eq:bond-distance}.}[-2.5cm].
 Finally, combining this reference $F_\mathrm{ref}$ with the thermodynamic integration steps \eqref{eq:ideal-free-energy-change} and \eqref{eq:td-integration} gives the free energy of the structure at the target volume fraction $F(\eta)$.
 
 \begin{SCfigure}
   \includegraphics[width=\linewidth,center]{structure-populations}
   \caption[Concentration of local structures in the equilibrium liquid]{
     Static many-body structure in the hard sphere liquid: populations of small local structures in the hard sphere liquid determined from molecular dynamics simulations of 1372 monodisperse (open circles) and 8\% polydisperse (solid triangles) hard spheres against the theoretical prediction of this chapter (lines).
-    Variations against volume fraction $\eta$ and compressibility $Z = \beta p/\rho$ shown.
+    Variations against volume fraction $\eta$ and compressibility factor $Z = \beta p/\rho$ shown.
     The hard sphere freezing and melting volume fractions are indicated by vertical dashed lines.
   }
   \label{fig:structure-populations}
@@ -540,8 +546,9 @@ This is related to the previously observed emergence of fivefold symmetric motif
 Having tested that the theory is accurate for selected geometries, we now take the exhaustive list of 11980 rigid structures for $n=12$ determined in Ref.\ \cite{Holmes-CerfonSR2016} to obtain a local density of states for a given sized inhomogeneity.
 We calculated the free energy of all (first-order) rigid structures using \eqref{eq:local-structure-free-energy} (right panel of Fig.\ \ref{fig:structure-populations}), finding a bimodal distribution with two main peaks separated by a free energy difference that increases with increasing volume fraction.
 We find the that lower energy distribution consists of structures rich in fivefold (icosahedral) symmetry in the absence of fourfold (octahedral) symmetry.
-This shows that the hard sphere liquid is highly frustrated, and would be interpreted as the reason hard spheres make good glassformers in the geometric frustration picture \cite{KivelsonPA1995,TarjusJPCM2005}.
-However, this result is potentially compatible with other thermodynamic scenarios like random first-order transition theory (RFOT) \cite{LubchenkoARPC2007}.
+This shows that the hard sphere liquid is highly frustrated, and would be interpreted as the reason hard spheres make good glassformers with respect to crystallisation in the geometric frustration picture \cite{FrankPRS1952}.
+%\cite{KivelsonPA1995,TarjusJPCM2005}.
+However, this result is also compatible with other thermodynamic scenarios like random first-order transition theory (RFOT) \cite{LubchenkoARPC2007}.
 
 Each of the structures correspond to unique contact topologies, but in thermal systems (i.e. with finite gaps between particles) we expect many of them to be indistinguishable as found in Ref.\ \cite{TrombachPRE2018}.
 As such, we have likely overestimated the height of the each peak, and especially the lower energy peak which contains more frustrated structures; we will find evidence of this in the next section.
@@ -627,19 +634,9 @@ Formally, the probability distribution is written
 \begin{equation}
   p(\vec{x})
   =
-  \frac{g^{(n)}(\vec{x}) \mathbb{I}_{\mathcal{D}'}(\vec{x})}{Z}
+  \frac{g^{(n)}(\vec{x}) \mathbb{I}_{\mathcal{D}'}(\vec{x})}{Z},
 \end{equation}
-with indicator function%
-\marginfootnote{This is really the Euler characteristic \eqref{eq:euler-characteristic-definition} of the intersection $\chi[\mathcal{D}' \cap \vec{x}]$.}
-\begin{equation*}
-  \mathbb{I}_{\mathcal{D}'}(\vec{x})
-  =
-  \begin{cases}
-    1 & \textrm{ if } \vec{x} \in \mathcal{D}' \\
-    0 & \textrm{ otherwise}.
-  \end{cases}
-\end{equation*}
-The probability distribution contains singularities from both the hard sphere interactions in $g^{(n)}$ and from the integration limits of $\mathcal{D}'$ through $\mathbb{I}_{\mathcal{D}'}$.
+which contains singularities from both the hard sphere interactions in $g^{(n)}$ and from the integration limits of $\mathcal{D}'$ through $\mathbb{I}_{\mathcal{D}'}$.
 Separated into smooth and singular contributions, we can write
 \begin{equation*}
   p(\vec{x})
@@ -764,7 +761,7 @@ In the next section we apply this approximate technique to the calculation of fr
   \caption[The simplest nontrivial reaction path in hard spheres: octahedron to tripyramid]{
     Reaction for transition between tripyramid and octahedron $n = 6$ structures.
     Stationary points are indicated by markers: there is a discontinuity in free energy at the end points due to the additional integration over the reaction coordinate, and symmetry in the case of the octahedron.
-    Inset: variation of activation barrier with volume fraction $\eta$ and compressibility $Z = \beta p/\rho$ from this theoretical reaction path (dashed line) and measured $\alpha$-relaxation times in bulk molecular dynamics simulations (solid line), where $\eta = 0.45$ is indicated with a vertical dotted line.
+    Inset: variation of activation barrier with volume fraction $\eta$ and compressibility factor $Z = \beta p/\rho$ from this theoretical reaction path (dashed line) and measured $\alpha$-relaxation times in bulk molecular dynamics simulations (solid line), where $\eta = 0.45$ is indicated with a vertical dotted line.
   }
   \label{fig:reaction-path-6}
 \end{SCfigure}
@@ -843,6 +840,7 @@ This suggests a route for predicting static properties of equilibrium liquids, w
 
 The morphometric approach can extend straightforwardly to hard particles of more complex shapes where the interaction potential is still geometric in nature; in the next chapter we will derive a morphometric theory for arbitrary mixtures of hard convex particles.
 The downside of this extension is that this introduces rotational degrees of freedom for each particle, and more complex interactions, so evaluating free energies is likely to become substantially more complicated.
+This extension includes the generalisation to arbitrary dimensions $d$, which may provide a route to connect with the mean-field theory of glasses (section \ref{sec:mean-field-glass}) which is formally exact in the limit $d \to \infty$
 
 %% \section{New notes.}
 

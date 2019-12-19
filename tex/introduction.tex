@@ -74,14 +74,21 @@ that is
 where $\sigma$ is the diameter of the each sphere.
 No chemical bonds are possible in the absence of any attractions so this represents a kind of \emph{zeroth-order} approximation to real fluids; nonetheless, atoms and molecules do feature sharp short-ranged repulsions so this is a reasonable starting point.
 Furthermore, this oversimplified model has historically, and counterintuitively, represented the frontiers in our understanding of real liquids.
-To illustrate this we consider the van der Waals equation of state for real gases.
+
+To illustrate the above we consider the van der Waals equation of state for real gases.
 This \emph{mean-field theory} characterises a system of $N$ particles contained in a volume $V$ as
 \begin{equation}\label{eq:van-der-waals}
-  \frac{p - a N}{k_B T} = \frac{N}{V - b N}
+  \frac{p + a \frac{N^2}{V^2}}{k_B T} = \frac{N}{V - b N}
 \end{equation}
 where $p$ is the pressure, $k_B$ is the Boltzmann constant, $T$ as temperature, and with $a,b$ as perturbations from the ideal gas law due to the interactions.
 We have written this equation such that the left-hand side contains \emph{liquid-like} modifications to the pressure due to the attractions, whereas the right-hand side contains \emph{gas-like} perturbations from the reduction in the accessible volume due to short-range repulsions.
-It was widely believed that improvements to this theory would require sophisticated treatments of the \emph{attractions}, however history has shown that it was the treatment of the \emph{repulsions} which were lacking \cite{WidomS1967,Hansen2013,Santos2016}.
+Introducing the (number) density $\rho = N/V$ allows \eqref{eq:van-der-waals} to be rewritten more simply as
+\begin{equation}\label{eq:van-der-waals-2}
+  \frac{\beta p}{\rho} = 1 + (b - \beta a) \rho + \mathcal{O}(\rho^2)
+\end{equation}
+where $\beta = (k_B T)^{-1}$.
+Setting $a = b = 0$ recovers the ideal gas law as expected.
+It was widely believed that improvements to van der Waals' theory would require sophisticated treatments of the \emph{attractions}, however history has shown that it was the treatment of the \emph{repulsions} which were lacking \cite{WidomS1967,Hansen2013,Santos2016}.
 Simple liquids can to a large extent be considered as weak perturbations to the hard sphere model; as such, the left-hand side of \eqref{eq:van-der-waals} is reasonably accurate, but the right-hand side must be refined to account for the non-trivial effects of exclusion \cite{Hansen2013}.
 
 %They thus serve as a foundational toy model for fluids in a similar way the Ising model is \emph{the} system for ferromagnetism and critical phenomena.
@@ -101,7 +108,8 @@ We will focus our discussion of established properties on the hard sphere phase 
 As the hard sphere potential \eqref{eq:hs-interaction} is everywhere zero or divergent, temperature has no effect%
 \marginfootnote{The velocities will be trivially rescaled by temperature, but this will not affect the static structure.}
 on the thermodynamics and we say the system is \emph{athermal}.
-The phase diagram is thus reduced to a single control parameter: the (number) density $\rho = N/V$.
+The phase diagram is thus one-dimensional with state point specified solely by density $\rho$%
+\marginfootnote{Or equivalently the pressure, itself connected to $\rho$ by the equation of state.}[1cm].
 For convenience, and to emphasise the geometric nature of hard spheres, it is usual to work with a normalised density: the \emph{volume fraction}, the volume of space occupied by the spheres i.e.\
 \begin{equation}\label{eq:hs-volume-fraction}
   \eta
@@ -130,15 +138,15 @@ Written in terms of volume fraction, the van der Waals equation \eqref{eq:van-de
 \begin{equation}\label{eq:van-der-waals-hs}
   \frac{\beta p}{\rho} = \frac{1}{1 - 2^{d-1} \eta}
 \end{equation}
-where $\beta = (k_B T)^{-1}$, and we recognised that $a = 0$ because hard spheres have no attractions.
-This theory features no singularities until $\eta = 2^{1-d}$ where the pressure diverges, so it predicts no thermodynamic phase transitions and contradicts the existence of a close packing limit at $\eta_\mathrm{CP} \sim 0.74$ in $d=3$.
+where we recognised that $a = 0$ because hard spheres have no attractions.
+This theory features no singularities until $\eta = 2^{1-d}$ where the pressure diverges, so it predicts no thermodynamic phase transitions and contradicts the existence in $d=3$ of a close packing limit at $\eta_\mathrm{CP} \sim 0.74$ well above the value of $0.25$ predicted by \eqref{eq:van-der-waals-hs}.
 By contrast, the actual phase diagram (Fig.\ \ref{fig:hs-phase-diagram}), determined from simulations \cite{AlderJCP1957,WoodJCP1957,HooverJCP1968} and colloidal experiments \cite{PuseyN1986}, shows that the hard sphere system remains a liquid%
 \marginfootnote{Strictly speaking there is no distinction between a liquid and a gas phase in hard spheres because the phase diagram does not have a critical point.
   As such, to be precise we should refer to the isotropic phase as a \emph{fluid}.
   However, we will always be focusing on the high density fluid, which serves as the starting point for descriptions of real liquids, so we can justify using `liquid' and `fluid' interchangeably.}
 up to $\eta_f \sim 0.494$ whereupon it undergoes a freezing transition to an ordered phase with an accompanying melting transition at $\eta_m \sim 0.545$ \cite{HooverJCP1968}.
 %Controversial, .
-This result was not immediately accepted by the community, even though these simulation studies are generally considered definitive in hindsight.
+This result was not immediately accepted by the community, even though these simulation studies are generally considered definitive in hindsight \cite{MareschalEPJH2018}.
 
 %The hard sphere freezing transition suggests the counterituitive notion that billiard balls will spontaneously order into a crystal at high densities.
 In everyday scenarios crystallisation typically occurs as one lowers temperature, and the classroom explanation posits that the crystal is favoured due to \emph{attractions} between molecules.
@@ -151,7 +159,7 @@ The net entropic effect leads to the crystal being favoured over the liquid at h
 
 A similar effect is seen in balls floating on water as in e.g.\ peas boiling in a saucepan or shade balls covering a reservoir (Fig.\ \ref{fig:shade-balls}).
 The hard interactions between the balls causes%
-\marginfootnote{In an attempt to find an everyday example, I have taken liberties with the interaction being purely hard; I suspect that floating balls feature effective attractions because of \emph{hydrodynamic} interactions at the water surface.}
+\marginfootnote{In an attempt to find an everyday example, I have taken liberties with the interaction being purely hard; I suspect that floating balls feature effective attractions because of \emph{hydrodynamic} interactions at the water surface.}[-2cm]
 them to `crystallise' at high densities as can been seen in the figure.
 Strictly speaking these are not crystals in the sense of long-range \emph{translational} order, instead they are said to possess long-range \emph{orientational} order.
 This subtlety emerges because the floating balls are confined to the water surface making them effectively two dimensional.
@@ -185,16 +193,16 @@ In thermal systems, fluctuations are strong enough in two dimensions to overcome
 Now that we have given an overview of the firmly established bulk phase behaviour of hard spheres, we can turn to address the questions which remain unresolved.
 So far we have only discussed the \emph{equilibrium} properties of hard spheres which are well-described by theory.
 In equilibrium, a great deal is even known about the \emph{inhomogeneous} liquid, e.g.\ in confinement \cite{GonzalezJCP1998}, thanks to advances in density functional theory \cite{RosenfeldPRL1989,RothJPCM2010}.
-By contrast, there are still much debate surrounding the nature of the \emph{metastable} phase in hard spheres, especially concerning its dynamical properties.
+By contrast, there are still much debate surrounding the nature of the \emph{metastable} liquid phase in hard spheres, especially concerning its dynamical properties.
 %We now turn to the central questions still unresolved concerning the hard sphere system, which focus on their metastable properties at high densities.
 %As the most widely studied model interaction potential we know a lot about its equilibrium structure (phase diagram) in bulk and even inhomogeneous thanks to density functional theory \cite{?,?,?}.
 %However, its behaviour off-equilibrium at high densities is hotly debated.
 %The two biggest unresolved research topics for this subject:
 The metastable phase is the continuation of the liquid phase above the melting point, shown by a dashed line in Fig.\ \ref{fig:hs-phase-diagram}.
-We refer to this branch as the \emph{supercooled liquid} in analogy to the metastable phase of real liquids which are formed by cooling below their freezing temperature; in this sense we think of increasing density as equivalent to lowering the temperature.
+We refer to this branch as the \emph{supercooled liquid} in analogy to the metastable phase of real liquids which are formed by cooling below their freezing temperature; in this sense we think of increasing density as equivalent to lowering temperature.
 
 The supercooled liquid is not strictly a phase in the sense of being the free energy minimum, as it will eventually crystallise, however it has many features in common with equilibrium phases.
-In particular, the supercooled liquid is long-lived and it eventually reaches a steady state with well-defined thermodynamic observables.
+In particular, the supercooled liquid is sufficiently long-lived to eventually reach a steady state with well-defined thermodynamic observables.
 In simple terms, supercooled liquids are thermodynamically indistinguishable from that of an equilibrium phase \emph{until} they spontaneously crystallise.
 However, supercooled liquids profoundly differ from ordinary liquids in their \emph{dynamical} properties, which are the least understood aspects of simple liquids and we discuss more below.
 %We will leave detailed discussion of the specific properties of supercooled liquids until chapter \ref{chapter:glass}, as for now we only wish to briefly introduce the key questions posed.
@@ -203,9 +211,9 @@ However, supercooled liquids profoundly differ from ordinary liquids in their \e
 
 As we see it, the two central topics regarding the metastable liquid are:
 \begin{enumerate}
-\item \emph{Fate of the liquid branch}: if crystallisation could (somehow) be circumvented, what is the ultimate fate of the supercooled liquid as one increases the density?
+\item \emph{Fate of the liquid branch}: if crystallisation could (somehow) be circumvented, what is the ultimate fate of the supercooled liquid as one increases density?
   Related to this is the nature of the out-of-equilibrium state: the \emph{glass}.
-\item \emph{Nucleation}: given that the crystal is the ground state above the freezing density, can we describe the kinetic pathway by which the liquid orders into the crystal?
+\item \emph{Nucleation}: given that the crystal is the ground state above the freezing density, can we describe the kinetic pathway by which the liquid crystallises?
 \end{enumerate}
 Each question is complicated by a remarkable change in the timescales involved, requiring new ideas to approach them.
 Regarding nucleation, the rates predicted by theory and experiments differ by some $\sim$12 orders of magnitude, which is claimed to be the second worst disagreement%
@@ -231,7 +239,7 @@ The central question of this field asks if the relaxation timescale, or viscosit
   \label{fig:rcp}
 \end{SCfigure}
 
-The goal of this thesis is to advance the methods of treating liquids at high densities, so we aim make a small contribution to addressing both topics above; in chapters \ref{chapter:morphometric-framework}, \ref{chapter:morphometric-applications} and \ref{chapter:resummation} we will develop methods to assess changes in the supercooled hard sphere liquid, while in chapter \ref{chapter:aerosols} we will model nucleation kinetics in drying aerosols.
+The goal of this thesis is to advance the methods for treating liquids at high densities, so we aim make a small contribution to addressing both topics above; in chapters \ref{chapter:morphometric-framework}, \ref{chapter:morphometric-applications} and \ref{chapter:resummation} we will develop methods to assess changes in the supercooled hard sphere liquid, while in chapter \ref{chapter:aerosols} we will model nucleation kinetics in drying aerosols.
 
 %% Metastable liquid.
 %% Evantually this falls out of equilibrium.
