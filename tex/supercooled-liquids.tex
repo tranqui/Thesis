@@ -140,7 +140,9 @@ where $\delta A(\cdot)$ is the spontaneous and instantaneous fluctuation in $A$,
 These relations are obeyed in supercooled liquids, even though they are not a proper equilibrium state.
 
 In spite of these similarities, supercooled liquids are markedly different from normal liquids in their \emph{dynamics}.
-Typically, this is discussed in the context of two (related) quantities: the \emph{viscosity} and the \emph{relaxation time}.
+Typically, this is discussed in the context of two (related) quantities: the \emph{viscosity} and the \emph{relaxation time}%
+\marginfootnote{In Maxwell's viscoelasticity theory, these are linearly related with constant of proportionality $G_\infty$, the high frequency shear modulus.
+As such, these can be thought of as equivalent quantities.}.
 Viscosity measures how resistant the system is to flow, while relaxation time measures the typical microscopic time for the density profile to relax i.e.\ for liquid-like behaviour caused by particle diffusion.
 A defining feature of supercooled liquids is that these numbers become so large that the precise details of the measurement used do not matter.
 We will discuss this dynamical slowdown further on, but for now we introduce a specific time correlation function in order to frame the discussion.
@@ -196,8 +198,9 @@ Then, assuming a temperature-independent barrier $\Delta \Phi_\mathrm{crys}$, th
 \cite{CavagnaPR2009}.
 %This is essentially the reason it is possible for supercooled liquids to exist at all, and reach an effectively time-translation invariant state without decaying to the crystal \cite{CavagnaPR2009}.
 This argument is highly system dependent, as systems with small barriers to crystallisation will not be long-lived enough for the metastable liquid to be observed.
-Single-component hard spheres are particularly prone to crystallise at very high densities, so polydispersity is typically introduced to frustrate the crystal structure and extend the lifetime of the supercooled liquid.
-However, this process is imperfect, as even highly polydisperse systems have been found to crystallise without careful fine tuning of the size distribution \cite{BommineniPRL2019,BerthierPRL2016}.
+Single-component hard spheres are particularly prone to crystallise at very high densities, so polydispersity is typically introduced to frustrate the crystal structure and extend the lifetime of the supercooled liquid%
+\marginfootnote{This process is imperfect, as even highly polydisperse systems have been found to crystallise without careful fine tuning of the size distribution \cite{BommineniPRL2019,BerthierPRL2016,SanzPRL2011}.
+  However, crystallisation of polydisperse systems occurs through \emph{fractionation} rather than nucleation.}
 
 \begin{SCfigure}
   \includegraphics[width=0.7\linewidth,center]{transition-state}
@@ -218,17 +221,17 @@ Naively, we might expect the barrier to remain constant with temperature, corres
   \ln{\tau_\alpha} \propto \frac{1}{T}.
 \end{equation}
 This argument captures the high temperature behaviour very well and, outside of soft matter, it applies reasonably well to many molecular glassformers e.g.\ silica-based materials%
-\marginfootnote{That is, the material which the average person would mean when they say ``glass''.}[-1cm],
+\marginfootnote{That is, the material which the average person would mean when they say ``glass''.}[-0.5cm],
 where relaxation essentially depends on the timescale to break a chemical bond.
 Experimental data for \ce{SiO2} \cite{AngellS1995} confirms that $\ln{\tau_\alpha}$ scales linearly with $\beta$ (Fig.\ \ref{fig:angell}).
 By convention, systems which scale in an Arrhenius fashion are called \emph{strong}%
-\marginfootnote{This baffling naming convention has nothing to do with the mechanical properties.}
+\marginfootnote{This baffling naming convention has nothing to do with the mechanical properties.}[-0.5cm]
 glassformers.
 
 \begin{SCfigure}
   \includegraphics[width=0.9\linewidth,outer]{angell}
-  \caption[The Angell plot for model systems undergoing dynamical arrest]{
-    The \emph{Angell} plot \cite{AngellJNS1988} for molecular and model glassformers showing the temperature/pressure dependence of viscosity (labelled here as $\eta$) or equivalently relaxation time $\tau_\alpha$.
+  \caption[Angell plot for model systems undergoing dynamical arrest]{
+    \emph{Angell} plot \cite{AngellJNS1988} for molecular and model glassformers showing the temperature/pressure dependence of viscosity (labelled here as $\eta$) or equivalently relaxation time $\tau_\alpha$.
     The molecular systems \ce{SiO2} and orthoterphenyl (OTP) respectively display the \emph{strong} and \emph{fragile} behaviours described in text, with data obtained from Refs.\ \cite{AngellS1995, BerthierPRE2009}.
     Kob-Anderson (KA) and Wahnstrom (Wahn) are binary mixtures of Lennard-Jones atoms designed to exhibit fragility.
     The compressibility factor $Z = \beta p / \rho$ is argued to be equivalent to inverse temperature for hard spheres (HS) \cite{BerthierPRE2009}, with data taken from Ref.\ \cite{RoyallJSM2017}.
@@ -247,12 +250,12 @@ We will discuss this more in the next section.
 
 Some modification is required for hard particle systems, where temperature is not a natural control parameter.
 As we argued in the introduction, pressure%
-\marginfootnote{Equivalent to density, with the connection made through the equation of state $p = p(\rho)$.}
+\marginfootnote{Equivalent to density, with the connection made through the equation of state $p = p(\rho)$.}[-0.5cm]
 is the only meaningful state variable.
 The authors of Ref.\ \cite{BerthierPRE2009} argue that pressure plays a role equivalent to inverse temperature in athermal systems, because of similarities in their limit behaviour.
 Alternatively, we could make a free volume argument, where we expect a relaxation event to involve fluctuations of volume $\Delta V$.
 In equilibrium, volume fluctuations are created by reversible work $p \Delta V$ so to leading order%
-\marginfootnote{The leading order behaviour can be given more justification by invoking the morphometric approach \eqref{eq:fmt-morphometric-2}, or from more general arguments which we will introduce in section \ref{sec:insertion-as-solvation}.}
+\marginfootnote{The leading order behaviour can be given more justification by invoking the morphometric approach \eqref{eq:fmt-morphometric-2}, or from more general arguments which we will introduce in section \ref{sec:insertion-as-solvation}.}[-1cm]
 we then expect
 \begin{equation*}
   \tau_\alpha \sim e^{\beta p \Delta V}.
@@ -296,7 +299,7 @@ Dynamical heterogeneities are now seen as quintessential features of the glass t
 %% Widmer-Cooper and Harrowell 11 demonstrated that the initial configuration of a simulation, independently of the initial dynamics, has a role in the heterogeneity of the dynamics.
 
 The main point of contention is over what causes the dynamical slow-down: whether it is driven by an underlying phase transition in the thermodynamic viewpoint, or if it is purely a kinetic effect.
-The former viewpoint includes the related \emph{mode-coupling} and \emph{random first-order transition} theories, which are loosely based on mean-field theory.
+The former viewpoint includes the related \emph{mode-coupling} and \emph{random first-order transition} theories, which are connected in the mean-field picture of glasses.
 By contrast, the kinetic viewpoint \emph{dynamical facilitation} is based entirely around study of fluctuations.
 Having introduced the phenomenology of supercooled liquids we can now proceed to discuss these theories in turn.
 We will emphasise the thermodynamic theories because in recent years there has been a substantial shift towards them because of the success of mean-field theories.
@@ -429,8 +432,10 @@ This method requires knowledge of the structure factor, which implicitly depends
 Together \eqref{eq:full-mct} and \eqref{eq:full-mct-coupled} form a non-linear coupled set of integro-differential equations that can be numerically solved, providing a reasonable description of the first few decades of dynamical slowdown, with deviations only becoming noticeable at deep supercooling \cite{FlennerPRE2011,BrambillaPRL2009}.
 
 Crucially, MCT predicts a diverging timescale at $\eta \sim 0.52$ in hard spheres, where the dynamics would become completely arrested, and numerical fits to colloidal experimental data with the same power behaviour law predicted by MCT move this point up to $\eta \sim 0.58$ \cite{VanMegenPRE1994}.
-However, this predicted transition must be spurious as recent experiments have managed to equilibrate colloidal hard sphere liquids up to $\eta \lesssim 0.60$ \cite{BrambillaPRL2009,HallettNC2018} and to even higher densities in simulations \cite{BerthierPRL2016}.
-Despite this failing of MCT, it remains the only properly first-principles theory for treating liquid dynamics.
+However, this predicted transition has long been known to be spurious as the theory does not allow for activated dynamical events.
+Moreover, recent experiments have managed to equilibrate colloidal hard sphere liquids up to $\eta \lesssim 0.60$ \cite{BrambillaPRL2009,HallettNC2018} and to even higher densities in simulations \cite{BerthierPRL2016}.
+Despite this failing of MCT, it remains the only properly first-principles theory for treating liquid dynamics in physical dimensions%
+\marginfootnote{In higher dimensions, very similar theories emerge from mean-field theory \cite{MaimbourgPRL2016,SzamelPTEP2013}.}.
 
 Extensions incorporating fluctuations can be found in Refs.\ \cite{BiroliPRL2006,SzamelPTEP2013}, and more recently a generalised MCT has been developed which avoids the uncontrolled factorisation of the pair densities \cite{JanssenPRL2015,JanssenFP2018}.
 Importantly, the latter approach incorporates closures of the many-body correlation functions, which will be a central theme of later chapters; by doing this the authors were able to move the diverging timescale to higher densities, bringing the theory into better agreement with available data from simulations and experiments.
@@ -500,7 +505,7 @@ At a volume fraction $\eta_K > \eta_c$ an \emph{entropy crisis} occurs: $\Sigma$
 If an equilibrium glass state in the regime $\eta \in [\eta_c, \eta_K]$ is compressed out-of-equilibrium without sampling the other clusters, a further phase transition occurs to a so-called \emph{Gardner phase} \cite{KurchanJPCB2013,CharbonneauNC2014,CharbonneauJSM2014}.
 Each cluster splits further into fractal sub-regions arranged hierarchically.
 Whereas the clustered regions formed at $\eta_c$ are geometrically dissimilar%
-\marginfootnote{As measured by e.g.\ the intermediate scattering function},
+\marginfootnote{As measured by e.g.\ the intermediate scattering function.},
 these regions are close in configuration space to one another.
 This phase has deep connections with the jamming transition seen at diverging pressure, providing a unified description of glass and jamming conjectured since the landmark paper of Ref.\ \cite{LiuN1998}.
 Remarkably, this mean-field theory is able to predict anomalous $d$-independent critical scaling coefficients, matching those known around jamming \cite{WyartPRL2012,LernerSM2013,DeGiuliPNAS2014}.
@@ -656,7 +661,8 @@ Instead, dynamics is inhibited through kinetic constraints which must be overcom
 Inspired by this, dynamical facilitation posits that relaxation in supercooled liquids occurs through a series of connected elementary excitations \cite{ChandlerARPC2010,SpeckJSM2019}.
 Dynamical heterogeneity and its associated lengthscale are the fundamental features of glass in this picture, and no thermodynamic phase transition occurs so the relaxation time remains finite until $T = \SI{0}{\kelvin}$.
 The dynamical lengthscale corresponds to the distance between dynamical defects in this theory, which could have a structural interpretation although the nature of the defects are usually considered incidental to the theory.
-Notably, the agreement of dynamical facilitation with available data is comparable with the mean-field/RFOT scenario up to the experimental glass transition \cite{ChandlerARPC2010}.
+Notably, the agreement of dynamical facilitation with available structural relaxation time data is comparable with the mean-field/RFOT scenario up to the experimental glass transition \cite{ChandlerARPC2010}.
+However, dynamical facilitation fails to explain other observables such as the reduction in $S_\mathrm{conf}$ seen in Fig.\ \ref{fig:swap-sconf}.
 %This must trivially occur at the very least $T=0\si{K}$ where relaxation timescales diverges, however much like the lack of a phase transition in the Ising model in $d=1$ this is not a true thermodynamic phase transition because it cannot be crossed.
 %So the central question of glass is what happens in $d=3$, is there a vanishing configurational entropy at a finite $T > 0$ with an accompanying thermodynamic glass transition?
 

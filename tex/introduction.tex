@@ -204,7 +204,7 @@ We refer to this branch as the \emph{supercooled liquid} in analogy to the metas
 The supercooled liquid is not strictly a phase in the sense of being the free energy minimum, as it will eventually crystallise, however it has many features in common with equilibrium phases.
 In particular, the supercooled liquid is sufficiently long-lived to eventually reach a steady state with well-defined thermodynamic observables.
 In simple terms, supercooled liquids are thermodynamically indistinguishable from that of an equilibrium phase \emph{until} they spontaneously crystallise.
-However, supercooled liquids profoundly differ from ordinary liquids in their \emph{dynamical} properties, which are the least understood aspects of simple liquids and we discuss more below.
+While supercooled liquids are not markedly different from ordinary liquids immediately above freezing, at higher densities their \emph{dynamical} properties profoundly depart and are the least understood aspects of simple liquids.
 %We will leave detailed discussion of the specific properties of supercooled liquids until chapter \ref{chapter:glass}, as for now we only wish to briefly introduce the key questions posed.
 %\todo{Demphasise thermodynamics, emphasise dynamics.}
 %so we will find it useful to describe it with similar language.
@@ -224,8 +224,8 @@ between theory and experiment in all of physics \cite{RussoSM2013}.
 In the supercooled liquid the time to reach the steady state, or `equilibrium', dramatically increases with density until it becomes effectively infinite above a glass transition%
 \marginfootnote{This is typically taken to occur around $\eta_g \in [0.58, 0.60]$, although the exact point where the system falls out of equilibrium will depend on many factors including the size of the particles in case of colloidal experiments, the specific dynamical rules of a simulation algorithm, and the patience of the observer.}[1.5cm]
 where it forms a glass.
-If the hard sphere glass is continually compressed to higher densities the pressure will diverge, which is related to \emph{jamming} in granular materials like sand.
-Empirically this occurs at \emph{random close packing} (Fig.\ \ref{fig:rcp}) around $\eta_\mathrm{RCP} \sim 0.64$, but as an out-of-equilibrium state this is highly protocol dependent so this density may not be well-defined \cite{TorquatoRMP2010}.
+If the hard sphere glass is rapidly compressed to higher densities the pressure will diverge, which is related to \emph{jamming} in granular materials like sand; the density at jamming is highly dependent on the protocol.
+Empirically, rapid compression of a low density liquid leads to jamming at \emph{random close packing} (Fig.\ \ref{fig:rcp}) around $\eta_\mathrm{RCP} \sim 0.64$ \cite{TorquatoRMP2010}.
 %This is complicated by the fact that as density increases the dynamical timescales increase by $\gtrsim 14$ orders of magnitude, so no ordinary simulation or experiment can probe `equilibrium' properties.
 Our focus will be on the `equilibrium' supercooled liquid, although the nature of the glass and jammed states provide important context for our programme, which we will return to in chapter \ref{chapter:glass}.
 The central question of this field asks if the relaxation timescale, or viscosity, truly diverges at finite pressure; an equivalent question asks whether there is a thermodynamic transition to an \emph{ideal glass} phase which drives the dynamical slowdown.
