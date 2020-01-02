@@ -96,7 +96,7 @@ Comparison with \eqref{eq:ideal-grand-canonical-partition} above yields the simp
     \int e^{-\beta \phi_\mathrm{ext}(\vec{r}')} \, d\vec{r}'
   }
   =
-  \frac{e^{-\beta (\mu - \phi_\mathrm{ext}(\vec{r}))}}{\Lambda^d}.
+  \frac{e^{-\beta (\phi_\mathrm{ext}(\vec{r}) - \mu)}}{\Lambda^d}.
 \end{equation}
 We can express the grand potential for the non-interacting system as a functional of the external potential from the partition function \eqref{eq:ideal-grand-canonical-partition} as
 \begin{equation*}
@@ -117,10 +117,11 @@ Equating these two forms and rearranging we find the ideal part of the Helmholtz
 \begin{align}
   \beta \mathcal{F}^\mathrm{id}
   &=
+  -
   \int
   \left(
   \rho^{(1)}(\vec{r}) \beta (\phi_\mathrm{ext}(\vec{r}) - \mu)
-  - \frac{e^{-\beta (\phi_\mathrm{ext}(\vec{r}) - \mu)}}{\Lambda^d}
+  + \frac{e^{-\beta (\phi_\mathrm{ext}(\vec{r}) - \mu)}}{\Lambda^d}
   \right)
   d\vec{r}
   \nonumber \\ &=
