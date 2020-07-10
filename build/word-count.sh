@@ -10,5 +10,5 @@ for p in *.tex; do
     (texcount $p -merge -sum | head -n 10 | tail -n +3) > $filename.wordcount 2> /dev/null
     summary=($(grep Sum $filename.wordcount))
     echo ${summary[2]} $'\t' $filename
-    printf "%'d" ${summary[2]} > $filename.wordcountsum
+    printf "%'d words" ${summary[2]} > $filename.wordcountsum
 done
