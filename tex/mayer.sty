@@ -2,7 +2,9 @@
 \usepackage{xcolor}
 \usepackage{tkz-euclide}
 \usepackage{xparse}
-\usetkzobj{all}
+%\usetkzobj{all} % no longer needed with tkz-euclide v3.02
+
+\def\mayernodesize{6}
 
 \def\mayerlineloop#1{%
   \ifx\relax#1%
@@ -37,10 +39,10 @@
   \ifx\relax#1%
   \else%
   \ifthenelse{\equal{#1}{o}} {%
-    \tkzDrawPoints[color=black,fill=white,size=12](\i)%
+    \tkzDrawPoints[color=black,fill=white,size=\mayernodesize](\i)%
   } {%
     \ifthenelse{\equal{#1}{.}} {%
-      \tkzDrawPoints[color=black,fill=black,size=12](\i)%
+      \tkzDrawPoints[color=black,fill=black,size=\mayernodesize](\i)%
     } {%
       \ifthenelse{\equal{#1}{T}} {%
         \tkzDefShiftPoint[\i](90:0.1){t1}%
@@ -113,7 +115,7 @@
       \mayernodes{#2}
     } {
       \foreach \i in {1,...,\natoms} {
-        \tkzDrawPoints[color=black,fill=black,size=12](\i)
+        \tkzDrawPoints[color=black,fill=black,size=\mayernodesize](\i)
       }
     }
   \end{tikzpicture}%
@@ -172,10 +174,10 @@
 
     %% % Draw the points.
     %% \foreach \i in {1,...,\natoms} {
-    %%   \tkzDrawPoints[color=black,fill=black,size=12](\i)
+    %%   \tkzDrawPoints[color=black,fill=black,size=\mayernodesize](\i)
     %% }
 
     % Draw the central point.
-    \tkzDrawPoints[color=black,fill=black,size=12](0)%
+    \tkzDrawPoints[color=black,fill=black,size=\mayernodesize](0)%
   \end{tikzpicture}%
 }
